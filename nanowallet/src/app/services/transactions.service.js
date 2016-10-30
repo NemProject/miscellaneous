@@ -7,7 +7,7 @@ import helpers from '../utils/helpers';
 import Address from '../utils/Address';
 
 export default class Transactions {
-    constructor(AppConstants, Wallet, $http, DataBridge) {
+    constructor(AppConstants, Wallet, $http, DataBridge, NetworkRequests) {
         'ngInject';
 
         // Application constants
@@ -18,6 +18,8 @@ export default class Transactions {
         this._$http = $http;
         // DataBridge service
         this._DataBridge = DataBridge;
+        // NetworkRequests service
+        this._NetworkRequests = NetworkRequests;
     }
 
 
@@ -580,7 +582,7 @@ export default class Transactions {
      * @param common: The password/privateKey object
      * @param tx: The transaction data
      *
-     * return res: Response of the announce request
+     * return an announce transaction promise
      */
     prepareSignature(tx, common) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -595,11 +597,7 @@ export default class Transactions {
             'data': convert.ua2hex(result),
             'signature': signature.toString()
         };
-
-        return this._$http.post('http://' + helpers.getHostname(this._Wallet.node) + ':' + this._AppConstants.defaultNisPort + '/transaction/announce', obj).then((res) => {
-            return res;
-        });
-
+        return this._NetworkRequests.announceTransaction(helpers.getHostname(this._Wallet.node), obj);
     };
 
     /**
@@ -634,7 +632,7 @@ export default class Transactions {
      * @param entity: The prepared transaction object
      * @param common: The password/privateKey object
      *
-     * return $http: The http request to the network
+     * return an announce transaction promise
      */
     serializeAndAnnounceTransaction(entity, common) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -644,21 +642,18 @@ export default class Transactions {
             'data': convert.ua2hex(result),
             'signature': signature.toString()
         };
-
-        return this._$http.post('http://' + helpers.getHostname(this._Wallet.node) + ':' + this._AppConstants.defaultNisPort + '/transaction/announce', obj).then((res) => {
-            return res;
-        });
+        return this._NetworkRequests.announceTransaction(helpers.getHostname(this._Wallet.node), obj);
     }
 
     /**
-     * serializeAndAnnounceTransactionLoop() Serialize a transaction and broadcast it to the network while in a loop
+     * serializeAndAnnounceTransactionLoop() Serialize a transaction and broadcast it to the network (from a loop)
      *
      * @param entity: The prepared transaction object
      * @param common: The password/privateKey object
      * @param data: Any object
      * @param k: The position into the loop
      *
-     * return $http: The http request to the network
+     * return an announce transaction promise with isolated data
      */
     serializeAndAnnounceTransactionLoop(entity, common, data, k) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -668,15 +663,7 @@ export default class Transactions {
             'data': convert.ua2hex(result),
             'signature': signature.toString()
         };
-
-        return this._$http.post('http://' + helpers.getHostname(this._Wallet.node) + ':' + this._AppConstants.defaultNisPort + '/transaction/announce', obj).then((res) => {
-            // Return response with loop data and k to isolate them into the callback.
-            return {
-                'res': res,
-                'tx': data,
-                'k': k
-            };
-        });
+        return this._NetworkRequests.announceTransactionLoop(helpers.getHostname(this._Wallet.node), obj, data, k);
     }
 
 }
