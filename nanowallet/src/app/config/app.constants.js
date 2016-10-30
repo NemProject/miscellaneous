@@ -2,10 +2,10 @@ const AppConstants = {
     //Application name
     appName: 'Nano Wallet',
 
-    version: 'BETA 1.1.11',
+    version: 'BETA 1.1.12',
 
     //Network
-    defaultNetwork: -104,
+    defaultNetwork: 104,
 
     // Ports
     defaultNisPort: 7890,
