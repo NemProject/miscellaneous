@@ -10,7 +10,7 @@ Open NCC and your wallet, clicking on user icon should reveal a drop-down menu w
 Once your have your wallet (.json format), open Nano and import it from the login page. It'll ask for an upgrade and trigger the download of your updated wallet. 
 Do not delete your old NCC wallet and keep it safe somewhere.
 
-### Imported accounts that are already harvesting using NCC ? ###
+### Imported accounts that are already harvesting using NCC ###
 
 NCC is using a different way to generate the remote associated with an account. Nano Wallet uses BIP32 to generate it deterministically and make everything easier. In order to manage and monitor harvesting, you'll need to deactivate the old remote account from NCC and activate your new remote account from Nano. Alternatively you can use a custom delegated public key in Nano Wallet importance transaction page.
 
@@ -24,15 +24,17 @@ Before update make sure that you don't have any wallets stored into the NanoWall
 
 ### Build from source ###
 
-Open a console to the path of the NanoWallet folder and install all the needed dependencies by typing
+1) Install gulp
+
+<pre>npm install -g gulp-cli</pre>
+
+2) Open a console to the path of the NanoWallet folder and install all the needed dependencies
 
 <pre>npm install</pre>
 
-Nano Wallet use Babel with gulp to transpile the ES6 code, to build type
+3) Build:
 
 <pre>gulp</pre>
-
-It'll create a build folder containing the app.
 
 ### Known issues ###
 
