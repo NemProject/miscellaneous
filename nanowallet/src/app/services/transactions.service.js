@@ -5,13 +5,12 @@ import CryptoHelpers from '../utils/CryptoHelpers';
 import Serialization from '../utils/Serialization';
 import helpers from '../utils/helpers';
 import Address from '../utils/Address';
+import TransactionTypes from '../utils/TransactionTypes';
 
 export default class Transactions {
-    constructor(AppConstants, Wallet, $http, DataBridge, NetworkRequests) {
+    constructor(Wallet, $http, DataBridge, NetworkRequests) {
         'ngInject';
 
-        // Application constants
-        this._AppConstants = AppConstants;
         // Wallet service
         this._Wallet = Wallet
         // $http service
@@ -140,7 +139,7 @@ export default class Transactions {
     _multisigWrapper(senderPublicKey, innerEntity, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MultisigTransaction, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MultisigTransaction, senderPublicKey, timeStamp, due, version);
         let custom = {
             'fee': 6000000,
             'otherTrans': innerEntity
@@ -196,7 +195,7 @@ export default class Transactions {
     _constructTransfer(senderPublicKey, recipientCompressedKey, amount, message, due, mosaics, mosaicsFee) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.Transfer, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
         let msgFee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 && message.payload.length ? Math.max(1, Math.floor((message.payload.length / 32) + 1)) : message.payload.length ? Math.max(1, Math.floor(message.payload.length / 2 / 16)) * 2 : 0;
         let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
         let totalFee = (msgFee + fee) * 1000000;
@@ -223,7 +222,7 @@ export default class Transactions {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(2);
         let due = this._Wallet.network === Network.data.Testnet.id ? 60 : 24 * 60;
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
         let totalFee = (10 + 6 * signatoryArray.length + 6) * 1000000;
         let custom = {
             'fee': totalFee,
@@ -275,7 +274,7 @@ export default class Transactions {
         } else {
             version = this.CURRENT_NETWORK_VERSION(2);
         }
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
         if (tx.minCosigs === null || tx.minCosigs === 0) {
             totalFee = (10 + 6 * signatoryArray.length) * 1000000;
             custom = {
@@ -364,7 +363,7 @@ export default class Transactions {
     _constructNamespace(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, namespaceName, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
         let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let custom = {
             'rentalFeeSink': rentalFeeSink.toUpperCase().replace(/-/g, ''),
@@ -426,7 +425,7 @@ export default class Transactions {
     _constructMosaicDefinition(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, mosaicName, mosaicDescription, mosaicProperties, levy, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MosaicDefinition, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MosaicDefinition, senderPublicKey, timeStamp, due, version);
 
         let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let levyData = levy ? {
@@ -492,7 +491,7 @@ export default class Transactions {
     _constructMosaicSupply(senderPublicKey, mosaicId, supplyType, delta, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MosaicSupply, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MosaicSupply, senderPublicKey, timeStamp, due, version);
 
         let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let custom = {
@@ -537,7 +536,7 @@ export default class Transactions {
     _constructImportanceTransfer(senderPublicKey, recipientKey, mode, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.ImportanceTransfer, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.ImportanceTransfer, senderPublicKey, timeStamp, due, version);
         let custom = {
             'remoteAccount': recipientKey,
             'mode': mode,
@@ -613,7 +612,7 @@ export default class Transactions {
     _constructSignature(senderPublicKey, otherAccount, otherHash, due) {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
-        let data = this.CREATE_DATA(this._AppConstants.TransactionType.MultisigSignature, senderPublicKey, timeStamp, due, version);
+        let data = this.CREATE_DATA(TransactionTypes.MultisigSignature, senderPublicKey, timeStamp, due, version);
         let totalFee = (2 * 3) * 1000000;
         let custom = {
             'otherHash': {
