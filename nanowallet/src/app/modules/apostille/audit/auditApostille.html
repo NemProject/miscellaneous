@@ -83,7 +83,7 @@
                             <td style="vertical-align: middle;border-bottom: 1px solid #444">{{file.owner}}</td>
                             <td style="vertical-align: middle;border-bottom: 1px solid #444"><span ng-show="file.hash">{{file.fileHash}}</span></td>
                             <td style="vertical-align: middle;word-break:normal;border-bottom: 1px solid #444"><span ng-show="file.private"><i class="fa fa-check" style="color:green;"></i></span><span ng-show="!file.private"><i class="fa fa-times" style="color:red;"></i></span></td>
-                            <td style="vertical-align: middle;word-break:normal;border-bottom: 1px solid #444"> <a ng-show="file.hash" href="{{$ctrl._Wallet.chainLink}}/#/transfer/{{file.hash}}" target="_blank">{{file.result}}</a><span ng-show="!file.hash">{{file.result}}</span></td>
+                            <td style="vertical-align: middle;word-break:normal;border-bottom: 1px solid #444"> <a ng-show="file.hash" href="{{$ctrl._Wallet.chainLink}}{{file.hash}}" target="_blank">{{file.result}}</a><span ng-show="!file.hash">{{file.result}}</span></td>
                         </tr>
                     </tbody>
                     </table>

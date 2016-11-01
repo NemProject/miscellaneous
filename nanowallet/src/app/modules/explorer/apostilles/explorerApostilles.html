@@ -61,12 +61,12 @@
               <td style="vertical-align: middle;border-bottom: 1px solid #444;word-break: break-all;">{{ap.tags}}</td>
               <td style="vertical-align: middle;border-bottom: 1px solid #444;word-break: break-all;text-align:justify;">
                 <span ng-show="!ap.txMultisigHash.length">
-                  <a href="{{$ctrl._Wallet.chainLink}}/#/transfer/{{ap.txHash}}" target="_blank">
+                  <a href="{{$ctrl._Wallet.chainLink}}{{ap.txHash}}" target="_blank">
                     {{ap.fileHash}}
                   </a>
                 </span>
                 <span ng-show="ap.txMultisigHash.length">
-                  <a href="{{$ctrl._Wallet.chainLink}}/#/transfer/{{ap.txMultisigHash}}" target="_blank">
+                  <a href="{{$ctrl._Wallet.chainLink}}{{ap.txMultisigHash}}" target="_blank">
                     {{ap.fileHash}}
                   </a>
                 </span>
@@ -106,12 +106,12 @@
               <td style="vertical-align: middle;border-bottom: 1px solid #444;word-break: break-all;text-align:justify;">{{tx.transaction.signer | fmtPubToAddress:$ctrl._Wallet.network}}</td>
               <td style="vertical-align: middle;border-bottom: 1px solid #444;word-break: break-all;text-align:justify;"> 
                 <span ng-show="tx.transaction.type === 257">
-                  <a href="{{$ctrl._Wallet.chainLink}}/#/transfer/{{tx.meta.hash.data}}" target="_blank">
+                  <a href="{{$ctrl._Wallet.chainLink}}{{tx.meta.hash.data}}" target="_blank">
                     {{tx.transaction.message.payload }}
                   </a>
                 </span>
                 <span ng-show="tx.transaction.type === 4100">
-                  <a href="{{$ctrl._Wallet.chainLink}}/#/transfer/{{tx.meta.innerHash.data}}" target="_blank">
+                  <a href="{{$ctrl._Wallet.chainLink}}{{tx.meta.innerHash.data}}" target="_blank">
                     {{ tx.transaction.otherTrans.message.payload }}
                   </a>
                 </span>

@@ -4,8 +4,8 @@ let defaultMainnetNode = 'http://alice6.nem.ninja:7778';
 let defaultMijinNode = '';
 
 // Block explorers
-let defaultMainnetExplorer = 'http://chain.nem.ninja';
-let defaultTestnetExplorer = 'http://bob.nem.ninja:8765';
+let defaultMainnetExplorer = 'http://chain.nem.ninja/#/transfer/';
+let defaultTestnetExplorer = 'http://bob.nem.ninja:8765/#/transfer/';
 let defaultMijinExplorer = '';
 
 // Search tx by hash nodes
