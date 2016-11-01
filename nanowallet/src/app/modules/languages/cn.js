@@ -97,6 +97,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_OPTIONAL: '(可选)',
 	    GENERAL_ERROR: 'Error',
         GENERAL_EXAMPLE: 'Example',
+        GENERAL_PUBLIC: 'Public',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: '发送和接收',
