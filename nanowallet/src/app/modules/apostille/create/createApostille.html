@@ -68,8 +68,8 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <input type="checkbox" ng-model="$ctrl.formData.isPrivate" placeholder="">
-              <b>{{ 'APOSTILLE_KEEP_PRIVATE' | translate }}</b>
+              <select class="form-control" ng-options="type.value as type.name for type in $ctrl.types" ng-model="$ctrl.formData.isPrivate">
+              </select>
             </fieldset>
 
             <button class="btn btn-success pull-xs-right"
@@ -114,7 +114,7 @@
               <p>{{ 'APOSTILLE_INFORMATION_4' | translate }} </p> 
               <p><span ng-bind-html="'APOSTILLE_INFORMATION_5' | translate"></span></p>
               <p>{{ 'APOSTILLE_INFORMATION_6' | translate }} </p>
-              <p>{{ 'APOSTILLE_INFORMATION_7' | translate }} </p> 
+              <p><span ng-bind-html="'APOSTILLE_INFORMATION_7' | translate"></span></p> 
               <p>{{ 'APOSTILLE_INFORMATION_8' | translate }} </p>  
             </div>
           </div>

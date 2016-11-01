@@ -59,6 +59,14 @@ class CreateApostilleCtrl {
             version: "09"
         }];
 
+        this.types = [{
+            name: this._$filter('translate')('GENERAL_PUBLIC'),
+            value: false
+        },{
+            name: this._$filter('translate')('APOSTILLE_KEEP_PRIVATE'),
+            value: true
+        }]
+
         /**
          * Default apostille properties
          */
@@ -444,7 +452,7 @@ class CreateApostilleCtrl {
                                 if (data.tx.isMultisig) {
                                     txMultisigHash = data.res.data.innerTransactionHash.data;
                                     // Create the QR url
-                                    url = this._Wallet.chainLink + "/#/transfer/" + txMultisigHash;
+                                    url = this._Wallet.chainLink + txMultisigHash;
                                     // From multisig
                                     from = data.tx.multisigAccount.address;
                                     // Create nty data
@@ -453,7 +461,7 @@ class CreateApostilleCtrl {
                                     // No multisig hash
                                     txMultisigHash = "";
                                     // Create the QR url
-                                    url = this._Wallet.chainLink + "/#/transfer/" + txHash;
+                                    url = this._Wallet.chainLink + txHash;
                                     // From current account
                                     from = this._Wallet.currentAccount.address;
                                     // Create nty data
