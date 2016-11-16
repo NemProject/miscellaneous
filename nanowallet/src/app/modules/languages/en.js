@@ -87,6 +87,7 @@ function EnglishProvider($translateProvider) {
         GENERAL_STATUS: 'Status',
         GENERAL_LOCATION: 'Location',
         GENERAL_ACTION: 'Action',
+        GENERAL_ACTIONS: 'Actions',
         GENERAL_ADD: 'Add',
         GENERAL_ADDED: 'Added',
         GENERAL_REMOVED: 'Removed',
@@ -98,6 +99,15 @@ function EnglishProvider($translateProvider) {
         GENERAL_ERROR: 'Error',
         GENERAL_EXAMPLE: 'Example',
         GENERAL_PUBLIC: 'Public',
+        GENERAL_NAMESPACES: 'Namespaces',
+        GENERAL_NAMESPACE: 'Namespace',
+        GENERAL_SUB_NAMESPACES: 'Sub-namespaces',
+        GENERAL_SUB_NAMESPACE: 'Sub-namespace',
+        GENERAL_MOSAICS: 'Mosaics',
+        GENERAL_VALUE: 'Value',
+        GENERAL_CONNECTION_ERROR: 'An error occured, either node is down or you are offline',
+        GENERAL_HISTORY: 'History',
+        GENERAL_REVEAL: 'Reveal',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Send & Receive',
@@ -161,7 +171,7 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_NO_BLOCKS_HARVESTED: 'No blocks harvested',
         IMPORTANCE_TRANSFER_HARVESTING_PANEL: 'Harvesting panel',
         IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'You must wait until your remote status is active to start delegated harvesting',
-        IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'You must send an importance transfer from the right panel to activate your remote account',
+        IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'You must send an importance transfer from the left panel to activate your remote account',
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
@@ -305,11 +315,22 @@ function EnglishProvider($translateProvider) {
         EXPLORER_HOME_NS_MULTISIG: 'Namespaces owned by multisig accounts',
         EXPLORER_HOME_MOSAICS_LEVY: 'Levy mosaic',
 
+        // EXPLORER NAMESPACES AND MOSAICS
+        EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Select a mosaic to show details',
+
         // EXPLORER APOSTILLES MODULE
         EXPLORER_APOSTILLES_TITLE: 'Explorer - Apostilles',
         EXPLORER_APOSTILLES_YOURS: 'Your apostilles',
         EXPLORER_APOSTILLES_PUBLIC: 'Public sink',
         EXPLORER_APOSTILLES_NO_NTY: 'No nty file loaded, please click here to import one.',
+
+        // APOSTILLE HISTORY MODULE
+        APOSTILLE_HISTORY_TITLE: 'Apostille history',
+        APOSTILLE_HISTORY_BTN_MESSAGE: 'Update / Message',
+        APOSTILLE_HISTORY_BTN_TRANSFER: 'Transfer / Split ownership',
+        APOSTILLE_HISTORY_BACKUP: 'Backup notary data',
+        APOSTILLE_HISTORY_PURGE: 'Purge notary data',
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Create apostilles',
