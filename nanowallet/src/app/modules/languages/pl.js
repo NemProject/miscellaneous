@@ -87,6 +87,7 @@ function PolishProvider($translateProvider) {
         GENERAL_STATUS: 'Status',
         GENERAL_LOCATION: 'Lokacja',
         GENERAL_ACTION: 'Akcja',
+        GENERAL_ACTIONS: 'Akcje',
         GENERAL_ADD: 'Dodaj',
         GENERAL_ADDED: 'Dodany',
         GENERAL_REMOVED: 'Usunięty',
@@ -97,6 +98,16 @@ function PolishProvider($translateProvider) {
         GENERAL_OPTIONAL: '(opcjonalnie)',
         GENERAL_ERROR: 'Błąd',
         GENERAL_EXAMPLE: 'Przykład',
+        GENERAL_PUBLIC: 'Publiczny',
+        GENERAL_NAMESPACES: 'Namespaces',
+        GENERAL_NAMESPACE: 'Namespace',
+        GENERAL_SUB_NAMESPACES: 'Sub-namespaces',
+        GENERAL_SUB_NAMESPACE: 'Sub-namespace',
+        GENERAL_MOSAICS: 'Mozaiki',
+        GENERAL_VALUE: 'Wartość',
+        GENERAL_CONNECTION_ERROR: 'Wystąpił błąd, nie działa serwer lub jesteś offline',
+        GENERAL_HISTORY: 'Historia',
+        GENERAL_REVEAL: 'Odsłoń',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
@@ -160,7 +171,7 @@ function PolishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_NO_BLOCKS_HARVESTED: 'Brak zebranych bloków',
         IMPORTANCE_TRANSFER_HARVESTING_PANEL: 'Panel zbierania bloków',
         IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'Musisz zaczekać, aż zdalny status będzie aktywny, aby rozpocząć delegowane zbieranie.',
-        IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'Musisz wysłać transakcję transferu znaczenia z prawego panelu, aby aktywować swoje zdalne konto',
+        IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'Musisz wysłać transakcję transferu znaczenia z lewego panelu, aby aktywować swoje zdalne konto',
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'Nie jesteś sygnatariuszem, który zainicjował transfer przeniesienia znaczenia, dlatego nie możesz uruchomić lub zatrzymać delegowanego zbierania bloków. Proszę przeczytaj powyżej jak przejąć spowrotem kontrolę nad zbieraniem.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Wybierz konto z multipodpisem',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Wybierz konto z multipodpisem aby zobaczyć status',
@@ -303,18 +314,29 @@ function PolishProvider($translateProvider) {
         EXPLORER_HOME_MOSAICS: 'Twoje Mozaiki',
         EXPLORER_HOME_NS_MULTISIG: 'Namespaces posiadane przez konta z multipodpisem',
         EXPLORER_HOME_MOSAICS_LEVY: 'Podatek mozaiki',
+        
+        // EXPLORER NAMESPACES AND MOSAICS
+        EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces i Mozaiki',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Wybierz mozaikę, aby zobaczyć szczegóły',
 
         // EXPLORER APOSTILLES MODULE
         EXPLORER_APOSTILLES_TITLE: 'Explorer - Apostile',
         EXPLORER_APOSTILLES_YOURS: 'Twoje apostile',
         EXPLORER_APOSTILLES_PUBLIC: 'Publiczny sink',
         EXPLORER_APOSTILLES_NO_NTY: 'Plik nty nie załadowany, proszę tu kliknąć aby go importować.',
+        
+        // APOSTILLE HISTORY MODULE
+        APOSTILLE_HISTORY_TITLE: 'Apostille historia',
+        APOSTILLE_HISTORY_BTN_MESSAGE: 'Aktualizuj / Wiadomość',
+        APOSTILLE_HISTORY_BTN_TRANSFER: 'Transferuj / Podziel własność',
+        APOSTILLE_HISTORY_BACKUP: 'Zabezpiecz dane notarialne',
+        APOSTILLE_HISTORY_PURGE: 'Wyczyść dane notarialne',
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Utwórz apostile',
         APOSTILLE_TRANSACTION_NAME: 'Transakcja apostila',
         APOSTILLE_TRANSACTION_MULTISIG_NAME: 'Transakcja apostila z multipodpisem',
-        APOSTILLE_KEEP_PRIVATE: 'Zachowaj Prywatne',
+        APOSTILLE_KEEP_PRIVATE: 'Prywatne, transferowalne i aktualizowalne',
         APOSTILLE_USE_DEDICATED: 'Użyj konta dedykowanego ',
         APOSTILLE_FILES_TO_NOTARIZE: 'Pliki do notaryzowania',
         APOSTILLE_REJECTED: 'Odrzucony',
@@ -324,10 +346,10 @@ function PolishProvider($translateProvider) {
         APOSTILLE_NAME_TOO_LONG: 'Nazwa pliku jest zbyt długa, dozwolone maksimum 40 znaków.',
         APOSTILLE_MAX_NUMBER: 'Maksimum apostili w partii to 25',
         APOSTILLE_INFORMATION_1: 'Każdy przesłany plik jest automatycznie przetwarzany z użyciem opcji ustawionych na lewym panelu. Możesz dodać nowe pliki, zmienić parametry, a następnie dodać więcej plików z innymi ustawieniami. Możesz również przełączyć na zakładkę Multipodpis i dodać więcej plików.',
-        APOSTILLE_INFORMATION_2: 'Opcja "<b>Zachowaj Prywatne</b>" oznacza, że hasze Twoich plików są podpisane za pomocą twojego klucza prywatnego i wysłane do dedykowanego hierarchicznie deterministycznego (HD) konta. Tym sposobem tylko ty wiesz jaka zawartość została oznakowana, chyba, że ujawnisz tą zawartość.', 
+        APOSTILLE_INFORMATION_2: 'Opcja "<b>Prywatne, transferowalne i aktualizowalne</b>" oznacza, że hasze Twoich plików są podpisane za pomocą twojego klucza prywatnego i wysłane do dedykowanego hierarchicznie deterministycznego (HD) konta. Tym sposobem tylko ty wiesz jaka zawartość została oznakowana, chyba, że ujawnisz tą zawartość.', 
         APOSTILLE_INFORMATION_3: 'Dedykowane konto HD może zostać przekonwertowane na kontrakt z multipodpisem tak, aby można je było przesyłać poprzez kontrakt 1-z-1 lub m-z-n. Może posiadać również dodatkowe informacje przesyłane do niego za pośrednictwem wiadomości z aktualizacjami oraz zmianami w oryginalnym dokumencie lub produkcie, który reprezentuje.',
         APOSTILLE_INFORMATION_4: 'Kiedy dwie lub więcej stron chce zatwierdzić transakcję na przykład wiążący kontrakt, konto dokonujące notaryzacji można umieścić w kontrakcie z multipodpisem n-z-n',
-        APOSTILLE_INFORMATION_5: 'W przypadku kont w kontrakcie z multipodpisem, które zaznaczyły "<b>Zachowaj Prywatne</b>", do podpisania haszu i utworzenia dedykowanego konta HD użyty jest klucz prywatny inicjującego sygnatariusza, a nie konto, które zostało przekonwertowane na multipodpis.',
+        APOSTILLE_INFORMATION_5: 'W przypadku kont w kontrakcie z multipodpisem, które wybrały opcję "<b>Prywatne, transferowalne i aktualizowalne</b>", do podpisania haszu i utworzenia dedykowanego konta HD użyty jest klucz prywatny inicjującego sygnatariusza, a nie konto, które zostało przekonwertowane na multipodpis.',
         APOSTILLE_INFORMATION_6: 'Konto HD jest kontem dedykowanym wygenerowanym z hasza pliku, który następnie jest podpisany przez twoj klucz prywatny. Hasz powstały w tym procesu stosuje się następnie do wytworzenia drugiego klucza prywatnego. To jest klucz prywatny oznaczonego w łańcuchu bloków pliku; pierwszy w technologii blockchain, dostępny tylko w technologii Apostille.',
         APOSTILLE_INFORMATION_7: 'Dedykowane konto HD pozwala na przechowywanie oryginalnego hasza pliku i jego aktualizacje na dedykowanym koncie. Jeśli <b>"Publiczny"</b> jest wybrany, transakcja idzie na adres pulicznego konta zbiorczego(domyślnie).',
         APOSTILLE_INFORMATION_8: 'Po wysłaniu transakcji uruchamiane jest pobieranie zarchiwizowanego pliku. Zawiera on twoje podpisane pliki, twoj certyfikat Apostila dla tego pliku i nowy lub zaktualizowany plik .nty aby śledzić wszystkie pliki, które oznaczyłeś na łańcuchu bloków NEM.',
