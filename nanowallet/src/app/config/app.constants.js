@@ -25,6 +25,9 @@ const AppConstants = {
     }, {
         name: "Chinese",
         key: "cn"
+    }, {
+        name: "Japanese",
+        key: "jp"
     }/*, {
         name: "Français",
         key: "fr"
