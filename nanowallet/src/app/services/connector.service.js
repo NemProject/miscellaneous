@@ -1,16 +1,33 @@
- export default class Connector {
-     constructor($http, $q, DataBridge) {
+/** Service to create the connection to NIS websocket channels */
+class Connector {
+
+     /**
+     * Initialize services and properties
+     *
+     * @param {service} DataBridge - The DataBridge service
+     */
+     constructor(DataBridge) {
          'ngInject';
 
+         /***
+         * Declare services
+         */
          this._DataBridge = DataBridge
-
      }
 
+     /**
+     * Create a connector and subscribe an account to default channels
+     *
+     * @param {string} _node - A node uri
+     * @param {string} _accountAddress - An account address 
+     *
+     * @return {object} - A connector
+     */
      create(_node, _accountAddress) {
          return {
 
              originalAddress: _accountAddress,
-             // this is important, we need upper case when subscribing
+             // This is important, we need upper case when subscribing
              accountAddress: _accountAddress.replace(/-/g, "").toUpperCase(),
              socket: undefined,
              stompClient: undefined,
@@ -247,3 +264,5 @@
      };
 
  }
+
+export default Connector;

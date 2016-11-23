@@ -7,27 +7,36 @@ import helpers from '../utils/helpers';
 import Address from '../utils/Address';
 import TransactionTypes from '../utils/TransactionTypes';
 
-export default class Transactions {
+/** Service to build transactions */
+class Transactions {
+
+    /**
+     * Initialize services and properties
+     *
+     * @param {service} Wallet - The Wallet service
+     * @param {service} $http - The angular $http service
+     * @param {service} DataBridge - The DataBridge service
+     * @param {service} NetworkRequests - The NetworkRequests service
+     */
     constructor(Wallet, $http, DataBridge, NetworkRequests) {
         'ngInject';
 
-        // Wallet service
+        /***
+         * Declare services
+         */
         this._Wallet = Wallet
-        // $http service
         this._$http = $http;
-        // DataBridge service
         this._DataBridge = DataBridge;
-        // NetworkRequests service
         this._NetworkRequests = NetworkRequests;
     }
 
 
     /**
-     * CURRENT_NETWORK_VERSION() Set the network version
+     * Set the network version
      *
-     * @param val: The version number (1 or 2)
+     * @param {number} val - A version number (1 or 2)
      *
-     * return: the network version
+     * @return {number} - A network version
      */
     CURRENT_NETWORK_VERSION(val) {
         if (this._Wallet.network === Network.data.Mainnet.id) {
@@ -39,15 +48,15 @@ export default class Transactions {
     }
 
     /**
-     * CREATE_DATA() Create the common part of a transaction
+     * Create the common part of a transaction
      *
-     * @param txType: The type of the transaction
-     * @param senderPublicKey: The sender public key
-     * @param timeStamp: The timestamp of the transation
-     * @param due: The deadline in minutes
-     * @param version: The network version
+     * @param {number} txType - A type of transaction
+     * @param {string} senderPublicKey - The sender public key
+     * @param {number} timeStamp - A timestamp for the transation
+     * @param {number} due - A deadline in minutes
+     * @param {number} version - A network version
      *
-     * return: common transaction object
+     * @return {object} - A common transaction object
      */
     CREATE_DATA(txtype, senderPublicKey, timeStamp, due, version) {
         return {
@@ -60,13 +69,13 @@ export default class Transactions {
     }
 
     /**
-     * calculateMosaicsFee() Calculate fees for mosaics included in a transaction
+     * Calculate fees for mosaics included in a transaction
      *
-     * @param multiplier: The quantity multiplier
-     * @param mosaics: The mosaicDefinitionMetaDataPair object for the account
-     * @param attachedMosaics: The array of included mosaics
+     * @param {number} multiplier - A quantity multiplier
+     * @param {object} mosaics - A mosaicDefinitionMetaDataPair object
+     * @param {array} attachedMosaics - An array of mosaics to send
      *
-     * return totalFee: The calculated fee for the mosaics transaction
+     * @return {number} - The fee amount for the mosaics in the transaction
      */
     calculateMosaicsFee(multiplier, mosaics, attachedMosaics) {
         if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500) {
@@ -128,13 +137,13 @@ export default class Transactions {
     }
 
     /**
-     * _multisigWrapper() Wrap a transaction in otherTrans
+     * Wrap a transaction in otherTrans
      *
-     * @param senderPublicKey: The sender public key
-     * @param innerEntity: The transaction entity to wrap
-     * @param due: The transaction deadline
+     * @param {string} senderPublicKey - The sender public key
+     * @param {object} innerEntity - The transaction entity to wrap
+     * @param {number} due - The transaction deadline in minutes
      *
-     * return entity: Multisignature transaction object
+     * @return {object} - A [MultisigTransaction]{@link http://bob.nem.ninja/docs/#multisigTransaction} object
      */
     _multisigWrapper(senderPublicKey, innerEntity, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -149,13 +158,13 @@ export default class Transactions {
     }
 
     /**
-     * prepareTransfer() Prepare a transfer and create the object to serialize
+     * Prepare a transfer and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
-     * @param mosaicsMetaData: A mosaicDefinitionMetaDataPair object
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
+     * @param {object} mosaicsMetaData - The mosaicDefinitionMetaDataPair object
      *
-     * return entity: Transaction object ready for serialization
+     * @return {object} - A [TransferTransaction]{@link http://bob.nem.ninja/docs/#transferTransaction} object ready for serialization
      */
     prepareTransfer(common, tx, mosaicsMetaData) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -179,18 +188,18 @@ export default class Transactions {
         return entity;
     }
 
-    /**
-     * _constructTransfer() Create a transaction object
+    /***
+     * Create a transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param recipientCompressedKey: The recipient account public key
-     * @param amount: Amount to send
-     * @param message: Message to send
-     * @param due: The deadline in minutes
-     * @param mosaics: The mosaic objects to send in an array
-     * @param mosaicFee: The fees for mosaics included in the transaction
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {string} recipientCompressedKey - The recipient account public key
+     * @param {number} amount - The amount to send in micro XEM
+     * @param {object} message - The message object
+     * @param {number} due - The deadline in minutes
+     * @param {array} mosaics - The array of mosaics to send
+     * @param {number} mosaicFee - The fees for mosaics included in the transaction
      *
-     * return entity: Transfer transaction object
+     * @return {object} - A [TransferTransaction]{@link http://bob.nem.ninja/docs/#transferTransaction} object
      */
     _constructTransfer(senderPublicKey, recipientCompressedKey, amount, message, due, mosaics, mosaicsFee) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -211,12 +220,12 @@ export default class Transactions {
     }
 
     /**
-     * _constructAggregate() Create an aggregate transaction object
+     * Create an aggregate modification transaction object
      *
-     * @param tx: The sender account public key
-     * @param signatoryArray: The modification array of cosignatories
+     * @param {object} tx - The transaction data
+     * @param {array} signatoryArray - The cosignatories modifications array
      *
-     * return entity: Aggregate transaction object
+     * @return {object} - A [MultisigAggregateModificationTransaction]{@link http://bob.nem.ninja/docs/#multisigAggregateModificationTransaction} object
      */
     _constructAggregate(tx, signatoryArray) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -252,16 +261,16 @@ export default class Transactions {
     };
 
     /**
-     * _constructAggregateModifications() Create a multisignature aggregate modification transaction object
+     * Create a multisignature aggregate modification transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param multisigPublicKey: The multisignature account public key
-     * @param signatoryArray: The modification array of cosignatories
-     * @param minCosigs: The minimum number of cosignatories
-     * @param network: The network id
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {string} multisigPublicKey - The multisignature account public key
+     * @param {array} signatoryArray: -The modification array of cosignatories
+     * @param {number} minCosigs - The minimum number of cosignatories
+     * @param {number} network - The network id
+     * @param {number} due - The deadline in minutes
      *
-     * return entity: Multisignature aggregate modification transaction object
+     * @return {object} - A [MultisigCosignatoryModification]{@link http://bob.nem.ninja/docs/#multisigCosignatoryModification} object
      */
     _constructAggregateModifications(senderPublicKey, tx, signatoryArray) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -311,12 +320,12 @@ export default class Transactions {
     };
 
     /**
-     * prepareNamespace() Prepare a namespace provision transaction and create the object to serialize
+     * Prepare a namespace provision transaction and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return entity:  Namespace provision transaction object ready for serialization
+     * @return {object} - A [ProvisionNamespaceTransaction]{@link http://bob.nem.ninja/docs/#provisionNamespaceTransaction} object ready for serialization
      */
     prepareNamespace(common, tx) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -348,17 +357,17 @@ export default class Transactions {
         return entity;
     };
 
-    /**
-     * _constructNamespace() Create a namespace provision transaction object
+    /***
+     * Create a namespace provision transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param rentalFeeSink: The rental sink account
-     * @param rentalFee: The rental fee
-     * @param namespaceParent: The parent namespace
-     * @param namespaceName: The namespace name
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {string} rentalFeeSink - The rental sink account
+     * @param {number} rentalFee - The rental fee
+     * @param {string} namespaceParent - The parent namespace
+     * @param {string} namespaceName  - The namespace name
+     * @param {number} due - The deadline in minutes
      *
-     * return entity: Namespace provision transaction object
+     * @return {object} - A [ProvisionNamespaceTransaction]{@link http://bob.nem.ninja/docs/#provisionNamespaceTransaction} object
      */
     _constructNamespace(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, namespaceName, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -377,12 +386,12 @@ export default class Transactions {
     }
 
     /**
-     * prepareMosaicDefinition() Prepare a mosaic definition transaction and create the object to serialize
+     * Prepare a mosaic definition transaction and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return entity:  Mosaic definition transaction object ready for serialization
+     * @return {object} - A [MosaicDefinitionCreationTransaction]{@link http://bob.nem.ninja/docs/#mosaicDefinitionCreationTransaction} object ready for serialization
      */
     prepareMosaicDefinition(common, tx) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -407,20 +416,20 @@ export default class Transactions {
         return entity;
     };
 
-    /**
-     * _constructMosaicDefinition() Create a mosaic definition transaction object
+    /***
+     * Create a mosaic definition transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param rentalFeeSink: The rental sink account
-     * @param rentalFee: The rental fee
-     * @param namespaceParent: The parent namespace
-     * @param mosaicName: The mosaic name
-     * @param mosaicDescription: The mosaic description
-     * @param mosaicProperties: The mosaic properties object
-     * @param levy: The levy object
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey: The sender account public key
+     * @param {string} rentalFeeSink: The rental sink account
+     * @param {number} rentalFee: The rental fee
+     * @param {string} namespaceParent: The parent namespace
+     * @param {string} mosaicName: The mosaic name
+     * @param {string} mosaicDescription: The mosaic description
+     * @param {object} mosaicProperties: The mosaic properties object
+     * @param {object} levy: The levy object
+     * @param {number} due: The deadline in minutes
      *
-     * return entity: Mosaic definition transaction object
+     * @return {object} - A [MosaicDefinitionCreationTransaction]{@link http://bob.nem.ninja/docs/#mosaicDefinitionCreationTransaction} object
      */
     _constructMosaicDefinition(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, mosaicName, mosaicDescription, mosaicProperties, levy, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -459,12 +468,12 @@ export default class Transactions {
     }
 
     /**
-     * prepareMosaicSupply() Prepare a mosaic supply change transaction and create the object to serialize
+     * Prepare a mosaic supply change transaction and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return entity:  Mosaic supply change transaction object ready for serialization
+     * @return {object} - A [MosaicSupplyChangeTransaction]{@link http://bob.nem.ninja/docs/#mosaicSupplyChangeTransaction} object ready for serialization
      */
     prepareMosaicSupply(common, tx) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -477,16 +486,16 @@ export default class Transactions {
         return entity;
     }
 
-    /**
-     * _constructMosaicSupply() Create a mosaic supply change transaction object
+    /***
+     * Create a mosaic supply change transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param mosaicId: The mosaic id
-     * @param supplyType: The type of change
-     * @param delta: The amount involved in the change
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {object} mosaicId - The mosaic id
+     * @param {number} supplyType - The type of change
+     * @param {number} delta - The amount involved in the change
+     * @param {number} due - The deadline in minutes
      *
-     * return entity: Mosaic supply change transaction object
+     * @return {object} - A [MosaicSupplyChangeTransaction]{@link http://bob.nem.ninja/docs/#mosaicSupplyChangeTransaction} object
      */
     _constructMosaicSupply(senderPublicKey, mosaicId, supplyType, delta, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -505,12 +514,12 @@ export default class Transactions {
     };
 
     /**
-     * prepareImportanceTransfer() Prepare an importance transfer transaction and create the object to serialize
+     * Prepare an importance transfer transaction and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return entity:  Importance transfer transaction object ready for serialization
+     * @return {object} - An [ImportanceTransferTransaction]{@link http://bob.nem.ninja/docs/#importanceTransferTransaction} object ready for serialization
      */
     prepareImportanceTransfer(common, tx) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -523,15 +532,15 @@ export default class Transactions {
         return entity;
     }
 
-    /**
-     * _constructImportanceTransfer() Create an importance transfer transaction object
+    /***
+     * Create an importance transfer transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param recipientKey: The remote account public key
-     * @param mode: The selected mode
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {string} recipientKey - The remote account public key
+     * @param {number} mode - The selected mode
+     * @param {number} due - The deadline in minutes
      *
-     * return entity: Importance transfer transaction object
+     * @return {object} - An [ImportanceTransferTransaction]{@link http://bob.nem.ninja/docs/#importanceTransferTransaction} object
      */
     _constructImportanceTransfer(senderPublicKey, recipientKey, mode, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -547,12 +556,12 @@ export default class Transactions {
     }
 
     /**
-     * prepareApostilleTransfer() Prepare an apostille transfer and create the object to serialize
+     * Prepare an apostille transfer and create the object to serialize
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return entity: Transaction object ready for serialization
+     * @return {object} - A [TransferTransaction]{@link http://bob.nem.ninja/docs/#transferTransaction} object ready for serialization
      */
     prepareApostilleTransfer(common, tx) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -576,12 +585,12 @@ export default class Transactions {
     }
 
     /**
-     * prepareSignature() Prepare a multisig signature transaction, create the object, serialize and broadcast
+     * Prepare a multisig signature transaction, create the object, serialize and broadcast
      *
-     * @param common: The password/privateKey object
-     * @param tx: The transaction data
+     * @param {object} common - A password/privateKey object
+     * @param {object} tx - The transaction data
      *
-     * return an announce transaction promise
+     * @return {promise} - An announce transaction promise of the NetworkRequests service
      */
     prepareSignature(tx, common) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -599,15 +608,15 @@ export default class Transactions {
         return this._NetworkRequests.announceTransaction(helpers.getHostname(this._Wallet.node), obj);
     };
 
-    /**
-     * _constructSignature() Create a multisig signature transaction object
+    /***
+     * Create a multisig signature transaction object
      *
-     * @param senderPublicKey: The sender account public key
-     * @param otherAccount: The multisig account address
-     * @param otherHash: The inner transaction hash
-     * @param due: The deadline in minutes
+     * @param {string} senderPublicKey - The sender account public key
+     * @param {string} otherAccount - The multisig account address
+     * @param {string} otherHash - The inner transaction hash
+     * @param {number} due - The deadline in minutes
      *
-     * return entity: Multisig signature transaction object
+     * @return {object} - An [MultisigSignatureTransaction]{@link http://bob.nem.ninja/docs/#multisigSignatureTransaction} object
      */
     _constructSignature(senderPublicKey, otherAccount, otherHash, due) {
         let timeStamp = helpers.createNEMTimeStamp();
@@ -626,12 +635,12 @@ export default class Transactions {
     }
 
     /**
-     * serializeAndAnnounceTransaction() Serialize a transaction and broadcast it to the network
+     * Serialize a transaction and broadcast it to the network
      *
-     * @param entity: The prepared transaction object
-     * @param common: The password/privateKey object
+     * @param {object} entity - The prepared transaction object
+     * @param {object} common - A password/privateKey object
      *
-     * return an announce transaction promise
+     * @return {promise} - An announce transaction promise of the NetworkRequests service
      */
     serializeAndAnnounceTransaction(entity, common) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -645,14 +654,14 @@ export default class Transactions {
     }
 
     /**
-     * serializeAndAnnounceTransactionLoop() Serialize a transaction and broadcast it to the network (from a loop)
+     * Serialize a transaction and broadcast it to the network (from a loop)
      *
-     * @param entity: The prepared transaction object
-     * @param common: The password/privateKey object
-     * @param data: Any object
-     * @param k: The position into the loop
+     * @param {object} entity - The prepared transaction object
+     * @param {object} common - A password/privateKey object
+     * @param {anything} data - Any kind of data
+     * @param {number} k - The position into the loop
      *
-     * return an announce transaction promise with isolated data
+     * @return {promise} - An announce transaction promise of the NetworkRequests service, with isolated data
      */
     serializeAndAnnounceTransactionLoop(entity, common, data, k) {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
@@ -666,3 +675,5 @@ export default class Transactions {
     }
 
 }
+
+export default Transactions;
