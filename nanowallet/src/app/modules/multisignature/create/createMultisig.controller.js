@@ -1,6 +1,7 @@
 import Address from '../../../utils/Address';
 import helpers from '../../../utils/helpers';
 import CryptoHelpers from '../../../utils/CryptoHelpers';
+import KeyPair from '../../../utils/KeyPair';
 
 class CreateMultisigCtrl {
     constructor(Wallet, NetworkRequests, Alert, Transactions, $location) {
@@ -34,7 +35,7 @@ class CreateMultisigCtrl {
         this.formData.cosignatoryToAdd = this._Wallet.currentAccount.address;
         this.formData.accountToConvert = '';
         this.cosignatoryPubKey = '';
-        this.multisigPubKey = '';
+        this.formData.multisigPubKey = '';
         this.formData.fee = 0;
         // Alias address empty by default
         this.aliasAddress = '';
@@ -72,11 +73,10 @@ class CreateMultisigCtrl {
 
         // Init fees
         this.updateFee();
-
     }
 
     /**
-     * processCosignatoryToAdd() Set right address and get data of cosignatory to add
+     * Set right address and get data of cosignatory to add
      */
     processCosignatoryToAdd() {
         // Check if value is an alias
@@ -113,7 +113,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * processAccountToConvert() Set right address and get data of account to convert
+     * Set right address and get data of account to convert
      */
     processAccountToConvert() {
         if (!this.formData.accountToConvert) {
@@ -139,40 +139,41 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * getMultisigData() Get data of account to convert from network
+     * Get data of account to convert from network
      * 
-     * @param address: The account address
+     * @param {string} address - An account address
      */
     getMultisigData(address) {
+        this.okPressed = false;
         return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
             if (data.meta.cosignatoryOf.length > 0) {
                 // Alert
                 this._Alert.cosignatoryCannotBeMultisig();
                 // Reset multisig data and properties
                 this.resetMultisigData();
+                // Lock send button
+                this.okPressed = true;
                 return;
             } else if (data.meta.cosignatories.length > 0) {
                 // Alert
                 this._Alert.alreadyMultisig();
                 // Reset multisig data and properties
                 this.resetMultisigData();
+                // Lock send button
+                this.okPressed = true;
                 return;
             }
             // Store data
             this.multisigInfoData = data;
             // Store multisig public key
             this.formData.multisigPubKey = data.account.publicKey;
-            // It is needed to get the account public key
-            // If empty we prevent user to send and show an alert
-            if (!this.formData.multisigPubKey) {
-                // Alert
-                this._Alert.multisighasNoPubKey();
-                // Reset multisig data and properties
-                this.resetMultisigData();
-            }
         },
         (err) => {
-            this._Alert.getAccountDataError(err.data.message);
+            if(err.status === -1) {
+                this._Alert.connectionError();
+            } else {
+                this._Alert.getAccountDataError(err.data.message);
+            }
             // Reset recipient data
             this.resetMultisigData();
             return;
@@ -180,9 +181,9 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * getCosignatoryData() Get cosignatory data from network
+     * Get cosignatory data from network
      * 
-     * @param address: The account address
+     * @param {string} address - The account address
      */
     getCosignatoryData(address) {
         return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
@@ -207,7 +208,11 @@ class CreateMultisigCtrl {
             }
         },
         (err) => {
-            this._Alert.getAccountDataError(err.data.message);
+            if(err.status === -1) {
+                this._Alert.connectionError();
+            } else {
+                this._Alert.getAccountDataError(err.data.message);
+            }
             // Reset recipient data
             this.resetCosignatoryData();
             return;
@@ -215,9 +220,9 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * getCosignatoryDataFromAlias() Get cosignatory account data from network using @alias
+     * Get cosignatory account data from network using @alias
      * 
-     * @param alias: The recipient alias (namespace)
+     * @param {string} alias - An alias (@namespace)
      */
     getCosignatoryDataFromAlias(alias) {
         return this._NetworkRequests.getNamespacesById(helpers.getHostname(this._Wallet.node), alias).then((data) => {
@@ -238,7 +243,11 @@ class CreateMultisigCtrl {
             }
         },
         (err) => {
-            this._Alert.getNamespacesByIdError(err.data.message);
+            if(err.status === -1) {
+                this._Alert.connectionError();
+            } else {
+                this._Alert.getNamespacesByIdError(err.data.message);
+            }
             // Reset recipient data
             this.resetCosignatoryData();
             return;
@@ -246,7 +255,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * updateFee() Update transaction fee
+     * Update transaction fee
      */
     updateFee() {
         let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
@@ -254,7 +263,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * resetCosignatoryData() Reset data stored and properties for cosignatory
+     * Reset data stored and properties for cosignatory
      */
     resetCosignatoryData() {
         // Reset public key data
@@ -266,7 +275,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * resetMultisigData() Reset data stored and properties for multisig account
+     * Reset data stored and properties for multisig account
      */
     resetMultisigData() {
         // Reset public key data
@@ -276,7 +285,10 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * removeCosignFromList() Remove a cosignatory from the modifications list
+     * Remove a cosignatory from the modifications list
+     *
+     * @param {array} array - A modification array
+     * @param {object} elem - An object to remove from the array
      */
     removeCosignFromList(array, elem) {
         // If the deleted element is the elem 0 and length of array mod 5 gives 0 (means it is the last object of the page), 
@@ -290,7 +302,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * addCosig() Add cosignatory to array
+     * Add cosignatory to array
      */
     addCosig() {
         if (helpers.haveCosig(this.formData.cosignatoryAddress, this.formData.cosignatoryPubKey, this.cosignatoryArray)) {
@@ -306,7 +318,7 @@ class CreateMultisigCtrl {
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Build and broadcast the transaction to the network
      */
     send() {
         // Disable send button;
@@ -326,6 +338,12 @@ class CreateMultisigCtrl {
                 this.okPressed = false;
                 return;
             }
+        }
+
+        // Generate the multisig account public key if none
+        if (!this.formData.multisigPubKey.length) {
+            let kp = KeyPair.create(this.common.privateKey);
+            this.formData.multisigPubKey = kp.publicKey.toString();
         }
 
         // Build the entity to serialize
@@ -351,7 +369,11 @@ class CreateMultisigCtrl {
                 this.common.privateKey = '';
                 // Enable send button
                 this.okPressed = false;
-                this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+                if(err.status === -1) {
+                    this._Alert.connectionError();
+                } else {
+                    this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+                }
             });
     }
 
