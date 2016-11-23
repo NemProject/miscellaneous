@@ -4,24 +4,33 @@ import convert from '../utils/convert';
 import Address from '../utils/Address';
 import CryptoHelpers from '../utils/CryptoHelpers';
 
-export default class WalletBuilder {
+/** Service to build wallets */
+class WalletBuilder {
+
+    /**
+     * Initialize services and properties
+     *
+     * @param {service} Alert - The Alert service
+     * @param {service} $timeout - The angular $timeout service
+     */
     constructor(Alert, $timeout) {
         'ngInject';
 
-        // Alert service
+        /***
+         * Declare services
+         */
         this._Alert = Alert;
-        // $timeout for async digest
         this._$timeout = $timeout;
     }
 
     /**
-     * createWallet() Create a PRNG wallet object
+     * Create a PRNG wallet object
      *
-     * @param walletName: The wallet name
-     * @param walletPassword: The wallet password
-     * @param network: The network id
+     * @param {string} walletName - A wallet name
+     * @param {string} walletPassword - A wallet password
+     * @param {number} network - A network id
      *
-     * @return promise: PRNG wallet object or promise error
+     * @return {object|promise} - A PRNG wallet object or promise error
      */
     createWallet(walletName, walletPassword, network) {
         return new Promise((resolve, reject) => {
@@ -39,7 +48,7 @@ export default class WalletBuilder {
             // Create bip32 remote amount using generated private key
             return resolve(CryptoHelpers.generateBIP32Data(r, walletPassword, 0, network).then((data) => {
                     // Construct the wallet object
-                    let wallet = buildWallet(walletName, addr, true, "pass:bip32", encrypted, network, data.publicKey);
+                    let wallet = this.buildWallet(walletName, addr, true, "pass:bip32", encrypted, network, data.publicKey);
                     return wallet;
                 },
                 (err) => {
@@ -52,13 +61,13 @@ export default class WalletBuilder {
     }
 
     /**
-     * createBrainWallet() Create a brain wallet object
+     * Create a brain wallet object
      *
-     * @param  walletName: The wallet name
-     * @param walletPassword: The wallet password
-     * @param network: The network id
+     * @param {string} walletName - A wallet name
+     * @param {string} walletPassword - A wallet password
+     * @param {number} network - A network id
      *
-     * @return promise: Brain wallet object or promise error
+     * @return {object|promise} - A Brain wallet object or promise error
      */
     createBrainWallet(walletName, walletPassword, network) {
         return new Promise((resolve, reject) => {
@@ -74,7 +83,7 @@ export default class WalletBuilder {
             // Create bip32 remote account using derived private key
             return resolve(CryptoHelpers.generateBIP32Data(r.priv, walletPassword, 0, network).then((data) => {
                     // Construct the wallet object
-                    let wallet = buildWallet(walletName, addr, true, "pass:6k", "", network, data.publicKey);
+                    let wallet = this.buildWallet(walletName, addr, true, "pass:6k", "", network, data.publicKey);
                     return wallet;
                 },
                 (err) => {
@@ -87,13 +96,15 @@ export default class WalletBuilder {
     }
 
     /**
-     * createPrivateKeyWallet() Create a private key wallet object
+     * Create a private key wallet object
      *
-     * @param walletName: The wallet name
-     * @param walletPassword: The wallet password
-     * @param network: The network id
+     * @param {string} walletName - A wallet name
+     * @param {string} walletPassword - A wallet password
+     * @param {string} address - An account address
+     * @param {string} privateKey - The account private key
+     * @param {number} network - A network id
      *
-     * @return promise: Private key wallet object or promise error
+     * @return {object|promise} - A private key wallet object or promise error
      */
     createPrivateKeyWallet(walletName, walletPassword, address, privateKey, network) {
         return new Promise((resolve, reject) => {
@@ -107,7 +118,7 @@ export default class WalletBuilder {
             // Create bip32 remote account using provided private key
             return resolve(CryptoHelpers.generateBIP32Data(privateKey, walletPassword, 0, network).then((data) => {
                     // Construct the wallet object
-                    let wallet = buildWallet(walletName, cleanAddr, false, "pass:enc", encrypted, network, data.publicKey);
+                    let wallet = this.buildWallet(walletName, cleanAddr, false, "pass:enc", encrypted, network, data.publicKey);
                     return wallet;
                 },
                 (err) => {
@@ -119,37 +130,38 @@ export default class WalletBuilder {
         });
     }
 
+    /**
+     * Create a wallet object
+     *
+     * @param {string} walletName - The wallet name
+     * @param {string} addr - The main account address
+     * @param {boolean} brain - Is brain or not
+     * @param {string} algo - The wallet algorithm
+     * @param {object} encrypted - The encrypted private key object
+     * @param {number} network - The network id
+     * @param {string} child - The public key of the account derived from seed
+     *
+     * @return {object} - A wallet object
+     */
+    buildWallet(walletName, addr, brain, algo, encrypted, network, child) {
+        let wallet = {
+            "privateKey": "",
+            "name": walletName,
+            "accounts": {
+                "0": {
+                    "brain": brain,
+                    "algo": algo,
+                    "encrypted": encrypted.ciphertext || "",
+                    "iv": encrypted.iv || "",
+                    "address": addr.toUpperCase().replace(/-/g, ''),
+                    "label": 'Primary',
+                    "network": network,
+                    "child": child
+                }
+            }
+        };
+        return wallet;
+    }
 }
 
-/**
- * buildWallet() Create a wallet object
- *
- * @param walletName: The wallet name
- * @param addr: The main account address
- * @param brain: Is brain or not
- * @param algo: The wallet algo
- * @param encrypted: The encrypted private key object
- * @param network: The network id
- * @param child: Account derived of seed at index 0
- *
- * @return wallet: The wallet object
- */
-function buildWallet(walletName, addr, brain, algo, encrypted, network, child) {
-    let wallet = {
-        "privateKey": "",
-        "name": walletName,
-        "accounts": {
-            "0": {
-                "brain": brain,
-                "algo": algo,
-                "encrypted": encrypted.ciphertext || "",
-                "iv": encrypted.iv || "",
-                "address": addr.toUpperCase().replace(/-/g, ''),
-                "label": 'Primary',
-                "network": network,
-                "child": child
-            }
-        }
-    };
-    return wallet;
-}
+export default WalletBuilder;
