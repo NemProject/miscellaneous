@@ -197,11 +197,12 @@ describe('Wallet service tests', function() {
         expect(Wallet.searchNode).toEqual(Nodes.testnetSearchNodes[0]);
     });
 
-    it("Can set nty data if present in local storage", function() {
+    it("Can set mainnet nty data if present in local storage", function() {
         // Arrange
-        $localStorage.nty = [{
+        Wallet.network = Network.data.Mainnet.id;
+        $localStorage.ntyMainnet = [{
             "filename": "Accords-jazz.pdf",
-            "tags": "Test",
+            "tags": "Mainnet",
             "fileHash": "fe4e545903b88c03ec6bd0a91283dc9c12b13510407fc06164fd9bec04258e2bfb79974c43",
             "txHash": "5f0d3258a9a22522ff5d68634484909b9c37bacd6e68ab6d7cbb54d502d45ee9",
             "timeStamp": "Fri, 24 Jun 2016 14:51:31 GMT"
@@ -211,14 +212,33 @@ describe('Wallet service tests', function() {
         Wallet.setNtyData()
 
         // Assert
-        expect(Wallet.ntyData).toEqual($localStorage.nty);
+        expect(Wallet.ntyData).toEqual($localStorage.ntyMainnet);
     });
 
-    it("Can set nty data in local storage", function() {
+    it("Can set testnet nty data if present in local storage", function() {
         // Arrange
+        Wallet.network = Network.data.Testnet.id;
+        $localStorage.ntyTestnet = [{
+            "filename": "Accords-jazz.pdf",
+            "tags": "Testnet",
+            "fileHash": "fe4e545903b88c03ec6bd0a91283dc9c12b13510407fc06164fd9bec04258e2bfb79974c43",
+            "txHash": "5f0d3258a9a22522ff5d68634484909b9c37bacd6e68ab6d7cbb54d502d45ee9",
+            "timeStamp": "Fri, 24 Jun 2016 14:51:31 GMT"
+        }]
+
+        // Act
+        Wallet.setNtyData()
+
+        // Assert
+        expect(Wallet.ntyData).toEqual($localStorage.ntyTestnet);
+    });
+
+    it("Can set mainnet nty data in local storage", function() {
+        // Arrange
+        Wallet.network = Network.data.Mainnet.id;
         let ntyData = [{
             "filename": "Accords-jazz.pdf",
-            "tags": "Test",
+            "tags": "Mainnet",
             "fileHash": "fe4e545903b88c03ec6bd0a91283dc9c12b13510407fc06164fd9bec04258e2bfb79974c43",
             "txHash": "5f0d3258a9a22522ff5d68634484909b9c37bacd6e68ab6d7cbb54d502d45ee9",
             "timeStamp": "Fri, 24 Jun 2016 14:51:31 GMT"
@@ -228,7 +248,25 @@ describe('Wallet service tests', function() {
         Wallet.setNtyDataInLocalStorage(ntyData)
 
         // Assert
-        expect($localStorage.nty).toEqual(ntyData);
+        expect($localStorage.ntyMainnet).toEqual(ntyData);
+    });
+
+    it("Can set testnet nty data in local storage", function() {
+        // Arrange
+        Wallet.network = Network.data.Testnet.id;
+        let ntyData = [{
+            "filename": "Accords-jazz.pdf",
+            "tags": "Mainnet",
+            "fileHash": "fe4e545903b88c03ec6bd0a91283dc9c12b13510407fc06164fd9bec04258e2bfb79974c43",
+            "txHash": "5f0d3258a9a22522ff5d68634484909b9c37bacd6e68ab6d7cbb54d502d45ee9",
+            "timeStamp": "Fri, 24 Jun 2016 14:51:31 GMT"
+        }]
+
+        // Act
+        Wallet.setNtyDataInLocalStorage(ntyData)
+
+        // Assert
+        expect($localStorage.ntyTestnet).toEqual(ntyData);
     });
 
 });
