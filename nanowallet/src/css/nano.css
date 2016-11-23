@@ -784,7 +784,8 @@ border-bottom-color: transparent;
 .explorer-home-page .col-md-3 {
 	margin-top: 10px;
 }
-.explorer-home-page .explorerNav {
+
+.explorerNav {
 	padding-left: 0px; 
 	padding-right: 0px;
 	margin-top: 0px;
@@ -992,6 +993,43 @@ border-bottom-color: transparent;
 }
 
 .list-group-item.active:hover {
+	color: white;
+	background-color: #444;
+}
+
+.explorer-namespaces-mosaics-page .list-group-item.active {
+	color: #444;
+	background-color: #e3e0cf;
+	border-color: transparent;
+}
+
+.explorer-namespaces-mosaics-page .list-group-item.active:hover {
+	color: #444;
+	background-color: #e3e0cf;
+}
+
+.explorer-namespaces-mosaics-page .banner-left {
+	padding-bottom: 0px;
+	border-bottom: 1px solid white;
+}
+
+.explorer-namespaces-mosaics-page .banner-left h2 {
+	margin-top: 10px;
+}
+
+.explorer-namespaces-mosaics-page .list-group-item {
+	display: inline-block;
+	margin-left: -5px;
+	padding: 5px 10px;
+}
+
+.explorer-namespaces-mosaics-page .list-group a.active {
+	background-color: #444;
+	color: white;
+	border-color: transparent;
+}
+
+.explorer-namespaces-mosaics-page .explorerNav .list-group-item.active:hover {
 	color: white;
 	background-color: #444;
 }
