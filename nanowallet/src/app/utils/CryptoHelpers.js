@@ -1,3 +1,5 @@
+/** @module utils/CryptoHelpers */
+
 import KeyPair from './KeyPair';
 import convert from './convert';
 import Address from './Address';
@@ -6,49 +8,38 @@ import nacl from './nacl-fast';
 import Network from './Network';
 
 /**
- * AES_PBKF2_encryption() Encrypt a private key for mobile apps
- * - Not working -
+ * Encrypt a private key for mobile apps
  *
- * @param password: The wallet password
- * @param privateKey: The account private key
+ * @param {string} password - A wallet password
+ * @param {string} privateKey - An account private key
  *
- * @return object with encrypted data
+ * @return {object} - The encrypted data
  */
 let AES_PBKF2_encryption = function(password, privateKey) {
     let salt = CryptoJS.lib.WordArray.random(256 / 8);
-    let key = CryptoJS.PBKDF2(password.toString(), salt, {
+    let key = CryptoJS.PBKDF2(password, salt, {
         keySize: 256 / 32,
-        iterations: 2000,
-        hasher: CryptoJS.algo.SHA1
+        iterations: 2000
     });
-    console.log(salt.toString());
-    console.log(key.toString());
-    let result = aes_encrypt_pbkdf2(privateKey, key);
-    //let decrypted = CryptoJS.AES.decrypt(result.enc, key.toString());
-    //console.log(decrypted.toString());
+    let iv = new Uint8Array(16);
+    window.crypto.getRandomValues(iv);
+    let encIv = {
+        iv: convert.ua2words(iv, 16)
+    };
+    let encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Hex.parse(privateKey), key, encIv);
     return {
-        encrypted: result,
-        salt: salt
+        encrypted: convert.ua2hex(iv) + encrypted.ciphertext,
+        salt:  salt.toString()
     }
 };
 
-function aes_encrypt_pbkdf2(data, key) {
-    // let encKey = convert.ua2words(key, 32);
-    let encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Hex.parse(data), key.toString());
-    return {
-        enc: encrypted,
-        ciphertext: encrypted.ciphertext,
-        key: key
-    };
-};
-
 /**
- * derivePassSha() Derive a private key from a password using count iterations of SHA3-256
+ * Derive a private key from a password using count iterations of SHA3-256
  *
- * @param password: The wallet password
- * @param count: The number of iterations
+ * @param {string} password - A wallet password
+ * @param {number} count - A number of iterations
  *
- * @return object with derived private key
+ * @return {object} - The derived private key
  */
 let derivePassSha = function(password, count) {
     let data = password;
@@ -59,28 +50,27 @@ let derivePassSha = function(password, count) {
         });
     }
     console.timeEnd('sha3^n generation time');
-    let r = {
+    return {
         'priv': CryptoJS.enc.Hex.stringify(data)
     };
-    return r;
 };
 
 /**
- * passwordToPrivatekeyClear() Reveal the private key of a given account or derive it from the wallet password
+ * Reveal the private key of an account or derive it from the wallet password
  *
- * @param commonData: Object containing password and privateKey field
- * @param walletAccount: The wallet account object
- * @param algo: The wallet algorithm
- * @param doClear: True to clean password after operation false otherwise
+ * @param {object} commonData- An object containing password and privateKey field
+ * @param {object} walletAccount - A wallet account object
+ * @param {string} algo - A wallet algorithm
+ * @param {boolean} doClear - True to clean password after operation, false otherwise
  *
- * @return object with the account private key or false
+ * @return {object|boolean} - The account private key or false
  */
 let passwordToPrivatekeyClear = function(commonData, walletAccount, algo, doClear) {
     if (commonData.password) {
         let r = undefined;
         if (algo === "pass:6k") { // Brain wallets
             if (!walletAccount.encrypted && !walletAccount.iv) {
-                // Base account private key is generated simply using a passphrase so it has no encrypted or iv
+                // Base account private key is generated simply using a passphrase so it has no encrypted and iv
                 r = derivePassSha(commonData.password, 6000);
             } else if (!walletAccount.encrypted || !walletAccount.iv) {
                 // Else if one is missing there is a problem
@@ -99,7 +89,7 @@ let passwordToPrivatekeyClear = function(commonData, walletAccount, algo, doClea
                     'priv': d
                 };
             }
-        } else if (algo === "pass:bip32") { // New wallets from PRNG
+        } else if (algo === "pass:bip32") { // Wallets from PRNG
             let pass = derivePassSha(commonData.password, 20);
             let obj = {
                 ciphertext: CryptoJS.enc.Hex.parse(walletAccount.encrypted),
@@ -122,7 +112,7 @@ let passwordToPrivatekeyClear = function(commonData, walletAccount, algo, doClea
                 'priv': d
             };
         } else {
-            //alert("Unknown wallet encryption method");
+            alert("Unknown wallet encryption method");
             return false;
         }
         if (doClear) {
@@ -136,13 +126,13 @@ let passwordToPrivatekeyClear = function(commonData, walletAccount, algo, doClea
 }
 
 /**
- * checkAddress() Check if a given address match the one generated from a private key
+ * Check if a private key correspond to an account address
  *
- * @param priv: The account private key
- * @param network: The network id
- * @param _expectedAddress: The expected NEM address
+ * @param {string} priv - An account private key
+ * @param {number} network - A network id
+ * @param {string} _expectedAddress - The expected NEM address
  *
- * @return boolean: true if valid, false otherwise
+ * @return {boolean} - True if valid, false otherwise
  */
 let checkAddress = function(priv, network, _expectedAddress) {
     if (priv.length === 64 || priv.length === 66) {
@@ -168,7 +158,6 @@ function key_derive(shared, salt, sk, pk) {
     for (let i = 0; i < salt.length; i++) {
         shared[i] ^= salt[i];
     }
-    // ua2words
     let hash = CryptoJS.SHA3(convert.ua2words(shared, 32), {
         outputLength: 256
     });
@@ -176,9 +165,9 @@ function key_derive(shared, salt, sk, pk) {
 }
 
 /**
- * randomKey() Generate a random key
+ * Generate a random key
  *
- * @return rKey: A random key
+ * @return {Uint8Array} - A random key
  */
 let randomKey = function() {
     let rkey = new Uint8Array(32);
@@ -187,12 +176,12 @@ let randomKey = function() {
 };
 
 /**
- * encrypt() Encrypt hex data using a given key
+ * encrypt() Encrypt hex data using a key
  *
- * @param data: Hex string
- * @param key: Uint8Array key
+ * @param {string} data - An hex string
+ * @param {Uint8Array} key - An Uint8Array key
  *
- * @return an encryption data object
+ * @return {object} - The encrypted data
  */
 let encrypt = function(data, key) {
     let iv = new Uint8Array(16);
@@ -211,11 +200,11 @@ let encrypt = function(data, key) {
 };
 
 /**
- * decrypt() Decrypt data
+ * Decrypt data
  *
- * @param data: Encrypted data object
+ * @param {object} data - An encrypted data object
  *
- * @return decrypted hex string
+ * @return {string} - The decrypted hex string
  */
 let decrypt = function(data) {
     let encKey = convert.ua2words(data.key, 32);
@@ -226,12 +215,12 @@ let decrypt = function(data) {
 };
 
 /**
- * encodePrivKey() Encode a private key using a password
+ * Encode a private key using a password
  *
- * @param privateKey: The hex private key
- * @param password: The password to use
+ * @param {string} privateKey - An hex private key
+ * @param {string} password - A password
  *
- * @return ret: An encryption data object
+ * @return {object} - The encoded data
  */
 let encodePrivKey = function(privateKey, password) {
     if (!password) {
@@ -249,16 +238,16 @@ let encodePrivKey = function(privateKey, password) {
     }
 };
 
-/**
- * _encode() Encode a message, separated from below encode() to help testing
+/***
+ * Encode a message, separated from encode() to help testing
  *
- * @param senderPriv: The sender private key
- * @param recipientPub: The recipient public key
- * @param msg: The text message
- * @param iv: The initialization vector
- * @param salt: The salt
+ * @param {string} senderPriv - A sender private key
+ * @param {string} recipientPub - A recipient public key
+ * @param {string} msg - A text message
+ * @param {Uint8Array} iv - An initialization vector
+ * @param {Uint8Array} salt - A salt
  *
- * @return result: Encoded message
+ * @return {string} - The encoded message
  */
 let _encode = function(senderPriv, recipientPub, msg, iv, salt) {
     let sk = convert.hex2ua_reversed(senderPriv);
@@ -277,13 +266,13 @@ let _encode = function(senderPriv, recipientPub, msg, iv, salt) {
 };
 
 /**
- * encode() Encode a message
+ * Encode a message
  *
- * @param senderPriv: The sender private key
- * @param recipientPub: The recipient public key
- * @param msg: The text message
+ * @param {string} senderPriv - A sender private key
+ * @param {string} recipientPub - A recipient public key
+ * @param {string} msg - A text message
  *
- * @return result: Encoded message
+ * @return {string} - The encoded message
  */
 let encode = function(senderPriv, recipientPub, msg) {
     if (!recipientPub) {
@@ -307,13 +296,13 @@ let encode = function(senderPriv, recipientPub, msg) {
 };
 
 /**
- * decode() Decode an encrypted message payload
+ * Decode an encrypted message payload
  *
- * @param recipientPrivate: The recipient private key
- * @param senderPublic: The sender public key
- * @param _payload: The encrypted message payload
+ * @param {string} recipientPrivate - A recipient private key
+ * @param {string} senderPublic - A sender public key
+ * @param {string} _payload - An encrypted message payload
  *
- * @return hexplain: Decoded payload as hex
+ * @return {string} - The decoded payload as hex
  */
 let decode = function(recipientPrivate, senderPublic, _payload) {
     if (!senderPublic) {
@@ -348,14 +337,14 @@ let decode = function(recipientPrivate, senderPublic, _payload) {
 };
 
 /**
- * generateBIP32Data() Generate bip32 data
+ * Generate bip32 data
  *
- * @param r: The private key
- * @param password: The wallet password
- * @param index: The derivation index
- * @param network: The current network id
+ * @param {string} r - A private key
+ * @param {string} password - A wallet password
+ * @param {number} index - A derivation index
+ * @param {number} network - A network id
  *
- * @return promise: bip32 data or promise error
+ * @return {object|promise} - The bip32 data or promise error
  */
 let generateBIP32Data = function(r, password, index, network) {
     return new Promise((resolve, reject) => {
@@ -475,13 +464,13 @@ function updateResult(bip32_source_key, bip32_derivation_path, k_index, i_index,
 }
 
 /**
- * BIP32derivation() Derive a bip32 account from seed
+ * Derive a bip32 account from seed
  *
- * @param bip32Key: The bip32 seed
- * @param index: The derivation index
- * @param network: The current network id
+ * @param {string} bip32Key - A bip32 seed
+ * @param {number} index - A derivation index
+ * @param {number} network - A network id
  *
- * @return promise: bip32 data or promise error
+ * @return {object|promise} - The bip32 data or promise error
  */
 let BIP32derivation = function(bip32Key, index, network) {
     return new Promise((resolve, reject) => {
