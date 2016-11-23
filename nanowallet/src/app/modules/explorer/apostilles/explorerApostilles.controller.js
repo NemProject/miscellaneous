@@ -24,9 +24,6 @@ class ExplorerApostillesCtrl {
             return;
         }
 
-        // Load nty Data if any
-        this._Wallet.setNtyData();
-
         // Array to get sink data
         this.sinkData = [];
         // Get sink depending of ntwork
@@ -34,13 +31,6 @@ class ExplorerApostillesCtrl {
 
         // Get incoming transactions of the sink account
         this.getSinkTransactions();
-
-        // User's apostilles pagination properties
-        this.currentPage = 0;
-        this.pageSize = 5;
-        this.numberOfPages = function() {
-            return Math.ceil(this._Wallet.ntyData !== undefined ? this._Wallet.ntyData.data.length / this.pageSize : 1 / this.pageSize);
-        }
 
         // Public sink's apostilles pagination properties
         this.currentPageSink = 0;
@@ -52,32 +42,18 @@ class ExplorerApostillesCtrl {
     }
 
     /**
-     * uploadNty() Trigger file uploading for nty
-     */
-    uploadNty() {
-        document.getElementById("uploadNty").click();
-    }
-
-    /**
-     * loadNty() Save nty in Wallet service and local storage
-     */
-    loadNty($fileContent) {
-        this._Wallet.setNtyDataInLocalStorage(JSON.parse($fileContent));
-        if (this._Wallet.ntyData !== undefined) {
-            this._Alert.ntyFileSuccess();
-        }
-    }
-
-    /**
-     * getSinkTransactions() Get incoming transaction of the sink account
+     * Get incoming transaction of the sink account
      */
     getSinkTransactions() {
         return this._NetworkRequests.getIncomingTxes(helpers.getHostname(this._Wallet.node), this.sink, "").then((data) => {
             this.sinkData = data.data;
-            console.log(this.sinkData)
         }, 
         (err) => {
-            this._Alert.errorFetchingIncomingTxes();
+            if(err.status === -1) {
+                this._Alert.connectionError();
+            } else {
+                this._Alert.errorFetchingIncomingTxes(err.data.message);
+            }
         });
     }
 
