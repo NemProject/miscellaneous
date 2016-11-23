@@ -1,44 +1,139 @@
 import helpers from '../utils/helpers';
 import Address from '../utils/Address';
 
-export default class DataBridge {
+/** Service to open connection, store and process data received from websocket. */
+class DataBridge {
+
+    /**
+     * Initialize services and properties
+     *
+     * @param {config} AppConstants - The Application constants
+     * @param {service} Alert - The Alert service
+     * @param {service} NetworkRequests - The NetworkRequests service
+     * @param {service} Wallet - The Wallet service
+     * @param {service} $timeout - The angular $timeout service
+     * @param {service} $filter - The angular $filter service
+     */
     constructor(AppConstants, Alert, NetworkRequests, Wallet, $timeout, $filter) {
         'ngInject';
 
-        // Alert service
+        /***
+         * Declare services
+         */
         this._Alert = Alert;
-        // _$timeout to digest responses asynchronously
         this._$timeout = $timeout;
-        // Application constants
         this._AppConstants = AppConstants;
-        // Wallet service
         this._Wallet = Wallet;
-        // NetworkRequests service
         this._NetworkRequests = NetworkRequests;
-        // Filters
         this._$filter = $filter;
 
-        // Default DataBridge properties
+        /***
+         * Default DataBridge properties
+         */
+
+         /**
+         * The nis height
+         *
+         * @type {number}
+         */
         this.nisHeight = 0;
+
+        /**
+         * The connection status
+         *
+         * @type {boolean}
+         */
         this.connectionStatus = false;
+
+        /**
+         * The account meta data pair
+         *
+         * @type {object|undefined}
+         */
         this.accountData = undefined;
+
+        /**
+         * The recent transactions
+         *
+         * @type {array}
+         */
         this.transactions = [];
+
+        /**
+         * The unconfirmed transactions
+         *
+         * @type {array}
+         */
         this.unconfirmed = [];
+
+        /**
+         * The mosaic definition meta data pair
+         *
+         * @type {object}
+         */
         this.mosaicDefinitionMetaDataPair = {};
+
+        /**
+         * The mosaic definition meta data pair size
+         *
+         * @type {number}
+         */
         this.mosaicDefinitionMetaDataPairSize = 0;
+
+        /**
+         * The mosaics owned
+         *
+         * @type {object}
+         */
         this.mosaicOwned = {};
+
+        /**
+         * The mosaics owned size
+         *
+         * @type {object}
+         */
         this.mosaicOwnedSize = {};
+
+        /**
+         * The namespaces owned
+         *
+         * @type {object}
+         */
         this.namespaceOwned = {};
+
+        /**
+         * The harvested blocks
+         *
+         * @type {array}
+         */
         this.harvestedBlocks = [];
+
+        /**
+         * The connector
+         *
+         * @type {object|undefined}
+         */
         this.connector = undefined;
+
+        /**
+         * The delegated data
+         *
+         * @type {object|undefined}
+         */
         this.delegatedData = undefined;
+
+        /**
+         * The market information
+         *
+         * @type {object|undefined}
+         */
         this.marketInfo = undefined;
     }
 
     /**
-     * openConnection() Open websocket connection
+     * Open websocket connection
      *
-     * @param connector: A connector object instantiated with node and user address
+     * @param {object} connector - A connector object
      */
     openConnection(connector) {
 
@@ -51,10 +146,11 @@ export default class DataBridge {
             // Reset at new connection
             this.reset();
 
-            /**
-             * Network requests happen on socket connection
+            /***
+             * Few network requests happen on socket connection
              */
-            // Get current height
+
+            // Gets current height
             this._NetworkRequests.getHeight(helpers.getHostname(this._Wallet.node)).then((height) => {
                     this._$timeout(() => {
                         this.nisHeight = height;
@@ -66,7 +162,7 @@ export default class DataBridge {
                     });
                 });
 
-            // Get harvested blocks
+            // Gets harvested blocks
             this._NetworkRequests.getHarvestedBlocks(helpers.getHostname(this._Wallet.node), this._Wallet.currentAccount.address).then((blocks) => {
                     this._$timeout(() => {
                         this.harvestedBlocks = blocks.data;
@@ -79,7 +175,7 @@ export default class DataBridge {
                     });
                 });
 
-            // Get delegated data
+            // Gets delegated data
             this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), Address.toAddress(this._Wallet.currentAccount.child, this._Wallet.network)).then((data) => {
                     this._$timeout(() => {
                         this.delegatedData = data;
@@ -92,7 +188,7 @@ export default class DataBridge {
                     });
                 });
 
-            // Get market info
+            // Gets market info
             this._NetworkRequests.getMarketInfo().then((data) => {
                     this._$timeout(() => {
                         this.marketInfo = data;
@@ -104,7 +200,6 @@ export default class DataBridge {
                         this.marketInfo = undefined;
                     });
                 });
-            ///////////// End network requests /////////////
 
             // Set connection status
             this._$timeout(() => {
@@ -112,7 +207,7 @@ export default class DataBridge {
             })
 
 
-            // Get account data
+            // Account data
             connector.on('account', (d) => {
                 this._$timeout(() => {
                     this.accountData = d;
@@ -132,7 +227,7 @@ export default class DataBridge {
                 }, 0);
             });
 
-            // Get recent transactions
+            // Recent transactions
             connector.on('recenttransactions', (d) => {
                 d.data.reverse();
                 this._$timeout(() => {
@@ -147,6 +242,8 @@ export default class DataBridge {
                 this._$timeout(() => {
                     if (!helpers.haveTx(d.meta.hash.data, this.transactions)) { // Fix duplicate bug
                         this.transactions.push(d);
+                        let audio = new Audio('vendors/ding2.ogg');
+                        audio.play();
                         console.log("Confirmed data: ", d);
                         // If tx present in unconfirmed array it is removed
                         if (helpers.haveTx(d.meta.hash.data, this.unconfirmed)) {
@@ -165,6 +262,8 @@ export default class DataBridge {
                 this._$timeout(() => {
                     if (!helpers.haveTx(d.meta.hash.data, this.unconfirmed)) { //Fix duplicate bug
                         this.unconfirmed.push(d);
+                        let audio = new Audio('vendors/ding.ogg');
+                        audio.play();
                         // If not sender show notification
                         if (this._$filter('fmtPubToAddress')(d.transaction.signer, this._Wallet.network) !== this._Wallet.currentAccount.address) {
                             this._Alert.incomingTransaction(d.transaction.signer, this._Wallet.network);
@@ -180,14 +279,14 @@ export default class DataBridge {
                 this._Alert.websocketError(d.error + " " + d.message);
             });
 
-            // On new blocks, update nis height
+            // New blocks
             connector.on('newblocks', (blockHeight) => {
                 this._$timeout(() => {
                     this.nisHeight = blockHeight.height;
                 }, 0);
             });
 
-            // Get mosaic definition meta data pair
+            // Mosaic definition meta data pair callback
             let mosaicDefinitionCallback = (d) => {
                 this._$timeout(() => {
                     this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(d.mosaicDefinition.id)] = d;
@@ -195,7 +294,7 @@ export default class DataBridge {
                 }, 0);
             }
 
-            // Get mosaics owned
+            // Mosaics owned callback
             let mosaicCallback = (d, address) => {
                 this._$timeout(() => {
                     let mosaicName = helpers.mosaicIdToName(d.mosaicId);
@@ -207,7 +306,7 @@ export default class DataBridge {
                 }, 0);
             }
 
-            // Get namespaces owned
+            // Namespaces owned callback
             let namespaceCallback = (d, address) => {
                 this._$timeout(() => {
                     let namespaceName = d.fqn;
@@ -257,3 +356,5 @@ export default class DataBridge {
     }
 
 }
+
+export default DataBridge;
