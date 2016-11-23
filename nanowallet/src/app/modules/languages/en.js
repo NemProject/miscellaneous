@@ -47,6 +47,7 @@ function EnglishProvider($translateProvider) {
         GENERAL_BLOCK: 'Block',
         GENERAL_NO_RESULTS: 'Nothing to show',
         GENERAL_ACCOUNT: 'Account',
+        GENERAL_ACCOUNTS: 'Accounts',
         GENERAL_MULTISIG_ACCOUNT: 'Multisig account',
         GENERAL_AMOUNT: 'Amount',
         GENERAL_MESSAGE: 'Message',
@@ -108,6 +109,13 @@ function EnglishProvider($translateProvider) {
         GENERAL_CONNECTION_ERROR: 'An error occured, either node is down or you are offline',
         GENERAL_HISTORY: 'History',
         GENERAL_REVEAL: 'Reveal',
+        GENERAL_QR: 'QR code',
+        GENERAL_UPDATE:  'Update',
+        GENERAL_UNKNOWN: 'Unknown',
+        GENERAL_IMPORTANCE: 'Importance',
+        GENERAL_TRANSACTIONS: 'Transactions',
+        GENERAL_REGISTER: 'Register',
+        GENERAL_CREATE: 'Create',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Send & Receive',
@@ -175,7 +183,6 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
-
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Create a mosaic',
@@ -318,6 +325,7 @@ function EnglishProvider($translateProvider) {
         // EXPLORER NAMESPACES AND MOSAICS
         EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
         EXPLORER_NS_MOS_SELECT_MOS: 'Select a mosaic to show details',
+        EXPLORER_NS_MOS_SEARCH: 'Search namespace',
 
         // EXPLORER APOSTILLES MODULE
         EXPLORER_APOSTILLES_TITLE: 'Explorer - Apostilles',
@@ -325,9 +333,11 @@ function EnglishProvider($translateProvider) {
         EXPLORER_APOSTILLES_PUBLIC: 'Public sink',
         EXPLORER_APOSTILLES_NO_NTY: 'No nty file loaded, please click here to import one.',
 
+        // ACCOUNT EXPLORER
+        ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
-        APOSTILLE_HISTORY_BTN_MESSAGE: 'Update / Message',
         APOSTILLE_HISTORY_BTN_TRANSFER: 'Transfer / Split ownership',
         APOSTILLE_HISTORY_BACKUP: 'Backup notary data',
         APOSTILLE_HISTORY_PURGE: 'Purge notary data',
@@ -378,6 +388,20 @@ function EnglishProvider($translateProvider) {
         //APOSTILLE_AUDIT_SIGNED: 'Signed exemple:',
         APOSTILLE_AUDIT_FILES: 'Audit files',
 
+        // APOSTILLE MESSAGE MODULE
+        APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',
+        APOSTILLE_MESSAGE_NS_BRAND: 'Use my namespace to brand message',
+        APOSTILLE_MESSAGE_ADD_MOSAIC: 'Add mosaic',
+        APOSTILLE_NTY_ACCOUNT: 'Notarization account',
+        APOSTILLE_REQUEST_MESSAGE: 'Request message',
+        APOSTILLE_CREATE_MESSAGE_REQUEST: 'Create a message request',
+
+        // TRANSFER APOSTILLE OWNLERSHIP MODULE
+        APOSTILLE_TRANSFER_TITLE: 'Transfer or Split apostille ownership',
+
+        // UPADTE APOSTILLE MODULE
+        APOSTILLE_UPDATE_TITLE: 'Update apostille',
+
         // ERROR ALERTS
         ALERT_MISSING_FORM_DATA: 'Please complete the form !',
         ALERT_ERROR_WALLET_DOWNLOAD: 'Can\'t download wallet because it doesn\'t exists !',
@@ -423,7 +447,11 @@ function EnglishProvider($translateProvider) {
         ALERT_INVALID_NS_NAME: 'Name of namespace is invalid !',
         ALERT_INVALID_MOSAIC_NAME: 'Name of mosaic is invalid !',
         ALERT_MOSAIC_DESCRIPTION: 'Description of mosaic is invalid !',
-        ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, please change the node or check your connection and try again',
+        ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, reason: ',
+        ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
+        ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -521,7 +549,8 @@ function EnglishProvider($translateProvider) {
         FORM_INVOICE_RECIPIENT_PLACEHOLDER: 'Recipient address',
         FORM_SIDE_BTN_ALIAS_OF: 'Alias of',
         FORM_MESSAGE_PLACEHOLDER: 'Message',
-        FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name'
+        FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name',
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
     });
 
 }
