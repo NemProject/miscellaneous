@@ -1,5 +1,6 @@
 import helpers from '../../utils/helpers';
 import CryptoHelpers from '../../utils/CryptoHelpers';
+import Network from '../../utils/Network';
 
 class AccountCtrl {
     constructor(AppConstants, $localStorage, $location, Alert, Wallet, Connector, DataBridge, $timeout) {
@@ -42,7 +43,6 @@ class AccountCtrl {
         // Check number of accounts in wallet to show account selection in view
         this.checkNumberOfAccounts();
 
-
         // Object to contain our password & private key data.
         this.common = {
             'password': '',
@@ -82,8 +82,11 @@ class AccountCtrl {
                 quiet: 0,
                 ratio: 2,
             });
-            if (type == "wallet") {
+            if (type === "wallet") {
                 $('#exportWalletQR').append(qrCode);
+            } else if (type === "mobileWallet") {
+                $('#mobileWalletForm').html("");
+                $('#mobileWalletQR').append(qrCode);
             } else {
                 $('#accountInfoQR').append(qrCode);
             }
@@ -96,12 +99,42 @@ class AccountCtrl {
         // Generate the QRs
         this.encodeQrCode(this.walletString, "wallet");
         this.encodeQrCode(this.accountString, "accountInfo");
-
-
     }
 
     /**
-     * showPrivateKey() Reveal the private key
+     * Generate the mobile wallet QR
+     */
+    generateWalletQR() {
+        // Decrypt/generate private key and check it. Returned private key is contained into this.common
+        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
+            this._Alert.invalidPassword();
+            this.showPrivateKeyField = false;
+            return;
+        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
+            this._Alert.invalidPassword();
+            this.showPrivateKeyField = false;
+            return;
+        }
+
+        let mobileKeys = CryptoHelpers.AES_PBKF2_encryption(this.common.password, this.common.privateKey)
+
+        let QR = {
+            "v": this._Wallet.network === Network.data.Testnet.id ? 1 : 2,
+            "type":3,
+            "data": {
+                "name": this._Wallet.current.name,
+                "priv_key": mobileKeys.encrypted,
+                "salt": mobileKeys.salt
+            }
+        };
+
+        let QRstring = JSON.stringify(QR);
+        this.encodeQrCode(QRstring, "mobileWallet");
+        this.clearSensitiveData();
+    }
+
+    /**
+     * Reveal the private key
      */
     showPrivateKey() {
         // Decrypt/generate private key and check it. Returned private key is contained into this.common
@@ -118,9 +151,9 @@ class AccountCtrl {
     }
 
     /**
-     * changeCurrentAccount() Change current account
+     * Change current account
      *
-     * @param accountIndex: The account index in the wallet.accounts object
+     * @param {number} accountIndex - The account index in the wallet.accounts object
      */
     changeCurrentAccount(accountIndex) {
         // Close the connector
@@ -140,9 +173,9 @@ class AccountCtrl {
     }
 
     /**
-     * download() trigger download of the wallet
+     * Trigger download of the wallet
      *
-     * @param wallet: Wallet object
+     * @param {object} wallet - A wallet object
      */
     download(wallet) {
         if (!wallet) {
@@ -161,7 +194,7 @@ class AccountCtrl {
     }
 
     /**
-     * checkNumberOfAccounts() Check the number of accounts in wallet
+     * Check the number of accounts in wallet
      */
     checkNumberOfAccounts() {
         if (Object.keys(this._Wallet.current.accounts).length > 1) {
@@ -170,7 +203,7 @@ class AccountCtrl {
     }
 
     /**
-     * addNewAccount() Add a new bip32 account into the wallet
+     * Add a new bip32 account into the wallet
      */
     addNewAccount() {
         // Decrypt/generate private key and check it. Returned private key is contained into this.common
@@ -228,7 +261,7 @@ class AccountCtrl {
     }
 
     /**
-     * clearSensitiveData() Reset the common object
+     * Reset the common object
      */
     clearSensitiveData() {
         this.common = {

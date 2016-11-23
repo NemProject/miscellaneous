@@ -139,7 +139,19 @@
         <h4 class="modal-title">{{ 'ACCOUNT_WALLET_QR_ANDROID_IOS_TITLE' | translate }}</h4>
       </div>
       <div class="modal-body">
-       <p class="text-center">{{ 'GENERAL_COMING_SOON' | translate }}</p>
+        <center><div id="mobileWalletQR"></div></center>
+        <div id="mobileWalletForm">
+          <fieldset class="form-group">
+            <input class="form-control form-control-lg"
+              type="password"
+              placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
+              ng-model="$ctrl.common.password"/>
+          </fieldset>
+            <button class="btn btn-success" style="border-radius:0px;"
+              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.generateWalletQR()">
+              {{'GENERAL_REVEAL' | translate }}
+            </button>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
