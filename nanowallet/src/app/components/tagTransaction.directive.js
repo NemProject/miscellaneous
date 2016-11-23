@@ -6,7 +6,7 @@ import Address from '../utils/Address';
 
 let incr = 0;
 
-function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $timeout) {
+function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $timeout, $state) {
     'ngInject';
 
     return {
@@ -38,6 +38,13 @@ function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $
                 scope.walletScope = scope.h;
                 //console.log(scope.walletScope);
             }
+
+            // If called the accounts explorer we hide message decryption
+            scope.disableDecryption = false;
+            if ($state.current.name === 'app.accountsExplorer') {
+                scope.disableDecryption = true;
+            }
+
             scope.templateName = helpers.txTypeToName(scope.tx.type);
             scope.templateUri = 'layout/lines/line' + scope.templateName + '.html';
 

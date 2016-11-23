@@ -167,9 +167,8 @@
                 </div>
                 <div class="col-sm-9">
                     <span ng-show="tx.message.type === 1" style="white-space: pre-line;">{{tx.message | fmtHexMessage}}</span>
-                    <span ng-show="tx.message.type === 2" id="details-{{tx.timeStamp}}" style="white-space: pre-line;"><span style="white-space: normal;">{{ 'LINE_TX_DETAILS_MESS_ENC' | translate }} <b>--></b>
-                        <a ng-click="showDecodeMessage = ! showDecodeMessage" style="cursor:pointer">{{ 'LINE_TX_DETAILS_MESS_DEC' | translate }}</a>
-                    </span></span>
+                    <span ng-show="tx.message.type === 2" id="details-{{tx.timeStamp}}" style="white-space: pre-line;"> <span style="white-space: normal;"> {{ 'LINE_TX_DETAILS_MESS_ENC' | translate }} <span ng-show="!disableDecryption"> <b>--></b> <a ng-click="showDecodeMessage = ! showDecodeMessage" style="cursor:pointer">{{ 'LINE_TX_DETAILS_MESS_DEC' | translate }}</a></span></span>
+                    </span>
                     <div ng-show="!requiresKey">
                         {{decoded | fmtHexMessage}}
                     </div>
@@ -243,7 +242,7 @@
         </div>
     </div>
 
-    <div id="decodeTxMessage-{{tx.timeStamp}}" ng-show="tx.message.type === 2 && showDecodeMessage" style="padding: 5px 30px;background-color: rgb(65, 191, 118);">
+    <div id="decodeTxMessage-{{tx.timeStamp}}" ng-show="tx.message.type === 2 && showDecodeMessage && !disableDecryption" style="padding: 5px 30px;background-color: rgb(65, 191, 118);">
         <div class="input-group">
             <input type="password" class="form-control ng-valid ng-touched ng-dirty ng-valid-parse" ng-model="walletScope.common.password" id="passwordDecoding" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" aria-invalid="false">
             <span class="input-group-btn">
