@@ -8,7 +8,7 @@ export default class Alert {
         this._$filter = $filter;
     }
 
-    /**
+    /***
      * Error alerts
      */
     missingFormData() {
@@ -326,14 +326,49 @@ export default class Alert {
         }); 
     }
 
-    errorFetchingIncomingTxes() {
+    errorFetchingIncomingTxes(message) {
          this._ngToast.create({
-            content: this._$filter('translate')('ALERT_GET_INCOMING_TXES_ERROR'),
+            content: this._$filter('translate')('ALERT_GET_INCOMING_TXES_ERROR') + message,
             className: 'danger'
         }); 
     }
 
-    /**
+    connectionError() {
+         this._ngToast.create({
+            content: this._$filter("translate")("GENERAL_CONNECTION_ERROR"),
+            className: 'danger'
+        }); 
+    }
+
+    errorGetMosaicsDefintions(message) {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_GET_MOSAICS_DEFINITIONS_ERROR") + message,
+            className: 'danger'
+        });
+    }
+
+    errorGetSubNamespaces(message) {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_GET_SUB_NS_ERROR") + message,
+            className: 'danger'
+        });
+    }
+
+    errorGetMosaics(message) {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_GET_MOSAICS_ERROR") + message,
+            className: 'danger'
+        });
+    }
+
+    errorGetTransactions(message) {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_GET_TRANSACTIONS_ERROR") + message,
+            className: 'danger'
+        });
+    }
+
+    /***
      * Success alerts
      */
     createWalletSuccess() {
@@ -399,7 +434,7 @@ export default class Alert {
         });
     }
 
-    /**
+    /***
      * Transaction notifications
      */
 
