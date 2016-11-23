@@ -71,7 +71,7 @@ gulp.task('tests', function() {
 });
 
   gulp.task('js', function() {
-  return gulp.src("src/vendors/**/*.js")
+  return gulp.src("src/vendors/**/*")
       .on('error', interceptErrors)
       .pipe(gulp.dest('./build/vendors'));
 });
@@ -83,7 +83,7 @@ gulp.task('tests', function() {
 });
 
     gulp.task('images', function() {
-    return gulp.src("src/images/*")
+    return gulp.src("src/images/**/*")
       .on('error', interceptErrors)
       .pipe(gulp.dest('./build/images'));
 });
