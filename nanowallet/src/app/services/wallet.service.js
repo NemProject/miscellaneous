@@ -2,18 +2,29 @@ import Network from '../utils/Network';
 import helpers from '../utils/helpers';
 import Nodes from '../utils/nodes';
 
-export default class Wallet {
+/** Service storing wallet data and relative functions on user wallet. */
+class Wallet {
+
+    /**
+     * Initialize services and properties
+     *
+     * @param {config} AppConstants - The application constants
+     * @param {service} $localStorage - The angular $localStorage service
+     * @param {service} Alert - The Alert service
+     */
     constructor(AppConstants, $localStorage, Alert) {
         'ngInject';
 
-        // Application constants
+        /***
+         * Declare services
+         */
         this._AppConstants = AppConstants;
-        // Local storage
         this._storage = $localStorage;
-        // Alert service
         this._Alert = Alert;
 
-        //Default Wallet properties
+        /***
+         * Default Wallet properties
+         */
         this.current = undefined;
         this.currentAccount = undefined;
         this.algo = undefined
@@ -25,9 +36,9 @@ export default class Wallet {
     }
 
     /**
-     * setWallet() Set a wallet as current
+     * Set a wallet as current
      *
-     * @param wallet: The wallet object
+     * @param {object} wallet - A wallet object
      */
     setWallet(wallet) {
         if (!wallet) {
@@ -47,10 +58,10 @@ export default class Wallet {
     }
 
     /**
-     * setWalletAccount() Set another account of the wallet
+     * Set another account of the wallet
      *
-     * @param wallet: The wallet object
-     * @param index: The index of account in wallet
+     * @param {object} wallet - A wallet object
+     * @param {number} index - The index of account in wallet
      */
     setWalletAccount(wallet, index) {
         if (!wallet) {
@@ -75,7 +86,7 @@ export default class Wallet {
     }
 
     /**
-     * setUtilNodes() Set util nodes according to network
+     * Set util nodes according to network
      */
     setUtilNodes() {
         if (this.network === Network.data.Testnet.id) {
@@ -91,7 +102,7 @@ export default class Wallet {
     }
 
     /**
-     * setDefaultnode() Check if nodes present in local storage or set default according to network
+     * Check if nodes present in local storage or set default according to network
      */
     setDefaultNode() {
         if (this.network == Network.data.Mainnet.id) {
@@ -116,22 +127,52 @@ export default class Wallet {
     }
 
     /**
-     * setNtyData() Set nty data in service if exists in local storage
+     * Set nty data in service if exists in local storage
      */
     setNtyData() {
-        if (this._storage.nty) {
-            this.ntyData = this._storage.nty;
+        if (this.network == Network.data.Mainnet.id) {
+            if (this._storage.ntyMainnet) {
+                this.ntyData = this._storage.ntyMainnet;
+            }
+        } else if (this.network == Network.data.Testnet.id) {
+            if (this._storage.ntyTestnet) {
+                this.ntyData = this._storage.ntyTestnet;
+            }
+        } else {
+            if (this._storage.ntyMijin) {
+                this.ntyData = this._storage.ntyMijin;
+            }
         }
     }
 
     /**
-     * setNtyDataInLocalStorage() Set nty data into local storage and update in service
+     * Set nty data into local storage and update in service
      *
      * @param data: The nty data
      */
     setNtyDataInLocalStorage(data) {
-        this._storage.nty = data;
+        if (this.network == Network.data.Mainnet.id) {
+            this._storage.ntyMainnet = data;
+        } else if (this.network == Network.data.Testnet.id) {
+            this._storage.ntyTestnet = data;
+        } else {
+            this._storage.ntyMijin = data;
+        }
         this.ntyData = data;
+    }
+
+    /**
+     * Purge nty data from local storage and update in service
+     */
+    purgeNtyDataInLocalStorage() {
+        if (this.network == Network.data.Mainnet.id) {
+            delete this._storage.ntyMainnet;
+        } else if (this.network == Network.data.Testnet.id) {
+            delete this._storage.ntyTestnet;
+        } else {
+            delete this._storage.ntyMijin;
+        }
+        this.ntyData = undefined;
     }
 
     /**
@@ -149,3 +190,5 @@ export default class Wallet {
     }
 
 }
+
+export default Wallet;
