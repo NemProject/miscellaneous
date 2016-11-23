@@ -87,8 +87,8 @@ class CreateApostilleCtrl {
         this.formData.isFiles = true;
         // To show text area
         this.formData.isText = false;
-        // Hash not signed by default
-        this.formData.isPrivate = false;
+        // Hash signed by default
+        this.formData.isPrivate = true;
         // Apostille tags
         this.formData.tags = '';
         // Array of valid files to apostille
@@ -132,10 +132,10 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * removeFileFromList() Remove a file from filesToApostille array
+     * Remove a file from filesToApostille array
      *
-     * @param array: The array of files to apostilles
-     * @param elem: The object to delete
+     * @param {array} array - The array of files to apostilles
+     * @param {object} elem - The object to delete
      */
     removeFileFromList(array, elem) {
         // If the deleted element is the elem 0 and length of array mod 5 gives 0 (means it is the last object of the page), 
@@ -147,10 +147,10 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * processFile() Process the file to apostille and push to array
+     * Process the file to apostille and push to array
      *
-     * @param $fileContent: Base 64 content of the file 
-     * @param $fileData: Meta data of the file
+     * @param {object} $fileContent - Base 64 content of the file 
+     * @param {object} $fileData - Meta data of the file
      */
     processFile($fileContent, $fileData) {
 
@@ -235,7 +235,7 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * updateFee() Update transaction fee
+     * Update transaction fee
      */
     updateFee() {
         let entity = this._Transactions.prepareApostilleTransfer(this.common, this.formData);
@@ -246,10 +246,10 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * hashFileData() Hash the file content depending of hashing
+     * Hash the file content depending of hashing
      *
-     * @param data: Base 64 file content
-     * @param hashing: The chosen hashing object
+     * @param {string} data - Base 64 file content
+     * @param {object} hashing - The chosen hashing object
      */
     hashFileData(data, hashing) {
         // Full checksum is 0xFE + 0x4E + 0x54 + 0x59 + hashing version byte
@@ -280,9 +280,12 @@ class CreateApostilleCtrl {
     };
 
     /**
-     * addFileToList() Add the file to array of files to apostille
+     * Add the file to array of files to apostille
      *
-     * @param currentFileName: The original filename
+     * @param {string} currentFileName - The original filename
+     * @param {string} base64 - The file content data as base64
+     * @param {string} recipientPrivateKey - The destination account private key
+     * @param {boolean} isSigned - True if apostille is signed, false otherwise
      */
     addFileToList(currentFileName, base64, recipientPrivateKey, isSigned) {
         if (this.formData.isMultisig) {
@@ -328,7 +331,7 @@ class CreateApostilleCtrl {
     };
 
     /**
-     * downloadSignedFiles() Download the archive of signed files
+     * Download the archive of signed files
      */
     downloadSignedFiles() {
         // If there is success txes
@@ -339,21 +342,25 @@ class CreateApostilleCtrl {
             }).then((content) => {
                 // Trigger download
                 saveAs(content, "NEMsigned -- Do not Edit -- " + helpers.getTimestampShort(helpers.createTimeStamp()) + ".zip");
-                // Reset all apostilles
-                this.clearAllApostille();
+                this._$timeout(() => {
+                    // Reset all apostilles
+                    this.clearAllApostille();
+                })
             });
         }
     }
 
     /**
-     * uploadNty() Trigger file uploading for nty
+     * Trigger file uploading for nty
      */
     uploadNty() {
         document.getElementById("uploadNty").click();
     }
 
     /**
-     * loadNty() Save nty in Wallet service and local storage
+     * Save nty in Wallet service and local storage
+     *
+     * @params {object} $fileContent - Content of an nty file
      */
     loadNty($fileContent) {
         this._Wallet.setNtyDataInLocalStorage(JSON.parse($fileContent));
@@ -364,7 +371,7 @@ class CreateApostilleCtrl {
 
 
     /**
-     * cleanData() Clean temp data
+     * Clean temp data
      */
     cleanData() {
         $("#fileToNotary").val(null);
@@ -377,7 +384,7 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * clearAllApostille() Clear all data
+     * Clear all data
      */
     clearAllApostille() {
         this.cleanData();
@@ -387,7 +394,7 @@ class CreateApostilleCtrl {
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Build and broadcast the transaction to the network
      */
     send() {
         // Disable send button;
