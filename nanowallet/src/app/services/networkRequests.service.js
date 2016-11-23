@@ -1,31 +1,40 @@
 import Nodes from '../utils/nodes';
 import Network from '../utils/Network';
 
-export default class NetworkRequests {
+/** Service containing various API requests */
+class NetworkRequests {
+
+    /**
+     * Initialize services and properties
+     *
+     * @param {service} $http - The angular $http service
+     * @param {config} AppConstants - The Application constants
+     * @param {service} Wallet - The Wallet service
+     */
     constructor($http, AppConstants, Wallet) {
         'ngInject';
 
-        // $http service
+        /***
+         * Declare services
+         */
         this._$http = $http;
-        // Application constants
         this._AppConstants = AppConstants;
-        // Wallet service
         this._Wallet = Wallet;
     }
 
     /**
-     * getPort() Get port from network
+     * Get port from network
      */
     getPort() {
         return this._Wallet.network === Network.data.Mijin.id ? this._AppConstants.defaultMijinPort : this._AppConstants.defaultNisPort;
     }
 
     /**
-     * getHeight() Get current height from network
+     * Gets the current height of the block chain.
      *
-     * @param host: The host ip or domain
+     * @param {string} host - An host ip or domain
      *
-     * return: current nis height
+     * @return {number} - The current height on chosen endpoint
      */
     getHeight(host) {
         let port = this.getPort();
@@ -40,12 +49,12 @@ export default class NetworkRequests {
     }
 
     /**
-     * getAccountData() Get account info object from network
+     * Gets the AccountMetaDataPair of an account.
      *
-     * @param host: The host ip or domain
-     * @param address: The address
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
      *
-     * return: AccountMetaDataPair
+     * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
      */
     getAccountData(host, address) {
     let port = this.getPort();
@@ -59,12 +68,12 @@ export default class NetworkRequests {
     }
 
     /**
-     * getHarvestedBlocks() Get harvested block for account
+     * Gets an array of harvest info objects for an account.
      *
-     * @param host: The host ip or domain
-     * @param address: The address
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
      *
-     * return:  array of harvest info objects
+     * @return {array} - An array of [HarvestInfo]{@link http://bob.nem.ninja/docs/#harvestInfo} objects
      */
     getHarvestedBlocks(host, address){
         let port = this.getPort();
@@ -78,12 +87,12 @@ export default class NetworkRequests {
     }
 
     /**
-     * getNamespacesById() Get namespace info by it's id
+     * Gets the namespace with given id.
      *
-     * @param host: The host ip or domain
-     * @param id: The namespace id
+     * @param {string} host - An host ip or domain
+     * @param {string} id - A namespace id
      *
-     * return: namespace info object
+     * @return {object} - A [NamespaceInfo]{@link http://bob.nem.ninja/docs/#namespace} object
      */
     getNamespacesById(host, id) {
         let port = this.getPort();
@@ -97,13 +106,13 @@ export default class NetworkRequests {
     }
 
     /**
-     * getIncomingTxes() Get incoming txes for an account
+     * Gets an array of TransactionMetaDataPair objects where the recipient has the address given as parameter to the request.
      *
-     * @param host: The host ip or domain
-     * @param address: The account address
-     * @param txHash: The starting hash for search (optional)
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     * @param {string} txHash - A starting hash for search (optional)
      *
-     * return:  array of incoming txes
+     * @return {array} - An array of [TransactionMetaDataPair]{@link http://bob.nem.ninja/docs/#transactionMetaDataPair} objects
      */
     getIncomingTxes(host, address, txHash){
         let port = this.getPort();
@@ -117,12 +126,12 @@ export default class NetworkRequests {
     }
 
      /**
-     * getUncomingTxes() Get unconfirmed txes for an account
+     * Gets the array of transactions for which an account is the sender or receiver and which have not yet been included in a block.
      *
-     * @param host: The host ip or domain
-     * @param address: The address
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
      *
-     * return:  array of unconfirmed txes
+     * @return {array} - An array of [UnconfirmedTransactionMetaDataPair]{@link http://bob.nem.ninja/docs/#unconfirmedTransactionMetaDataPair} objects
      */
     getUnconfirmedTxes(host, address){
         let port = this.getPort();
@@ -136,13 +145,13 @@ export default class NetworkRequests {
     }
 
     /**
-     * auditApostille() Audit an apostille file
+     * Audit an apostille file
      *
-     * @param publicKey: The signer public key
-     * @param data: The file data of audited file
-     * @param signedData: The signed data into the apostille tx message
+     * @param {string} publicKey - The signer public key
+     * @param {string} data - The file data of audited file
+     * @param {string} signedData - The signed data into the apostille transaction message
      *
-     * return boolean: true if valid, false otherwise
+     * @return {boolean} - True if valid, false otherwise
      */
     auditApostille(publicKey, data, signedData) {
 
@@ -168,11 +177,11 @@ export default class NetworkRequests {
         }
 
     /**
-     * getUnlockedInfo() Get information about the maximum number of allowed harvesters and how many harvesters are already using the node
+     * Gets information about the maximum number of allowed harvesters and how many harvesters are already using the node
      *
-     * @param host: The host ip or domain
+     * @param {string} host - An host ip or domain
      *
-     * return object with num-unlocked and max-unlocked
+     * @return {object} - An [UnlockInfo]{@link http://bob.nem.ninja/docs/#retrieving-the-unlock-info} object
      */
     getUnlockedInfo(host) {
         let port = this.getPort();
@@ -182,12 +191,12 @@ export default class NetworkRequests {
     };
 
     /**
-     * unlockAccount() Start delegated harvesting on chosen node
+     * Unlocks an account (starts harvesting).
      *
-     * @param host: The host ip or domain
-     * @param privateKey: The delegated account private key
+     * @param {string} host - An host ip or domain
+     * @param {string} privateKey - A delegated account private key
      *
-     * return $http response
+     * @return - Nothing
      */
     unlockAccount(host, privateKey){
         let port = this.getPort();
@@ -198,12 +207,12 @@ export default class NetworkRequests {
     };
 
      /**
-     * lockAccount() Stop delegated harvesting on chosen node
+     * Locks an account (stops harvesting).
      *
-     * @param host: The host ip or domain
-     * @param privateKey: The delegated account private key
+     * @param {string} host - An host ip or domain
+     * @param {string} privateKey - A delegated account private key
      *
-     * return $http response
+     * @return - Nothing
      */
     lockAccount(host, privateKey){
         let port = this.getPort();
@@ -214,9 +223,9 @@ export default class NetworkRequests {
     };
 
     /**
-     * getSupernodes() Get nodes of the node reward program
+     * Gets nodes of the node reward program
      *
-     * return array of nodes
+     * @return {array} - An array of SuperNodeData objects
      */
     getSupernodes(){
         return this._$http.get('http://supernodes.nem.io/nodes').then((res) => {
@@ -225,9 +234,9 @@ export default class NetworkRequests {
     };
 
     /**
-     * getMarketInfo() Get market information from CoinMarketCap api
+     * Gets market information from CoinMarketCap api
      *
-     * return market info array
+     * @return {object} - A MarketInfo object
      */
     getMarketInfo(){
         return this._$http.get('https://api.coinmarketcap.com/v1/ticker/nem/').then((res) => {
@@ -236,12 +245,12 @@ export default class NetworkRequests {
     };
 
     /**
-     * getTxByHash() Get a transaction from the chain by it's hash
+     * Gets a TransactionMetaDataPair object from the chain using it's hash
      *
-     * @param host: The host ip or domain
-     * @param txHash: The transaction hash
+     * @param {string} host - An host ip or domain
+     * @param {string} txHash - A transaction hash
      *
-     * return:  array of harvest info objects
+     * @return {object} - A [TransactionMetaDataPair]{@link http://bob.nem.ninja/docs/#transactionMetaDataPair} object
      */
     getTxByHash(host, txHash){
         let port = this.getPort();
@@ -255,11 +264,11 @@ export default class NetworkRequests {
     }
 
     /**
-     * heartbeat() Get heartbeat of a node
+     * Determines if NIS is up and responsive.
      *
-     * @param host: The host ip or domain
+     * @param {string} host - An host ip or domain
      *
-     * return:  heartbeat response object
+     * @return {object} - A [NemRequestResult]{@link http://bob.nem.ninja/docs/#nemRequestResult} object
      */
     heartbeat(host) {
         let port = this.getPort();
@@ -272,12 +281,12 @@ export default class NetworkRequests {
     }
 
     /**
-     * getForwarded() Gets the AccountMetaDataPair for the account for which the given account is the delegate account
+     * Gets the AccountMetaDataPair of the account for which the given account is the delegate account
      *
-     * @param host: The host ip or domain
-     * @param account: The account address
+     * @param {string} host - An host ip or domain
+     * @param {string} account - An account address
      *
-     * return:  AccountMetaDataPair
+     * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
      */
     getForwarded(host, account) {
         let port = this.getPort();
@@ -291,12 +300,12 @@ export default class NetworkRequests {
     }
 
     /**
-     * announceTransaction() Broadcast a transaction to the NEM network
+     * Broadcast a transaction to the NEM network
      *
-     * @param host: The host ip or domain
-     * @param obj: A RequestAnnounce object
+     * @param {string} host - An host ip or domain
+     * @param {object} obj - A RequestAnnounce object
      *
-     * return: NemAnnounceResult object
+     * @return {object} - A [NemAnnounceResult]{@link http://bob.nem.ninja/docs/#nemAnnounceResult} object
      */
     announceTransaction(host, obj) {
         let port = this.getPort();
@@ -309,14 +318,14 @@ export default class NetworkRequests {
     }
 
     /**
-     * announceTransactionLoop() Broadcast a transaction to the NEM network and return isolated data
+     * Broadcast a transaction to the NEM network and return isolated data
      *
-     * @param host: The host ip or domain
-     * @param obj: A RequestAnnounce object
-     * @param data: Any object
-     * @param k: The position into the loop
+     * @param {string} host - An host ip or domain
+     * @param {object} obj - A RequestAnnounce object
+     * @param {anything} data - Any kind of data
+     * @param {number} k - The position into the loop
      *
-     * return: NemAnnounceResult object with loop data and k to isolate them into the callback.
+     * @return {object} - A [NemAnnounceResult]{@link http://bob.nem.ninja/docs/#nemAnnounceResult} object with loop data and k to isolate them into the callback.
      */
     announceTransactionLoop(host, obj, data, k) {
         let port = this.getPort();
@@ -332,4 +341,107 @@ export default class NetworkRequests {
         );
     }
 
+    /**
+     * Gets root namespaces.
+     *
+     * @param {string} host - An host ip or domain
+     * @param {number|null} id - The namespace id up to which root namespaces are returned, null for most recent
+     *
+     * @return {object} - An array of [NamespaceMetaDataPair]{@link http://bob.nem.ninja/docs/#namespaceMetaDataPair} objects
+     */
+    getNamespaces(host, id){
+        let port = this.getPort();
+        let obj1 = {'params':{'pageSize':100}};
+        let obj2 = {'params':{ 'id': id, 'pageSize':100}};
+        let req;
+        if(id === null) {
+            req = this._$http.get('http://' + host + ':' + port + '/namespace/root/page', obj1)
+        } else {
+            req = this._$http.get('http://' + host + ':' + port + '/namespace/root/page', obj2)
+        }
+        return req.then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets sub-namespaces of a parent namespace
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     * @param {string} parent - The namespace parent
+     *
+     * @return {object} - An array of [NamespaceMetaDataPair]{@link http://bob.nem.ninja/docs/#namespaceMetaDataPair} objects
+     */
+    getSubNamespaces(host, address, parent){
+        let port = this.getPort();
+        let obj = {'params':{ 'address': address, 'parent':parent}};
+        return this._$http.get('http://' + host + ':' + port + '/account/namespace/page', obj).then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets mosaics of a parent namespace
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     * @param {string} parent - The namespace parent
+     *
+     * @return {object} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
+     */
+    getMosaics(host, address, parent){
+        let port = this.getPort();
+        let obj = {'params':{ 'address': address, 'parent':parent}};
+        return this._$http.get('http://' + host + ':' + port + '/account/mosaic/definition/page', obj).then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets all mosaics definitions of an account
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     *
+     * @return {array} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
+     */
+    getMosaicsDefinitions(host, address){
+        let port = this.getPort();
+        let obj = {'params':{ 'address': address}};
+        return this._$http.get('http://' + host + ':' + port + '/account/mosaic/owned/definition', obj).then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets all transactions of an account
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     * @param {string} txHash - A starting hash (optional)
+     *
+     * @return {array} - An array of [TransactionMetaDataPair]{@link http://bob.nem.ninja/docs/#transactionMetaDataPair} objects
+     */
+    getAllTransactions(host, address, txHash){
+        let port = this.getPort();
+        let obj = {'params':{'address':address, 'hash': txHash}};
+     return this._$http.get('http://' + host + ':' + port + '/account/transfers/all', obj)
+        .then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
 }
+
+export default NetworkRequests;
