@@ -1,3 +1,10 @@
+/** @module utils/sinks */
+
+/**
+ * The namespace, mosaic and apostille sink accounts
+ *
+ * @type {object}
+ */
 let sinks = {
     namespace: {
         '-104': 'TAMESP-ACEWH4-MKFMBC-VFERDP-OOP4FK-7MTDJE-YP35',

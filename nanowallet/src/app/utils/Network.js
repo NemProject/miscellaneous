@@ -1,3 +1,10 @@
+/** @module utils/Network */
+
+/**
+* Networks info data
+*
+* @type {object}
+*/
 const data = {
     "Mainnet": {
         "id": 104,
@@ -14,9 +21,15 @@ const data = {
         "prefix": "60",
         "char": "M"
     }
-
 }
 
+/**
+ * Gets a network prefix from network id
+ *
+ * @param {number} id - A network id
+ *
+ * @return {string} - The network prefix
+ */
 let id2Prefix = function(id) {
     if (id === 104) {
         return "68";
@@ -27,6 +40,13 @@ let id2Prefix = function(id) {
     }
 }
 
+/**
+ * Gets the starting char of the addresses of a network id
+ *
+ * @param {number} id - A network id
+ *
+ * @return {string} - The starting char of addresses
+ */
 let id2Char = function(id) {
     if (id === 104) {
         return "N";
@@ -37,6 +57,13 @@ let id2Char = function(id) {
     }
 }
 
+/**
+ * Gets the network id from the starting char of an address
+ *
+ * @param {string} startChar - A starting char from an address
+ *
+ * @return {number} - The network id
+ */
 let char2Id = function(startChar) {
     if (startChar === "N") {
         return 104;

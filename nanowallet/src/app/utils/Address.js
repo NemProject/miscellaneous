@@ -1,14 +1,16 @@
+/** @module utils/Address */
+
 import convert from './convert';
 import Network from './Network';
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
 /**
-* b32encode() Encode a string to base 32
+* Encode a string to base32
 *
-* @param s: String to encode
+* @param {string} s - A string
 *
-* return the encoded string
+* @return {string} - The encoded string
 */
 let b32encode = function(s) {
     let parts = [];
@@ -46,12 +48,12 @@ let b32encode = function(s) {
 }
 
 /**
-* b32decode() Decode a base32 string
+* Decode a base32 string.
 * This is made specifically for our use, deals only with proper strings
 *
-* @param s: Base32 string
+* @param {string} s - A base32 string
 *
-* return the decoded string
+* @return {Uint8Array} - The decoded string
 */
 let b32decode = function(s) {
     let r = new ArrayBuffer(s.length * 5 / 8);
@@ -72,12 +74,12 @@ let b32decode = function(s) {
 }
 
 /**
-* toAddress() Convert a public key to a NEM address
+* Convert a public key to a NEM address
 *
-* @param publicKey: The public key to convert
-* @param networkId: The network id
+* @param {string} publicKey - A public key
+* @param {number} networkId - A network id
 *
-* return ret: A NEM address
+* @return {string} - The NEM address
 */
 let toAddress = function(publicKey, networkId) {
     let binPubKey = CryptoJS.enc.Hex.parse(publicKey);
@@ -98,12 +100,12 @@ let toAddress = function(publicKey, networkId) {
 };
 
 /**
-* isFromNetwork() Check if an address is from a specified network
+* Check if an address is from a specified network
 *
-* @param _address: The address to check
-* @param networkId: The network id
+* @param {string} _address - An address
+* @param {number} networkId - A network id
 *
-* return boolean: True if address is from network, false otherwise
+* @return {boolean} - True if address is from network, false otherwise
 */
 let isFromNetwork = function(_address, networkId) {
     let address = _address.toString().toUpperCase().replace(/-/g, '');
@@ -112,11 +114,11 @@ let isFromNetwork = function(_address, networkId) {
 };
 
 /**
-* isValid() Check if an address is valid
+* Check if an address is valid
 *
-* @param _address: The address to check
+* @param {string} _address - An address
 *
-* return boolean: True if address is valid, false otherwise
+* @return {boolean} - True if address is valid, false otherwise
 */
 let isValid = function(_address) {
     let address = _address.toString().toUpperCase().replace(/-/g, '');

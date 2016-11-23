@@ -1,14 +1,16 @@
+/** @module utils/helpers */
+
 import convert from './convert';
 import CryptoHelpers from './CryptoHelpers';
 import TransactionTypes from './TransactionTypes';
 
 /**
- * haveWallet() Check if wallet already present in localstorage
+ * Check if wallet already present in an array
  *
- * @param walletName: The wallet name
- * @param array: The wallets array from local storage
+ * @param {string} walletName - A wallet name
+ * @param {array} array - A wallets array
  *
- * @return boolean: True if present, false otherwise
+ * @return {boolean} - True if present, false otherwise
  */
 let haveWallet = function(walletName, array) {
     let i = null;
@@ -21,12 +23,12 @@ let haveWallet = function(walletName, array) {
 }
 
 /**
- * needsSignature() Check if a multisig transaction needs signature
+ * Check if a multisig transaction needs signature
  *
- * @param multisigTransaction: The multisig transaction object
- * @param data: The account data
+ * @param {object} multisigTransaction - A multisig transaction
+ * @param {object} data - An account data
  *
- * @return boolean: True if it needs signature, false otherwise
+ * @return {boolean} - True if it needs signature, false otherwise
  */
 let needsSignature = function(multisigTransaction, data) {
     if (multisigTransaction.transaction.signer === data.account.publicKey) {
@@ -57,11 +59,11 @@ let needsSignature = function(multisigTransaction, data) {
 }
 
 /**
- * txTypeToName() Return the name of a transaction type id
+ * Return the name of a transaction type id
  *
- * @param id: The transaction type id
+ * @param {number} id - A transaction type id
  *
- * @return string: The transaction type name
+ * @return {string} - The transaction type name
  */
 let txTypeToName = function(id) {
     switch (id) {
@@ -83,12 +85,12 @@ let txTypeToName = function(id) {
 }
 
 /**
- * haveTx() Check if a transaction is already present in an array of transactions
+ * Check if a transaction is already present in an array of transactions
  *
- * @param hash: The transaction hash
- * @param array: The array of transactions
+ * @param {string} hash - A transaction hash
+ * @param {array} array - An array of transactions
  *
- * @return boolean: True if present, false otherwise
+ * @return {boolean} - True if present, false otherwise
  */
 let haveTx = function(hash, array) {
     let i = null;
@@ -101,14 +103,13 @@ let haveTx = function(hash, array) {
 };
 
 /**
- * getTransactionIndex() Get the index of a transaction in an array of transactions
+ * Gets the index of a transaction in an array of transactions.
+ * It must be present in the array.
  *
- * @note: Used only if the transaction is present in the array
+ * @param {string} hash - A transaction hash
+ * @param {array} array - An array of transactions
  *
- * @param hash: The transaction hash
- * @param array: The array of transactions
- *
- * @return i: The index of the transaction
+ * @return {number} - The index of the transaction
  */
 let getTransactionIndex = function(hash, array) {
     let i = null;
@@ -121,11 +122,11 @@ let getTransactionIndex = function(hash, array) {
 };
 
 /**
- * mosaicIdToName() Return mosaic name from mosaicId object
+ * Return mosaic name from mosaicId object
  *
- * @param hash: The mosaicId object
+ * @param {object} mosaicId - A mosaicId object
  *
- * @return the mosaic name
+ * @return {string} - The mosaic name
  */
 let mosaicIdToName = function(mosaicId) {
     if (!mosaicId) return mosaicId;
@@ -133,11 +134,11 @@ let mosaicIdToName = function(mosaicId) {
 }
 
 /**
- * getHostname() Parse uri to get the hostname
+ * Parse uri to get hostname
  *
- * @param uri: An uri string
+ * @param {string} uri - An uri string
  *
- * @return the uri hostname
+ * @return {string} - The uri hostname
  */
 let getHostname = function(uri) {
     let _uriParser = document.createElement('a');
@@ -146,13 +147,13 @@ let getHostname = function(uri) {
 }
 
 /**
- * haveCosig() Check if a cosignatory is already present in modifications array
+ * Check if a cosignatory is already present in modifications array
  *
- * @param address: The cosignatory address
- * @param pubKey: The cosignatory public key
- * @param array: The modifications array
+ * @param {string} address - A cosignatory address
+ * @param {string} pubKey - A cosignatory public key
+ * @param {array} array - A modifications array
  *
- * @return boolean: True if present, false otherwise
+ * @return {boolean} - True if present, false otherwise
  */
 let haveCosig = function(address, pubKey, array) {
     let i = null;
@@ -165,56 +166,60 @@ let haveCosig = function(address, pubKey, array) {
 };
 
 /**
- * getFileName() Remove extension of a filename
+ * Remove extension of a file name
  *
- * @param filename: The file name with extension
+ * @param {string} filename - A file name with extension
  *
- * @return the file name without extension
+ * @return {string} - The file name without extension
  */
 let getFileName = function(filename) {
     return filename.replace(/\.[^/.]+$/, "");
 };
 
 /**
- * getExtension() Get extension from filename
+ * Gets extension of a file name
  *
- * @param filename: The file name with extension
+ * @param {string} filename - A file name with extension
  *
- * @return the file name extension
+ * @return {string} - The file name extension
  */
 let getExtension = function(filename) {
     return filename.split('.').pop();
 }
 
-// NEM epoch time
+/***
+ * NEM epoch time
+ *
+ * @type {number}
+ */
 let NEM_EPOCH = Date.UTC(2015, 2, 29, 0, 6, 25, 0);
 
 /**
- * createNEMTimeStamp() Create a time stamp for a NEM transaction
+ * Create a time stamp for a NEM transaction
  *
- * @return NEM transaction timestamp
+ * @return {number} - The NEM transaction time stamp in milliseconds
  */
 let createNEMTimeStamp = function() {
     return Math.floor((Date.now() / 1000) - (NEM_EPOCH / 1000));
 }
 
 /**
- * fixPrivateKey() Fix the private key
+ * Fix a private key
  *
- * @param privatekey: The hex private key
+ * @param {string} privatekey - An hex private key
  *
- * @return the fixed hex private key
+ * @return {string} - The fixed hex private key
  */
 let fixPrivateKey = function(privatekey) {
     return ("0000000000000000000000000000000000000000000000000000000000000000" + privatekey.replace(/^00/, '')).slice(-64);
 }
 
 /**
- * calcMinFee() Calculate minimum fees from an amount of XEM
+ * Calculate minimum fees from an amount of XEM
  *
- * @param numNem: The amount of XEM
+ * @param {number} numNem - An amount of XEM
  *
- * @return the minimum fee
+ * @return {number} - The minimum fee
  */
 let calcMinFee = function(numNem) {
     let fee = Math.floor(Math.max(1, numNem / 10000));
@@ -222,14 +227,14 @@ let calcMinFee = function(numNem) {
 }
 
 /**
- * calcXemEquivalent() Calculate mosaic quantity equivalent in XEM
+ * Calculate mosaic quantity equivalent in XEM
  *
- * @param multiplier: The mosaic multiplier
- * @param q: The mosaic quantity
- * @param sup: The mosaic supply
- * @param divisibility: The mosaic divisibility
+ * @param {number} multiplier - A mosaic multiplier
+ * @param {number} q - A mosaic quantity
+ * @param {number} sup - A mosaic supply
+ * @param {number} divisibility - A mosaic divisibility
  *
- * @return the XEM equivalent of a mosaic quantity
+ * @return {number} - The XEM equivalent of a mosaic quantity
  */
 let calcXemEquivalent = function(multiplier, q, sup, divisibility) {
     if (sup === 0) {
@@ -240,12 +245,12 @@ let calcXemEquivalent = function(multiplier, q, sup, divisibility) {
 }
 
 /**
- * prepareMessage() Build the message object
+ * Build a message object
  *
- * @param common: The object containing wallet private key
- * @param tx: The transaction object containing the message
+ * @param {object} common - An object containing wallet private key
+ * @param {object} tx - A transaction object containing the message
  *
- * @return a message object
+ * @return {object} - The message object
  */
 let prepareMessage = function(common, tx) {
     if (tx.encryptMessage && common.privateKey) {
@@ -262,12 +267,12 @@ let prepareMessage = function(common, tx) {
 }
 
 /**
- * checkAndFormatUrl() Check and format an url
+ * Check and format an url
  *
- * @param node: A custom node from user input
- * @param defaultWebsocketPort: The default websocket port
+ * @param {string} node - A custom node from user input
+ * @param {number} defaultWebsocketPort - A default websocket port
  *
- * @return the formatted node as string or 1
+ * @return {string|number} - The formatted node as string or 1
  */
 let checkAndFormatUrl = function (node, defaultWebsocketPort) {
     // Detect if custom node doesn't begin with "http://"
@@ -299,20 +304,20 @@ let checkAndFormatUrl = function (node, defaultWebsocketPort) {
 }
  
 /**
- * createTimeStamp() Create a timestamp
+ * Create a time stamp
  *
- * @return a date object
+ * @return {object} - A date object
  */
 let createTimeStamp = function() {
     return new Date();
 }
 
 /**
- * getTimestampShort() Short format for a timestamp
+ * Date object to YYYY-MM-DD format
  *
- * @param date: A date object
+ * @param {object} date - A date object
  *
- * @return a short date
+ * @return {string} - The short date
  */
 let getTimestampShort = function(date) {
     let dd = date.getDate();
@@ -331,11 +336,11 @@ let getTimestampShort = function(date) {
 };
 
 /**
- * convertDateToString() Date object to date string
+ * Date object to date string
  *
- * @param date: A date object
+ * @param {object} date - A date object
  *
- * @return a date string
+ * @return {string} - The date string
  */
 let convertDateToString = function(date) {
     return date.toDateString();

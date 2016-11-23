@@ -1,14 +1,52 @@
-// Default nodes
+/** @module utils/nodes */
+
+/**
+ * The default testnet node
+ *
+ * @type {string}
+ */
 let defaultTestnetNode = 'http://bob.nem.ninja:7778';
+
+/**
+ * The default mainnet node
+ *
+ * @type {string}
+ */
 let defaultMainnetNode = 'http://alice6.nem.ninja:7778';
+
+/**
+ * The default mijin node
+ *
+ * @type {string}
+ */
 let defaultMijinNode = '';
 
-// Block explorers
+/**
+ * The default mainnet block explorer
+ *
+ * @type {string}
+ */
 let defaultMainnetExplorer = 'http://chain.nem.ninja/#/transfer/';
+
+/**
+ * The default testnet block explorer
+ *
+ * @type {string}
+ */
 let defaultTestnetExplorer = 'http://bob.nem.ninja:8765/#/transfer/';
+
+/**
+ * The default mijin block explorer
+ *
+ * @type {string}
+ */
 let defaultMijinExplorer = '';
 
-// Search tx by hash nodes
+/**
+ * The nodes allowing search by transaction hash on testnet
+ *
+ * @type {array}
+ */
 let testnetSearchNodes = [
 	{
 	    'uri': 'http://bigalice2.nem.ninja:7890',
@@ -24,6 +62,11 @@ let testnetSearchNodes = [
 	}
 ];
 
+/**
+ * The nodes allowing search by transaction hash on mainnet
+ *
+ * @type {array}
+ */
 let mainnetSearchNodes = [
 	{
 	    'uri': 'http://62.75.171.41:7890',
@@ -43,6 +86,11 @@ let mainnetSearchNodes = [
 	}
 ];
 
+/**
+ * The nodes allowing search by transaction hash on mijin
+ *
+ * @type {array}
+ */
 let mijinSearchNodes = [
 	{
 	    'uri': '',
@@ -50,7 +98,11 @@ let mijinSearchNodes = [
 	}
 ];
 
-// Testnet nodes
+/**
+ * The testnet nodes
+ *
+ * @type {array}
+ */
 let testnetNodes = [
 	{
 	    uri: 'http://bob.nem.ninja:7778'
@@ -67,7 +119,11 @@ let testnetNodes = [
 	}
 ];
 
-// Mainnet nodes
+/**
+ * The mainnet nodes
+ *
+ * @type {array}
+ */
 let mainnetNodes = [
     {
         uri: 'http://62.75.171.41:7778'
@@ -98,13 +154,22 @@ let mainnetNodes = [
     }
 ];
 
-// Mijin nodes
+/**
+ * The mijin nodes
+ *
+ * @type {array}
+ */
 let mijinNodes = [
 	{
 	    uri: ''
 	}
 ];
 
+/**
+ * The server verifying signed apostilles
+ *
+ * @type {string}
+ */
 let apostilleAuditServer = 'http://185.117.22.58:4567/verify';
 
 module.exports = {

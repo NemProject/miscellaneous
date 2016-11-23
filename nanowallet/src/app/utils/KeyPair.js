@@ -1,10 +1,12 @@
+/** @module utils/KeyPair */
+
 import nacl from './nacl-fast';
 import convert from './convert';
 
-/**
-* BinaryKey() Create a BinaryKey object
+/***
+* Create a BinaryKey object
 *
-* @param keyData: The key data to use (Uint8Array)
+* @param {Uint8Array} keyData - A key data
 */
 let BinaryKey = function(keyData) {
     this.data = keyData;
@@ -21,8 +23,8 @@ let hashfunc = function(dest, data, dataLength) {
     convert.words2ua(dest, hash);
 }
 
-/**
-* hashobj() Create an hasher object
+/***
+* Create an hasher object
 */
 let hashobj = function() {
     this.sha3 = CryptoJS.algo.SHA3.create({
@@ -59,10 +61,10 @@ let hashobj = function() {
     };
 }
 
-/**
-* KeyPair() Create a KeyPair Object 
+/***
+* Create a KeyPair Object 
 *
-* @param privkey: The hex private key to use
+* @param {string} privkey - An hex private key
 */
 let KeyPair = function(privkey) {
     this.publicKey = new BinaryKey(new Uint8Array(nacl.lowlevel.crypto_sign_PUBLICKEYBYTES));
@@ -83,11 +85,11 @@ let KeyPair = function(privkey) {
 }
 
 /**
-* create() Create a NEM KeyPair
+* Create a NEM KeyPair
 *
-* @param hexdata: The hex private key to use
+* @param {string} hexdata - An hex private key
 *
-* return NEM KeyPair object
+* @return {object} - The NEM KeyPair object
 */
 let create = function(hexdata) {
     let r = new KeyPair(hexdata);

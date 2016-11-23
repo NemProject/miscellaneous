@@ -1,8 +1,10 @@
+/** @module utils/Serialization */
+
 import convert from './convert';
 import helpers from './helpers';
 import TransactionTypes from './TransactionTypes';
 
-/**
+/***
  * NOTE, related to serialization: Unfortunately we need to create few objects
  * and do a bit of copying, as Uint32Array does not allow random offsets
  */
@@ -245,6 +247,13 @@ let _serializeMosaicDefinition = function(entity) {
     return new Uint8Array(r, 0, e);
 };
 
+/**
+ * Serialize a transaction object
+ *
+ * @param {object} entity - A transaction object
+ *
+ * @return {Uint8Array} - The serialized transaction
+ */
 let serializeTransaction = function(entity) {
     var r = new ArrayBuffer(512 + 2764);
     var d = new Uint32Array(r);
@@ -399,29 +408,29 @@ let serializeTransaction = function(entity) {
 
         // Aggregate Modification transaction
     } else if (d[0] === TransactionTypes.MultisigModification) {
-        //NUMBER OF MODIFS
+        // Number of modifications
         var temp = entity['modifications'];
         d[i++] = temp.length;
         e += 4;
 
         for (var j = 0; j < temp.length; ++j) {
-            //LENGTH OF MODIFICATION STUCTURE
+            // Length of modification structure
             d[i++] = 0x28;
             e += 4;
-            //MOD TYPE
+            // Modification type
             if (temp[j]['modificationType'] == 1) {
                 d[i++] = 0x01;
             } else {
                 d[i++] = 0x02;
             }
             e += 4;
-            //LENGTH PUBLIC 
+            // Length of public key
             d[i++] = 0x20;
             e += 4;
 
             var key2bytes = convert.hex2ua(entity['modifications'][j]['cosignatoryAccount']);
 
-            //Key to Bytes
+            // Key to Bytes
             for (var k = 0; k < key2bytes.length; ++k) {
                 b[e++] = key2bytes[k];
             }
@@ -430,14 +439,13 @@ let serializeTransaction = function(entity) {
 
         var entityVersion = d[1] & 0xffffff;
         if (entityVersion >= 2) {
-            //LENGTH OF MIN COSIG MODIF STUCTURE
             d[i++] = 0x04;
             e += 4;
-            //RELATIVE CHANGE 
+            // Relative change
             d[i++] = entity['minCosignatories']['relativeChange'].toString(16);
             e += 4;
         } else {
-            //VERSION 1 -> NO MODIFICATIONS
+            // Version 1 has no modifications
         }
 
     } else if (d[0] === TransactionTypes.ImportanceTransfer) {
