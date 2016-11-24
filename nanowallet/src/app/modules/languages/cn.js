@@ -47,6 +47,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_BLOCK: '块',
         GENERAL_NO_RESULTS: '无结果',
         GENERAL_ACCOUNT: '账户',
+        GENERAL_ACCOUNTS: 'Accounts',
         GENERAL_MULTISIG_ACCOUNT: '多重签名账户',
         GENERAL_AMOUNT: '量',
         GENERAL_MESSAGE: '消息',
@@ -87,6 +88,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_STATUS: '状态',
         GENERAL_LOCATION: '位置',
         GENERAL_ACTION: '行动',
+        GENERAL_ACTIONS: 'Actions',
         GENERAL_ADD: '添加',
         GENERAL_ADDED: '已添加',
         GENERAL_REMOVED: '已删除',
@@ -98,6 +100,22 @@ function ChineseProvider($translateProvider) {
 	    GENERAL_ERROR: 'Error',
         GENERAL_EXAMPLE: 'Example',
         GENERAL_PUBLIC: 'Public',
+        GENERAL_NAMESPACES: 'Namespaces',
+        GENERAL_NAMESPACE: 'Namespace',
+        GENERAL_SUB_NAMESPACES: 'Sub-namespaces',
+        GENERAL_SUB_NAMESPACE: 'Sub-namespace',
+        GENERAL_MOSAICS: 'Mosaics',
+        GENERAL_VALUE: 'Value',
+        GENERAL_CONNECTION_ERROR: 'An error occured, either node is down or you are offline',
+        GENERAL_HISTORY: 'History',
+        GENERAL_REVEAL: 'Reveal',
+        GENERAL_QR: 'QR code',
+        GENERAL_UPDATE:  'Update',
+        GENERAL_UNKNOWN: 'Unknown',
+        GENERAL_IMPORTANCE: 'Importance',
+        GENERAL_TRANSACTIONS: 'Transactions',
+        GENERAL_REGISTER: 'Register',
+        GENERAL_CREATE: 'Create',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: '发送和接收',
@@ -307,11 +325,25 @@ function ChineseProvider($translateProvider) {
         EXPLORER_HOME_NS_MULTISIG: '多重签名账户所属命名空间',
         EXPLORER_HOME_MOSAICS_LEVY: '征费马赛克',
 
+        // EXPLORER NAMESPACES AND MOSAICS
+        EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Select a mosaic to show details',
+        EXPLORER_NS_MOS_SEARCH: 'Search namespace',
+
         // EXPLORER APOSTILLES MODULE
         EXPLORER_APOSTILLES_TITLE: '浏览 - 公证',
         EXPLORER_APOSTILLES_YOURS: '您的公证',
         EXPLORER_APOSTILLES_PUBLIC: '公有池',
         EXPLORER_APOSTILLES_NO_NTY: '未加载nty文件，请点击这里检查并导入。',
+
+        // ACCOUNT EXPLORER
+        ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+
+        // APOSTILLE HISTORY MODULE
+        APOSTILLE_HISTORY_TITLE: 'Apostille history',
+        APOSTILLE_HISTORY_BTN_TRANSFER: 'Transfer / Split ownership',
+        APOSTILLE_HISTORY_BACKUP: 'Backup notary data',
+        APOSTILLE_HISTORY_PURGE: 'Purge notary data',
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: '创建Apostille',
@@ -359,6 +391,20 @@ function ChineseProvider($translateProvider) {
         //APOSTILLE_AUDIT_SIGNED: '已签名范例:',
         APOSTILLE_AUDIT_FILES: '审核文件',
 
+        // APOSTILLE MESSAGE MODULE
+        APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',
+        APOSTILLE_MESSAGE_NS_BRAND: 'Use my namespace to brand message',
+        APOSTILLE_MESSAGE_ADD_MOSAIC: 'Add mosaic',
+        APOSTILLE_NTY_ACCOUNT: 'Notarization account',
+        APOSTILLE_REQUEST_MESSAGE: 'Request message',
+        APOSTILLE_CREATE_MESSAGE_REQUEST: 'Create a message request',
+
+        // TRANSFER APOSTILLE OWNLERSHIP MODULE
+        APOSTILLE_TRANSFER_TITLE: 'Transfer or Split apostille ownership',
+
+        // UPADTE APOSTILLE MODULE
+        APOSTILLE_UPDATE_TITLE: 'Update apostille',
+
         // ERROR ALERTS
         ALERT_MISSING_FORM_DATA: '请完整填写表格！',
         ALERT_ERROR_WALLET_DOWNLOAD: '无法下载钱包，钱包不存在！',
@@ -404,7 +450,12 @@ function ChineseProvider($translateProvider) {
         ALERT_INVALID_NS_NAME: '命名空间名不合规！',
         ALERT_INVALID_MOSAIC_NAME: '马赛克名不合规！',
         ALERT_MOSAIC_DESCRIPTION: '马赛克描述不合规！',
-        ALERT_GET_INCOMING_TXES_ERROR: '接收交互错误，请检查网络或更换节点后再次尝试',
+        //ALERT_GET_INCOMING_TXES_ERROR: '接收交互错误，请检查网络或更换节点后再次尝试',
+        ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, reason: ',
+        ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
+        ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -502,7 +553,8 @@ function ChineseProvider($translateProvider) {
         FORM_INVOICE_RECIPIENT_PLACEHOLDER: '接收地址',
         FORM_SIDE_BTN_ALIAS_OF: '别名',
         FORM_MESSAGE_PLACEHOLDER: '信息',
-        FORM_MOSAIC_NAME_PLACEHOLDER: '马赛克名'
+        FORM_MOSAIC_NAME_PLACEHOLDER: '马赛克名',
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
     });
 
 }
