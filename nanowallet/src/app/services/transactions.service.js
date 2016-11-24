@@ -78,7 +78,7 @@ class Transactions {
      * @return {number} - The fee amount for the mosaics in the transaction
      */
     calculateMosaicsFee(multiplier, mosaics, attachedMosaics) {
-        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500) {
+        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
             let totalFee = 0;
             let fee = 0;
             let supplyRelatedAdjustment = 0;
@@ -205,8 +205,8 @@ class Transactions {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
-        let msgFee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 && message.payload.length ? Math.max(1, Math.floor((message.payload.length / 32) + 1)) : message.payload.length ? Math.max(1, Math.floor(message.payload.length / 2 / 16)) * 2 : 0;
-        let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
+        let msgFee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 && message.payload.length || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 && message.payload.length ? Math.max(1, Math.floor((message.payload.length / 32) + 1)) : message.payload.length ? Math.max(1, Math.floor(message.payload.length / 2 / 16)) * 2 : 0;
+        let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
         let totalFee = (msgFee + fee) * 1000000;
         let custom = {
             'recipient': recipientCompressedKey.toUpperCase().replace(/-/g, ''),
@@ -332,7 +332,7 @@ class Transactions {
         let actualSender = tx.isMultisig ? tx.multisigAccount.publicKey : kp.publicKey.toString();
         let rentalFeeSink = tx.rentalFeeSink.toString();
         let rentalFee;
-        if (this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500) {
+        if (this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
             // Set fee depending if namespace or sub
             if (tx.namespaceParent) {
                 rentalFee = 200 * 1000000;
@@ -373,7 +373,7 @@ class Transactions {
         let timeStamp = helpers.createNEMTimeStamp();
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let custom = {
             'rentalFeeSink': rentalFeeSink.toUpperCase().replace(/-/g, ''),
             'rentalFee': rentalFee,
@@ -398,7 +398,7 @@ class Transactions {
         let actualSender = tx.isMultisig ? tx.multisigAccount.publicKey : kp.publicKey.toString();
         let rentalFeeSink = tx.mosaicFeeSink.toString();
         let rentalFee;
-        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500) {
+        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
             rentalFee = 500 * 1000000;
         } else {
             rentalFee = 50000 * 1000000;
@@ -436,7 +436,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicDefinition, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let levyData = levy ? {
             'type': levy.feeType,
             'recipient': levy.address.toUpperCase().replace(/-/g, ''),
@@ -502,7 +502,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicSupply, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
         let custom = {
             'mosaicId': mosaicId,
             'supplyType': supplyType,
