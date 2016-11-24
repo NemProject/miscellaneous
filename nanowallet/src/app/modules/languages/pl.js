@@ -47,6 +47,7 @@ function PolishProvider($translateProvider) {
         GENERAL_BLOCK: 'Blok',
         GENERAL_NO_RESULTS: 'Nic do pokazania',
         GENERAL_ACCOUNT: 'Konto',
+        GENERAL_ACCOUNTS: 'Accounts',
         GENERAL_MULTISIG_ACCOUNT: 'Konto z multipodpisem',
         GENERAL_AMOUNT: 'Ilość',
         GENERAL_MESSAGE: 'Wiadomość',
@@ -108,6 +109,13 @@ function PolishProvider($translateProvider) {
         GENERAL_CONNECTION_ERROR: 'Wystąpił błąd, nie działa serwer lub jesteś offline',
         GENERAL_HISTORY: 'Historia',
         GENERAL_REVEAL: 'Odsłoń',
+        GENERAL_QR: 'QR code',
+        GENERAL_UPDATE:  'Update',
+        GENERAL_UNKNOWN: 'Unknown',
+        GENERAL_IMPORTANCE: 'Importance',
+        GENERAL_TRANSACTIONS: 'Transactions',
+        GENERAL_REGISTER: 'Register',
+        GENERAL_CREATE: 'Create',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
@@ -318,16 +326,20 @@ function PolishProvider($translateProvider) {
         // EXPLORER NAMESPACES AND MOSAICS
         EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces i Mozaiki',
         EXPLORER_NS_MOS_SELECT_MOS: 'Wybierz mozaikę, aby zobaczyć szczegóły',
+        EXPLORER_NS_MOS_SEARCH: 'Search namespace',
 
         // EXPLORER APOSTILLES MODULE
         EXPLORER_APOSTILLES_TITLE: 'Explorer - Apostile',
         EXPLORER_APOSTILLES_YOURS: 'Twoje apostile',
         EXPLORER_APOSTILLES_PUBLIC: 'Publiczny sink',
         EXPLORER_APOSTILLES_NO_NTY: 'Plik nty nie załadowany, proszę tu kliknąć aby go importować.',
+
+        // ACCOUNT EXPLORER
+        ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
         
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille historia',
-        APOSTILLE_HISTORY_BTN_MESSAGE: 'Aktualizuj / Wiadomość',
+        //APOSTILLE_HISTORY_BTN_MESSAGE: 'Aktualizuj / Wiadomość',
         APOSTILLE_HISTORY_BTN_TRANSFER: 'Transferuj / Podziel własność',
         APOSTILLE_HISTORY_BACKUP: 'Zabezpiecz dane notarialne',
         APOSTILLE_HISTORY_PURGE: 'Wyczyść dane notarialne',
@@ -378,6 +390,20 @@ function PolishProvider($translateProvider) {
         //APOSTILLE_AUDIT_SIGNED: 'Podpisany przykład:',
         APOSTILLE_AUDIT_FILES: 'Audytuj pliki',
 
+        // APOSTILLE MESSAGE MODULE
+        APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',
+        APOSTILLE_MESSAGE_NS_BRAND: 'Use my namespace to brand message',
+        APOSTILLE_MESSAGE_ADD_MOSAIC: 'Add mosaic',
+        APOSTILLE_NTY_ACCOUNT: 'Notarization account',
+        APOSTILLE_REQUEST_MESSAGE: 'Request message',
+        APOSTILLE_CREATE_MESSAGE_REQUEST: 'Create a message request',
+
+        // TRANSFER APOSTILLE OWNLERSHIP MODULE
+        APOSTILLE_TRANSFER_TITLE: 'Transfer or Split apostille ownership',
+
+        // UPADTE APOSTILLE MODULE
+        APOSTILLE_UPDATE_TITLE: 'Update apostille',
+
         // ERROR ALERTS
         ALERT_MISSING_FORM_DATA: 'Proszę wypełnić formularz !',
         ALERT_ERROR_WALLET_DOWNLOAD: 'Nie można pobrać portfela ponieważ nie istnieje !',
@@ -423,7 +449,12 @@ function PolishProvider($translateProvider) {
         ALERT_INVALID_NS_NAME: 'Nazwa namespace jest nieprawidłowa !',
         ALERT_INVALID_MOSAIC_NAME: 'Nazwa mozaiki jest nieprawidłowa !',
         ALERT_MOSAIC_DESCRIPTION: 'Opis mozaiki jest nieprawidłowy !',
-        ALERT_GET_INCOMING_TXES_ERROR: 'Wystąpił błąd podczas próby pobrania przychodzących transakcji, zmień serwer lub sprawdź połączenie i spróbuj ponownie',
+        //ALERT_GET_INCOMING_TXES_ERROR: 'Wystąpił błąd podczas próby pobrania przychodzących transakcji, zmień serwer lub sprawdź połączenie i spróbuj ponownie',
+        ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, reason: ',
+        ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
+        ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -521,7 +552,8 @@ function PolishProvider($translateProvider) {
         FORM_INVOICE_RECIPIENT_PLACEHOLDER: 'Adres odbiorcy',
         FORM_SIDE_BTN_ALIAS_OF: 'Alias konta',
         FORM_MESSAGE_PLACEHOLDER: 'Wiadomość',
-        FORM_MOSAIC_NAME_PLACEHOLDER: 'Nazwa mozaiki'
+        FORM_MOSAIC_NAME_PLACEHOLDER: 'Nazwa mozaiki',
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
     });
 
 }
