@@ -228,7 +228,7 @@ class NetworkRequests {
      * @return {array} - An array of SuperNodeData objects
      */
     getSupernodes(){
-        return this._$http.get('http://supernodes.nem.io/nodes').then((res) => {
+        return this._$http.get('https://supernodes.nem.io/nodes').then((res) => {
             return res;
         });
     };
