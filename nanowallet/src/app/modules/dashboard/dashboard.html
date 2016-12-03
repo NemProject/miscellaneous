@@ -2,7 +2,7 @@
 
   <div class="banner-left">
     <div class="container">
-      <h2><i class="fa fa-dashboard"></i> {{'DASHBOARD_TITLE' | translate}}</h2>
+      <h2>{{'DASHBOARD_TITLE' | translate}}</h2>
     </div>
   </div>
 
@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-          
+
     </div>
 
     <div class="col-xs-12 col-md-4 noPaddingLeft" style="margin-top:10px;">
@@ -109,13 +109,13 @@
               <i class="fa fa-newspaper-o"></i> {{ 'DASHBOARD_NEWS_TITLE' | translate }}
             </div>
             <div class="panel-body" style="max-height: 180px; overflow: auto;">
-                  <p><b>Nano Wallet BETA 1.2.2 !</b> 
+                  <p><b>Nano Wallet BETA 1.2.2 !</b>
                   <br>
-                  Please report issues <a href="https://github.com/NemProject/NanoWallet" target="_blank">here</a>. 
+                  Please report issues <a href="https://github.com/NemProject/NanoWallet" target="_blank">here</a>.
                   <br><br>
-                  The NEM team is not responsible for any loss of funds due to testing this app on the main net and we suggest primarily testing on the testnet. Users are responsible for their funds and having their private keys backed up. 
+                  The NEM team is not responsible for any loss of funds due to testing this app on the main net and we suggest primarily testing on the testnet. Users are responsible for their funds and having their private keys backed up.
                   <br><br>
-                  Do not use the main net unless you are confident all your funds are securely backed up. We suggest writing down private keys on paper and storing it in a safe place. Additionally, you can import your accounts into Lightwallet/NCC. 
+                  Do not use the main net unless you are confident all your funds are securely backed up. We suggest writing down private keys on paper and storing it in a safe place. Additionally, you can import your accounts into Lightwallet/NCC.
                   <br><br>
                   Thanks for your participation!
                   </p>
@@ -139,21 +139,21 @@
                     <li class="list-group-item"><b>{{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:</b></li>
                     <div class="list-group">
                       <li class="list-group-item">
-                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_1H' | translate }}: </b> 
+                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_1H' | translate }}: </b>
                         <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_1h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
                           <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h > 0"></span>
                           <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h < 0"></span>
                           {{$ctrl._DataBridge.marketInfo.percent_change_1h}} %
-                        </span> 
-                        <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i> 
-                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_24H' | translate }}: </b> 
+                        </span>
+                        <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i>
+                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_24H' | translate }}: </b>
                         <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_24h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
                           <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h > 0"></span>
                           <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h < 0"></span>
-                          {{$ctrl._DataBridge.marketInfo.percent_change_24h}} %</span> 
-                          <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i> 
-                          <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_7D' | translate }}: </b> 
-                          <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_7d < 0 ? { 'color': 'red'} : { 'color': 'green'}"> 
+                          {{$ctrl._DataBridge.marketInfo.percent_change_24h}} %</span>
+                          <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i>
+                          <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_7D' | translate }}: </b>
+                          <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_7d < 0 ? { 'color': 'red'} : { 'color': 'green'}">
                             <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d > 0"></span>
                             <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d < 0"></span>
                             {{$ctrl._DataBridge.marketInfo.percent_change_7d}} %

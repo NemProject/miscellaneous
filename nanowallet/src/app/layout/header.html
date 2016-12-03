@@ -14,10 +14,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account">
-        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.dashboard" show-authed="true"><i class="fa fa-dashboard"></i></a></li>
-        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-credit-card"></i></a></li>
-        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-hashtag"></i></a></li>
-        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i></a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.dashboard" show-authed="true"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-credit-card"></i> Wallet</a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-hashtag"></i> Services</a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i> Explorer</a></li>
         <li><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="!balanceToBtc && !balanceToUsd" show-account-data="balance" show-authed="true" ng-click="balanceToUsd = true;">
           <b>0.000000 XEM</b></a>
         </li>
@@ -33,7 +33,7 @@
         <li><a style="outline:0;text-transform: uppercase;" ui-sref-active="active" ui-sref="app.signup" show-authed="false"><small><b>{{ 'HEADER_SIGNUP_BUTTON' | translate }}</b></small></a></li>
         <li ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a style="outline:0;border-left:1px solid #444;" ui-sref-active="active" ui-sref="app.account" show-authed="true"><i class="fa fa-user"></i></a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" show-authed="true" show-network-status><i class="fa fa-cloud-upload"></i></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" show-authed="true" show-network-status><i class="fa fa-cloud-upload"></i> Node</a>
           <ul class="dropdown-menu">
             <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_NODE_BLOCK_HEIGHT' | translate }}</li>
             <li class="text-center" style="border-bottom:1px solid #444;" show-block-height></li>
@@ -48,7 +48,7 @@
         </li>
         <li style="display:none"><a style="outline:0;cursor:default;" show-authed="true" show-block-height></a></li>
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language"></i> Language</a>
           <ul class="dropdown-menu">
             <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_LANG_TITLE' | translate }}</li>
             <li><select class="form-control" style="width:100%;" ng-model="$ctrl.lang.name" ng-change="$ctrl.changeLanguage($ctrl.lang.name)" ng-options="lang.key as lang.name for lang in $ctrl.languages"><option value="" disabled selected>{{ 'HEADER_LANG_SELECT' | translate }}</option></select></li>

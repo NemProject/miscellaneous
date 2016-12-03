@@ -147,12 +147,12 @@ fieldset[disabled] .btn-default.focus {
 
 .navbar-default .navbar-nav .open a {
 	color: white;
-	background-color: #444;
+	background-color: red;
 }
 
 .navbar-default .navbar-nav .open a:hover {
 	color: white;
-	background-color: #444;
+	background-color: pink;
 }
 
 .navbar {
@@ -161,12 +161,12 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .navbar-default .navbar-brand {
-	background-color: rgb(68, 68, 68);
+	background-color: orange;
 	color: white;
 }
 
 .navbar-default .navbar-brand:hover {
-	background-color: rgb(68, 68, 68);
+	background-color: green;
 	color: white;
 }
 
@@ -181,14 +181,15 @@ fieldset[disabled] .btn-default.focus {
 }
 
 .navbar-default .navbar-nav li a {
-    border-right: 1px solid #444;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .navbar-default .navbar-nav li a.active {
-	background-color: rgb(68, 68, 68);
-	border-left: 1px solid white;
-	border-bottom:1px solid white;
-	color: white;
+	background-color: transparent;
+	text-decoration: underline;
+	border-left: 1px solid rgba(0, 0, 0, 0.3);
+	border-bottom:1px solid rgba(0, 0, 0, 0.3);
+	color: #444;
 }
 
 .banner{
@@ -339,13 +340,20 @@ form button.btn-success {
     opacity: 0;
     filter: alpha(opacity=0);
 }
-
+.dashboard-page .container{
+	margin-left: 0px;
+	padding-left: 0px;
+}
 .dashboard-page .banner-left {
 	padding-bottom: 0px;
+	background-color: transparent;
+
 }
 
 .dashboard-page .banner-left h2 {
 	margin-top: 10px;
+	text-align: left;
+	color: rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-page th {
@@ -424,7 +432,7 @@ border-bottom-color: transparent;
 }
 
 .transferTransaction-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
-	color: #444;
+	color: transparent;
 	background-color: white;
 }
 
@@ -786,7 +794,7 @@ border-bottom-color: transparent;
 }
 
 .explorerNav {
-	padding-left: 0px; 
+	padding-left: 0px;
 	padding-right: 0px;
 	margin-top: 0px;
 }
@@ -920,28 +928,28 @@ border-bottom-color: transparent;
 }
 
 .loading-overlay {
-	position: absolute; 
-	z-index: 5; 
-	background-color: rgba(68, 68, 68, 0.29); 
-	width: 100%; 
-	top: 0; 
+	position: absolute;
+	z-index: 5;
+	background-color: rgba(68, 68, 68, 0.29);
+	width: 100%;
+	top: 0;
 	bottom: 0;
 }
 
 .loading-text {
-	font-weight: bold; 
+	font-weight: bold;
 	color: white;
-	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; 
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 	font-size: 23px;
 	position: absolute;
 }
 
 .loader {
   border: 20px solid transparent;
-  position: absolute; 
-  top: 20%; 
-  left: 50%; 
-  margin-left: -100px; 
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  margin-left: -100px;
   margin-top: -45px;
   width: 200px;
   /*height: 120px;*/
@@ -956,7 +964,7 @@ border-bottom-color: transparent;
   overflow: hidden;
   display: inline-block;
   vertical-align: bottom;
-  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;
   animation: ellipsis steps(4,end) 900ms infinite;
   content: "\2026"; /* ascii code for the ellipsis character */
   width: 0px;
@@ -964,13 +972,13 @@ border-bottom-color: transparent;
 
 @keyframes ellipsis {
   to {
-    width: 1.25em;    
+    width: 1.25em;
   }
 }
 
 @-webkit-keyframes ellipsis {
   to {
-    width: 1.25em;    
+    width: 1.25em;
   }
 }
 

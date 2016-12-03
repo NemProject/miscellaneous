@@ -113,11 +113,11 @@ gulp.task('views', function() {
 });*/
 
 // Run Tasks
-gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'browserifyTests'], function() { 
+gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'browserifyTests'], function() {
 
   // Uncomment below for dev mode (watch and build as you change the code)
-    // browserSync.init(['./build/**/**.**'], {
-    /*server: "./build",
+  browserSync.init(['./build/**/**.**'], {
+    server: "./build",
     port: 4000,
     notify: false,
     ui: {
@@ -125,7 +125,8 @@ gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'bro
     }
   });
   gulp.watch("src/index.html", ['html']);
+  // gulp.watch("src/css/**/*.css", ['css']);
   gulp.watch(viewFiles, ['views']);
-  gulp.watch(jsFiles, ['browserify']);*/
-  
+  gulp.watch(jsFiles, ['browserify']);
+
 });
