@@ -125,7 +125,7 @@ gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'bro
     }
   });
   gulp.watch("src/index.html", ['html']);
-  // gulp.watch("src/css/**/*.css", ['css']);
+  gulp.watch("src/css/**/*.css", ['css']);
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 
