@@ -21,8 +21,20 @@ footer {
 hr {
 	border-color: #444;
 }
-
-thead {
+h2{
+	margin-top: 0px;
+}
+table{
+	border: none !important;
+}
+tr{
+	border: none !important;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.3) !important;
+}
+tr td{
+	border: none !important;
+}
+/*thead {
 	color: white;
 	background-color: rgb(68, 68, 68);
 }
@@ -34,7 +46,7 @@ th {
 td {
 	text-align: center;
 	vertical-align: middle !important;
-}
+}*/
 
 .bg-info {
 	background-color: #e3e0cf;
@@ -160,11 +172,13 @@ fieldset[disabled] .btn-default.focus {
 .navbar {
 	border:none;
 	border-radius:0px;
+	border-bottom: 1px solid rgba(0,0,0,0.5);
 }
 
 .navbar-default .navbar-brand {
-	background-color: orange;
-	color: white;
+	background-color: transparent;
+	color: black;
+	border-right: 1px solid rgba(0,0,0,0.5);
 }
 
 .navbar-default .navbar-brand:hover {
@@ -184,14 +198,16 @@ fieldset[disabled] .btn-default.focus {
 
 .navbar-default .navbar-nav li a {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
+		color: black
 }
 
 .navbar-default .navbar-nav li a.active {
 	background-color: transparent;
-	text-decoration: underline;
-	border-left: 1px solid rgba(0, 0, 0, 0.3);
-	border-bottom:1px solid rgba(0, 0, 0, 0.3);
-	color: #444;
+	/*text-decoration: underline;*/
+	/*border-left: 1px solid rgba(0, 0, 0, 0.3);
+	border-bottom:1px solid rgba(0, 0, 0, 0.3);*/
+	color: rgba(0, 0, 0, 0.6);
+
 }
 
 .banner{
@@ -342,6 +358,9 @@ form button.btn-success {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+.dashboard-page{
+	background-color: white;
+}
 .dashboard-page .container{
 	margin-left: 0px;
 	padding-left: 0px;
@@ -351,7 +370,10 @@ form button.btn-success {
 	background-color: transparent;
 
 }
-
+/*.panel-default .panel-heading .nav-tabs a{
+    color: white;
+    background-color: grey;
+}*/
 .dashboard-page .banner-left h2 {
 	margin-top: 10px;
 	text-align: left;
@@ -384,6 +406,10 @@ form button.btn-success {
 
 .dashboard-page .well h4 small {
 	color: #444;
+}
+
+.dashboard-page .market-percent{
+	text-align: center;
 }
 
 /*.dashboard-page .col-md-3 {
@@ -456,11 +482,12 @@ border-bottom-color: transparent;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-		text-decoration: underline;
+		/*text-decoration: underline;*/
     cursor: default;
     background-color: blue;
     border: 0px solid #ddd;
     border-bottom-color: transparent;
+		border-bottom: 0px !important;
 		color: white;
 }
 
@@ -471,7 +498,9 @@ border-bottom-color: transparent;
 .nav-tabs {
 	border-bottom: none;
 }
-
+/*.buttonStyle {
+	color: grey;
+}*/
 .dashboard-page .panel-default > .panel-heading {
     background-color: transparent;
     border-radius: 0px;
@@ -1042,4 +1071,33 @@ border-bottom-color: transparent;
 .explorer-namespaces-mosaics-page .explorerNav .list-group-item.active:hover {
 	color: white;
 	background-color: #444;
+}
+table thead, table tr td{
+	background-color: transparent;
+	border: 0px;
+	/*border-bottom: 2px solid blue !important;*/
+}
+table th:first-child, table th:nth-of-type(2), table th:nth-of-type(3), table th:nth-of-type(4){
+	border-bottom: 2px solid blue !important;
+}
+/* Target account */
+table th:first-child, table td:nth-of-type(2) {
+	text-align: left;
+	width: 44%;
+
+}
+/* Targeting amount */
+table th:nth-of-type(2), table td:nth-of-type(4) {
+	text-align: left;
+	width: 14%;
+}
+/* Targeting message */
+table th:nth-of-type(3), table td:nth-of-type(6) {
+	text-align: left;
+	width: 19%;
+}
+/* Targeting date */
+table th:nth-of-type(4), table td:nth-of-type(8) {
+	text-align: left;
+	width: 23%;
 }
