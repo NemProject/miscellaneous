@@ -36,7 +36,7 @@ class AccountCtrl {
 
         // Hide private key field by default
         this.showPrivateKeyField = false;
-       
+
         // Empty default label for added account
         this.newAccountLabel = "";
 
@@ -65,7 +65,7 @@ class AccountCtrl {
 
         // Account info model for QR
         this.accountInfoModelQR = {
-            "v": 1,
+            "v": this._Wallet.network === Network.data.Testnet.id ? 1 : 2,
             "type": 1,
             "data": {
                 "addr": this._Wallet.currentAccount.address,
