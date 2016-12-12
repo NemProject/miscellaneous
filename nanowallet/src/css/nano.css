@@ -8,12 +8,26 @@ footer {
 	bottom: 0;
 	position: absolute;
 	padding: 15px;
-	border-top: 1px solid #444;
+	/*border-top: 1px solid #444;*/
 	width: 100%;
 	background-color: white;
 	z-index: 10;
 }
+footer .container{
+	margin: 0px !important;
+	padding: 0px !important;
+}
+footer .col-md-6:first-of-type{
+	text-align: left;
+	margin-left: 0px;
+	padding-left: 0px;
 
+}
+footer .col-md-6:last-of-type{
+	text-align: right;
+	margin-right: 0px;
+	padding-right: 0px;
+}
 .navbar {
 	z-index: 10;
 }
@@ -23,6 +37,13 @@ hr {
 }
 h2{
 	margin-top: 0px;
+}
+h4{
+	padding-top: 20px;
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 20px;
+	font-weight: 500;
+	font-family: 'Roboto';
 }
 table{
 	border: none !important;
@@ -172,13 +193,13 @@ fieldset[disabled] .btn-default.focus {
 .navbar {
 	border:none;
 	border-radius:0px;
-	border-bottom: 1px solid rgba(0,0,0,0.5);
+	border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
 .navbar-default .navbar-brand {
 	background-color: transparent;
 	color: black;
-	border-right: 1px solid rgba(0,0,0,0.5);
+	border-right: 1px solid rgba(0,0,0,0.3);
 }
 
 .navbar-default .navbar-brand:hover {
@@ -196,10 +217,10 @@ fieldset[disabled] .btn-default.focus {
 	background-color: white;
 }
 
-.navbar-default .navbar-nav li a {
+/*.navbar-default .navbar-nav li a:nth-of-type(5) {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 		color: black
-}
+}*/
 
 .navbar-default .navbar-nav li a.active {
 	background-color: transparent;
@@ -374,6 +395,13 @@ form button.btn-success {
     color: white;
     background-color: grey;
 }*/
+.dashboard-page h2{
+	/*color: #c2c2c2;*/
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 55px;
+	font-weight: 100;
+	font-family: 'Roboto';
+}
 .dashboard-page .banner-left h2 {
 	margin-top: 10px;
 	text-align: left;
@@ -484,11 +512,12 @@ border-bottom-color: transparent;
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
 		/*text-decoration: underline;*/
     cursor: default;
-    background-color: blue;
+    background-color: #69b2e5;
     border: 0px solid #ddd;
     border-bottom-color: transparent;
 		border-bottom: 0px !important;
 		color: white;
+		z-index: 1000;
 }
 
 .nav-tabs li a {
@@ -504,21 +533,21 @@ border-bottom-color: transparent;
 .dashboard-page .panel-default > .panel-heading {
     background-color: transparent;
     border-radius: 0px;
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid #69b2e5;
 }
 
 .panel-default .panel-heading .nav-tabs .badge {
     color: white;
-    background-color: blue;
+    background-color: #69b2e5;
 }
 
 .panel-default .panel-heading .nav-tabs li a:hover .badge {
-    color: blue;
+    color: #69b2e5;
     background-color: white;
 }
 
 .panel-default .panel-heading .nav-tabs li.active .badge {
-    color: blue;
+    color: #69b2e5;
     background-color: white;
 }
 
@@ -1072,32 +1101,32 @@ border-bottom-color: transparent;
 	color: white;
 	background-color: #444;
 }
-table thead, table tr td{
+
+/*table thead, table tr td{
 	background-color: transparent;
 	border: 0px;
-	/*border-bottom: 2px solid blue !important;*/
 }
 table th:first-child, table th:nth-of-type(2), table th:nth-of-type(3), table th:nth-of-type(4){
-	border-bottom: 2px solid blue !important;
-}
+	border-bottom: 2px solid #69b2e5 !important;
+}*/
 /* Target account */
-table th:first-child, table td:nth-of-type(2) {
+/*table th:first-child, table td:nth-of-type(2) {
 	text-align: left;
 	width: 44%;
 
-}
+}*/
 /* Targeting amount */
-table th:nth-of-type(2), table td:nth-of-type(4) {
+/*table th:nth-of-type(2), table td:nth-of-type(4) {
 	text-align: left;
 	width: 14%;
-}
+}*/
 /* Targeting message */
-table th:nth-of-type(3), table td:nth-of-type(6) {
+/*table th:nth-of-type(3), table td:nth-of-type(6) {
 	text-align: left;
 	width: 19%;
-}
+}*/
 /* Targeting date */
-table th:nth-of-type(4), table td:nth-of-type(8) {
+/*table th:nth-of-type(4), table td:nth-of-type(8) {
 	text-align: left;
 	width: 23%;
-}
+}*/

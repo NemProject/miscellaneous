@@ -189,54 +189,10 @@
 
 </div>
 
+</div>
 
-
-          <div class="panel panel-default">
-              <h4> {{ 'DASHBOARD_MARKET_INFO_TITLE' | translate }}</h4>
-              <span style="float:right;cursor:pointer;" title="Refresh"><i class="fa fa-refresh" ng-click="$ctrl.refreshMarketInfo()"></i></span>
-            </div>
-            <div class="panel-body" style="padding:0px;">
-                <div class="list-group list-group-root well">
-                    <li class="list-group-item"><b>{{ 'DASHBOARD_MARKET_INFO_CAP' | translate }}: </b> <i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.market_cap_usd | currencyFormat}}</li>
-                    <li class="list-group-item"><b>{{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }}:</b></li>
-                    <div class="list-group">
-                      <li class="list-group-item"><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.price_usd}}</li>
-                      <li class="list-group-item"><i class="fa fa-btc"></i> {{$ctrl._DataBridge.marketInfo.price_btc}}</li>
-                    </div>
-                    <li class="list-group-item"><b>{{ 'DASHBOARD_MARKET_INFO_VOLUME' | translate }}: </b> <i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo['24h_volume_usd'] | currencyFormat}}</li>
-                    <li class="list-group-item"><b>{{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:</b></li>
-                    <div class="list-group">
-                      <li class="list-group-item">
-                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_1H' | translate }}: </b>
-                        <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_1h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-                          <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h > 0"></span>
-                          <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h < 0"></span>
-                          {{$ctrl._DataBridge.marketInfo.percent_change_1h}} %
-                        </span>
-                        <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i>
-                        <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_24H' | translate }}: </b>
-                        <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_24h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-                          <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h > 0"></span>
-                          <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h < 0"></span>
-                          {{$ctrl._DataBridge.marketInfo.percent_change_24h}} %</span>
-                          <i class="fa fa-ellipsis-v" style="margin-left: 5px; margin-right: 5px;"></i>
-                          <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_7D' | translate }}: </b>
-                          <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_7d < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-                            <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d > 0"></span>
-                            <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d < 0"></span>
-                            {{$ctrl._DataBridge.marketInfo.percent_change_7d}} %
-                          </span>
-                      </li>
-                    </div>
-                  </div>
-            </div>
-            <div class="panel-footer text-center" style="background-color: #e3e0cf; color: #444;border-top:1px solid #444;padding:0;">
-              <small><b><i><span ng-bind-html="'DASHBOARD_MARKET_INFO_NOTE' | translate"></span></i></b></small>
-            </div>
           </div>
 
         </div>
 
   </div>
-
-</div>
