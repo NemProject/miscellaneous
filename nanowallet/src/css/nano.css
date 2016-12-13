@@ -189,9 +189,19 @@ fieldset[disabled] .btn-default.focus {
 
 .navbar-default .navbar-nav .open a:hover {
 	color: white;
-	background-color: pink;
+	/*background-color: pink;*/
 }
-
+.navbar-nav li a {
+	color: black !important;
+	font-weight: 500;
+}
+.navbar-nav li a.active {
+	color: grey !important;
+}
+.navbar-nav li.money, .navbar-nav li.node{
+	border-right: 1px solid rgba(0,0,0,0.3);
+	border-left: 1px solid rgba(0,0,0,0.3);
+}
 .navbar {
 	border:none;
 	border-radius:0px;
