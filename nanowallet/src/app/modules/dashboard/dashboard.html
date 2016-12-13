@@ -73,7 +73,7 @@
           <div class="col-xs-12 col-md-9">
             <div class="panel panel-default">
             <div class="panel-heading">
-              <i class="fa fa-bar-chart" aria-hidden="true"></i> {{ 'DASHBOARD_HARVEST_INCOME_TITLE' | translate }}
+              <h4> {{ 'DASHBOARD_HARVEST_INCOME_TITLE' | translate }} </h4>
             </div>
             <div class="panel-body" ng-show="$ctrl._DataBridge.harvestedBlocks.length && !$ctrl.chartEmpty" style="padding:10px;padding-bottom:0px;">
               <canvas width='793' height='200' id="bar" class="chart chart-bar" chart-data="$ctrl.valuesInFee" chart-labels="$ctrl.labels"></canvas>
@@ -91,7 +91,7 @@
           <div class="col-xs-12 col-md-3 noPaddingLeft">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <i class="fa fa-cubes"></i> {{ 'DASHBOARD_HARVESTED_BLOCKS_TITLE' | translate }}
+              <h4>{{ 'DASHBOARD_HARVESTED_BLOCKS_TITLE' | translate }}</h4>
               <div style="float: right; position: relative; display: block;" ng-show="$ctrl._DataBridge.harvestedBlocks.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPageHb == 0" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageHb+1}}/{{$ctrl.numberOfPagesHb()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageHb+1 >= $ctrl.numberOfPagesHb()" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
             </div>
             <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed">
