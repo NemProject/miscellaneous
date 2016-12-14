@@ -10,6 +10,7 @@ var templateCache = require('gulp-angular-templatecache');
 var uglify        = require('gulp-uglify');
 var merge         = require('merge-stream');
 var glob          = require('glob');
+var sass          = require('gulp-sass');
 
 // Where our files are located
 var jsFiles   = "src/app/**/*.js";
@@ -76,11 +77,11 @@ gulp.task('tests', function() {
       .pipe(gulp.dest('./build/vendors'));
 });
 
-    gulp.task('css', function() {
-    return gulp.src("src/css/**/*")
-      .on('error', interceptErrors)
+  gulp.task('sass', function () {
+    return gulp.src('src/sass/nano.scss')
+      .pipe(sass().on('error', sass.logError))
       .pipe(gulp.dest('./build/css'));
-});
+  });
 
     gulp.task('images', function() {
     return gulp.src("src/images/**/*")
@@ -113,7 +114,7 @@ gulp.task('views', function() {
 });*/
 
 // Run Tasks
-gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'browserifyTests'], function() {
+gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'browserifyTests'], function() {
 
   // Uncomment below for dev mode (watch and build as you change the code)
   browserSync.init(['./build/**/**.**'], {
@@ -125,7 +126,7 @@ gulp.task('default', ['html', 'js', 'css', 'images', 'browserify', 'tests', 'bro
     }
   });
   gulp.watch("src/index.html", ['html']);
-  gulp.watch("src/css/**/*.css", ['css']);
+  gulp.watch("src/sass/**/*.scss", ['sass']);
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 

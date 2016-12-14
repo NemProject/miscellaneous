@@ -49,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/NemProject/NanoWallet/issues"
   },
-  "homepage": "https://github.com/NemProject/NanoWallet#readme"
+  "homepage": "https://github.com/NemProject/NanoWallet#readme",
+  "devDependencies": {
+    "gulp-sass": "^3.0.0"
+  }
 }
