@@ -1,0 +1,198 @@
+.panel-heading {
+  background-color: transparent !important;
+  border-bottom: 2px solid $blue !important;
+  padding-left: 0px;
+  padding-right: 0px;
+  // margin-left: $pad;
+  // margin-right: $pad;
+
+
+}
+
+// confirmed/unconfirmed tabs, send/receive tabs
+.nav-tabs li a:hover {
+	text-decoration: underline;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+		/*text-decoration: underline;*/
+    cursor: default;
+    background-color: $blue;
+		color: white;
+    padding-bottom: 12px;
+}
+
+.nav-tabs li a {
+	color: grey;
+}
+
+.nav-tabs {
+	border-bottom: none;
+}
+
+button {
+  min-width: 140px;
+  width: 140px;
+  text-align: left;
+}
+.btn-default {
+  background: transparent;
+  color: black;
+  text-align: left;
+  font-weight: 700;
+  font-size: 16px;
+  border: 0px;
+}
+
+.btn-default small{
+  background: pink;
+}
+.dashboard-page, .transferTransaction-page{
+	background-color: white;
+}
+.dashboard-page .container{
+	margin-left: 0px;
+	padding-left: 0px;
+}
+// container for main heading on page, h2
+.dashboard-page .banner-left, .transferTransaction-page .banner-left, .banner-left {
+	padding-bottom: 0px;
+	background-color: transparent;
+}
+// main heading on page, h2
+.dashboard-page h2, .transferTransaction-page h2, h2 {
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 55px;
+	font-weight: 100;
+  text-align: left;
+}
+
+.dashboard-page .updates {
+	max-width: 400px;
+}
+.dashboard-page .updates p {
+	font-size: 12px;
+}
+.dashboard-page .updates a{
+	color: $blue;
+	text-decoration: underline;
+	font-weight: 500;
+}
+.dashboard-page .updates h3{
+	max-width: 250px;
+}
+.dashboard-page th {
+	font-weight: inherit;
+}
+
+.dashboard-page .container .row {
+	margin-top: 10px;
+}
+
+.dashboard-page .accordion-inner .row {
+	margin-top: 0px;
+	margin-right: 0px;
+}
+
+.dashboard-page .well {
+	border-radius: 0px;
+	background-color: #fff;
+	border-top: 3px solid #444;
+}
+
+.dashboard-page .well h4 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.dashboard-page .well h4 small {
+	color: #444;
+}
+
+.dashboard-page .panel-default > .panel-heading {
+    background-color: transparent;
+    border-radius: 0px;
+    border-bottom: 2px solid $blue;
+}
+.dashboard-page .panel-heading h4 {
+	color: black;
+	font-weight: 700;
+	font-size: 20px;
+}
+
+
+
+/*** MARKET INFO WIDGET ***/
+.market-info .header{
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 12px;
+	font-weight: 700;
+}
+.market-info .header span{
+	font-weight: 900;
+	font-size: 16px;
+	color: black;
+}
+.market-info .ticker {
+	padding-top: 20px;
+}
+.market-percent .col-md-4:first-of-type {
+	text-align: left;
+	padding-left: 0px;
+}
+.market-percent .col-md-4:nth-of-type(2) {
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.market-percent .col-md-4:last-of-type {
+	text-align: right;
+	padding-right: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// table thead, table tr td{
+// 	background-color: transparent;
+// 	border: 0px;
+// }
+// table th:first-child, table th:nth-of-type(2), table th:nth-of-type(3), table th:nth-of-type(4){
+// 	border-bottom: 2px solid $blue !important;
+// }
+// /* Target account */
+// table th:first-child, table td:nth-of-type(2) {
+// 	text-align: left;
+// 	width: 44%;
+// }
+// /* Targeting amount */
+// table th:nth-of-type(2), table td:nth-of-type(4) {
+// 	text-align: left;
+// 	width: 14%;
+// }
+// /* Targeting message */
+// table th:nth-of-type(3), table td:nth-of-type(6) {
+// 	text-align: left;
+// 	width: 19%;
+// }
+// /* Targeting date */
+// table th:nth-of-type(4), table td:nth-of-type(8) {
+// 	text-align: left;
+// 	width: 23%;
+// }

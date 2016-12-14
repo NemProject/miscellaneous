@@ -1,3 +1,6 @@
+$blue: #69b2e5;
+$pad: 20px;
+
 html {
 	position: relative;
 	min-height: 100vh;
@@ -172,11 +175,11 @@ fieldset[disabled] .btn-default.focus {
 	margin-bottom: 0px;
 }
 
-.panel-default > .panel-heading {
-    color: white;
-    background-color: #444;
-    border-radius: 0px;
-}
+// .panel-default > .panel-heading {
+//     color: white;
+//     background-color: #444;
+//     border-radius: 0px;
+// }
 
 .nav-tabs li a {
 	border-radius: 0px;
@@ -391,91 +394,28 @@ form button.btn-success {
     opacity: 0;
     filter: alpha(opacity=0);
 }
-.dashboard-page{
-	background-color: white;
-}
-.dashboard-page .container{
-	margin-left: 0px;
-	padding-left: 0px;
-}
-.dashboard-page .banner-left {
-	padding-bottom: 0px;
-	background-color: transparent;
 
-}
 /*.panel-default .panel-heading .nav-tabs a{
     color: white;
     background-color: grey;
 }*/
-.dashboard-page h2{
-	/*color: #c2c2c2;*/
-	color: rgba(0, 0, 0, 0.3);
-	font-size: 55px;
-	font-weight: 100;
-	font-family: 'Roboto';
-}
-.dashboard-page .banner-left h2 {
-	margin-top: 10px;
-	text-align: left;
-	color: rgba(0, 0, 0, 0.3);
-}
-.dashboard-page .updates {
-	max-width: 400px;
-}
-.dashboard-page .updates p {
-	font-size: 12px;
-}
-.dashboard-page .updates a{
-	color: #69b2e5;
-	text-decoration: underline;
-	font-weight: 500;
-}
-.dashboard-page .updates h3{
-	max-width: 250px;
-}
-.dashboard-page th {
-	font-weight: inherit;
-}
 
-.dashboard-page .container .row {
-	margin-top: 10px;
-}
-
-.dashboard-page .accordion-inner .row {
-	margin-top: 0px;
-	margin-right: 0px;
-}
-
-.dashboard-page .well {
-	border-radius: 0px;
-	background-color: #fff;
-	border-top: 3px solid #444;
-}
-
-.dashboard-page .well h4 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
-.dashboard-page .well h4 small {
-	color: #444;
-}
 
 /*.dashboard-page .col-md-3 {
 	padding-left: 0px;
 }*/
 
-.transferTransaction-page .banner-left {
-	padding-bottom: 0px;
-}
+// .transferTransaction-page .banner-left {
+// 	padding-bottom: 0px;
+// }
 
-.transferTransaction-page .banner-left h2 {
-	margin-top: 10px;
-}
+// .transferTransaction-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
 
-.transferTransaction-page .container .row {
-	margin-top: 10px;
-}
+// .transferTransaction-page .container .row {
+// 	margin-top: 10px;
+// }
 
 .transferTransaction-page th {
 	font-weight: inherit;
@@ -500,99 +440,65 @@ background-color: #444;
 border: 1px solid #444;
 }*/
 
-.transferTransaction-page .nav-tabs {
-border-bottom-color: transparent;
-}
-
-.transferTransaction-page .col-md-6 {
-	margin-top: 10px;
-}
-
-.transferTransaction-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
-	color: transparent;
-	background-color: white;
-}
-
-.transferTransaction-page .nav-tabs li a {
-	color: white;
-}
-
-.transferTransaction-page .nav-tabs li a:hover {
-	color: #444;
-}
+// .transferTransaction-page .nav-tabs {
+// border-bottom-color: transparent;
+// }
+//
+// .transferTransaction-page .col-md-6 {
+// 	margin-top: 10px;
+// }
+//
+// .transferTransaction-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
+// 	color: transparent;
+// 	background-color: white;
+// }
+//
+// .transferTransaction-page .nav-tabs li a {
+// 	color: white;
+// }
+//
+// .transferTransaction-page .nav-tabs li a:hover {
+// 	color: #444;
+// }
 
 /*.nav-tabs li.active a, .nav-tabs li.active a:hover, .nav-tabs li a:focus:hover {
 	color: white;
 	background-color: #444;
 }*/
 
-.nav-tabs li a:hover {
-	text-decoration: underline;
-}
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-		/*text-decoration: underline;*/
-    cursor: default;
-    background-color: #69b2e5;
-    border: 0px solid #ddd;
-    border-bottom-color: transparent;
-		border-bottom: 0px !important;
-		color: white;
-		z-index: 1000;
-}
-
-.nav-tabs li a {
-	color: grey;
-}
-
-.nav-tabs {
-	border-bottom: none;
-}
-/*.buttonStyle {
-	color: grey;
-}*/
-.dashboard-page .panel-default > .panel-heading {
-    background-color: transparent;
-    border-radius: 0px;
-    border-bottom: 2px solid #69b2e5;
-}
-.dashboard-page .panel-heading h4 {
-	color: black;
-	font-weight: 700;
-	font-size: 20px;
-}
 
 .panel-default .panel-heading .nav-tabs .badge {
     color: white;
-    background-color: #69b2e5;
+    background-color: $blue;
 }
 
 .panel-default .panel-heading .nav-tabs li a:hover .badge {
-    color: #69b2e5;
+    color: $blue;
     background-color: white;
 }
 
 .panel-default .panel-heading .nav-tabs li.active .badge {
-    color: #69b2e5;
+    color: $blue;
     background-color: white;
 }
 
-.transferTransaction-page .panel-default .panel-heading {
-    color: #444;
-    background-color: transparent;
-    border-radius: 0px;
-    /*border-bottom: 3px solid #dfa82f;*/
-}
-
-.transferTransaction-page .panel-heading {
-    border-bottom: 3px solid #dfa82f;
-}
-
-.transferTransaction-page fieldset .panel-default .panel-heading {
-    color: #fff;
-    background-color: #444;
-    border-radius: 0px;
-}
+// .transferTransaction-page .panel-default .panel-heading {
+//     color: #444;
+//     background-color: transparent;
+//     border-radius: 0px;
+//     /*border-bottom: 3px solid #dfa82f;*/
+// }
+//
+// .transferTransaction-page .panel-heading {
+//     border-bottom: 3px solid #dfa82f;
+// }
+//
+// .transferTransaction-page fieldset .panel-default .panel-heading {
+//     color: #fff;
+//     background-color: #444;
+//     border-radius: 0px;
+// }
 
 .services-page .banner-left {
 	padding-bottom: 0px;
@@ -648,9 +554,9 @@ border-bottom-color: transparent;
 	border-left: 1px solid white;
 }*/
 
-.services-page .panel-heading {
-	border-bottom: 3px solid #dfa82f;
-}
+// .services-page .panel-heading {
+// 	border-bottom: 3px solid #dfa82f;
+// }
 
 .create-apostille-page .banner-left {
 	padding-bottom: 0px;
@@ -665,10 +571,10 @@ border-bottom-color: transparent;
 border-bottom-color: transparent;
 }
 
-.create-apostille-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
-	color: #444;
-	background-color: white;
-}
+// .create-apostille-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
+// 	color: #444;
+// 	background-color: white;
+// }
 
 .create-apostille-page .nav-tabs li a {
 	color: white;
@@ -686,9 +592,9 @@ border-bottom-color: transparent;
 	font-weight: inherit;
 }
 
-.create-apostille-page .panel-heading {
-	border-bottom: 3px solid #dfa82f;
-}
+// .create-apostille-page .panel-heading {
+// 	border-bottom: 3px solid #dfa82f;
+// }
 
 .drop {
     border: 1px dashed rgb(0, 166, 90);
@@ -853,10 +759,10 @@ border-bottom-color: transparent;
 border-bottom-color: transparent;
 }
 
-.create-mosaic-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
-	color: #444;
-	background-color: white;
-}
+// .create-mosaic-page .nav-tabs li.active a, .transferTransaction-page .nav-tabs li.active a:hover {
+// 	color: #444;
+// 	background-color: white;
+// }
 
 .create-mosaic-page .nav-tabs li a {
 	color: white;
@@ -1128,58 +1034,5 @@ border-bottom-color: transparent;
 	background-color: #444;
 }
 
-/*table thead, table tr td{
-	background-color: transparent;
-	border: 0px;
-}
-table th:first-child, table th:nth-of-type(2), table th:nth-of-type(3), table th:nth-of-type(4){
-	border-bottom: 2px solid #69b2e5 !important;
-}*/
-/* Target account */
-/*table th:first-child, table td:nth-of-type(2) {
-	text-align: left;
-	width: 44%;
 
-}*/
-/* Targeting amount */
-/*table th:nth-of-type(2), table td:nth-of-type(4) {
-	text-align: left;
-	width: 14%;
-}*/
-/* Targeting message */
-/*table th:nth-of-type(3), table td:nth-of-type(6) {
-	text-align: left;
-	width: 19%;
-}*/
-/* Targeting date */
-/*table th:nth-of-type(4), table td:nth-of-type(8) {
-	text-align: left;
-	width: 23%;
-}*/
-
-.market-info .header{
-	color: rgba(0, 0, 0, 0.3);
-	font-size: 12px;
-	font-weight: 700;
-}
-.market-info .header span{
-	font-weight: 900;
-	font-size: 16px;
-	color: black;
-}
-.market-info .ticker {
-	padding-top: 20px;
-}
-.market-percent .col-md-4:first-of-type {
-	text-align: left;
-	padding-left: 0px;
-}
-.market-percent .col-md-4:nth-of-type(2) {
-	text-align: center;
-	padding-left: 0px;
-	padding-right: 0px;
-}
-.market-percent .col-md-4:last-of-type {
-	text-align: right;
-	padding-right: 0px;
-}
+@import 'new';
