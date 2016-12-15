@@ -113,16 +113,21 @@
                             </div>
                         </fieldset>
 
+                        <!-- <input id="box1" type="checkbox" />
+                        <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label> -->
+
                         <!-- Checkbox Fields -->
                         <div class="row checkboxes">
                           <div class="col-md-6">
                             <fieldset class="form-group">
-                                <input type="checkbox" ng-model="$ctrl.formData.encryptMessage" placeholder="" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();"> <b>{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</b>
+                                <input id="box1" type="checkbox" ng-model="$ctrl.formData.encryptMessage" placeholder="" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();">
+                                <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label>
                             </fieldset>
                           </div>
                           <div class="col-md-6">
                             <fieldset class="form-group">
-                                <input type="checkbox" ng-model="$ctrl.formData.isMosaicTransfer" ng-change="$ctrl.setMosaicTransfer();"> <b>{{'TRANSFER_TRANSACTION_MOSAIC_TRANSFER' | translate}}</b>
+                                <input id="box2" type="checkbox" ng-model="$ctrl.formData.isMosaicTransfer" ng-change="$ctrl.setMosaicTransfer();">
+                                <label for="box2">{{'TRANSFER_TRANSACTION_MOSAIC_TRANSFER' | translate}}</label>
                             </fieldset>
                           </div>
                       </div>
