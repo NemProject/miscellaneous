@@ -177,11 +177,11 @@
         </div>
 
         <!-- Mosaics part -->
-        <div class="col-md-6 noPaddingLeft" ng-show="!$ctrl.invoice">
+        <div class="mosaic col-md-6 noPaddingLeft" ng-show="!$ctrl.invoice">
 
             <div class="panel panel-default">
                 <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-                  <i class="fa fa-paperclip"></i> {{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }}
+                  <h4>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }} <i class="fa fa-paperclip"></i></h4>
                 </div>
                 <div class="panel-body" style="padding-bottom:0;">
                     <div class="form-group">
@@ -209,7 +209,7 @@
                 <!-- Mosaics attached table -->
                 <div class="panel panel-default" style="margin-top:10px;">
                     <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-                        <i class="fa fa-table"></i> {{ 'TRANSFER_TRANSACTION_MOSAICS_ATTACHED' | translate }}
+                        <h4> {{ 'TRANSFER_TRANSACTION_MOSAICS_ATTACHED' | translate }}</h4>
                     </div>
                     <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed">
                         <thead>
