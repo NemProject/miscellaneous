@@ -20,13 +20,13 @@
                     <ul class="nav nav-tabs">
                         <!-- Normal mode -->
                         <!-- On click it set multisig to false, invoice to false and update mosaics of account -->
-                        <li ng-class="$ctrl.formData.isMultisig || $ctrl.invoice ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+                        <li ng-class="$ctrl.formData.isMultisig || $ctrl.invoice ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">Send*</a></li>
                         <!-- Multisig mode -->
                         <!-- On click it set multisig to true, invoice to false update mosaics of account -->
                         <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.invoice = false;$ctrl.formData.encryptMessage = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
                         <!-- Invoice mode -->
                         <!-- On click it set multisig to false, set invoice to true, isMosaicTransfer to false and reset form data -->
-                        <li ng-class="$ctrl.invoice ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = true;$ctrl.resetData();$ctrl.formData.isMosaicTransfer = false;" style="outline:0;cursor:pointer;display:inline;">{{ 'TRANSFER_TRANSACTION_TAB_INVOICE' | translate }}</a></li>
+                        <li ng-class="$ctrl.invoice ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = true;$ctrl.resetData();$ctrl.formData.isMosaicTransfer = false;" style="outline:0;cursor:pointer;display:inline;">Receive*</a></li>
                     </ul>
                 </div>
                 <div class="panel-body" ng-show="!$ctrl.invoice">
@@ -88,7 +88,7 @@
                         <fieldset class="form-group">
                           <div class="input-group">
                           <span class="input-group-btn">
-                              <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Message*:</button>
+                              <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}:</button>
                           </span>
                             <textarea class="form-control" ng-model="$ctrl.formData.message" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateFees();"></textarea>
                           </div>
@@ -97,7 +97,7 @@
                         <fieldset class="form-group">
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_TX_FEE' | translate}}</button>
+                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Fee*:</button>
                                 </span>
                                 <p class="fees">
                                     <span style="margin-right:10px;">

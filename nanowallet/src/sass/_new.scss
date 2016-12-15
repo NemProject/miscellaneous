@@ -50,6 +50,14 @@ button {
 .input-group-btn {
   vertical-align: top;
 }
+.btn-success {
+  background-color: $blue;
+  border-color: $blue;
+}
+.btn-success:hover, .btn-success:active, .btn-success:focus {
+  background-color: $blueLite !important;
+  border-color: $blueLite !important;
+}
 .form-control {
   border: 0px;
   border-bottom: 2px solid rgba(0,0,0,.3);
@@ -196,9 +204,9 @@ textarea {
 label {
   font-size: 16px;
 }
-label:active. label:focus{
-  color: $blue;
-}
+// label:active. label:focus{
+//   color: $blue;
+// }
 // div {
 //   width: 175px;
 //   margin-left: 20px;
