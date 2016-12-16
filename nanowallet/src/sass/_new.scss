@@ -58,6 +58,9 @@ button {
   background-color: $blueLite !important;
   border-color: $blueLite !important;
 }
+
+/*** SEND/RECEIVE PAGE ***/
+
 .form-control {
   border: 0px;
   border-bottom: 2px solid rgba(0,0,0,.3);
@@ -86,8 +89,19 @@ textarea {
   padding-top: $pad * 1.35;
 }
 
+/*** SERVICES/PORTAL PAGE ***/
+.portalWrap {
+  padding-left: $pad;
+  padding-right: $pad;
+
+}
 
 
+
+
+
+
+/*** DASHBOARD PAGE ***/
 
 .dashboard-page, .transferTransaction-page{
 	background-color: white;
