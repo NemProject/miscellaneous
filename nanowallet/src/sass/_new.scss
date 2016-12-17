@@ -95,6 +95,49 @@ textarea {
   padding-right: $pad;
 
 }
+.portalWrap{
+  .panel-heading {
+    border-bottom: 0px !important;
+    h5 {
+      font-size: 19px;
+      font-weight: 700;
+    }
+    i {
+      vertical-align: middle;
+    }
+    img {
+      width: 50px;
+      vertical-align: middle;
+
+    }
+    .col-sm-3 {
+      min-height: 60px;
+    }
+  }
+  .panel-body {
+    padding: 0px;
+    padding-top: $pad;
+    padding-bottom: $pad;
+    border-top: 1px solid $blue;
+    line-height: 1.1;
+    font-size: 13.5px;
+    color: rgba(0,0,0,0.4);
+    font-weight: 700;
+  }
+  .panelFooter {
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    padding: 0px;
+    button {
+      text-decoration: underline !important;
+      color: $blue;
+      font-size: 13.5px;
+
+    }
+  }
+}
+
 
 
 
@@ -103,7 +146,7 @@ textarea {
 
 /*** DASHBOARD PAGE ***/
 
-.dashboard-page, .transferTransaction-page{
+.dashboard-page, .transferTransaction-page, .services-page{
 	background-color: white;
 }
 .dashboard-page .container{
@@ -114,7 +157,7 @@ textarea {
 .dashboard-page .banner-left, .transferTransaction-page .banner-left, .banner-left {
 	padding-bottom: 0px;
 	background-color: transparent;
-  padding-top: $pad;
+  padding-top: $pad / 2;
 }
 // main heading on page, h2
 .dashboard-page h2, .transferTransaction-page h2, h2 {
@@ -184,6 +227,9 @@ textarea {
 	color: rgba(0, 0, 0, 0.3);
 	font-size: 12px;
 	font-weight: 700;
+}
+.market-info h4 {
+  margin-bottom: $pad * 2;
 }
 .market-info .header span{
 	font-weight: 900;
