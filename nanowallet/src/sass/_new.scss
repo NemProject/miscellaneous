@@ -96,6 +96,9 @@ textarea {
 
 }
 .portalWrap{
+  .row1 {
+    padding-bottom: $pad * 2;
+  }
   .panel-heading {
     border-bottom: 0px !important;
     h5 {
@@ -129,11 +132,17 @@ textarea {
     border: 0px;
     box-shadow: none;
     padding: 0px;
-    button {
+    .btn {
       text-decoration: underline !important;
       color: $blue;
       font-size: 13.5px;
-
+      padding: 0px !important;
+      margin: 0px !important;
+      text-align: left;
+      background-color: transparent;
+    }
+    .btn[disabled] {
+      color: rgba(0,0,0,0.7);
     }
   }
 }

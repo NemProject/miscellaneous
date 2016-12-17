@@ -10,7 +10,7 @@
 <div class="row portalWrap">
  <div class="col-sm-9">
          <h2>{{ 'PORTAL_TITLE' | translate }}</h2>
-    <div class="row">
+    <div class="row row1">
       	<div class="col-sm-4">
                 <div class="">
                     <div class="panel-heading row">
@@ -25,9 +25,9 @@
                             <i>{{ 'PORTAL_MULTISIG_TEXT' | translate }}</i>
                     </div>
                     <div class="panelFooter">
-                        <a class=""  ui-sref="app.createMultisig">{{ 'PORTAL_MULTISIG_BTN_1' | translate }}</a>
+                        <button class="btn"  ui-sref="app.createMultisig">{{ 'PORTAL_MULTISIG_BTN_1' | translate }}</button>
                         <br>
-                        <a class="" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</a>
+                        <button class="btn" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</button>
                     </div>
                 </div>
         </div>
@@ -47,7 +47,7 @@
                             <i>{{ 'PORTAL_NS_TEXT' | translate }}</i></p>
                     </div>
                     <div class="panelFooter">
-                        <a class="" ui-sref="app.namespaces">{{ 'PORTAL_NS_BTN' | translate }}</a>
+                        <button class="btn" class="" ui-sref="app.namespaces">{{ 'PORTAL_NS_BTN' | translate }}</button>
                     </div>
                 </div>
 
@@ -66,12 +66,12 @@
                       </div>
                     </div>
                     <div class="panel-body">
-                        <p style="font-size:15px;"><i>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</i></p>
+                        <p><i>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</i></p>
                     </div>
                     <div class="panelFooter">
-                        <a ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</a>
+                        <button class="btn" ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
                           <br>
-                         <a ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</a>
+                         <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
                     </div>
                 </div>
       	</div>
@@ -94,9 +94,11 @@
                   <i>{{ 'PORTAL_APOSTILLE_TEXT' | translate }}</i></p>
           </div>
           <div class="panelFooter">
-              <a ui-sref="app.createApostille">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</a>
-              <a ui-sref="app.auditApostille">{{ 'PORTAL_APOSTILLE_BTN_2' | translate }}</a>
-              <a ui-sref="app.apostilleHistory">{{ 'GENERAL_HISTORY' | translate }}</a>
+              <button class="btn" ui-sref="app.createApostille">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
+              <br>
+              <button class="btn" ui-sref="app.auditApostille">{{ 'PORTAL_APOSTILLE_BTN_2' | translate }}</button>
+              <br>
+              <button class="btn" ui-sref="app.apostilleHistory">{{ 'GENERAL_HISTORY' | translate }}</button>
           </div>
       </div>
     </div>
@@ -112,11 +114,12 @@
             </div>
           </div>
           <div class="panel-body">
-              <p style="font-size:15px;"><i>{{ 'PORTAL_MOSAIC_TEXT' | translate }}</i></p>
+              <p><i>{{ 'PORTAL_MOSAIC_TEXT' | translate }}</i></p>
           </div>
-          <div class="panel-footer" >
-              <button class="btn btn-operations" ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address] === undefined && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.createMosaic">{{ 'PORTAL_MOSAIC_BTN_1' | translate }}</button>
-              <button ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.mosaicOwnedSize[$ctrl._Wallet.currentAccount.address] < 2 && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.editMosaic">{{ 'PORTAL_MOSAIC_BTN_2' | translate }}</button>
+          <div class="panelFooter" >
+              <button class="btn" ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address] === undefined && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.createMosaic">{{ 'PORTAL_MOSAIC_BTN_1' | translate }}</button>
+              <br>
+              <button class="btn" ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.mosaicOwnedSize[$ctrl._Wallet.currentAccount.address] < 2 && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.editMosaic">{{ 'PORTAL_MOSAIC_BTN_2' | translate }}</button>
           </div>
       </div>
     </div>
@@ -124,7 +127,7 @@
 
 
       <div class="col-sm-4">
-        <div class="panel panel-default">
+        <div class="">
             <div class="panel-heading row">
               <div class="col-sm-3">
                 <i class="fa fa-exchange fa-4x"></i>
@@ -134,10 +137,10 @@
               </div>
             </div>
             <div class="panel-body">
-                <p style="font-size:15px;"><i>{{ 'PORTAL_CHANGELLY_TEXT' | translate }}</i></p>
+                <p><i>{{ 'PORTAL_CHANGELLY_TEXT' | translate }}</i></p>
             </div>
-            <div class="panel-footer" style="border-top-color: #444;padding:0;">
-                <button class="btn btn-operations" ui-sref="app.changelly">{{ 'PORTAL_CHANGELLY_BTN' | translate }}</button>
+            <div class="panelFooter">
+                <button class="btn" ui-sref="app.changelly">{{ 'PORTAL_CHANGELLY_BTN' | translate }}</button>
             </div>
         </div>
       </div>
