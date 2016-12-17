@@ -1,14 +1,14 @@
 <div class="create-mosaic-page">
    <div class="banner-left">
       <div class="container">
-         <h2><i class="fa fa-hashtag"></i> {{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
+         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
    </div>
    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
       <div class="col-md-6">
          <div class="panel panel-default">
             <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-               <i class="fa fa-chevron-right"></i> 
+               <i class="fa fa-chevron-right"></i>
                <span ng-show="!$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_NAME' | translate }}</span>
                <span ng-show="$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
                <ul class="nav nav-tabs" style="float:right">
@@ -109,7 +109,7 @@
             </div>
             <div class="panel-body" ng-show="$ctrl.showInfo">
             <p>{{ 'MOSAIC_DEFINITION_INFORMATION_1' | translate }}</p>
-            <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, ', _ , -</pre> 
+            <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, ', _ , -</pre>
             <p>{{ 'MOSAIC_DEFINITION_INFORMATION_2' | translate }}</p>
             <p>{{ 'MOSAIC_DEFINITION_INFORMATION_3' | translate }}</p>
             <p>{{ 'MOSAIC_DEFINITION_INFORMATION_4' | translate }}</p>
@@ -146,7 +146,7 @@
                            <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_14' | translate }}
                         </li>
                         <li>
-                          <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_15' | translate }} 
+                          <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_15' | translate }}
                         </li>
                      </ul>
                   </li>
@@ -181,18 +181,17 @@
                      </div>
                   </fieldset>
                   <fieldset class="form-group">
-                     <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
-                     <input type="checkbox" ng-model="$ctrl.formData.properties.transferable">
-                     {{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}
-                     </label>
-                     <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
-                     <input type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
-                     {{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}
-                     </label>
-                     <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
-                     <input type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
-                     {{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}
-                     </label>
+
+                     <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
+                     <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+
+
+                     <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
+                     <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
+
+                     <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
+                     <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
+
                   </fieldset>
                   <div ng-show="$ctrl.hasLevy">
                      <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
@@ -215,6 +214,7 @@
                         </span>
                         </div>
                      </fieldset>
+                     <!-- LEVY FEE TYPE OPTIONS -->
                      <fieldset class="form-group">
                         <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}</label><br>
                         <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
@@ -224,8 +224,8 @@
                         <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="2"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}
                         </label>
                      </fieldset>
-                     
-                  </div>       
+
+                  </div>
                </fieldset>
             </div>
             <div class="panel-footer text-center" style="background-color: #e3e0cf; color: #444;border-top:1px solid #444;" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
@@ -252,4 +252,3 @@
       </div>
    </div>
 </div>
-
