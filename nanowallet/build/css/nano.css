@@ -786,6 +786,12 @@ border: 1px solid #444;
   padding-left: 0px;
   padding-right: 0px; }
 
+.navbar-brand span:first-of-type {
+  font-weight: 100; }
+
+.navbar-brand span:last-of-type {
+  font-weight: 900; }
+
 .nav-tabs li a:hover {
   text-decoration: underline; }
 
@@ -903,8 +909,12 @@ textarea {
   .portalWrap .panelFooter .btn[disabled] {
     color: rgba(0, 0, 0, 0.7); }
 
-/*** DASHBOARD PAGE ***/
-.dashboard-page, .transferTransaction-page, .services-page {
+/*** CREATE MOSAIC PAGE ***/
+.create-mosaic-page .input-group-btn {
+  min-width: 150px; }
+
+/*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page {
   background-color: white; }
 
 .dashboard-page .container {

@@ -18,12 +18,7 @@
             </div>
             <div class="panel-body">
                <fieldset>
-                  <fieldset class="form-group">
-                     <input class="form-control form-control-lg"
-                        type="password"
-                        placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                        ng-model="$ctrl.common.password"/>
-                  </fieldset>
+
                   <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
                      <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNSM();">
                      </select>
@@ -40,15 +35,28 @@
                                 </span>
                             </div>
                         </fieldset>
-
+                  <!-- NAMESPACE SELECTION -->
                   <div class="form-group">
-                     <label for="namespaceParent" class="control-label">{{ 'MOSAIC_DEFINITION_PARENT' | translate }}</label>
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                      <label for="namespaceParent" class="control-label">{{ 'MOSAIC_DEFINITION_PARENT' | translate }}:</label>
+                    </span>
                      <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] track by namespace.fqn" ng-model="$ctrl.formData.namespaceParent">
                      </select>
+                   </div>
                   </div>
+                  <!-- MOSAIC NAME -->
                   <fieldset class="form-group">
-                     <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}" maxlength="32" ng-change="$ctrl.processMosaicName();">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                      <label for="namespaceParent" class="control-label">{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}:</label>
+                    </span>
+
+                     <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="Mosaic*" maxlength="32" ng-change="$ctrl.processMosaicName();">
+                  </div>
                   </fieldset>
+                  <!-- MOSAIC DESCRIPTION -->
+
                   <fieldset class="form-group">
                      <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
                   </fieldset>
@@ -85,6 +93,13 @@
                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
                         </span>
                      </div>
+                  </fieldset>
+
+                  <fieldset class="form-group">
+                     <input class="form-control form-control-lg"
+                        type="password"
+                        placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
+                        ng-model="$ctrl.common.password"/>
                   </fieldset>
 
                   <button class="btn btn-success pull-xs-right"
