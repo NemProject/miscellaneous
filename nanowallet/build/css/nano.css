@@ -782,9 +782,38 @@ border: 1px solid #444;
 
 .panel-heading {
   background-color: transparent !important;
-  border-bottom: 2px solid #69b2e5 !important;
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   padding-left: 0px;
   padding-right: 0px; }
+
+/*** GLOBAL STYLES ***/
+table {
+  table-layout: auto;
+  word-break: break-all; }
+
+thead {
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
+
+tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
+
+tbody {
+  border: none; }
+
+th {
+  color: black;
+  font-size: 13px;
+  min-width: 55px;
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
+
+select {
+  border: 1px solid rgba(105, 178, 229, 0.6) !important;
+  border-radius: none !important; }
+
+.bg-info {
+  background-color: rgba(105, 178, 229, 0.1);
+  padding: 10px;
+  border: 1px solid rgba(105, 178, 229, 0.6); }
 
 .navbar-brand span:first-of-type {
   font-weight: 100; }
@@ -839,13 +868,13 @@ button {
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
   border: 0px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   box-shadow: none;
   font-size: 16px;
   min-width: 100%; }
 
 textarea {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   box-shadow: inherit;
   max-height: 60px; }
 
@@ -856,7 +885,7 @@ textarea {
   text-align: center; }
 
 .fees {
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   text-align: right; }
 
 .mosaic {
@@ -914,7 +943,7 @@ textarea {
   min-width: 150px; }
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
-.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page {
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page {
   background-color: white; }
 
 .dashboard-page .container {
@@ -971,12 +1000,22 @@ textarea {
 .dashboard-page .panel-default > .panel-heading {
   background-color: transparent;
   border-radius: 0px;
-  border-bottom: 2px solid #69b2e5; }
+  border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
 
 .dashboard-page .panel-heading h4 {
   color: black;
   font-weight: 700;
   font-size: 20px; }
+
+/*** APOSTILLE AUDIT PAGE ***/
+.audit-apostille-page .trash {
+  float: right;
+  position: relative;
+  bottom: 20px;
+  font-family: 'Roboto';
+  display: block;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 700; }
 
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
