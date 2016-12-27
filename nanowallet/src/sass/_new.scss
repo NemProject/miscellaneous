@@ -20,6 +20,10 @@ tr {
 }
 tbody {
   border: none;
+  text-align: center;
+}
+td {
+  vertical-align: middle !important;
 }
 th {
   color: black;
@@ -35,7 +39,22 @@ select {
   background-color: $blueXLite;
   padding: $pad / 2;
   border: 1px solid $blueLite;
+  text-align: center;
 }
+.bg-danger {
+  padding:10px;
+  cursor:pointer;
+  margin-bottom:0;
+}
+.pointer {
+  cursor: pointer;
+  color: red;
+}
+
+
+
+
+
 
 // confirmed/unconfirmed tabs, send/receive tabs
 .navbar-brand {
@@ -60,12 +79,20 @@ select {
 
 .nav-tabs li a {
 	color: grey;
+  // background-color: $grayLite;
 }
 
 .nav-tabs {
+  // float: right;
+  position: relative;
 	border-bottom: none;
 }
-
+.tabDescription {
+  float: right;
+  position: relative;
+  // bottom: $pad;
+  padding-right: $pad;
+}
 button {
   min-width: 140px;
   width: 140px;
@@ -197,7 +224,7 @@ textarea {
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 
-.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page{
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page{
 	background-color: white;
 }
 .dashboard-page .container{
@@ -310,9 +337,39 @@ textarea {
   // }
 }
 
+/*** APOSTILLE ADD PAGE ***/
+.rejected {
+  float: right;
+}
 
+/*** DROPBOX GLOBAL STYLES ***/
+.drop {
+    border: 1px dashed rgb(0, 166, 90);
+    /*width: 450px;*/
+    min-height: 35px;
+    /*margin: 10px auto;*/
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    display:box;
+    /*cursor:pointer;*/
+    text-align: center;
+}
+.drop input.upload {
+    position: absolute;
+    top: 0;
+    /*right: 0;*/
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
 
-
+.drop input.upload[disabled] {
+    cursor: not-allowed;
+}
 
 
 

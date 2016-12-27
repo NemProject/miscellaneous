@@ -413,54 +413,6 @@ border: 1px solid #444;
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 }*/
-.create-apostille-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.create-apostille-page .banner-left h2 {
-  margin-top: 10px; }
-
-.create-apostille-page .nav-tabs {
-  border-bottom-color: transparent; }
-
-.create-apostille-page .nav-tabs li a {
-  color: white; }
-
-.create-apostille-page .nav-tabs li a:hover {
-  color: #444; }
-
-.create-apostille-page .col-sm-6 {
-  margin-top: 10px; }
-
-.create-apostille-page th {
-  font-weight: inherit; }
-
-.drop {
-  border: 1px dashed #00a65a;
-  /*width: 450px;*/
-  min-height: 35px;
-  /*margin: 10px auto;*/
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  display: box;
-  /*cursor:pointer;*/
-  text-align: center; }
-
-.drop input.upload {
-  position: absolute;
-  top: 0;
-  /*right: 0;*/
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  cursor: pointer;
-  opacity: 0;
-  filter: alpha(opacity=0); }
-
-.drop input.upload[disabled] {
-  cursor: not-allowed; }
-
 .account-page .banner-left {
   padding-bottom: 0px;
   border-bottom: 1px solid white; }
@@ -798,7 +750,11 @@ tr {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
 
 tbody {
-  border: none; }
+  border: none;
+  text-align: center; }
+
+td {
+  vertical-align: middle !important; }
 
 th {
   color: black;
@@ -813,7 +769,17 @@ select {
 .bg-info {
   background-color: rgba(105, 178, 229, 0.1);
   padding: 10px;
-  border: 1px solid rgba(105, 178, 229, 0.6); }
+  border: 1px solid rgba(105, 178, 229, 0.6);
+  text-align: center; }
+
+.bg-danger {
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 0; }
+
+.pointer {
+  cursor: pointer;
+  color: red; }
 
 .navbar-brand span:first-of-type {
   font-weight: 100; }
@@ -835,7 +801,13 @@ select {
   color: grey; }
 
 .nav-tabs {
+  position: relative;
   border-bottom: none; }
+
+.tabDescription {
+  float: right;
+  position: relative;
+  padding-right: 20px; }
 
 button {
   min-width: 140px;
@@ -943,7 +915,7 @@ textarea {
   min-width: 150px; }
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
-.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page {
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page {
   background-color: white; }
 
 .dashboard-page .container {
@@ -1016,6 +988,37 @@ textarea {
   display: block;
   color: rgba(0, 0, 0, 0.3);
   font-weight: 700; }
+
+/*** APOSTILLE ADD PAGE ***/
+.rejected {
+  float: right; }
+
+/*** DROPBOX GLOBAL STYLES ***/
+.drop {
+  border: 1px dashed #00a65a;
+  /*width: 450px;*/
+  min-height: 35px;
+  /*margin: 10px auto;*/
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  display: box;
+  /*cursor:pointer;*/
+  text-align: center; }
+
+.drop input.upload {
+  position: absolute;
+  top: 0;
+  /*right: 0;*/
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0); }
+
+.drop input.upload[disabled] {
+  cursor: not-allowed; }
 
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
