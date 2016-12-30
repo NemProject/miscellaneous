@@ -11,13 +11,16 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-6">
-        <h2> {{ 'APOSTILLE_CREATE_TITLE' | translate }}</h2>
+      <div class="col-sm-8">
+        <h2>{{ 'APOSTILLE_CREATE_TITLE' | translate }}</h2>
+      </div>
+      <div class="col-sm-4 helper">
+        <h4 data-toggle="modal" data-target="#apostilleHelp">Want more info on apostille?</h4>
       </div>
     </div>
     <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-danger" ng-click="$ctrl.uploadNty()"><b><i class="fa  fa-exclamation-triangle "></i> {{ 'APOSTILLE_NO_NTY' | translate }}</b></p>
     <input id="uploadNty" style="visibility:hidden;position:absolute;" import-nty-file="$ctrl.loadNty($fileContent)" type="file">
-
+    <div class="row">
   <div class="col-sm-6">
   	<div class="panel panel-default">
             <div class="panel-heading">
@@ -32,17 +35,13 @@
 
             </div>
             <div class="panel-body">
-
-            	<fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.common.password"/>
-            </fieldset>
-
             <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
-             <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount">
-            </select>
+              <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Address*</button>
+                </span>
+                <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount"></select>
+              </div>
             </fieldset>
 
             <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
@@ -56,8 +55,11 @@
                                 </span>
                             </div>
                         </fieldset>
-
             <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Tags*:</button>
+                </span>
               <input class="form-control form-control-lg"
                 type="text"
                 placeholder="{{ 'GENERAL_TAGS' | translate }}"
@@ -65,13 +67,31 @@
             </fieldset>
 
             <fieldset class="form-group">
-            <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing">
-            </select>
+            <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Hash Function*:</button>
+            </span>
+            <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing"></select>
+          </div>
             </fieldset>
 
             <fieldset class="form-group">
-              <select class="form-control" ng-options="type.value as type.name for type in $ctrl.types" ng-model="$ctrl.formData.isPrivate">
-              </select>
+              <div class="input-group">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Storage*:</button>
+              </span>
+              <select class="form-control" ng-options="type.value as type.name for type in $ctrl.types" ng-model="$ctrl.formData.isPrivate"></select>
+            </div>
+            </fieldset>
+
+            <!-- Password Field -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Password*:</button>
+                </span>
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
             </fieldset>
 
             <button class="btn btn-success pull-xs-right"
@@ -90,11 +110,11 @@
             <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
               <span ng-show="$ctrl.formData.isFiles"><i class="fa fa-files-o"></i> {{ 'APOSTILLE_IMPORT_FILES' | translate }}</span>
               <span ng-show="$ctrl.formData.isText"><i class="fa fa-edit"></i> {{ 'APOSTILLE_CREATE_TEXT' | translate }}</span>
-              <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span>
+              <!-- <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span> -->
               <ul class="nav nav-tabs" style="float:right">
                 <li ng-class="$ctrl.formData.isFiles ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = true;$ctrl.formData.isText = false;$ctrl.showInfo = false;"><i class="fa fa-files-o"></i></a></li>
                 <li ng-class="$ctrl.formData.isText ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = false;$ctrl.formData.isText = true;$ctrl.showInfo = false;"><i class="fa fa-edit"></i></a></li>
-                <li ng-class="!$ctrl.formData.isText && !$ctrl.formData.isFiles  ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = false;$ctrl.formData.isText = false;$ctrl.showInfo = true;"><i class="fa fa-info-circle"></i></a></li>
+                <!-- <li ng-class="!$ctrl.formData.isText && !$ctrl.formData.isFiles  ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = false;$ctrl.formData.isText = false;$ctrl.showInfo = true;"><i class="fa fa-info-circle"></i></a></li> -->
               </ul>
             </div>
             <div class="panel-body">
@@ -109,23 +129,13 @@
               <p style="padding-top:100px;"><b class="text-muted" style="color:#444;"><span class="fa fa-cloud-upload"></span> <i>{{ 'GENERAL_DROPBOX' | translate }} </i></b></p>
               <input type="file" multiple class="upload" id="fileToNotary" style="height: 220px; width: 100%; position: relative; margin-top: -130px;" import-apostille-files="$ctrl.processFile($fileContent, $fileData)" ng-disabled="$ctrl.common.password.length===0 || $ctrl.formData.tags.length===0" />
             </div>
-            <div ng-show="$ctrl.showInfo">
-              <p>{{ 'APOSTILLE_INFORMATION_1' | translate }} </p>
-              <p><span ng-bind-html="'APOSTILLE_INFORMATION_2' | translate"></span></p>
-              <p>{{ 'APOSTILLE_INFORMATION_3' | translate }} </p>
-              <p>{{ 'APOSTILLE_INFORMATION_4' | translate }} </p>
-              <p><span ng-bind-html="'APOSTILLE_INFORMATION_5' | translate"></span></p>
-              <p>{{ 'APOSTILLE_INFORMATION_6' | translate }} </p>
-              <p><span ng-bind-html="'APOSTILLE_INFORMATION_7' | translate"></span></p>
-              <p>{{ 'APOSTILLE_INFORMATION_8' | translate }} </p>
-            </div>
           </div>
     </div>
 
 
     </div>
   </div>
-
+</div>
   <div class="col-sm-12">
 
   	<div class="panel panel-default">
@@ -191,3 +201,30 @@
 </div>
 
 </div>
+<!-- MODAL SECTION -->
+<div id="apostilleHelp" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p>{{ 'APOSTILLE_INFORMATION_1' | translate }} </p>
+          <p><span ng-bind-html="'APOSTILLE_INFORMATION_2' | translate"></span></p>
+          <p>{{ 'APOSTILLE_INFORMATION_3' | translate }} </p>
+          <p>{{ 'APOSTILLE_INFORMATION_4' | translate }} </p>
+          <p><span ng-bind-html="'APOSTILLE_INFORMATION_5' | translate"></span></p>
+          <p>{{ 'APOSTILLE_INFORMATION_6' | translate }} </p>
+          <p><span ng-bind-html="'APOSTILLE_INFORMATION_7' | translate"></span></p>
+          <p>{{ 'APOSTILLE_INFORMATION_8' | translate }} </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

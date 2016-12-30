@@ -50,7 +50,13 @@ select {
   cursor: pointer;
   color: red;
 }
-
+.helper {
+  text-align: right;
+  cursor: pointer;
+  h4:hover{
+    color: $blue;
+  }
+}
 
 
 

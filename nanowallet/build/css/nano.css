@@ -781,6 +781,12 @@ select {
   cursor: pointer;
   color: red; }
 
+.helper {
+  text-align: right;
+  cursor: pointer; }
+  .helper h4:hover {
+    color: #69b2e5; }
+
 .navbar-brand span:first-of-type {
   font-weight: 100; }
 
