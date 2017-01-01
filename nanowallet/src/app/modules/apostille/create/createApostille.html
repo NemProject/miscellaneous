@@ -21,8 +21,8 @@
     <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-danger" ng-click="$ctrl.uploadNty()"><b><i class="fa  fa-exclamation-triangle "></i> {{ 'APOSTILLE_NO_NTY' | translate }}</b></p>
     <input id="uploadNty" style="visibility:hidden;position:absolute;" import-nty-file="$ctrl.loadNty($fileContent)" type="file">
     <div class="row">
-  <div class="col-sm-6">
-  	<div class="panel panel-default">
+  <div class="col-sm-7">
+  	<div class="">
             <div class="panel-heading">
               <div class="tabDescription">
                 <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'APOSTILLE_TRANSACTION_NAME' | translate }}</span>
@@ -103,18 +103,18 @@
     </div>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-5">
 
   	<div class="form-group">
-      <div class="panel panel-default" style="margin-bottom:10px;">
-            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-              <span ng-show="$ctrl.formData.isFiles"><i class="fa fa-files-o"></i> {{ 'APOSTILLE_IMPORT_FILES' | translate }}</span>
-              <span ng-show="$ctrl.formData.isText"><i class="fa fa-edit"></i> {{ 'APOSTILLE_CREATE_TEXT' | translate }}</span>
-              <!-- <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span> -->
-              <ul class="nav nav-tabs" style="float:right">
+      <div class="addApostilleFile">
+            <div class="panel-heading">
+              <div class="tabDescription">
+                <span ng-show="$ctrl.formData.isFiles">{{ 'APOSTILLE_IMPORT_FILES' | translate }}</span>
+                <span ng-show="$ctrl.formData.isText">{{ 'APOSTILLE_CREATE_TEXT' | translate }}</span>
+              </div>
+              <ul class="nav nav-tabs">
                 <li ng-class="$ctrl.formData.isFiles ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = true;$ctrl.formData.isText = false;$ctrl.showInfo = false;"><i class="fa fa-files-o"></i></a></li>
                 <li ng-class="$ctrl.formData.isText ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = false;$ctrl.formData.isText = true;$ctrl.showInfo = false;"><i class="fa fa-edit"></i></a></li>
-                <!-- <li ng-class="!$ctrl.formData.isText && !$ctrl.formData.isFiles  ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isFiles = false;$ctrl.formData.isText = false;$ctrl.showInfo = true;"><i class="fa fa-info-circle"></i></a></li> -->
               </ul>
             </div>
             <div class="panel-body">
@@ -138,7 +138,7 @@
 </div>
   <div class="col-sm-12">
 
-  	<div class="panel panel-default">
+  	<div class="">
             <div class="panel-heading">
               <h4>{{ 'APOSTILLE_FILES_TO_NOTARIZE' | translate }}</h4>
               <span ng-show="$ctrl.rejected.length" class="rejected"><b>{{ 'APOSTILLE_REJECTED' | translate }}: {{$ctrl.rejected.length}}</b> - <a style="color:white;cursor:pointer;"><i ng-show="!$ctrl.viewRejected" class="fa fa-eye" ng-click="$ctrl.viewRejected = true"></i><i ng-show="$ctrl.viewRejected" class="fa fa-eye-slash" ng-click="$ctrl.viewRejected = false"></i></a></span>
@@ -207,7 +207,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Creating an Apostille*</h4>
       </div>
       <div class="modal-body">
         <div>
