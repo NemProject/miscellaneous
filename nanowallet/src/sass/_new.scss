@@ -113,8 +113,12 @@ button {
   border: 0px;
   padding-top: 0px;
 }
-.input-group-btn:hover, .input-group-btn:focus {
+.input-group-btn:hover, .input-group-btn:focus, .input-group-btn:active {
   background: transparent;
+  .btn:hover, .btn:active, .btn:focus {
+    background: transparent;
+    color: black;
+  }
 }
 .input-group-btn {
   vertical-align: top;
@@ -230,7 +234,7 @@ textarea {
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 
-.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page{
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page, .namespace-provision-page{
 	background-color: white;
 }
 .dashboard-page .container{

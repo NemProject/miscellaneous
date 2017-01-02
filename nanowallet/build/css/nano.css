@@ -595,22 +595,6 @@ border: 1px solid #444;
   color: #444;
   background-color: #f2cd88; }
 
-.namespace-provision-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.namespace-provision-page .banner-left h2 {
-  margin-top: 10px; }
-
-.namespace-provision-page .col-md-6 {
-  margin-top: 10px; }
-
-.namespace-provision-page .btn-default {
-  border: 1px solid #444; }
-
-.namespace-provision-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
 .dashboard-page .list-group.list-group-root {
   padding: 0;
   overflow: hidden;
@@ -829,8 +813,11 @@ button {
   border: 0px;
   padding-top: 0px; }
 
-.input-group-btn:hover, .input-group-btn:focus {
+.input-group-btn:hover, .input-group-btn:focus, .input-group-btn:active {
   background: transparent; }
+  .input-group-btn:hover .btn:hover, .input-group-btn:hover .btn:active, .input-group-btn:hover .btn:focus, .input-group-btn:focus .btn:hover, .input-group-btn:focus .btn:active, .input-group-btn:focus .btn:focus, .input-group-btn:active .btn:hover, .input-group-btn:active .btn:active, .input-group-btn:active .btn:focus {
+    background: transparent;
+    color: black; }
 
 .input-group-btn {
   vertical-align: top; }
@@ -921,7 +908,7 @@ textarea {
   min-width: 150px; }
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
-.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page {
+.dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page, .namespace-provision-page {
   background-color: white; }
 
 .dashboard-page .container {
