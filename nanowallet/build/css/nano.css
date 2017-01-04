@@ -771,6 +771,10 @@ select {
   .helper h4:hover {
     color: #69b2e5; }
 
+.input-group-btn {
+  min-width: 170px;
+  vertical-align: middle; }
+
 .navbar-brand span:first-of-type {
   font-weight: 100; }
 
@@ -818,9 +822,6 @@ button {
   .input-group-btn:hover .btn:hover, .input-group-btn:hover .btn:active, .input-group-btn:hover .btn:focus, .input-group-btn:focus .btn:hover, .input-group-btn:focus .btn:active, .input-group-btn:focus .btn:focus, .input-group-btn:active .btn:hover, .input-group-btn:active .btn:active, .input-group-btn:active .btn:focus {
     background: transparent;
     color: black; }
-
-.input-group-btn {
-  vertical-align: top; }
 
 .btn-success {
   background-color: #69b2e5;
@@ -903,8 +904,9 @@ textarea {
     color: rgba(0, 0, 0, 0.7); }
 
 /*** CREATE MOSAIC PAGE ***/
-.create-mosaic-page .input-group-btn {
-  min-width: 150px; }
+/*** CREATE NAMESPACE PAGE ***/
+.feeAmount {
+  vertical-align: bottom !important; }
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 .dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page, .namespace-provision-page {

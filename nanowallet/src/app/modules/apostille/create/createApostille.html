@@ -65,16 +65,16 @@
                 placeholder="{{ 'GENERAL_TAGS' | translate }}"
                 ng-model="$ctrl.formData.tags" ng-disabled="!$ctrl.common.password"/>
             </fieldset>
-
+<!-- HASH FUNCTION -->
             <fieldset class="form-group">
-            <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Hash Function*:</button>
-            </span>
-            <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing"></select>
-          </div>
+              <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Hash Function*:</button>
+                </span>
+                <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing"></select>
+              </div>
             </fieldset>
-
+<!-- STORAGE LOCATION -->
             <fieldset class="form-group">
               <div class="input-group">
               <span class="input-group-btn">
@@ -84,7 +84,7 @@
             </div>
             </fieldset>
 
-            <!-- Password Field -->
+<!-- PASSWORD FIELD -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">

@@ -28,10 +28,16 @@
 
                <fieldset>
 
+<!-- MULTISIG ACCOUNT ADDRESS -->
 
             <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
+              <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Multisig Account: *</button>
+                </span>
              <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNS();">
             </select>
+          </div>
             </fieldset>
 
             <fieldset class="form-group" ng-show="$ctrl.formData.multisigAccount && $ctrl.formData.isMultisig">
@@ -45,29 +51,45 @@
                                 </span>
                             </div>
                         </fieldset>
-
+<!-- PARENT NAMESPACE -->
             <fieldset class="form-group">
-               <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}</label>
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent">Parent Namespace:* </label>
+                </span>
               <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
                 <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>
             </select>
+          </div>
             </fieldset>
-
+<!-- NAMESPACE NAME -->
             <fieldset class="form-group">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Namespace:* </button>
+                  </span>
              <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
+           </div>
             </fieldset>
-
+<!-- NAMESPACE SINK ADDRESS -->
             <fieldset class="form-group">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Sink Address:* </button>
+                  </span>
             <input type="text" class="form-control" ng-model="$ctrl.formData.rentalFeeSink" readOnly>
+          </div>
             </fieldset>
-
+<!-- TRANSACTION FEE -->
+            <div class="row" class="dualFees">
+            <div class="col-md-6">
              <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}</button>
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </button>
                 </span>
                 <p>
-                  <span>
+                  <span class="feeAmount">
                    <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
                   <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
                 </span>
@@ -77,14 +99,16 @@
                 </span>
               </div>
             </fieldset>
-
+            </div>
+<!-- RENTAL FEE-->
+            <div class="col-md-6">
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}</button>
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</button>
                 </span>
                 <p>
-                  <span style="margin-right:10px;">
+                  <span class="feeAmount">
                     {{($ctrl.formData.rentalFee | fmtNemValue)[0]}}.{{($ctrl.formData.rentalFee | fmtNemValue)[1]}}
                 </span>
                 </p>
@@ -93,8 +117,9 @@
                 </span>
               </div>
             </fieldset>
-
-            <!-- Password Field -->
+            </div>
+          </div>
+<!-- Password Field -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">

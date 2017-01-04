@@ -58,8 +58,10 @@ select {
   }
 }
 
-
-
+.input-group-btn {
+  min-width: 170px;
+  vertical-align: middle;
+}
 
 
 // confirmed/unconfirmed tabs, send/receive tabs
@@ -119,9 +121,6 @@ button {
     background: transparent;
     color: black;
   }
-}
-.input-group-btn {
-  vertical-align: top;
 }
 .btn-success {
   background-color: $blue;
@@ -222,12 +221,19 @@ textarea {
 
 /*** CREATE MOSAIC PAGE ***/
 .create-mosaic-page {
-  .input-group-btn {
-    min-width: 150px;
-  }
+
 }
-
-
+/*** CREATE NAMESPACE PAGE ***/
+// .dualFees {
+//   text-align: center !important;
+//   .col-md-6 span{
+//     color: pink;
+//     text-align: center !important;
+//   }
+// }
+.feeAmount{
+  vertical-align: bottom !important;
+}
 
 
 
