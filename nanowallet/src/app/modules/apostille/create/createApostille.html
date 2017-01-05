@@ -38,7 +38,7 @@
             <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
               <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Address*</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}:</button>
                 </span>
                 <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount"></select>
               </div>
@@ -55,10 +55,11 @@
                                 </span>
                             </div>
                         </fieldset>
+<!-- TAGS SECTION -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Tags*:</button>
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_TAGS' | translate }}:</button>
                 </span>
               <input class="form-control form-control-lg"
                 type="text"
@@ -69,7 +70,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Hash Function*:</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_HASH_FUNCTION' | translate }}</button>
                 </span>
                 <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing"></select>
               </div>
@@ -78,7 +79,7 @@
             <fieldset class="form-group">
               <div class="input-group">
               <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Storage*:</button>
+                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_STORAGE' | translate }}:</button>
               </span>
               <select class="form-control" ng-options="type.value as type.name for type in $ctrl.types" ng-model="$ctrl.formData.isPrivate"></select>
             </div>
@@ -88,7 +89,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Password*:</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
                 </span>
                 <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
               </div>

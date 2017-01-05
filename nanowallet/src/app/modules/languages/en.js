@@ -18,9 +18,10 @@ function EnglishProvider($translateProvider) {
         HEADER_NODE_CUSTOM_INFO: 'Node ip or domain',
         HEADER_PURGE: 'Purge',
         HEADER_PURGE_MESSAGE: 'Please confirm the purge of local storage. By clicking "OK" all wallets in local storage will be deleted and will not be recoverable. You agree that all wallets have been backed up and funds are secured.',
-        
+
         // FOOTER COMPONENT
-        FOOTER_POWERED_BY: 'Powered by NEM technology.',
+        FOOTER_POWERED_BY_1: 'Powered by',
+        FOOTER_POWERED_BY_2: 'NEM technology.',
         FOOTER_VERSION: 'Version',
 
         // DASHBOARD MODULE
@@ -53,6 +54,7 @@ function EnglishProvider($translateProvider) {
         GENERAL_MESSAGE: 'Message',
         GENERAL_DATE: 'Date',
         GENERAL_TAB_NORMAL: 'Normal',
+        GENERAL_TAB_SEND: 'Send',
         GENERAL_TAB_MULTISIG: 'Multisig',
         GENERAL_TOTAL: 'Total',
         GENERAL_REMOVE: 'Remove',
@@ -64,6 +66,7 @@ function EnglishProvider($translateProvider) {
         GENERAL_SEND: 'Send',
         GENERAL_TO: 'To',
         GENERAL_HASH: 'Hash',
+        GENERAL_HASH_FUNCTION: 'Hash Function',
         GENERAL_NAME: 'Name',
         GENERAL_INFORMATION: 'Information',
         GENERAL_ADDRESS: 'Address',
@@ -79,6 +82,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_NO: 'No',
         GENERAL_TAGS: 'Tags',
         GENERAL_SINK: 'Sink',
+        GENERAL_SINK_ADDRESS: 'Sink Address',
+        GENERAL_STORAGE: 'Storage',
         GENERAL_REASON: 'Reason',
         GENERAL_TRANSACTION_HASH: 'Transaction hash',
         GENERAL_TRANSACTION_ID: 'Transaction ID',
@@ -122,7 +127,7 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_NAME: 'Transfer transaction',
         TRANSFER_TRANSACTION_MULTISIG_NAME: 'Multisignature transfer transaction',
         TRANSFER_TRANSACTION_INVOICE: 'Create invoice',
-        TRANSFER_TRANSACTION_TAB_INVOICE: 'Invoice',
+        TRANSFER_TRANSACTION_TAB_INVOICE: 'Receive',
         TRANSFER_TRANSACTION_MOSAIC_TRANSFER: 'Mosaic transfer',
         TRANSFER_TRANSACTION_ATTACH_MOSAIC: 'Attach mosaic',
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
@@ -242,12 +247,13 @@ function EnglishProvider($translateProvider) {
         NAMESPACE_PROVISION_TITLE: 'Create namespace & sub-namespace',
         NAMESPACE_PROVISION_NAME: 'Provision namespace transaction',
         NAMESPACE_PROVISION_MULTISIG_NAME: 'Multisignature provision namespace transaction',
-        NAMESPACE_PROVISION_PARENT: 'Parent Namespace (excluding level 3)',
-        NAMESPACE_PROVISION_NEW_ROOT: 'New root',
+        NAMESPACE_PROVISION_PARENT: 'Parent Namespace',
+        NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
+        NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: 'Namespace name',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:',
         NAMESPACE_PROVISION_INFORMATION_2: 'However a part is only allowed to begin with a letter of the alphabet, thus \'alice\' is an allowed part for a root namespace while \'1alice\' is not. Certain strings are reserved and thus not allowed as namespace parts. Among the disallowed namespace parts are:',
-        NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.', 
+        NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.',
 
         // ACCOUNT MODULE
         ACCOUNT_TITLE: 'Account',
@@ -312,11 +318,11 @@ function EnglishProvider($translateProvider) {
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
-        EXPLORER_NAV_NSM: 'Namespaces & Mosaics', 
+        EXPLORER_NAV_NSM: 'Namespaces & Mosaics',
         EXPLORER_NAV_APOSTILLES: 'Apostilles',
 
         // EXPLORER HOME MODULE
-        EXPLORER_HOME_TITLE: 'Explorer - Home', 
+        EXPLORER_HOME_TITLE: 'Explorer - Home',
         EXPLORER_HOME_NS: 'Your Namespaces',
         EXPLORER_HOME_MOSAICS: 'Your Mosaics',
         EXPLORER_HOME_NS_MULTISIG: 'Namespaces owned by multisig accounts',
@@ -356,7 +362,7 @@ function EnglishProvider($translateProvider) {
         APOSTILLE_NAME_TOO_LONG: 'File name is too long, 40 characters maximum allowed.',
         APOSTILLE_MAX_NUMBER: 'Maximum apostilles per batch is 25',
         APOSTILLE_INFORMATION_1: 'Each file uploaded is processed automatically with options set on the left panel. You can add new files, change parameters and then add more files with different options. It\'ll also work if you switch to the multisig tab and add more files.',
-        APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.', 
+        APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.',
         APOSTILLE_INFORMATION_3: 'The dedicated HD account can be put under a multisig contract so that it may be transferred to others via 1-of-1 or any m-of-n multisig contract combination. It can also have additional information sent to it via messages with updates and augments to the original document or the product it represents.',
         APOSTILLE_INFORMATION_4: 'When two or more parties want to both approve of a blockchain timestamp, e.g. binding contracts, the account making the blockchain notarization can be put in an n-of-n multisig contract.',
         APOSTILLE_INFORMATION_5: 'For accounts in a multisignature contract that have selected "<b>Private, transferable, and updateable</b>", the initiating cosigner\'s private key is used to sign the hash and create a dedicated HD account, not the account that was multisigged.',
@@ -535,6 +541,7 @@ function EnglishProvider($translateProvider) {
         FORM_PASSWORD_FIELD_PLACEHOLDER: 'Enter your wallet password or passphrase',
         FORM_WALLET_NAME_FIELD_PLACEHOLDER: 'Wallet name',
         FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: 'Password',
+        FORM_PASSWORD: 'Password',
         FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: 'Confirm your password',
         FORM_PASSPHRASE_FIELD_PLACEHOLDER: 'Passphrase',
         FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: 'Confirm your passphrase',

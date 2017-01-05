@@ -13,20 +13,20 @@
                 <div class="panel-heading">
                   <!-- <i class="fa fa-chevron-right"></i> -->
                     <!-- Title of panel -->
-                    <!-- <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_NAME' | translate }}</span>
+                    <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_NAME' | translate }}</span>
                     <span ng-show="$ctrl.formData.isMultisig">{{ 'TRANSFER_TRANSACTION_MULTISIG_NAME' | translate }}</span>
-                    <span ng-show="$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_INVOICE' | translate }} Receive</span> -->
+                    <span ng-show="$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_INVOICE' | translate }} Receive</span>
                     <!-- Tabbed modes -->
                     <ul class="nav nav-tabs">
                         <!-- Normal mode -->
                         <!-- On click it set multisig to false, invoice to false and update mosaics of account -->
-                        <li ng-class="$ctrl.formData.isMultisig || $ctrl.invoice ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">Send*</a></li>
+                        <li ng-class="$ctrl.formData.isMultisig || $ctrl.invoice ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">{{ 'GENERAL_TAB_SEND' | translate }}</a></li>
                         <!-- Multisig mode -->
                         <!-- On click it set multisig to true, invoice to false update mosaics of account -->
                         <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.invoice = false;$ctrl.formData.encryptMessage = false;$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
                         <!-- Invoice mode -->
                         <!-- On click it set multisig to false, set invoice to true, isMosaicTransfer to false and reset form data -->
-                        <li ng-class="$ctrl.invoice ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = true;$ctrl.resetData();$ctrl.formData.isMosaicTransfer = false;" style="outline:0;cursor:pointer;display:inline;">Receive*</a></li>
+                        <li ng-class="$ctrl.invoice ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = true;$ctrl.resetData();$ctrl.formData.isMosaicTransfer = false;" style="outline:0;cursor:pointer;display:inline;">{{ 'TRANSFER_TRANSACTION_TAB_INVOICE' | translate }}</a></li>
                     </ul>
                 </div>
                 <div class="panel-body" ng-show="!$ctrl.invoice">
@@ -97,7 +97,7 @@
                         <fieldset class="form-group">
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Fee*:</button>
+                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_FEE' | translate}}:</button>
                                 </span>
                                 <p class="fees">
                                     <span style="margin-right:10px;">
@@ -135,7 +135,7 @@
                       <fieldset class="form-group">
                         <div class="input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Password*:</button>
+                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
                         </span>
                         <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
                         </div>

@@ -33,7 +33,7 @@
             <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
               <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Multisig Account: *</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}: </button>
                 </span>
              <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNS();">
             </select>
@@ -55,7 +55,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label for="namespaceParent">Parent Namespace:* </label>
+                  <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
                 </span>
               <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
                 <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>
@@ -66,7 +66,7 @@
             <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Namespace:* </button>
+                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'NAMESPACE_PROVISION_NS' | translate }}: </button>
                   </span>
              <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
            </div>
@@ -75,7 +75,7 @@
             <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Sink Address:* </button>
+                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </button>
                   </span>
             <input type="text" class="form-control" ng-model="$ctrl.formData.rentalFeeSink" readOnly>
           </div>
@@ -123,7 +123,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>Password*:</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
                 </span>
                 <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
               </div>
