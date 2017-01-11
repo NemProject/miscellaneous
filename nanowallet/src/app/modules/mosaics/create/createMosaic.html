@@ -1,17 +1,22 @@
 <div class="create-mosaic-page">
-   <div class="banner-left">
-      <div class="container">
-         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-8">
+        <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
-   </div>
-   <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+      <div class="col-sm-4 helper">
+        <h4 data-toggle="modal" data-target="#mosaicHelp">Want more info about Mosaics?*</h4>
+      </div>
+
       <div class="col-md-6">
-         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-               <i class="fa fa-chevron-right"></i>
+         <div>
+            <div class="panel-heading">
+              <div class="tabDescription">
                <span ng-show="!$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_NAME' | translate }}</span>
                <span ng-show="$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
-               <ul class="nav nav-tabs" style="float:right">
+             </div>
+               <ul class="nav nav-tabs">
                   <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
                   <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
                </ul>
@@ -23,19 +28,21 @@
                      <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNSM();">
                      </select>
                   </fieldset>
-
+                  <!-- MULTISIG ACCOUNT -->
                   <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
                             <div class="input-group">
                               <span class="input-group-btn">
                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
                         </span>
+                  <!-- MULTISIG ACCOUNT BALANCE -->
+
                                 <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
                                 </span>
                             </div>
                         </fieldset>
-                  <!-- NAMESPACE SELECTION -->
+                  <!-- PARENT NAMESPACE SELECTION -->
                   <div class="form-group">
                     <div class="input-group">
                     <span class="input-group-btn">
@@ -56,51 +63,76 @@
                   </div>
                   </fieldset>
                   <!-- MOSAIC DESCRIPTION -->
-
                   <fieldset class="form-group">
-                     <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}:</button>
+                    </span>
+                    <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
+                    </div>
                   </fieldset>
                   <fieldset class="form-group">
-                     <input type="text" class="form-control" ng-model="$ctrl.formData.mosaicFeeSink" readOnly>
                   </fieldset>
+                  <!-- MOSAIC SINK ADDRESS -->
                   <fieldset class="form-group">
-                     <div class="input-group">
+                      <div class="input-group">
                         <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_TX_FEE' | translate}}</button>
+                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </button>
                         </span>
-                        <p style="display: table-cell; vertical-align: middle; border: 1px solid rgb(68, 68, 68);background-color:#fff;text-align:right;">
-                           <span style="margin-right:10px;">
-                           <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
-                           <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
-                           </span>
-                        </p>
-                        <span class="input-group-btn">
-                         <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                         </span>
-                     </div>
-                  </fieldset>
-                  <fieldset class="form-group">
-                     <div class="input-group">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_RENTAL_FEE' | translate}}</button>
-                        </span>
-                        <p style="display: table-cell; vertical-align: middle; border: 1px solid rgb(68, 68, 68);background-color:#fff;text-align:right;">
-                           <span style="margin-right:10px;">
-                           <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}</span>
-                           </span>
-                        </p>
-                        <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                        </span>
-                     </div>
+                        <input type="text" class="form-control" ng-model="$ctrl.formData.mosaicFeeSink" readOnly>
+                </div>
                   </fieldset>
 
-                  <fieldset class="form-group">
-                     <input class="form-control form-control-lg"
-                        type="password"
-                        placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                        ng-model="$ctrl.common.password"/>
+                  <!-- TRANSACTION FEE -->
+                  <div class="row" class="dualFees">
+                  <div class="col-md-6">
+                   <fieldset class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </button>
+                      </span>
+                      <p>
+                        <span class="feeAmount">
+                          <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
+                          <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
+                      </span>
+                      </p>
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                      </span>
+                    </div>
                   </fieldset>
+                  </div>
+                  <!-- RENTAL FEE -->
+                  <div class="col-md-6">
+                  <fieldset class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</button>
+                      </span>
+                      <p>
+                        <span class="feeAmount">
+                          {{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}
+                      </span>
+                      </p>
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                      </span>
+                    </div>
+                  </fieldset>
+                  </div>
+                </div>
+
+                <!-- PASSWORD FIELD -->
+
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
+                    </span>
+                    <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                  </div>
+                </fieldset>
 
                   <button class="btn btn-success pull-xs-right"
                      type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceParent || !$ctrl.formData.mosaicName || !$ctrl.formData.mosaicDescription || $ctrl.hasLevy && !$ctrl.formData.levy.address || !$ctrl.formData.properties.initialSupply || $ctrl.hasLevy && !$ctrl.formData.levy.fee || $ctrl.formData.properties.divisibility == undefined || !$ctrl.mosaicIsValid($ctrl.formData.mosaicName) || !$ctrl.mosaicDescriptionIsValid($ctrl.formData.mosaicDescription)" ng-click="$ctrl.send()">
@@ -111,7 +143,7 @@
             </div>
          </div>
       </div>
-      <div class="col-md-6 noPaddingLeft">
+      <div class="col-md-6">
 
          <div class="panel panel-default">
             <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
@@ -266,4 +298,5 @@
     </div>
       </div>
    </div>
+ </div>
 </div>
