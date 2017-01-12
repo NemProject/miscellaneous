@@ -64,7 +64,6 @@
                     <span class="input-group-btn">
                       <label for="namespaceParent" class="control-label">{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}:</label>
                     </span>
-
                      <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="Mosaic*" maxlength="32" ng-change="$ctrl.processMosaicName();">
                   </div>
                   </fieldset>
@@ -184,7 +183,7 @@
                  </fieldset>
                </div>
                 </div>
-
+                <!-- CHECKBOXES -->
                 <fieldset class="form-group row centerCheckboxes">
 
                    <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
@@ -229,21 +228,33 @@
                     </fieldset>
                      </div>
                    </div>
-
+                    <!-- LEVY START -->
                   <div ng-show="$ctrl.hasLevy">
                      <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
+                  <!-- MOSAIC TO BE LEVY -->
                      <fieldset class="form-group">
-                        <label>{{ 'MOSAIC_DEFINITION_LEVY_SELECT_MOSAIC' | translate }}</label>
+                       <div class="input-group">
+                       <span class="input-group-btn">
+                        <label>{{ 'MOSAIC_DEFINITION_LEVY_SELECT_MOSAIC' | translate }}: </label>
+                        </span>
                         <select class="form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" ng-change="$ctrl.updateLevyMosaic(true)"></select>
+                      </div>
                      </fieldset>
+                     <!-- ADDRESS TO RECEIVE LEVY -->
+
                      <fieldset class="form-group">
-                        <label>{{ 'MOSAIC_DEFINITION_LEVY_ADDRESS' | translate }}</label>
+                       <div class="input-group">
+                       <span class="input-group-btn">
+                         <label>{{ 'MOSAIC_DEFINITION_LEVY_ADDRESS' | translate }}: </label>
+                       </span>
                         <input type="text" class="form-control" ng-model="$ctrl.formData.levy.address">
+                     </div>
                      </fieldset>
+                     <!-- LEVY FEE -->
                      <fieldset class="form-group">
                         <div class="input-group">
                            <span class="input-group-btn">
-                           <button class="btn btn-default" style="cursor:default;opacity:1;" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}</button>
+                           <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
                         </span>
                            <input type="number" class="form-control" ng-model="$ctrl.formData.levy.fee">
                            <span class="input-group-btn">
@@ -253,7 +264,10 @@
                      </fieldset>
                      <!-- LEVY FEE TYPE OPTIONS -->
                      <fieldset class="form-group">
-                        <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}</label><br>
+                       <div class="input-group">
+                          <span class="input-group-btn">
+                        <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}: </label>
+                      </span>
                         <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
                         <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="1"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}
                         </label>
@@ -265,7 +279,7 @@
                   </div>
                </fieldset>
             </div>
-            <div class="panel-footer text-center" style="background-color: #e3e0cf; color: #444;border-top:1px solid #444;" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
+            <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
                      <div ng-show="$ctrl.formData.levy.feeType === 1">
                         {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1_NOTE' | translate }}
                         <strong>{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
