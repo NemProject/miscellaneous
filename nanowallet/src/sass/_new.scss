@@ -57,7 +57,11 @@ select {
     color: $blue;
   }
 }
-
+h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 19px;
+}
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle;
@@ -157,9 +161,9 @@ textarea {
   text-align: right;
 }
 
-.mosaic {
-  padding-top: $pad * 1.35;
-}
+// .mosaic {
+//   padding-top: $pad * 1.35;
+// }
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap {

@@ -1,14 +1,14 @@
 <div class="transferTransaction-page">
-
-    <div class="banner-left">
-        <div class="container">
-        </div>
-    </div>
-
     <div class="container-fluid">
 
-        <div class="col-md-6">
+      <div class="row">
+        <div class="col-sm-8">
           <h2>{{ 'TRANSFER_TRANSACTION_TITLE' | translate }}</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
             <div class="panel">
                 <div class="panel-heading">
                   <div class="tabDescription">
@@ -179,10 +179,10 @@
         </div>
 
         <!-- Mosaics part -->
-        <div class="mosaic col-md-6 noPaddingLeft" ng-show="!$ctrl.invoice">
+        <div class="mosaic col-md-6" ng-show="!$ctrl.invoice">
 
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
+            <div>
+                <div class="panel-heading">
                   <h4>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }} <i class="fa fa-paperclip"></i></h4>
                 </div>
                 <div class="panel-body" style="padding-bottom:0;">
@@ -262,7 +262,7 @@
                     </div>
                 </div>
         </div>
-
+</div>
         <!-- Invoice part -->
         <div class="col-md-6 noPaddingLeft" ng-show="$ctrl.invoice">
 

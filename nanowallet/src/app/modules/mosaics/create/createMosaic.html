@@ -6,7 +6,7 @@
         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
       <div class="col-sm-4 helper">
-        <h4 data-toggle="modal" data-target="#mosaicHelp">Want more info about Mosaics?*</h4>
+        <h5 data-toggle="modal" data-target="#mosaicHelp">Want more info about Mosaics?*</h5>
       </div>
 
       <div class="col-md-6">
@@ -151,14 +151,15 @@
       </div>
       <div class="col-md-6">
 
-         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-               <span ng-show="!$ctrl.showInfo"><i class="fa fa-cog"></i> {{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</span>
+         <div>
+            <div class="panel-heading">
+               <!-- <span ng-show="!$ctrl.showInfo"><i class="fa fa-cog"></i> {{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</span>
               <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span>
               <ul class="nav nav-tabs" style="float:right">
                 <li ng-class="!$ctrl.showInfo ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.showInfo = false;"><i class="fa fa-cog"></i></a></li>
                 <li ng-class="$ctrl.showInfo ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.showInfo = true;"><i class="fa fa-info-circle"></i></a></li>
-              </ul>
+              </ul> -->
+                <h3>{{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</h3>
             </div>
             <div class="panel-body" ng-show="$ctrl.showInfo">
             <p>{{ 'MOSAIC_DEFINITION_INFORMATION_1' | translate }}</p>
@@ -207,7 +208,7 @@
                <p ng-bind-html="'MOSAIC_DEFINITION_INFORMATION_16' | translate"></p>
             </div>
 
-            <div class="panel-body" style="padding-bottom:0;" ng-show="!$ctrl.showInfo">
+            <div class="panel-body">
                <fieldset>
                   <fieldset class="form-group">
                      <label>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}</label>
