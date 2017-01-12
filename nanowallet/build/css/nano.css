@@ -749,7 +749,8 @@ select {
 h3 {
   padding: 0;
   margin: 0;
-  font-size: 19px; }
+  font-size: 19px;
+  color: rgba(0, 0, 0, 0.3); }
 
 .input-group-btn {
   min-width: 170px;
@@ -881,6 +882,9 @@ textarea {
     color: rgba(0, 0, 0, 0.7); }
 
 /*** CREATE MOSAIC PAGE ***/
+.create-mosaic-page .centerCheckboxes {
+  text-align: center; }
+
 /*** CREATE NAMESPACE PAGE ***/
 .feeAmount {
   vertical-align: bottom !important; }

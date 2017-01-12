@@ -153,100 +153,83 @@
 
          <div>
             <div class="panel-heading">
-               <!-- <span ng-show="!$ctrl.showInfo"><i class="fa fa-cog"></i> {{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</span>
-              <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span>
-              <ul class="nav nav-tabs" style="float:right">
-                <li ng-class="!$ctrl.showInfo ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.showInfo = false;"><i class="fa fa-cog"></i></a></li>
-                <li ng-class="$ctrl.showInfo ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.showInfo = true;"><i class="fa fa-info-circle"></i></a></li>
-              </ul> -->
                 <h3>{{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</h3>
             </div>
-            <div class="panel-body" ng-show="$ctrl.showInfo">
-            <p>{{ 'MOSAIC_DEFINITION_INFORMATION_1' | translate }}</p>
-            <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, ', _ , -</pre>
-            <p>{{ 'MOSAIC_DEFINITION_INFORMATION_2' | translate }}</p>
-            <p>{{ 'MOSAIC_DEFINITION_INFORMATION_3' | translate }}</p>
-            <p>{{ 'MOSAIC_DEFINITION_INFORMATION_4' | translate }}</p>
-            <ul>
-             <li>
-               <b>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_5' | translate }}
-             </li>
-             <li>
-                <b>{{ 'MOSAIC_DEFINITION_DIV' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_6' | translate }}
-             </li>
-             <li>
-               <b>{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_7' | translate }}
-             </li>
-             <li>
-               <b>{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_8' | translate }}
-            </li>
-            </ul>
-            <li style="list-style: outside none none;"><b>{{ 'GENERAL_LEVY' | translate }}:</b></li>
-            <p>{{ 'MOSAIC_DEFINITION_INFORMATION_9' | translate }}</p>
-               <ul>
-                  <li>
-                     <b>{{ 'GENERAL_MOSAIC' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_10' | translate }}
-                  </li>
-                  <li>
-                     <b>{{ 'GENERAL_ADDRESS' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_11' | translate }}
-                  </li>
-                  <li>
-                     <b>{{ 'GENERAL_FEE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_12' | translate }}
-                  </li>
-                  <li>
-                     <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_13' | translate }}
-                     <ul>
-                        <li>
-                           <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_14' | translate }}
-                        </li>
-                        <li>
-                          <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_15' | translate }}
-                        </li>
-                     </ul>
-                  </li>
-               </ul>
-               <p ng-bind-html="'MOSAIC_DEFINITION_INFORMATION_16' | translate"></p>
-            </div>
+
 
             <div class="panel-body">
                <fieldset>
+
+                 <div class="row">
+                   <!-- SET MOSAIC SUPPLY -->
+                   <div class="col-md-6">
                   <fieldset class="form-group">
-                     <label>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}</label>
-                     <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
+                    <div class="input-group">
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</button>
+                      </span>
+                      <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
+                    </div>
                   </fieldset>
-                  <fieldset class="form-group">
-                     <label>{{ 'MOSAIC_DEFINITION_DIV' | translate }}</label>
+                </div>
+                  <!-- SET DIVISIBILITY AMOUNT -->
+                  <div class="col-md-6">
+                 <fieldset class="form-group">
+                   <div class="input-group">
+                     <span class="input-group-btn">
+                       <label>{{ 'MOSAIC_DEFINITION_DIV' | translate }}:</label>
+                     </span>
                      <input type="number" class="form-control" ng-model="$ctrl.formData.properties.divisibility" placeholder="" min="0" max="6">
-                  </fieldset>
-                  <fieldset class="form-group">
-                     <div class="input-group">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_TOTAL' | translate }}</button>
+                   </div>
+                 </fieldset>
+               </div>
+                </div>
+
+                <fieldset class="form-group row centerCheckboxes">
+
+                   <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
+                   <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+
+                   <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
+                   <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
+
+                   <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
+                   <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
+
+                </fieldset>
+
+                  <fieldset>
+                     <div class="row">
+                       <!-- TOTAL SUPPLY -->
+
+                       <div class="col-md-6">
+                      <fieldset class="form-group">
+                        <div class="input-group">
+                          <span class="input-group-btn">
+                            <label>Total Supply:* </label>
+                          </span>
+                          <span class="form-control" readOnly>
+                            <span>{{($ctrl.formData.properties.initialSupply)}}</span>
+                            <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
+</span>
+                        </div>
+                      </fieldset>
+                  </div>
+
+
+                        <!-- NAMESPACE AND MOSAIC FINAL NAME -->
+                        <div class="col-md-6">
+                          <fieldset class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                          <label>Full Name:* </label>
                         </span>
-                        <p style="display: table-cell; vertical-align: middle; border: 1px solid rgb(68, 68, 68);background-color:#fff;text-align:right;">
-                           <span style="margin-right:10px;">
-                           <span>{{($ctrl.formData.properties.initialSupply)}}</span>
-                           <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
-                           </span>
-                        </p>
-                        <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" style="cursor:default;opacity:1;text-transform: uppercase;" disabled><small>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</small></button>
-                        </span>
+                           <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
+                      </div>
+                    </fieldset>
                      </div>
-                  </fieldset>
-                  <fieldset class="form-group">
+                   </div>
 
-                     <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
-                     <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
-
-
-                     <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
-                     <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
-
-                     <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
-                     <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
-
-                  </fieldset>
                   <div ng-show="$ctrl.hasLevy">
                      <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
                      <fieldset class="form-group">
@@ -307,3 +290,68 @@
    </div>
  </div>
 </div>
+
+
+<!-- MODAL SECTION -->
+<div id="mosaicHelp" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Creating a Mosaic*</h4>
+      </div>
+      <div class="modal-body">
+        <div>
+        <p>{{ 'MOSAIC_DEFINITION_INFORMATION_1' | translate }}</p>
+        <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, ', _ , -</pre>
+        <p>{{ 'MOSAIC_DEFINITION_INFORMATION_2' | translate }}</p>
+        <p>{{ 'MOSAIC_DEFINITION_INFORMATION_3' | translate }}</p>
+        <p>{{ 'MOSAIC_DEFINITION_INFORMATION_4' | translate }}</p>
+        <ul>
+         <li>
+           <b>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_5' | translate }}
+         </li>
+         <li>
+            <b>{{ 'MOSAIC_DEFINITION_DIV' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_6' | translate }}
+         </li>
+         <li>
+           <b>{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_7' | translate }}
+         </li>
+         <li>
+           <b>{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_8' | translate }}
+        </li>
+        </ul>
+        <li style="list-style: outside none none;"><b>{{ 'GENERAL_LEVY' | translate }}:</b></li>
+        <p>{{ 'MOSAIC_DEFINITION_INFORMATION_9' | translate }}</p>
+           <ul>
+              <li>
+                 <b>{{ 'GENERAL_MOSAIC' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_10' | translate }}
+              </li>
+              <li>
+                 <b>{{ 'GENERAL_ADDRESS' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_11' | translate }}
+              </li>
+              <li>
+                 <b>{{ 'GENERAL_FEE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_12' | translate }}
+              </li>
+              <li>
+                 <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_13' | translate }}
+                 <ul>
+                    <li>
+                       <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_14' | translate }}
+                    </li>
+                    <li>
+                      <b>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_15' | translate }}
+                    </li>
+                 </ul>
+              </li>
+           </ul>
+           <p ng-bind-html="'MOSAIC_DEFINITION_INFORMATION_16' | translate"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
