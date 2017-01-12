@@ -11,11 +11,13 @@
           <h2>{{ 'TRANSFER_TRANSACTION_TITLE' | translate }}</h2>
             <div class="panel">
                 <div class="panel-heading">
+                  <div class="tabDescription">
                   <!-- <i class="fa fa-chevron-right"></i> -->
                     <!-- Title of panel -->
                     <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_NAME' | translate }}</span>
                     <span ng-show="$ctrl.formData.isMultisig">{{ 'TRANSFER_TRANSACTION_MULTISIG_NAME' | translate }}</span>
                     <span ng-show="$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_INVOICE' | translate }} Receive</span>
+                  </div>
                     <!-- Tabbed modes -->
                     <ul class="nav nav-tabs">
                         <!-- Normal mode -->
