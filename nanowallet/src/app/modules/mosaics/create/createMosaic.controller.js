@@ -26,7 +26,7 @@ class createMosaicCtrl {
         }
 
         /**
-         *  Default mosaic definition transaction properties  
+         *  Default mosaic definition transaction properties
          */
         this.formData = {};
         this.formData.mosaicFeeSink = Sinks.sinks.mosaic[this._Wallet.network];

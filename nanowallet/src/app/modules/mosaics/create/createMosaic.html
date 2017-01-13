@@ -157,22 +157,23 @@
 
 
             <div class="panel-body">
-               <fieldset>
 
                  <div class="row">
                    <!-- SET MOSAIC SUPPLY -->
-                   <div class="col-md-6">
+                  <div class="col-md-5">
+                   <div class="col-md-12">
                   <fieldset class="form-group">
                     <div class="input-group">
                       <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</button>
+                          <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
                       </span>
+
                       <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
                     </div>
                   </fieldset>
                 </div>
                   <!-- SET DIVISIBILITY AMOUNT -->
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                  <fieldset class="form-group">
                    <div class="input-group">
                      <span class="input-group-btn">
@@ -183,25 +184,9 @@
                  </fieldset>
                </div>
                 </div>
-                <!-- CHECKBOXES -->
-                <fieldset class="form-group row centerCheckboxes">
-
-                   <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
-                   <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
-
-                   <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
-                   <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
-
-                   <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
-                   <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
-
-                </fieldset>
-
-                  <fieldset>
-                     <div class="row">
                        <!-- TOTAL SUPPLY -->
-
-                       <div class="col-md-6">
+                      <div class="col-md-7">
+                       <div class="col-md-12">
                       <fieldset class="form-group">
                         <div class="input-group">
                           <span class="input-group-btn">
@@ -210,14 +195,14 @@
                           <span class="form-control" readOnly>
                             <span>{{($ctrl.formData.properties.initialSupply)}}</span>
                             <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
-</span>
+                          </span>
                         </div>
                       </fieldset>
                   </div>
 
 
                         <!-- NAMESPACE AND MOSAIC FINAL NAME -->
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                           <fieldset class="form-group">
                             <div class="input-group">
                               <span class="input-group-btn">
@@ -228,6 +213,19 @@
                     </fieldset>
                      </div>
                    </div>
+                 </div>
+                   <!-- CHECKBOXES -->
+                   <fieldset class="form-group row centerCheckboxes">
+                      <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
+                      <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+
+                      <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
+                      <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
+
+                      <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
+                      <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
+
+                   </fieldset>
                     <!-- LEVY START -->
                   <div ng-show="$ctrl.hasLevy">
                      <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
@@ -277,7 +275,6 @@
                      </fieldset>
 
                   </div>
-               </fieldset>
             </div>
             <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
                      <div ng-show="$ctrl.formData.levy.feeType === 1">
