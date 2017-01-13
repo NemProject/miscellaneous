@@ -6,7 +6,10 @@
   // margin-left: $pad;
   // margin-right: $pad;
 }
-
+.panel-body {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
@@ -92,6 +95,7 @@ h3 {
 
 .nav-tabs li a {
 	color: grey;
+  // padding: 0px;
   // background-color: $grayLite;
 }
 

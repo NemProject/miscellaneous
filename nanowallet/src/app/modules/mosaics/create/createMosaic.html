@@ -71,18 +71,16 @@
                   <fieldset class="form-group">
                     <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}:</button>
+                        <label>{{'MOSAIC_DEFINITION_DESCRPITION' | translate}}:</label>
                     </span>
                     <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
                     </div>
-                  </fieldset>
-                  <fieldset class="form-group">
                   </fieldset>
                   <!-- MOSAIC SINK ADDRESS -->
                   <fieldset class="form-group">
                       <div class="input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </button>
+                            <label>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </label>
                         </span>
                         <input type="text" class="form-control" ng-model="$ctrl.formData.mosaicFeeSink" readOnly>
                 </div>
@@ -94,7 +92,7 @@
                    <fieldset class="form-group">
                     <div class="input-group">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </button>
+                        <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
                       </span>
                       <p>
                         <span class="feeAmount">
@@ -103,7 +101,7 @@
                       </span>
                       </p>
                       <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                          <label><small>XEM</small></label>
                       </span>
                     </div>
                   </fieldset>
@@ -113,7 +111,7 @@
                   <fieldset class="form-group">
                     <div class="input-group">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</button>
+                        <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
                       </span>
                       <p>
                         <span class="feeAmount">
@@ -121,7 +119,7 @@
                       </span>
                       </p>
                       <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                          <label><small>XEM</small></label>
                       </span>
                     </div>
                   </fieldset>
@@ -133,7 +131,7 @@
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
+                        <label>{{ 'FORM_PASSWORD' | translate }}:</label>
                     </span>
                     <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
                   </div>

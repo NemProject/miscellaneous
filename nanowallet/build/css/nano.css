@@ -697,6 +697,10 @@ border: 1px solid #444;
   padding-left: 0px;
   padding-right: 0px; }
 
+.panel-body {
+  padding-left: 0px;
+  padding-right: 0px; }
+
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
