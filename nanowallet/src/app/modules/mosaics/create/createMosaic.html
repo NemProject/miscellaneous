@@ -94,15 +94,13 @@
                       <span class="input-group-btn">
                         <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
                       </span>
-                      <p>
+                      <div class="form-control" readOnly>
                         <span class="feeAmount">
                           <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
                           <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
                       </span>
-                      </p>
-                      <span class="input-group-btn">
-                          <label><small>XEM</small></label>
-                      </span>
+                          <label class="floatRight"><small>XEM</small></label>
+                    </div>
                     </div>
                   </fieldset>
                   </div>
@@ -113,14 +111,14 @@
                       <span class="input-group-btn">
                         <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
                       </span>
-                      <p>
+                      <div class="form-control" readOnly>
                         <span class="feeAmount">
+                          <span>
                           {{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}
+</span>
                       </span>
-                      </p>
-                      <span class="input-group-btn">
-                          <label><small>XEM</small></label>
-                      </span>
+                          <label class="floatRight"><small>XEM</small></label>
+                    </div>
                     </div>
                   </fieldset>
                   </div>
@@ -162,7 +160,7 @@
                    <div class="col-md-12">
                   <fieldset class="form-group">
                     <div class="input-group">
-                      <span class="input-group-btn">
+                      <span class="input-group-btn short">
                           <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
                       </span>
 
@@ -174,10 +172,10 @@
                   <div class="col-md-12">
                  <fieldset class="form-group">
                    <div class="input-group">
-                     <span class="input-group-btn">
+                     <span class="input-group-btn short">
                        <label>{{ 'MOSAIC_DEFINITION_DIV' | translate }}:</label>
                      </span>
-                     <input type="number" class="form-control" ng-model="$ctrl.formData.properties.divisibility" placeholder="" min="0" max="6">
+                     <input type="number" class="form-control short" ng-model="$ctrl.formData.properties.divisibility" placeholder="" min="0" max="6">
                    </div>
                  </fieldset>
                </div>

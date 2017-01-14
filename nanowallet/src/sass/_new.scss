@@ -19,7 +19,9 @@
   padding-right: $pad * 1.5;
   padding-top: $pad / 2;
   padding-bottom: $pad * 1.5;
-
+}
+.floatRight {
+  float: right;
 }
 /*** GLOBAL STYLES ***/
 table {
@@ -80,6 +82,14 @@ h3 {
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle;
+  &.short {
+    min-width: 130px;
+  }
+}
+input.form-control.short{
+  width: 50px !important;
+  min-width: 50px;
+
 }
 
 
