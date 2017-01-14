@@ -701,6 +701,16 @@ border: 1px solid #444;
   padding-left: 0px;
   padding-right: 0px; }
 
+.inner {
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.main {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 30px; }
+
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;

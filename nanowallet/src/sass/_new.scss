@@ -10,6 +10,17 @@
   padding-left: 0px;
   padding-right: 0px;
 }
+.inner {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.main {
+  padding-left: $pad * 1.5;
+  padding-right: $pad * 1.5;
+  padding-top: $pad / 2;
+  padding-bottom: $pad * 1.5;
+
+}
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
