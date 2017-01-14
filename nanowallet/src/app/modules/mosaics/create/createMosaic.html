@@ -1,173 +1,160 @@
 <div class="create-mosaic-page">
   <div class="container-fluid main">
-    <div class="row">
 
+    <div class="row">
       <div class="col-sm-8">
         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
       <div class="col-sm-4 helper">
         <h5 data-toggle="modal" data-target="#mosaicHelp">Want more info about Mosaics?*</h5>
       </div>
-
+    </div>
+    <div class="row">
       <div class="col-md-6">
-         <div>
-            <div class="panel-heading">
-              <div class="tabDescription">
-               <span ng-show="!$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_NAME' | translate }}</span>
-               <span ng-show="$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
-             </div>
-               <ul class="nav nav-tabs">
-                  <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
-                  <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
-               </ul>
+
+        <div class="panel-heading">
+          <div class="tabDescription">
+            <span ng-show="!$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_NAME' | translate }}</span>
+            <span ng-show="$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
+          </div>
+          <ul class="nav nav-tabs">
+            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
+          </ul>
+        </div>
+
+        <div class="panel-body">
+          <fieldset>
+            <!-- MULTISIG ACCOUNT -->
+            <div class="form-group" ng-show="$ctrl.formData.isMultisig">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent" class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
+                </span>
+                <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNSM();">
+                </select>
+              </div>
             </div>
-            <div class="panel-body">
-               <fieldset>
-                 <!-- MULTISIG ACCOUNT -->
-
-                  <div class="form-group" ng-show="$ctrl.formData.isMultisig">
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                      <label for="namespaceParent" class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
-                    </span>
-                    <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNSM();">
-                    </select>
-                   </div>
-                  </div>
-                  <!-- MULTISIG ACCOUNT BALANCE -->
-
-                  <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </button>
-                        </span>
-
-                                <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                                </span>
-                            </div>
-                        </fieldset>
-                  <!-- PARENT NAMESPACE SELECTION -->
-                  <div class="form-group">
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                      <label for="namespaceParent" class="control-label">{{ 'MOSAIC_DEFINITION_PARENT' | translate }}:</label>
-                    </span>
-                     <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] track by namespace.fqn" ng-model="$ctrl.formData.namespaceParent">
-                     </select>
-                   </div>
-                  </div>
-                  <!-- MOSAIC NAME -->
-                  <fieldset class="form-group">
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                      <label for="namespaceParent" class="control-label">{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}:</label>
-                    </span>
-                     <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="Mosaic*" maxlength="32" ng-change="$ctrl.processMosaicName();">
-                  </div>
-                  </fieldset>
-                  <!-- MOSAIC DESCRIPTION -->
-                  <fieldset class="form-group">
-                    <div class="input-group">
-                    <span class="input-group-btn">
-                        <label>{{'MOSAIC_DEFINITION_DESCRPITION' | translate}}:</label>
-                    </span>
-                    <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
-                    </div>
-                  </fieldset>
-                  <!-- MOSAIC SINK ADDRESS -->
-                  <fieldset class="form-group">
-                      <div class="input-group">
-                        <span class="input-group-btn">
-                            <label>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </label>
-                        </span>
-                        <input type="text" class="form-control" ng-model="$ctrl.formData.mosaicFeeSink" readOnly>
-                </div>
-                  </fieldset>
-
-                  <!-- TRANSACTION FEE -->
-                  <div class="row" class="dualFees">
-                  <div class="col-md-6">
-                   <fieldset class="form-group">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
-                      </span>
-                      <div class="form-control" readOnly>
-                        <span class="feeAmount">
-                          <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
-                          <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
-                      </span>
-                          <label class="floatRight"><small>XEM</small></label>
-                    </div>
-                    </div>
-                  </fieldset>
-                  </div>
-                  <!-- RENTAL FEE -->
-                  <div class="col-md-6">
-                  <fieldset class="form-group">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
-                      </span>
-                      <div class="form-control" readOnly>
-                        <span class="feeAmount">
-                          <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}</span>
-                      </span>
-                          <label class="floatRight"><small>XEM</small></label>
-                    </div>
-                    </div>
-                  </fieldset>
-                  </div>
-                </div>
-
-                <!-- PASSWORD FIELD -->
-
+            <!-- MULTISIG ACCOUNT BALANCE -->
+            <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
+                </span>
+                <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
+                <span class="input-group-btn">
+                  <label><small>XEM</small></label>
+                </span>
+              </div>
+            </fieldset>
+            <!-- PARENT NAMESPACE SELECTION -->
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent" class="control-label">{{ 'MOSAIC_DEFINITION_PARENT' | translate }}:</label>
+                </span>
+                <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] track by namespace.fqn" ng-model="$ctrl.formData.namespaceParent">
+                </select>
+              </div>
+            </div>
+            <!-- MOSAIC NAME -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent" class="control-label">{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}:</label>
+                </span>
+                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="Mosaic*" maxlength="32" ng-change="$ctrl.processMosaicName();">
+              </div>
+            </fieldset>
+            <!-- MOSAIC DESCRIPTION -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'MOSAIC_DEFINITION_DESCRPITION' | translate}}:</label>
+                </span>
+                <textarea class="form-control" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();"></textarea>
+              </div>
+            </fieldset>
+            <!-- MOSAIC SINK ADDRESS -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </label>
+                </span>
+                <input type="text" class="form-control" ng-model="$ctrl.formData.mosaicFeeSink" readOnly>
+              </div>
+            </fieldset>
+            <!-- TRANSACTION FEE -->
+            <div class="row" class="dualFees">
+              <div class="col-md-6">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
-                        <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                      <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
                     </span>
-                    <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                    <div class="form-control" readOnly>
+                      <span class="feeAmount">
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
+                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
+                      </span>
+                      <label class="floatRight"><small>XEM</small></label>
+                    </div>
                   </div>
                 </fieldset>
-
-                  <button class="btn btn-success pull-xs-right"
-                     type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceParent || !$ctrl.formData.mosaicName || !$ctrl.formData.mosaicDescription || $ctrl.hasLevy && !$ctrl.formData.levy.address || !$ctrl.formData.properties.initialSupply || $ctrl.hasLevy && !$ctrl.formData.levy.fee || $ctrl.formData.properties.divisibility == undefined || !$ctrl.mosaicIsValid($ctrl.formData.mosaicName) || !$ctrl.mosaicDescriptionIsValid($ctrl.formData.mosaicDescription)" ng-click="$ctrl.send()">
-                  <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
-                  </button>
-
-               </fieldset>
-            </div>
-         </div>
-      </div>
-      <div class="col-md-6">
-
-         <div>
-            <div class="panel-heading">
-                <h3>{{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</h3>
-            </div>
-
-
-            <div class="panel-body">
-
-                 <div class="row">
-                   <!-- SET MOSAIC SUPPLY -->
-                  <div class="col-md-8 inner">
-                   <div class="col-md-12">
-                  <fieldset class="form-group">
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                          <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
+              </div>
+              <!-- RENTAL FEE -->
+              <div class="col-md-6">
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
+                    </span>
+                    <div class="form-control" readOnly>
+                      <span class="feeAmount">
+                        <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}</span>
                       </span>
-
-                      <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
+                      <label class="floatRight"><small>XEM</small></label>
                     </div>
-                  </fieldset>
-                </div>
-                  <!-- SET DIVISIBILITY AMOUNT -->
-                  <div class="col-md-12">
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <!-- PASSWORD FIELD -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                </span>
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
+            </fieldset>
+            <button class="btn btn-success pull-xs-right" type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceParent || !$ctrl.formData.mosaicName || !$ctrl.formData.mosaicDescription || $ctrl.hasLevy && !$ctrl.formData.levy.address || !$ctrl.formData.properties.initialSupply || $ctrl.hasLevy && !$ctrl.formData.levy.fee || $ctrl.formData.properties.divisibility == undefined || !$ctrl.mosaicIsValid($ctrl.formData.mosaicName) || !$ctrl.mosaicDescriptionIsValid($ctrl.formData.mosaicDescription)" ng-click="$ctrl.send()">
+              <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
+            </button>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel-heading">
+          <h3>{{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <!-- SET MOSAIC SUPPLY -->
+            <div class="col-md-8 inner">
+              <div class="col-md-12">
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
+                    </span>
+                    <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
+                  </div>
+                </fieldset>
+              </div>
+              <!-- SET DIVISIBILITY AMOUNT -->
+              <div class="col-md-12">
                  <fieldset class="form-group">
                    <div class="input-group">
                      <span class="input-group-btn">
@@ -176,131 +163,120 @@
                      <input type="number" class="form-control short" ng-model="$ctrl.formData.properties.divisibility" placeholder="" min="0" max="6">
                    </div>
                  </fieldset>
-               </div>
-
-                </div>
-                      <div class="col-md-4">
-                        <!-- CHECKBOXES -->
-                        <fieldset class="form-group row mosaicCheckboxes">
-                           <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
-                           <label for="box3" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
-
-                           <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
-                           <label for="box4" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
-
-                           <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
-                           <label for="box5" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
-
-                        </fieldset>
-
-
-
-
-                   </div>
-                 </div>
-                 <div class="row">
-                 <!-- TOTAL SUPPLY -->
-                 <div class="col-md-12">
-                <fieldset class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <label>Total Supply:* </label>
-                    </span>
-                    <span class="form-control" readOnly>
-                      <span>{{($ctrl.formData.properties.initialSupply)}}</span>
-                      <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
-                    </span>
-                  </div>
-                </fieldset>
-            </div>
-                 <!-- NAMESPACE AND MOSAIC FINAL NAME -->
-
-                 <div class="col-md-12">
-                   <fieldset class="form-group">
-                     <div class="input-group">
-                       <span class="input-group-btn">
-                   <label>Full Name:* </label>
-                 </span>
-                    <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
-               </div>
-             </fieldset>
               </div>
             </div>
-                    <!-- LEVY START -->
-                  <div ng-show="$ctrl.hasLevy">
-                  <!-- MOSAIC TO BE LEVY -->
-                     <fieldset class="form-group">
-                       <div class="input-group">
-                       <span class="input-group-btn">
-                        <label>{{ 'MOSAIC_DEFINITION_LEVY_SELECT_MOSAIC' | translate }}: </label>
-                        </span>
-                        <select class="form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" ng-change="$ctrl.updateLevyMosaic(true)"></select>
-                      </div>
-                     </fieldset>
-                     <!-- ADDRESS TO RECEIVE LEVY -->
-                     <fieldset class="form-group">
-                       <div class="input-group">
-                       <span class="input-group-btn">
-                         <label>{{ 'MOSAIC_DEFINITION_LEVY_ADDRESS' | translate }}: </label>
-                       </span>
-                        <input type="text" class="form-control" ng-model="$ctrl.formData.levy.address">
-                     </div>
-                     </fieldset>
-                     <!-- LEVY FEE -->
-                     <fieldset class="form-group">
-                        <div class="input-group">
-                           <span class="input-group-btn">
-                           <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
-                        </span>
-                        <div class="form-control formFloat">
-                           <input type="number" ng-model="$ctrl.formData.levy.fee">
-                           <label class="floatRight">{{ $ctrl.selectedMosaic }}</label>
-                      </div>
-                        </div>
-                     </fieldset>
-                     <!-- LEVY FEE TYPE OPTIONS -->
-                     <fieldset class="form-group">
-                       <div class="input-group">
-                          <span class="input-group-btn">
-                        <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}: </label>
-                      </span>
-                        <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
-                        <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="1"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}
-                        </label>
-                        <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
-                        <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="2"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}
-                        </label>
-                      </div>
-
-                     </fieldset>
-
+            <div class="col-md-4">
+              <!-- CHECKBOXES -->
+              <fieldset class="form-group row mosaicCheckboxes">
+                <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
+                <label for="box3" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+                <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
+                <label for="box4" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
+                <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
+                <label for="box5" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
+              </fieldset>
             </div>
-            <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
-                     <div ng-show="$ctrl.formData.levy.feeType === 1">
-                        {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1_NOTE' | translate }}
-                        <strong>{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
-                        <span class="text-muted">.{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span> {{$ctrl.selectedMosaic}}
-                     </div>
-                     <div ng-show="$ctrl.formData.levy.feeType === 2">
-                        {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE' | translate }}
-                        <ul style="list-style:none">
-                           <li ng-repeat="amountSend in [100, 1000, 3145, 10000, $ctrl.formData.properties.initialSupply] track by $index">
-                              {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2' | translate }}
-                              <strong>{{(amountSend | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[0]}}</strong>
-                              <span class="text-muted">.{{(amountSend | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
-                              <span class="text-muted">{{$ctrl.formData.namespaceParent.fqn}}:</span>{{$ctrl.formData.mosaicName}} {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3' | translate }}
-                              <strong>{{( (amountSend * $ctrl.formData.levy.fee / 10000) | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
-                              <span class="text-muted">.{{( (amountSend * $ctrl.formData.levy.fee / 10000) | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span> {{$ctrl.selectedMosaic}}
-                           </li>
-                        </ul>
-                     </div>
-                     </div>
-    </div>
-      </div>
-   </div>
- </div>
-</div>
+          </div>
+          <div class="row">
+            <!-- TOTAL SUPPLY -->
+            <div class="col-md-12">
+              <fieldset class="form-group">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <label>Total Supply:* </label>
+                  </span>
+                  <span class="form-control" readOnly>
+                    <span>{{($ctrl.formData.properties.initialSupply)}}</span>
+                    <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
+                  </span>
+                </div>
+              </fieldset>
+            </div>
+            <!-- NAMESPACE AND MOSAIC FINAL NAME -->
+            <div class="col-md-12">
+              <fieldset class="form-group">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <label>Full Name:* </label>
+                  </span>
+                  <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <!-- LEVY START -->
+          <div ng-show="$ctrl.hasLevy">
+            <!-- MOSAIC TO BE LEVY -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'MOSAIC_DEFINITION_LEVY_SELECT_MOSAIC' | translate }}: </label>
+                </span>
+                <select class="form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" ng-change="$ctrl.updateLevyMosaic(true)"></select>
+              </div>
+            </fieldset>
+            <!-- ADDRESS TO RECEIVE LEVY -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'MOSAIC_DEFINITION_LEVY_ADDRESS' | translate }}: </label>
+                </span>
+                <input type="text" class="form-control" ng-model="$ctrl.formData.levy.address">
+              </div>
+            </fieldset>
+            <!-- LEVY FEE -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
+                </span>
+                <div class="form-control formFloat">
+                  <input type="number" ng-model="$ctrl.formData.levy.fee">
+                  <label class="floatRight">{{ $ctrl.selectedMosaic }}</label>
+                </div>
+              </div>
+            </fieldset>
+            <!-- LEVY FEE TYPE OPTIONS -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}: </label>
+                </span>
+                <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
+                  <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="1"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}
+                </label>
+                <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
+                  <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="2"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}
+                </label>
+              </div>
+            </fieldset>
+          </div>
 
+          <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
+            <div ng-show="$ctrl.formData.levy.feeType === 1">
+              {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1_NOTE' | translate }}
+              <strong>{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
+              <span class="text-muted">.{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span> {{$ctrl.selectedMosaic}}
+            </div>
+            <div ng-show="$ctrl.formData.levy.feeType === 2">
+              {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE' | translate }}
+              <ul style="list-style:none">
+                 <li ng-repeat="amountSend in [100, 1000, 3145, 10000, $ctrl.formData.properties.initialSupply] track by $index">
+                    {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2' | translate }}
+                    <strong>{{(amountSend | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[0]}}</strong>
+                    <span class="text-muted">.{{(amountSend | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
+                    <span class="text-muted">{{$ctrl.formData.namespaceParent.fqn}}:</span>{{$ctrl.formData.mosaicName}} {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3' | translate }}
+                    <strong>{{( (amountSend * $ctrl.formData.levy.fee / 10000) | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
+                    <span class="text-muted">.{{( (amountSend * $ctrl.formData.levy.fee / 10000) | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span> {{$ctrl.selectedMosaic}}
+                 </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL SECTION -->
 <div id="mosaicHelp" class="modal fade" tabindex="-1" role="dialog">
