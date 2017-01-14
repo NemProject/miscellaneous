@@ -714,6 +714,13 @@ border: 1px solid #444;
 .floatRight {
   float: right; }
 
+.formFloat input {
+  width: 80%;
+  border: 0px; }
+
+.formFloat input:focus {
+  outline: 0; }
+
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
@@ -767,7 +774,13 @@ h3 {
   padding: 0;
   margin: 0;
   font-size: 19px;
-  color: rgba(0, 0, 0, 0.3); }
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 300; }
+
+h5 {
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 300;
+  font-size: 16px; }
 
 .input-group-btn {
   min-width: 170px;
@@ -776,8 +789,8 @@ h3 {
     min-width: 130px; }
 
 input.form-control.short {
-  width: 50px !important;
-  min-width: 50px; }
+  width: 60px !important;
+  min-width: 60px; }
 
 .navbar-brand span:first-of-type {
   font-weight: 100; }
@@ -805,7 +818,8 @@ input.form-control.short {
 .tabDescription {
   float: right;
   position: relative;
-  padding-right: 20px; }
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 500; }
 
 button {
   min-width: 140px;
@@ -905,13 +919,10 @@ textarea {
     color: rgba(0, 0, 0, 0.7); }
 
 /*** CREATE MOSAIC PAGE ***/
-.create-mosaic-page .centerCheckboxes {
-  text-align: center; }
+.create-mosaic-page .mosaicCheckboxes {
+  text-align: left; }
 
 /*** CREATE NAMESPACE PAGE ***/
-.feeAmount {
-  vertical-align: bottom !important; }
-
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 .dashboard-page, .transferTransaction-page, .services-page, .create-mosaic-page, .audit-apostille-page, .create-apostille-page, .namespace-provision-page {
   background-color: white; }
@@ -1052,7 +1063,7 @@ textarea {
 label {
   font-size: 16px; }
 
-/*** custom checkboxes ***/
+/*** CUSTOM CHECKBOXES ***/
 input[type=checkbox] {
   display: none; }
 

@@ -23,6 +23,15 @@
 .floatRight {
   float: right;
 }
+.formFloat {
+  input {
+    width: 80%;
+    border: 0px;
+  }
+  input:focus {
+    outline: 0;
+  }
+}
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
@@ -78,6 +87,12 @@ h3 {
   margin: 0;
   font-size: 19px;
   color: $gray;
+  font-weight: 300;
+}
+h5 {
+  color: $gray;
+  font-weight: 300;
+  font-size: 16px;
 }
 .input-group-btn {
   min-width: 170px;
@@ -87,8 +102,8 @@ h3 {
   }
 }
 input.form-control.short{
-  width: 50px !important;
-  min-width: 50px;
+  width: 60px !important;
+  min-width: 60px;
 
 }
 
@@ -128,8 +143,9 @@ input.form-control.short{
 .tabDescription {
   float: right;
   position: relative;
-  // bottom: $pad;
-  padding-right: $pad;
+  // padding-right: $pad;
+  color: $gray;
+  font-weight: 500;
 }
 button {
   min-width: 140px;
@@ -251,8 +267,8 @@ textarea {
 
 /*** CREATE MOSAIC PAGE ***/
 .create-mosaic-page {
-  .centerCheckboxes {
-    text-align: center;
+  .mosaicCheckboxes {
+    text-align: left;
   }
 }
 /*** CREATE NAMESPACE PAGE ***/
@@ -263,9 +279,9 @@ textarea {
 //     text-align: center !important;
 //   }
 // }
-.feeAmount{
-  vertical-align: bottom !important;
-}
+// .feeAmount{
+//   vertical-align: bottom !important;
+// }
 
 
 
@@ -484,23 +500,28 @@ label {
 //   margin-left: 20px;
 // }
 
-/*** custom checkboxes ***/
 
-input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+/*** CUSTOM CHECKBOXES ***/
+input[type=checkbox] {
+  display:none;
+} /* to hide the checkbox itself */
 input[type=checkbox] + label:before {
   font-family: FontAwesome;
   display: inline-block;
 }
+input[type=checkbox] + label:before {
+   content: "\f096";
+} /* unchecked icon */
+input[type=checkbox] + label:before {
+   letter-spacing: 10px;
+} /* space between checkbox and label */
 
-input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
-input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
-
-input[type=checkbox]:checked + label:before { content: "\f046"; } /* checked icon */
-input[type=checkbox]:checked + label:before { letter-spacing: 8px; } /* allow space for check mark */
-
-
-
-
+input[type=checkbox]:checked + label:before {
+   content: "\f046";
+} /* checked icon */
+input[type=checkbox]:checked + label:before {
+   letter-spacing: 8px;
+} /* allow space for check mark */
 
 
 

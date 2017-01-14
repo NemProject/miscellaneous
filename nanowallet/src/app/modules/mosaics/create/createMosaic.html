@@ -113,9 +113,7 @@
                       </span>
                       <div class="form-control" readOnly>
                         <span class="feeAmount">
-                          <span>
-                          {{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}
-</span>
+                          <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}</span>
                       </span>
                           <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -156,11 +154,11 @@
 
                  <div class="row">
                    <!-- SET MOSAIC SUPPLY -->
-                  <div class="col-md-5 inner">
+                  <div class="col-md-8 inner">
                    <div class="col-md-12">
                   <fieldset class="form-group">
                     <div class="input-group">
-                      <span class="input-group-btn short">
+                      <span class="input-group-btn">
                           <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
                       </span>
 
@@ -172,59 +170,64 @@
                   <div class="col-md-12">
                  <fieldset class="form-group">
                    <div class="input-group">
-                     <span class="input-group-btn short">
+                     <span class="input-group-btn">
                        <label>{{ 'MOSAIC_DEFINITION_DIV' | translate }}:</label>
                      </span>
                      <input type="number" class="form-control short" ng-model="$ctrl.formData.properties.divisibility" placeholder="" min="0" max="6">
                    </div>
                  </fieldset>
                </div>
+
                 </div>
-                       <!-- TOTAL SUPPLY -->
-                      <div class="col-md-7">
-                       <div class="col-md-12">
-                      <fieldset class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-btn">
-                            <label>Total Supply:* </label>
-                          </span>
-                          <span class="form-control" readOnly>
-                            <span>{{($ctrl.formData.properties.initialSupply)}}</span>
-                            <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
-                          </span>
-                        </div>
-                      </fieldset>
-                  </div>
+                      <div class="col-md-4">
+                        <!-- CHECKBOXES -->
+                        <fieldset class="form-group row mosaicCheckboxes">
+                           <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
+                           <label for="box3" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+
+                           <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
+                           <label for="box4" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
+
+                           <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
+                           <label for="box5" class="col-md-12 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
+
+                        </fieldset>
 
 
-                        <!-- NAMESPACE AND MOSAIC FINAL NAME -->
-                        <div class="col-md-12">
-                          <fieldset class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                          <label>Full Name:* </label>
-                        </span>
-                           <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
-                      </div>
-                    </fieldset>
-                     </div>
+
+
                    </div>
                  </div>
-                   <!-- CHECKBOXES -->
-                   <fieldset class="form-group row centerCheckboxes">
-                      <input id="box3" type="checkbox" ng-model="$ctrl.formData.properties.transferable">
-                      <label for="box3" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_TRANSFERABLE' | translate }}</label>
+                 <div class="row">
+                 <!-- TOTAL SUPPLY -->
+                 <div class="col-md-12">
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label>Total Supply:* </label>
+                    </span>
+                    <span class="form-control" readOnly>
+                      <span>{{($ctrl.formData.properties.initialSupply)}}</span>
+                      <span class="text-muted" ng-show="$ctrl.formData.properties.divisibility > 0">.{{(0 | fmtSupplyRaw:$ctrl.formData.properties.divisibility)[1]}}</span>
+                    </span>
+                  </div>
+                </fieldset>
+            </div>
+                 <!-- NAMESPACE AND MOSAIC FINAL NAME -->
 
-                      <input id="box4" type="checkbox" ng-model="$ctrl.formData.properties.supplyMutable">
-                      <label for="box4" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_MUTABLE_SUPPLY' | translate }}</label>
-
-                      <input id="box5" type="checkbox" ng-model="$ctrl.hasLevy" ng-change="$ctrl.updateLevyMosaic($ctrl.hasLevy)">
-                      <label for="box5" class="col-md-4 control-label">{{ 'MOSAIC_DEFINITION_REQUIRES_LEVY' | translate }}</label>
-
-                   </fieldset>
+                 <div class="col-md-12">
+                   <fieldset class="form-group">
+                     <div class="input-group">
+                       <span class="input-group-btn">
+                   <label>Full Name:* </label>
+                 </span>
+                    <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
+               </div>
+             </fieldset>
+              </div>
+            </div>
                     <!-- LEVY START -->
                   <div ng-show="$ctrl.hasLevy">
-                     <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
                   <!-- MOSAIC TO BE LEVY -->
                      <fieldset class="form-group">
                        <div class="input-group">
@@ -235,7 +238,6 @@
                       </div>
                      </fieldset>
                      <!-- ADDRESS TO RECEIVE LEVY -->
-
                      <fieldset class="form-group">
                        <div class="input-group">
                        <span class="input-group-btn">
@@ -250,10 +252,10 @@
                            <span class="input-group-btn">
                            <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
                         </span>
-                           <input type="number" class="form-control" ng-model="$ctrl.formData.levy.fee">
-                           <span class="input-group-btn">
-                           <button class="btn btn-default" style="cursor:default;opacity:1;text-transform: uppercase;" type="button" style="cursor:default;opacity:1;" disabled><small>{{ $ctrl.selectedMosaic }}</small></button>
-                        </span>
+                        <div class="form-control formFloat">
+                           <input type="number" ng-model="$ctrl.formData.levy.fee">
+                           <label class="floatRight">{{ $ctrl.selectedMosaic }}</label>
+                      </div>
                         </div>
                      </fieldset>
                      <!-- LEVY FEE TYPE OPTIONS -->
@@ -268,9 +270,10 @@
                         <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
                         <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="2"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}
                         </label>
+                      </div>
+
                      </fieldset>
 
-                  </div>
             </div>
             <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
                      <div ng-show="$ctrl.formData.levy.feeType === 1">
@@ -353,11 +356,13 @@
               </li>
            </ul>
            <p ng-bind-html="'MOSAIC_DEFINITION_INFORMATION_16' | translate"></p>
+
+           <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
+
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
