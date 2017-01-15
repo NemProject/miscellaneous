@@ -887,24 +887,24 @@ textarea {
   text-align: right; }
 
 /*** SERVICES/PORTAL PAGE ***/
-.portalWrap {
-  padding-left: 20px;
-  padding-right: 20px; }
-
 .portalWrap .row1 {
   padding-bottom: 40px; }
 
 .portalWrap .panel-heading {
   border-bottom: 0px !important; }
+  .portalWrap .panel-heading .col-sm-9 {
+    position: relative;
+    left: -20px; }
   .portalWrap .panel-heading h5 {
-    font-size: 19px;
-    font-weight: 700; }
+    color: black;
+    font-weight: 500;
+    font-size: 21px; }
   .portalWrap .panel-heading i {
     vertical-align: middle; }
   .portalWrap .panel-heading img {
     width: 56px; }
   .portalWrap .panel-heading .col-sm-3 {
-    min-height: 60px; }
+    min-height: 66px; }
 
 .portalWrap .panel-body {
   padding: 0px;
