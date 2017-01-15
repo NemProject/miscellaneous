@@ -30,20 +30,22 @@
               <li ng-class="$ctrl.invoice ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.invoice = true;$ctrl.resetData();$ctrl.formData.isMosaicTransfer = false;" style="outline:0;cursor:pointer;display:inline;">{{ 'TRANSFER_TRANSACTION_TAB_INVOICE' | translate }}</a></li>
             </ul>
           </div>
+          <!-- Transaction form -->
           <div class="panel-body" ng-show="!$ctrl.invoice">
-            <fieldset>
-              <!-- Transaction form -->
-
-
-              <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
-                <!-- SELECT MULTISIG ACCOUNT -->
+            <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
+              <!-- SELECT MULTISIG ACCOUNT -->
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent" class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
+                </span>
                 <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();"></select>
-              </fieldset>
+              </div>
+            </fieldset>
               <!-- MULTISIG ACCOUNT BALANCE -->
               <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}</label>
+                    <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
                   </span>
                   <div class="form-control formFloat" readOnly>
                     <input type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly disabled/>
@@ -55,7 +57,7 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_TO' | translate}}: </button>
+                    <label>{{'GENERAL_TO' | translate}}: </label>
                   </span>
                   <!-- Delayed input with debounce -->
                   <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
@@ -65,7 +67,7 @@
               <fieldset class="form-group" ng-show="$ctrl.showAlias">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}: </button>
+                    <label>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}: </label>
                   </span>
                   <input class="form-control form-control-lg" type="text" ng-model="$ctrl.aliasAddress" readOnly/>
                 </div>
@@ -86,7 +88,7 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}:</button>
+                    <label>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}: </label>
                   </span>
                   <textarea class="form-control" ng-model="$ctrl.formData.message" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateFees();"></textarea>
                 </div>
@@ -95,7 +97,7 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <label>{{'GENERAL_FEE' | translate}}:</label>
+                    <label>{{'GENERAL_FEE' | translate}}: </label>
                   </span>
                   <div class="form-control" readOnly>
                     <span class="feeAmount">
@@ -127,7 +129,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_PASSWORD' | translate }}:</button>
+                  <label>{{ 'FORM_PASSWORD' | translate }}: </label>
                 </span>
                 <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
               </div>
@@ -138,32 +140,39 @@
             </button>
           </fieldset>
         </div>
-
+        <!-- INVOICE TAB START -->
+        <!-- PAYTO ADDRESS -->
         <div class="panel-body" ng-show="$ctrl.invoice">
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_PAY_TO' | translate}}</button>
+                <label>{{'FORM_SIDE_BTN_PAY_TO' | translate}}: </label>
               </span>
               <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_INVOICE_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.invoiceData.data.addr" ng-change="$ctrl.updateInvoiceQR()"/>
             </div>
           </fieldset>
-
+          <!-- AMOUNT REQUESTED -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_AMOUNT' | translate}}</button>
+                <label>{{'GENERAL_AMOUNT' | translate}}</label>
               </span>
-              <input class="form-control form-control-lg" type="number" ng-model="$ctrl.rawAmountInvoice" min="0" ng-change="$ctrl.updateInvoiceQR();"/>
+              <div class="form-control formFloat" ng-disabled="$ctrl.formData.isMosaicTransfer">
+                <input type="number" ng-model="$ctrl.rawAmountInvoice" min="0" ng-change="$ctrl.updateInvoiceQR();"/>
+                <label class="floatRight"><small>XEM</small></label>
+              </div>
+            </div>
+          </fieldset>
+          <!-- MESSAGE REGARDING REQUEST -->
+          <fieldset class="form-group">
+            <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                <label>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}: </label>
               </span>
+              <textarea class="form-control" ng-model="$ctrl.invoiceData.data.msg" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateInvoiceQR();"></textarea>
             </div>
           </fieldset>
 
-          <fieldset class="form-group">
-            <textarea class="form-control" ng-model="$ctrl.invoiceData.data.msg" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateInvoiceQR();"></textarea>
-          </fieldset>
         </div>
       </div>
     </div>
@@ -250,21 +259,19 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- Invoice part -->
-    <div class="col-md-6 noPaddingLeft" ng-show="$ctrl.invoice">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-          <i class="fa fa-qrcode"></i> {{ 'TRANSFER_TRANSACTION_TAB_INVOICE' | translate }}
+      <!-- QR CODE IS HERE -->
+      <div class="col-md-3" ng-show="$ctrl.invoice">
+        <div class="panel-heading">
+          <h3>{{ 'TRANSFER_TRANSACTION_TAB_INVOICE' | translate }} <i class="fa fa-qrcode"></i></h3>
         </div>
         <div class="panel-body">
           <center>
-          <!-- QR appended from controller here -->
+            <!-- QR appended from controller here -->
             <div id="invoiceQR"></div>
           </center>
         </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>

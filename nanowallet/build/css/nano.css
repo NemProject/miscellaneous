@@ -715,8 +715,11 @@ border: 1px solid #444;
   float: right; }
 
 .formFloat input {
-  width: 50%;
+  width: 88%;
   border: 0px; }
+
+.formFloat input.levy {
+  width: 40%; }
 
 .formFloat input:focus {
   outline: 0; }

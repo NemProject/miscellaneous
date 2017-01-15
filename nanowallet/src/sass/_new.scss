@@ -25,8 +25,11 @@
 }
 .formFloat {
   input {
-    width: 50%;
+    width: 88%;
     border: 0px;
+  }
+  input.levy {
+    width: 40%;
   }
   input:focus {
     outline: 0;
