@@ -715,7 +715,7 @@ border: 1px solid #444;
   float: right; }
 
 .formFloat input {
-  width: 80%;
+  width: 30%;
   border: 0px; }
 
 .formFloat input:focus {
