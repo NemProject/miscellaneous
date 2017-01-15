@@ -721,6 +721,11 @@ border: 1px solid #444;
 .formFloat input:focus {
   outline: 0; }
 
+input.readOnly {
+  background: transparent;
+  box-shadow: none;
+  border: 0; }
+
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;

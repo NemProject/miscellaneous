@@ -41,10 +41,10 @@
                 <span class="input-group-btn">
                   <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
                 </span>
-                <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
-                <span class="input-group-btn">
-                  <label><small>XEM</small></label>
-                </span>
+                <div class="form-control" readOnly>
+                  <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly />
+                  <label class="floatRight"><small>XEM</small></label>
+                </div>
               </div>
             </fieldset>
             <!-- PARENT NAMESPACE SELECTION -->
