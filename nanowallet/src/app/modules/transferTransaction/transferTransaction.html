@@ -179,7 +179,7 @@
         </div>
 
         <!-- Mosaics part -->
-        <div class="mosaic col-md-6" ng-show="!$ctrl.invoice">
+        <div class="mosaic col-md-6" ng-show="$ctrl.formData.isMosaicTransfer">
 
             <div>
                 <div class="panel-heading">
@@ -262,6 +262,7 @@
                     </div>
                 </div>
         </div>
+
 </div>
         <!-- Invoice part -->
         <div class="col-md-6 noPaddingLeft" ng-show="$ctrl.invoice">
