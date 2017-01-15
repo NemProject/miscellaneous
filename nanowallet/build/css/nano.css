@@ -797,6 +797,9 @@ input.form-control.short {
   width: 60px !important;
   min-width: 60px; }
 
+footer .container-fluid {
+  padding: 0; }
+
 .navbar-brand span:first-of-type {
   font-weight: 100; }
 

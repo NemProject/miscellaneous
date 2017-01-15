@@ -112,7 +112,9 @@ input.form-control.short{
 
 }
 
-
+footer .container-fluid {
+  padding: 0;
+}
 // confirmed/unconfirmed tabs, send/receive tabs
 .navbar-brand {
   span:first-of-type {
