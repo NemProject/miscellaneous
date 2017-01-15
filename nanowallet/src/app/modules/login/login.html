@@ -2,7 +2,7 @@
 
   <div class="container text-center">
 
-    <h1 style="color:white;">{{ 'LOGIN_MEMBER_TITLE' | translate }}</h1>
+    <h1 style="color:white;" data-toggle="tooltip" title="{{ 'LOGIN_IMPORT_BUTTON' | translate }}">{{ 'LOGIN_MEMBER_TITLE' | translate }}</h1>
 
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -59,7 +59,7 @@
             <button class="btn btn-success" style="border-radius:0px;"
               type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.upgradeWallet()">
               {{ 'LOGIN_UPGRADE_BUTTON' | translate }}
-            </button> 
+            </button>
       </div>
     </div>
 
