@@ -715,11 +715,14 @@ border: 1px solid #444;
   float: right; }
 
 .formFloat input {
-  width: 30%;
+  width: 50%;
   border: 0px; }
 
 .formFloat input:focus {
   outline: 0; }
+
+.formFloat input[disabled] {
+  background: transparent; }
 
 input.readOnly {
   background: transparent;

@@ -8,7 +8,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-5">
         <div class="panel">
           <div class="panel-heading">
             <div class="tabDescription">
@@ -33,52 +33,54 @@
           <div class="panel-body" ng-show="!$ctrl.invoice">
             <fieldset>
               <!-- Transaction form -->
+
+
               <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
-                <!-- Update account mosaics on change -->
+                <!-- SELECT MULTISIG ACCOUNT -->
                 <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountMosaics();$ctrl.setMosaicTransfer();"></select>
               </fieldset>
-
+              <!-- MULTISIG ACCOUNT BALANCE -->
               <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
+                    <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}</label>
                   </span>
-                  <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                  </span>
+                  <div class="form-control formFloat" readOnly>
+                    <input type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly disabled/>
+                    <label class="floatRight"><small>XEM</small></label>
+                  </div>
                 </div>
               </fieldset>
-              <!--  recipient address -->
+              <!--  RECIPIENT ADDRESS OR ALIAS -->
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_TO' | translate}}:</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_TO' | translate}}: </button>
                   </span>
                   <!-- Delayed input with debounce -->
                   <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
                 </div>
               </fieldset>
-
+              <!-- ADDRESS THAT BELONGS TO ALIAS -->
               <fieldset class="form-group" ng-show="$ctrl.showAlias">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}</button>
+                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}: </button>
                   </span>
                   <input class="form-control form-control-lg" type="text" ng-model="$ctrl.aliasAddress" readOnly/>
                 </div>
               </fieldset>
               <!-- Amount of XEM to send -->
               <fieldset class="form-group">
-                  <div class="input-group">
-                      <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_AMOUNT' | translate}}:</button>
-                      </span>
-                      <input class="form-control form-control-lg" type="number" ng-model="$ctrl.formData.amount" min="0" ng-disabled="$ctrl.formData.isMosaicTransfer" ng-change="$ctrl.updateFees();"/>
-                      <span class="input-group-btn">
-                          <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                      </span>
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <label>{{'GENERAL_AMOUNT' | translate}}: </label>
+                  </span>
+                  <div class="form-control formFloat" ng-disabled="$ctrl.formData.isMosaicTransfer">
+                    <input type="number" ng-disabled="$ctrl.formData.isMosaicTransfer" ng-model="$ctrl.formData.amount" min="0" ng-change="$ctrl.updateFees();"/>
+                    <label class="floatRight"><small>XEM</small></label>
                   </div>
+                </div>
               </fieldset>
               <!-- Message Field -->
               <fieldset class="form-group">
@@ -93,19 +95,17 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_FEE' | translate}}:</button>
+                    <label>{{'GENERAL_FEE' | translate}}:</label>
                   </span>
-                  <p class="fees">
-                    <span style="margin-right:10px;">
+                  <div class="form-control" readOnly>
+                    <span class="feeAmount">
                       <!-- Multisig fee -->
                       <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
                       <!-- Transaction fee -->
                       <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}} <span ng-show="$ctrl.formData.encryptMessage">(+ encryption fees)</span></span>
                     </span>
-                  </p>
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                  </span>
+                    <label class="floatRight"><small>XEM</small></label>
+                  </div>
                 </div>
               </fieldset>
               <!-- Checkbox Fields -->
@@ -168,7 +168,7 @@
       </div>
     </div>
       <!-- Mosaics part -->
-      <div class="mosaic col-md-6" ng-show="$ctrl.formData.isMosaicTransfer">
+      <div class="mosaic col-md-7" ng-show="$ctrl.formData.isMosaicTransfer">
         <div class="panel-heading">
           <h4>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }} <i class="fa fa-paperclip"></i></h4>
         </div>
@@ -265,6 +265,6 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>

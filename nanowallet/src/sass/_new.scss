@@ -25,12 +25,15 @@
 }
 .formFloat {
   input {
-    width: 30%;
+    width: 50%;
     border: 0px;
   }
   input:focus {
     outline: 0;
   }
+}
+.formFloat input[disabled] {
+  background: transparent;
 }
 input.readOnly {
   background: transparent;
