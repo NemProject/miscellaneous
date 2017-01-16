@@ -73,7 +73,7 @@
             </fieldset>
             <!-- TRANSACTION FEE -->
             <div class="row" class="dualFees">
-              <div class="col-md-7">
+              <div class="col-md-6">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
@@ -81,8 +81,8 @@
                     </span>
                     <div class="form-control" readOnly>
                       <span class="feeAmount">
-                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
-                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
+                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -90,15 +90,15 @@
                 </fieldset>
               </div>
               <!-- RENTAL FEE-->
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <fieldset class="form-group">
                   <div class="input-group">
-                    <span class="input-group-btn short">
+                    <span class="input-group-btn">
                       <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
                     </span>
                     <div class="form-control" readOnly>
                       <span class="feeAmount">
-                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}.{{($ctrl.formData.rentalFee | fmtNemValue)[1]}}</span>
+                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
