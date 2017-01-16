@@ -87,93 +87,74 @@
         </div>
       </div>
 
-    <div class="col-md-6">
-      <div class="panel-heading">
-        <h3>{{ 'MOSAIC_SUPPLY_CHANGE_SUPPLY' | translate }}</h3>
-      </div>
-      <div class="panel-body">
-        <!-- ORIGINAL MOSAIC SUPPLY -->
-        <fieldset class="form-group">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <label>{{ 'MOSAIC_SUPPLY_CHANGE_CURRENT_SUPPLY' | translate }}: </label>
-            </span>
-            <div class="form-control formFloat" disabled >
-              <strong>{{$ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply}}</strong>
-              <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
-              <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
-            </div>
-          </div>
-        </fieldset>
-        <!-- CREATE OR DELETE MOSAIC -->
-        <fieldset class="form-group row changeType">
-          <div class="col-md-3">
-            <label>{{ 'MOSAIC_SUPPLY_CHANGE_TYPE' | translate }}: </label>
-          </div>
-          <div class="col-md-4">
-            <label>
-              <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="1"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_1' | translate }}
-            </label>
-          </div>
-          <div class="col-md-4">
-            <label>
-              <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="2"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_2' | translate }}
-            </label>
-          </div>
-        </fieldset>
-        <!-- CREATE/DELETE AMOUNT -->
-        <fieldset class="form-group">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <label>{{ 'MOSAIC_SUPPLY_CHANGE_AMOUNT' | translate }}: </label>
-            </span>
-            <div class="form-control formFloat">
-              <input class="levy" type="number" ng-model="$ctrl.formData.delta" min="0">
-              <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
-            </div>
-          </div>
-        </fieldset>
-        <!-- RESULTING MOSAIC SUPPLY -->
-        <fieldset class="form-group">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <label>{{ 'MOSAIC_SUPPLY_CHANGE_RES_SUPPLY' | translate }}</label>
-            </span>
-            <div class="form-control formFloat" disabled >
-              <span ng-show="$ctrl.formData.supplyType === 1">
-                <strong>{{($ctrl.formData.delta + $ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply)}}</strong>
-                <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
+      <div class="col-md-6">
+        <div class="panel-heading">
+          <h3>{{ 'MOSAIC_SUPPLY_CHANGE_SUPPLY' | translate }}</h3>
+        </div>
+        <div class="panel-body">
+          <!-- ORIGINAL MOSAIC SUPPLY -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'MOSAIC_SUPPLY_CHANGE_CURRENT_SUPPLY' | translate }}: </label>
               </span>
-              <span ng-show="$ctrl.formData.supplyType === 2">
-                <strong>{{(-$ctrl.formData.delta + $ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply)}}</strong>
+              <div class="form-control formFloat" disabled >
+                <strong>{{$ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply}}</strong>
                 <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
-              </span>
-              <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+              </div>
             </div>
-          </div>
-        </fieldset>
+          </fieldset>
+          <!-- CREATE OR DELETE MOSAIC -->
+          <fieldset class="form-group row changeType">
+            <div class="col-md-3">
+              <label>{{ 'MOSAIC_SUPPLY_CHANGE_TYPE' | translate }}: </label>
+            </div>
+            <div class="col-md-4">
+              <label>
+                <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="1"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_1' | translate }}
+              </label>
+            </div>
+            <div class="col-md-4">
+              <label>
+                <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="2"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_2' | translate }}
+              </label>
+            </div>
+          </fieldset>
+          <!-- CREATE/DELETE AMOUNT -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'MOSAIC_SUPPLY_CHANGE_AMOUNT' | translate }}: </label>
+              </span>
+              <div class="form-control formFloat">
+                <input class="levy" type="number" ng-model="$ctrl.formData.delta" min="0">
+                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+              </div>
+            </div>
+          </fieldset>
+          <!-- RESULTING MOSAIC SUPPLY -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'MOSAIC_SUPPLY_CHANGE_RES_SUPPLY' | translate }}</label>
+              </span>
+              <div class="form-control formFloat" disabled >
+                <span ng-show="$ctrl.formData.supplyType === 1">
+                  <strong>{{($ctrl.formData.delta + $ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply)}}</strong>
+                  <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
+                </span>
+                <span ng-show="$ctrl.formData.supplyType === 2">
+                  <strong>{{(-$ctrl.formData.delta + $ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply)}}</strong>
+                  <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
+                </span>
+                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
       </div>
+
     </div>
-
-
-
-
-        <!-- <fieldset class="form-group">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <label>{{ 'MOSAIC_SUPPLY_CHANGE_CURRENT_SUPPLY' | translate }}: </label>
-            </span>
-            <div class="form-control formFloat" disabled >
-              <strong>{{$ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply}}</strong>
-              <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
-              <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
-            </div>
-          </div>
-        </fieldset> -->
-
-
-
-
   </div>
-</div>
 </div>
