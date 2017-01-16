@@ -19,8 +19,8 @@
             <span ng-show="$ctrl.formData.isMultisig">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
-            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
-            <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
+            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
           </ul>
         </div>
 
@@ -129,6 +129,7 @@
                 <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
               </div>
             </fieldset>
+            <!-- SEND TRANSACTION -->
             <button class="btn btn-success pull-xs-right" type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceParent || !$ctrl.formData.mosaicName || !$ctrl.formData.mosaicDescription || $ctrl.hasLevy && !$ctrl.formData.levy.address || !$ctrl.formData.properties.initialSupply || $ctrl.hasLevy && !$ctrl.formData.levy.fee || $ctrl.formData.properties.divisibility == undefined || !$ctrl.mosaicIsValid($ctrl.formData.mosaicName) || !$ctrl.mosaicDescriptionIsValid($ctrl.formData.mosaicDescription)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
             </button>

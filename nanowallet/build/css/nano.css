@@ -823,7 +823,10 @@ footer .container-fluid {
   padding-bottom: 12px; }
 
 .nav-tabs li a {
-  color: grey; }
+  color: grey;
+  outline: 0;
+  cursor: pointer;
+  display: inline; }
 
 .nav-tabs {
   position: relative;

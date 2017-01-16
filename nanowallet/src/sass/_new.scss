@@ -144,8 +144,9 @@ footer .container-fluid {
 
 .nav-tabs li a {
 	color: grey;
-  // padding: 0px;
-  // background-color: $grayLite;
+  outline: 0;
+  cursor: pointer;
+  display: inline;
 }
 
 .nav-tabs {
@@ -232,7 +233,7 @@ textarea {
     }
     .col-sm-9 {
       position: relative;
-      left: -$pad;   
+      left: -$pad;
     }
     h5 {
       color: black;
