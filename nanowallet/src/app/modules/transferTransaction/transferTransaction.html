@@ -101,9 +101,9 @@
                 <div class="form-control" readOnly>
                   <span class="feeAmount">
                     <!-- Multisig fee -->
-                    <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
+                    <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
                     <!-- Transaction fee -->
-                    <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}} <span ng-show="$ctrl.formData.encryptMessage">(+ encryption fees)</span></span>
+                    <span>{{($ctrl.formData.fee | fmtNemValue)[0]}} <span ng-show="$ctrl.formData.encryptMessage">(+ encryption fees)</span></span>
                   </span>
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
