@@ -11,6 +11,7 @@ var uglify        = require('gulp-uglify');
 var merge         = require('merge-stream');
 var glob          = require('glob');
 var sass          = require('gulp-sass');
+var autoprefixer  = require('gulp-autoprefixer');
 
 // Where our files are located
 var jsFiles   = "src/app/**/*.js";
@@ -29,6 +30,10 @@ var args = Array.prototype.slice.call(arguments);
 
   // Keep gulp from hanging on this task
   this.emit('end');
+};
+
+var autoprefixerOptions = {
+  browsers: ['last 6 versions']
 };
 
 // Task for app files
@@ -80,6 +85,7 @@ gulp.task('tests', function() {
   gulp.task('sass', function () {
     return gulp.src('src/sass/nano.scss')
       .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer())
       .pipe(gulp.dest('./build/css'));
   });
 

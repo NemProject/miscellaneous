@@ -51,6 +51,7 @@
   },
   "homepage": "https://github.com/NemProject/NanoWallet#readme",
   "devDependencies": {
+    "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^3.0.0"
   }
 }
