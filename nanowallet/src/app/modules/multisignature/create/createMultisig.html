@@ -5,31 +5,38 @@
       <div class="col-sm-8">
         <h2>{{ 'AGGREGATE_MODIFICATION_TITLE' | translate }}</h2>
       </div>
+    </div>
+          <div class="row">
+            <div class="col-md-6">
 
-      <div class="col-md-6">
-        <div>
           <div class="panel-heading">
-              {{ 'AGGREGATE_MODIFICATION_NAME' | translate }}
+            <div class="tabDescription">
+              <span ng-show="!$ctrl.useCustomAccount">{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}</span>
+              <span ng-show="$ctrl.useCustomAccount">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
+            </div>
+            <ul class="nav nav-tabs">
+              <li ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+              <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">Import Key*</a></li>
+            </ul>
           </div>
           <div class="panel-body">
             <fieldset>
-
-              <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
-                <input class="form-control form-control-lg"
-                  type="password"
-                  placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                  ng-model="$ctrl.common.password"/>
-              </fieldset>
-
+              <!-- ACCOUNT TO CONVERT TO MULTISIG -->
               <fieldset class="form-group" ng-show="$ctrl.haveMoreThanOneAccount && !$ctrl.useCustomAccount">
               	<div class="input-group">
+                  <span class="input-group-btn">
+                    <label>Account to Convert:* </label>
+                  </span>
                  	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
                  		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
                 	</select>
-              	  <span class="input-group-btn">
+
+
+                  <!-- CHOOSE CUSTOM ACCOUNT BUTTON -->
+              	  <!-- <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}">
                     <i class="fa fa-edit"></i></button>
-                  </span>
+                  </span> -->
                 </div>
               </fieldset>
 
@@ -39,10 +46,10 @@
                 type="text"
                 placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT' | translate }}"
                 ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();"/>
-            	<span class="input-group-btn" ng-show="$ctrl.haveMoreThanOneAccount">
+            	<!-- <span class="input-group-btn" ng-show="$ctrl.haveMoreThanOneAccount">
                         <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = false;$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_SELECT_WALLET_ACCOUNT' | translate }}">
                           <i class="fa fa-caret-square-o-down"></i></button>
-                  </span>
+                  </span> -->
             </div>
             </fieldset>
 
@@ -113,7 +120,16 @@
                 </span>
               </div>
             </fieldset>
-
+            <!-- PASSWORD FIELD -->
+            <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                </span>
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
+            </fieldset>
+            <!-- SEND TRANSACTION -->
             <button class="btn btn-success pull-xs-right"
               type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.useCustomAccount && !$ctrl.common.password.length || $ctrl.useCustomAccount && !$ctrl.common.privateKey || !$ctrl.cosignatoryArray.length" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
@@ -123,7 +139,6 @@
         </fieldset>
             </div>
         </div>
-    </div>
 
     <div class="col-md-6">
 
@@ -157,5 +172,5 @@
 
       </div>
     </div>
-
+</div>
 </div>
