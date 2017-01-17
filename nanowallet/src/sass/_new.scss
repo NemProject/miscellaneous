@@ -111,6 +111,21 @@ h5 {
   &.short {
     min-width: 130px;
   }
+  &.adding {
+    max-width: $pad * 2;
+    min-width: $pad * 2;
+  }
+  .btn-warning {
+    max-width: $pad * 2;
+    min-width: $pad * 2;
+    background: $blue;
+    border: 1px solid $blue;
+  }
+  .btn-warning:hover, .btn-warning:active, .btn-warning:focus {
+    background: $blueLite !important;
+    border: 1px solid $blueLite !important;
+    color: white !important;
+  }
 }
 input.form-control.short{
   width: 60px !important;
@@ -185,12 +200,15 @@ button {
 .btn-success {
   background-color: $blue;
   border-color: $blue;
+  width: 100%;
 }
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   background-color: $blueLite !important;
   border-color: $blueLite !important;
 }
-
+.button-warning {
+  max-width: 50px;
+}
 /*** SEND/RECEIVE PAGE ***/
 
 .form-control {

@@ -798,6 +798,18 @@ h5 {
   vertical-align: middle; }
   .input-group-btn.short {
     min-width: 130px; }
+  .input-group-btn.adding {
+    max-width: 40px;
+    min-width: 40px; }
+  .input-group-btn .btn-warning {
+    max-width: 40px;
+    min-width: 40px;
+    background: #69b2e5;
+    border: 1px solid #69b2e5; }
+  .input-group-btn .btn-warning:hover, .input-group-btn .btn-warning:active, .input-group-btn .btn-warning:focus {
+    background: rgba(105, 178, 229, 0.6) !important;
+    border: 1px solid rgba(105, 178, 229, 0.6) !important;
+    color: white !important; }
 
 input.form-control.short {
   width: 60px !important;
@@ -860,11 +872,15 @@ button {
 
 .btn-success {
   background-color: #69b2e5;
-  border-color: #69b2e5; }
+  border-color: #69b2e5;
+  width: 100%; }
 
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   background-color: rgba(105, 178, 229, 0.6) !important;
   border-color: rgba(105, 178, 229, 0.6) !important; }
+
+.button-warning {
+  max-width: 50px; }
 
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
