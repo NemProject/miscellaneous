@@ -1,34 +1,25 @@
 <div class="importance-transfer-page">
+  <div class="container-fluid">
 
-  <div class="banner-left">
-    <div class="container">
-      <h2><i class="fa fa-hashtag"></i> {{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</h2>
+    <div class="row">
+      <div class="col-sm-8">
+        <h2>{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</h2>
+      </div>
     </div>
-  </div>
+    <div class="row">
 
-  <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-
-    <div class="col-sm-6">
-
-           <div class="panel panel-default">
+      <div class="col-sm-6">
                 <div class="panel-heading">
                     <i class="fa fa-chevron-right"></i>
                     <span>{{ 'IMPORTANCE_TRANSFER_NAME' | translate }}</span>
                 </div>
                 <div class="panel-body">
-                    <fieldset>
-
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.common.password"/>
-            </fieldset>
-
+            <fieldset>
+            <!-- REMOTE ACCOUNT -->
             <fieldset class="form-group" ng-show="!$ctrl.customKey">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'IMPORTANCE_TRANSFER_REMOTE_ACCOUNT' | translate }}</button>
+                  <label>{{ 'IMPORTANCE_TRANSFER_REMOTE_ACCOUNT' | translate }}</label>
                 </span>
                 <input type="text" class="form-control" ng-model="$ctrl.remoteAccountAddress" readOnly>
               </div>
@@ -71,21 +62,27 @@
                 </span>
               </div>
             </fieldset>
-
+            <!-- PASSWORD FIELD -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                </span>
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
+            </fieldset>
          <button class="btn btn-success pull-xs-right"
               type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
-            </button>  
+            </button>
 
           </fieldset>
                 </div>
-            </div>
 
     </div>
 
      <div class="col-sm-6 noPaddingLeft">
 
-           <div class="panel panel-default">
                 <div class="panel-heading">
                   <span ng-show="!$ctrl.showInfo"><i class="fa fa-cubes"></i> {{ 'IMPORTANCE_TRANSFER_HARVESTING_PANEL' | translate }}</span>
                     <span ng-show="$ctrl.showInfo"><i class="fa fa-info-circle"></i> {{ 'GENERAL_INFORMATION' | translate }}</span>
@@ -167,7 +164,7 @@
 
                   <p class="bg-danger text-center" style="margin-top:5px;padding-left:5px;" ng-show="$ctrl.noFreeSlots && $ctrl.delegatedData.meta.status === 'LOCKED' && $ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_NO_SLOTS' | translate }}</p>
                   <p class="bg-danger" style="margin-top:5px;padding-left:5px;" ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 < 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_BELOW_THRESHOLD' | translate }}</p>
-                </div> 
+                </div>
                 <div ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'ACTIVATING'">
                   <p class="bg-danger" style="margin-top:5px;padding-left:5px;"><i class="fa fa-exclamation-triangle "></i> {{ 'IMPORTANCE_TRANSFER_REMOTE_ACTIVATING' | translate }}</p>
                 </div>
@@ -175,11 +172,9 @@
                   <p class="bg-danger" style="margin-top:5px;padding-left:5px;"><i class="fa fa-exclamation-triangle "></i> {{ 'IMPORTANCE_TRANSFER_REMOTE_INACTIVE' | translate }}</p>
                 </div>
                 </div>
-            </div>
 
     </div>
 
   </div>
 
 </div>
-
