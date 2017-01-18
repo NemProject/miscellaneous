@@ -163,6 +163,15 @@ footer .container-fluid {
     font-weight: 900;
   }
 }
+.account a {
+  padding-right: $pad / 10 !important;
+  margin-right: $pad / 10 !important;
+}
+.account2 a {
+  padding-left: 0px !important;
+  margin-left: 0px !important;
+}
+
 .nav-tabs li a:hover {
 	text-decoration: underline;
 }

@@ -47,7 +47,8 @@
              <li><button type="submit" class="btn btn-success" ng-click="$ctrl.changeNode($ctrl.customNode)" style="width: 100%; background: #444; color: white; border: medium none;border-radius:0px;">{{ 'HEADER_NODE_CONNECT' | translate }}</button></li>
           </ul>
         </li>
-        <li ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a ui-sref-active="active" ui-sref="app.account" show-authed="true">Account</a></li>
+        <li class="account" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a ui-sref-active="active" ui-sref="app.account" show-authed="true">Account*</a></li>
+        <li class="account2" ng-show="$ctrl._Wallet.currentAccount.label"><a>: {{ $ctrl._Wallet.currentAccount.label }}</a></li>
         <li style="display:none"><a style="outline:0;cursor:default;" show-authed="true" show-block-height></a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'HEADER_LANG_TITLE' | translate }}</a>
@@ -59,7 +60,6 @@
         </li>
         <li><a style="outline:0;border-left:medium none;" ui-sref-active="active" ui-sref="app.faq"><i class="fa fa-question-circle"></i></a></li>
         <li><a style="outline:0;cursor:pointer;text-transform: uppercase;border-right:none;" ng-click="$ctrl.purge()" ng-if="$ctrl._storage.wallets.length" show-authed="false"><i class="fa fa-trash"></i> <small><b>{{ 'HEADER_PURGE' | translate }}</b></small></a></li>
-        <li ng-show="$ctrl._Wallet.currentAccount.label"><a>{{ $ctrl._Wallet.currentAccount.label }}</a></li>
         <li><a style="outline:0;cursor:pointer;border-right:none;" show-authed="true" ng-click="$ctrl.logout()"><i class="fa fa-sign-out"></i> <small><b>{{$ctrl.walletName}}</small></b></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

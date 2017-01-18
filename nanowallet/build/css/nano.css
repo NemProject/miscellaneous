@@ -178,26 +178,19 @@ fieldset[disabled] .btn-default.focus {
   color: grey !important; }
 
 .navbar-nav li.money, .navbar-nav li.node {
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-left: 1px solid rgba(0, 0, 0, 0.3); }
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: 1px solid rgba(0, 0, 0, 0.05); }
 
 .navbar {
   border: none;
   border-radius: 0px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3); }
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); }
 
 .navbar-default .navbar-brand {
   background-color: transparent;
   color: black;
-  border-right: 1px solid rgba(0, 0, 0, 0.3); }
-
-.navbar-default .navbar-brand:hover {
-  background-color: green;
-  color: white; }
-
-.navbar-default .navbar-brand:focus {
-  background-color: #444444;
-  color: white; }
+  box-shadow: 1px 0 0 rgba(0, 0, 0, 0.05); }
 
 .navbar-default {
   margin-bottom: 0;
@@ -833,6 +826,14 @@ footer .container-fluid {
 
 .navbar-brand span:last-of-type {
   font-weight: 900; }
+
+.account a {
+  padding-right: 2px !important;
+  margin-right: 2px !important; }
+
+.account2 a {
+  padding-left: 0px !important;
+  margin-left: 0px !important; }
 
 .nav-tabs li a:hover {
   text-decoration: underline; }
