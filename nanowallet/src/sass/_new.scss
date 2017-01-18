@@ -76,6 +76,9 @@ select {
   padding: $pad / 2;
   border: 1px solid $blueLite;
   text-align: center;
+  p {
+    margin: 0;
+  }
 }
 .bg-danger {
   padding:10px;
@@ -115,6 +118,10 @@ h5 {
     max-width: $pad * 2;
     min-width: $pad * 2;
   }
+  &.addSubtract {
+    max-width: $pad * 4;
+    min-width: $pad * 4;
+  }
   .btn-warning {
     max-width: $pad * 2;
     min-width: $pad * 2;
@@ -124,6 +131,17 @@ h5 {
   .btn-warning:hover, .btn-warning:active, .btn-warning:focus {
     background: $blueLite !important;
     border: 1px solid $blueLite !important;
+    color: white !important;
+  }
+  .btn-danger {
+    max-width: $pad * 2;
+    min-width: $pad * 2;
+    // background: $blue;
+    // border: 1px solid $blue;
+  }
+  .btn-danger:hover, .btn-danger:active, .btn-danger:focus {
+    // background: $blueLite !important;
+    // border: 1px solid $blueLite !important;
     color: white !important;
   }
 }

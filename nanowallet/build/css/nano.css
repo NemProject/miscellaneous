@@ -765,6 +765,8 @@ select {
   padding: 10px;
   border: 1px solid rgba(105, 178, 229, 0.6);
   text-align: center; }
+  .bg-info p {
+    margin: 0; }
 
 .bg-danger {
   padding: 10px;
@@ -801,6 +803,9 @@ h5 {
   .input-group-btn.adding {
     max-width: 40px;
     min-width: 40px; }
+  .input-group-btn.addSubtract {
+    max-width: 80px;
+    min-width: 80px; }
   .input-group-btn .btn-warning {
     max-width: 40px;
     min-width: 40px;
@@ -809,6 +814,11 @@ h5 {
   .input-group-btn .btn-warning:hover, .input-group-btn .btn-warning:active, .input-group-btn .btn-warning:focus {
     background: rgba(105, 178, 229, 0.6) !important;
     border: 1px solid rgba(105, 178, 229, 0.6) !important;
+    color: white !important; }
+  .input-group-btn .btn-danger {
+    max-width: 40px;
+    min-width: 40px; }
+  .input-group-btn .btn-danger:hover, .input-group-btn .btn-danger:active, .input-group-btn .btn-danger:focus {
     color: white !important; }
 
 input.form-control.short {

@@ -1,5 +1,4 @@
 <div class="create-multisig-page">
-
   <div class="container-fluid main">
     <div class="row">
       <div class="col-sm-8">
@@ -83,7 +82,7 @@
                 <span class="input-group-btn">
                   <label>Add Signer:* </label>
                 </span>
-                <input class="form-control form-control-lg"
+                <input class="form-control"
                     type="text"
                     placeholder="{{ 'AGGREGATE_ADD_PLACEHOLDER' | translate }}"
                     ng-model="$ctrl.formData.cosignatoryToAdd" ng-model-options="{debounce:500}" ng-change="$ctrl.processCosignatoryToAdd();"/>

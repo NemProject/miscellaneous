@@ -486,7 +486,7 @@ function EnglishProvider($translateProvider) {
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Edit a multisignature contract',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Select an account to edit',
         AGGREGATE_ADD_REMOVE_PLACEHOLDER: 'Cosignatory account or @alias to add',
-        AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Relative change on minimum signatures',
+        AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Change Sigs Needed',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Number of signatures to add (n) or remove (-n) - Automated removals',
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Selected account information',
         AGGREGATE_MIN_SIGNATURES: 'Min signatures',
