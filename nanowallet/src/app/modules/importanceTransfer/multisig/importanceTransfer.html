@@ -31,16 +31,16 @@
             </fieldset>
 
             <fieldset class="form-group" ng-show="$ctrl.formData.multisigAccount">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
-                        </span>
-                                <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                                </span>
-                            </div>
-                        </fieldset>
+              <div class="input-group">
+                <span class="input-group-btn">
+             <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
+          </span>
+                  <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
+                  <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                  </span>
+              </div>
+          </fieldset>
 
             <div ng-show="$ctrl.remoteAccountAddress.length">
             <fieldset class="form-group" ng-show="!$ctrl.customKey">
@@ -94,7 +94,7 @@
          <button class="btn btn-success pull-xs-right"
               type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
-            </button>  
+            </button>
 
           </div>
 
@@ -124,7 +124,7 @@
                     <p style="margin: 0;">{{ 'IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE' | translate }}</p>
                   </div>
                    <div ng-show="$ctrl.multisigData">
-                    
+
                     <div class="form-group col-sm-4">
                       <label>{{ 'ACCOUNT_REMOTE_STATUS' | translate }}</label>
                       <br>
@@ -148,7 +148,7 @@
                       <p><b>{{ 'ACCOUNT_DELEGATED_PRIVATE_KEY' | translate }}</b><br> {{ $ctrl.remotePrivateKey }}</p>
 
                       <label>{{ 'ACCOUNT_START_STOP_HARVESTING' | translate }}</label>
-                        
+
                         <div ng-show="$ctrl.isActivator && $ctrl.multisigData.meta.remoteStatus === 'ACTIVE'">
                         <p class="bg-info" style="padding-left: 5px; padding-right: 5px;word-break:keep-all;font-style:italic;">
                           <span ng-bind-html="'ACCOUNT_HARVESTING_NOTE' | translate" ng-show="$ctrl.formData.multisigAccount.vestedBalance / 1000000 > 10000"></span>
@@ -182,7 +182,7 @@
 
                    </div>
                 </div>
-                
+
             </div>
 
     </div>
@@ -190,4 +190,3 @@
   </div>
 
 </div>
-
