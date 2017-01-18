@@ -325,7 +325,7 @@ function EnglishProvider($translateProvider) {
         EXPLORER_HOME_TITLE: 'Explorer - Home',
         EXPLORER_HOME_NS: 'Your Namespaces',
         EXPLORER_HOME_MOSAICS: 'Your Mosaics',
-        EXPLORER_HOME_NS_MULTISIG: 'Namespaces owned by multisig accounts',
+        EXPLORER_HOME_NS_MULTISIG: 'Multisig Owned Namespaces',
         EXPLORER_HOME_MOSAICS_LEVY: 'Levy mosaic',
 
         // EXPLORER NAMESPACES AND MOSAICS

@@ -44,13 +44,6 @@ h4 {
   font-weight: 500;
   font-family: 'Roboto'; }
 
-table {
-  border: none !important; }
-
-tr {
-  border: none !important;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.3) !important; }
-
 tr td {
   border: none !important; }
 
@@ -329,9 +322,6 @@ form button.btn-success {
 /*.dashboard-page .col-md-3 {
 	padding-left: 0px;
 }*/
-.transferTransaction-page th {
-  font-weight: inherit; }
-
 @media (max-width: 768px) {
   .transferTransaction-page .col-md-6 {
     margin-top: 55px; } }
@@ -469,9 +459,6 @@ border: 1px solid #444;
 .create-multisig-page .panel-heading {
   border-bottom: 3px solid #dfa82f; }
 
-.create-multisig-page th {
-  font-weight: inherit; }
-
 .edit-multisig-page .banner-left {
   padding-bottom: 0px;
   border-bottom: 1px solid white; }
@@ -488,51 +475,9 @@ border: 1px solid #444;
 .edit-multisig-page .panel-heading {
   border-bottom: 3px solid #dfa82f; }
 
-.edit-multisig-page th {
-  font-weight: inherit; }
-
-.explorer-home-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.explorer-home-page .banner-left h2 {
-  margin-top: 10px; }
-
-.explorer-home-page .col-md-3 {
-  margin-top: 10px; }
-
-.explorerNav {
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-top: 0px; }
-
-.explorer-home-page .list-group-item {
-  display: inline-block;
-  margin-left: -5px; }
-
-.explorer-home-page .list-group a.active {
-  background-color: #444;
-  color: white;
-  border-color: transparent; }
-
-.explorer-home-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
-.explorer-home-page .col-md-3 {
-  margin-top: 0px; }
-
-.explorer-home-page table thead tr th {
-  font-weight: inherit; }
-
-.explorer-home-page .list-group-item {
-  padding: 5px 10px; }
-
 .audit-apostille-page .banner-left {
   padding-bottom: 0px;
   border-bottom: 1px solid white; }
-
-.audit-apostille-page table thead tr th {
-  font-weight: inherit; }
 
 .audit-apostille-page .col-sm-6 {
   margin-top: 10px; }
@@ -646,44 +591,6 @@ border: 1px solid #444;
 .faq-page p {
   margin: 0px; }
 
-.list-group-item.active {
-  color: white;
-  background-color: #444; }
-
-.list-group-item.active:hover {
-  color: white;
-  background-color: #444; }
-
-.explorer-namespaces-mosaics-page .list-group-item.active {
-  color: #444;
-  background-color: #e3e0cf;
-  border-color: transparent; }
-
-.explorer-namespaces-mosaics-page .list-group-item.active:hover {
-  color: #444;
-  background-color: #e3e0cf; }
-
-.explorer-namespaces-mosaics-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.explorer-namespaces-mosaics-page .banner-left h2 {
-  margin-top: 10px; }
-
-.explorer-namespaces-mosaics-page .list-group-item {
-  display: inline-block;
-  margin-left: -5px;
-  padding: 5px 10px; }
-
-.explorer-namespaces-mosaics-page .list-group a.active {
-  background-color: #444;
-  color: white;
-  border-color: transparent; }
-
-.explorer-namespaces-mosaics-page .explorerNav .list-group-item.active:hover {
-  color: white;
-  background-color: #444; }
-
 .panel-heading {
   background-color: transparent !important;
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
@@ -728,7 +635,8 @@ input.readOnly {
 /*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
-  word-break: break-all; }
+  word-break: break-all;
+  margin-bottom: 0px !important; }
 
 thead {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
@@ -821,6 +729,18 @@ input.form-control.short {
 footer .container-fluid {
   padding: 0; }
 
+.list-group {
+  margin: 0; }
+
+.list-group-item {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 0;
+  padding-left: 0;
+  border: 0;
+  box-shadow: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
 .navbar-brand span:first-of-type {
   font-weight: 100; }
 
@@ -838,8 +758,7 @@ footer .container-fluid {
 .nav-tabs li a:hover {
   text-decoration: underline; }
 
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
-  /*text-decoration: underline;*/
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a.active {
   cursor: default;
   background-color: #69b2e5;
   color: white;
@@ -1063,6 +982,25 @@ textarea {
 
 .drop input.upload[disabled] {
   cursor: not-allowed; }
+
+/*** EXPLORER PAGE ***/
+.explorer-home-page .panel-body {
+  padding: 0; }
+
+.explorer-home-page tbody {
+  text-align: left; }
+
+.explorer-home-page tr th:first-child, .explorer-home-page tr td:first-child {
+  width: 38%; }
+
+.explorer-home-page tr th:nth-of-type(2), .explorer-home-page tr td:nth-of-type(2) {
+  width: 18%; }
+
+.explorer-home-page tr th:nth-of-type(3), .explorer-home-page tr td:nth-of-type(3) {
+  width: 26%; }
+
+.explorer-home-page tr th:nth-of-type(4), .explorer-home-page tr td:nth-of-type(4) {
+  width: 18%; }
 
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
