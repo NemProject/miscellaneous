@@ -240,30 +240,6 @@ select {
   /*background-color: transparent;*/
   border-radius: 0px; }
 
-.login-page .btn-success {
-  background-color: #5cb85c;
-  border-radius: 0px; }
-
-.login-page .banner-left h2 {
-  margin-top: 10px; }
-
-.login-page .btn-import {
-  background-color: #dfa82f;
-  border-radius: 0px;
-  color: white; }
-
-.login-page .btn-import:hover {
-  background-color: #daa022; }
-
-.login-page .fileUpload input.upload {
-  padding: 10px 16px; }
-
-.login-page .container {
-  margin-top: 150px; }
-
-.login-page h1 {
-  font-weight: bold; }
-
 .signup-page .banner-left h2 {
   margin-top: 10px; }
 
@@ -807,6 +783,24 @@ footer .container-fluid {
 
 .button-warning {
   max-width: 50px; }
+
+/*** LOGIN PAGE ***/
+.login-page {
+  color: white; }
+  .login-page .container {
+    margin-top: 100px; }
+  .login-page .row.text-center {
+    margin-bottom: 40px; }
+  .login-page .btn-import {
+    background-color: #dfa82f;
+    border-radius: 0px;
+    color: white; }
+  .login-page .btn-import:hover {
+    background-color: #daa022; }
+  .login-page .loginButtons .col-md-3:nth-of-type(1) {
+    padding-right: 0; }
+  .login-page .loginButtons .col-md-3:nth-of-type(2) {
+    padding-left: 0; }
 
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
