@@ -1002,6 +1002,21 @@ textarea {
 .explorer-home-page tr th:nth-of-type(4), .explorer-home-page tr td:nth-of-type(4) {
   width: 18%; }
 
+.explorer-apostilles tbody {
+  text-align: left; }
+
+.explorer-apostilles tr th:first-child, .explorer-apostilles tr td:first-child {
+  width: 25%; }
+
+.explorer-apostilles tr th:nth-of-type(2), .explorer-apostilles tr td:nth-of-type(2) {
+  width: 25%; }
+
+.explorer-apostilles tr th:nth-of-type(3), .explorer-apostilles tr td:nth-of-type(3) {
+  width: 35%; }
+
+.explorer-apostilles tr th:nth-of-type(4), .explorer-apostilles tr td:nth-of-type(4) {
+  width: 15%; }
+
 .explorer-namespaces-mosaics-page .form-control {
   padding-left: 0px; }
 
