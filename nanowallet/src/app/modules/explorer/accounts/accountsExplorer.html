@@ -1,4 +1,4 @@
-<div class="explorer-home-page">
+<div class="explorer-accounts">
   <div class="container-fluid main">
     <div class="row">
       <div class="col-sm-8">
@@ -9,12 +9,17 @@
     <explorer-nav></explorer-nav>
 
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6 searchBar">
           <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn short">
+                <label>Search:* </label>
+              </span>
             <div class="form-control formFloat">
               <input type="text" ng-model="$ctrl.rawInput" ng-model-options="{debounce:500}" placeholder="{{'FORM_ADDRESS_ALIAS_PLACEHOLDER' | translate}}" ng-change="$ctrl.processRawInput()"/>
-              <label><i class="fa fa-search"></i></label>
+              <label class="floatRight"><i class="fa fa-search"></i></label>
             </div>
+          </div>
           </fieldset>
         </div>
       </div>

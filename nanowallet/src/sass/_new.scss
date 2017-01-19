@@ -202,6 +202,7 @@ footer .container-fluid {
   outline: 0;
   cursor: pointer;
   display: inline;
+  background: $grayLite;
 }
 
 .nav-tabs {
@@ -519,11 +520,7 @@ textarea {
     cursor: not-allowed;
 }
 /*** EXPLORER PAGE ***/
-// .explorerNav {
-//   a:active {
-//
-//   }
-// }
+
 .explorer-home-page {
   .panel-body {
     padding: 0;
@@ -573,12 +570,12 @@ textarea {
   .arrows {
     padding-top: $pad * 1.5;
   }
-  // .namespaceRules .panel-heading {
-  //   min-height: $pad * 4.1;
-  //   vertical-align: bottom !important;
-  // }
 }
-
+.explorer-accounts {
+  .searchBar {
+    padding-top: $pad * 2;
+  }
+}
 
 /*** MARKET INFO WIDGET ***/
 .market-info .header{

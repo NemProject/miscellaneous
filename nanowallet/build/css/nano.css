@@ -768,7 +768,8 @@ footer .container-fluid {
   color: grey;
   outline: 0;
   cursor: pointer;
-  display: inline; }
+  display: inline;
+  background: rgba(0, 0, 0, 0.1); }
 
 .nav-tabs {
   position: relative;
@@ -1025,6 +1026,9 @@ textarea {
 
 .explorer-namespaces-mosaics-page .arrows {
   padding-top: 30px; }
+
+.explorer-accounts .searchBar {
+  padding-top: 40px; }
 
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
