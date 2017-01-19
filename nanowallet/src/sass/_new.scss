@@ -544,6 +544,23 @@ textarea {
     width: 18%;
   }
 }
+.explorer-namespaces-mosaics-page {
+  .form-control {
+    padding-left: 0px;
+  }
+  .namespacesArrows {
+    .col-md-6 {
+      min-height: $pad * 3;
+    }
+  }
+  .arrows {
+    padding-top: $pad * 1.5;
+  }
+  // .namespaceRules .panel-heading {
+  //   min-height: $pad * 4.1;
+  //   vertical-align: bottom !important;
+  // }
+}
 
 
 /*** MARKET INFO WIDGET ***/

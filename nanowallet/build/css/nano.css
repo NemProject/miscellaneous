@@ -1002,6 +1002,15 @@ textarea {
 .explorer-home-page tr th:nth-of-type(4), .explorer-home-page tr td:nth-of-type(4) {
   width: 18%; }
 
+.explorer-namespaces-mosaics-page .form-control {
+  padding-left: 0px; }
+
+.explorer-namespaces-mosaics-page .namespacesArrows .col-md-6 {
+  min-height: 60px; }
+
+.explorer-namespaces-mosaics-page .arrows {
+  padding-top: 30px; }
+
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
   color: rgba(0, 0, 0, 0.3);
