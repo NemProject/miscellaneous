@@ -110,76 +110,69 @@ td {
     color: #444;
 }
 
-.btn-default {
-	border-radius: 0px;
-	color: white;
-	background-color: #444;
-	border: 1px solid #444;
-}
+// .btn-default {
+// 	border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// 	border: 1px solid #444;
+// }
+//
+// .btn-default[disabled]:hover {
+// 	border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// }
+//
+// .btn-default:focus,
+// .btn-default.focus {
+//     border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// }
+// .btn-default:hover {
+//     border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// }
+// .btn-default:active,
+// .btn-default.active,
+// .open > .dropdown-toggle.btn-default {
+//     border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// }
+// .btn-default:active:hover,
+// .btn-default.active:hover,
+// .open > .dropdown-toggle.btn-default:hover,
+// .btn-default:active:focus,
+// .btn-default.active:focus,
+// .open > .dropdown-toggle.btn-default:focus,
+// .btn-default:active.focus,
+// .btn-default.active.focus,
+// .open > .dropdown-toggle.btn-default.focus {
+//     border-radius: 0px;
+// 	color: white;
+// 	background-color: #444;
+// }
+// .btn-default:active,
+// .btn-default.active,
+// .open > .dropdown-toggle.btn-default {
+//   background-image: none;
+// }
+// .btn-default.disabled:hover,
+// .btn-default[disabled]:hover,
+// fieldset[disabled] .btn-default:hover,
+// .btn-default.disabled:focus,
+// .btn-default[disabled]:focus,
+// fieldset[disabled] .btn-default:focus,
+// .btn-default.disabled.focus,
+// .btn-default[disabled].focus,
+// fieldset[disabled] .btn-default.focus {
+//   background-color: #444;
+//   border-color: #444;
+// }
 
-.btn-default[disabled]:hover {
-	border-radius: 0px;
-	color: white;
-	background-color: #444;
-}
 
-.btn-default:focus,
-.btn-default.focus {
-    border-radius: 0px;
-	color: white;
-	background-color: #444;
-}
-.btn-default:hover {
-    border-radius: 0px;
-	color: white;
-	background-color: #444;
-}
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-    border-radius: 0px;
-	color: white;
-	background-color: #444;
-}
-.btn-default:active:hover,
-.btn-default.active:hover,
-.open > .dropdown-toggle.btn-default:hover,
-.btn-default:active:focus,
-.btn-default.active:focus,
-.open > .dropdown-toggle.btn-default:focus,
-.btn-default:active.focus,
-.btn-default.active.focus,
-.open > .dropdown-toggle.btn-default.focus {
-    border-radius: 0px;
-	color: white;
-	background-color: #444;
-}
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-  background-image: none;
-}
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled.focus,
-.btn-default[disabled].focus,
-fieldset[disabled] .btn-default.focus {
-  background-color: #444;
-  border-color: #444;
-}
-
-.panel-default {
-	/*border-color: #444;*/
-	border-radius: 0px;
-	border-color: transparent;
-	background-color: transparent;
-	/*box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);*/
-	margin-bottom: 0px;
-}
 
 // .panel-default > .panel-heading {
 //     color: white;
@@ -191,40 +184,16 @@ fieldset[disabled] .btn-default.focus {
 	border-radius: 0px;
 }
 
-.navbar-default .navbar-nav .open a {
-	color: white;
-	background-color: red;
-}
+// .navbar-default .navbar-nav .open a {
+// 	color: white;
+// 	background-color: red;
+// }
+//
+// .navbar-default .navbar-nav .open a:hover {
+// 	color: white;
+// 	/*background-color: pink;*/
+// }
 
-.navbar-default .navbar-nav .open a:hover {
-	color: white;
-	/*background-color: pink;*/
-}
-.navbar-nav li a {
-	color: black !important;
-	font-weight: 500;
-}
-.navbar-nav li a.active {
-	color: grey !important;
-}
-.navbar-nav li.money, .navbar-nav li.node{
-	border-right: 1px solid rgba(0,0,0,0.05);
-	border-left: 1px solid rgba(0,0,0,0.05);
-}
-.navbar {
-	border:none;
-	border-radius:0px;
-	border-bottom: 1px solid rgba(0,0,0,0.1);
-	box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-
-}
-
-.navbar-default .navbar-brand {
-	background-color: transparent;
-	color: black;
-	// border-right: 1px solid rgba(0,0,0,0.3);
-	box-shadow: 1px 0 0 rgba(0,0,0,0.05);
-}
 
 // .navbar-default .navbar-brand:hover {
 // 	background-color: green;
@@ -236,24 +205,24 @@ fieldset[disabled] .btn-default.focus {
 // 	color: white;
 // }
 
-.navbar-default {
-	margin-bottom: 0;
-	background-color: white;
-}
+// .navbar-default {
+// 	margin-bottom: 0;
+// 	background-color: white;
+// }
 
 /*.navbar-default .navbar-nav li a:nth-of-type(5) {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 		color: black
 }*/
 
-.navbar-default .navbar-nav li a.active {
-	background-color: transparent;
-	/*text-decoration: underline;*/
-	/*border-left: 1px solid rgba(0, 0, 0, 0.3);
-	border-bottom:1px solid rgba(0, 0, 0, 0.3);*/
-	color: rgba(0, 0, 0, 0.6);
-
-}
+// .navbar-default .navbar-nav li a.active {
+// 	background-color: transparent;
+// 	/*text-decoration: underline;*/
+// 	/*border-left: 1px solid rgba(0, 0, 0, 0.3);
+// 	border-bottom:1px solid rgba(0, 0, 0, 0.3);*/
+// 	color: rgba(0, 0, 0, 0.6);
+//
+// }
 
 .banner{
 	background-color: #444;
@@ -327,36 +296,36 @@ select {
 // }
 
 
-.signup-page .banner-left h2 {
-	margin-top: 10px;
-}
+// .signup-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
 
 /*.signup-page .panel-heading {
 	border-bottom: 3px solid #dfa82f;
 }*/
 
-.signup-page .panel-default a {
-	color: #fffe8f;
-	text-decoration: underline;
-}
+// .signup-page .panel-default a {
+// 	color: #fffe8f;
+// 	text-decoration: underline;
+// }
 
-@media (max-width: 768px) {
-	.signup-page .col-md-6 {
-		margin-top: 10px;
-	}
-}
+// @media (max-width: 768px) {
+// 	.signup-page .col-md-6 {
+// 		margin-top: 10px;
+// 	}
+// }
 
 
-form button.btn-success {
-	background-color: #5cb85c;
-}
+// form button.btn-success {
+// 	background-color: #5cb85c;
+// }
 
-.signup-page .btn-default.active {
-	/*background-color: #8e8e8e;*/
-	background-color: #e3e0cf;
-	border-color: #adadad;
-	color: #444;
-}
+// .signup-page .btn-default.active {
+// 	/*background-color: #8e8e8e;*/
+// 	background-color: #e3e0cf;
+// 	border-color: #adadad;
+// 	color: #444;
+// }
 
 /*.signup-page .btn-default.active:hover {
 	background-color: #444;
@@ -857,38 +826,38 @@ border: 1px solid #444;
 // 	border-bottom: 3px solid #dfa82f;
 // }
 
-.dashboard-page .list-group.list-group-root {
-  padding: 0;
-  overflow: hidden;
-  border-top: none;
-  margin-bottom: 0px;
-}
-
-.dashboard-page .list-group.list-group-root .list-group {
-  margin-bottom: 0;
-}
-
-.dashboard-page .list-group.list-group-root .well {
-  margin-bottom: 0px;
-}
-
-.dashboard-page .list-group.list-group-root .list-group-item {
-  border-radius: 0;
-  border-width: 1px 0 0 0;
-  padding: 5px 15px;
-}
-
-.dashboard-page .list-group.list-group-root > .list-group-item:first-child {
-  border-top-width: 0;
-}
-
-.dashboard-page .list-group.list-group-root > .list-group > .list-group-item {
-  padding-left: 30px;
-}
-
-.dashboard-page .list-group.list-group-root > .list-group > .list-group > .list-group-item {
-  padding-left: 45px;
-}
+// .dashboard-page .list-group.list-group-root {
+//   padding: 0;
+//   overflow: hidden;
+//   border-top: none;
+//   margin-bottom: 0px;
+// }
+//
+// .dashboard-page .list-group.list-group-root .list-group {
+//   margin-bottom: 0;
+// }
+//
+// .dashboard-page .list-group.list-group-root .well {
+//   margin-bottom: 0px;
+// }
+//
+// .dashboard-page .list-group.list-group-root .list-group-item {
+//   border-radius: 0;
+//   border-width: 1px 0 0 0;
+//   padding: 5px 15px;
+// }
+//
+// .dashboard-page .list-group.list-group-root > .list-group-item:first-child {
+//   border-top-width: 0;
+// }
+//
+// .dashboard-page .list-group.list-group-root > .list-group > .list-group-item {
+//   padding-left: 30px;
+// }
+//
+// .dashboard-page .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+//   padding-left: 45px;
+// }
 
 .loading-overlay {
 	position: absolute;

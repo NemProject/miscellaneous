@@ -1,14 +1,19 @@
+/*** GLOBAL STYLES ***/
 .panel-heading {
   background-color: transparent !important;
   border-bottom: $borderUnderline;
   padding-left: 0px;
   padding-right: 0px;
-  // margin-left: $pad;
-  // margin-right: $pad;
 }
 .panel-body {
   padding-left: 0px;
   padding-right: 0px;
+}
+.panel-default {
+	border-radius: 0px;
+	border-color: transparent;
+	background-color: transparent;
+	margin-bottom: 0px;
 }
 .inner {
   padding-left: 0px;
@@ -43,7 +48,6 @@ input.readOnly {
   box-shadow: none;
   border: 0;
 }
-/*** GLOBAL STYLES ***/
 table {
   table-layout: auto;
   word-break: break-all;
@@ -96,6 +100,10 @@ select {
   h4:hover{
     color: $blue;
   }
+}
+h1 {
+  font-weight: 300;
+  font-size: 40px;
 }
 h3 {
   padding: 0;
@@ -186,15 +194,12 @@ footer .container-fluid {
   margin-left: 0px !important;
 }
 
-.nav-tabs li a:hover {
-	text-decoration: underline;
-}
-
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a.active {
     cursor: default;
     background-color: $blue;
 		color: white;
     padding-bottom: 12px;
+    border: 0;
 }
 
 .nav-tabs li a {
@@ -202,13 +207,40 @@ footer .container-fluid {
   outline: 0;
   cursor: pointer;
   display: inline;
-  background: $grayLite;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .nav-tabs {
-  // float: right;
   position: relative;
 	border-bottom: none;
+}
+.navbar-nav li a {
+	color: black !important;
+	font-weight: 500;
+}
+.navbar-nav li a.active {
+	color: grey !important;
+}
+.navbar-nav li.money, .navbar-nav li.node{
+	border-right: 1px solid rgba(0,0,0,0.05);
+	border-left: 1px solid rgba(0,0,0,0.05);
+}
+.navbar {
+	border:none;
+	border-radius:0px;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+
+}
+.navbar-default {
+  background-color: white;
+  .navbar-brand {
+  	color: black;
+    background-color: white;
+  	box-shadow: 1px 0 0 rgba(0,0,0,0.05);
+  }
 }
 .tabDescription {
   float: right;
@@ -217,11 +249,6 @@ footer .container-fluid {
   color: $gray;
   font-weight: 500;
 }
-// button {
-//   min-width: 140px;
-//   width: 140px;
-//   text-align: left;
-// }
 .btn-default {
   background: transparent;
   color: black;
@@ -250,15 +277,22 @@ footer .container-fluid {
 .button-warning {
   max-width: 50px;
 }
-/*** LOGIN PAGE ***/
-.login-page {
+/*** LOGIN & SIGNUP PAGE ***/
+.login-page, .signup-page {
   color: white;
   .container {
-  	margin-top: $pad * 5;
+    margin-top: $pad * 5;
   }
   .row.text-center {
     margin-bottom: $pad * 2;
   }
+  // h1 {
+  //   font-weight: 300;
+  //   font
+  // }
+}
+/*** LOGIN PAGE ***/
+.login-page {
   .btn-import {
   	background-color: #dfa82f;
   	border-radius: 0px;
@@ -273,6 +307,27 @@ footer .container-fluid {
     }
     .col-md-3:nth-of-type(2) {
       padding-left: 0;
+    }
+  }
+}
+/*** SIGNUP PAGE ***/
+.signup-page {
+  .nav-tabs li a {
+  	color: white;
+    outline: 0;
+    cursor: pointer;
+    display: inline;
+    &:hover {
+      background: $blueLite;
+      border: 0;
+      text-decoration: none;
+    }
+  }
+  .bg-info {
+    color: white;
+    border: $blueLite;
+    a {
+      color: red;
     }
   }
 }
