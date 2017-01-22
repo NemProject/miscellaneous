@@ -30,7 +30,7 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a style="outline:0;border-left:1px solid #444;text-transform: uppercase;" ui-sref-active="active" ui-sref="app.login" show-authed="false"><small><b>{{ 'HEADER_LOGIN_BUTTON' | translate }}</b></small></a></li>
+        <li><a class="login" ui-sref-active="active" ui-sref="app.login" show-authed="false"><small><b>{{ 'HEADER_LOGIN_BUTTON' | translate }}</b></small></a></li>
         <li><a style="outline:0;text-transform: uppercase;" ui-sref-active="active" ui-sref="app.signup" show-authed="false"><small><b>{{ 'HEADER_SIGNUP_BUTTON' | translate }}</b></small></a></li>
 
         <li class="dropdown node">
@@ -58,7 +58,7 @@
             <!--<li><select class="form-control" style="width:100%" ng-model="theme" ng-change="vm.setTheme(theme.color)" data-ng-options="theme.color for theme in vm.themes"><option value="" disabled selected>{{ 'SETTING_CHANG_THEME_SELECT' | translate }}</option></select></li>-->
           </ul>
         </li>
-        <li><a style="outline:0;border-left:medium none;" ui-sref-active="active" ui-sref="app.faq"><i class="fa fa-question-circle"></i></a></li>
+        <!-- <li><a style="outline:0;border-left:medium none;" ui-sref-active="active" ui-sref="app.faq"><i class="fa fa-question-circle"></i></a></li> -->
         <li><a style="outline:0;cursor:pointer;text-transform: uppercase;border-right:none;" ng-click="$ctrl.purge()" ng-if="$ctrl._storage.wallets.length" show-authed="false"><i class="fa fa-trash"></i> <small><b>{{ 'HEADER_PURGE' | translate }}</b></small></a></li>
         <li><a style="outline:0;cursor:pointer;border-right:none;" show-authed="true" ng-click="$ctrl.logout()"><i class="fa fa-sign-out"></i> <small><b>{{$ctrl.walletName}}</small></b></a></li>
       </ul>
