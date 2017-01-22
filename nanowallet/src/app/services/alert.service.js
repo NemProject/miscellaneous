@@ -368,6 +368,13 @@ export default class Alert {
         });
     }
 
+    invalidAddressBookFile() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_ADDRESS_BOOK_FILE'),
+            className: 'danger'
+        });
+    }
+
     /***
      * Success alerts
      */
@@ -430,6 +437,13 @@ export default class Alert {
     ntyFileSuccess() {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_NTY_FILE_SUCCESS'),
+            className: 'success'
+        });
+    }
+
+    addressBookFileSuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_ADDRESS_BOOK_FILE_SUCCESS'),
             className: 'success'
         });
     }

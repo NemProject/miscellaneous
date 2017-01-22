@@ -4,7 +4,7 @@ import CryptoHelpers from '../../utils/CryptoHelpers';
 import Network from '../../utils/Network';
 
 class TransferTransactionCtrl {
-    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge) {
+    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $rootScope) {
         'ngInject';
 
         // Alert service
@@ -32,7 +32,7 @@ class TransferTransactionCtrl {
          */
         this.formData = {};
         // Alias or address user type in
-        this.formData.rawRecipient = '';
+        this.formData.rawRecipient = ($rootScope.address) ? $rootScope.address : '';
         // Cleaned recipient from @alias or input
         this.formData.recipient = '';
         this.formData.recipientPubKey = '';

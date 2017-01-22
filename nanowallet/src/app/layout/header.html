@@ -16,6 +16,7 @@
       <ul class="nav navbar-nav" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account">
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.dashboard" show-authed="true"><i class="fa fa-dashboard"></i></a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-credit-card"></i></a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.addressBook" show-authed="true"><i class="fa">&#xf2b9;</i></a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-hashtag"></i></a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i></a></li>
         <li><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="!balanceToBtc && !balanceToUsd" show-account-data="balance" show-authed="true" ng-click="balanceToUsd = true;">
