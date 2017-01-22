@@ -1,76 +1,113 @@
 <div class="dashboard-page">
-  <div class="container-fluid">
-      <div class="col-xs-12 col-md-7">
+  <div class="container-fluid main">
+
+    <div class="row">
+      <div class="col-sm-8">
         <h2>{{'DASHBOARD_TITLE' | translate}}</h2>
+      </div>
+      <div class="col-sm-4">
+        <h4>{{ 'DASHBOARD_NEWS_TITLE' | translate }}</h4>
+      </div>
+    </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading noPadding">
-              <ul class="nav nav-tabs">
-                  <li ng-class="$ctrl.tabConfirmed ? 'active' : ''"><a ng-click="$ctrl.tabConfirmed = true;$ctrl.currentPageUnc = 0">{{ 'DASHBOARD_CONFIRMED' | translate }}</a></li>
-                  <li ng-class="$ctrl.tabConfirmed ? '' : 'active'"><a ng-click="$ctrl.tabConfirmed = false;$ctrl.currentPage = 0">{{ 'DASHBOARD_UNCONFIRMED' | translate }} <span class="badge">{{$ctrl._DataBridge.unconfirmed.length}}</span></a></li>
-                  <li ng-show="$ctrl._DataBridge.transactions.length > 5 && $ctrl.tabConfirmed"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></li>
-                  <li ng-show="$ctrl._DataBridge.unconfirmed.length > 5 && !$ctrl.tabConfirmed"><button class="buttonStyle" ng-disabled="$ctrl.currentPageUnc == 0" ng-click="$ctrl.currentPageUnc = $ctrl.currentPageUnc-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageUnc+1}}/{{$ctrl.numberOfPagesUnc()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageUnc+1 >= $ctrl.numberOfPagesUnc()" ng-click="$ctrl.currentPageUnc = $ctrl.currentPageUnc+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></li>
-              </ul>
-            </div>
-            <table class="table table-condensed">
-                <thead>
-                    <tr>
-                        <th>{{ 'GENERAL_ACCOUNT' | translate }}</th>
-                        <th>{{ 'GENERAL_AMOUNT' | translate }}</th>
-                        <th>{{ 'GENERAL_MESSAGE' | translate }}</th>
-                        <th>{{ 'GENERAL_DATE' | translate }}</th>
-                    </tr>
-                </thead>
-            </table>
-            <table class="table">
-                <tbody>
-                  <div ng-show="$ctrl.tabConfirmed">
-                    <div ng-repeat="tx in $ctrl._DataBridge.transactions | orderBy:'-transaction.timeStamp' | startFromUnc:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
-                        <tag-transaction d="tx" z="$ctrl._Wallet.currentAccount.address" h="$ctrl._DataBridge" tooltip-position="'left'"></tag-transaction>
-                    </div>
-                  </div>
-                  <div ng-show="!$ctrl.tabConfirmed">
-                   <div ng-repeat="tx in $ctrl._DataBridge.unconfirmed | orderBy:'-transaction.timeStamp' | startFrom:$ctrl.currentPageUnc*$ctrl.pageSizeUnc | limitTo:$ctrl.pageSizeUnc">
-                        <tag-transaction d="tx" z="$ctrl._Wallet.currentAccount.address" h="$ctrl._DataBridge" tooltip-position="'left'" account-data="$ctrl._DataBridge.accountData"></tag-transaction>
-
-                    </div>
-                  </div>
-                </tbody>
-            </table>
-            <div class="panel-body" ng-show="$ctrl._DataBridge.transactions.length == 0 && $ctrl.tabConfirmed">
-                <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-            </div>
-            <div class="panel-body" ng-show="$ctrl._DataBridge.unconfirmed.length == 0 && !$ctrl.tabConfirmed">
-                <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-            </div>
-          </div>
-
-          <div class="row">
-          <div class="col-xs-12 col-md-9">
-            <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4> {{ 'DASHBOARD_HARVEST_INCOME_TITLE' | translate }} </h4>
-            </div>
-            <div class="panel-body" ng-show="$ctrl._DataBridge.harvestedBlocks.length && !$ctrl.chartEmpty">
-              <canvas width='793' height='200' id="bar" class="chart chart-bar" chart-data="$ctrl.valuesInFee" chart-labels="$ctrl.labels"></canvas>
-              <center><small>{{ 'DASHBOARD_HARVEST_INCOME_NOTE' | translate }}</small></center>
-            </div>
-            <div class="panel-body" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
-                <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-            </div>
-            <div class="panel-body" ng-show="$ctrl.chartEmpty && $ctrl._DataBridge.harvestedBlocks.length">
-                <p>{{ 'DASHBOARD_HARVEST_INCOME_MESSAGE' | translate }}</p>
-            </div>
-          </div>
+    <div class="row">
+      <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+        <div class="panel-heading">
+          <ul class="nav nav-tabs">
+            <li ng-class="$ctrl.tabConfirmed ? 'active' : ''">
+              <a ng-click="$ctrl.tabConfirmed = true;$ctrl.currentPageUnc = 0">{{ 'DASHBOARD_CONFIRMED' | translate }}</a>
+            </li>
+            <li ng-class="$ctrl.tabConfirmed ? '' : 'active'">
+              <a ng-click="$ctrl.tabConfirmed = false;$ctrl.currentPage = 0">{{ 'DASHBOARD_UNCONFIRMED' | translate }}
+                <span class="badge">{{$ctrl._DataBridge.unconfirmed.length}}</span>
+              </a>
+            </li>
+            <li ng-show="$ctrl._DataBridge.transactions.length > 5 && $ctrl.tabConfirmed">
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+              </button>
+              <b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b>
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+              </button>
+            </li>
+            <li ng-show="$ctrl._DataBridge.unconfirmed.length > 5 && !$ctrl.tabConfirmed">
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPageUnc == 0" ng-click="$ctrl.currentPageUnc = $ctrl.currentPageUnc-1">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+              </button>
+              <b>{{$ctrl.currentPageUnc+1}}/{{$ctrl.numberOfPagesUnc()}}</b>
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPageUnc+1 >= $ctrl.numberOfPagesUnc()" ng-click="$ctrl.currentPageUnc = $ctrl.currentPageUnc+1">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+              </button>
+            </li>
+          </ul>
         </div>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>{{ 'GENERAL_ACCOUNT' | translate }}</th>
+              <th>{{ 'GENERAL_AMOUNT' | translate }}</th>
+              <th>{{ 'GENERAL_MESSAGE' | translate }}</th>
+              <th>{{ 'GENERAL_DATE' | translate }}</th>
+            </tr>
+          </thead>
+        </table>
+        <table class="table">
+          <tbody>
+            <div ng-show="$ctrl.tabConfirmed">
+              <div ng-repeat="tx in $ctrl._DataBridge.transactions | orderBy:'-transaction.timeStamp' | startFromUnc:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
+                <tag-transaction d="tx" z="$ctrl._Wallet.currentAccount.address" h="$ctrl._DataBridge" tooltip-position="'left'"></tag-transaction>
+              </div>
+            </div>
+            <div ng-show="!$ctrl.tabConfirmed">
+              <div ng-repeat="tx in $ctrl._DataBridge.unconfirmed | orderBy:'-transaction.timeStamp' | startFrom:$ctrl.currentPageUnc*$ctrl.pageSizeUnc | limitTo:$ctrl.pageSizeUnc">
+                <tag-transaction d="tx" z="$ctrl._Wallet.currentAccount.address" h="$ctrl._DataBridge" tooltip-position="'left'" account-data="$ctrl._DataBridge.accountData"></tag-transaction>
+              </div>
+            </div>
+          </tbody>
+        </table>
+        <div class="panel-body" ng-show="$ctrl._DataBridge.transactions.length == 0 && $ctrl.tabConfirmed">
+          <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+        </div>
+        <div class="panel-body" ng-show="$ctrl._DataBridge.unconfirmed.length == 0 && !$ctrl.tabConfirmed">
+          <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+        </div>
+      </div>
+        <div class="col-xs-12 col-md-9">
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4> {{ 'DASHBOARD_HARVEST_INCOME_TITLE' | translate }} </h4>
+          </div>
+          <div class="panel-body" ng-show="$ctrl._DataBridge.harvestedBlocks.length && !$ctrl.chartEmpty">
+            <canvas width='793' height='200' id="bar" class="chart chart-bar" chart-data="$ctrl.valuesInFee" chart-labels="$ctrl.labels"></canvas>
+            <center><small>{{ 'DASHBOARD_HARVEST_INCOME_NOTE' | translate }}</small></center>
+          </div>
+          <div class="panel-body" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
+              <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+          </div>
+          <div class="panel-body" ng-show="$ctrl.chartEmpty && $ctrl._DataBridge.harvestedBlocks.length">
+              <p>{{ 'DASHBOARD_HARVEST_INCOME_MESSAGE' | translate }}</p>
+              </div>
+            </div>
+          </div>
 
-          <div class="col-xs-12 col-md-3 noPaddingLeft">
+          <div class="col-xs-12 col-md-3">
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4>{{ 'DASHBOARD_HARVESTED_BLOCKS_TITLE' | translate }}</h4>
-              <div ng-show="$ctrl._DataBridge.harvestedBlocks.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPageHb == 0" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageHb+1}}/{{$ctrl.numberOfPagesHb()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageHb+1 >= $ctrl.numberOfPagesHb()" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+              <div ng-show="$ctrl._DataBridge.harvestedBlocks.length > 5">
+                <button class="buttonStyle" ng-disabled="$ctrl.currentPageHb == 0" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb-1">
+                  <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                </button>
+                <b>{{$ctrl.currentPageHb+1}}/{{$ctrl.numberOfPagesHb()}}</b>
+                <button class="buttonStyle" ng-disabled="$ctrl.currentPageHb+1 >= $ctrl.numberOfPagesHb()" ng-click="$ctrl.currentPageHb = $ctrl.currentPageHb+1">
+                  <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                </button>
+              </div>
             </div>
-            <table class="table table-bordered table-hover table-striped table-condensed">
+            <table class="table table-condensed">
                 <thead>
                     <tr>
                         <th>{{ 'GENERAL_BLOCK' | translate }}</th>
@@ -78,7 +115,7 @@
                     </tr>
                 </thead>
             </table>
-            <table ng-show="$ctrl._DataBridge.harvestedBlocks.length" class="table table-bordered table-hover table-striped table-condensed">
+            <table ng-show="$ctrl._DataBridge.harvestedBlocks.length" class="table table-hover table-condensed">
                 <tbody>
             <tr ng-repeat="block in $ctrl._DataBridge.harvestedBlocks | startFrom:$ctrl.currentPageHb*$ctrl.pageSizeHb | limitTo:$ctrl.pageSizeHb">
                 <td>{{block.height}}</td>
@@ -92,11 +129,11 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <div class="col-xs-12 col-md-4 col-md-offset-1 noPaddingLeft updates">
-      <h4>{{ 'DASHBOARD_NEWS_TITLE' | translate }}</h4>
+
+    <div class="col-xs-12 col-md-3 col-md-offset-1 updates">
+
       <div>
             <div>
                   <h3>Welcome to the Nano Wallet Beta!</h3>
@@ -112,7 +149,7 @@
             </div>
         </div>
         <!-- MARKET INFO WIDGET -->
-        <div class="market-info noPaddingLeft">
+        <div class="market-info">
             <h4> {{ 'DASHBOARD_MARKET_INFO_TITLE' | translate }}</h4>
         <div class="col-md-6 header noPaddingLeft">
           {{ 'DASHBOARD_MARKET_INFO_CAP' | translate }}:
@@ -136,7 +173,7 @@
           <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataBridge.marketInfo.price_btc}}</span>
         </div>
 
-        <div class="col-md-12 header ticker noPaddingLeft">
+        <div class="col-md-12 header ticker">
           {{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:
         </div>
         <div class="market-percent">
@@ -173,3 +210,4 @@
         </div>
 
   </div>
+</div>

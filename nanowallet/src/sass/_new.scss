@@ -72,6 +72,17 @@ th {
   min-width: 55px;
   border-bottom: $borderUnderline;
 }
+.table-bordered {
+  border: 0;
+}
+.accordion-inner {
+  background-color: $blueXLite !important;
+  hr {
+    border-style: none !important;
+    border: 1px solid $grayLite !important;
+    margin: 0 !important;
+  }
+}
 select {
   border: 1px solid $blueLite !important;
   border-radius: none !important;
@@ -104,6 +115,12 @@ select {
 h1 {
   font-weight: 300;
   font-size: 40px;
+}
+h2 {
+	color: rgba(0, 0, 0, 0.3);
+	font-size: 55px;
+	font-weight: 100;
+  text-align: left;
 }
 h3 {
   padding: 0;
@@ -185,16 +202,13 @@ footer .container-fluid {
     font-weight: 900;
   }
 }
-
-
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a.active {
+ .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a.active {
     cursor: default;
     background-color: $blue;
 		color: white;
     padding-bottom: 12px;
     border: 0;
 }
-
 .nav-tabs li a {
 	color: grey;
   outline: 0;
@@ -447,76 +461,71 @@ textarea {
 
 /*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 
-.dashboard-page .container{
-	margin-left: 0px;
-	padding-left: 0px;
-}
-// container for main heading on page, h2
-.dashboard-page .banner-left, .transferTransaction-page .banner-left, .banner-left {
-	padding-bottom: 0px;
-	background-color: transparent;
-  padding-top: $pad / 2;
-}
+// .dashboard-page .container{
+// 	margin-left: 0px;
+// 	padding-left: 0px;
+// }
+// // container for main heading on page, h2
+// .dashboard-page .banner-left, .transferTransaction-page .banner-left, .banner-left {
+// 	padding-bottom: 0px;
+// 	background-color: transparent;
+//   padding-top: $pad / 2;
+// }
 // main heading on page, h2
-.dashboard-page h2, .transferTransaction-page h2, h2 {
-	color: rgba(0, 0, 0, 0.3);
-	font-size: 55px;
-	font-weight: 100;
-  text-align: left;
-}
 
-.dashboard-page .updates {
-	max-width: 400px;
-}
-.dashboard-page .updates p {
-	font-size: 12px;
-}
-.dashboard-page .updates a{
-	color: $blue;
-	text-decoration: underline;
-	font-weight: 500;
-}
-.dashboard-page .updates h3{
-	max-width: 250px;
-}
-.dashboard-page th {
-	font-weight: inherit;
-}
-
-.dashboard-page .container .row {
-	margin-top: 10px;
-}
-
-.dashboard-page .accordion-inner .row {
-	margin-top: 0px;
-	margin-right: 0px;
-}
-
-.dashboard-page .well {
-	border-radius: 0px;
-	background-color: #fff;
-	border-top: 3px solid #444;
-}
-
-.dashboard-page .well h4 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
-.dashboard-page .well h4 small {
-	color: #444;
-}
-
-.dashboard-page .panel-default > .panel-heading {
-    background-color: transparent;
-    border-radius: 0px;
-    border-bottom: $borderUnderline;
-}
-.dashboard-page .panel-heading h4 {
-	color: black;
-	font-weight: 700;
-	font-size: 20px;
-}
+//
+// .dashboard-page .updates {
+// 	max-width: 400px;
+// }
+// .dashboard-page .updates p {
+// 	font-size: 12px;
+// }
+// .dashboard-page .updates a{
+// 	color: $blue;
+// 	text-decoration: underline;
+// 	font-weight: 500;
+// }
+// .dashboard-page .updates h3{
+// 	max-width: 250px;
+// }
+// .dashboard-page th {
+// 	font-weight: inherit;
+// }
+//
+// .dashboard-page .container .row {
+// 	margin-top: 10px;
+// }
+//
+// .dashboard-page .accordion-inner .row {
+// 	margin-top: 0px;
+// 	margin-right: 0px;
+// }
+//
+// .dashboard-page .well {
+// 	border-radius: 0px;
+// 	background-color: #fff;
+// 	border-top: 3px solid #444;
+// }
+//
+// .dashboard-page .well h4 {
+// 	margin-top: 0px;
+// 	margin-bottom: 0px;
+// }
+//
+// .dashboard-page .well h4 small {
+// 	color: #444;
+// }
+//
+// .dashboard-page .panel-default > .panel-heading {
+//     background-color: transparent;
+//     border-radius: 0px;
+//     border-bottom: $borderUnderline;
+// }
+// .dashboard-page .panel-heading h4 {
+// 	color: black;
+// 	font-weight: 700;
+// 	font-size: 20px;
+// }
 /*** APOSTILLE AUDIT PAGE ***/
 
 .audit-apostille-page {
@@ -666,8 +675,8 @@ textarea {
   margin-bottom: $pad * 2;
 }
 .market-info .header span{
-	font-weight: 900;
-	font-size: 16px;
+	font-weight: 500;
+	font-size: 20px;
 	color: black;
 }
 .market-info .ticker {
