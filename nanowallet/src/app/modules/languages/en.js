@@ -272,7 +272,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_HARVESTING_NO_SLOTS: 'No free slots on selected node, please choose another',
         ACCOUNT_HARVESTING_BELOW_THRESHOLD: 'You need 10\'000 vested XEM to start delegated harvesting',
         ACCOUNT_ACCOUNT_SELECT: 'Select another account',
-        ACCOUNT_ACCOUNT_SELECT_LABEL: 'Use another account',
+        ACCOUNT_ACCOUNT_SELECT_LABEL: 'Choose Account',
         ACCOUNT_WALLET_KEYS: 'Wallet & keys',
         ACCOUNT_ADD_NEW_ACCOUNT: 'Add new account',
         ACCOUNT_ADD_NEW_ACCOUNT_BTN: 'Add a new account into wallet',

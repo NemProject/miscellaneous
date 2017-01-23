@@ -48,6 +48,7 @@ input.readOnly {
   box-shadow: none;
   border: 0;
 }
+
 table {
   table-layout: auto;
   word-break: break-all;
@@ -674,7 +675,17 @@ textarea {
     padding-top: $pad * 2;
   }
 }
-
+/*** ACCOUNT INFO PAGE ***/
+.account-page {
+  #downloadWallet {
+  visibility: hidden;
+  }
+  .form-control {
+    max-width: 565px;
+    width: 565px;
+    min-width: 565px;
+  }
+}
 /*** MARKET INFO WIDGET ***/
 .market-info .header{
 	color: rgba(0, 0, 0, 0.3);

@@ -885,6 +885,15 @@ textarea {
 .explorer-accounts .searchBar {
   padding-top: 40px; }
 
+/*** ACCOUNT INFO PAGE ***/
+.account-page #downloadWallet {
+  visibility: hidden; }
+
+.account-page .form-control {
+  max-width: 565px;
+  width: 565px;
+  min-width: 565px; }
+
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
   color: rgba(0, 0, 0, 0.3);
