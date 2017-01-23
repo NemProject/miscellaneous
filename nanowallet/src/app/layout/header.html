@@ -36,15 +36,15 @@
         <li class="dropdown node">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" show-authed="true" show-network-status><i class="fa fa-cloud-upload"></i> Node</a>
           <ul class="dropdown-menu">
-            <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_NODE_BLOCK_HEIGHT' | translate }}</li>
-            <li class="text-center" style="border-bottom:1px solid #444;" show-block-height></li>
-            <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_NODE_CURRENT_NODE' | translate }}</li>
-            <li class="text-center" style="padding:10px;border-bottom:1px solid #444;">{{ $ctrl.currentNode | toHostname }}</li>
-            <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEARDER_NODE_LIST' | translate }}</li>
-             <li><select class="form-control" style="width:100%;" ng-model="$ctrl.currentNode" ng-change="$ctrl.changeNode($ctrl.currentNode)" ng-options="node.uri as (node.uri | toHostname) for node in $ctrl.nodes"><option value="" disabled selected>{{ 'HEADER_NODE_SELECT' | translate }}</option></select></li>
-             <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_NODE_CUSTOM' | translate }}</li>
-             <li><input type="text" class="form-control" style="width:100%;border-radius:0px;" ng-model="$ctrl.customNode" placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}"></li>
-             <li><button type="submit" class="btn btn-success" ng-click="$ctrl.changeNode($ctrl.customNode)" style="width: 100%; background: #444; color: white; border: medium none;border-radius:0px;">{{ 'HEADER_NODE_CONNECT' | translate }}</button></li>
+            <li>{{ 'HEADER_NODE_BLOCK_HEIGHT' | translate }}</li>
+            <li show-block-height></li>
+            <li>{{ 'HEADER_NODE_CURRENT_NODE' | translate }}</li>
+            <li>{{ $ctrl.currentNode | toHostname }}</li>
+            <li>{{ 'HEARDER_NODE_LIST' | translate }}</li>
+             <li><select class="form-control" ng-model="$ctrl.currentNode" ng-change="$ctrl.changeNode($ctrl.currentNode)" ng-options="node.uri as (node.uri | toHostname) for node in $ctrl.nodes"><option value="" disabled selected>{{ 'HEADER_NODE_SELECT' | translate }}</option></select></li>
+             <li>{{ 'HEADER_NODE_CUSTOM' | translate }}</li>
+             <li><input type="text" class="form-control" ng-model="$ctrl.customNode" placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}"></li>
+             <li><button type="submit" class="btn btn-success" ng-click="$ctrl.changeNode($ctrl.customNode)">{{ 'HEADER_NODE_CONNECT' | translate }}</button></li>
           </ul>
         </li>
         <li class="account" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a ui-sref-active="active" ui-sref="app.account" show-authed="true">Account*</a></li>
@@ -53,8 +53,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ 'HEADER_LANG_TITLE' | translate }}</a>
           <ul class="dropdown-menu">
-            <li class="text-center" style="border-bottom:1px solid #444;background-color:#444;color:white;">{{ 'HEADER_LANG_TITLE' | translate }}</li>
-            <li><select class="form-control" style="width:100%;" ng-model="$ctrl.lang.name" ng-change="$ctrl.changeLanguage($ctrl.lang.name)" ng-options="lang.key as lang.name for lang in $ctrl.languages"><option value="" disabled selected>{{ 'HEADER_LANG_SELECT' | translate }}</option></select></li>
+            <li><select class="form-control" ng-model="$ctrl.lang.name" ng-change="$ctrl.changeLanguage($ctrl.lang.name)" ng-options="lang.key as lang.name for lang in $ctrl.languages"><option value="" disabled selected>{{ 'HEADER_LANG_SELECT' | translate }}</option></select></li>
             <!--<li><select class="form-control" style="width:100%" ng-model="theme" ng-change="vm.setTheme(theme.color)" data-ng-options="theme.color for theme in vm.themes"><option value="" disabled selected>{{ 'SETTING_CHANG_THEME_SELECT' | translate }}</option></select></li>-->
           </ul>
         </li>

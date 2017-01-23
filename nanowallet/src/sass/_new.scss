@@ -261,6 +261,16 @@ footer .container-fluid {
     margin-left: 0px !important;
     color: grey !important;
   }
+  .dropdown-menu li:nth-of-type(even), .dropdown-menu li select, .dropdown-menu li input {
+    border-bottom: 1px solid $blue;
+    font-size: 14px;
+
+  }
+  .dropdown-menu li:nth-of-type(odd) {
+    font-weight: 700;
+    font-size: 13px;
+    border-bottom: 1px solid $grayLite;
+  }
 }
 .tabDescription {
   float: right;
