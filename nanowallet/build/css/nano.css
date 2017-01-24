@@ -879,6 +879,10 @@ textarea {
   width: 565px;
   min-width: 565px; }
 
+/*** Changelly WIDGET ***/
+#changwidget {
+  margin-top: 60px; }
+
 /*** MARKET INFO WIDGET ***/
 .market-info .header {
   color: rgba(0, 0, 0, 0.3);
