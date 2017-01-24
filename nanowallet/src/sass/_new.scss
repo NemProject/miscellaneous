@@ -680,10 +680,41 @@ textarea {
   #downloadWallet {
   visibility: hidden;
   }
-  .form-control {
-    max-width: 565px;
-    width: 565px;
-    min-width: 565px;
+  .btn-block {
+    border-radius: 0;
+    color: white;
+    background: $blue;
+    border: 1px solid $blue;
+    &:hover, &:active {
+      background: $blueLite;
+      border: 1px solid $blueLite;
+      color: white;
+    }
+  }
+  .showHide, .dLoad {
+    max-width: $pad * 2;
+    // width: 100%;
+    background: transparent;
+    text-align: center;
+
+    .btn-primary, .btn-danger {
+      width: 100%;
+      color: white;
+      background: $blue;
+      border: 1px solid $blue;
+      &:hover, &:active {
+        background: $blueLite;
+        border: 1px solid $blueLite;
+        color: white;
+      }
+    }
+  }
+  .col-sm-6:first-of-type {
+    .form-control {
+      max-width: 565px;
+      width: 565px;
+      min-width: 565px;
+    }
   }
 }
 /*** MARKET INFO WIDGET ***/

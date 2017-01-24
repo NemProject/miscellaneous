@@ -244,53 +244,14 @@ border: 1px solid #444;
 	border-right: 1px solid white;
 	border-left: 1px solid white;
 }*/
-.account-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.account-page .banner-left h2 {
-  margin-top: 10px; }
-
-.account-page .col-sm-6 {
-  margin-top: 10px; }
-
 /*.account-page .col-sm-6 {
 	padding: 0px;
 }*/
-.account-page .panel {
-  margin-bottom: 10px; }
-
-.account-page .panel-default {
-  word-break: break-all;
-  border-color: #444; }
-
-.account-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
-.account-page .input-group-btn button.active {
-  color: #444;
-  background-color: #f2cd88; }
-
 /*
 .account-page .input-group-btn button {
 	color: white;
 	background-color: #444;
 }*/
-.account-page .btn-success {
-  background-color: #5cb85c;
-  color: white; }
-
-.modal-content {
-  border-radius: 0px; }
-
-.modal-header {
-  background-color: #444;
-  color: white; }
-
-.modal-header button {
-  color: red;
-  opacity: 1; }
-
 .create-multisig-page .banner-left {
   padding-bottom: 0px;
   border-bottom: 1px solid white; }
@@ -889,7 +850,31 @@ textarea {
 .account-page #downloadWallet {
   visibility: hidden; }
 
-.account-page .form-control {
+.account-page .btn-block {
+  border-radius: 0;
+  color: white;
+  background: #69b2e5;
+  border: 1px solid #69b2e5; }
+  .account-page .btn-block:hover, .account-page .btn-block:active {
+    background: rgba(105, 178, 229, 0.6);
+    border: 1px solid rgba(105, 178, 229, 0.6);
+    color: white; }
+
+.account-page .showHide, .account-page .dLoad {
+  max-width: 40px;
+  background: transparent;
+  text-align: center; }
+  .account-page .showHide .btn-primary, .account-page .showHide .btn-danger, .account-page .dLoad .btn-primary, .account-page .dLoad .btn-danger {
+    width: 100%;
+    color: white;
+    background: #69b2e5;
+    border: 1px solid #69b2e5; }
+    .account-page .showHide .btn-primary:hover, .account-page .showHide .btn-primary:active, .account-page .showHide .btn-danger:hover, .account-page .showHide .btn-danger:active, .account-page .dLoad .btn-primary:hover, .account-page .dLoad .btn-primary:active, .account-page .dLoad .btn-danger:hover, .account-page .dLoad .btn-danger:active {
+      background: rgba(105, 178, 229, 0.6);
+      border: 1px solid rgba(105, 178, 229, 0.6);
+      color: white; }
+
+.account-page .col-sm-6:first-of-type .form-control {
   max-width: 565px;
   width: 565px;
   min-width: 565px; }

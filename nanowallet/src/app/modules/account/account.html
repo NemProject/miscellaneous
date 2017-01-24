@@ -14,7 +14,7 @@
            <h3>{{ 'ACCOUNT_ACCOUNT_INFORMATION' | translate }}</h3>
         </div>
         <div class="panel-body">
-          
+
           <fieldset class="form-group" ng-show="$ctrl.moreThanOneAccount">
             <div class="input-group">
               <span class="input-group-btn">
@@ -61,58 +61,80 @@
               <span class="form-control" show-account-data="vestedBalance" readOnly></span>
             </div>
           </fieldset>
+          <fieldset class="form-group">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAccountModal">
+            <i class="fa fa-plus"></i> {{ 'ACCOUNT_ADD_NEW_ACCOUNT_BTN' | translate }}
+          </button>
+          <!-- <button type="button" class="btn btn-default">Add an existing account into wallet</button>-->
+          </fieldset>
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="panel-heading">
-          <h3>{{ 'ACCOUNT_WALLET_KEYS' | translate }}</h3>
+          <h3>{{ 'GENERAL_PRIVATE_KEY' | translate }}</h3>
         </div>
         <div class="panel-body">
-
           <div class="form-group">
-            <label> <b>{{ 'ACCOUNT_ADD_NEW_ACCOUNT' | translate }}</b></label>
-            <br>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addAccountModal">{{ 'ACCOUNT_ADD_NEW_ACCOUNT_BTN' | translate }}</button>
-          <!-- <button type="button" class="btn btn-default">Add an existing account into wallet</button>-->
-          </div>
-          <div class="form-group">
-            <label> <b>{{ 'GENERAL_PRIVATE_KEY' | translate }}</b></label>
             <p class="bg-info"><span ng-bind-html="'ACCOUNT_PRIVATE_KEY_NOTE' | translate"></span></p>
             <div class="input-group">
+              <span class="input-group-btn short">
+                <label ng-show="!$ctrl.showPrivateKeyField">{{ 'FORM_PASSWORD' | translate }}:</label>
+                <label ng-show="$ctrl.showPrivateKeyField">Private Key:* </label>
+              </span>
               <input class="form-control" type="password" ng-model="$ctrl.common.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-show="!$ctrl.showPrivateKeyField"/>
               <input class="form-control" ng-show="$ctrl.showPrivateKeyField" ng-model="$ctrl.common.privateKey" readOnly></input>
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button"  ng-show="!$ctrl.showPrivateKeyField" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
-                  <i class="fa fa-check-circle-o"></i>
+              <span class="input-group-btn showHide">
+                <button class="btn btn-primary" type="button"  ng-show="!$ctrl.showPrivateKeyField" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
+                  <i class="fa fa-plus"></i>
                 </button>
                 <button class="btn btn-danger" type="button" ng-show="$ctrl.showPrivateKeyField" ng-click="$ctrl.clearSensitiveData()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
-                  <i class="fa fa-trash-o"></i>
+                  <i class="fa fa-minus"></i>
                 </button>
               </span>
             </div>
           </div>
+        </div>
+        <div class="panel-heading">
+          <h3>{{'ACCOUNT_EXPORT_MOBILE' | translate }}</h3>
+        </div>
+        <div class="panel-body">
           <div class="form-group">
-            <label><b>{{'ACCOUNT_EXPORT_MOBILE' | translate }}</b></label>
-            <br>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#walletModal">{{'ACCOUNT_WALLET_QR_BTN' | translate }}</button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#walletModalMobileApps">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
+            <div class="row">
+              <div class="col-md-4">
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
+              </div>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModal">{{'ACCOUNT_WALLET_QR_BTN' | translate }}</button>
+              </div>
+              <div class="col-md-4">
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label> <b>{{'ACCOUNT_BACKUP_WALLET' | translate }}</b></label>
-            <p class="bg-info" ng-bind-html="'ACCOUNT_BACKUP_WALLET_NOTE' | translate"></p>
-            <div class="input-group" ng-style="!$ctrl.selectedWallet ? {'display': 'inherit'} : {}">
+        </div>
+
+        <div class="panel-heading">
+          <h3>Choose Wallet:* </h3>
+        </div>
+        <div class="panel-body">
+          <p class="bg-info" ng-bind-html="'ACCOUNT_BACKUP_WALLET_NOTE' | translate"></p>
+
+          <fieldset class="form-group">
+            <div class="input-group" >
+              <span class="input-group-btn">
+                <label>{{ 'ACCOUNT_ACCOUNT_SELECT_LABEL' | translate }}: </label>
+              </span>
               <select class="form-control" ng-model="$ctrl.selectedWallet" ng-options="wallet.name group by (wallet.accounts[0].network | toNetworkName) for wallet in $ctrl._storage.wallets">
                 <option value="" disabled selected>{{ 'LOGIN_SELECT_WALLET' | translate }}</option>
               </select>
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-show="$ctrl.selectedWallet" ng-click="$ctrl.download($ctrl.selectedWallet)" title="{{'ACCOUNT_BACKUP_WALLET_DOWNLOAD' | translate}}"><i class="fa fa-download"></i></button>
+              <span class="input-group-btn dLoad">
+                <button class="btn btn-primary" type="button" ng-show="$ctrl.selectedWallet" ng-click="$ctrl.download($ctrl.selectedWallet)" title="{{'ACCOUNT_BACKUP_WALLET_DOWNLOAD' | translate}}"><i class="fa fa-download"></i></button>
               </span>
-            </div>
             <a id="downloadWallet" target="_blank"></a>
           </div>
-        </div>
+        </fieldset>
+
       </div>
 
     </div>
