@@ -297,26 +297,6 @@ border: 1px solid #444;
 .audit-apostille-page .panel-heading {
   border-bottom: 3px solid #dfa82f; }
 
-.importance-transfer-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.importance-transfer-page .banner-left h2 {
-  margin-top: 10px; }
-
-.importance-transfer-page .col-sm-6 {
-  margin-top: 10px; }
-
-.importance-transfer-page .btn-default {
-  border: 1px solid #444; }
-
-.importance-transfer-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
-.importance-transfer-page .input-group-btn button.active {
-  color: #444;
-  background-color: #f2cd88; }
-
 .loading-overlay {
   position: absolute;
   z-index: 5;
@@ -373,6 +353,20 @@ border: 1px solid #444;
 
 .faq-page p {
   margin: 0px; }
+
+.importance-transfer-page .input-group-btn.showHide, .account-page .input-group-btn.showHide, .importance-transfer-page .dLoad, .account-page .dLoad {
+  max-width: 40px;
+  background: transparent;
+  text-align: center; }
+  .importance-transfer-page .input-group-btn.showHide .btn-primary, .account-page .input-group-btn.showHide .btn-primary, .importance-transfer-page .input-group-btn.showHide .btn-danger, .account-page .input-group-btn.showHide .btn-danger, .importance-transfer-page .dLoad .btn-primary, .account-page .dLoad .btn-primary, .importance-transfer-page .dLoad .btn-danger, .account-page .dLoad .btn-danger {
+    width: 100%;
+    color: white;
+    background: #69b2e5;
+    border: 1px solid #69b2e5; }
+    .importance-transfer-page .input-group-btn.showHide .btn-primary:hover, .account-page .input-group-btn.showHide .btn-primary:hover, .importance-transfer-page .input-group-btn.showHide .btn-primary:active, .account-page .input-group-btn.showHide .btn-primary:active, .importance-transfer-page .input-group-btn.showHide .btn-danger:hover, .account-page .input-group-btn.showHide .btn-danger:hover, .importance-transfer-page .input-group-btn.showHide .btn-danger:active, .account-page .input-group-btn.showHide .btn-danger:active, .importance-transfer-page .dLoad .btn-primary:hover, .account-page .dLoad .btn-primary:hover, .importance-transfer-page .dLoad .btn-primary:active, .account-page .dLoad .btn-primary:active, .importance-transfer-page .dLoad .btn-danger:hover, .account-page .dLoad .btn-danger:hover, .importance-transfer-page .dLoad .btn-danger:active, .account-page .dLoad .btn-danger:active {
+      background: rgba(105, 178, 229, 0.6);
+      border: 1px solid rgba(105, 178, 229, 0.6);
+      color: white; }
 
 /*** GLOBAL STYLES ***/
 .panel-heading {
@@ -800,6 +794,17 @@ textarea {
 .drop input.upload[disabled] {
   cursor: not-allowed; }
 
+/*** MANAGE DELEGATED ACCOUNT PAGE ***/
+.importance-transfer-page .col-md-4 h5 {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.3);
+  margin-bottom: 5px; }
+
+.importance-transfer-page .col-md-4 span {
+  font-size: 14px;
+  font-weight: 700; }
+
 /*** EXPLORER PAGE ***/
 .explorer-home-page .panel-body {
   padding: 0; }
@@ -859,25 +864,6 @@ textarea {
     background: rgba(105, 178, 229, 0.6);
     border: 1px solid rgba(105, 178, 229, 0.6);
     color: white; }
-
-.account-page .showHide, .account-page .dLoad {
-  max-width: 40px;
-  background: transparent;
-  text-align: center; }
-  .account-page .showHide .btn-primary, .account-page .showHide .btn-danger, .account-page .dLoad .btn-primary, .account-page .dLoad .btn-danger {
-    width: 100%;
-    color: white;
-    background: #69b2e5;
-    border: 1px solid #69b2e5; }
-    .account-page .showHide .btn-primary:hover, .account-page .showHide .btn-primary:active, .account-page .showHide .btn-danger:hover, .account-page .showHide .btn-danger:active, .account-page .dLoad .btn-primary:hover, .account-page .dLoad .btn-primary:active, .account-page .dLoad .btn-danger:hover, .account-page .dLoad .btn-danger:active {
-      background: rgba(105, 178, 229, 0.6);
-      border: 1px solid rgba(105, 178, 229, 0.6);
-      color: white; }
-
-.account-page .col-sm-6:first-of-type .form-control {
-  max-width: 565px;
-  width: 565px;
-  min-width: 565px; }
 
 /*** Changelly WIDGET ***/
 #changwidget {

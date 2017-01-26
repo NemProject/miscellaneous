@@ -1,3 +1,23 @@
+%plusMinus {
+  .input-group-btn.showHide, .dLoad {
+    max-width: $pad * 2;
+    background: transparent;
+    text-align: center;
+    .btn-primary, .btn-danger {
+      width: 100%;
+      color: white;
+      background: $blue;
+      border: 1px solid $blue;
+      &:hover, &:active {
+        background: $blueLite;
+        border: 1px solid $blueLite;
+        color: white;
+      }
+    }
+  }
+}
+
+
 /*** GLOBAL STYLES ***/
 .panel-heading {
   background-color: transparent !important;
@@ -618,6 +638,23 @@ textarea {
 .drop input.upload[disabled] {
     cursor: not-allowed;
 }
+/*** MANAGE DELEGATED ACCOUNT PAGE ***/
+.importance-transfer-page {
+  @extend %plusMinus;
+  .col-md-4 {
+    h5 {
+      font-size: 14px;
+      font-weight: 500;
+      color: $gray;
+      margin-bottom: $pad / 4;
+    }
+    span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
 /*** EXPLORER PAGE ***/
 
 .explorer-home-page {
@@ -691,31 +728,7 @@ textarea {
       color: white;
     }
   }
-  .showHide, .dLoad {
-    max-width: $pad * 2;
-    // width: 100%;
-    background: transparent;
-    text-align: center;
-
-    .btn-primary, .btn-danger {
-      width: 100%;
-      color: white;
-      background: $blue;
-      border: 1px solid $blue;
-      &:hover, &:active {
-        background: $blueLite;
-        border: 1px solid $blueLite;
-        color: white;
-      }
-    }
-  }
-  .col-sm-6:first-of-type {
-    .form-control {
-      max-width: 565px;
-      width: 565px;
-      min-width: 565px;
-    }
-  }
+  @extend %plusMinus;
 }
 /*** Changelly WIDGET ***/
   #changwidget {
