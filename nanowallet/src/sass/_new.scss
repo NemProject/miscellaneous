@@ -664,6 +664,40 @@ textarea {
   }
 }
 
+/*** APOSTILLE HISTORY PAGE ***/
+.apostille-history-page {
+  tr th:first-child, tr td:first-child {
+    width: 22%;
+  }
+  tr th:nth-of-type(2), tr td:nth-of-type(2) {
+    width: 12%;
+  }
+  tr th:nth-of-type(3), tr td:nth-of-type(3) {
+    width: 11%;
+  }
+  tr th:nth-of-type(4), tr td:nth-of-type(4) {
+    width: 20%;
+  }
+  tr th:nth-of-type(5), tr td:nth-of-type(5) {
+    width: 15%;
+  }
+  tr th:nth-of-type(6), tr td:nth-of-type(6) {
+    width: 15%;
+  }
+  .backupPurge {
+    float: right;
+    cursor: pointer;
+    span {
+      font-size: 13px;
+      font-weight: 300
+      color: $gray;
+    }
+    span:first-of-type(){
+      margin-right: $pad;
+    }
+  }
+}
+
 
 
 /*** DROPBOX GLOBAL STYLES ***/
@@ -692,6 +726,7 @@ textarea {
 .drop input.upload[disabled] {
     cursor: not-allowed;
 }
+
 /*** MANAGE DELEGATED ACCOUNT PAGE ***/
 .importance-transfer-page {
   @extend %plusMinus;

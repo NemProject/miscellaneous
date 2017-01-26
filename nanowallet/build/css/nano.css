@@ -807,6 +807,34 @@ textarea {
 .rejected {
   float: right; }
 
+/*** APOSTILLE HISTORY PAGE ***/
+.apostille-history-page tr th:first-child, .apostille-history-page tr td:first-child {
+  width: 22%; }
+
+.apostille-history-page tr th:nth-of-type(2), .apostille-history-page tr td:nth-of-type(2) {
+  width: 12%; }
+
+.apostille-history-page tr th:nth-of-type(3), .apostille-history-page tr td:nth-of-type(3) {
+  width: 11%; }
+
+.apostille-history-page tr th:nth-of-type(4), .apostille-history-page tr td:nth-of-type(4) {
+  width: 20%; }
+
+.apostille-history-page tr th:nth-of-type(5), .apostille-history-page tr td:nth-of-type(5) {
+  width: 15%; }
+
+.apostille-history-page tr th:nth-of-type(6), .apostille-history-page tr td:nth-of-type(6) {
+  width: 15%; }
+
+.apostille-history-page .backupPurge {
+  float: right;
+  cursor: pointer; }
+  .apostille-history-page .backupPurge span {
+    font-size: 13px;
+    font-weight: 300; }
+  .apostille-history-page .backupPurge span:first-of-type {
+    margin-right: 20px; }
+
 /*** DROPBOX GLOBAL STYLES ***/
 .drop {
   border: 1px dashed #00a65a;
