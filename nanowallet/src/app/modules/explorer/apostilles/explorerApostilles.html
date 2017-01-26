@@ -11,13 +11,15 @@
     <div class="row">
       <div class="col-md-12">
         <div class="panel-heading">
-          <div ng-show="$ctrl.sinkData.length > 5">
-            <button class="buttonStyle" ng-disabled="$ctrl.currentPageSink == 0" ng-click="$ctrl.currentPageSink = $ctrl.currentPageSink-1">
-              <span class="fa fa-chevron-left" aria-hidden="true"></span>
-            </button><b>{{$ctrl.currentPageSink+1}}/{{$ctrl.numberOfPagesSink()}}</b>
-            <button class="buttonStyle" ng-disabled="$ctrl.currentPageSink+1 >= $ctrl.numberOfPagesSink()" ng-click="$ctrl.currentPageSink = $ctrl.currentPageSink+1">
-              <span class="fa fa-chevron-right" aria-hidden="true"></span>
-            </button>
+          <div class="nav nav-tabs arrows">
+            <div ng-show="$ctrl.sinkData.length > 5">
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPageSink == 0" ng-click="$ctrl.currentPageSink = $ctrl.currentPageSink-1">
+                <span class="fa fa-chevron-left" aria-hidden="true"></span>
+              </button><b>{{$ctrl.currentPageSink+1}}/{{$ctrl.numberOfPagesSink()}}</b>
+              <button class="buttonStyle" ng-disabled="$ctrl.currentPageSink+1 >= $ctrl.numberOfPagesSink()" ng-click="$ctrl.currentPageSink = $ctrl.currentPageSink+1">
+                <span class="fa fa-chevron-right" aria-hidden="true"></span>
+              </button>
+            </div>
           </div>
         </div>
         <table class="table table-condensed">

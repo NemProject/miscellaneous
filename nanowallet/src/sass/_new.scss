@@ -82,7 +82,7 @@ tr {
 }
 tbody {
   border: none;
-  text-align: center;
+  text-align: left !important;
 }
 td {
   vertical-align: middle !important;
@@ -138,7 +138,7 @@ h1 {
   font-size: 40px;
 }
 h2 {
-	color: rgba(0, 0, 0, 0.3);
+	color: $gray;
 	font-size: 55px;
 	font-weight: 100;
   text-align: left;
@@ -149,6 +149,12 @@ h3 {
   font-size: 19px;
   color: $gray;
   font-weight: 300;
+}
+h4{
+	padding-top: $pad;
+	color: $gray;
+	font-size: 24px;
+	font-weight: 300;
 }
 h5 {
   color: $gray;
@@ -327,6 +333,24 @@ footer .container-fluid {
 .button-warning {
   max-width: 50px;
 }
+/*** ARROWS ***/
+.arrows {
+  float: right;
+  margin-top: -$pad;
+  &.harvested {
+    margin-top: -$pad * 1.6;
+  }
+  .buttonStyle {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    color: $gray;
+    weight: 100;
+  }
+  b {
+    color: $gray;
+  }
+}
 /*** LOGIN & SIGNUP PAGE ***/
 .login-page, .signup-page {
   color: white;
@@ -378,6 +402,36 @@ footer .container-fluid {
     border: $blueLite;
     a {
       color: red;
+    }
+  }
+}
+/*** DASHBOARD PAGE ***/
+.dashboard-page {
+  // tbody {
+  //   text-align: left;
+  // }
+  h1 {
+    color: black;
+    font-weight: 500;
+    font-size: 26px;
+    margin-top: 0px;
+  }
+  h5 {
+    color: black;
+    font-size: 15px;
+  }
+  .secondary h4 {
+    padding-top: 0px !important;
+  }
+  .updates {
+  	max-width: 400px;
+    p {
+  	  font-size: 12px;
+    }
+    a{
+    	color: $blue;
+    	text-decoration: underline;
+    	font-weight: 500;
     }
   }
 }
@@ -693,6 +747,12 @@ textarea {
   tr th:nth-of-type(4), tr td:nth-of-type(4) {
     width: 15%;
   }
+  .arrows {
+    margin-top: -$pad * 2;
+  }
+  // .panel-heading {
+  //   border-bottom: 0px solid white !important;
+  // }
 }
 .explorer-namespaces-mosaics-page {
   .form-control {
@@ -704,7 +764,7 @@ textarea {
     }
   }
   .arrows {
-    padding-top: $pad * 1.5;
+    padding-top: $pad * 2.7;
   }
 }
 .explorer-accounts {
@@ -741,7 +801,7 @@ textarea {
 	font-weight: 700;
 }
 .market-info h4 {
-  margin-bottom: $pad * 2;
+  margin-bottom: $pad;
 }
 .market-info .header span{
 	font-weight: 500;

@@ -37,13 +37,6 @@ hr {
 h2 {
   margin-top: 0px; }
 
-h4 {
-  padding-top: 20px;
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 20px;
-  font-weight: 500;
-  font-family: 'Roboto'; }
-
 tr td {
   border: none !important; }
 
@@ -429,7 +422,7 @@ tr {
 
 tbody {
   border: none;
-  text-align: center; }
+  text-align: left !important; }
 
 td {
   vertical-align: middle !important; }
@@ -492,6 +485,12 @@ h3 {
   margin: 0;
   font-size: 19px;
   color: rgba(0, 0, 0, 0.3);
+  font-weight: 300; }
+
+h4 {
+  padding-top: 20px;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 24px;
   font-weight: 300; }
 
 h5 {
@@ -640,6 +639,21 @@ footer .container-fluid {
 .button-warning {
   max-width: 50px; }
 
+/*** ARROWS ***/
+.arrows {
+  float: right;
+  margin-top: -20px; }
+  .arrows.harvested {
+    margin-top: -32px; }
+  .arrows .buttonStyle {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    color: rgba(0, 0, 0, 0.3);
+    weight: 100; }
+  .arrows b {
+    color: rgba(0, 0, 0, 0.3); }
+
 /*** LOGIN & SIGNUP PAGE ***/
 .login-page, .signup-page {
   color: white; }
@@ -679,6 +693,29 @@ footer .container-fluid {
   border: rgba(105, 178, 229, 0.6); }
   .signup-page .bg-info a {
     color: red; }
+
+/*** DASHBOARD PAGE ***/
+.dashboard-page h1 {
+  color: black;
+  font-weight: 500;
+  font-size: 26px;
+  margin-top: 0px; }
+
+.dashboard-page h5 {
+  color: black;
+  font-size: 15px; }
+
+.dashboard-page .secondary h4 {
+  padding-top: 0px !important; }
+
+.dashboard-page .updates {
+  max-width: 400px; }
+  .dashboard-page .updates p {
+    font-size: 12px; }
+  .dashboard-page .updates a {
+    color: #69b2e5;
+    text-decoration: underline;
+    font-weight: 500; }
 
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
@@ -839,6 +876,9 @@ textarea {
 .explorer-apostilles tr th:nth-of-type(4), .explorer-apostilles tr td:nth-of-type(4) {
   width: 15%; }
 
+.explorer-apostilles .arrows {
+  margin-top: -40px; }
+
 .explorer-namespaces-mosaics-page .form-control {
   padding-left: 0px; }
 
@@ -846,7 +886,7 @@ textarea {
   min-height: 60px; }
 
 .explorer-namespaces-mosaics-page .arrows {
-  padding-top: 30px; }
+  padding-top: 54px; }
 
 .explorer-accounts .searchBar {
   padding-top: 40px; }
@@ -876,7 +916,7 @@ textarea {
   font-weight: 700; }
 
 .market-info h4 {
-  margin-bottom: 40px; }
+  margin-bottom: 20px; }
 
 .market-info .header span {
   font-weight: 500;
