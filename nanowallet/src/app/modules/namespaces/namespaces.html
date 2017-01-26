@@ -46,7 +46,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
+                  <label for="namespaceParent" data-toggle="tooltip" title="select 'Root Namespace' if renewing a namespace">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: <i class="fa fa-question-circle"></i> </label>
                 </span>
                 <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
                   <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>

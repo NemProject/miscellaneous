@@ -1,9 +1,12 @@
-function AppRun(AppConstants, $rootScope, Wallet) {
+function AppRun(AppConstants, $rootScope, $timeout, Wallet) {
     'ngInject';
 
     // change page title based on state
     $rootScope.$on('$stateChangeSuccess', (event, toState) => {
         $rootScope.setPageTitle(toState.title);
+        $timeout( function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
     });
 
     // Helper method for setting the page's title
