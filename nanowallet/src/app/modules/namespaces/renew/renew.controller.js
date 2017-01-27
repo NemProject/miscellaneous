@@ -1,8 +1,8 @@
-import CryptoHelpers from '../../utils/CryptoHelpers';
-import Sinks from '../../utils/sinks';
+import CryptoHelpers from '../../../utils/CryptoHelpers';
+import Sinks from '../../../utils/sinks';
 
-class NamespacesCtrl {
-    constructor($location, Wallet, Alert, Transactions, DataBridge, $filter) {
+class RenewNamespacesCtrl {
+    constructor($location, Wallet, Alert, Transactions, DataBridge) {
         'ngInject';
 
         // Alert service
@@ -15,8 +15,6 @@ class NamespacesCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
-        // Filters
-        this._$filter = $filter;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -42,6 +40,9 @@ class NamespacesCtrl {
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
+        // Show / hide ns dropdown
+        this.needRenew = false;
+
         // Object to contain our password & private key data.
         this.common = {
             'password': '',
@@ -57,37 +58,16 @@ class NamespacesCtrl {
     }
 
     /**
-     * isNotNamespaceLevel3() Exclude level 3 namespace
-     *
-     * @param elem: The element to check
-     */
-    isNotNamespaceLevel3(elem) {
-        return elem.fqn.split('.').length < 3
-    };
-
-    /**
-     * processNamespaceName() Set name to lowercase and check it
-     */
-    processNamespaceName() {
-        // lowercase namespace name
-        this.formData.namespaceName = this._$filter('lowercase')(this.formData.namespaceName);
-        // Check namespace validity
-        if(!this.namespaceIsValid(this.formData.namespaceName)) {
-            this._Alert.invalidNamespaceName();
-            return;
-        }
-    }
-
-    /**
-     * updateCurrentAccountNS() Get current account namespaces & mosaic names
+     * Get current account namespaces & mosaic names
      *
      * @note: Used in view (ng-update) on multisig changes
      */
     updateCurrentAccountNS() {
         //Fix this.formData.multisigAccount error on logout
-        if (null === this.formData.multisigAccount) {
+        if (null === this.formData.multisigAccount || this._DataBridge.nisHeight === 0) {
             return;
         }
+        this.needRenew = false;
         // Update current account if multisig selected
         if (this.formData.isMultisig) {
             this.currentAccount = this.formData.multisigAccount.address;
@@ -97,15 +77,40 @@ class NamespacesCtrl {
         // Set current account mosaics names if namespaceOwned is not undefined
         if (undefined !== this._DataBridge.namespaceOwned[this.currentAccount]) {
             let namespaceOwned = this._DataBridge.namespaceOwned[this.currentAccount];
-            this.formData.namespaceParent = namespaceOwned[Object.keys(namespaceOwned)[0]];
+            for (let i = 0; i < Object.keys(namespaceOwned).length; i++) {
+                if (namespaceOwned[Object.keys(namespaceOwned)[i]].height + 525600 - this._DataBridge.nisHeight <= 43200 && namespaceOwned[Object.keys(namespaceOwned)[i]].fqn.indexOf('.') === -1) {
+                    this.formData.namespaceName = namespaceOwned[Object.keys(namespaceOwned)[i]].fqn;
+                    this.needRenew = true;
+                    this.updateFees();
+                    return;
+                }
+            }
         } else {
-            this.formData.namespaceParent = '';
+            this.formData.namespaceName = '';
         }
         this.updateFees();
     }
 
     /**
-     * updateFees() Update transaction fee
+     * Check if expire in less than a month
+     *
+     * @param elem: The element to check
+     */
+    cleanArray(elem) {
+        if (undefined === elem) {
+            return;
+        }
+        let clean = [];
+        for (let i = 0; i < Object.keys(elem).length; i++) {
+            if (elem[Object.keys(elem)[i]].height + 525600 - this._DataBridge.nisHeight <= 43200 && elem[Object.keys(elem)[i]].fqn.indexOf('.') === -1) {
+                clean.push(elem[Object.keys(elem)[i]]);
+            }
+        }
+        return clean;
+    };
+
+    /**
+     * Update transaction fee
      */
     updateFees() {
         let entity = this._Transactions.prepareNamespace(this.common, this.formData);
@@ -120,7 +125,7 @@ class NamespacesCtrl {
     }
 
     /**
-     * namespaceIsValid() Check validity of namespace name
+     * Check validity of namespace name
      *
      * @param ns: The namespace name
      */
@@ -133,13 +138,13 @@ class NamespacesCtrl {
         // Test if has special chars or space excluding hyphens
         if (pattern.test(ns) == false) {
             return false;
-          } else {
+        } else {
             return true;
-          }
+        }
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Build and broadcast the transaction to the network
      */
     send() {
         // Disable send button;
@@ -187,4 +192,4 @@ class NamespacesCtrl {
 
 }
 
-export default NamespacesCtrl;
+export default RenewNamespacesCtrl;

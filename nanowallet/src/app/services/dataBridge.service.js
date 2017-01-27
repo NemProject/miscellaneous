@@ -314,6 +314,13 @@ class DataBridge {
                         this.namespaceOwned[address] = {};
                     }
                     this.namespaceOwned[address][namespaceName] = d;
+                    // Check namespace expiration date
+                    // Creation height of ns + 1 year in blocks (~60 blocks per hour * 24h * 365d) - current height < 1 month in blocks (60 blocks per hour * 24h * 30d)
+                    if(d.height + 525600 - this.nisHeight <= 43200 && d.fqn.indexOf('.') === -1) {
+                        this._$timeout(() => {
+                            this._Alert.namespaceExpiryNotice(d.fqn, d.height + 525600 - this.nisHeight);
+                        });                  
+                    }
                 }, 0);
             }
 

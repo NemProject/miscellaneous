@@ -368,6 +368,14 @@ export default class Alert {
         });
     }
 
+    namespaceExpiryNotice(ns, blocks) {
+        this._ngToast.create({
+            content: this._$filter("translate")("RENEW_NS_ALERT_PART_1") + ' <b>'+ns+'</b> ' + this._$filter("translate")("RENEW_NS_ALERT_PART_2") + ' (~' + blocks + ' ' + this._$filter("translate")("GENERAL_BLOCKS") + '). ' + this._$filter("translate")("RENEW_NS_ALERT_PART_3") ,
+            className: 'warning',
+            timeout: 10000
+        });
+    }
+
     /***
      * Success alerts
      */

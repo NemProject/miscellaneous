@@ -58,6 +58,10 @@ td {
     border-color: #d15050 !important;
 }
 
+	.alert-warning {
+    color: #444;
+}
+
 .bg-danger {
 	color: #fff;
     background-color: #d15050 !important;
@@ -266,9 +270,9 @@ select {
 	padding: 10px 16px;
 }
 
-.login-page .container {
+/*.login-page .container {
 	margin-top: 150px;
-}
+}*/
 
 .login-page h1 {
 	font-weight: bold;
