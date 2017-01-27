@@ -76,6 +76,7 @@
                 <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
               </div>
             </fieldset>
+            <!-- SEND FIELD -->
             <button class="btn btn-success pull-xs-right"
               type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
