@@ -15,7 +15,7 @@
           </div>
           <ul class="nav nav-tabs">
             <li ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
-            <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">Import Key*</a></li>
+            <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}</a></li>
           </ul>
         </div>
         <div class="panel-body">
@@ -24,7 +24,7 @@
             <fieldset class="form-group" ng-show="$ctrl.haveMoreThanOneAccount && !$ctrl.useCustomAccount">
             	<div class="input-group">
                 <span class="input-group-btn">
-                  <label>Account to Convert:* </label>
+                  <label>{{ 'AGGREGATE_ACCOUNT_SELECT_TITLE' | translate }}</label>
                 </span>
                	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
                		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
@@ -40,7 +40,7 @@
             <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
               <div class="input-group" ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}">
                 <span class="input-group-btn">
-                  <label>Address:* </label>
+                  <label>{{ 'GENERAL_ADDRESS' | translate }}</label>
                 </span>
                 <input class="form-control"
                   type="text"
@@ -68,7 +68,7 @@
             <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>Address Private Key:* </label>
+                  <label>{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE' | translate }}</label>
                 </span>
                 <input class="form-control"
                   type="password"
@@ -80,7 +80,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>Add Signer:* </label>
+                  <label>{{ 'AGGREGATE_ADD_BTN_TITLE' | translate}}</label>
                 </span>
                 <input class="form-control"
                     type="text"
@@ -152,7 +152,7 @@
       <div class="col-md-6">
         <!-- LIST OF SIGNERS TO BE ADDED -->
         <div class="panel-heading">
-          <h3>Cosignatory Address List*</h3>
+          <h3>{{ 'AGGREGATE_COSIG_LIST' | translate }}</h3>
           <div style="float: right; position: relative; display: block;" ng-show="$ctrl.cosignatoryArray.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
         </div>
         <table class="table table-bordered table-hover table-striped table-condensed">

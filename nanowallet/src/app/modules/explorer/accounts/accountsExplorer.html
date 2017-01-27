@@ -13,7 +13,7 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn short">
-                <label>Search:* </label>
+                <label>{{ 'ACCOUNTS_EXPLORER_TITLE' | translate }}: </label>
               </span>
             <div class="form-control formFloat">
               <input type="text" ng-model="$ctrl.rawInput" ng-model-options="{debounce:500}" placeholder="{{'FORM_ADDRESS_ALIAS_PLACEHOLDER' | translate}}" ng-change="$ctrl.processRawInput()"/>

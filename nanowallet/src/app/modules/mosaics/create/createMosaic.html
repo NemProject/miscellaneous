@@ -6,7 +6,7 @@
         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
       <div class="col-sm-4 helper">
-        <h5 data-toggle="modal" data-target="#mosaicHelp">Want more info about Mosaics?*</h5>
+        <h5 data-toggle="modal" data-target="#mosaicHelp">{{ 'MOSAIC_DEFINITION_INFORMATION' | translate }}</h5>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
                 <span class="input-group-btn">
                   <label for="namespaceParent" class="control-label">{{ 'FORM_MOSAIC_NAME_PLACEHOLDER' | translate }}:</label>
                 </span>
-                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="Mosaic*" maxlength="32" ng-change="$ctrl.processMosaicName();">
+                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.mosaicName" placeholder="{{ 'GENERAL_MOSAIC' | translate }}" maxlength="32" ng-change="$ctrl.processMosaicName();">
               </div>
             </fieldset>
             <!-- MOSAIC DESCRIPTION -->
@@ -185,7 +185,7 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <label>Total Supply:* </label>
+                    <label>{{ 'MOSAIC_DEFINITION_TOTAL_SUPPLY' | translate }}: </label>
                   </span>
                   <span class="form-control" readOnly>
                     <span>{{($ctrl.formData.properties.initialSupply)}}</span>
@@ -199,7 +199,7 @@
               <fieldset class="form-group">
                 <div class="input-group">
                   <span class="input-group-btn">
-                    <label>Full Name:* </label>
+                    <label>{{ 'MOSAIC_DEFINITION_FINAL_NAME' | translate }}: </label>
                   </span>
                   <span class="form-control" readOnly>{{ $ctrl.formData.namespaceParent.fqn }}:{{ $ctrl.formData.mosaicName }}</span>
                 </div>

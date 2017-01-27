@@ -4,9 +4,17 @@ function EnglishProvider($translateProvider) {
     $translateProvider.translations('en', {
 
         // HEADER COMPONENT
+        WALLET_NAME_1: 'nano',
+        WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'The secure interface connecting to the NEM platform',
         HEADER_LOGIN_BUTTON: 'Login',
         HEADER_SIGNUP_BUTTON: 'Sign Up',
+        HEADER_DASHBOARD: 'Dashboard',
+        HEADER_WALLET: 'Wallet',
+        HEADER_SERVICES: 'Services',
+        HEADER_EXPLORER: 'Explorer',
+        HEADER_NODE: 'Node',
+        HEADER_ACCOUNT: 'Account',
         HEADER_LANG_TITLE: 'Language',
         HEADER_LANG_SELECT: 'Select a language',
         HEADER_NODE_BLOCK_HEIGHT: 'Block height',
@@ -195,6 +203,8 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_MULTISIG_NAME: 'Multisignature mosaic definition transaction',
         MOSAIC_DEFINITION_QUANTITY: 'Quantity',
         MOSAIC_DEFINITION_DIV: 'Divisibility',
+        MOSAIC_DEFINITION_TOTAL_SUPPLY: 'Total supply',
+        MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
         MOSAIC_DEFINITION_DESCRPITION: 'Description',
         MOSAIC_DEFINITION_INITIAL_SUPPLY: 'Initial supply',
         MOSAIC_DEFINITION_MUTABLE_SUPPLY: 'Mutable supply',
@@ -213,6 +223,7 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: 'Sending',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: 'will imply levy of',
         MOSAIC_DEFINITION_PARENT: 'Parent Namespace',
+        MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: 'The maximum length for a mosaic name is 32 characters. Allowed characters are:',
         MOSAIC_DEFINITION_INFORMATION_2: 'The first character must be a letter from the alphabet.',
         MOSAIC_DEFINITION_INFORMATION_3: 'The description may not exceed a length of 512 characters. There is no limitation for the characters used in the description.',
@@ -341,6 +352,7 @@ function EnglishProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+        ACCOUNTS_EXPLORER_TITLE: 'Search',
 
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
@@ -350,6 +362,7 @@ function EnglishProvider($translateProvider) {
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Create apostilles',
+        APOSTILLE_CREATE_HELP: 'Want more info on apostille?',
         APOSTILLE_TRANSACTION_NAME: 'Apostille transaction',
         APOSTILLE_TRANSACTION_MULTISIG_NAME: 'Multisignature apostille transaction',
         APOSTILLE_KEEP_PRIVATE: 'Private, transferable, and updateable',
@@ -471,20 +484,27 @@ function EnglishProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
 
+        // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
         AGGREGATE_MODIFICATION_NAME: 'Aggregate modification transaction',
         AGGREGATE_MODIFICATION_MULTISIG_NAME: 'Multisignature aggregate modification transaction',
+        AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
         AGGREGATE_ACCOUNT_SELECT: 'Select an account to convert',
-        AGGREGATE_CUSTOM_ACCOUNT: 'Use custom account',
+        AGGREGATE_CUSTOM_ACCOUNT: 'Import Key',
+        AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
         AGGREGATE_ACCOUNT_TO_CONVERT: 'Account to convert address',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: 'Account to convert private key',
         AGGREGATE_ADD_PLACEHOLDER: 'Cosignatory account or @alias to add',
-        AGGREGATE_ADD_BTN_TITLE: 'Add cosignatory',
+        AGGREGATE_ADD_BTN_TITLE: 'Add Signer',
         AGGREGATE_MIN_SIGNATURES: 'Minimum signatures required',
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimum signatures needed to validate a transaction',
         AGGREGATE_MODIFICATION_LIST: 'Modifications list',
+        AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
+
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Edit a multisignature contract',
+        AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Select an account to edit',
+        AGGREGATE_ADD_REMOVE_TITLE: 'Add/Remove signer',
         AGGREGATE_ADD_REMOVE_PLACEHOLDER: 'Cosignatory account or @alias to add',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Change Sigs Needed',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Number of signatures to add (n) or remove (-n) - Automated removals',
@@ -498,6 +518,7 @@ function EnglishProvider($translateProvider) {
         LOGIN_UPGRADE_MESSAGE: 'Selected wallet needs an upgrade. This action will generate a child public key and add it into your main account. Download of updated wallet will be automatically triggered at success, you <b><u>must</u></b> download it !',
         LOGIN_UPGRADE_BUTTON: 'Upgrade wallet',
         LOGIN_IMPORT_BUTTON: 'Import Wallet',
+        LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
         LOGIN_SELECT_WALLET: 'Select a wallet in local storage',
         LOGIN_LOGIN_BUTTON: 'Sign In',
 
@@ -542,6 +563,8 @@ function EnglishProvider($translateProvider) {
         FORM_WALLET_NAME_FIELD_PLACEHOLDER: 'Wallet name',
         FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: 'Password',
         FORM_PASSWORD: 'Password',
+        FORM_PASSWORD_CONFIRM: 'Confirm Password',
+        FORM_PASSPHRASE_CONFIRM: 'Confirm Passphrase',
         FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: 'Confirm your password',
         FORM_PASSPHRASE_FIELD_PLACEHOLDER: 'Passphrase',
         FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: 'Confirm your passphrase',

@@ -11,7 +11,7 @@
         <h2>{{ 'APOSTILLE_CREATE_TITLE' | translate }}</h2>
       </div>
       <div class="col-sm-4 helper">
-        <h4 data-toggle="modal" data-target="#apostilleHelp">Want more info on apostille?</h4>
+        <h4 data-toggle="modal" data-target="#apostilleHelp">{{ 'APOSTILLE_CREATE_HELP' | translate }}</h4>
       </div>
     </div>
 
@@ -44,7 +44,7 @@
           <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig && $ctrl.formData.multisigAccount">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}</label>
+                <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
               </span>
               <div class="form-control" readOnly>
                 <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
@@ -56,7 +56,7 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'GENERAL_TAGS' | translate }}:</label>
+                <label>{{ 'GENERAL_TAGS' | translate }}: </label>
               </span>
               <input class="form-control" type="text" placeholder="{{ 'GENERAL_TAGS' | translate }}" ng-model="$ctrl.formData.tags" ng-disabled="!$ctrl.common.password"/>
             </div>
@@ -65,7 +65,7 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'GENERAL_HASH_FUNCTION' | translate }}</label>
+                <label>{{ 'GENERAL_HASH_FUNCTION' | translate }}: </label>
               </span>
               <select class="form-control" ng-options="hash.name for hash in $ctrl.hashing" ng-model="$ctrl.formData.hashing">
               </select>

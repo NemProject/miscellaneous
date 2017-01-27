@@ -16,7 +16,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>Account to Edit:* </label>
+                  <label>{{ 'AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE' |translate }}: </label>
                 </span>
                	<select class="form-control" ng-options="account as account.address for (index, account) in $ctrl._DataBridge.accountData.meta.cosignatoryOf" ng-model="$ctrl.formData.accountToEdit" ng-change="$ctrl.processAccountToEdit();">
                		<option value="" disabled selected> {{ 'AGGREGATE_MODIFICATION_EDIT_SELECT' | translate }}</option>
@@ -39,7 +39,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>Add/Remove Signer:* </label>
+                  <label>{{ 'AGGREGATE_ADD_REMOVE_TITLE' | translate }}: </label>
                 </span>
                 <input class="form-control"
                   type="text"
