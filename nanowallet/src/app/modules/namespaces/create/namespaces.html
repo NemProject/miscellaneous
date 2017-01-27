@@ -16,7 +16,7 @@
           <ul class="nav nav-tabs">
             <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
             <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
-          <ul>
+          </ul>
         </div>
         <div class="panel-body">
           <fieldset>
@@ -46,7 +46,7 @@
             <fieldset class="form-group" ng-show="!$ctrl.customKey">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label for="namespaceParent" data-toggle="tooltip" title="select 'Root Namespace' if renewing a namespace">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: <i class="fa fa-question-circle"></i> </label>
+                  <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
                 </span>
                 <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
                   <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>
@@ -57,21 +57,11 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <!-- <label ng-show="$ctrl.customKey" for="namespaceParent" data-toggle="tooltip" title="select 'Root Namespace' if renewing a namespace">Renew Namespace:* <i class="fa fa-question-circle"></i> </label> -->
                   <label ng-show="!$ctrl.customKey">{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
                 </span>
                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
              </div>
             </fieldset>
-            <!-- CHECKBOX TO RENEW NAMESPACE -->
-            <!-- <div class="row checkboxes">
-              <div class="col-md-5">
-                <fieldset class="form-group">
-                  <input id="box8" type="checkbox" ng-model="$ctrl.customKey" ng-change="$ctrl.updateRemoteAccount()">
-                  <label for="box8">Check to renew a namespace you own.</label>
-                </fieldset>
-              </div>
-            </div> -->
             <!-- NAMESPACE SINK ADDRESS -->
             <fieldset class="form-group">
               <div class="input-group">
