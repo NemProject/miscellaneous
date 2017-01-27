@@ -31,6 +31,20 @@
               <button class="btn" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</button>
             </div>
           </div>
+          	<!-- <div class="col-sm-4 noPaddingLeft">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-chevron-right"></i> {{ 'PORTAL_NS_TITLE' | translate }}
+                </div>
+                <div class="panel-body">
+                  <p>{{ 'PORTAL_NS_TEXT' | translate }}</p>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn" ui-sref="app.namespaces">{{ 'PORTAL_NS_BTN' | translate }}</button>
+                    <button class="btn" ui-sref="app.renewNamespaces">{{ 'RENEW_NS_TITLE' | translate }}</button>
+                </div>
+            </div>
+          </div> -->
           <div class="col-sm-4">
             <div class="panel-heading row">
               <div class="col-sm-3">
@@ -45,6 +59,8 @@
             </div>
             <div class="panelFooter">
               <button class="btn" class="" ui-sref="app.namespaces">{{ 'PORTAL_NS_BTN' | translate }}</button>
+              <br>
+              <button class="btn" ui-sref="app.renewNamespaces">{{ 'RENEW_NS_TITLE' | translate }}</button>
             </div>
           </div>
           <div class="col-sm-4">

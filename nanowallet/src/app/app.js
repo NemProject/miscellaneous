@@ -58,6 +58,7 @@ const requires = [
     'app.createMultisig',
     'app.editMultisig',
     'app.namespaces',
+    'app.renewNamespaces',
     'app.createMosaic',
     'app.editMosaic',
     'app.portal',
