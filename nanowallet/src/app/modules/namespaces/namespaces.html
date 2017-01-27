@@ -43,7 +43,7 @@
               </div>
             </fieldset>
             <!-- PARENT NAMESPACE -->
-            <fieldset class="form-group">
+            <fieldset class="form-group" ng-show="!$ctrl.customKey">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label for="namespaceParent" data-toggle="tooltip" title="select 'Root Namespace' if renewing a namespace">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: <i class="fa fa-question-circle"></i> </label>
@@ -57,11 +57,21 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
+                  <!-- <label ng-show="$ctrl.customKey" for="namespaceParent" data-toggle="tooltip" title="select 'Root Namespace' if renewing a namespace">Renew Namespace:* <i class="fa fa-question-circle"></i> </label> -->
+                  <label ng-show="!$ctrl.customKey">{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
                 </span>
                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
              </div>
             </fieldset>
+            <!-- CHECKBOX TO RENEW NAMESPACE -->
+            <!-- <div class="row checkboxes">
+              <div class="col-md-5">
+                <fieldset class="form-group">
+                  <input id="box8" type="checkbox" ng-model="$ctrl.customKey" ng-change="$ctrl.updateRemoteAccount()">
+                  <label for="box8">Check to renew a namespace you own.</label>
+                </fieldset>
+              </div>
+            </div> -->
             <!-- NAMESPACE SINK ADDRESS -->
             <fieldset class="form-group">
               <div class="input-group">
@@ -116,7 +126,7 @@
               </div>
             </fieldset>
             <!-- SEND TRANSACTION -->
-            <button class="btn btn-success pull-xs-right" type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
+            <button class="btn btn-success pull-xs-right" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_REGISTER' | translate }}
             </button>
           </fieldset>
@@ -127,8 +137,29 @@
         <div class="panel-heading">
           <h3>{{ 'GENERAL_INFORMATION' | translate }}</h3>
         </div>
-        <div class="panel-body">
-          <p>
+        <div class="panel-body row">
+          <div class="col-md-6">
+          <h4>Namespace Restrictions</h4>
+          <p>Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:
+          </p>
+          <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
+          <p> Disallowed namespaces are below. This list is not final and can be extended in the future
+          </p>
+          <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
+          <p>The namespace may have up to 3 parts, thus 'qm.metals.silver' is valid while 'qm.metals.silver.coin' is not.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h4>Renewing Namespaces</h4>
+          <h5>Fees</h5>
+          <p>Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.
+          <h5>Root Namespaces</h5>
+          <p>Only root namesspaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.
+          </p>
+          <h5>Renewal Period</h5>
+          <p>Namespaces can be renewed 1 month prior to their expiration.
+          </p>
+          <!-- <p>
             {{ 'NAMESPACE_PROVISION_INFORMATION_1' | translate }}
           </p>
           <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
@@ -138,8 +169,9 @@
           <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
           <p>
             {{ 'NAMESPACE_PROVISION_INFORMATION_3' | translate }}
-          </p>
+          </p> -->
         </div>
+      </div>
       </div>
     </div>
 
