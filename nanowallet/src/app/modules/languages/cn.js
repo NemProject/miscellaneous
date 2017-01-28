@@ -374,7 +374,7 @@ function ChineseProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
-        ACCOUNTS_EXPLORER_TITLE: 'Search',
+        ACCOUNTS_EXPLORER_SEARCH: 'Search',
 
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
@@ -514,7 +514,6 @@ function ChineseProvider($translateProvider) {
         AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
         AGGREGATE_ACCOUNT_SELECT: '选择一个待转换账户',
         AGGREGATE_CUSTOM_ACCOUNT: '使用自定义账户',
-        AGGREGATE_CUSTOM_ACCOUNT: 'Import Key',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
         AGGREGATE_ACCOUNT_TO_CONVERT: '待转换账户的地址',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: '待转换账户的私钥',

@@ -4,9 +4,17 @@ function JapaneseProvider($translateProvider) {
     $translateProvider.translations('jp', {
 
       // HEADER COMPONENT
+      WALLET_NAME_1: 'nano',
+      WALLET_NAME_2: 'Wallet',
       APP_NAME_SUB: "NEMプラットフォームに接続するための安全な方法\n(ボランティアによる日本語翻訳版)",
       HEADER_LOGIN_BUTTON: "ログイン",
       HEADER_SIGNUP_BUTTON: "アカウントの作成",
+      HEADER_DASHBOARD: 'Dashboard',
+      HEADER_WALLET: 'Wallet',
+      HEADER_SERVICES: 'Services',
+      HEADER_EXPLORER: 'Explorer',
+      HEADER_NODE: 'Node',
+      HEADER_ACCOUNT: 'Account',
       HEADER_LANG_TITLE: "言語",
       HEADER_LANG_SELECT: "言語選択",
       HEADER_NODE_BLOCK_HEIGHT: "ブロック高",
@@ -20,7 +28,8 @@ function JapaneseProvider($translateProvider) {
       HEADER_PURGE_MESSAGE: "必ずバックアップを行った上で実行して下さい。OK をクリックすると、ローカルストレージに登録されているすべてのウォレットが削除(パージ)されます。すべてのウォレットをバックアップしていた場合、残高は安全です。（回復にはバックアップファイルの再読み込みが必要になります）",
 
       // FOOTER COMPONENT
-      FOOTER_POWERED_BY: "Powered by NEM technology.",
+      FOOTER_POWERED_BY_1: 'Powered by',
+      FOOTER_POWERED_BY_2: 'NEM technology.',
       FOOTER_VERSION: "Version",
 
       // DASHBOARD MODULE
@@ -45,6 +54,7 @@ function JapaneseProvider($translateProvider) {
 
       // GENERAL
       GENERAL_BLOCK: "ブロック",
+      GENERAL_BLOCKS: 'Blocks',
       GENERAL_NO_RESULTS: "なし",
       GENERAL_ACCOUNT: "アカウント",
       GENERAL_ACCOUNTS: 'Accounts',
@@ -53,6 +63,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_MESSAGE: "メッセージ",
       GENERAL_DATE: "日時",
       GENERAL_TAB_NORMAL: "ノーマル",
+      GENERAL_TAB_SEND: 'Send',
       GENERAL_TAB_MULTISIG: "マルチシグ",
       GENERAL_TOTAL: "トータル",
       GENERAL_REMOVE: "削除",
@@ -64,6 +75,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_SEND: "送信",
       GENERAL_TO: "宛先",
       GENERAL_HASH: "ハッシュ",
+      GENERAL_HASH_FUNCTION: 'Hash Function',
       GENERAL_NAME: "名前",
       GENERAL_INFORMATION: "情報",
       GENERAL_ADDRESS: "アドレス",
@@ -80,6 +92,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_NO: "いいえ",
       GENERAL_TAGS: "タグ",
       GENERAL_SINK: "シンク（受信側）",
+      GENERAL_SINK_ADDRESS: 'Sink Address',
+      GENERAL_STORAGE: 'Storage',
       GENERAL_REASON: "理由",
       GENERAL_TRANSACTION_HASH: "トランザクションハッシュ",
       GENERAL_TRANSACTION_ID: "トランザクション ID",
@@ -117,6 +131,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_TRANSACTIONS: 'Transactions',
       GENERAL_REGISTER: 'Register',
       GENERAL_CREATE: 'Create',
+      GENERAL_RENEW: 'Renew',
 
       // TRANSFER TRANSACTION MODULE
       TRANSFER_TRANSACTION_TITLE: "送受信",
@@ -191,6 +206,8 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_MULTISIG_NAME: "マルチシグモザイクディフィニショントランザクション",
       MOSAIC_DEFINITION_QUANTITY: "数量",
       MOSAIC_DEFINITION_DIV: "可分性（小数点の有無）",
+      MOSAIC_DEFINITION_TOTAL_SUPPLY: 'Total supply',
+      MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
       MOSAIC_DEFINITION_DESCRPITION: "説明",
       MOSAIC_DEFINITION_INITIAL_SUPPLY: "初期供給量",
       MOSAIC_DEFINITION_MUTABLE_SUPPLY: "供給量ロック（チェック有で総量変更可 ）",
@@ -209,6 +226,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: "送信モザイク",
       MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: "の場合、徴収されるモザイクは",
       MOSAIC_DEFINITION_PARENT: "親ネームスペース（名前空間）",
+      MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
       MOSAIC_DEFINITION_INFORMATION_1: "モザイク名は32文字が最長です。使用できる文字は以下の通りです。",
       MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベットから始めて下さい。",
       MOSAIC_DEFINITION_INFORMATION_3: "「説明」は512文字以内で記述できます。使用できる文字の制限はありません。",
@@ -245,10 +263,28 @@ function JapaneseProvider($translateProvider) {
       NAMESPACE_PROVISION_MULTISIG_NAME: "マルチシグプロビジョンネームスペーストランザクション",
       NAMESPACE_PROVISION_PARENT: "親（上位側）ネームスペース（レベル3を除く）",
       NAMESPACE_PROVISION_NEW_ROOT: "新規ルート",
+      NAMESPACE_PROVISION_PARENT: 'Parent Namespace',
+      NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
+      NAMESPACE_PROVISION_NS: 'Namespace',
       NAMESPACE_PROVISION_NS_NAME: "ネームスペースの名前",
       NAMESPACE_PROVISION_INFORMATION_1: "ネームスペースには制約があります。ルートネームスペースは16字以内で、ルート以下のネームスペースは64文字までです。使用できる文字は以下の通りです。",
       NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'1では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
-      NAMESPACE_PROVISION_INFORMATION_3: "リストは最終版ではなく、将来増えるかもしれません。 'user.alice' や 'alice.user' もネームスペース仕様では許可されません。ネームスペースは3階層までです。従って、 'udon.yuyuyu.tanu' は妥当ですが、 'udon.yuyuyu.tanu.tomotomo' は適切ではありません。",
+      NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
+
+      // RENEW NAMESPACE MODULE
+      RENEW_NS_TITLE: 'Renew namespaces',
+      RENEW_NS_NONE: 'No namespace to renew',
+      RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
+      RENEW_NS_INFORMATION_TITLE_1: 'Fees',
+      RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
+      RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
+      RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+      RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
+      RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
+      RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+      RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+      RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+      RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
 
       // ACCOUNT MODULE
       ACCOUNT_TITLE: "アカウント",
@@ -339,6 +375,7 @@ function JapaneseProvider($translateProvider) {
 
       // ACCOUNT EXPLORER
       ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+      ACCOUNTS_EXPLORER_SEARCH: 'Search',
 
       // APOSTILLE HISTORY MODULE
       APOSTILLE_HISTORY_TITLE: "アポスティーユの履歴",
@@ -349,6 +386,7 @@ function JapaneseProvider($translateProvider) {
 
       // CREATE APOSTILLE MODULE
       APOSTILLE_CREATE_TITLE: "アポスティーユ（公証）を作成",
+      APOSTILLE_CREATE_HELP: 'Want more info on apostille?',
       APOSTILLE_TRANSACTION_NAME: "アポスティーユトランザクション",
       APOSTILLE_TRANSACTION_MULTISIG_NAME: "マルチシグアポスティーユトランザクション",
       APOSTILLE_KEEP_PRIVATE: "プライベート、譲渡、アップデート可能",
@@ -471,11 +509,14 @@ function JapaneseProvider($translateProvider) {
       ALERT_NTY_FILE_SUCCESS: ".nty ファイルは正常にロードされました。",
       ALERT_INCOMING_TX_FROM: "トランザクションを受信",
 
+      // CONVERT ACCOUNT TO MULTISIG
       AGGREGATE_MODIFICATION_TITLE: "マルチシグアカウントへ変換",
       AGGREGATE_MODIFICATION_NAME: "アグリゲートモディフィケーショントランザクション（multisig連署者追加・削除等)",
       AGGREGATE_MODIFICATION_MULTISIG_NAME: "マルチシグアグリゲートモディフィケーショントランザクション(multisig連署者追加・削除等)",
+      AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
       AGGREGATE_ACCOUNT_SELECT: "変換するアカウントを選択",
       AGGREGATE_CUSTOM_ACCOUNT: "カスタムアカウントを使用",
+      AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
       AGGREGATE_ACCOUNT_TO_CONVERT: "マルチシグ変換するアカウントのアドレス",
       AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: "マルチシグ変換するアカウントの秘密鍵",
       AGGREGATE_ADD_PLACEHOLDER: "連署アカウント、または @alias名 を追加",
@@ -483,8 +524,11 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_MIN_SIGNATURES: "最小署名数",
       AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: "署名トランザクションを検証するために必要な最小連署者数",
       AGGREGATE_MODIFICATION_LIST: "修正リスト",
+      AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
       AGGREGATE_MODIFICATION_EDIT_TITLE: "マルチシグネイチャーコントラクトを編集",
+      AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
       AGGREGATE_MODIFICATION_EDIT_SELECT: "編集するアカウントを選択",
+      AGGREGATE_ADD_REMOVE_TITLE: 'Add/Remove signer',
       AGGREGATE_ADD_REMOVE_PLACEHOLDER: "連署アカウント、または @alias を追加",
       AGGREGATE_MODIFICATION_RELATIVE_CHANGE: "最小署名数の相対変化",
       AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: "\n追加または (n)削除(-n) する署名の数 - 自動除去",
@@ -497,6 +541,7 @@ function JapaneseProvider($translateProvider) {
       LOGIN_UPGRADE_MESSAGE: "選択されたウォレットは、アップグレードが必要です。このアクションでは、サブの公開鍵を生成し、メインのアカウントに追加されます。更新されたウォレットのダウンロードが自動的に開始される為には、それを <b><u>ダウンロード</u></b>する必要があります。",
       LOGIN_UPGRADE_BUTTON: "ウォレットをアップグレード",
       LOGIN_IMPORT_BUTTON: "ウォレットをインポート",
+      LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
       LOGIN_SELECT_WALLET: "ローカルストレージからウォレットを選択してください。",
       LOGIN_LOGIN_BUTTON: "サインイン",
 
@@ -540,6 +585,9 @@ function JapaneseProvider($translateProvider) {
       FORM_PASSWORD_FIELD_PLACEHOLDER: "ウォレットのパスワード、もしくはパスフレーズを入力してください。",
       FORM_WALLET_NAME_FIELD_PLACEHOLDER: "ウォレット名",
       FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: "パスワード",
+      FORM_PASSWORD: 'Password',
+      FORM_PASSWORD_CONFIRM: 'Confirm Password',
+      FORM_PASSPHRASE_CONFIRM: 'Confirm Passphrase',
       FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: "パスワードを確認",
       FORM_PASSPHRASE_FIELD_PLACEHOLDER: "パスフレーズ",
       FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: "パスフレーズを確認",

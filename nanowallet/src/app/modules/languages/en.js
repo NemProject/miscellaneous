@@ -354,7 +354,7 @@ function EnglishProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
-        ACCOUNTS_EXPLORER_TITLE: 'Search',
+        ACCOUNTS_EXPLORER_SEARCH: 'Search',
 
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
