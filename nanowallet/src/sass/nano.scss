@@ -218,26 +218,26 @@ td {
 //
 // }
 
-.banner{
-	background-color: #444;
-	text-align: center;
-	color: white;
-	padding: 0px 15px 15px;
-}
-
-.banner-left{
-	background-color: #444;
-	color: white;
-	padding: 0px 15px 15px;
-}
+// .banner{
+// 	background-color: #444;
+// 	text-align: center;
+// 	color: white;
+// 	padding: 0px 15px 15px;
+// }
+//
+// .banner-left{
+// 	background-color: #444;
+// 	color: white;
+// 	padding: 0px 15px 15px;
+// }
 
 /*.home-page .banner h1{
 	padding-top: 15px;
 }*/
 
-.panel-footer {
-	border-radius: 0px;
-}
+// .panel-footer {
+// 	border-radius: 0px;
+// }
 
 .home-page .banner h1{
 	font-size: 4em;
@@ -261,14 +261,14 @@ select {
 	border-radius: 0px !important;
 }
 
-.form-control {
-	border-radius: 0px;
-}
+// .form-control {
+// 	border-radius: 0px;
+// }
 
-.btn-success {
-	/*background-color: transparent;*/
-	border-radius:0px;
-}
+// .btn-success {
+// 	/*background-color: transparent;*/
+// 	border-radius:0px;
+// }
 
 // .login-page .btn-success {
 // 	background-color: #5cb85c;
@@ -381,11 +381,11 @@ select {
 // 	font-weight: inherit;
 // }
 
-@media (max-width: 768px) {
-	.transferTransaction-page .col-md-6 {
-		margin-top: 55px;
-	}
-}
+// @media (max-width: 768px) {
+// 	.transferTransaction-page .col-md-6 {
+// 		margin-top: 55px;
+// 	}
+// }
 
 /*.transferTransaction-page .input-group-btn button {
 color: white;
@@ -460,31 +460,31 @@ border: 1px solid #444;
 //     border-radius: 0px;
 // }
 
-.services-page .banner-left {
-	padding-bottom: 0px;
-	border-bottom: 1px solid white;
-}
+// .services-page .banner-left {
+// 	padding-bottom: 0px;
+// 	border-bottom: 1px solid white;
+// }
+//
+// .services-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
 
-.services-page .banner-left h2 {
-	margin-top: 10px;
-}
+// .services-page .panel-footer .btn-operations {
+// 	width: 100%;
+// 	/*background-color: #ffc963;*/
+// 	background-color: #e3e0cf;
+// 	color: #444;
+// }
 
-.services-page .panel-footer .btn-operations {
-	width: 100%;
-	/*background-color: #ffc963;*/
-	background-color: #e3e0cf;
-	color: #444;
-}
+// .services-page .panel-footer .btn-operations:hover {
+// 	/*background-color: #ffc963;*/
+// 	background-color: #dad6bf;
+// }
 
-.services-page .panel-footer .btn-operations:hover {
-	/*background-color: #ffc963;*/
-	background-color: #dad6bf;
-}
-
-.services-page .col-sm-4 {
-	/*padding: 0px;*/
-	margin-top: 10px;
-}
+// .services-page .col-sm-4 {
+// 	/*padding: 0px;*/
+// 	margin-top: 10px;
+// }
 
 .noPaddingLeft {
 	padding-left: 0px;
@@ -496,18 +496,18 @@ border: 1px solid #444;
 	}
 }
 
-.services-page .panel {
-	/*margin-bottom: 0px;*/
-}
-
-.services-page .btn {
-	border-radius: 0px;
-}
-
-.services-page .panel-default {
-	border-radius: 0px;
-	/*border-color: #ddd;*/
-}
+// .services-page .panel {
+// 	/*margin-bottom: 0px;*/
+// }
+//
+// .services-page .btn {
+// 	border-radius: 0px;
+// }
+//
+// .services-page .panel-default {
+// 	border-radius: 0px;
+// 	/*border-color: #ddd;*/
+// }
 
 /*.services-page .panel-heading {
 	border-right: 1px solid white;
@@ -618,51 +618,51 @@ border: 1px solid #444;
 // 	opacity: 1;
 // }
 
-.create-multisig-page .banner-left {
-	padding-bottom: 0px;
-	border-bottom: 1px solid white;
-}
-
-.create-multisig-page .banner-left h2 {
-	margin-top: 10px;
-}
-
-.create-multisig-page .col-md-6 {
-	margin-top: 10px;
-}
-
-.create-multisig-page .btn-default {
-	border: 1px solid #444;
-}
-
-.create-multisig-page .panel-heading {
-	border-bottom: 3px solid #dfa82f;
-}
+// .create-multisig-page .banner-left {
+// 	padding-bottom: 0px;
+// 	border-bottom: 1px solid white;
+// }
+//
+// .create-multisig-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
+//
+// .create-multisig-page .col-md-6 {
+// 	margin-top: 10px;
+// }
+//
+// .create-multisig-page .btn-default {
+// 	border: 1px solid #444;
+// }
+//
+// .create-multisig-page .panel-heading {
+// 	border-bottom: 3px solid #dfa82f;
+// }
 
 // .create-multisig-page th {
 // 	font-weight: inherit;
 // }
-
-.edit-multisig-page .banner-left {
-	padding-bottom: 0px;
-	border-bottom: 1px solid white;
-}
-
-.edit-multisig-page .banner-left h2 {
-	margin-top: 10px;
-}
-
-.edit-multisig-page .col-md-6 {
-	margin-top: 10px;
-}
-
-.edit-multisig-page .btn-default {
-	border: 1px solid #444;
-}
-
-.edit-multisig-page .panel-heading {
-	border-bottom: 3px solid #dfa82f;
-}
+//
+// .edit-multisig-page .banner-left {
+// 	padding-bottom: 0px;
+// 	border-bottom: 1px solid white;
+// }
+//
+// .edit-multisig-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
+//
+// .edit-multisig-page .col-md-6 {
+// 	margin-top: 10px;
+// }
+//
+// .edit-multisig-page .btn-default {
+// 	border: 1px solid #444;
+// }
+//
+// .edit-multisig-page .panel-heading {
+// 	border-bottom: 3px solid #dfa82f;
+// }
 
 // .edit-multisig-page th {
 // 	font-weight: inherit;
@@ -751,27 +751,27 @@ border: 1px solid #444;
 // .explorer-home-page .list-group-item {
 // 	padding: 5px 10px;
 // }
-
-.audit-apostille-page .banner-left {
-	padding-bottom: 0px;
-	border-bottom: 1px solid white;
-}
+//
+// .audit-apostille-page .banner-left {
+// 	padding-bottom: 0px;
+// 	border-bottom: 1px solid white;
+// }
 
 // .audit-apostille-page table thead tr th {
 // 	font-weight: inherit;
 // }
 
-.audit-apostille-page .col-sm-6 {
-	margin-top: 10px;
-}
-
-.audit-apostille-page .banner-left h2 {
-	margin-top: 10px;
-}
-
-.audit-apostille-page .panel-heading {
-	border-bottom: 3px solid #dfa82f;
-}
+// .audit-apostille-page .col-sm-6 {
+// 	margin-top: 10px;
+// }
+//
+// .audit-apostille-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
+//
+// .audit-apostille-page .panel-heading {
+// 	border-bottom: 3px solid #dfa82f;
+// }
 
 // .importance-transfer-page .banner-left {
 // 	padding-bottom: 0px;
@@ -908,18 +908,18 @@ border: 1px solid #444;
   }
 }
 
-.faq-page .banner-left {
-	padding-bottom: 0px;
-	border-bottom: 1px solid white;
-}
-
-.faq-page .banner-left h2 {
-	margin-top: 10px;
-}
-
-.faq-page p {
-	margin: 0px;
-}
+// .faq-page .banner-left {
+// 	padding-bottom: 0px;
+// 	border-bottom: 1px solid white;
+// }
+//
+// .faq-page .banner-left h2 {
+// 	margin-top: 10px;
+// }
+//
+// .faq-page p {
+// 	margin: 0px;
+// }
 
 // .list-group-item.active {
 // 	color: white;

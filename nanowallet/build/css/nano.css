@@ -85,23 +85,9 @@ td {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 		color: black
 }*/
-.banner {
-  background-color: #444;
-  text-align: center;
-  color: white;
-  padding: 0px 15px 15px; }
-
-.banner-left {
-  background-color: #444;
-  color: white;
-  padding: 0px 15px 15px; }
-
 /*.home-page .banner h1{
 	padding-top: 15px;
 }*/
-.panel-footer {
-  border-radius: 0px; }
-
 .home-page .banner h1 {
   font-size: 4em; }
 
@@ -117,13 +103,6 @@ td {
 
 select {
   border-radius: 0px !important; }
-
-.form-control {
-  border-radius: 0px; }
-
-.btn-success {
-  /*background-color: transparent;*/
-  border-radius: 0px; }
 
 /*.signup-page .panel-heading {
 	border-bottom: 3px solid #dfa82f;
@@ -163,10 +142,6 @@ select {
 /*.dashboard-page .col-md-3 {
 	padding-left: 0px;
 }*/
-@media (max-width: 768px) {
-  .transferTransaction-page .col-md-6 {
-    margin-top: 55px; } }
-
 /*.transferTransaction-page .input-group-btn button {
 color: white;
 background-color: #444;
@@ -195,43 +170,12 @@ border: 1px solid #444;
   color: #69b2e5;
   background-color: white; }
 
-.services-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.services-page .banner-left h2 {
-  margin-top: 10px; }
-
-.services-page .panel-footer .btn-operations {
-  width: 100%;
-  /*background-color: #ffc963;*/
-  background-color: #e3e0cf;
-  color: #444; }
-
-.services-page .panel-footer .btn-operations:hover {
-  /*background-color: #ffc963;*/
-  background-color: #dad6bf; }
-
-.services-page .col-sm-4 {
-  /*padding: 0px;*/
-  margin-top: 10px; }
-
 .noPaddingLeft {
   padding-left: 0px; }
 
 @media (max-width: 768px) {
   .noPaddingLeft {
     padding-left: 15px; } }
-
-.services-page .panel {
-  /*margin-bottom: 0px;*/ }
-
-.services-page .btn {
-  border-radius: 0px; }
-
-.services-page .panel-default {
-  border-radius: 0px;
-  /*border-color: #ddd;*/ }
 
 /*.services-page .panel-heading {
 	border-right: 1px solid white;
@@ -245,51 +189,6 @@ border: 1px solid #444;
 	color: white;
 	background-color: #444;
 }*/
-.create-multisig-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.create-multisig-page .banner-left h2 {
-  margin-top: 10px; }
-
-.create-multisig-page .col-md-6 {
-  margin-top: 10px; }
-
-.create-multisig-page .btn-default {
-  border: 1px solid #444; }
-
-.create-multisig-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
-.edit-multisig-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.edit-multisig-page .banner-left h2 {
-  margin-top: 10px; }
-
-.edit-multisig-page .col-md-6 {
-  margin-top: 10px; }
-
-.edit-multisig-page .btn-default {
-  border: 1px solid #444; }
-
-.edit-multisig-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
-.audit-apostille-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.audit-apostille-page .col-sm-6 {
-  margin-top: 10px; }
-
-.audit-apostille-page .banner-left h2 {
-  margin-top: 10px; }
-
-.audit-apostille-page .panel-heading {
-  border-bottom: 3px solid #dfa82f; }
-
 .loading-overlay {
   position: absolute;
   z-index: 5;
@@ -336,16 +235,6 @@ border: 1px solid #444;
 @-webkit-keyframes ellipsis {
   to {
     width: 1.25em; } }
-
-.faq-page .banner-left {
-  padding-bottom: 0px;
-  border-bottom: 1px solid white; }
-
-.faq-page .banner-left h2 {
-  margin-top: 10px; }
-
-.faq-page p {
-  margin: 0px; }
 
 .importance-transfer-page .input-group-btn.showHide, .account-page .input-group-btn.showHide, .importance-transfer-page .dLoad, .account-page .dLoad {
   max-width: 40px;
