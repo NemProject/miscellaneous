@@ -4,9 +4,17 @@ function PolishProvider($translateProvider) {
     $translateProvider.translations('pl', {
 
         // HEADER COMPONENT
+        WALLET_NAME_1: 'nano',
+        WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'Bezpieczny interfejs łączący z platformą NEM',
         HEADER_LOGIN_BUTTON: 'Logowanie',
         HEADER_SIGNUP_BUTTON: 'Rejestracja',
+        HEADER_DASHBOARD: 'Dashboard',
+        HEADER_WALLET: 'Wallet',
+        HEADER_SERVICES: 'Services',
+        HEADER_EXPLORER: 'Explorer',
+        HEADER_NODE: 'Node',
+        HEADER_ACCOUNT: 'Account',
         HEADER_LANG_TITLE: 'Język',
         HEADER_LANG_SELECT: 'Wybierz język',
         HEADER_NODE_BLOCK_HEIGHT: 'Bieżący blok',
@@ -18,9 +26,10 @@ function PolishProvider($translateProvider) {
         HEADER_NODE_CUSTOM_INFO: 'IP serwera lub domena',
         HEADER_PURGE: 'Wyczyść',
         HEADER_PURGE_MESSAGE: 'Proszę potwierdzić czyszczenie pamięci przeglądarki. Po wciśnięciu "OK" wszystkie portfele w lokalnej pamięci zostaną usunięte i nie będzie można ich odzyskać. Zgadzasz się z tym, że posiadasz kopie zapasowe portfeli i że fundusze są zabezpieczone.',
-        
+
         // FOOTER COMPONENT
-        FOOTER_POWERED_BY: 'Zasilany technologią NEM.',
+        FOOTER_POWERED_BY_1: 'Zasilany',
+        FOOTER_POWERED_BY_2: 'technologią NEM.',
         FOOTER_VERSION: 'Wersja',
 
         // DASHBOARD MODULE
@@ -45,6 +54,7 @@ function PolishProvider($translateProvider) {
 
         // GENERAL
         GENERAL_BLOCK: 'Blok',
+        GENERAL_BLOCKS: 'Blocks',
         GENERAL_NO_RESULTS: 'Nic do pokazania',
         GENERAL_ACCOUNT: 'Konto',
         GENERAL_ACCOUNTS: 'Accounts',
@@ -53,6 +63,7 @@ function PolishProvider($translateProvider) {
         GENERAL_MESSAGE: 'Wiadomość',
         GENERAL_DATE: 'Data',
         GENERAL_TAB_NORMAL: 'Zwykły',
+        GENERAL_TAB_SEND: 'Send',
         GENERAL_TAB_MULTISIG: 'Multipodpis',
         GENERAL_TOTAL: 'Łącznie',
         GENERAL_REMOVE: 'Usuń',
@@ -64,6 +75,7 @@ function PolishProvider($translateProvider) {
         GENERAL_SEND: 'Wyślij',
         GENERAL_TO: 'Do',
         GENERAL_HASH: 'Hasz',
+        GENERAL_HASH_FUNCTION: 'Hash Function',
         GENERAL_NAME: 'Nazwa',
         GENERAL_INFORMATION: 'Informacja',
         GENERAL_ADDRESS: 'Adres',
@@ -79,6 +91,8 @@ function PolishProvider($translateProvider) {
         GENERAL_NO: 'Nie',
         GENERAL_TAGS: 'Tagi',
         GENERAL_SINK: 'Sink',
+        GENERAL_SINK_ADDRESS: 'Sink Address',
+        GENERAL_STORAGE: 'Storage',
         GENERAL_REASON: 'Powód',
         GENERAL_TRANSACTION_HASH: 'Hasz transakcji',
         GENERAL_TRANSACTION_ID: 'ID Transakcji',
@@ -116,6 +130,7 @@ function PolishProvider($translateProvider) {
         GENERAL_TRANSACTIONS: 'Transactions',
         GENERAL_REGISTER: 'Register',
         GENERAL_CREATE: 'Create',
+        GENERAL_RENEW: 'Renew',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
@@ -191,6 +206,8 @@ function PolishProvider($translateProvider) {
         MOSAIC_DEFINITION_MULTISIG_NAME: 'Transakcja tworzenia mozaiki z multipodpisem',
         MOSAIC_DEFINITION_QUANTITY: 'Ilość',
         MOSAIC_DEFINITION_DIV: 'Podzielność',
+        MOSAIC_DEFINITION_TOTAL_SUPPLY: 'Total supply',
+        MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
         MOSAIC_DEFINITION_DESCRPITION: 'Opis',
         MOSAIC_DEFINITION_INITIAL_SUPPLY: 'Początkowy zapas',
         MOSAIC_DEFINITION_MUTABLE_SUPPLY: 'Zmienna ilość',
@@ -209,6 +226,7 @@ function PolishProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: 'Wysyłanie',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: 'należny podatek',
         MOSAIC_DEFINITION_PARENT: 'Główna Namespace',
+        MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: 'Maksymalna długość nazwy mozaiki wynosi 32 znaki. Dozwolone znaki to:',
         MOSAIC_DEFINITION_INFORMATION_2: 'Pierwszy znak musi być literą z alfabetu.',
         MOSAIC_DEFINITION_INFORMATION_3: 'Opis nie może przekraczać długości 512 znaków. Nie ma ograniczeń co do  znaków użytych w opisie.',
@@ -245,10 +263,28 @@ function PolishProvider($translateProvider) {
         NAMESPACE_PROVISION_MULTISIG_NAME: 'Transakcja tworzenia namespace z multipodpisem',
         NAMESPACE_PROVISION_PARENT: 'Macierzysta Namespace (wyłączając poziom 3)',
         NAMESPACE_PROVISION_NEW_ROOT: 'Nowa Główna',
+        NAMESPACE_PROVISION_PARENT: 'Parent Namespace',
+        NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
+        NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: 'Nazwa Namespace',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces mają pewne ograniczenia w odniesieniu do akceptowanych znaków jak również długości nazw. Namespace główna może mieć długość do 16 znaków, podczas gdy sub-namespace może mieć długość 64 znaków. Poprawne znaki to:',
         NAMESPACE_PROVISION_INFORMATION_2: 'Nazwa Namespace musi zaczynać się od litery z alfabetu, wobec tego \'alice\' jest dozwoloną nazwą dla Głównej Namespace, podczas gdy \'1alice\' nie jest. Pewne ciągi znaków są zarezerwowane i nie można ich użyć jako nazwy Namespace. Wśród tych ciągów znaków są:',
-        NAMESPACE_PROVISION_INFORMATION_3: 'Ta lista nie jest ostateczna i może zostać wydłużona w przyszłości. Tak więc \'user.alice\' lub \'alice.user\' nie są dozwolone w systemie NEM Namespace. Namespace może mieć maksymalnie 3 części, a zatem \'qm.metals.silver\' jest poprawna natomiast \'qm.metals.silver.coin\' nie jest.', 
+        NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
+
+        // RENEW NAMESPACE MODULE
+        RENEW_NS_TITLE: 'Renew namespaces',
+        RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
+        RENEW_NS_INFORMATION_TITLE_1: 'Fees',
+        RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
+        RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
+        RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
+        RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
 
         // ACCOUNT MODULE
         ACCOUNT_TITLE: 'Konto',
@@ -313,16 +349,16 @@ function PolishProvider($translateProvider) {
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
-        EXPLORER_NAV_NSM: 'Namespaces i Mozaiki', 
+        EXPLORER_NAV_NSM: 'Namespaces i Mozaiki',
         EXPLORER_NAV_APOSTILLES: 'Apostile',
 
         // EXPLORER HOME MODULE
-        EXPLORER_HOME_TITLE: 'Explorer - Home', 
+        EXPLORER_HOME_TITLE: 'Explorer - Home',
         EXPLORER_HOME_NS: 'Twoje Namespaces',
         EXPLORER_HOME_MOSAICS: 'Twoje Mozaiki',
         EXPLORER_HOME_NS_MULTISIG: 'Namespaces posiadane przez konta z multipodpisem',
         EXPLORER_HOME_MOSAICS_LEVY: 'Podatek mozaiki',
-        
+
         // EXPLORER NAMESPACES AND MOSAICS
         EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces i Mozaiki',
         EXPLORER_NS_MOS_SELECT_MOS: 'Wybierz mozaikę, aby zobaczyć szczegóły',
@@ -336,7 +372,8 @@ function PolishProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
-        
+        ACCOUNTS_EXPLORER_SEARCH: 'Search',
+
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille historia',
         //APOSTILLE_HISTORY_BTN_MESSAGE: 'Aktualizuj / Wiadomość',
@@ -346,6 +383,7 @@ function PolishProvider($translateProvider) {
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Utwórz apostile',
+        APOSTILLE_CREATE_HELP: 'Want more info on apostille?',
         APOSTILLE_TRANSACTION_NAME: 'Transakcja apostila',
         APOSTILLE_TRANSACTION_MULTISIG_NAME: 'Transakcja apostila z multipodpisem',
         APOSTILLE_KEEP_PRIVATE: 'Prywatne, transferowalne i aktualizowalne',
@@ -358,7 +396,7 @@ function PolishProvider($translateProvider) {
         APOSTILLE_NAME_TOO_LONG: 'Nazwa pliku jest zbyt długa, dozwolone maksimum 40 znaków.',
         APOSTILLE_MAX_NUMBER: 'Maksimum apostili w partii to 25',
         APOSTILLE_INFORMATION_1: 'Każdy przesłany plik jest automatycznie przetwarzany z użyciem opcji ustawionych na lewym panelu. Możesz dodać nowe pliki, zmienić parametry, a następnie dodać więcej plików z innymi ustawieniami. Możesz również przełączyć na zakładkę Multipodpis i dodać więcej plików.',
-        APOSTILLE_INFORMATION_2: 'Opcja "<b>Prywatne, transferowalne i aktualizowalne</b>" oznacza, że hasze Twoich plików są podpisane za pomocą twojego klucza prywatnego i wysłane do dedykowanego hierarchicznie deterministycznego (HD) konta. Tym sposobem tylko ty wiesz jaka zawartość została oznakowana, chyba, że ujawnisz tą zawartość.', 
+        APOSTILLE_INFORMATION_2: 'Opcja "<b>Prywatne, transferowalne i aktualizowalne</b>" oznacza, że hasze Twoich plików są podpisane za pomocą twojego klucza prywatnego i wysłane do dedykowanego hierarchicznie deterministycznego (HD) konta. Tym sposobem tylko ty wiesz jaka zawartość została oznakowana, chyba, że ujawnisz tą zawartość.',
         APOSTILLE_INFORMATION_3: 'Dedykowane konto HD może zostać przekonwertowane na kontrakt z multipodpisem tak, aby można je było przesyłać poprzez kontrakt 1-z-1 lub m-z-n. Może posiadać również dodatkowe informacje przesyłane do niego za pośrednictwem wiadomości z aktualizacjami oraz zmianami w oryginalnym dokumencie lub produkcie, który reprezentuje.',
         APOSTILLE_INFORMATION_4: 'Kiedy dwie lub więcej stron chce zatwierdzić transakcję na przykład wiążący kontrakt, konto dokonujące notaryzacji można umieścić w kontrakcie z multipodpisem n-z-n',
         APOSTILLE_INFORMATION_5: 'W przypadku kont w kontrakcie z multipodpisem, które wybrały opcję "<b>Prywatne, transferowalne i aktualizowalne</b>", do podpisania haszu i utworzenia dedykowanego konta HD użyty jest klucz prywatny inicjującego sygnatariusza, a nie konto, które zostało przekonwertowane na multipodpis.',
@@ -468,11 +506,14 @@ function PolishProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: 'Udało się załadować plik nty !',
         ALERT_INCOMING_TX_FROM: 'Transakcja przychodząca od ',
 
+        // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Zamień konto na konto z multipodpisem',
         AGGREGATE_MODIFICATION_NAME: 'Transakcja łącznej modyfikacji',
         AGGREGATE_MODIFICATION_MULTISIG_NAME: 'Transakcja łącznej modyfikacji z multipodpisem',
+        AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
         AGGREGATE_ACCOUNT_SELECT: 'Wybierz konto do zamiany',
         AGGREGATE_CUSTOM_ACCOUNT: 'Użyj własnego konta',
+        AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
         AGGREGATE_ACCOUNT_TO_CONVERT: 'Adres konta do zamiany',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: 'Klucz prywatny konta do zamiany',
         AGGREGATE_ADD_PLACEHOLDER: 'Konto sygnatariusza lub @alias',
@@ -480,8 +521,11 @@ function PolishProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES: 'Minimum wymaganych sygnatur',
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimum wymaganych sygnatur do uprawomocnienia tranzakcji',
         AGGREGATE_MODIFICATION_LIST: 'Lista modyfikacji',
+        AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Edytuj kontrakt z multipodpisem',
+        AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Wybierz konto do edycji',
+        AGGREGATE_ADD_REMOVE_TITLE: 'Add/Remove signer',
         AGGREGATE_ADD_REMOVE_PLACEHOLDER: 'Konto sygnatariusza lub @alias',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Relatywna zmiana minimum sygnatur',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Liczba sygnatur do dodania (n) lub usunięcia (-n)',
@@ -495,6 +539,7 @@ function PolishProvider($translateProvider) {
         LOGIN_UPGRADE_MESSAGE: 'Wybrany portfel wymaga aktualizacji. Ta czynność spowoduje wygenerowanie pochodnego klucza publicznego i dodanie go do konta głównego. Pobieranie zaktualizowanego portfela zostanie automatycznie rozpoczęte. <b><u>Musisz</u></b> go pobrać !',
         LOGIN_UPGRADE_BUTTON: 'Aktualizuj portfel',
         LOGIN_IMPORT_BUTTON: 'Importuj Portfel',
+        LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
         LOGIN_SELECT_WALLET: 'Wybierz portfel w lokalnej pamięci',
         LOGIN_LOGIN_BUTTON: 'Zaloguj',
 
@@ -538,6 +583,9 @@ function PolishProvider($translateProvider) {
         FORM_PASSWORD_FIELD_PLACEHOLDER: 'Wpisz hasło portfela lub hasło wielowyrazowe',
         FORM_WALLET_NAME_FIELD_PLACEHOLDER: 'Nazwa portfela',
         FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: 'Hasło',
+        FORM_PASSWORD: 'Password',
+        FORM_PASSWORD_CONFIRM: 'Confirm Password',
+        FORM_PASSPHRASE_CONFIRM: 'Confirm Passphrase',
         FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: 'Potwierdź hasło',
         FORM_PASSPHRASE_FIELD_PLACEHOLDER: 'Hasło wielowyrazowe',
         FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: 'Potwierdź hasło wielowyrazowe',
