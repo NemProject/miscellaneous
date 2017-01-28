@@ -586,6 +586,7 @@ function EnglishProvider($translateProvider) {
 
         RENEW_NS_TITLE: 'Renew namespaces',
         RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
         RENEW_NS_INFORMATION_TITLE_1: 'Fees',
         RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
         RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',

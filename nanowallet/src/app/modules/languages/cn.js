@@ -4,9 +4,17 @@ function ChineseProvider($translateProvider) {
     $translateProvider.translations('cn', {
 
         // HEADER COMPONENT
+        WALLET_NAME_1: 'nano',
+        WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: '安全界面正在连接NEM平台',
         HEADER_LOGIN_BUTTON: '登录',
         HEADER_SIGNUP_BUTTON: '注册',
+        HEADER_DASHBOARD: 'Dashboard',
+        HEADER_WALLET: 'Wallet',
+        HEADER_SERVICES: 'Services',
+        HEADER_EXPLORER: 'Explorer',
+        HEADER_NODE: 'Node',
+        HEADER_ACCOUNT: 'Account',
         HEADER_LANG_TITLE: '语言',
         HEADER_LANG_SELECT: '选择语言',
         HEADER_NODE_BLOCK_HEIGHT: '区块高',
@@ -18,9 +26,10 @@ function ChineseProvider($translateProvider) {
         HEADER_NODE_CUSTOM_INFO: '节点IP或域名',
         HEADER_PURGE: '清理',
         HEADER_PURGE_MESSAGE: '请确认清理功能将删除您本地保存的全部信息。如确认，点击OK，本地存储的所有钱包信息将被全部删除，请确认所有钱包均已做好备份，确保资金安全。',
-        
+
         // FOOTER COMPONENT
-        FOOTER_POWERED_BY: 'Powered by NEM technology.',
+        FOOTER_POWERED_BY_1: 'Powered by',
+        FOOTER_POWERED_BY_2: 'NEM technology.',
         FOOTER_VERSION: '版本',
 
         // DASHBOARD MODULE
@@ -45,6 +54,7 @@ function ChineseProvider($translateProvider) {
 
         // GENERAL
         GENERAL_BLOCK: '块',
+        GENERAL_BLOCKS: 'Blocks',
         GENERAL_NO_RESULTS: '无结果',
         GENERAL_ACCOUNT: '账户',
         GENERAL_ACCOUNTS: 'Accounts',
@@ -53,6 +63,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_MESSAGE: '消息',
         GENERAL_DATE: '日期',
         GENERAL_TAB_NORMAL: '普通',
+        GENERAL_TAB_SEND: 'Send',
         GENERAL_TAB_MULTISIG: '多重签名',
         GENERAL_TOTAL: '总量',
         GENERAL_REMOVE: '删除',
@@ -64,6 +75,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_SEND: '发送',
         GENERAL_TO: '目标',
         GENERAL_HASH: 'Hash',
+        GENERAL_HASH_FUNCTION: 'Hash Function',
         GENERAL_NAME: '名称',
         GENERAL_INFORMATION: '信息',
         GENERAL_ADDRESS: '地址',
@@ -79,6 +91,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_NO: '否',
         GENERAL_TAGS: '标签',
         GENERAL_SINK: '下沉',
+        GENERAL_SINK_ADDRESS: 'Sink Address',
+        GENERAL_STORAGE: 'Storage',
         GENERAL_REASON: '原因',
         GENERAL_TRANSACTION_HASH: '交互hash',
         GENERAL_TRANSACTION_ID: '交互ID',
@@ -97,7 +111,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_PROCESSING: '处理中',
         GENERAL_ACCOUNT_LABEL: '账户标签',
         GENERAL_OPTIONAL: '(可选)',
-	    GENERAL_ERROR: 'Error',
+        GENERAL_ERROR: 'Error',
         GENERAL_EXAMPLE: 'Example',
         GENERAL_PUBLIC: 'Public',
         GENERAL_NAMESPACES: 'Namespaces',
@@ -116,6 +130,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_TRANSACTIONS: 'Transactions',
         GENERAL_REGISTER: 'Register',
         GENERAL_CREATE: 'Create',
+        GENERAL_RENEW: 'Renew',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: '发送和接收',
@@ -168,7 +183,7 @@ function ChineseProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MODE_1: '激活',
         IMPORTANCE_TRANSFER_MODE_2: '取消激活',
         IMPORTANCE_TRANSFER_TITLE: '管理远程账户',
-	    IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE: 'Manage delegated account of multisignature accounts',
+	      IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE: 'Manage delegated account of multisignature accounts',
         IMPORTANCE_TRANSFER_CUSTOM_KEY: '使用远程公钥',
         IMPORTANCE_TRANSFER_MODE_SELECT: '选择模式',
         IMPORTANCE_TRANSFER_REMOTE_ACCOUNT: '远程账户',
@@ -190,6 +205,8 @@ function ChineseProvider($translateProvider) {
         MOSAIC_DEFINITION_MULTISIG_NAME: '多重签名马赛克定义交互',
         MOSAIC_DEFINITION_QUANTITY: '量',
         MOSAIC_DEFINITION_DIV: '可分割性',
+        MOSAIC_DEFINITION_TOTAL_SUPPLY: 'Total supply',
+        MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
         MOSAIC_DEFINITION_DESCRPITION: '描述',
         MOSAIC_DEFINITION_INITIAL_SUPPLY: '初始供应',
         MOSAIC_DEFINITION_MUTABLE_SUPPLY: '可变供应量',
@@ -208,6 +225,7 @@ function ChineseProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: '发送中',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: '将包含税金',
         MOSAIC_DEFINITION_PARENT: '父命名空间',
+        MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: '马赛克允许最长32个字符允许使用的字符集：',
         MOSAIC_DEFINITION_INFORMATION_2: '第一个字符必须是英文字母。',
         MOSAIC_DEFINITION_INFORMATION_3: '描述必须在512个字符以内。描述文字中所使用的字符无限制。',
@@ -244,10 +262,28 @@ function ChineseProvider($translateProvider) {
         NAMESPACE_PROVISION_MULTISIG_NAME: '多重签名命名空间部署交互',
         NAMESPACE_PROVISION_PARENT: '父命名空间 (不包括3层)',
         NAMESPACE_PROVISION_NEW_ROOT: '创建新的根命名空间',
+        NAMESPACE_PROVISION_PARENT: 'Parent Namespace',
+        NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
+        NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: '命名空间名',
         NAMESPACE_PROVISION_INFORMATION_1: '命名空间所使用的长度和字符均存在限制。根命名空间长度限制为16个字符以内，二级命名空间长度限制为64个字符以内。有效的字符有：',
         NAMESPACE_PROVISION_INFORMATION_2: '命名空间的首个字符必须使用英文字母。 \'alice\'是有效命名空间，而 \'1alice\'不是。部分字符串被保留，不可用于命名空间的申请。不被允许的命名空间包含字符串如下：',
-        NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。', 
+        NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
+
+        // RENEW NAMESPACE MODULE
+        RENEW_NS_TITLE: 'Renew namespaces',
+        RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
+        RENEW_NS_INFORMATION_TITLE_1: 'Fees',
+        RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
+        RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
+        RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
+        RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
 
         // ACCOUNT MODULE
         ACCOUNT_TITLE: '账户',
@@ -315,11 +351,11 @@ function ChineseProvider($translateProvider) {
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: '主页',
-        EXPLORER_NAV_NSM: '命名空间和马赛克', 
+        EXPLORER_NAV_NSM: '命名空间和马赛克',
         EXPLORER_NAV_APOSTILLES: 'Apostilles',
 
         // EXPLORER HOME MODULE
-        EXPLORER_HOME_TITLE: '浏览 - 主页', 
+        EXPLORER_HOME_TITLE: '浏览 - 主页',
         EXPLORER_HOME_NS: '您的命名空间',
         EXPLORER_HOME_MOSAICS: '您的马赛克',
         EXPLORER_HOME_NS_MULTISIG: '多重签名账户所属命名空间',
@@ -338,6 +374,7 @@ function ChineseProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+        ACCOUNTS_EXPLORER_TITLE: 'Search',
 
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
@@ -347,6 +384,7 @@ function ChineseProvider($translateProvider) {
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: '创建Apostille',
+        APOSTILLE_CREATE_HELP: 'Want more info on apostille?',
         APOSTILLE_TRANSACTION_NAME: '公证交互',
         APOSTILLE_TRANSACTION_MULTISIG_NAME: '多重签名公证交互',
         APOSTILLE_KEEP_PRIVATE: '需保密',
@@ -359,7 +397,7 @@ function ChineseProvider($translateProvider) {
         APOSTILLE_NAME_TOO_LONG: '文件名过长，最多允许40个字符。',
         APOSTILLE_MAX_NUMBER: '最大的一批公证文件数为25',
         APOSTILLE_INFORMATION_1: '每个文件的上传均以在左栏的选项为准自动处理。您可以添加文件，变更类型或添加其他属性。您也可以切换至多重签名标签页添加更多文件',
-        APOSTILLE_INFORMATION_2: '"<b>需保密</b>" 在于您文件的hash都会被您的私钥加密，并发送至一个HD账户。以这种方式，除了你以外的任何人都无法获取接受认证的信息或认证本身。', 
+        APOSTILLE_INFORMATION_2: '"<b>需保密</b>" 在于您文件的hash都会被您的私钥加密，并发送至一个HD账户。以这种方式，除了你以外的任何人都无法获取接受认证的信息或认证本身。',
         APOSTILLE_INFORMATION_3: 'The dedicated HD account can be put under a multisig contract so that it may be transferred to others via 1-of-1 or any m-of-n multisig contract combination. It can also have additional information sent to it via messages with updates and augments to the original document or the product it represents.',
         APOSTILLE_INFORMATION_4: 'When two or more parties want to both approve of a blockchain timestamp, e.g. binding contracts, the account making the blockchain notarization can be put in an n-of-n multisig contract.',
         APOSTILLE_INFORMATION_5: 'For accounts in a multisignature contract that have checked "<b>Keep private</b>", the initiating cosigner\'s private key is used to sign the hash and create a dedicated HD account, not the account that was multisigged.',
@@ -469,11 +507,15 @@ function ChineseProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: '成功加载nty文件！',
         ALERT_INCOMING_TX_FROM: '接收交互，来源',
 
+        // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: '变更账户至多重签名',
         AGGREGATE_MODIFICATION_NAME: '共有账户变更',
         AGGREGATE_MODIFICATION_MULTISIG_NAME: '多重签名账户变更交互',
+        AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
         AGGREGATE_ACCOUNT_SELECT: '选择一个待转换账户',
         AGGREGATE_CUSTOM_ACCOUNT: '使用自定义账户',
+        AGGREGATE_CUSTOM_ACCOUNT: 'Import Key',
+        AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
         AGGREGATE_ACCOUNT_TO_CONVERT: '待转换账户的地址',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: '待转换账户的私钥',
         AGGREGATE_ADD_PLACEHOLDER: '待添加的共签人账户或别名',
@@ -481,8 +523,11 @@ function ChineseProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES: '所需最小签名数量',
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: '通过交互必须的最小签名数量',
         AGGREGATE_MODIFICATION_LIST: '变更清单',
+        AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
         AGGREGATE_MODIFICATION_EDIT_TITLE: '编辑多重签名协议',
+        AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
         AGGREGATE_MODIFICATION_EDIT_SELECT: '选择待编辑的账户',
+        AGGREGATE_ADD_REMOVE_TITLE: 'Add/Remove signer',
         AGGREGATE_ADD_REMOVE_PLACEHOLDER: '带变更的共签人账户地址，或别名',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE: '最小签名数量变更',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: '最小签名数量变更(自动计算）',
@@ -496,6 +541,7 @@ function ChineseProvider($translateProvider) {
         LOGIN_UPGRADE_MESSAGE: '您选择的钱包需要升级。这将创建一个子公钥添加至您的主账户。升级成功后将自动下载升级后的钱包，请<b><u>务必</u></b>下载和妥善保存！',
         LOGIN_UPGRADE_BUTTON: '升级钱包',
         LOGIN_IMPORT_BUTTON: '导入钱包',
+        LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
         LOGIN_SELECT_WALLET: '从本地存储选择钱包',
         LOGIN_LOGIN_BUTTON: '登录',
 
@@ -539,6 +585,9 @@ function ChineseProvider($translateProvider) {
         FORM_PASSWORD_FIELD_PLACEHOLDER: '输入您的钱包密码',
         FORM_WALLET_NAME_FIELD_PLACEHOLDER: '钱包名',
         FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: '密码',
+        FORM_PASSWORD: 'Password',
+        FORM_PASSWORD_CONFIRM: 'Confirm Password',
+        FORM_PASSPHRASE_CONFIRM: 'Confirm Passphrase',
         FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: '确认您的密码',
         FORM_PASSPHRASE_FIELD_PLACEHOLDER: '密钥串',
         FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: '确认您的密钥串',

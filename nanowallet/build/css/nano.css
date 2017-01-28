@@ -955,6 +955,10 @@ textarea {
 .market-info .ticker {
   padding-top: 20px; }
 
+.market-percent .col-lg-4 {
+  padding-left: 0;
+  padding-right: 0; }
+
 .market-percent .col-md-4:first-of-type {
   text-align: left;
   padding-left: 0px; }
