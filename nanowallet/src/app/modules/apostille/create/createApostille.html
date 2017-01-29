@@ -25,7 +25,7 @@
               <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'APOSTILLE_TRANSACTION_NAME' | translate }}</span>
               <span ng-show="$ctrl.formData.isMultisig">{{ 'APOSTILLE_TRANSACTION_MULTISIG_NAME' | translate }}</span>
               <ul class="nav nav-tabs" style="float:right">
-                <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.formData.isPrivate = false;">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+                <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = false;$ctrl.formData.isPrivate = true;">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
                 <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a style="outline:0;cursor:pointer;display:inline;" ng-click="$ctrl.formData.isMultisig = true;$ctrl.formData.isPrivate = false;">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
               </ul>
             </div>
