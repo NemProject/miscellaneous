@@ -165,8 +165,6 @@ class CreateMultisigCtrl {
             }
             // Store data
             this.multisigInfoData = data;
-            // Store multisig public key
-            this.formData.multisigPubKey = data.account.publicKey;
         },
         (err) => {
             if(err.status === -1) {
@@ -340,11 +338,9 @@ class CreateMultisigCtrl {
             }
         }
 
-        // Generate the multisig account public key if none
-        if (!this.formData.multisigPubKey.length) {
-            let kp = KeyPair.create(this.common.privateKey);
-            this.formData.multisigPubKey = kp.publicKey.toString();
-        }
+        // Generate the multisig account public key
+        let kp = KeyPair.create(this.common.privateKey);
+        this.formData.multisigPubKey = kp.publicKey.toString();
 
         // Build the entity to serialize
         let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
@@ -363,6 +359,10 @@ class CreateMultisigCtrl {
                 this.okPressed = false;
                 // Delete private key in common
                 this.common.privateKey = '';
+                // Reset data
+                this.resetCosignatoryData();
+                this.resetMultisigData();
+                this.cosignatoryArray = [];
             },
             (err) => {
                 // Delete private key in common
