@@ -45,6 +45,7 @@ function PolishProvider($translateProvider) {
 
         // GENERAL
         GENERAL_BLOCK: 'Blok',
+        GENERAL_BLOCKS: 'Blocks',
         GENERAL_NO_RESULTS: 'Nic do pokazania',
         GENERAL_ACCOUNT: 'Konto',
         GENERAL_ACCOUNTS: 'Accounts',
@@ -116,6 +117,7 @@ function PolishProvider($translateProvider) {
         GENERAL_TRANSACTIONS: 'Transactions',
         GENERAL_REGISTER: 'Register',
         GENERAL_CREATE: 'Create',
+        GENERAL_RENEW: 'Renew',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
@@ -553,7 +555,15 @@ function PolishProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Alias konta',
         FORM_MESSAGE_PLACEHOLDER: 'Wiadomość',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Nazwa mozaiki',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
+
+        RENEW_NS_TITLE: 'Renew namespaces',
+        RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_1: 'You can renew a namespace starting from one month before it expires.',
+        RENEW_NS_INFORMATION_2: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.'
     });
 
 }

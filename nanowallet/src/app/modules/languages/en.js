@@ -355,7 +355,7 @@ function EnglishProvider($translateProvider) {
         APOSTILLE_FILE_HASH: 'File hash',
         APOSTILLE_PRIVATE: 'Private',
         APOSTILLE_FILENAME: 'File name',
-        APOSTILLE_NAME_TOO_LONG: 'File name is too long, 40 characters maximum allowed.',
+        APOSTILLE_NAME_TOO_LONG: 'File name is too long, 32 characters maximum allowed.',
         APOSTILLE_MAX_NUMBER: 'Maximum apostilles per batch is 25',
         APOSTILLE_INFORMATION_1: 'Each file uploaded is processed automatically with options set on the left panel. You can add new files, change parameters and then add more files with different options. It\'ll also work if you switch to the multisig tab and add more files.',
         APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.', 
