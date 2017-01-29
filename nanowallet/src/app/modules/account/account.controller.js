@@ -36,7 +36,7 @@ class AccountCtrl {
 
         // Hide private key field by default
         this.showPrivateKeyField = false;
-
+       
         // Empty default label for added account
         this.newAccountLabel = "";
 
