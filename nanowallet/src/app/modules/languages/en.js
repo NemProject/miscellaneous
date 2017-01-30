@@ -267,7 +267,20 @@ function EnglishProvider($translateProvider) {
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:',
         NAMESPACE_PROVISION_INFORMATION_2: 'However a part is only allowed to begin with a letter of the alphabet, thus \'alice\' is an allowed part for a root namespace while \'1alice\' is not. Certain strings are reserved and thus not allowed as namespace parts. Among the disallowed namespace parts are:',
         NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.',
-
+        // RENEW NAMESPACE MODULE
+        RENEW_NS_TITLE: 'Renew namespaces',
+        RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
+        RENEW_NS_INFORMATION_TITLE_1: 'Fees',
+        RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
+        RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
+        RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
+        RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
         // ACCOUNT MODULE
         ACCOUNT_TITLE: 'Account',
         ACCOUNT_ACCOUNT_INFORMATION: 'Account information',
@@ -582,21 +595,7 @@ function EnglishProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Alias of',
         FORM_MESSAGE_PLACEHOLDER: 'Message',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
-
-        RENEW_NS_TITLE: 'Renew namespaces',
-        RENEW_NS_NONE: 'No namespace to renew',
-        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
-        RENEW_NS_INFORMATION_TITLE_1: 'Fees',
-        RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
-        RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
-        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
-        RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
-        RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
-        RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
-        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
-        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
-        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
     });
 
 }
