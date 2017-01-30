@@ -106,19 +106,6 @@ gulp.task('views', function() {
       .pipe(gulp.dest('./src/app/config/'));
 });
 
-// This task is used for building production ready
-// minified JS/CSS files into the dist/ folder
-/*gulp.task('build', ['html', 'browserify'], function() {
-  var html = gulp.src("build/index.html")
-                 .pipe(gulp.dest('./dist/'));
-
-  var js = gulp.src("build/main.js")
-               .pipe(uglify())
-               .pipe(gulp.dest('./dist/'));
-
-  return merge(html,js);
-});*/
-
 // Run Tasks
 gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'browserifyTests'], function() {
 

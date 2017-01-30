@@ -71,6 +71,7 @@ class ApostilleMessageCtrl {
         // Message request QR
         this.invoiceData = {
             "v": this._Wallet.network === Network.data.Testnet.id ? 1 : 2,
+            "type": 2,
             "data": {
                 "addr": this.formData.recipient,
                 "msg": "",

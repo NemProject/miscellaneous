@@ -26,7 +26,7 @@
             <span ng-show="$ctrl.formData.isMultisig">{{ 'APOSTILLE_TRANSACTION_MULTISIG_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
-            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.formData.isPrivate = false;">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.formData.isPrivate = true;">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
             <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.formData.isPrivate = false;">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
           </ul>
         </div>
