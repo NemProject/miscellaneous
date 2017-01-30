@@ -1,32 +1,24 @@
+/*** GLOBAL EXTENDS ***/
+.importance-transfer-page .input-group-btn.showHide, .account-page .input-group-btn.showHide, .importance-transfer-page .dLoad, .account-page .dLoad {
+  max-width: 40px;
+  background: transparent;
+  text-align: center; }
+  .importance-transfer-page .input-group-btn.showHide .btn-primary, .account-page .input-group-btn.showHide .btn-primary, .importance-transfer-page .input-group-btn.showHide .btn-danger, .account-page .input-group-btn.showHide .btn-danger, .importance-transfer-page .dLoad .btn-primary, .account-page .dLoad .btn-primary, .importance-transfer-page .dLoad .btn-danger, .account-page .dLoad .btn-danger {
+    width: 100%;
+    color: white;
+    background: #69b2e5;
+    border: 1px solid #69b2e5; }
+    .importance-transfer-page .input-group-btn.showHide .btn-primary:hover, .account-page .input-group-btn.showHide .btn-primary:hover, .importance-transfer-page .input-group-btn.showHide .btn-primary:active, .account-page .input-group-btn.showHide .btn-primary:active, .importance-transfer-page .input-group-btn.showHide .btn-danger:hover, .account-page .input-group-btn.showHide .btn-danger:hover, .importance-transfer-page .input-group-btn.showHide .btn-danger:active, .account-page .input-group-btn.showHide .btn-danger:active, .importance-transfer-page .dLoad .btn-primary:hover, .account-page .dLoad .btn-primary:hover, .importance-transfer-page .dLoad .btn-primary:active, .account-page .dLoad .btn-primary:active, .importance-transfer-page .dLoad .btn-danger:hover, .account-page .dLoad .btn-danger:hover, .importance-transfer-page .dLoad .btn-danger:active, .account-page .dLoad .btn-danger:active {
+      background: rgba(105, 178, 229, 0.6);
+      border: 1px solid rgba(105, 178, 229, 0.6);
+      color: white; }
+
 html {
   position: relative;
   min-height: 100vh;
   padding-bottom: 100px;
   font-family: 'Roboto';
   z-index: -1; }
-
-footer {
-  bottom: 0;
-  position: absolute;
-  padding: 15px;
-  /*border-top: 1px solid #444;*/
-  width: 100%;
-  background-color: white;
-  z-index: 10; }
-
-footer .container {
-  margin: 0px !important;
-  padding: 0px !important; }
-
-footer .col-md-6:first-of-type {
-  text-align: left;
-  margin-left: 0px;
-  padding-left: 0px; }
-
-footer .col-md-6:last-of-type {
-  text-align: right;
-  margin-right: 0px;
-  padding-right: 0px; }
 
 .navbar {
   z-index: 10; }
@@ -236,20 +228,6 @@ border: 1px solid #444;
   to {
     width: 1.25em; } }
 
-.importance-transfer-page .input-group-btn.showHide, .account-page .input-group-btn.showHide, .importance-transfer-page .dLoad, .account-page .dLoad {
-  max-width: 40px;
-  background: transparent;
-  text-align: center; }
-  .importance-transfer-page .input-group-btn.showHide .btn-primary, .account-page .input-group-btn.showHide .btn-primary, .importance-transfer-page .input-group-btn.showHide .btn-danger, .account-page .input-group-btn.showHide .btn-danger, .importance-transfer-page .dLoad .btn-primary, .account-page .dLoad .btn-primary, .importance-transfer-page .dLoad .btn-danger, .account-page .dLoad .btn-danger {
-    width: 100%;
-    color: white;
-    background: #69b2e5;
-    border: 1px solid #69b2e5; }
-    .importance-transfer-page .input-group-btn.showHide .btn-primary:hover, .account-page .input-group-btn.showHide .btn-primary:hover, .importance-transfer-page .input-group-btn.showHide .btn-primary:active, .account-page .input-group-btn.showHide .btn-primary:active, .importance-transfer-page .input-group-btn.showHide .btn-danger:hover, .account-page .input-group-btn.showHide .btn-danger:hover, .importance-transfer-page .input-group-btn.showHide .btn-danger:active, .account-page .input-group-btn.showHide .btn-danger:active, .importance-transfer-page .dLoad .btn-primary:hover, .account-page .dLoad .btn-primary:hover, .importance-transfer-page .dLoad .btn-primary:active, .account-page .dLoad .btn-primary:active, .importance-transfer-page .dLoad .btn-danger:hover, .account-page .dLoad .btn-danger:hover, .importance-transfer-page .dLoad .btn-danger:active, .account-page .dLoad .btn-danger:active {
-      background: rgba(105, 178, 229, 0.6);
-      border: 1px solid rgba(105, 178, 229, 0.6);
-      color: white; }
-
 /*** GLOBAL STYLES ***/
 .panel-heading {
   background-color: transparent !important;
@@ -420,6 +398,24 @@ input.form-control.short {
 footer .container-fluid {
   padding: 0; }
 
+footer {
+  bottom: 0;
+  position: absolute;
+  padding: 20px;
+  /*border-top: 1px solid #444;*/
+  width: 100%;
+  z-index: 10; }
+
+footer .col-lg-6:first-of-type {
+  text-align: left;
+  margin-left: 0px;
+  padding-left: 0px; }
+
+footer .col-lg-6:last-of-type {
+  text-align: right;
+  margin-right: 0px;
+  padding-right: 0px; }
+
 .list-group {
   margin: 0; }
 
@@ -533,7 +529,7 @@ footer .container-fluid {
   float: right;
   margin-top: -20px; }
   .arrows.harvested {
-    margin-top: -32px; }
+    margin-top: 5px; }
   .arrows .buttonStyle {
     border: none;
     box-shadow: none;
@@ -547,6 +543,8 @@ footer .container-fluid {
 .home-page {
   color: white;
   text-align: center; }
+  .home-page h1 {
+    font-weight: 700; }
 
 /*** LOGIN & SIGNUP PAGE ***/
 .login-page, .signup-page {
@@ -601,15 +599,17 @@ footer .container-fluid {
 
 .dashboard-page .secondary h4 {
   padding-top: 0px !important; }
+  @media only screen and (max-width: 992px) {
+    .dashboard-page .secondary h4 {
+      display: none; } }
 
-.dashboard-page .updates {
-  max-width: 400px; }
-  .dashboard-page .updates p {
-    font-size: 12px; }
-  .dashboard-page .updates a {
-    color: #69b2e5;
-    text-decoration: underline;
-    font-weight: 500; }
+.dashboard-page .updates p {
+  font-size: 12px; }
+
+.dashboard-page .updates a {
+  color: #69b2e5;
+  text-decoration: underline;
+  font-weight: 500; }
 
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
@@ -845,26 +845,43 @@ textarea {
   font-weight: 500;
   font-size: 20px;
   color: black; }
+  @media only screen and (max-width: 1500px) {
+    .market-info .header span {
+      font-size: 15px; } }
+  @media only screen and (max-width: 1200px) {
+    .market-info .header span {
+      font-size: 12px; } }
 
 .market-info .ticker {
   padding-top: 20px; }
+  @media only screen and (max-width: 992px) {
+    .market-info .ticker {
+      padding-top: 0px; } }
 
-.market-percent .col-lg-4 {
-  padding-left: 0;
-  padding-right: 0; }
+@media only screen and (max-width: 1500px) {
+  .marketPercents {
+    font-size: 12px; }
+    .marketPercents .col-lg-4:nth-of-type(2) {
+      text-align: left;
+      padding-right: 0px; }
+    .marketPercents .col-lg-4:nth-of-type(3) {
+      text-align: right;
+      padding-right: 0px;
+      padding-left: 0px; } }
+    @media only screen and (max-width: 1500px) and (max-width: 992px) {
+      .marketPercents .col-lg-4:nth-of-type(3) {
+        text-align: left; } }
 
-.market-percent .col-md-4:first-of-type {
-  text-align: left;
-  padding-left: 0px; }
-
-.market-percent .col-md-4:nth-of-type(2) {
-  text-align: center;
-  padding-left: 0px;
-  padding-right: 0px; }
-
-.market-percent .col-md-4:last-of-type {
-  text-align: right;
-  padding-right: 0px; }
+@media only screen and (max-width: 1500px) {
+    .marketPercents .col-lg-4:last-of-type {
+      text-align: right;
+      padding-right: 0px;
+      padding-left: 0px; } }
+    @media only screen and (max-width: 1500px) and (max-width: 1200px) {
+      .marketPercents .col-lg-4:last-of-type {
+        text-align: left;
+        padding-right: 15px;
+        padding-left: 15px; } }
 
 /*** basic styles ***/
 label {

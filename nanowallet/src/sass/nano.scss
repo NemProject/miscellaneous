@@ -6,6 +6,30 @@ $grayLite: rgba(0 ,0 ,0 ,0.1);
 $gray: rgba(0 ,0 ,0 ,0.3);
 $borderUnderline: 1px solid $blueLite !important;
 
+$xl: 1500px;
+$lg: 1200px;
+$md: 992px;
+$sm: 768px;
+
+/*** GLOBAL EXTENDS ***/
+%plusMinus {
+  .input-group-btn.showHide, .dLoad {
+    max-width: $pad * 2;
+    background: transparent;
+    text-align: center;
+    .btn-primary, .btn-danger {
+      width: 100%;
+      color: white;
+      background: $blue;
+      border: 1px solid $blue;
+      &:hover, &:active {
+        background: $blueLite;
+        border: 1px solid $blueLite;
+        color: white;
+      }
+    }
+  }
+}
 
 html {
 	position: relative;
@@ -14,30 +38,7 @@ html {
 	font-family: 'Roboto';
 	z-index: -1;
 }
-footer {
-	bottom: 0;
-	position: absolute;
-	padding: 15px;
-	/*border-top: 1px solid #444;*/
-	width: 100%;
-	background-color: white;
-	z-index: 10;
-}
-footer .container{
-	margin: 0px !important;
-	padding: 0px !important;
-}
-footer .col-md-6:first-of-type{
-	text-align: left;
-	margin-left: 0px;
-	padding-left: 0px;
 
-}
-footer .col-md-6:last-of-type{
-	text-align: right;
-	margin-right: 0px;
-	padding-right: 0px;
-}
 .navbar {
 	z-index: 10;
 }

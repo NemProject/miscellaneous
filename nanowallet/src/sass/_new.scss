@@ -1,22 +1,3 @@
-%plusMinus {
-  .input-group-btn.showHide, .dLoad {
-    max-width: $pad * 2;
-    background: transparent;
-    text-align: center;
-    .btn-primary, .btn-danger {
-      width: 100%;
-      color: white;
-      background: $blue;
-      border: 1px solid $blue;
-      &:hover, &:active {
-        background: $blueLite;
-        border: 1px solid $blueLite;
-        color: white;
-      }
-    }
-  }
-}
-
 
 /*** GLOBAL STYLES ***/
 .panel-heading {
@@ -207,6 +188,27 @@ input.form-control.short{
 footer .container-fluid {
   padding: 0;
 }
+footer {
+	bottom: 0;
+	position: absolute;
+	padding: $pad;
+	/*border-top: 1px solid #444;*/
+	width: 100%;
+	// background-color: white;
+	z-index: 10;
+}
+footer .col-lg-6:first-of-type{
+	text-align: left;
+	margin-left: 0px;
+	padding-left: 0px;
+}
+footer .col-lg-6:last-of-type{
+	text-align: right;
+	margin-right: 0px;
+	padding-right: 0px;
+}
+
+
 .list-group {
   margin: 0;
 }
@@ -338,7 +340,7 @@ footer .container-fluid {
   float: right;
   margin-top: -$pad;
   &.harvested {
-    margin-top: -$pad * 1.6;
+    margin-top: $pad / 4;
   }
   .buttonStyle {
     border: none;
@@ -355,6 +357,9 @@ footer .container-fluid {
 .home-page {
   color: white;
   text-align: center;
+  h1 {
+    font-weight: 700;
+  }
 }
 /*** LOGIN & SIGNUP PAGE ***/
 .login-page, .signup-page {
@@ -424,9 +429,12 @@ footer .container-fluid {
   }
   .secondary h4 {
     padding-top: 0px !important;
+    @media only screen and (max-width : $md) {
+      display: none;
+    }
   }
   .updates {
-  	max-width: 400px;
+  	// max-width: 400px;
     p {
   	  font-size: 12px;
     }
@@ -840,31 +848,74 @@ textarea {
 .market-info h4 {
   margin-bottom: $pad;
 }
+
+
+// .market-percent .col-lg-4 {
+//   padding-left: 0;
+//   padding-right: 0;
+//   @media only screen and (max-width : $xl) {
+//     font-size: 12px;
+//   }
+// }
+// .market-percent .col-lg-4:first-of-type {
+// 	text-align: left;
+// 	padding-left: 0px;
+// }
+// .market-percent .col-lg-4:nth-of-type(2) {
+// 	text-align: center;
+// 	padding-left: 0px;
+// 	padding-right: 0px;
+// }
+// .market-percent .col-lg-4:last-of-type {
+// 	text-align: right;
+// 	padding-right: 0px;
+//
+// }
 .market-info .header span{
 	font-weight: 500;
 	font-size: 20px;
 	color: black;
+  @media only screen and (max-width : $xl) {
+    font-size: 15px;
+  }
+  @media only screen and (max-width : $lg) {
+    font-size: 12px;
+  }
 }
 .market-info .ticker {
-	padding-top: 20px;
+	padding-top: $pad;
+  @media only screen and (max-width : $md) {
+    padding-top: 0px;
+  }
 }
-.market-percent .col-lg-4 {
-  padding-left: 0;
-  padding-right: 0;
+.marketPercents {
+  @media only screen and (max-width : $xl) {
+    font-size: 12px;
+    .col-lg-4:nth-of-type(2) {
+      text-align: left;
+      padding-right: 0px;
+    }
+    .col-lg-4:nth-of-type(3) {
+      text-align: right;
+      padding-right: 0px;
+      padding-left: 0px;
+      @media only screen and (max-width : $md) {
+        text-align: left;
+      }
+    }
+    .col-lg-4:last-of-type {
+      text-align: right;
+      padding-right: 0px;
+      padding-left: 0px;
+      @media only screen and (max-width : $lg) {
+        text-align: left;
+        padding-right: 15px;
+        padding-left: 15px;
 }
-.market-percent .col-md-4:first-of-type {
-	text-align: left;
-	padding-left: 0px;
+    }
+  }
 }
-.market-percent .col-md-4:nth-of-type(2) {
-	text-align: center;
-	padding-left: 0px;
-	padding-right: 0px;
-}
-.market-percent .col-md-4:last-of-type {
-	text-align: right;
-	padding-right: 0px;
-}
+
 
 
 
