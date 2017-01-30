@@ -543,6 +543,11 @@ footer .container-fluid {
   .arrows b {
     color: rgba(0, 0, 0, 0.3); }
 
+/*** HOME PAGE ***/
+.home-page {
+  color: white;
+  text-align: center; }
+
 /*** LOGIN & SIGNUP PAGE ***/
 .login-page, .signup-page {
   color: white; }
