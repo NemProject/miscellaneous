@@ -191,11 +191,12 @@
           <div class="form-group" ng-show="$ctrl.selectedMosaic !== 'nem:xem'">
             <div class="input-group">
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" disabled>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
+                <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
               </span>
-              <input class="form-control" type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
+              <div class="form-control">
+              <input type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
               <span class="input-group-btn">
-                <button class="btn btn-default" type="button" disabled><small>{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.namespaceId}}:{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.name}}</small></button>
+                <label class="floatRight"><small>{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.namespaceId}}:{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.name}}</small></label>
               </span>
             </div>
           </div>
@@ -230,7 +231,6 @@
                       <p class="form-control-static">
                         <!-- tx.amount * 1000000 because it needs to be in micro xem in fmtLevyFee filter -->
                         <strong>{{mos | fmtLevyFee:tx.amount*1000000:levy:mosaics}}</strong>
-                        <br>
                         <span class="text-muted">{{levy.mosaicId.namespaceId}}</span>:{{levy.mosaicId.name}}
                         <span ng-show="levy.type === 1">- I<!--({{ 'TRANSFER_INFO_LEVY_TYPE_1' | translate }})--></span>
                         <span ng-show="levy.type === 2">- II<!--({{ 'TRANSFER_INFO_LEVY_TYPE_2' | translate }})--></span>

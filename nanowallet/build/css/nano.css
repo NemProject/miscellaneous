@@ -342,6 +342,12 @@ h4 {
   font-size: 24px;
   font-weight: 300; }
 
+.secondary h4 {
+  padding-top: 0px !important; }
+  @media only screen and (max-width: 1200px) {
+    .secondary h4 {
+      display: none !important; } }
+
 h5 {
   color: rgba(0, 0, 0, 0.3);
   font-weight: 300;
@@ -501,7 +507,8 @@ footer .col-lg-6:last-of-type {
 .btn-success {
   background-color: #69b2e5;
   border-color: #69b2e5;
-  width: 100%; }
+  width: 100%;
+  border-radius: 0px; }
 
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   background-color: rgba(105, 178, 229, 0.6) !important;
@@ -587,12 +594,6 @@ footer .col-lg-6:last-of-type {
   color: black;
   font-size: 15px; }
 
-.dashboard-page .secondary h4 {
-  padding-top: 0px !important; }
-  @media only screen and (max-width: 992px) {
-    .dashboard-page .secondary h4 {
-      display: none; } }
-
 .dashboard-page .harvestedBlocks th, .dashboard-page .harvestedBlocks td {
   width: 50% !important;
   max-width: 50%;
@@ -633,21 +634,19 @@ textarea {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   text-align: right; }
 
-.mosaicsAttached th:first-of-type, .mosaicsAttached td:first-of-type {
-  width: 35%; }
-
-.mosaicsAttached th:nth-of-type(2), .mosaicsAttached td:nth-of-type(2) {
-  width: 20%; }
-
-.mosaicsAttached th:nth-of-type(3), .mosaicsAttached td:nth-of-type(3) {
-  width: 15%; }
-
-.mosaicsAttached th:nth-of-type(4), .mosaicsAttached td:nth-of-type(4) {
-  width: 15%; }
-
-.mosaicsAttached th:nth-of-type(5), .mosaicsAttached td:nth-of-type(5) {
-  width: 10%;
-  text-align: center; }
+.mosaicsAttached {
+  text-overflow: ellipsis; }
+  .mosaicsAttached th:first-of-type, .mosaicsAttached td:first-of-type {
+    width: 35%; }
+  .mosaicsAttached th:nth-of-type(2), .mosaicsAttached td:nth-of-type(2) {
+    width: 20%; }
+  .mosaicsAttached th:nth-of-type(3), .mosaicsAttached td:nth-of-type(3) {
+    width: 15%; }
+  .mosaicsAttached th:nth-of-type(4), .mosaicsAttached td:nth-of-type(4) {
+    width: 15%; }
+  .mosaicsAttached th:nth-of-type(5), .mosaicsAttached td:nth-of-type(5) {
+    width: 10%;
+    text-align: center; }
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap .row1 {
@@ -658,6 +657,15 @@ textarea {
   .portalWrap .panel-heading .col-sm-9 {
     position: relative;
     left: -20px; }
+    @media only screen and (max-width: 1500px) {
+      .portalWrap .panel-heading .col-sm-9 {
+        left: 0; } }
+    @media only screen and (max-width: 1200px) {
+      .portalWrap .panel-heading .col-sm-9 {
+        left: 6.66667px; } }
+    @media only screen and (max-width: 992px) {
+      .portalWrap .panel-heading .col-sm-9 {
+        left: 0; } }
   .portalWrap .panel-heading h5 {
     color: black;
     font-weight: 500;
@@ -668,6 +676,9 @@ textarea {
     width: 56px; }
   .portalWrap .panel-heading .col-sm-3 {
     min-height: 66px; }
+    @media only screen and (max-width: 992px) {
+      .portalWrap .panel-heading .col-sm-3 {
+        display: none; } }
 
 .portalWrap .panel-body {
   padding: 0px;
@@ -683,7 +694,8 @@ textarea {
   background-color: transparent;
   border: 0px;
   box-shadow: none;
-  padding: 0px; }
+  padding: 0px;
+  line-height: 1.4; }
   .portalWrap .panelFooter .btn {
     text-decoration: underline !important;
     color: #69b2e5;
@@ -691,9 +703,15 @@ textarea {
     padding: 0px !important;
     margin: 0px !important;
     text-align: left;
-    background-color: transparent; }
+    background-color: transparent;
+    white-space: normal;
+    line-height: 1.1; }
   .portalWrap .panelFooter .btn[disabled] {
     color: rgba(0, 0, 0, 0.7); }
+
+@media only screen and (max-width: 1200px) {
+  .portalWrap .market-info {
+    display: none; } }
 
 /*** CREATE MOSAIC PAGE ***/
 .create-mosaic-page .mosaicCheckboxes {
