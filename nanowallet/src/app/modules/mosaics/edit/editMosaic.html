@@ -2,7 +2,7 @@
   <div class="container-fluid main">
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-10">
         <h2>{{ 'MOSAIC_SUPPLY_CHANGE_TITLE' | translate }}</h2>
       </div>
     </div>
@@ -107,15 +107,15 @@
           </fieldset>
           <!-- CREATE OR DELETE MOSAIC -->
           <fieldset class="form-group row changeType">
-            <div class="col-md-3">
+            <div class="col-sm-4">
               <label>{{ 'MOSAIC_SUPPLY_CHANGE_TYPE' | translate }}: </label>
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-4">
               <label>
                 <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="1"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_1' | translate }}
               </label>
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-4">
               <label>
                 <input type="radio" ng-model="$ctrl.formData.supplyType" ng-value="2"> {{ 'MOSAIC_SUPPLY_CHANGE_TYPE_2' | translate }}
               </label>

@@ -2,14 +2,14 @@
   <div class="container-fluid main">
 
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-10">
         <h2>{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</h2>
       </div>
     </div>
 
     <div class="row">
 
-      <div class="col-sm-6">
+      <div class="col-md-6 col-sm-12">
         <div class="panel-heading">
             <h3>{{ 'IMPORTANCE_TRANSFER_MULTISIG_NAME' | translate }}</h3>
         </div>
@@ -112,7 +112,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-md-6 col-sm-12">
         <div class="panel-heading">
           <h3>{{ 'IMPORTANCE_TRANSFER_HARVESTING_PANEL' | translate }}</h3>
         </div>
@@ -161,7 +161,7 @@
                   <span class="input-group-btn">
                     <label>{{ 'ACCOUNT_DELEGATED_PUBLIC' | translate }}: </label>
                   </span>
-                  <span class="form-control" readOnly>{{ $ctrl.remoteAccountPublicView }}</span>
+                  <input type="text" class="form-control" ng-model="$ctrl.remoteAccountPublicView" readOnly>
                 </div>
               </fieldset>
             <!-- DELEGATED PRIVATE KEY -->
@@ -170,7 +170,7 @@
                   <span class="input-group-btn">
                     <label>{{ 'ACCOUNT_DELEGATED_PRIVATE_KEY' | translate }}: </label>
                   </span>
-                  <span class="form-control" readOnly>{{ $ctrl.remotePrivateKey }}</span>
+                  <input type="text" class="form-control" ng-model="$ctrl.remotePrivateKey" readOnly>
                 </div>
               </fieldset>
 

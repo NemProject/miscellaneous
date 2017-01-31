@@ -491,7 +491,7 @@ footer .col-lg-6:last-of-type {
   position: relative;
   color: rgba(0, 0, 0, 0.3);
   font-weight: 500; }
-  @media only screen and (max-width: 992px) {
+  @media only screen and (max-width: 1200px) {
     .tabDescription {
       display: none; } }
 
@@ -830,6 +830,9 @@ textarea {
 .importance-transfer-page .col-md-4 span {
   font-size: 14px;
   font-weight: 700; }
+
+.importance-transfer-page .overflow {
+  text-overflow: clip !important; }
 
 /*** EXPLORER PAGE ***/
 .explorer-home-page .panel-body {

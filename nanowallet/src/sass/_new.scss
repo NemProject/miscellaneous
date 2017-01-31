@@ -324,10 +324,15 @@ footer .col-lg-6:last-of-type{
   position: relative;
   color: $gray;
   font-weight: 500;
-  @media only screen and (max-width : $md) {
+  @media only screen and (max-width : $lg) {
     display: none;
   }
 }
+// .someShort {
+//   @media only screen and (max-width : $lg) {
+//     max-width: 120px;
+//   }
+// }
 .btn-default {
   background: transparent;
   color: black;
@@ -741,6 +746,9 @@ textarea {
       font-size: 14px;
       font-weight: 700;
     }
+  }
+  .overflow {
+    text-overflow: clip !important;
   }
 }
 

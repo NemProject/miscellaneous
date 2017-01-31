@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-lg-7 col-md-12">
 
         <div class="panel-heading">
           <div class="tabDescription">
@@ -87,16 +87,16 @@
             </fieldset>
             <!-- TRANSACTION FEE -->
             <div class="row" class="dualFees">
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <fieldset class="form-group">
                   <div class="input-group">
-                    <span class="input-group-btn">
+                    <span class="input-group-btn someShort">
                       <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
                     </span>
                     <div class="form-control" readOnly>
                       <span class="feeAmount">
-                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
-                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
+                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -104,15 +104,15 @@
                 </fieldset>
               </div>
               <!-- RENTAL FEE -->
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <fieldset class="form-group">
                   <div class="input-group">
-                    <span class="input-group-btn">
-                      <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
+                    <span class="input-group-btn short">
+                      <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}: </label>
                     </span>
                     <div class="form-control" readOnly>
                       <span class="feeAmount">
-                        <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}.{{($ctrl.formData.mosaicFee | fmtNemValue)[1]}}</span>
+                        <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -137,7 +137,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-lg-5 col-md-6 col-sm-12">
         <div class="panel-heading">
           <h3>{{ 'MOSAIC_DEFINITION_MOSAIC_PROPERTIES' | translate }}</h3>
         </div>
@@ -206,6 +206,10 @@
               </fieldset>
             </div>
           </div>
+        </div>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+
           <!-- LEVY START -->
           <div ng-show="$ctrl.hasLevy">
             <div class="panel-heading">
@@ -257,10 +261,10 @@
                       <span class="input-group-btn">
                         <label>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}: </label>
                       </span>
-                      <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
+                      <label class="col-md-6 control-label" style="margin-top:0;word-break: break-all;">
                         <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="1"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }}
                       </label>
-                      <label class="col-md-4 control-label" style="margin-top:0;word-break: break-all;">
+                      <label class="col-md-6 control-label" style="margin-top:0;word-break: break-all;">
                         <input type="radio" ng-model="$ctrl.formData.levy.feeType" ng-value="2"> {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }}
                       </label>
                     </div>
@@ -290,6 +294,7 @@
               </div>
             </div>
         </div>
+      </div>
       </div>
     </div>
   </div>
