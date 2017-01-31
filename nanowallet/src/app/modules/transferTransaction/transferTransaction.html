@@ -188,19 +188,30 @@
               </span>
             </div>
           </div>
+          <!-- MOSAIC BALANCE -->
           <div class="form-group" ng-show="$ctrl.selectedMosaic !== 'nem:xem'">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
               </span>
-              <div class="form-control">
-              <input type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
-              <span class="input-group-btn">
+              <div class="form-control formFloat" disabled>
+                <input class="readOnly mosaic" type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
                 <label class="floatRight"><small>{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.namespaceId}}:{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.name}}</small></label>
-              </span>
+              </div>
             </div>
           </div>
-        </div>
+
+        <!-- <div class="input-group">
+          <span class="input-group-btn">
+            <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
+          </span>
+          <div class="form-control formFloat" readOnly>
+            <input type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly disabled/>
+            <label class="floatRight"><small>XEM</small></label>
+          </div>
+        </div> -->
+
+
         <!-- Mosaics attached table -->
         <div class="panel-default mosaicsAttached">
           <div class="panel-heading">

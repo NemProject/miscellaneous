@@ -29,11 +29,6 @@
                	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
                		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
               	</select>
-                <!-- CHOOSE CUSTOM ACCOUNT BUTTON -->
-            	  <!-- <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}">
-                  <i class="fa fa-edit"></i></button>
-                </span> -->
               </div>
             </fieldset>
             <!-- ACCOUNT TO CONVERT TO MULTISIG MANUALLY -->
@@ -46,10 +41,6 @@
                   type="text"
                   placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT' | translate }}"
                   ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();"/>
-              	<!-- <span class="input-group-btn" ng-show="$ctrl.haveMoreThanOneAccount">
-                          <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = false;$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_SELECT_WALLET_ACCOUNT' | translate }}">
-                            <i class="fa fa-caret-square-o-down"></i></button>
-                    </span> -->
               </div>
             </fieldset>
             <!-- MULTISIG ACCOUNT BALANCE -->

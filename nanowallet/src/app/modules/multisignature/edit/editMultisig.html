@@ -112,25 +112,26 @@
       <div class="col-md-5">
         <!-- CURRENT ACCOUNT STATS -->
         <div class="panel-heading">
-          <h4>{{'AGGREGATE_SELECTED_ACCOUNT_INFO' | translate}}</h4>
+          <h3>{{'AGGREGATE_SELECTED_ACCOUNT_INFO' | translate}}</h3>
         </div>
         <div class="panel-body" ng-show="$ctrl.multisigInfosData.cosignatories.length && $ctrl.formData.accountToEdit">
-          <div class="col-xs-12 col-md-9">
-          <label>{{'GENERAL_COSIGNATORIES' | translate}}</label>
-          <br>
+          <div class="row">
+          <div class="col-sm-9 col-md-8 col-lg-8">
+          <h5>{{'GENERAL_COSIGNATORIES' | translate}}</h5>
           <span ng-repeat="cosig in $ctrl.multisigInfosData.cosignatories">{{cosig.address}}<br></span>
           </div>
-          <div class="col-xs-12 col-md-3">
-            <label>{{'AGGREGATE_MIN_SIGNATURES' | translate}}</label>
-            <br> {{$ctrl.multisigInfosData.minCosigs}}
+          <div class="col-sm-3 col-md-4 col-lg-4">
+            <h5>{{'AGGREGATE_MIN_SIGNATURES' | translate}}</h5>
+             {{$ctrl.multisigInfosData.minCosigs}}
           </div>
         </div>
         <div class="panel-body bg-info" ng-show="!$ctrl.multisigInfosData.cosignatories.length">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
+      </div>
         <!-- LIST OF SIGNERS TO BE ADDED/DELETED -->
         <div class="panel-heading">
-          <h4>{{ 'AGGREGATE_MODIFICATION_LIST' | translate }}</h4>
+          <h3>{{ 'AGGREGATE_MODIFICATION_LIST' | translate }}</h3>
           <div style="float: right; position: relative; display: block;" ng-show="$ctrl.cosignatoryArray.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
         </div>
         <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed">

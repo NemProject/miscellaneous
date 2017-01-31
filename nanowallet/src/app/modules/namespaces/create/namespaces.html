@@ -1,13 +1,13 @@
 <div class="namespace-provision-page">
   <div class="container-fluid main">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-11">
         <h2>{{ 'NAMESPACE_PROVISION_TITLE' | translate }}</h2>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-9 col-lg-6">
+      <div class="col-md-9 col-lg-7">
         <div class="panel-heading">
           <div class="tabDescription">
             <span ng-show="!$ctrl.formData.isMultisig">{{ 'NAMESPACE_PROVISION_NAME' | translate }}</span>
@@ -73,7 +73,7 @@
             </fieldset>
             <!-- TRANSACTION FEE -->
             <div class="row" class="dualFees">
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
@@ -90,7 +90,7 @@
                 </fieldset>
               </div>
               <!-- RENTAL FEE-->
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
@@ -123,15 +123,17 @@
         </div>
       </div>
 
-      <div class="col-md-3 col-lg-6">
+      <div class="col-md-3 col-lg-5">
         <!-- <div class="panel-heading">
           <h3>{{ 'GENERAL_INFORMATION' | translate }}</h3>
         </div> -->
-        <div class="panel-body row">
-          <div class="col-md-12 col-lg-6">
+
             <div class="panel-heading">
+
               <h3>Namespace Restrictions</h3>
             </div>
+            <div class="panel-body row">
+              <div class="col-md-12 col-lg-12">
           <p>Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:
           </p>
           <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
@@ -140,30 +142,6 @@
           <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
           <p>The namespace may have up to 3 parts, thus 'qm.metals.silver' is valid while 'qm.metals.silver.coin' is not.
           </p>
-        </div>
-        <div class="col-md-12 col-lg-6 ">
-          <div class="panel-heading">
-            <h3>Renewing Namespaces</h3>
-          </div>
-          <h5>Fees</h5>
-          <p>Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.
-          <h5>Root Namespaces</h5>
-          <p>Only root namesspaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.
-          </p>
-          <h5>Renewal Period</h5>
-          <p>Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.
-          </p>
-          <!-- <p>
-            {{ 'NAMESPACE_PROVISION_INFORMATION_1' | translate }}
-          </p>
-          <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
-          <p>
-            {{ 'NAMESPACE_PROVISION_INFORMATION_2' | translate }}
-          </p>
-          <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
-          <p>
-            {{ 'NAMESPACE_PROVISION_INFORMATION_3' | translate }}
-          </p> -->
         </div>
       </div>
       </div>

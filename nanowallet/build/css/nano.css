@@ -236,6 +236,10 @@ border: 1px solid #444;
 .floatRight {
   float: right; }
 
+.formFloat .mosaic {
+  width: 40%;
+  text-overflow: ellipsis; }
+
 .formFloat input {
   width: 88%;
   border: 0px; }
@@ -377,7 +381,9 @@ h5 {
     max-width: 40px;
     min-width: 40px; }
   .input-group-btn .btn-danger:hover, .input-group-btn .btn-danger:active, .input-group-btn .btn-danger:focus {
-    color: white !important; }
+    color: white !important;
+    background: #e27c79;
+    border: 1px solid #e27c79; }
 
 input.form-control.short {
   width: 60px !important;
@@ -712,6 +718,36 @@ textarea {
 @media only screen and (max-width: 1200px) {
   .portalWrap .market-info {
     display: none; } }
+
+/*** CONVERT AN ACCOUNT TO MULTISIG ***/
+.create-multisig-page th:nth-of-type(1), .create-multisig-page td:nth-of-type(1), .edit-multisig-page th:nth-of-type(1), .edit-multisig-page td:nth-of-type(1) {
+  width: 72%; }
+  @media only screen and (max-width: 1200px) {
+    .create-multisig-page th:nth-of-type(1), .create-multisig-page td:nth-of-type(1), .edit-multisig-page th:nth-of-type(1), .edit-multisig-page td:nth-of-type(1) {
+      width: 64%; } }
+
+.create-multisig-page th, .edit-multisig-page th {
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  font-size: 12px; }
+
+.create-multisig-page td:nth-of-type(1), .edit-multisig-page td:nth-of-type(1) {
+  font-weight: 500;
+  font-size: 14px; }
+  @media only screen and (max-width: 1500px) {
+    .create-multisig-page td:nth-of-type(1), .edit-multisig-page td:nth-of-type(1) {
+      font-size: 12px; } }
+
+.edit-multisig-page .col-md-5 h5 {
+  font-size: 14px;
+  font-weight: 500; }
+
+.edit-multisig-page .col-md-5 span {
+  font-size: 12px;
+  font-weight: 500; }
+
+.edit-multisig-page .col-md-5 .col-md-4 {
+  text-align: right; }
 
 /*** CREATE MOSAIC PAGE ***/
 .create-mosaic-page .mosaicCheckboxes {

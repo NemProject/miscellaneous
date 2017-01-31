@@ -30,6 +30,11 @@
   float: right;
 }
 .formFloat {
+  .mosaic {
+    width: 40%;
+    text-overflow: ellipsis;
+
+  }
   input {
     width: 88%;
     border: 0px;
@@ -187,6 +192,8 @@ h5 {
     // background: $blueLite !important;
     // border: 1px solid $blueLite !important;
     color: white !important;
+    background: lighten( $red, 10% );
+    border: 1px solid lighten( $red, 10% );
   }
 }
 input.form-control.short{
@@ -591,6 +598,44 @@ textarea {
     }
   }
 }
+/*** CONVERT AN ACCOUNT TO MULTISIG ***/
+.create-multisig-page, .edit-multisig-page {
+  th:nth-of-type(1), td:nth-of-type(1){
+    width: 72%;
+    @media only screen and (max-width : $lg) {
+      width: 64%;
+
+    }
+  }
+  th {
+    color: $gray;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  td:nth-of-type(1) {
+    font-weight: 500;
+    font-size: 14px;
+    @media only screen and (max-width : $xl) {
+      font-size: 12px;
+    }
+  }
+}
+.edit-multisig-page {
+  .col-md-5 {
+    h5 {
+      // margin-bottom: 0px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  span {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .col-md-4 {
+    text-align: right;
+  }
+}
+}
 
 /*** CREATE MOSAIC PAGE ***/
 .create-mosaic-page {
@@ -740,9 +785,6 @@ textarea {
   .arrows {
     margin-top: -$pad * 2;
   }
-  // .panel-heading {
-  //   border-bottom: 0px solid white !important;
-  // }
 }
 .explorer-namespaces-mosaics-page {
   .form-control {
