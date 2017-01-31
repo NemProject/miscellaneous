@@ -311,6 +311,9 @@ footer .col-lg-6:last-of-type{
   position: relative;
   color: $gray;
   font-weight: 500;
+  @media only screen and (max-width : $md) {
+    display: none;
+  }
 }
 .btn-default {
   background: transparent;
@@ -336,6 +339,7 @@ footer .col-lg-6:last-of-type{
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   background-color: $blueLite !important;
   border-color: $blueLite !important;
+  color: white !important;
 }
 .button-warning {
   max-width: 50px;
@@ -358,6 +362,20 @@ footer .col-lg-6:last-of-type{
     color: $gray;
   }
 }
+
+/*** LOGIN, HOME & SIGNUP PAGE ***/
+.login-page, .signup-page, .home-page {
+  color: white;
+  .container {
+    margin-top: $pad * 5;
+  }
+  .row.text-center {
+    margin-bottom: $pad * 2;
+  }
+  // footer {
+  //   color: pink !important;
+  // }
+}
 /*** HOME PAGE ***/
 .home-page {
   color: white;
@@ -368,16 +386,6 @@ footer .col-lg-6:last-of-type{
   }
   p{
     font-size: 1.3em;
-  }
-}
-/*** LOGIN & SIGNUP PAGE ***/
-.login-page, .signup-page, .home-page {
-  color: white;
-  .container {
-    margin-top: $pad * 5;
-  }
-  .row.text-center {
-    margin-bottom: $pad * 2;
   }
 }
 /*** LOGIN PAGE ***/
@@ -485,7 +493,24 @@ textarea {
   border-bottom: $borderUnderline;
   text-align: right;
 }
-
+.mosaicsAttached {
+  th:first-of-type, td:first-of-type {
+    width: 35%;
+  }
+  th:nth-of-type(2), td:nth-of-type(2) {
+    width: 20%;
+  }
+  th:nth-of-type(3), td:nth-of-type(3) {
+    width: 15%;
+  }
+  th:nth-of-type(4), td:nth-of-type(4) {
+    width: 15%;
+  }
+  th:nth-of-type(5), td:nth-of-type(5) {
+    width: 10%;
+    text-align: center;
+  }
+}
 /*** SERVICES/PORTAL PAGE ***/
 
 .portalWrap{

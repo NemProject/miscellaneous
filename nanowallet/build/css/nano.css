@@ -479,6 +479,9 @@ footer .col-lg-6:last-of-type {
   position: relative;
   color: rgba(0, 0, 0, 0.3);
   font-weight: 500; }
+  @media only screen and (max-width: 992px) {
+    .tabDescription {
+      display: none; } }
 
 .btn-default {
   background: transparent;
@@ -502,7 +505,8 @@ footer .col-lg-6:last-of-type {
 
 .btn-success:hover, .btn-success:active, .btn-success:focus {
   background-color: rgba(105, 178, 229, 0.6) !important;
-  border-color: rgba(105, 178, 229, 0.6) !important; }
+  border-color: rgba(105, 178, 229, 0.6) !important;
+  color: white !important; }
 
 .button-warning {
   max-width: 50px; }
@@ -522,6 +526,14 @@ footer .col-lg-6:last-of-type {
   .arrows b {
     color: rgba(0, 0, 0, 0.3); }
 
+/*** LOGIN, HOME & SIGNUP PAGE ***/
+.login-page, .signup-page, .home-page {
+  color: white; }
+  .login-page .container, .signup-page .container, .home-page .container {
+    margin-top: 100px; }
+  .login-page .row.text-center, .signup-page .row.text-center, .home-page .row.text-center {
+    margin-bottom: 40px; }
+
 /*** HOME PAGE ***/
 .home-page {
   color: white;
@@ -531,14 +543,6 @@ footer .col-lg-6:last-of-type {
     font-size: 4em; }
   .home-page p {
     font-size: 1.3em; }
-
-/*** LOGIN & SIGNUP PAGE ***/
-.login-page, .signup-page, .home-page {
-  color: white; }
-  .login-page .container, .signup-page .container, .home-page .container {
-    margin-top: 100px; }
-  .login-page .row.text-center, .signup-page .row.text-center, .home-page .row.text-center {
-    margin-bottom: 40px; }
 
 /*** LOGIN PAGE ***/
 .login-page .btn-import {
@@ -628,6 +632,22 @@ textarea {
 .fees {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   text-align: right; }
+
+.mosaicsAttached th:first-of-type, .mosaicsAttached td:first-of-type {
+  width: 35%; }
+
+.mosaicsAttached th:nth-of-type(2), .mosaicsAttached td:nth-of-type(2) {
+  width: 20%; }
+
+.mosaicsAttached th:nth-of-type(3), .mosaicsAttached td:nth-of-type(3) {
+  width: 15%; }
+
+.mosaicsAttached th:nth-of-type(4), .mosaicsAttached td:nth-of-type(4) {
+  width: 15%; }
+
+.mosaicsAttached th:nth-of-type(5), .mosaicsAttached td:nth-of-type(5) {
+  width: 10%;
+  text-align: center; }
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap .row1 {
