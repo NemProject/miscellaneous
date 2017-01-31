@@ -58,6 +58,9 @@ table {
 thead {
   border-bottom: $borderUnderline;
 }
+tr, td {
+  border: none !important;
+}
 tr {
   border-bottom:1px solid $grayLite !important;
 }
@@ -123,6 +126,7 @@ h2 {
 	font-size: 55px;
 	font-weight: 100;
   text-align: left;
+  margin-top: 0px;
 }
 h3 {
   padding: 0;
@@ -256,6 +260,7 @@ footer .col-lg-6:last-of-type{
 	border-radius:0px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 	box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+  z-index: 10;
 }
 .navbar-default {
   background-color: white;
@@ -358,11 +363,15 @@ footer .col-lg-6:last-of-type{
   color: white;
   text-align: center;
   h1 {
-    font-weight: 700;
+    font-weight: 300;
+    font-size: 4em;
+  }
+  p{
+    font-size: 1.3em;
   }
 }
 /*** LOGIN & SIGNUP PAGE ***/
-.login-page, .signup-page {
+.login-page, .signup-page, .home-page {
   color: white;
   .container {
     margin-top: $pad * 5;
@@ -370,10 +379,6 @@ footer .col-lg-6:last-of-type{
   .row.text-center {
     margin-bottom: $pad * 2;
   }
-  // h1 {
-  //   font-weight: 300;
-  //   font
-  // }
 }
 /*** LOGIN PAGE ***/
 .login-page {
@@ -433,8 +438,18 @@ footer .col-lg-6:last-of-type{
       display: none;
     }
   }
+  .harvestedBlocks {
+    th, td {
+      width: 50% !important;
+      max-width: 50%;
+      min-width: 50%;
+    }
+    th {
+      font-size: 12px;
+      color: $gray;
+    }
+  }
   .updates {
-  	// max-width: 400px;
     p {
   	  font-size: 12px;
     }
@@ -535,92 +550,6 @@ textarea {
   }
 }
 
-/*** EDIT MOSAIC PAGE ***/
-// .changeType {
-//   text-align: left;
-// }
-/*** CREATE NAMESPACE PAGE ***/
-// .dualFees {
-//   text-align: center !important;
-//   .col-md-6 span{
-//     color: pink;
-//     text-align: center !important;
-//   }
-// }
-// .feeAmount{
-//   vertical-align: bottom !important;
-// }
-
-
-
-
-/*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
-
-// .dashboard-page .container{
-// 	margin-left: 0px;
-// 	padding-left: 0px;
-// }
-// // container for main heading on page, h2
-// .dashboard-page .banner-left, .transferTransaction-page .banner-left, .banner-left {
-// 	padding-bottom: 0px;
-// 	background-color: transparent;
-//   padding-top: $pad / 2;
-// }
-// main heading on page, h2
-
-//
-// .dashboard-page .updates {
-// 	max-width: 400px;
-// }
-// .dashboard-page .updates p {
-// 	font-size: 12px;
-// }
-// .dashboard-page .updates a{
-// 	color: $blue;
-// 	text-decoration: underline;
-// 	font-weight: 500;
-// }
-// .dashboard-page .updates h3{
-// 	max-width: 250px;
-// }
-// .dashboard-page th {
-// 	font-weight: inherit;
-// }
-//
-// .dashboard-page .container .row {
-// 	margin-top: 10px;
-// }
-//
-// .dashboard-page .accordion-inner .row {
-// 	margin-top: 0px;
-// 	margin-right: 0px;
-// }
-//
-// .dashboard-page .well {
-// 	border-radius: 0px;
-// 	background-color: #fff;
-// 	border-top: 3px solid #444;
-// }
-//
-// .dashboard-page .well h4 {
-// 	margin-top: 0px;
-// 	margin-bottom: 0px;
-// }
-//
-// .dashboard-page .well h4 small {
-// 	color: #444;
-// }
-//
-// .dashboard-page .panel-default > .panel-heading {
-//     background-color: transparent;
-//     border-radius: 0px;
-//     border-bottom: $borderUnderline;
-// }
-// .dashboard-page .panel-heading h4 {
-// 	color: black;
-// 	font-weight: 700;
-// 	font-size: 20px;
-// }
 /*** APOSTILLE AUDIT PAGE ***/
 
 .audit-apostille-page {
@@ -633,45 +562,12 @@ textarea {
     color: $gray;
     font-weight: 700;
   }
-
-
-
-
-
-
-  // .drop {
-  //   height: 100px;
-  //   width: 100%;
-  //   margin: 0 auto;
-  //   background-color: white;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   text-align: center;
-  // }
-  // i{
-  //   z-index: -100;
-  // }
-  // #fileNotary {
-  //   width: 100%;
-  //   position: relative;
-  //   margin-top: -110px;
-  //   height: 170px;
-  //   z-index: 1000;
-  // }
 }
-
-
 
 
 /*** APOSTILLE ADD PAGE ***/
 .rejected {
   float: right;
-}
-.addApostilleFile {
-  .nav-tabs {
-    // position: relative;
-  }
 }
 
 /*** APOSTILLE HISTORY PAGE ***/
@@ -848,29 +744,6 @@ textarea {
 .market-info h4 {
   margin-bottom: $pad;
 }
-
-
-// .market-percent .col-lg-4 {
-//   padding-left: 0;
-//   padding-right: 0;
-//   @media only screen and (max-width : $xl) {
-//     font-size: 12px;
-//   }
-// }
-// .market-percent .col-lg-4:first-of-type {
-// 	text-align: left;
-// 	padding-left: 0px;
-// }
-// .market-percent .col-lg-4:nth-of-type(2) {
-// 	text-align: center;
-// 	padding-left: 0px;
-// 	padding-right: 0px;
-// }
-// .market-percent .col-lg-4:last-of-type {
-// 	text-align: right;
-// 	padding-right: 0px;
-//
-// }
 .market-info .header span{
 	font-weight: 500;
 	font-size: 20px;
@@ -911,35 +784,15 @@ textarea {
         text-align: left;
         padding-right: 15px;
         padding-left: 15px;
-}
+      }
     }
   }
 }
 
 
-
-
-
-
-
-
-
-/*** basic styles ***/
-
-// body { margin: 30px; }
-// h1 { font-size: 1.5em; }
 label {
   font-size: 16px;
 }
-// label:active. label:focus{
-//   color: $blue;
-// }
-// div {
-//   width: 175px;
-//   margin-left: 20px;
-// }
-
-
 /*** CUSTOM CHECKBOXES ***/
 input[type=checkbox] {
   display:none;
@@ -961,36 +814,3 @@ input[type=checkbox]:checked + label:before {
 input[type=checkbox]:checked + label:before {
    letter-spacing: 8px;
 } /* allow space for check mark */
-
-
-
-
-
-
-// table thead, table tr td{
-// 	background-color: transparent;
-// 	border: 0px;
-// }
-// table th:first-child, table th:nth-of-type(2), table th:nth-of-type(3), table th:nth-of-type(4){
-// 	border-bottom: 2px solid $blue !important;
-// }
-// /* Target account */
-// table th:first-child, table td:nth-of-type(2) {
-// 	text-align: left;
-// 	width: 44%;
-// }
-// /* Targeting amount */
-// table th:nth-of-type(2), table td:nth-of-type(4) {
-// 	text-align: left;
-// 	width: 14%;
-// }
-// /* Targeting message */
-// table th:nth-of-type(3), table td:nth-of-type(6) {
-// 	text-align: left;
-// 	width: 19%;
-// }
-// /* Targeting date */
-// table th:nth-of-type(4), table td:nth-of-type(8) {
-// 	text-align: left;
-// 	width: 23%;
-// }

@@ -77,6 +77,8 @@
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>
+      <!-- HARVESTED INCOME -->
+
         <div class="col-xs-12 col-lg-9">
           <div class="panel panel-default">
           <div class="panel-heading">
@@ -94,9 +96,8 @@
               </div>
             </div>
           </div>
-
-          <div class="col-xs-12 col-lg-3">
-          <!-- <div class="panel panel-default"> -->
+          <!-- HARVESTED BLOCKS -->
+          <div class="col-xs-12 col-lg-3 harvestedBlocks">
             <div class="panel-heading">
               <h4>{{ 'DASHBOARD_HARVESTED_BLOCKS_TITLE' | translate }}</h4>
             </div>
@@ -108,7 +109,7 @@
                     </tr>
                 </thead>
             </table>
-            <table ng-show="$ctrl._DataBridge.harvestedBlocks.length" class="table table-hover table-condensed">
+            <table ng-show="$ctrl._DataBridge.harvestedBlocks.length" class="table table-condensed">
                 <tbody>
             <tr ng-repeat="block in $ctrl._DataBridge.harvestedBlocks | startFrom:$ctrl.currentPageHb*$ctrl.pageSizeHb | limitTo:$ctrl.pageSizeHb">
                 <td>{{block.height}}</td>
@@ -130,7 +131,6 @@
         <div class="panel-body" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
             <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
-          <!-- </div> -->
         </div>
       </div>
     </div>

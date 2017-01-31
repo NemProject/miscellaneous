@@ -20,18 +20,6 @@ html {
   font-family: 'Roboto';
   z-index: -1; }
 
-.navbar {
-  z-index: 10; }
-
-hr {
-  border-color: #444; }
-
-h2 {
-  margin-top: 0px; }
-
-tr td {
-  border: none !important; }
-
 /*thead {
 	color: white;
 	background-color: rgb(68, 68, 68);
@@ -80,16 +68,6 @@ td {
 /*.home-page .banner h1{
 	padding-top: 15px;
 }*/
-.home-page .banner h1 {
-  font-size: 4em; }
-
-.home-page .banner p {
-  font-size: 1.3em; }
-
-.home-page .banner {
-  margin-top: 200px;
-  /*margin-top:15%;*/ }
-
 .dropdown-menu {
   padding: 0px 0px; }
 
@@ -284,6 +262,9 @@ table {
 thead {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
 
+tr, td {
+  border: none !important; }
+
 tr {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; }
 
@@ -345,7 +326,8 @@ h2 {
   color: rgba(0, 0, 0, 0.3);
   font-size: 55px;
   font-weight: 100;
-  text-align: left; }
+  text-align: left;
+  margin-top: 0px; }
 
 h3 {
   padding: 0;
@@ -457,7 +439,8 @@ footer .col-lg-6:last-of-type {
   border: none;
   border-radius: 0px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); }
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  z-index: 10; }
 
 .navbar-default {
   background-color: white; }
@@ -544,14 +527,17 @@ footer .col-lg-6:last-of-type {
   color: white;
   text-align: center; }
   .home-page h1 {
-    font-weight: 700; }
+    font-weight: 300;
+    font-size: 4em; }
+  .home-page p {
+    font-size: 1.3em; }
 
 /*** LOGIN & SIGNUP PAGE ***/
-.login-page, .signup-page {
+.login-page, .signup-page, .home-page {
   color: white; }
-  .login-page .container, .signup-page .container {
+  .login-page .container, .signup-page .container, .home-page .container {
     margin-top: 100px; }
-  .login-page .row.text-center, .signup-page .row.text-center {
+  .login-page .row.text-center, .signup-page .row.text-center, .home-page .row.text-center {
     margin-bottom: 40px; }
 
 /*** LOGIN PAGE ***/
@@ -602,6 +588,15 @@ footer .col-lg-6:last-of-type {
   @media only screen and (max-width: 992px) {
     .dashboard-page .secondary h4 {
       display: none; } }
+
+.dashboard-page .harvestedBlocks th, .dashboard-page .harvestedBlocks td {
+  width: 50% !important;
+  max-width: 50%;
+  min-width: 50%; }
+
+.dashboard-page .harvestedBlocks th {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.3); }
 
 .dashboard-page .updates p {
   font-size: 12px; }
@@ -684,9 +679,6 @@ textarea {
 .create-mosaic-page .mosaicCheckboxes {
   text-align: left; }
 
-/*** EDIT MOSAIC PAGE ***/
-/*** CREATE NAMESPACE PAGE ***/
-/*** DASHBOARD PAGE/ MAIN STYLINGS PAGE ***/
 /*** APOSTILLE AUDIT PAGE ***/
 .audit-apostille-page .trash {
   float: right;
@@ -883,7 +875,6 @@ textarea {
         padding-right: 15px;
         padding-left: 15px; } }
 
-/*** basic styles ***/
 label {
   font-size: 16px; }
 
