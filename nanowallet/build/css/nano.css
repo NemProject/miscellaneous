@@ -244,6 +244,9 @@ border: 1px solid #444;
   width: 88%;
   border: 0px; }
 
+.formFloat input.accounts {
+  width: 70%; }
+
 .formFloat input.levy {
   width: 40%; }
 
@@ -622,7 +625,7 @@ footer .col-lg-6:last-of-type {
   border: 0px;
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   box-shadow: none;
-  font-size: 16px;
+  font-size: 15px;
   min-width: 100%; }
 
 textarea {
@@ -874,11 +877,21 @@ textarea {
 .explorer-namespaces-mosaics-page .form-control {
   padding-left: 0px; }
 
-.explorer-namespaces-mosaics-page .namespacesArrows .col-md-6 {
+.explorer-namespaces-mosaics-page .namespacesArrows .col-lg-6 {
   min-height: 60px; }
 
-.explorer-namespaces-mosaics-page .arrows {
+.arrows {
   padding-top: 54px; }
+  @media only screen and (max-width: 1200px) {
+    .arrows {
+      text-align: right; } }
+
+li.list-group-item {
+  padding-left: 10px; }
+  li.list-group-item.active, li.list-group-item:hover, li.list-group-item:focus, li.list-group-item:active {
+    background: rgba(105, 178, 229, 0.6);
+    border-radius: 0;
+    border-bottom: 0px; }
 
 .explorer-accounts .searchBar {
   padding-top: 40px; }
@@ -886,6 +899,12 @@ textarea {
 /*** ACCOUNT INFO PAGE ***/
 .account-page #downloadWallet {
   visibility: hidden; }
+
+.account-page fieldset {
+  overflow: hidden; }
+
+.account-page .form-control {
+  white-space: nowrap; }
 
 .account-page .btn-block {
   border-radius: 0;

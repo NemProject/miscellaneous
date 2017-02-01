@@ -33,11 +33,13 @@
   .mosaic {
     width: 40%;
     text-overflow: ellipsis;
-
   }
   input {
     width: 88%;
     border: 0px;
+  }
+  input.accounts {
+    width: 70%;
   }
   input.levy {
     width: 40%;
@@ -487,7 +489,7 @@ footer .col-lg-6:last-of-type{
   border: 0px;
   border-bottom: $borderUnderline;
   box-shadow: none;
-  font-size: 16px;
+  font-size: 15px;
   min-width: 100%;
 }
 textarea {
@@ -799,14 +801,34 @@ textarea {
     padding-left: 0px;
   }
   .namespacesArrows {
-    .col-md-6 {
+    .col-lg-6 {
       min-height: $pad * 3;
+      // text-align: right !important;
+      @media only screen and (max-width : $lg) {
+        // text-align: left;
+}
+}
     }
   }
   .arrows {
     padding-top: $pad * 2.7;
-  }
+    @media only screen and (max-width : $lg) {
+      // padding-top: 0px;
+    text-align: right;
+
 }
+}
+  // }
+  li.list-group-item{
+    padding-left: $pad /2;
+    // text-decoration: underline;
+    &.active, &:hover, &:focus, &:active {
+      background: $blueLite;
+      border-radius: 0;
+      border-bottom: 0px;
+    }
+  }
+
 .explorer-accounts {
   .searchBar {
     padding-top: $pad * 2;
@@ -816,6 +838,13 @@ textarea {
 .account-page {
   #downloadWallet {
   visibility: hidden;
+  }
+  fieldset {
+    overflow: hidden;
+  }
+  .form-control {
+    white-space: nowrap;
+
   }
   .btn-block {
     border-radius: 0;

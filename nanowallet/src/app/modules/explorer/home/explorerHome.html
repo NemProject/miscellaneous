@@ -1,7 +1,7 @@
 <div class="explorer-home-page">
   <div class="container-fluid main">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-11">
         <h2>{{ 'EXPLORER_HOME_TITLE' | translate }}</h2>
       </div>
     </div>
@@ -9,7 +9,9 @@
   	<explorer-nav></explorer-nav>
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-lg-3 col-sm-12">
+        <div class="row">
+      <div class="col-lg-12 col-sm-6">
         <!-- YOUR NAMESPACES -->
         <div class="panel-heading">
           <h4>{{ 'EXPLORER_HOME_NS' | translate }}</h4>
@@ -20,7 +22,9 @@
           </ul>
           <p ng-show="!$ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
-        <!-- YOUR MULTISIG OWNED NAMESPACES -->
+      </div>
+      <!-- YOUR MULTISIG OWNED NAMESPACES -->
+      <div class="col-lg-12 col-sm-6">
         <div ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length">
           <div class="panel-heading">
             <h4>{{ 'EXPLORER_HOME_NS_MULTISIG' | translate }}</h4>
@@ -35,8 +39,10 @@
           </div>
         </div>
       </div>
+    </div>
+    </div>
 
-      <div class="col-md-9">
+      <div class="col-lg-9 col-sm-12">
         <div class="panel-heading">
           <h4>{{ 'EXPLORER_HOME_MOSAICS' | translate }}</h4>
         </div>

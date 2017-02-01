@@ -1,7 +1,7 @@
 <div class="explorer-accounts">
   <div class="container-fluid main">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-11">
         <h2>{{'ACCOUNTS_EXPLORER_TITLE' | translate}}</h2>
       </div>
     </div>
@@ -38,7 +38,7 @@
             <!-- ADDRESS IN SEARCH RESULTS -->
             <fieldset class="form-group">
               <div class="input-group">
-                <span class="input-group-btn">
+                <span class="input-group-btn short">
                   <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
                 </span>
                 <input type="text" class="form-control" value="{{ $ctrl.scope.accountData.account.address }}" readOnly/>
@@ -47,7 +47,7 @@
             <!-- PUBLIC KEY OF ADDRESS -->
             <fieldset class="form-group">
               <div class="input-group">
-                <span class="input-group-btn">
+                <span class="input-group-btn short">
                   <label>{{ 'GENERAL_PUBLIC_KEY' | translate }}: </label>
                 </span>
                 <input type="text" class="form-control" value="{{ $ctrl.scope.accountData.account.publicKey ? $ctrl.scope.accountData.account.publicKey : '' }}" readOnly/>
@@ -63,11 +63,11 @@
             <!-- BALANCE OF ADDRESS -->
             <fieldset class="form-group">
               <div class="input-group">
-                <span class="input-group-btn">
+                <span class="input-group-btn short">
                   <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
                 </span>
                 <div class="form-control formFloat" readOnly>
-                  <input class="readOnly" type="text" value="{{ ($ctrl.scope.accountData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.scope.accountData.account.balance | fmtNemValue)[1] }}" readOnly/>
+                  <input class="readOnly accounts" type="text" value="{{ ($ctrl.scope.accountData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.scope.accountData.account.balance | fmtNemValue)[1] }}" readOnly/>
                   <label class="floatRight"><small>XEM</small></button>
                 </div>
               </div>
@@ -75,11 +75,11 @@
             <!-- IMPORTANCE OF ADDRESS -->
             <fieldset class="form-group">
               <div class="input-group">
-                <span class="input-group-btn">
+                <span class="input-group-btn short">
                   <label>{{ 'GENERAL_IMPORTANCE' | translate }}: </label>
                 </span>
                 <div class="form-control formFloat" readOnly>
-                  <input class="readOnly" type="text" value="{{ ($ctrl.scope.accountData.account.importance | fmtNemImportanceScore)[0] }}.{{ ($ctrl.scope.accountData.account.importance | fmtNemImportanceScore)[1] }}" readOnly/>
+                  <input class="readOnly accounts" type="text" value="{{ ($ctrl.scope.accountData.account.importance | fmtNemImportanceScore)[0] }}.{{ ($ctrl.scope.accountData.account.importance | fmtNemImportanceScore)[1] }}" readOnly/>
                   <label class="floatRight">* 10<sup>(-5)</sup></label>
                 </div>
               </div>

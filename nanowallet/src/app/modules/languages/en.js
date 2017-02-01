@@ -356,7 +356,7 @@ function EnglishProvider($translateProvider) {
 
         // EXPLORER NAMESPACES AND MOSAICS
         EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
-        EXPLORER_NS_MOS_SELECT_MOS: 'Select a mosaic to show details',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Selected Mosaic Details',
         EXPLORER_NS_MOS_SEARCH: 'Search namespace',
 
         // EXPLORER APOSTILLES MODULE

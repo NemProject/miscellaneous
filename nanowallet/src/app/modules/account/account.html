@@ -9,7 +9,7 @@
 
     <div class="row">
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <div class="panel-heading">
            <h3>{{ 'ACCOUNT_ACCOUNT_INFORMATION' | translate }}</h3>
         </div>
@@ -25,22 +25,24 @@
               </select>
             </div>
           </fieldset>
-
+          <!-- ACCOUNT ADDRESS -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
               </span>
-              <span class="form-control" show-account-data="address" readOnly></span>
+              <span type="text" class="form-control" show-account-data="address" readOnly></span>
             </div>
           </fieldset>
-
+          <!-- ACCOUNT PUBLIC KEY -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{ 'GENERAL_PUBLIC_KEY' | translate }}: </label>
               </span>
-              <span class="form-control" show-account-data="publicKey" readOnly></span>
+              <span class="block">
+                <span type="text" class="form-control" show-account-data="publicKey" readOnly></span>
+              </span>
             </div>
           </fieldset>
 
@@ -70,7 +72,7 @@
         </div>
       </div>
 
-      <div class="col-sm-6">
+      <div class="col-md-6">
         <div class="panel-heading">
           <h3>{{ 'GENERAL_PRIVATE_KEY' | translate }}</h3>
         </div>
@@ -101,13 +103,13 @@
         <div class="panel-body">
           <div class="form-group">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-sm-4">
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-sm-4">
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModal">{{'ACCOUNT_WALLET_QR_BTN' | translate }}</button>
               </div>
-              <div class="col-md-4">
+              <div class="col-sm-4">
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
               </div>
             </div>

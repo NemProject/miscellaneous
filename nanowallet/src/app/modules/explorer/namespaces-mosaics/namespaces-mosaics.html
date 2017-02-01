@@ -1,7 +1,7 @@
 <div class="explorer-namespaces-mosaics-page">
   <div class="container-fluid main">
     <div class="row">
-      <div class="col-sm-8">
+      <div class="col-sm-11">
         <h2>{{ 'EXPLORER_NS_MOS_TITLE' | translate }}</h2>
       </div>
     </div>
@@ -10,14 +10,14 @@
 
     <div class="row namespaceRules">
 
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
 
         <div class="panel-heading namespacesArrows">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-6 col-md-6 col-sm-6">
               <h4>{{ 'GENERAL_NAMESPACES' | translate }}</h4>
             </div>
-            <div class="col-md-6 arrows">
+            <div class="col-lg-6 col-md-6 col-sm-6 arrows">
               <div ng-show="$ctrl.namespaces.length > 10 && !$ctrl.searchText">
                 <button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1">
                   <span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -51,9 +51,9 @@
       </div>
 
       <!-- RESULTS SUBNAMESPACES -->
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="panel-heading">
-          <h5>{{ 'GENERAL_SUB_NAMESPACES' | translate }}</h5>
+          <h4>{{ 'GENERAL_SUB_NAMESPACES' | translate }}</h4>
           <div ng-show="$ctrl.subNamespaces.length > 10">
             <button class="buttonStyle" ng-disabled="$ctrl.currentPageSubNs == 0" ng-click="$ctrl.currentPageSubNs = $ctrl.currentPageSubNs-1">
               <span class="fa fa-chevron-left" aria-hidden="true"></span>
@@ -73,9 +73,9 @@
         </div>
       </div>
       <!-- RESULTS MOSAICS -->
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="panel-heading">
-          <h5>{{ 'GENERAL_MOSAICS' | translate }}</h5>
+          <h4>{{ 'GENERAL_MOSAICS' | translate }}</h4>
           <div ng-show="$ctrl.mosaics.length > 10"><button class="buttonStyle" ng-disabled="$ctrl.currentPageMos == 0" ng-click="$ctrl.currentPageMos = $ctrl.currentPageMos-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageMos+1}}/{{$ctrl.numberOfPagesMos()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageMos+1 >= $ctrl.numberOfPagesMos()" ng-click="$ctrl.currentPageMos = $ctrl.currentPageMos+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
         </div>
         <div class="panel-body" ng-show="$ctrl.mosaics.length" >
@@ -88,9 +88,9 @@
         </div>
       </div>
       <!-- RESULTS MOSAICS DETAILS -->
-      <div class="col-md-3">
+      <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="panel-heading">
-          <h5>{{ $ctrl.selectedMosaicName }}</h5>
+          <h4>{{ $ctrl.selectedMosaicName }}</h4>
         </div>
         <div class="panel-body" ng-show="$ctrl.selectedMosaic" >
           <p class="bg-info">{{ $ctrl.selectedMosaic.description }}</p>
