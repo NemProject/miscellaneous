@@ -51,10 +51,16 @@
                 </span>
               </td>
               <td>{{ap.timeStamp}}</td>
-              <td>
-                <button class="btn btn-default" type="button" ui-sref="app.updateApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey, tags: ap.tags})" ng-show="ap.dedicatedAccount !== $ctrl.sink">{{ 'GENERAL_UPDATE' | translate }}</button>
-                <button class="btn btn-default" type="button" ui-sref="app.apostilleMessage({address: ap.dedicatedAccount})" ng-show="ap.dedicatedAccount !== $ctrl.sink">{{ 'GENERAL_MESSAGE' | translate }}</button>
-                <button class="btn btn-default" type="button" ng-show="ap.dedicatedAccount !== $ctrl.sink" ui-sref="app.transferApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})">{{ 'APOSTILLE_HISTORY_BTN_TRANSFER' | translate }}</button>
+              <td class="row buttans">
+                <div class="col-md-6">
+                  <button class="btn btn-success" type="button" ui-sref="app.updateApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey, tags: ap.tags})" ng-show="ap.dedicatedAccount !== $ctrl.sink">{{ 'GENERAL_UPDATE' | translate }}</button>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-success" type="button" ui-sref="app.apostilleMessage({address: ap.dedicatedAccount})" ng-show="ap.dedicatedAccount !== $ctrl.sink">{{ 'GENERAL_MESSAGE' | translate }}</button>
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-success" type="button" ng-show="ap.dedicatedAccount !== $ctrl.sink" ui-sref="app.transferApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})">{{ 'APOSTILLE_HISTORY_BTN_TRANSFER' | translate }}</button>
+                </div>
                 <p ng-show="ap.dedicatedAccount === $ctrl.sink">{{ 'GENERAL_NONE' | translate }}</p>
               </td>
             </tr>

@@ -799,6 +799,9 @@ textarea {
   .apostille-history-page .backupPurge span:first-of-type {
     margin-right: 20px; }
 
+.apostille-history-page .buttans .col-md-12 {
+  margin-top: 5px; }
+
 /*** DROPBOX GLOBAL STYLES ***/
 .drop {
   border: 1px dashed #00a65a;
@@ -916,6 +919,14 @@ li.list-group-item {
     border: 1px solid rgba(105, 178, 229, 0.6);
     color: white; }
 
+/*** APOSTILLE MESSAGE PAGE ***/
+.apostilleMessage .checkboxes .col-sm-5 {
+  text-align: center; }
+
+.apostilleMessage .checkboxes .col-sm-4:last-of-type {
+  text-align: right; }
+
+/*** APOSTILLE MESSAGE PAGE ***/
 /*** Changelly WIDGET ***/
 #changwidget {
   margin-top: 60px; }

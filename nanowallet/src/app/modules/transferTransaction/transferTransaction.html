@@ -123,14 +123,14 @@
                   <label for="box2">{{'TRANSFER_TRANSACTION_MOSAIC_TRANSFER' | translate}}</label>
                 </fieldset>
               </div>
-          </div>
+            </div>
           <!-- Password Field -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{ 'FORM_PASSWORD' | translate }}: </label>
               </span>
-              <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
             </div>
           </fieldset>
           <!-- Send button disabled if already pressed or no password or no clean recipient address or message is supposed to be encrypted but no recipient public key or is a mosaic transfer and no mosaics in array -->

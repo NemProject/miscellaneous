@@ -703,6 +703,11 @@ textarea {
       margin-right: $pad;
     }
   }
+  .buttans {
+    .col-md-12 {
+      margin-top: $pad / 4;
+    }
+  }
 }
 
 
@@ -859,6 +864,18 @@ textarea {
   }
   @extend %plusMinus;
 }
+
+/*** APOSTILLE MESSAGE PAGE ***/
+.apostilleMessage {
+  .checkboxes .col-sm-5 {
+    text-align: center;
+  }
+  .checkboxes .col-sm-4:last-of-type {
+    text-align: right;
+  }
+}
+/*** APOSTILLE MESSAGE PAGE ***/
+
 /*** Changelly WIDGET ***/
   #changwidget {
     margin-top: $pad * 3;

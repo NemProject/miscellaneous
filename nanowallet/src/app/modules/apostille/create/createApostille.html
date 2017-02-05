@@ -91,7 +91,7 @@
             </div>
           </fieldset>
           <!-- SEND TRANSACTION -->
-          <button class="btn btn-success pull-xs-right" type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.filesToApostille.length" ng-click="$ctrl.send()">
+          <button class="btn btn-success" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.filesToApostille.length" ng-click="$ctrl.send()">
             <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
           </button>
 
