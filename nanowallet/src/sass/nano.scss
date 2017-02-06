@@ -415,17 +415,18 @@ border: 1px solid #444;
 
 
 
-.panel-default .panel-heading .nav-tabs .badge {
+.panel-heading .nav-tabs .badge {
     color: white;
     background-color: $blue;
+    margin-right: $pad / 2;
 }
 
-.panel-default .panel-heading .nav-tabs li a:hover .badge {
+.panel-heading .nav-tabs li a:hover .badge {
     color: $blue;
     background-color: white;
 }
 
-.panel-default .panel-heading .nav-tabs li.active .badge {
+.panel-heading .nav-tabs li.active .badge {
     color: $blue;
     background-color: white;
 }

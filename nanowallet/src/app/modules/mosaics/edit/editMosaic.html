@@ -98,7 +98,7 @@
               <span class="input-group-btn">
                 <label>{{ 'MOSAIC_SUPPLY_CHANGE_CURRENT_SUPPLY' | translate }}: </label>
               </span>
-              <div class="form-control formFloat mosaic" disabled >
+              <div class="form-control formFloat mosaic block" disabled >
                 <strong>{{$ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply}}</strong>
                 <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
                 <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
