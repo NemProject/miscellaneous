@@ -112,6 +112,7 @@ gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'br
   // Uncomment below for dev mode (watch and build as you change the code)
   browserSync.init(['./build/**/**.**'], {
     server: "./build",
+    index: "start.html",
     port: 4000,
     notify: false,
     ui: {
