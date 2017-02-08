@@ -290,9 +290,6 @@ tbody {
 td {
   vertical-align: middle !important; }
 
-table.top {
-  margin-top: 26px !important; }
-
 th {
   color: grey;
   font-size: 13px;
@@ -995,6 +992,18 @@ li.list-group-item {
         text-align: left;
         padding-right: 15px;
         padding-left: 15px; } }
+
+/*** LINES -- TRANSFER **/
+table.top {
+  margin-top: 26px !important; }
+  table.top th:first-of-type {
+    width: 43%; }
+
+.sentTx, .receivedTx, .multisigTx, .importanceTx, .namespaceTx, .mosaicTx, .createMosaic {
+  width: 43%; }
+
+.amountTx, .mosaicChange {
+  width: 20%; }
 
 label {
   font-size: 16px; }

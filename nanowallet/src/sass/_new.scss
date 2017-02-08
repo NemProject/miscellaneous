@@ -84,9 +84,7 @@ tbody {
 td {
   vertical-align: middle !important;
 }
-table.top {
-  margin-top: $pad * 1.3 !important;
-}
+
 th {
   color: grey;
   font-size: 13px;
@@ -944,6 +942,22 @@ textarea {
       }
     }
   }
+}
+/*** LINES -- TRANSFER **/
+
+table.top {
+  margin-top: $pad * 1.3 !important;
+  th:first-of-type {
+    width: 43%;
+  }
+}
+.sentTx, .receivedTx, .multisigTx, .importanceTx, .namespaceTx, .mosaicTx, .createMosaic {
+  // th:first-of-type {
+    width: 43%;
+  // }
+}
+.amountTx, .mosaicChange {
+  width: 20%;
 }
 
 
