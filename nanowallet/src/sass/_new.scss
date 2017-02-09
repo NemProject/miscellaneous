@@ -857,10 +857,11 @@ textarea {
     }
   }
   .arrows {
-    padding-top: $pad * 2.7;
+    padding-top: $pad * 5.2;
+    text-align: right;
+
     @media only screen and (max-width : $lg) {
       // padding-top: 0px;
-    text-align: right;
 
 }
 }

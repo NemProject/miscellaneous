@@ -92,7 +92,7 @@
         <div class="col-md-12">
           <div class="panel-heading">
             <h4>{{ 'GENERAL_TRANSACTIONS' | translate }}</h4>
-            <div ng-show="$ctrl.transactions.length > 5">
+            <div class="arrows" ng-show="$ctrl.transactions.length > 5">
               <button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1">
                 <span class="fa fa-chevron-left" aria-hidden="true"></span>
               </button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b>
@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="panel-body" ng-show="$ctrl.transactions.length">
-            <table class="table table-bordered table-hover table-striped table-condensed">
+            <table class="table table-condensed top">
               <thead>
                 <tr>
                   <th>{{ 'GENERAL_ACCOUNT' | translate }}</th>

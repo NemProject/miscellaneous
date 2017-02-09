@@ -922,10 +922,8 @@ textarea {
   min-height: 60px; }
 
 .arrows {
-  padding-top: 54px; }
-  @media only screen and (max-width: 1200px) {
-    .arrows {
-      text-align: right; } }
+  padding-top: 104px;
+  text-align: right; }
 
 li.list-group-item {
   padding-left: 10px; }
