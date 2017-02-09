@@ -20,7 +20,7 @@
           <ul class="list-group" ng-repeat="namespace in $ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address]" ng-show="$ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address]">
             <li class="list-group-item">{{namespace.fqn}}</li>
           </ul>
-          <p ng-show="!$ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+          <p class="nothing" ng-show="!$ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>
       <!-- YOUR MULTISIG OWNED NAMESPACES -->
@@ -34,12 +34,12 @@
               <ul class="list-group" ng-repeat="namespace in $ctrl._DataBridge.namespaceOwned[multisig.address]" ng-show="$ctrl._DataBridge.namespaceOwned[multisig.address]">
                 <li class="list-group-item">{{namespace.fqn}}</li>
               </ul>
-              <p ng-show="!$ctrl._DataBridge.namespaceOwned[multisig.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+              <p  class="nothing" ng-show="!$ctrl._DataBridge.namespaceOwned[multisig.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>
         </div>
       </div>
-      
+
     </div>
     </div>
 
@@ -88,7 +88,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="panel-body" ng-show="!$ctrl._DataBridge.mosaicOwned[$ctrl._Wallet.currentAccount.address]">
+        <div class="panel-body nothing" ng-show="!$ctrl._DataBridge.mosaicOwned[$ctrl._Wallet.currentAccount.address]">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
         <div class="panel-footer text-center bg-info">

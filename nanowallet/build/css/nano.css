@@ -424,8 +424,8 @@ footer {
   bottom: 0;
   position: absolute;
   padding: 20px;
-  /*border-top: 1px solid #444;*/
   width: 100%;
+  background-color: white;
   z-index: 10; }
 
 footer .col-lg-6:first-of-type {
@@ -450,11 +450,12 @@ footer .col-lg-6:last-of-type {
   box-shadow: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
 
-.navbar-brand span:first-of-type {
-  font-weight: 100; }
-
-.navbar-brand span:last-of-type {
-  font-weight: 900; }
+.navbar-brand {
+  padding-left: 30px; }
+  .navbar-brand span:first-of-type {
+    font-weight: 100; }
+  .navbar-brand span:last-of-type {
+    font-weight: 900; }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a.active {
   cursor: default;
@@ -468,13 +469,14 @@ footer .col-lg-6:last-of-type {
   outline: 0;
   cursor: pointer;
   display: inline;
-  letter-spacing: 1px; }
+  letter-spacing: .8px; }
   .nav-tabs li a:hover {
     text-decoration: underline; }
 
 .nav-tabs {
   position: relative;
-  border-bottom: none; }
+  border-bottom: none;
+  z-index: 10; }
 
 .navbar {
   border: none;
@@ -556,15 +558,15 @@ footer .col-lg-6:last-of-type {
 /*** ARROWS ***/
 .arrows {
   float: right;
-  margin-top: -70px; }
-  .arrows.harvested {
-    margin-top: -40px; }
+  z-index: 9;
+  text-align: right;
+  margin-top: -20px; }
   .arrows .buttonStyle {
     border: none;
     box-shadow: none;
     background: transparent;
     color: rgba(0, 0, 0, 0.3);
-    weight: 100; }
+    weight: 1; }
   .arrows b {
     color: rgba(0, 0, 0, 0.3); }
 
@@ -651,6 +653,9 @@ footer .col-lg-6:last-of-type {
   text-decoration: underline;
   font-weight: 500; }
 
+.dashboard-page .arrows.harvested {
+  margin-top: 0px; }
+
 /*** LINES -- TRANSFER **/
 table.top {
   margin-top: 26px !important; }
@@ -679,7 +684,8 @@ table.top {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   box-shadow: none;
   font-size: 15px;
-  min-width: 100%; }
+  min-width: 100%;
+  border-radius: 0px; }
 
 textarea {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
@@ -757,16 +763,17 @@ textarea {
   border: 0px;
   box-shadow: none;
   padding: 0px;
-  line-height: 1.4; }
+  line-height: 1.7; }
   .portalWrap .panelFooter .btn {
     text-decoration: underline !important;
-    color: #69b2e5;
-    font-size: 13.5px;
+    color: #3e9cdd;
+    font-size: 14px;
     padding: 0px !important;
     margin: 0px !important;
     text-align: left;
     background-color: transparent;
     white-space: normal;
+    font-weight: 500;
     line-height: 1.1; }
   .portalWrap .panelFooter .btn[disabled] {
     color: rgba(0, 0, 0, 0.7); }
@@ -933,12 +940,15 @@ textarea {
 .explorer-namespaces-mosaics-page .form-control {
   padding-left: 0px; }
 
+.explorer-namespaces-mosaics-page .list-group-item.active, .explorer-namespaces-mosaics-page .list-group-item.active:focus, .explorer-namespaces-mosaics-page .list-group-item.active:hover {
+  background-color: #69b2e5;
+  border-color: #69b2e5; }
+
 .explorer-namespaces-mosaics-page .namespacesArrows .col-lg-6 {
   min-height: 60px; }
 
-.arrows {
-  padding-top: 104px;
-  text-align: right; }
+.explorer-namespaces-mosaics-page .namespacesArrows .arrows {
+  padding-top: 36px; }
 
 li.list-group-item {
   padding-left: 10px; }

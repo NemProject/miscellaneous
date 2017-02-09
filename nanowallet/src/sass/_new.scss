@@ -1,6 +1,3 @@
-tt {
-  @extend %tableDisplay;
-}
 /*** GLOBAL STYLES ***/
 .panel-heading {
   background-color: transparent !important;
@@ -59,7 +56,6 @@ input.readOnly {
   box-shadow: none;
   border: 0;
 }
-
 table {
   table-layout: auto;
   word-break: break-all;
@@ -82,7 +78,6 @@ tbody {
 td {
   vertical-align: middle !important;
 }
-
 th {
   color: grey;
   font-size: 13px;
@@ -90,6 +85,9 @@ th {
   min-width: 55px;
   border-bottom: $borderUnderline;
   padding-top: $pad * 2;
+}
+tt {
+  @extend %tableDisplay;
 }
 .table-hover>tbody>tr:hover {
   background-color: $blueXLite;
@@ -221,9 +219,8 @@ footer {
 	bottom: 0;
 	position: absolute;
 	padding: $pad;
-	/*border-top: 1px solid #444;*/
 	width: 100%;
-	// background-color: white;
+	background-color: white;
 	z-index: 10;
 }
 footer .col-lg-6:first-of-type{
@@ -253,6 +250,7 @@ footer .col-lg-6:last-of-type{
 }
 // confirmed/unconfirmed tabs, send/receive tabs
 .navbar-brand {
+  padding-left: $pad * 1.5;
   span:first-of-type {
     font-weight: 100;
   }
@@ -272,7 +270,7 @@ footer .col-lg-6:last-of-type{
   outline: 0;
   cursor: pointer;
   display: inline;
-  letter-spacing: 1px;
+  letter-spacing: .8px;
   &:hover {
     text-decoration: underline;
   }
@@ -280,6 +278,7 @@ footer .col-lg-6:last-of-type{
 .nav-tabs {
   position: relative;
 	border-bottom: none;
+  z-index: 10;
 }
 .navbar {
 	border:none;
@@ -341,11 +340,6 @@ footer .col-lg-6:last-of-type{
     display: none;
   }
 }
-// .someShort {
-//   @media only screen and (max-width : $lg) {
-//     max-width: 120px;
-//   }
-// }
 .btn-default {
   background: transparent;
   color: black;
@@ -376,29 +370,36 @@ footer .col-lg-6:last-of-type{
 .button-warning {
   max-width: 50px;
 }
+
 /*** ARROWS ***/
 .arrows {
   float: right;
-  margin-top: -$pad * 3.5;
-  &.harvested {
-    margin-top: -$pad * 2;
-  }
+  z-index: 9;
+  text-align: right;
+  margin-top: -$pad;
   .buttonStyle {
     border: none;
     box-shadow: none;
     background: transparent;
     color: $gray;
-    weight: 100;
+    weight: 1;
   }
   b {
     color: $gray;
   }
 }
+// .arrows {
+//   @media only screen and (max-width : $lg) {
+//     // padding-top: 0px;
+//   }
+// }
+
 /*** NOTHING TO SHOW STYLING ***/
 .nothing {
   font-weight: 300;
   font-size: 13px;
 }
+
 /*** LOGIN, HOME & SIGNUP PAGE ***/
 .login-page, .signup-page, .home-page {
   color: white;
@@ -408,10 +409,8 @@ footer .col-lg-6:last-of-type{
   .row.text-center {
     margin-bottom: $pad * 2;
   }
-  // footer {
-  //   color: pink !important;
-  // }
 }
+
 /*** HOME PAGE ***/
 .home-page {
   color: white;
@@ -424,6 +423,7 @@ footer .col-lg-6:last-of-type{
     font-size: 1.3em;
   }
 }
+
 /*** LOGIN PAGE ***/
 .login-page {
   .btn-import {
@@ -443,6 +443,7 @@ footer .col-lg-6:last-of-type{
     }
   }
 }
+
 /*** SIGNUP PAGE ***/
 .signup-page {
   .nav-tabs li a {
@@ -464,6 +465,7 @@ footer .col-lg-6:last-of-type{
     }
   }
 }
+
 /*** DASHBOARD PAGE ***/
 .dashboard-page {
   h1 {
@@ -498,9 +500,14 @@ footer .col-lg-6:last-of-type{
     	font-weight: 500;
     }
   }
+  .arrows {
+    &.harvested {
+      margin-top: 0px;
+    }
+  }
 }
-/*** LINES -- TRANSFER **/
 
+/*** LINES -- TRANSFER **/
 table.top {
   margin-top: $pad * 1.3 !important;
   @extend %tableHeaderDisplay;
@@ -526,7 +533,6 @@ table.top {
   @extend %tableDisplay;
   // font-size: 12px;
   color: black;
-
 }
 .messageTx {
   width: 20%;
@@ -537,17 +543,17 @@ td:last-of-type {
   @extend %overflowHide;
   @extend %tableDisplay;
 }
-/*** SEND/RECEIVE PAGE ***/
 
+/*** SEND/RECEIVE PAGE ***/
 .form-control {
   border: 0px;
   border-bottom: $borderUnderline;
   box-shadow: none;
   font-size: 15px;
   min-width: 100%;
+  border-radius: 0px;
 }
 textarea {
-  // border: 2px !important;
   border-bottom: $borderUnderline;
   box-shadow: inherit;
   max-height: 60px;
@@ -636,17 +642,17 @@ textarea {
     border: 0px;
     box-shadow: none;
     padding: 0px;
-    line-height: 1.4;
-
+    line-height: 1.7;
     .btn {
       text-decoration: underline !important;
-      color: $blue;
-      font-size: 13.5px;
+      color: $blueDark;
+      font-size: 14px;
       padding: 0px !important;
       margin: 0px !important;
       text-align: left;
       background-color: transparent;
       white-space: normal;
+      font-weight: 500;
       line-height: 1.1;
     }
     .btn[disabled] {
@@ -745,6 +751,9 @@ textarea {
   tr th:nth-of-type(6), tr td:nth-of-type(6) {
     width: 15%;
   }
+  // tr th:nth-of-type(7), tr td:nth-of-type(7) {
+  //   width: 15%;
+  // }
   .backupPurge {
     float: right;
     cursor: pointer;
@@ -859,25 +868,24 @@ textarea {
   .form-control {
     padding-left: 0px;
   }
+  .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    // color: #fff;
+    background-color: $blue;
+    border-color: $blue;
+  }
   .namespacesArrows {
     .col-lg-6 {
       min-height: $pad * 3;
-      // text-align: right !important;
       @media only screen and (max-width : $lg) {
         // text-align: left;
-}
-}
+      }
+    }
+    .arrows {
+      padding-top: $pad * 1.8;
     }
   }
-  .arrows {
-    padding-top: $pad * 5.2;
-    text-align: right;
-
-    @media only screen and (max-width : $lg) {
-      // padding-top: 0px;
-
 }
-}
+
   // }
   li.list-group-item{
     padding-left: $pad /2;
@@ -893,6 +901,7 @@ textarea {
   .searchBar {
     padding-top: $pad * 2;
   }
+
 }
 /*** ACCOUNT INFO PAGE ***/
 .account-page {

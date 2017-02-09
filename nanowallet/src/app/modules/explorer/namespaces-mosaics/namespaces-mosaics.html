@@ -38,10 +38,11 @@
                 <input ng-model="$ctrl.searchText" type="text" placeholder="{{ 'EXPLORER_NS_MOS_SEARCH' | translate }}">
                 <label><i class="fa fa-search"></i></label>
               </div>
+              <br>
               <ul class="list-group" ng-repeat="ns in $ctrl.namespaces | orderBy:'namespace.fqn' | filter:$ctrl.searchNsInArray($ctrl.searchText) | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
                 <li class="list-group-item" ng-class="$ctrl.selectedNamespaceName === ns.namespace.fqn ? 'active' : ''" ng-click="$ctrl.getSubNamespaces(ns.namespace.owner, ns.namespace.fqn);$ctrl.getMosaics(ns.namespace.owner, ns.namespace.fqn)">{{ns.namespace.fqn}}</li>
               </ul>
-              <div class="panel-body" ng-show="!$ctrl.namespaces.length">
+              <div class="panel-body nothing" ng-show="!$ctrl.namespaces.length">
                 <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
               </div>
             </div>
@@ -68,7 +69,7 @@
             <li class="list-group-item" ng-class="$ctrl.selectedSubNamespaceName === ns.fqn ? 'active' : ''" ng-click="$ctrl.getMosaics(ns.owner, ns.fqn)">{{ $ctrl.substringSubNs(ns.fqn) }}</li>
           </ul>
         </div>
-        <div class="panel-body" ng-show="!$ctrl.subNamespaces.length">
+        <div class="panel-body nothing" ng-show="!$ctrl.subNamespaces.length">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>
@@ -83,7 +84,7 @@
             <li class="list-group-item" ng-class="$ctrl.selectedMosaicName === mos.id.namespaceId + ':' + mos.id.name ? 'active' : ''" ng-click="$ctrl.processMosaic(mos)">{{mos.id.name}}</li>
           </ul>
         </div>
-        <div class="panel-body" ng-show="!$ctrl.mosaics.length">
+        <div class="panel-body nothing" ng-show="!$ctrl.mosaics.length">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>
@@ -94,7 +95,7 @@
         </div>
         <div class="panel-body" ng-show="$ctrl.selectedMosaic" >
           <p class="bg-info">{{ $ctrl.selectedMosaic.description }}</p>
-          <table class="table table-bordered table-hover">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th>{{ 'GENERAL_NAME' | translate }}</th>
@@ -134,7 +135,7 @@
             </tbody>
           </table>
         </div>
-        <div class="panel-body" ng-show="!$ctrl.selectedMosaic">
+        <div class="panel-body nothing" ng-show="!$ctrl.selectedMosaic">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>

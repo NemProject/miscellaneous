@@ -20,7 +20,7 @@
             <span ng-click="$ctrl.download()"><i class="fa fa-download"></i> {{ 'APOSTILLE_HISTORY_BACKUP' | translate }}</span>
           </div>
         </div>
-        <table class="table table-bordered table-hover table-striped table-condensed">
+        <table class="table table-condensed">
           <thead>
             <tr>
               <th>{{ 'APOSTILLE_FILENAME' | translate }}</th>
@@ -61,12 +61,12 @@
                 <div class="col-md-12">
                   <button class="btn btn-success" type="button" ng-show="ap.dedicatedAccount !== $ctrl.sink" ui-sref="app.transferApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})">{{ 'APOSTILLE_HISTORY_BTN_TRANSFER' | translate }}</button>
                 </div>
-                <p ng-show="ap.dedicatedAccount === $ctrl.sink">{{ 'GENERAL_NONE' | translate }}</p>
+                <p class="col-md-12" ng-show="ap.dedicatedAccount === $ctrl.sink">{{ 'GENERAL_NONE' | translate }}</p>
               </td>
             </tr>
           </tbody>
         </table>
-          <div class="panel-body" ng-show="!$ctrl._Wallet.ntyData.data">
+          <div class="panel-body nothing" ng-show="!$ctrl._Wallet.ntyData.data">
                 <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
 

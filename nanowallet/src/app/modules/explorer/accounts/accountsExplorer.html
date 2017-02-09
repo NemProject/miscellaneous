@@ -54,7 +54,7 @@
               </div>
             </fieldset>
           </div>
-          <div class="panel-body" ng-show="!$ctrl.scope.accountData.account">
+          <div class="panel-body nothing" ng-show="!$ctrl.scope.accountData.account">
             <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
           </div>
         </div>
@@ -123,7 +123,7 @@
               </tbody>
             </table>
           </div>
-          <div class="panel-body" ng-show="!$ctrl.transactions.length">
+          <div class="panel-body nothing" ng-show="!$ctrl.transactions.length">
             <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
           </div>
         </div>
