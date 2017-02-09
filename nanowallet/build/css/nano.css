@@ -13,6 +13,17 @@
       border: 1px solid rgba(105, 178, 229, 0.6);
       color: white; }
 
+.amountTx, .mosaicChange, .messageTx, td:last-of-type {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+tt, .messageTx, td:last-of-type {
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: grey;
+  font-weight: 400; }
+
 html {
   position: relative;
   min-height: 100vh;
@@ -207,12 +218,6 @@ border: 1px solid #444;
   to {
     width: 1.25em; } }
 
-tt {
-  font-family: 'Roboto';
-  font-size: 13px;
-  color: grey;
-  font-weight: 400; }
-
 /*** GLOBAL STYLES ***/
 .panel-heading {
   background-color: transparent !important;
@@ -272,7 +277,8 @@ input.readOnly {
 table {
   table-layout: auto;
   word-break: break-all;
-  margin-bottom: 0px !important; }
+  margin-bottom: 0px !important;
+  letter-spacing: .5px; }
 
 thead {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important; }
@@ -630,6 +636,27 @@ footer .col-lg-6:last-of-type {
   color: #69b2e5;
   text-decoration: underline;
   font-weight: 500; }
+
+/*** LINES -- TRANSFER **/
+table.top {
+  margin-top: 26px !important; }
+  table.top th:first-of-type {
+    width: 43%; }
+  table.top th:nth-of-type(2) {
+    width: 17%; }
+  table.top th:nth-of-type(3) {
+    width: 20%; }
+  table.top th:nth-of-type(4) {
+    width: 20%; }
+
+.sentTx, .receivedTx, .multisigTx, .importanceTx, .namespaceTx, .mosaicTx, .createMosaic {
+  width: 43%; }
+
+.amountTx, .mosaicChange {
+  width: 17%; }
+
+.messageTx {
+  width: 20%; }
 
 /*** SEND/RECEIVE PAGE ***/
 .form-control {
@@ -992,18 +1019,6 @@ li.list-group-item {
         text-align: left;
         padding-right: 15px;
         padding-left: 15px; } }
-
-/*** LINES -- TRANSFER **/
-table.top {
-  margin-top: 26px !important; }
-  table.top th:first-of-type {
-    width: 43%; }
-
-.sentTx, .receivedTx, .multisigTx, .importanceTx, .namespaceTx, .mosaicTx, .createMosaic {
-  width: 43%; }
-
-.amountTx, .mosaicChange {
-  width: 20%; }
 
 label {
   font-size: 16px; }

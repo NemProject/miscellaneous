@@ -33,7 +33,17 @@ $sm: 768px;
     }
   }
 }
-
+%overflowHide {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+%tableDisplay {
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: grey;
+  font-weight: 400;
+}
 html {
 	position: relative;
 	min-height: 100vh;

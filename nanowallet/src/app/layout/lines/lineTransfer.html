@@ -39,7 +39,7 @@
                 </div>
             </td>
             <td class="messageTx" ng-show="!tx.message.type"></td>
-            <td class="messageTx" style="overflow: hidden; text-overflow: ellipsis;white-space: nowrap;" ng-show="tx.message.type === 1">{{tx.message | fmtHexMessage}}</td>
+            <td class="messageTx" style="" ng-show="tx.message.type === 1">{{tx.message | fmtHexMessage}}</td>
             <td class="messageTx" ng-show="tx.message.type === 2" id="line-{{tx.timeStamp}}">{{ 'LINE_TX_DETAILS_MESS_ENC' | translate }}
                 <div ng-show="!requiresKey">
                     {{decoded | fmtHexMessage}}
