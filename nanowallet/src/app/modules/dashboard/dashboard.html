@@ -70,10 +70,10 @@
                 </div>
               </tbody>
             </table>
-            <div class="panel-body" ng-show="$ctrl._DataBridge.transactions.length == 0 && $ctrl.tabConfirmed">
+            <div class="panel-body nothing" ng-show="$ctrl._DataBridge.transactions.length == 0 && $ctrl.tabConfirmed">
               <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
-            <div class="panel-body" ng-show="$ctrl._DataBridge.unconfirmed.length == 0 && !$ctrl.tabConfirmed">
+            <div class="panel-body nothing" ng-show="$ctrl._DataBridge.unconfirmed.length == 0 && !$ctrl.tabConfirmed">
               <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>
@@ -86,7 +86,7 @@
               <canvas width='793' height='200' id="bar" class="chart chart-bar" chart-data="$ctrl.valuesInFee" chart-labels="$ctrl.labels"></canvas>
               <center><small>{{ 'DASHBOARD_HARVEST_INCOME_NOTE' | translate }}</small></center>
             </div>
-            <div class="panel-body" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
+            <div class="panel-body nothing" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
               <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
             <div class="panel-body" ng-show="$ctrl.chartEmpty && $ctrl._DataBridge.harvestedBlocks.length">
@@ -125,7 +125,7 @@
                 </button>
               </div>
             </div>
-            <div class="panel-body" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
+            <div class="panel-body nothing" ng-show="!$ctrl._DataBridge.harvestedBlocks.length">
               <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>

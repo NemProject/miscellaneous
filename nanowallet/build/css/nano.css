@@ -18,7 +18,13 @@
   text-overflow: ellipsis;
   white-space: nowrap; }
 
-tt, .messageTx, td:last-of-type {
+table.top {
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: grey;
+  font-weight: 400; }
+
+tt, .dashboard-page .harvestedBlocks th, .amountTx, .mosaicChange, .messageTx, td:last-of-type {
   font-family: 'Roboto';
   font-size: 13px;
   color: grey;
@@ -304,6 +310,9 @@ th {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   padding-top: 40px; }
 
+.table-hover > tbody > tr:hover {
+  background-color: rgba(105, 178, 229, 0.1); }
+
 .table-bordered {
   border: 0; }
 
@@ -559,6 +568,11 @@ footer .col-lg-6:last-of-type {
   .arrows b {
     color: rgba(0, 0, 0, 0.3); }
 
+/*** NOTHING TO SHOW STYLING ***/
+.nothing {
+  font-weight: 300;
+  font-size: 13px; }
+
 /*** LOGIN, HOME & SIGNUP PAGE ***/
 .login-page, .signup-page, .home-page {
   color: white; }
@@ -626,8 +640,8 @@ footer .col-lg-6:last-of-type {
   min-width: 50%; }
 
 .dashboard-page .harvestedBlocks th {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.3); }
+  padding-top: 10px;
+  padding-bottom: 10px; }
 
 .dashboard-page .updates p {
   font-size: 12px; }
@@ -653,7 +667,8 @@ table.top {
   width: 43%; }
 
 .amountTx, .mosaicChange {
-  width: 17%; }
+  width: 17%;
+  color: black; }
 
 .messageTx {
   width: 20%; }
