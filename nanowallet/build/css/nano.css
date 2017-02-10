@@ -327,6 +327,16 @@ input.form-control.short {
 .text-success {
   color: #00b300; }
 
+fieldset {
+  overflow: hidden; }
+
+.reverseEllipsis {
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl; }
+
 /*** ARROWS ***/
 .arrows {
   float: right;
@@ -868,9 +878,20 @@ textarea {
 #changwidget {
   margin-top: 60px; }
 
+.explorer-home-page, .explorer-apostilles, .explorer-namespaces-mosaics-page, .explorer-accounts {
+  overflow: hidden; }
+  .explorer-home-page li, .explorer-apostilles li, .explorer-namespaces-mosaics-page li, .explorer-accounts li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+
+.explorerNav li {
+  overflow: visible; }
+
 /*** EXPLORER HOME PAGE ***/
 .explorer-home-page .panel-body {
-  padding: 0; }
+  padding: 0;
+  overflow: hidden; }
 
 .explorer-home-page tbody {
   text-align: left; }
@@ -935,9 +956,6 @@ textarea {
 /*** ACCOUNT INFO PAGE ***/
 .account-page #downloadWallet {
   visibility: hidden; }
-
-.account-page fieldset {
-  overflow: hidden; }
 
 .account-page .form-control {
   white-space: nowrap; }

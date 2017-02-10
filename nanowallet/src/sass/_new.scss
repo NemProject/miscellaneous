@@ -265,6 +265,21 @@ input.form-control.short{
 .text-success {
   color: $greenLite;
 }
+// .input-group {
+//   overflow: hidden;
+//   width: 300px;
+// }
+fieldset {
+  overflow: hidden;
+}
+.reverseEllipsis {
+  white-space: nowrap;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+}
+
 /*** ARROWS ***/
 .arrows {
   float: right;
@@ -926,11 +941,24 @@ textarea {
   #changwidget {
     margin-top: $pad * 3;
   }
-
+.explorer-home-page, .explorer-apostilles, .explorer-namespaces-mosaics-page, .explorer-accounts {
+  overflow: hidden;
+  li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+.explorerNav {
+  li {
+    overflow: visible;
+  }
+}
 /*** EXPLORER HOME PAGE ***/
 .explorer-home-page {
   .panel-body {
     padding: 0;
+    overflow: hidden;
   }
   tbody {
     text-align: left;
@@ -1011,9 +1039,7 @@ textarea {
   #downloadWallet {
   visibility: hidden;
   }
-  fieldset {
-    overflow: hidden;
-  }
+
   .form-control {
     white-space: nowrap;
   }

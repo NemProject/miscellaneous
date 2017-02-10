@@ -101,7 +101,7 @@
               <div class="form-control formFloat mosaic block" disabled >
                 <strong>{{$ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply}}</strong>
                 <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
-                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+                <label class="floatRight reverseEllipsis"><small>{{ $ctrl.selectedMosaic }}</small></label>
               </div>
             </div>
           </fieldset>
@@ -129,7 +129,7 @@
               </span>
               <div class="form-control formFloat">
                 <input class="levy" type="number" ng-model="$ctrl.formData.delta" min="0">
-                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+                <label class="floatRight reverseEllipsis"><small>{{ $ctrl.selectedMosaic }}</small></label>
               </div>
             </div>
           </fieldset>
@@ -148,7 +148,7 @@
                   <strong>{{(-$ctrl.formData.delta + $ctrl._DataBridge.mosaicDefinitionMetaDataPair[$ctrl.selectedMosaic].supply)}}</strong>
                   <span class="text-muted">.{{(0 | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}</span>
                 </span>
-                <label class="floatRight"><small>{{ $ctrl.selectedMosaic }}</small></label>
+                <label class="floatRight reverseEllipsis"><small>{{ $ctrl.selectedMosaic }}</small></label>
               </div>
             </div>
           </fieldset>
