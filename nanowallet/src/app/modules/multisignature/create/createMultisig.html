@@ -14,7 +14,7 @@
             <span ng-show="$ctrl.useCustomAccount">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
-            <li ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-show="$ctrl.haveMoreThanOneAccount" ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
             <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}</a></li>
           </ul>
         </div>
@@ -24,7 +24,7 @@
             <fieldset class="form-group" ng-show="$ctrl.haveMoreThanOneAccount && !$ctrl.useCustomAccount">
             	<div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'AGGREGATE_ACCOUNT_SELECT_TITLE' | translate }}</label>
+                  <label>{{ 'AGGREGATE_ACCOUNT_SELECT_TITLE' | translate }}: </label>
                 </span>
                	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
                		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
@@ -33,9 +33,9 @@
             </fieldset>
             <!-- ACCOUNT TO CONVERT TO MULTISIG MANUALLY -->
             <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
-              <div class="input-group" ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}">
+              <div class="input-group"> <!--  ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}" -->
                 <span class="input-group-btn">
-                  <label>{{ 'GENERAL_ADDRESS' | translate }}</label>
+                  <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
                 </span>
                 <input class="form-control"
                   type="text"

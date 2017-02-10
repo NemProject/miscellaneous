@@ -1,7 +1,7 @@
 <table id="MDSTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'MOSAIC_SUPPLY_CHANGE_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#MDStable{{number}}">
-            <td class="sentTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-upload text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_EDIT' | translate }} <span class="text-muted">{{tx.mosaicId.namespaceId}}</span>:<strong>{{tx.mosaicId.name}}</strong>"</tt></td>
+            <td class="sentTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-th-large text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_EDIT' | translate }} <span class="text-muted">{{tx.mosaicId.namespaceId}}</span>:<strong>{{tx.mosaicId.name}}</strong>"</tt></td>
             <td class="mosaicChange">
                 <span ng-show="!parent">
                     <strong>{{((tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee) | fmtNemValue)[1]}}</span> XEM

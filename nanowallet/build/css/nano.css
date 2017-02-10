@@ -273,8 +273,8 @@ label {
     min-width: 40px; }
   .input-group-btn .btn-danger:hover, .input-group-btn .btn-danger:active, .input-group-btn .btn-danger:focus {
     color: white !important;
-    background: #e27c79;
-    border: 1px solid #e27c79; }
+    background: #db5b57;
+    border: 1px solid #db5b57; }
 
 .btn-default {
   background: transparent;
@@ -320,6 +320,12 @@ input.form-control.short {
   border: 0;
   box-shadow: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+
+.text-danger {
+  color: #db5b57; }
+
+.text-success {
+  color: #00b300; }
 
 /*** ARROWS ***/
 .arrows {
@@ -537,6 +543,8 @@ footer {
   bottom: 0;
   position: absolute;
   padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
   width: 100%;
   background-color: white;
   z-index: 10;

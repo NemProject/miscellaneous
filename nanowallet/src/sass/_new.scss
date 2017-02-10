@@ -209,8 +209,8 @@ label {
   }
   .btn-danger:hover, .btn-danger:active, .btn-danger:focus {
     color: white !important;
-    background: lighten( $red, 10% );
-    border: 1px solid lighten( $red, 10% );
+    background: $redLite;
+    border: 1px solid $redLite;
   }
 }
 .btn-default {
@@ -259,7 +259,12 @@ input.form-control.short{
   box-shadow: 0;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-
+.text-danger {
+  color: $redLite;
+}
+.text-success {
+  color: $greenLite;
+}
 /*** ARROWS ***/
 .arrows {
   float: right;
@@ -506,8 +511,10 @@ footer {
   bottom: 0;
   position: absolute;
   padding: $pad;
+  padding-left: $pad * 1.5;
+  padding-right: $pad * 1.5;
   width: 100%;
-  background-color: white;
+  background-color: $white;
   z-index: 10;
   font-size: 13px;
   .container-fluid {
