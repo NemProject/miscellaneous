@@ -1,3 +1,28 @@
+/*** GLOBAL FONTS ***/
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Thin-webfont.woff") format("woff"), url("fonts/Roboto-Thin-webfont.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Light-webfont.woff") format("woff"), url("fonts/Roboto-Light-webfont.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Medium-webfont.woff") format("woff"), url("fonts/Roboto-Medium-webfont.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url("fonts/Roboto-Bold-webfont.woff") format("woff"), url("fonts/Roboto-Bold-webfont.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
 /*** GLOBAL VARIABLES ***/
 /*** GLOBAL EXTENDS ***/
 .importance-transfer-page .input-group-btn.showHide, .account-page .input-group-btn.showHide, .importance-transfer-page .dLoad, .account-page .dLoad {
@@ -145,7 +170,7 @@ td {
 th {
   color: grey;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   min-width: 55px;
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   padding-top: 40px; }
@@ -505,7 +530,7 @@ input[type=checkbox]:checked + label:before {
   .navbar-brand span:first-of-type {
     font-weight: 100; }
   .navbar-brand span:last-of-type {
-    font-weight: 900; }
+    font-weight: 700; }
 
 .navbar {
   border: none;

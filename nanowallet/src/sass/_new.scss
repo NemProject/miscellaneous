@@ -66,7 +66,7 @@ td {
 th {
   color: grey;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 500;
   min-width: 55px;
   border-bottom: $borderUnderline;
   padding-top: $pad * 2;
@@ -464,7 +464,7 @@ input[type=checkbox]:checked + label:before {
     font-weight: 100;
   }
   span:last-of-type {
-    font-weight: 900;
+    font-weight: 700;
   }
 }
 .navbar {
