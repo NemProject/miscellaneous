@@ -1,0 +1,13 @@
+{
+  "name": "NanoWallet",
+  "version": "1.2.12",
+  "description": "Cross-platform lite wallet for NEM",
+  "author": "https://github.com/QuantumMechanics",
+  "license": "MIT",
+  "main":"start.html",
+  "window":{
+    "min_width":1200,
+    "min_height":700,
+    "icon": "images/logomark.png"
+  }
+}
