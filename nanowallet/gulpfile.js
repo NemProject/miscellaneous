@@ -12,12 +12,18 @@ var merge         = require('merge-stream');
 var glob          = require('glob');
 var sass          = require('gulp-sass');
 var autoprefixer  = require('gulp-autoprefixer');
+var NwBuilder     = require('nw-builder');
+var gutil         = require('gulp-util');
+
 
 // Where our files are located
 var jsFiles   = "src/app/**/*.js";
 var viewFiles = "src/app/**/*.html";
 var specFiles = "tests/specs/*.spec.js"
 var specsArray = glob.sync(specFiles);
+
+// Check for --production flag
+// var isProduction = !!(argv.production);
 
 var interceptErrors = function(error) {
 var args = Array.prototype.slice.call(arguments);
@@ -106,8 +112,43 @@ gulp.task('views', function() {
       .pipe(gulp.dest('./src/app/config/'));
 });
 
+// Build App
+gulp.task('nw', function () {
+
+    var nw = new NwBuilder({
+        version: '0.14.6',
+        files: './build/**',
+        buildDir: './dist',
+        winIco: './build/images/logomark.ico',
+        macIcns: './build/images/NanoWallet.icns',
+        platforms: ['win64', 'osx64', 'linux64']
+    });
+
+    // Log stuff you want
+    nw.on('log', function (msg) {
+        gutil.log('nw-builder', msg);
+    });
+
+    // Build returns a promise, return it so the task isn't called in parallel
+    return nw.build().catch(function (err) {
+        gutil.log('nw-builder', err);
+    });
+  });
+
+// gulp.task('nw', function () {
+//   var nw = new NwBuilder({
+//       // version: '1.2.12',
+//       // files: [ bases.dist + '**'],
+//       platforms: ['win32', 'win64', 'osx64'],
+//       // buildDir: bases.webkit,
+//       winIco: 'src/images/logomark.ico',
+//       macIcns: 'src/images/logomark.icns'
+//   });
+// });
+
+
 // Run Tasks
-gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'browserifyTests'], function() {
+gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'nw', 'browserifyTests'], function() {
 
   // Uncomment below for dev mode (watch and build as you change the code)
   browserSync.init(['./build/**/**.**'], {
