@@ -38,8 +38,7 @@
   },
   "scripts": {
     "test": "gulp tests browserifyTests",
-    "devApp": "nw build/",
-    "prodApp": "nwbuild --platforms win64,osx64,linux64 --buildDir dist/ build/"
+    "devApp": "nw build/"
   },
   "repository": {
     "type": "git",

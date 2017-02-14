@@ -15,15 +15,12 @@ var autoprefixer  = require('gulp-autoprefixer');
 var NwBuilder     = require('nw-builder');
 var gutil         = require('gulp-util');
 
-
 // Where our files are located
 var jsFiles   = "src/app/**/*.js";
 var viewFiles = "src/app/**/*.html";
 var specFiles = "tests/specs/*.spec.js"
 var specsArray = glob.sync(specFiles);
 
-// Check for --production flag
-// var isProduction = !!(argv.production);
 
 var interceptErrors = function(error) {
 var args = Array.prototype.slice.call(arguments);
@@ -82,23 +79,35 @@ gulp.task('tests', function() {
       .pipe(gulp.dest('./build/tests'));
 });
 
-  gulp.task('js', function() {
+gulp.task('js', function() {
   return gulp.src("src/vendors/**/*")
-      .on('error', interceptErrors)
-      .pipe(gulp.dest('./build/vendors'));
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/vendors'));
 });
 
-  gulp.task('sass', function () {
-    return gulp.src('src/sass/nano.scss')
-      .pipe(sass().on('error', sass.logError))
-      .pipe(autoprefixer())
-      .pipe(gulp.dest('./build/css'));
-  });
+gulp.task('sass', function () {
+  return gulp.src('src/sass/nano.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
+    .pipe(gulp.dest('./build/css'));
+});
 
-    gulp.task('images', function() {
-    return gulp.src("src/images/**/*")
+gulp.task('css', function() {
+  return gulp.src('src/css/**/*')
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/css'))
+})
+
+gulp.task('images', function() {
+  return gulp.src("src/images/**/*")
+    .on('error', interceptErrors)
+    .pipe(gulp.dest('./build/images'));
+});
+
+gulp.task('package', function() {
+  return gulp.src("src/package.json")
       .on('error', interceptErrors)
-      .pipe(gulp.dest('./build/images'));
+      .pipe(gulp.dest('./build/'));
 });
 
 // Cache template
@@ -113,8 +122,7 @@ gulp.task('views', function() {
 });
 
 // Build App
-gulp.task('nw', function () {
-
+gulp.task('app', function () {
     var nw = new NwBuilder({
         version: '0.14.6',
         files: './build/**',
@@ -123,32 +131,18 @@ gulp.task('nw', function () {
         macIcns: './build/images/NanoWallet.icns',
         platforms: ['win64', 'osx64', 'linux64']
     });
-
     // Log stuff you want
     nw.on('log', function (msg) {
         gutil.log('nw-builder', msg);
     });
-
     // Build returns a promise, return it so the task isn't called in parallel
     return nw.build().catch(function (err) {
         gutil.log('nw-builder', err);
     });
   });
 
-// gulp.task('nw', function () {
-//   var nw = new NwBuilder({
-//       // version: '1.2.12',
-//       // files: [ bases.dist + '**'],
-//       platforms: ['win32', 'win64', 'osx64'],
-//       // buildDir: bases.webkit,
-//       winIco: 'src/images/logomark.ico',
-//       macIcns: 'src/images/logomark.icns'
-//   });
-// });
-
-
 // Run Tasks
-gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'nw', 'browserifyTests'], function() {
+gulp.task('default', ['html', 'js', 'sass', 'css', 'images', 'package', 'browserify', 'tests', 'browserifyTests'], function() {
 
   // Uncomment below for dev mode (watch and build as you change the code)
   browserSync.init(['./build/**/**.**'], {
@@ -165,4 +159,8 @@ gulp.task('default', ['html', 'js', 'sass', 'images', 'browserify', 'tests', 'nw
   gulp.watch(viewFiles, ['views']);
   gulp.watch(jsFiles, ['browserify']);
 
+});
+
+// Build packaged apps for production
+gulp.task('build-app', ['html', 'js', 'sass', 'css', 'images', 'package', 'app'], function() {
 });
