@@ -103,25 +103,13 @@
               </div>
             </fieldset>
             <!-- CUSTOM NODE -->
-            <!-- <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'HEADER_NODE_CUSTOM' | translate }}: </label>
-                </span>
-                <input type="text" class="form-control" ng-model="$ctrl.customNode" placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}">
-              </div>
-            </fieldset>
-            <button type="submit" class="btn btn-success" ng-click="$ctrl.changeNode($ctrl.customNode)">{{ 'HEADER_NODE_CONNECT' | translate }}</button>
- -->
-
-
-            <fieldset class="form-group">
+            <fieldset class="form-group" autocomplete="off">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{ 'HEADER_NODE_CUSTOM' | translate }}: </label>
                 </span>
                 <input class="form-control"
-                    type="text"
+                    type="number" autocomplete="off"
                     placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}"
                     ng-model="$ctrl.customNode" ng-model-options="{debounce:500}"/>
                 <span class="input-group-btn adding">

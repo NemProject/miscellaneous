@@ -437,6 +437,7 @@ fieldset {
   .drop input.upload[disabled] {
     cursor: not-allowed; }
 
+/*** CHROME SPECIFIC STYLES ***/
 /*** FILE UPLOAD GLOBAL STYLES ***/
 .fileUpload {
   position: relative;

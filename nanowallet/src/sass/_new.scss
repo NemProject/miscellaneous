@@ -370,6 +370,11 @@ fieldset {
       cursor: not-allowed;
   }
 }
+/*** CHROME SPECIFIC STYLES ***/
+// input:-webkit-autofill {
+// 	-webkit-box-shadow:0 0 0 500px $blueXLite inset;
+// }
+
 /*** FILE UPLOAD GLOBAL STYLES ***/
 .fileUpload {
     position: relative;
