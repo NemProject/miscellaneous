@@ -267,6 +267,7 @@ function EnglishProvider($translateProvider) {
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:',
         NAMESPACE_PROVISION_INFORMATION_2: 'However a part is only allowed to begin with a letter of the alphabet, thus \'alice\' is an allowed part for a root namespace while \'1alice\' is not. Certain strings are reserved and thus not allowed as namespace parts. Among the disallowed namespace parts are:',
         NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.',
+
         // RENEW NAMESPACE MODULE
         RENEW_NS_TITLE: 'Renew namespaces',
         RENEW_NS_NONE: 'No namespace to renew',
@@ -281,6 +282,7 @@ function EnglishProvider($translateProvider) {
         RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
         RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
         RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
+
         // ACCOUNT MODULE
         ACCOUNT_TITLE: 'Account',
         ACCOUNT_ACCOUNT_INFORMATION: 'Account information',
@@ -341,6 +343,23 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: 'Use the NEM Apostille service to create blockchain based notarizations to time stamp, follow and audit file authenticity.',
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
+
+        // ADDRESS BOOK MODULE
+        ADDRESS_BOOK_TITLE: 'Address book',
+        ADDRESS_BOOK_LIST: 'Contacts',
+        ADDRESS_BOOK_NAVIGATION: 'Navigation',
+        ADDRESS_BOOK_NEW: 'New contact',
+        ADDRESS_BOOK_EDIT: 'Edit contact',
+        ADDRESS_BOOK_REMOVE: 'Remove contact',
+        ADDRESS_BOOK_NEW_BTN: 'Add',
+        ADDRESS_BOOK_EDIT_BTN: 'Save',
+        ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+        ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+        ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+        ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+        ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+        ADDRESS_BOOK_ACTIONS: 'Actions',
+        ADDRESS_BOOK_MAX_NUMBER: 'Maximum contacts per batch is',
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
@@ -486,6 +505,7 @@ function EnglishProvider($translateProvider) {
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+        ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -498,6 +518,7 @@ function EnglishProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: 'Transaction successfully signed !',
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',

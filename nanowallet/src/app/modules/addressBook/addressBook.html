@@ -1,0 +1,156 @@
+<div class="address-book-page">
+  <div class="loading-overlay" ng-show="$ctrl.okPressed">
+    <div class="loader text-center">
+        <img src="images/logomark.png" class="loader-image"/>
+        <p class="loading-text">{{ 'GENERAL_PROCESSING' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="banner-left">
+    <div class="container">
+      <h2><i class="fa">&#xf2b9;</i> {{ 'ADDRESS_BOOK_TITLE' | translate }}</h2>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+      <div class="col-sm-3 sidebar" style="margin-top: 10px;">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
+              <i class="fa fa-chevron-right"></i>
+              <span>{{ 'ADDRESS_BOOK_NAVIGATION' | translate }}</span>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <button type="button" class="btn btn-operations" ng-click="$ctrl.addContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
+                    </li>
+                    <li>
+                        <button type="button" ng-disabled="!$ctrl.contacts.items.length" class="btn btn-operations" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
+                        <a id="exportAddressBook" class="hidden" target="_blank"></a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-operations" ng-click="$ctrl.uploadAddressBook()">{{ 'ADDRESS_BOOK_IMPORT_BTN' | translate }}</button>
+                        <input id="uploadAddressBook" accept=".adb" style="visibility:hidden;position:absolute;" import-address-book-file="$ctrl.importAddressBook($fileContent)" type="file">
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-sm-9 noPaddingLeft" style="margin-top: 10px;">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
+              <i class="fa fa-group"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_LIST' | translate }}
+              <div style="float: right; position: relative; display: block;" ng-show="$ctrl.contacts.items.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+            </div>
+            <table  class="table table-bordered table-hover table-striped table-condensed" style="border:1px solid #444;table-layout:fixed;word-break:break-all;">
+                <thead style="color:white;">
+                    <tr>
+                        <th style="width: 20%;">
+                            <a href="javascript:;" ng-click="$ctrl.sortBy('label')">
+                                <i class="fa" ng-show="$ctrl.propertyName === 'label'" ng-class="{'fa-caret-down': $ctrl.revers, 'fa-caret-up': !$ctrl.revers}"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_CONTACT_LABEL' | translate }}
+                            </a>
+                        </th>
+                        <th>
+                            <a href="javascript:;" ng-click="$ctrl.sortBy('address')">
+                                <i class="fa" ng-show="$ctrl.propertyName === 'address'" ng-class="{'fa-caret-down': $ctrl.revers, 'fa-caret-up': !$ctrl.revers}"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_ACCOUNT_ADDRESS' | translate }}
+                            </a>
+                        </th>
+                        <th style="width: 200px;">{{ 'ADDRESS_BOOK_ACTIONS' | translate }}</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:white;text-align:center">
+                    <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:$ctrl.propertyName:$ctrl.revers | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
+                        <td style="vertical-align: middle;border-bottom: 1px solid #444">{{contact.label}}</td>
+                        <td style="vertical-align: middle;border-bottom: 1px solid #444">{{contact.address}}</td>
+                        <td class="actions" style="vertical-align: middle;border-bottom: 1px solid #444;white-space:nowrap;">
+                            <button type="button" class="btn btn-xs" ng-click="$ctrl.transferTransaction(contact.address)">Send XEM</button>
+                            <button type="button" class="btn btn-xs" ng-click="$ctrl.editContact(contact)">Edit</button>
+                            <button type="button" class="btn btn-xs" ng-click="$ctrl.removeContact(contact)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="panel-body" ng-show="!$ctrl.contacts.items.length" style="border: 1px solid #444;">
+                <p style="margin:0;">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+            </div>
+            <div class="panel-footer text-center" style="background-color: #e3e0cf; color: #444;padding:0;">
+              <small><b><i>{{ 'ADDRESS_BOOK_MAX_NUMBER' | translate }} {{ $ctrl.pageSize }}</i></b></small>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Add new account modal -->
+<div id="contactModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" ng-show="!$ctrl.is_edit">{{ 'ADDRESS_BOOK_NEW' | translate }}</h4>
+                <h4 class="modal-title" ng-show="$ctrl.is_edit">{{ 'ADDRESS_BOOK_EDIT' | translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset class="form-group">
+                    <input class="form-control form-control-lg"
+                           type="password"
+                           placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
+                           ng-model="$ctrl.common.password"/>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input class="form-control form-control-lg"
+                           type="text"
+                           placeholder="{{ 'ADDRESS_BOOK_CONTACT_LABEL' | translate }}"
+                           ng-model="$ctrl.formData.label"/>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <input class="form-control form-control-lg"
+                           type="text"
+                           placeholder="{{ 'FORM_ADDRESS_FIELD_PLACEHOLDER' | translate }}"
+                           ng-model="$ctrl.formData.address"/>
+                </fieldset>
+                <button class="btn btn-success" style="border-radius:0px;"
+                        type="submit" ng-show="!$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.add()">
+                    <i class="fa fa-plus"></i> {{ 'ADDRESS_BOOK_NEW_BTN' | translate }}
+                </button>
+                <button class="btn btn-success" style="border-radius:0px;"
+                        type="submit" ng-show="$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.edit()">
+                    <i class="fa fa-edit"></i> {{ 'ADDRESS_BOOK_EDIT_BTN' | translate }}
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add new account modal -->
+<div id="removeContactModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{ 'ADDRESS_BOOK_REMOVE' | translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset class="form-group">
+                    <input class="form-control form-control-lg"
+                           type="password"
+                           placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
+                           ng-model="$ctrl.common.password"/>
+                </fieldset>
+                <button class="btn btn-danger" style="border-radius:0px;" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.remove()">
+                    <i class="fa fa-remove"></i> {{ 'ADDRESS_BOOK_REMOVE_BTN' | translate }}
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"  data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
