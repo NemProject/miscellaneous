@@ -565,13 +565,11 @@ input[type=checkbox]:checked + label:before {
     padding-left: 0px !important;
     margin-left: 0px !important;
     color: grey !important; }
-  .navbar-default .dropdown-menu li:nth-of-type(even), .navbar-default .dropdown-menu li select, .navbar-default .dropdown-menu li input {
-    border-bottom: 1px solid #69b2e5;
-    font-size: 14px; }
-  .navbar-default .dropdown-menu li:nth-of-type(odd) {
-    font-weight: 700;
-    font-size: 13px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+
+.nodes .modal-sm {
+  min-width: 600px; }
+  .nodes .modal-sm .col-sm-12 {
+    padding: 40px; }
 
 /*** GLOBAL FOOTER STYLES ***/
 footer {

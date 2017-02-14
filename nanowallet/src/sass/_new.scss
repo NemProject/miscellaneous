@@ -510,17 +510,28 @@ input[type=checkbox]:checked + label:before {
     margin-left: 0px !important;
     color: grey !important;
   }
-  .dropdown-menu li:nth-of-type(even), .dropdown-menu li select, .dropdown-menu li input {
-    border-bottom: 1px solid $blue;
-    font-size: 14px;
-  }
-  .dropdown-menu li:nth-of-type(odd) {
-    font-weight: 700;
-    font-size: 13px;
-    border-bottom: 1px solid $grayLite;
-  }
-}
 
+	// @media (min-width: 768px) {
+	// 	.modal-sm {
+	// 	   width: 600px;
+	// 	}
+	// }
+  // .dropdown-menu li:nth-of-type(even), .dropdown-menu li select, .dropdown-menu li input {
+  //   border-bottom: 1px solid $blue;
+  //   font-size: 14px;
+  // }
+  // .dropdown-menu li:nth-of-type(odd) {
+  //   font-weight: 700;
+  //   font-size: 13px;
+  //   border-bottom: 1px solid $grayLite;
+  // }
+}
+.nodes .modal-sm {
+	min-width: 600px;
+	.col-sm-12 {
+		padding: $pad * 2;
+	}
+}
 /*** GLOBAL FOOTER STYLES ***/
 footer {
   bottom: 0;
