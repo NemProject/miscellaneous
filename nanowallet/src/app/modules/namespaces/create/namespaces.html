@@ -1,0 +1,151 @@
+<div class="namespace-provision-page">
+  <div class="container-fluid main">
+    <div class="row">
+      <div class="col-sm-11">
+        <h2>{{ 'NAMESPACE_PROVISION_TITLE' | translate }}</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 col-lg-7">
+        <div class="panel-heading">
+          <div class="tabDescription">
+            <span ng-show="!$ctrl.formData.isMultisig">{{ 'NAMESPACE_PROVISION_NAME' | translate }}</span>
+            <span ng-show="$ctrl.formData.isMultisig">{{ 'NAMESPACE_PROVISION_MULTISIG_NAME' | translate }}</span>
+          </div>
+          <ul class="nav nav-tabs">
+            <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <fieldset>
+            <!-- MULTISIG ACCOUNT ADDRESS -->
+            <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}: </label>
+                </span>
+                <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNS();">
+                </select>
+              </div>
+            </fieldset>
+            <!-- MULTISIG ACCOUNT BALANCE -->
+            <fieldset class="form-group" ng-show="$ctrl.formData.multisigAccount && $ctrl.formData.isMultisig">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}</label>
+                </span>
+                <div class="form-control" readOnly>
+                  <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
+                  <label class="floatRight"><small>XEM</small></label>
+                </div>
+              </div>
+            </fieldset>
+            <!-- PARENT NAMESPACE -->
+            <fieldset class="form-group" ng-show="!$ctrl.customKey">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
+                </span>
+                <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
+                  <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>
+                </select>
+              </div>
+            </fieldset>
+            <!-- NAMESPACE NAME -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label ng-show="!$ctrl.customKey">{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
+                </span>
+               <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
+             </div>
+            </fieldset>
+            <!-- NAMESPACE SINK ADDRESS -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'GENERAL_SINK_ADDRESS' | translate }}: </label>
+                </span>
+                <input type="text" class="form-control" ng-model="$ctrl.formData.rentalFeeSink" readOnly>
+              </div>
+            </fieldset>
+            <!-- TRANSACTION FEE -->
+            <div class="row" class="dualFees">
+              <div class="col-sm-6">
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
+                    </span>
+                    <div class="form-control" readOnly>
+                      <span class="feeAmount">
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
+                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
+                      </span>
+                      <label class="floatRight"><small>XEM</small></label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <!-- RENTAL FEE-->
+              <div class="col-sm-6">
+                <fieldset class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-btn">
+                      <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}:</label>
+                    </span>
+                    <div class="form-control" readOnly>
+                      <span class="feeAmount">
+                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}</span>
+                      </span>
+                      <label class="floatRight"><small>XEM</small></label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <!-- PASSWORD FIELD -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                </span>
+                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
+            </fieldset>
+            <!-- SEND TRANSACTION -->
+            <button class="btn btn-success pull-xs-right" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
+              <i class="fa fa-send"></i> {{ 'GENERAL_REGISTER' | translate }}
+            </button>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-lg-5">
+        <!-- <div class="panel-heading">
+          <h3>{{ 'GENERAL_INFORMATION' | translate }}</h3>
+        </div> -->
+
+            <div class="panel-heading">
+
+              <h3>Namespace Restrictions</h3>
+            </div>
+            <div class="panel-body row">
+              <div class="col-md-12 col-lg-12">
+          <p>Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:
+          </p>
+          <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
+          <p> Disallowed namespaces are below. This list is not final and can be extended in the future
+          </p>
+          <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
+          <p>The namespace may have up to 3 parts, thus 'qm.metals.silver' is valid while 'qm.metals.silver.coin' is not.
+          </p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>

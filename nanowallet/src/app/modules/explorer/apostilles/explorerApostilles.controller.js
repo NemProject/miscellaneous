@@ -46,7 +46,7 @@ class ExplorerApostillesCtrl {
      */
     getSinkTransactions() {
         return this._NetworkRequests.getIncomingTxes(helpers.getHostname(this._Wallet.node), this.sink, "").then((data) => {
-            this.sinkData = data.data;
+            this.sinkData = this.cleanApostilles(data.data);
         }, 
         (err) => {
             if(err.status === -1) {
@@ -55,6 +55,33 @@ class ExplorerApostillesCtrl {
                 this._Alert.errorFetchingIncomingTxes(err.data.message);
             }
         });
+    }
+
+    /**
+     * Keep only HEX messages in transaction array
+     */
+    cleanApostilles(array) {
+        let result = []
+        if(array.length) {
+            for (let i = 0; i < array.length; i++){
+                if(array[i].transaction.type === 257) {
+                    if(!array[i].transaction.message || !array[i].transaction.message.payload || array[i].transaction.message.payload.substring(0, 2) !== 'fe') {
+                        //console.log("Not an apostille message")
+                    } else {
+                        result.push(array[i])
+                    }
+                } else if(array[i].transaction.type === 4100) {
+                    if(!array[i].transaction.otherTrans.message|| !array[i].transaction.otherTrans.message.payload || array[i].transaction.otherTrans.message.payload.substring(0, 2) !== 'fe') {
+                        //console.log("Not an apostille message")
+                    } else {
+                      result.push(array[i])
+                    }
+                }
+                if(i === array.length - 1) {
+                  return result;
+                }
+            }
+        }
     }
 
 }

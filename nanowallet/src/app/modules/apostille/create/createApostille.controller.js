@@ -6,7 +6,6 @@ import CryptoHelpers from '../../../utils/CryptoHelpers';
 import Nty from '../../../utils/nty';
 import Network from '../../../utils/Network';
 import convert from '../../../utils/convert';
-import apostille from '../../../utils/apostille';
 
 class CreateApostilleCtrl {
     constructor(DataBridge, Wallet, Alert, Transactions, $timeout, $location, $filter, $q) {
@@ -178,13 +177,8 @@ class CreateApostilleCtrl {
             let currentFileName = $fileData.name;
 
             // Check if name is too long, otherwise when apostille infos are appended it can go out of bounds
-            if (helpers.getFileName(currentFileName).length > 40) {
-                this.rejected.push({
-                    "filename": currentFileName,
-                    "tags": this.formData.tags,
-                    "reason": this._$filter('translate')('APOSTILLE_NAME_TOO_LONG')
-                });
-                return;
+            if (helpers.getFileName(currentFileName).length > 32) {
+                return this.pushError(this._$filter('translate')('APOSTILLE_NAME_TOO_LONG'), currentFileName, this.formData.tags);
             }
 
             // Decrypt/generate private key and check it. Returned private key is contained into this.common
@@ -441,13 +435,7 @@ class CreateApostilleCtrl {
                             // If code >= 2, it's an error
                             if (data.res.data.code >= 2) {
                                 this._$timeout(() => {
-                                    this._Alert.transactionError(data.res.data.message);
-                                    // Push in rejected array
-                                    this.rejected.push({
-                                        "filename": data.tx.filename,
-                                        "tags": data.tx.tags,
-                                        "reason": data.res.data.message
-                                    });
+                                    this.pushError(data.res.data.message,  data.tx.filename, data.tx.tags);
                                 });
                             } else {
                                 // Increment successes
@@ -484,7 +472,6 @@ class CreateApostilleCtrl {
                                     this._Wallet.setNtyDataInLocalStorage(updatedNty);
                                 }
                             }
-
                                 this.drawCertificate(data.tx.filename, helpers.convertDateToString(timeStamp), owner, data.tx.tags, from, data.tx.recipient, data.tx.recipientPrivateKey, txHash, data.tx.message, url).then((certificate) => {
                                     if (data.res.data.code < 2) {
                                         this._$timeout(() => {
@@ -494,7 +481,7 @@ class CreateApostilleCtrl {
                                             });
 
                                             // Add certificate to archive
-                                            this.zip.file("Apostille certificate of " + helpers.getFileName(data.tx.filename) + " -- TX " + txHash + " -- Date " + helpers.getTimestampShort(timeStamp) + ".png", (certificate).split(",").pop(), {
+                                            this.zip.file("Certificate of " + helpers.getFileName(data.tx.filename) + " -- TX " + txHash + " -- Date " + helpers.getTimestampShort(timeStamp) + ".png", (certificate).split(",").pop(), {
                                                 base64: true
                                             });
                                         });
@@ -526,78 +513,77 @@ class CreateApostilleCtrl {
         }
     }
 
-    // Draw the certificate
+    /**
+     * Draw an apostille certificate
+     */
     drawCertificate(filename, dateCreated, owner, tags, from, to, recipientPrivateKey, txHash, txHex, url) {
+        return new Promise((resolve, reject) => {
 
-        let deferred = this._$q.defer();
+            let canvas = document.createElement('canvas');
+            let context = canvas.getContext('2d');
 
-        let canvas = document.createElement('canvas');
-        let context = canvas.getContext('2d');
+                let imageObj = new Image();
 
-        let qrCode = kjua({
-            size: 256,
-            render: canvas,
-            text: url,
-            fill: '#000',
-            quiet: 0,
-            ratio: 2,
-        });
+                imageObj.onload = () => {
+                    context.canvas.width = imageObj.width;
+                    context.canvas.height = imageObj.height;
+                    context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
+                    context.font = "38px Roboto Arial sans-serif";
+                    // Top part
+                    context.fillText(filename, 541, 756);
+                    context.fillText(dateCreated, 607, 873);
+                    context.fillText(owner, 458, 989);
+                    context.fillText(tags, 426, 1105);
 
-        qrCode.toBlob((blob) => {
+                    // bottom part
+                    context.font = "30px Roboto Arial sans-serif";
+                    context.fillText(from, 345, 1550);
+                    context.fillText(to, 345, 1690);
+                    context.fillText(recipientPrivateKey, 345, 1846);
+                    context.fillText(txHash, 345, 1994);
 
-            let imageObj = new Image();
-
-            imageObj.onload = function() {
-                context.canvas.width = imageObj.width;
-                context.canvas.height = imageObj.height;
-                context.drawImage(imageObj, 0, 0, imageObj.width, imageObj.height);
-                context.font = "38px Roboto Arial sans-serif";
-                // Top part
-                context.fillText(filename, 541, 756);
-                context.fillText(dateCreated, 607, 873);
-                context.fillText(owner, 458, 989);
-                context.fillText(tags, 426, 1105);
-
-                // bottom part
-                context.font = "30px Roboto Arial sans-serif";
-                context.fillText(from, 345, 1550);
-                context.fillText(to, 345, 1690);
-                context.fillText(recipientPrivateKey, 345, 1846);
-                context.fillText(txHash, 345, 1994);
-
-                // Wrap file hash if too long
-                if (txHex.length > 70) {
-                    let x = 345;
-                    let y = 2137;
-                    let lineHeight = 35;
-                    let lines = txHex.match(/.{1,70}/g)
-                    for (var i = 0; i < lines.length; ++i) {
-                        context.fillText(lines[i], x, y);
-                        y += lineHeight;
+                    // Wrap file hash if too long
+                    if (txHex.length > 70) {
+                        let x = 345;
+                        let y = 2137;
+                        let lineHeight = 35;
+                        let lines = txHex.match(/.{1,70}/g)
+                        for (var i = 0; i < lines.length; ++i) {
+                            context.fillText(lines[i], x, y);
+                            y += lineHeight;
+                        }
+                    } else {
+                        context.fillText(txHex, 345, 2137);
                     }
-                } else {
-                    context.fillText(txHex, 345, 2137);
-                }
 
-                // Qr code
-                let image = new Image();
-                let URLobject = (window.URL ? URL : webkitURL).createObjectURL(blob);
-                image.onload = function() {
-                    context.drawImage(image, 1687, 688);
-
-                    // Revoke url object
-                    (window.URL ? URL : webkitURL).revokeObjectURL(URLobject);
-                    // Resolve promise
-                    deferred.resolve(canvas.toDataURL());
+                    let qr = qrcode(10, 'H');
+                    qr.addData(url);
+                    qr.make();
+                    let tileW = 500  / qr.getModuleCount();
+                    let tileH = 500 / qr.getModuleCount();
+                    for( let row = 0; row < qr.getModuleCount(); row++ ){
+                        for( let col = 0; col < qr.getModuleCount(); col++ ){
+                            context.fillStyle = qr.isDark(row, col) ? "#000000" : "#ffffff";
+                            let w = (Math.ceil((col+1)*tileW) - Math.floor(col*tileW));
+                            let h = (Math.ceil((row+1)*tileW) - Math.floor(row*tileW));
+                            context.fillRect(Math.round(col*tileW)+1687,Math.round(row*tileH)+688, w, h);  
+                        }
+                    }
+                    return resolve(canvas.toDataURL());
                 };
-                image.crossOrigin = "Anonymous";
-                image.src = URLobject;
-            };
             imageObj.crossOrigin = "Anonymous";
-            imageObj.src = apostille.certificate;
+            imageObj.src = "./images/certificate.png";
         });
+    }
 
-        return deferred.promise;
+    // Push in rejected array
+    pushError(message, filename, tags) {
+        this._Alert.transactionError(message);
+        this.rejected.push({
+            "filename": filename,
+            "tags": tags,
+            "reason": message
+        });
     }
 
 }

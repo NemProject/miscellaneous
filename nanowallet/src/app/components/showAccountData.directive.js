@@ -9,7 +9,7 @@ function ShowAccountData(DataBridge, $filter) {
             scope.$watch('DataBridge.accountData', function(val) {
                 if (val) {
                     if (attrs.showAccountData === 'balance') {
-                        element.html("<span><b>" + $filter('fmtNemValue')(val.account.balance) + " XEM</b></span>")
+                        element.html("<span><b>" + $filter('fmtNemValue')(val.account.balance)[0] + "."+ $filter('fmtNemValue')(val.account.balance)[1] +" XEM</b></span>")
                     } else if (attrs.showAccountData === 'importance') {
                         element.html("<span>" + $filter('fmtNemImportanceScore')(val.account.importance) + "* 10<sup>(-5)</sup></span>")
                     } else if (attrs.showAccountData === 'harvestedBlocks') {
@@ -23,11 +23,11 @@ function ShowAccountData(DataBridge, $filter) {
                             element.html("<span>" + val.account.publicKey + "</span>")
                         }
                     } else if (attrs.showAccountData === 'vestedBalance') {
-                        element.html("<span>" + $filter('fmtNemValue')(val.account.vestedBalance) + "</span>")
+                        element.html("<span>" + $filter('fmtNemValue')(val.account.vestedBalance)[0] + "." + $filter('fmtNemValue')(val.account.vestedBalance)[1] +" </span>")
                     }
                 } else {
                     if (attrs.showAccountData === 'balance') {
-                        element.html("<span><b>" + $filter('fmtNemValue')(0) + " XEM</b></span>")
+                        element.html("<span><b>" + $filter('fmtNemValue')(0) + "." + $filter('fmtNemValue')(1) +" XEM</b></span>")
                     } else if (attrs.showAccountData === 'importance') {
                         element.html("<span><b>" + $filter('fmtNemImportanceScore')(0) + "* 10<sup>(-5)</sup></b></span>")
                     } else if (attrs.showAccountData === 'harvestedBlocks') {

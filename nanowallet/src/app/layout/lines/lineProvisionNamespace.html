@@ -1,8 +1,8 @@
 <table id="NSTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'NAMESPACE_PROVISION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#NStable{{number}}">
-            <td style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-upload text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_NS_CREATE' | translate }} "<span class="text-muted">{{tx.parent}}</span><span ng-show="tx.parent">.</span><strong>{{tx.newPart}}</strong>"</tt></td>
-            <td>
+            <td class="namespaceTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-sitemap text-danger" ng-show="!parent"></span> <span class="fa fa-sitemap text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_NS_CREATE' | translate }} "<span class="text-muted">{{tx.parent}}</span><span ng-show="tx.parent">.</span><strong>{{tx.newPart}}</strong>"</tt></td>
+            <td class="amountTx">
                 <span ng-show="!parent">
                     <strong>{{((tx.rentalFee+tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.rentalFee+tx.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
@@ -13,7 +13,7 @@
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>
-            <td></td>
+            <td class="messageTx"></td>
             <td>{{tx.timeStamp | fmtNemDate}}</td>
         </tr>
         </tody>
@@ -128,7 +128,7 @@
                         <hr style="border-style: dashed;margin:5px;" />
                     </div>
                 </div>
-        
+
         <div class="row">
             <div class="col-sm-3"><b>{{ 'GENERAL_BLOCK' | translate }}</b></div>
             <div class="col-sm-9">
@@ -138,7 +138,7 @@
         </div>
 
         <div class="row">
-                <div class="col-sm-3"> 
+                <div class="col-sm-3">
                     <b>{{ 'LINE_TX_DETAILS_HASH' | translate }}</b>
                 </div>
                 <div class="col-sm-9">

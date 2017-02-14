@@ -2,12 +2,12 @@
 
 ### How to use Nano Wallet ? ###
 
-After downloading the latest version here https://forum.nem.io/t/nano-wallet-beta-1-1-11-5-000-xem-bug-bounty/2791, extract the NanoWallet folder from the archive, then you can simply click on start.html to open the app in your default browser. No installation or local server needed. 
+After downloading the latest version here https://forum.nem.io/t/nano-wallet-beta-1-1-11-5-000-xem-bug-bounty/2791, extract the NanoWallet folder from the archive, then you can simply click on start.html to open the app in your default browser. No installation or local server needed.
 
 ### How to import NCC wallet ? ###
 
 Open NCC and your wallet, clicking on user icon should reveal a drop-down menu with "Export to ligthwallet".
-Once your have your wallet (.json format), open Nano and import it from the login page. It'll ask for an upgrade and trigger the download of your updated wallet. 
+Once your have your wallet (.json format), open Nano and import it from the login page. It'll ask for an upgrade and trigger the download of your updated wallet.
 Do not delete your old NCC wallet and keep it safe somewhere.
 
 ### Imported accounts that are already harvesting using NCC ###
@@ -35,6 +35,18 @@ Before update make sure that you don't have any wallets stored into the NanoWall
 3) Build:
 
 <pre>gulp</pre>
+
+##### OR #####
+
+4) Run NanoWallet as App (packaged with chromium browser)
+
+<pre>npm run devApp</pre>
+
+##### OR #####
+
+5) Build NanoWallet apps for production, default set to : win64,osx64,linux64
+
+<pre>gulp build-app</pre>
 
 ### Known issues ###
 

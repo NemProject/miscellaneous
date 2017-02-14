@@ -34,7 +34,9 @@ class LoginCtrl {
             'password': '',
             'privateKey': ''
         };
-
+        $timeout( function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
     }
 
     /**
