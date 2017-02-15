@@ -55,32 +55,33 @@
 
             <!--  ADDRESS BOOK -->
             <fieldset class="form-group">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'GENERAL_TO' | translate}}</button>
-                    </span>
-                    <!-- Delayed input with debounce -->
-                    <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
-
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" style="cursor:pointer;opacity:1;" data-toggle="modal" data-target="#addressBookModal">
-                            <i class="fa">&#xf2b9;</i>
-                        </button>
-                    </span>
-                </div>
-            </fieldset>
-
-
-            <!--  RECIPIENT ADDRESS OR ALIAS -->
-            <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{'GENERAL_TO' | translate}}: </label>
                 </span>
-                <!-- Delayed input with debounce -->
+                <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
+                  <!-- <button class="btn btn-default" type="button" style="cursor:pointer;opacity:1;" data-toggle="modal" data-target="#addressBookModal">
+                    <i class="fa">&#xf2b9;</i>
+                  </button> -->
+                  <span class="input-group-btn adding">
+                    <!-- Disabled if no public key or no address or cosig === multisig -->
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addressBookModal" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
+                      <i class="fa">&#xf2b9;</i>
+                    </button>
+                  </span>
+
+                </div>
+            </fieldset>
+
+            <!--  RECIPIENT ADDRESS OR ALIAS -->
+            <!-- <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'GENERAL_TO' | translate}}: </label>
+                </span>
                 <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
               </div>
-            </fieldset>
+            </fieldset> -->
             <!-- ADDRESS THAT BELONGS TO ALIAS -->
             <fieldset class="form-group" ng-show="$ctrl.showAlias">
               <div class="input-group">
@@ -304,10 +305,7 @@
 
 
 
-</div>
-</div>
-</div>
-</div>
+
 <!-- Add new account modal -->
 <div id="addressBookModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -352,4 +350,8 @@
             </div>
         </div>
     </div>
+</div>
+
+</div>
+</div>
 </div>
