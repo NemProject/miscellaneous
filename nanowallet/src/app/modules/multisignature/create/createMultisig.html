@@ -85,7 +85,7 @@
                 </span>
               </div>
             </fieldset>
-            <!-- SIGNER ACCOUNT ALIAS -->
+            <!-- SHOW ADDRESS TO ADD IF ALIAS USED-->
             <fieldset class="form-group" ng-show="$ctrl.showAlias">
               <div class="input-group">
                 <span class="input-group-btn">
@@ -102,7 +102,7 @@
                 <span class="input-group-btn">
                   <label>{{ 'AGGREGATE_MIN_SIGNATURES' | translate }}: </label>
                 </span>
-                <input class="form-control form-control-lg"
+                <input class="form-control"
                   type="number"
                   placeholder="{{ 'AGGREGATE_MIN_SIGNATURES_PLACEHOLDER' | translate }}"
                   ng-model="$ctrl.formData.minCosigs" min="1" ng-change="$ctrl.updateFee();"/>
@@ -146,7 +146,7 @@
           <h3>{{ 'AGGREGATE_COSIG_LIST' | translate }}</h3>
           <div style="float: right; position: relative; display: block;" ng-show="$ctrl.cosignatoryArray.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
         </div>
-        <table class="table table-bordered table-hover table-striped table-condensed">
+        <table class="table table-condensed">
           <thead>
             <tr>
               <th>{{ 'GENERAL_ADDRESS' | translate }}</th>
@@ -155,7 +155,7 @@
             </tr>
           </thead>
         </table>
-        <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed" ng-show="$ctrl.cosignatoryArray.length">
+        <table class="table table-condensed" style="table-layout:fixed" ng-show="$ctrl.cosignatoryArray.length">
           <tbody>
             <tr ng-repeat="acct in $ctrl.cosignatoryArray | reverse | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
               <td style="word-break:break-all">{{acct.address}}</td>
