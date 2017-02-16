@@ -12,7 +12,7 @@
         <div class="form-group">
           <div class="input-group">
             <span class="input-group-btn">
-              <label for="namespaceParent" class="control-label">Select Wallet:* </label>
+              <label for="namespaceParent" class="control-label">{{ 'LOGIN_SELECT_WALLET_YOURS' | translate }}: </label>
             </span>
             <select class="form-control" ng-model="$ctrl.selectedWallet" ng-options="wallet.name group by (wallet.accounts[0].network | toNetworkName) for wallet in $ctrl._storage.wallets">
               <option value="" disabled selected>{{ 'LOGIN_SELECT_WALLET' | translate }}</option>
