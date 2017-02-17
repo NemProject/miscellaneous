@@ -53,16 +53,13 @@
               </div>
             </fieldset>
 
-            <!--  ADDRESS BOOK -->
+            <!--  ADDRESS BOOK, RECIPIENT ADDRESS OR ALIAS-->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{'GENERAL_TO' | translate}}: </label>
                 </span>
                 <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
-                  <!-- <button class="btn btn-default" type="button" style="cursor:pointer;opacity:1;" data-toggle="modal" data-target="#addressBookModal">
-                    <i class="fa">&#xf2b9;</i>
-                  </button> -->
                   <span class="input-group-btn adding">
                     <!-- Disabled if no public key or no address or cosig === multisig -->
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addressBookModal" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
@@ -72,16 +69,6 @@
 
                 </div>
             </fieldset>
-
-            <!--  RECIPIENT ADDRESS OR ALIAS -->
-            <!-- <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{'GENERAL_TO' | translate}}: </label>
-                </span>
-                <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
-              </div>
-            </fieldset> -->
             <!-- ADDRESS THAT BELONGS TO ALIAS -->
             <fieldset class="form-group" ng-show="$ctrl.showAlias">
               <div class="input-group">
@@ -220,18 +207,7 @@
               </div>
             </div>
           </div>
-
-        <!-- <div class="input-group">
-          <span class="input-group-btn">
-            <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
-          </span>
-          <div class="form-control formFloat" readOnly>
-            <input type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly disabled/>
-            <label class="floatRight"><small>XEM</small></label>
-          </div>
-        </div> -->
-
-
+          
         <!-- Mosaics attached table -->
         <div class="panel-default mosaicsAttached">
           <div class="panel-heading">

@@ -10,9 +10,8 @@
     <div class="row">
       <div class="col-sm-3 sidebar">
         <div class="panel panel-default">
-          <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-            <i class="fa fa-chevron-right"></i>
-            <span>{{ 'ADDRESS_BOOK_NAVIGATION' | translate }}</span>
+          <div class="panel-heading">
+            <h3>{{ 'ADDRESS_BOOK_NAVIGATION' | translate }}</h3>
           </div>
           <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
@@ -32,16 +31,16 @@
         </div>
       </div>
 
-      <div class="col-sm-9 noPaddingLeft">
+      <div class="col-sm-9">
         <div class="panel panel-default">
-          <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-            <i class="fa fa-group"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_LIST' | translate }}
-            <div style="float: right; position: relative; display: block;" ng-show="$ctrl.contacts.items.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+          <div class="panel-heading">
+            <h3>{{ 'ADDRESS_BOOK_LIST' | translate }}</h3>
+            <div ng-show="$ctrl.contacts.items.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
           </div>
-          <table  class="table table-condensed" style="table-layout:fixed;word-break:break-all;">
-            <thead style="color:white;">
+          <table  class="table table-condensed">
+            <thead>
             <tr>
-              <th style="width: 20%;">
+              <th>
                 <a href="javascript:;" ng-click="$ctrl.sortBy('label')">
                   <i class="fa" ng-show="$ctrl.propertyName === 'label'" ng-class="{'fa-caret-down': $ctrl.revers, 'fa-caret-up': !$ctrl.revers}"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_CONTACT_LABEL' | translate }}
                 </a>
@@ -51,14 +50,14 @@
                   <i class="fa" ng-show="$ctrl.propertyName === 'address'" ng-class="{'fa-caret-down': $ctrl.revers, 'fa-caret-up': !$ctrl.revers}"></i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_ACCOUNT_ADDRESS' | translate }}
                 </a>
               </th>
-              <th style="width: 200px;">{{ 'ADDRESS_BOOK_ACTIONS' | translate }}</th>
+              <th>{{ 'ADDRESS_BOOK_ACTIONS' | translate }}</th>
             </tr>
             </thead>
-            <tbody style="background-color:white;text-align:center">
+            <tbody>
             <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:$ctrl.propertyName:$ctrl.revers | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
-              <td style="vertical-align: middle;border-bottom: 1px solid #444">{{contact.label}}</td>
-              <td style="vertical-align: middle;border-bottom: 1px solid #444">{{contact.address}}</td>
-              <td class="actions" style="vertical-align: middle;border-bottom: 1px solid #444;white-space:nowrap;">
+              <td>{{contact.label}}</td>
+              <td>{{contact.address}}</td>
+              <td class="actions">
                 <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.transferTransaction(contact.address)">Send XEM</button>
                 <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.editContact(contact)">Edit</button>
                 <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.removeContact(contact)">Remove</button>
@@ -67,7 +66,7 @@
             </tbody>
           </table>
           <div class="panel-body" ng-show="!$ctrl.contacts.items.length">
-            <p style="margin:0;">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+            <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
           </div>
           <div class="text-center bg-info">
             <small><b><i>{{ 'ADDRESS_BOOK_MAX_NUMBER' | translate }} {{ $ctrl.pageSize }}</i></b></small>
