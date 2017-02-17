@@ -16,14 +16,14 @@
           <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
               <li>
-                <button type="button" class="btn btn-operations" ng-click="$ctrl.addContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
+                <button type="button" class="btn btn-success" ng-click="$ctrl.addContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
               </li>
               <li>
-                <button type="button" ng-disabled="!$ctrl.contacts.items.length" class="btn btn-operations" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
+                <button type="button" ng-disabled="!$ctrl.contacts.items.length" class="btn btn-success" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
                 <a id="exportAddressBook" class="hidden" target="_blank"></a>
               </li>
               <li>
-                <button type="button" class="btn btn-operations" ng-click="$ctrl.uploadAddressBook()">{{ 'ADDRESS_BOOK_IMPORT_BTN' | translate }}</button>
+                <button type="button" class="btn btn-success" ng-click="$ctrl.uploadAddressBook()">{{ 'ADDRESS_BOOK_IMPORT_BTN' | translate }}</button>
                 <input id="uploadAddressBook" accept=".adb" style="visibility:hidden;position:absolute;" import-address-book-file="$ctrl.importAddressBook($fileContent)" type="file">
               </li>
             </ul>
@@ -57,10 +57,16 @@
             <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:$ctrl.propertyName:$ctrl.revers | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
               <td>{{contact.label}}</td>
               <td>{{contact.address}}</td>
-              <td class="actions">
-                <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.transferTransaction(contact.address)">Send XEM</button>
-                <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.editContact(contact)">Edit</button>
-                <button type="button" class="btn btn-xs btn-warning" ng-click="$ctrl.removeContact(contact)">Remove</button>
+              <td class="actions row">
+                <div class="col-sm-4 inner">
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.transferTransaction(contact.address)">Send XEM</button>
+                </div>
+                <div class="col-sm-4">
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.editContact(contact)">Edit</button>
+                </div>
+                <div class="col-sm-4 inner">
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.removeContact(contact)">Remove</button>
+                </div>
               </td>
             </tr>
             </tbody>
