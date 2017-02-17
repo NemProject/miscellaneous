@@ -43,6 +43,10 @@ componentsModule.directive('importApostilleFiles', ImportApostilleFiles);
 import ImportNtyFile from './importNtyFile.directive';
 componentsModule.directive('importNtyFile', ImportNtyFile);
 
+// Set import-address-book-file directive
+import ImportAddressBookFile from './importAddressBookFile.directive';
+componentsModule.directive('importAddressBookFile', ImportAddressBookFile);
+
 
 
 export default componentsModule;

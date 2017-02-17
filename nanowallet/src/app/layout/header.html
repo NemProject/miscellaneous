@@ -16,6 +16,7 @@
       <ul class="nav navbar-nav" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account">
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.dashboard" show-authed="true"><i class="fa fa-home"></i> {{ 'HEADER_DASHBOARD' | translate }}</a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-send"></i> {{ 'HEADER_WALLET' | translate }}</a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.addressBook" show-authed="true"><i class="fa">&#xf2ba; </i> {{ 'ADDRESS_BOOK_TITLE' | translate }}</a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-book"></i> {{ 'HEADER_SERVICES' | translate }}</a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i> {{ 'HEADER_EXPLORER' | translate }}</a></li>
 
@@ -33,20 +34,6 @@
         <li><a class="login" ui-sref-active="active" ui-sref="app.login" show-authed="false"><small><b>{{ 'HEADER_LOGIN_BUTTON' | translate }}</b></small></a></li>
         <li><a style="outline:0;text-transform: uppercase;" ui-sref-active="active" ui-sref="app.signup" show-authed="false"><small><b>{{ 'HEADER_SIGNUP_BUTTON' | translate }}</b></small></a></li>
         <li class="node"><a data-toggle="modal" data-target=".nodes" aria-haspopup="true" aria-expanded="false" show-authed="true"><i class="fa fa-circle-o" show-network-status></i> {{ 'HEADER_NODE' | translate }}</a></li>
-        <!-- <li class="dropdown node">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" show-authed="true"><i class="fa fa-circle-o" show-network-status></i> {{ 'HEADER_NODE' | translate }}</a>
-          <ul class="dropdown-menu">
-            <li>{{ 'HEADER_NODE_BLOCK_HEIGHT' | translate }}</li>
-            <li show-block-height></li>
-            <li>{{ 'HEADER_NODE_CURRENT_NODE' | translate }}</li>
-            <li>{{ $ctrl.currentNode | toHostname }}</li>
-            <li>{{ 'HEARDER_NODE_LIST' | translate }}</li>
-             <li><select class="form-control" ng-model="$ctrl.currentNode" ng-change="$ctrl.changeNode($ctrl.currentNode)" ng-options="node.uri as (node.uri | toHostname) for node in $ctrl.nodes"><option value="" disabled selected>{{ 'HEADER_NODE_SELECT' | translate }}</option></select></li>
-             <li>{{ 'HEADER_NODE_CUSTOM' | translate }}</li>
-             <li><input type="text" class="form-control" ng-model="$ctrl.customNode" placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}"></li>
-             <li><button type="submit" class="btn btn-success" ng-click="$ctrl.changeNode($ctrl.customNode)">{{ 'HEADER_NODE_CONNECT' | translate }}</button></li>
-          </ul>
-        </li> -->
         <li class="account" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a ui-sref-active="active" ui-sref="app.account" show-authed="true">{{ 'HEADER_ACCOUNT' | translate }}</a></li>
         <li class="account2" ng-show="$ctrl._Wallet.currentAccount.label"><a>: {{ $ctrl._Wallet.currentAccount.label }}</a></li>
         <li style="display:none"><a style="outline:0;cursor:default;" show-authed="true" show-block-height></a></li>

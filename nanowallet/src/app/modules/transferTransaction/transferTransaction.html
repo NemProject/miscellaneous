@@ -52,15 +52,22 @@
                 </div>
               </div>
             </fieldset>
-            <!--  RECIPIENT ADDRESS OR ALIAS -->
+
+            <!--  ADDRESS BOOK, RECIPIENT ADDRESS OR ALIAS-->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{'GENERAL_TO' | translate}}: </label>
                 </span>
-                <!-- Delayed input with debounce -->
                 <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
-              </div>
+                  <span class="input-group-btn adding">
+                    <!-- Disabled if no public key or no address or cosig === multisig -->
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addressBookModal" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
+                      <i class="fa">&#xf2b9;</i>
+                    </button>
+                  </span>
+
+                </div>
             </fieldset>
             <!-- ADDRESS THAT BELONGS TO ALIAS -->
             <fieldset class="form-group" ng-show="$ctrl.showAlias">
@@ -200,18 +207,7 @@
               </div>
             </div>
           </div>
-
-        <!-- <div class="input-group">
-          <span class="input-group-btn">
-            <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
-          </span>
-          <div class="form-control formFloat" readOnly>
-            <input type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly disabled/>
-            <label class="floatRight"><small>XEM</small></label>
-          </div>
-        </div> -->
-
-
+          
         <!-- Mosaics attached table -->
         <div class="panel-default mosaicsAttached">
           <div class="panel-heading">
@@ -285,5 +281,53 @@
 
 
 
-  </div>
+
+<!-- Add new account modal -->
+<div id="addressBookModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" ng-controller="AddressBookCtrl as address_book_ctrl">
+            <div class="modal-header" style="border-bottom:3px solid #dfa82f;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="fa">&#xf2b9;</i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_TITLE' | translate }}</h4>
+            </div>
+            <div class="modal-body">
+                <table ng-show="address_book_ctrl.contacts.items.length" class="table table-striped table-condensed" style="table-layout:fixed;word-break:break-all;margin-bottom:0;">
+                    <thead style="color:white;">
+                        <tr>
+                            <th style="width: 25%;">
+                                {{ 'ADDRESS_BOOK_CONTACT_LABEL' | translate }}
+                            </th>
+                            <th>
+                               {{ 'ADDRESS_BOOK_ACCOUNT_ADDRESS' | translate }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color:white;text-align:center">
+                        <tr ng-repeat="contact in address_book_ctrl.contacts.items | orderBy:'label':false | startFrom:address_book_ctrl.currentPage*address_book_ctrl.pageSize | limitTo:address_book_ctrl.pageSize">
+                            <td style="vertical-align: middle;width: 25%;">{{contact.label}}</td>
+                            <td style="vertical-align: middle;">
+                                <button style="width: 100%; border: 1px solid rgba(153, 153, 153, 0.52); background: #E3E0CF;" type="button" class="btn btn-sm" data-dismiss="modal" ng-click="$ctrl.formData.rawRecipient = contact.address; $ctrl.processRecipientInput()">{{contact.address}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p ng-show="!address_book_ctrl.contacts.items.length" style="margin:15px;">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+            </div>
+            <div class="modal-footer clearfix">
+                <div class="custom-pagination" style="float: left; position: relative; display: block;" ng-show="address_book_ctrl.contacts.items.length > address_book_ctrl.pageSize">
+                    <button class="buttonStyle" ng-disabled="address_book_ctrl.currentPage == 0" ng-click="address_book_ctrl.currentPage = address_book_ctrl.currentPage-1" style="background-color: transparent; border: medium none;">
+                        <span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{address_book_ctrl.currentPage+1}}/{{address_book_ctrl.numberOfPages()}}</b>
+                    <button class="buttonStyle" ng-disabled="address_book_ctrl.currentPage+1 >= address_book_ctrl.numberOfPages()" ng-click="address_book_ctrl.currentPage = address_book_ctrl.currentPage+1" style="background-color: transparent; border: medium none;">
+                        <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
 </div>

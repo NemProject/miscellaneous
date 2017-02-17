@@ -22609,6 +22609,26 @@ var haveWallet = function haveWallet(walletName, array) {
 };
 
 /**
+ * Check if address book already present in an array
+ *
+ * @param {string} addressBookName - A address book name
+ * @param {array} array - A address books array
+ *
+ * @return {boolean} - True if present, false otherwise
+ */
+/** @module utils/helpers */
+
+var haveAddressBook = function haveAddressBook(addressBookName, array) {
+    var i = null;
+    for (i = 0; array.length > i; i++) {
+        if (array[i].name === addressBookName) {
+            return array[i];
+        }
+    }
+    return false;
+};
+
+/**
  * Check if a multisig transaction needs signature
  *
  * @param {object} multisigTransaction - A multisig transaction
@@ -22616,8 +22636,6 @@ var haveWallet = function haveWallet(walletName, array) {
  *
  * @return {boolean} - True if it needs signature, false otherwise
  */
-/** @module utils/helpers */
-
 var needsSignature = function needsSignature(multisigTransaction, data) {
     if (multisigTransaction.transaction.signer === data.account.publicKey) {
         return false;
@@ -22936,6 +22954,7 @@ var convertDateToString = function convertDateToString(date) {
 
 module.exports = {
     haveWallet: haveWallet,
+    haveAddressBook: haveAddressBook,
     needsSignature: needsSignature,
     txTypeToName: txTypeToName,
     haveTx: haveTx,

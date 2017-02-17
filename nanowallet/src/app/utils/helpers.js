@@ -23,6 +23,24 @@ let haveWallet = function(walletName, array) {
 }
 
 /**
+ * Check if address book already present in an array
+ *
+ * @param {string} addressBookName - A address book name
+ * @param {array} array - A address books array
+ *
+ * @return {boolean} - True if present, false otherwise
+ */
+let haveAddressBook = function(addressBookName, array) {
+    let i = null;
+    for (i = 0; array.length > i; i++) {
+        if (array[i].name === addressBookName) {
+            return array[i];
+        }
+    }
+    return false;
+}
+
+/**
  * Check if a multisig transaction needs signature
  *
  * @param {object} multisigTransaction - A multisig transaction
@@ -348,6 +366,7 @@ let convertDateToString = function(date) {
 
 module.exports = {
     haveWallet,
+    haveAddressBook,
     needsSignature,
     txTypeToName,
     haveTx,
