@@ -331,7 +331,7 @@
                         <tr ng-repeat="contact in address_book_ctrl.contacts.items | orderBy:'label':false | startFrom:address_book_ctrl.currentPage*address_book_ctrl.pageSize | limitTo:address_book_ctrl.pageSize">
                             <td style="vertical-align: middle;width: 25%;">{{contact.label}}</td>
                             <td style="vertical-align: middle;">
-                                <button style="width: 100%; border: 1px solid rgba(153, 153, 153, 0.52); background: #E3E0CF;" type="button" class="btn btn-sm" data-dismiss="modal" ng-click="$ctrl.formData.rawRecipient = contact.address">{{contact.address}}</button>
+                                <button style="width: 100%; border: 1px solid rgba(153, 153, 153, 0.52); background: #E3E0CF;" type="button" class="btn btn-sm" data-dismiss="modal" ng-click="$ctrl.formData.rawRecipient = contact.address; $ctrl.processRecipientInput()">{{contact.address}}</button>
                             </td>
                         </tr>
                     </tbody>

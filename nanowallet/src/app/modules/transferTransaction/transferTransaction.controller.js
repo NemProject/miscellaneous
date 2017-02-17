@@ -19,7 +19,8 @@ class TransferTransactionCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
-
+        // RootScope object
+        this._RootScope = $rootScope;
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
             this._Alert.noWalletLoaded();
@@ -28,7 +29,7 @@ class TransferTransactionCtrl {
         }
 
         /**
-         * Default transfer transaction properties 
+         * Default transfer transaction properties
          */
         this.formData = {};
         // Alias or address user type in
@@ -92,6 +93,8 @@ class TransferTransactionCtrl {
         this.updateInvoiceQR();
 
         this.updateFees();
+        // Address Book
+        this.processRecipientInput();
     }
 
     /**
@@ -149,7 +152,7 @@ class TransferTransactionCtrl {
 
     /**
      * processRecipientInput() Process recipient input and get data from network
-     * 
+     *
      * @note: I'm using debounce in view to get data typed with a bit of delay,
      * it limits network requests
      */
@@ -203,7 +206,7 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientData() Get recipient account data from network
-     * 
+     *
      * @param address: The recipient address
      */
     getRecipientData(address) {
@@ -224,7 +227,7 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientDataFromAlias() Get recipient account data from network using @alias
-     * 
+     *
      * @param alias: The recipient alias (namespace)
      */
     getRecipientDataFromAlias(alias) {
@@ -257,7 +260,7 @@ class TransferTransactionCtrl {
      * attachMosaic() Get selected mosaic and push it in mosaics array
      */
     attachMosaic() {
-        // increment counter 
+        // increment counter
         this.counter++;
         // Get current account
         let acct = this._Wallet.currentAccount.address;
@@ -285,8 +288,8 @@ class TransferTransactionCtrl {
 
     /**
      * removeMosaic() Remove a mosaic from mosaics array
-     * 
-     * @param index: Index of mosaic object in the array 
+     *
+     * @param index: Index of mosaic object in the array
      */
     removeMosaic(index) {
         this.formData.mosaics.splice(index, 1);
@@ -310,9 +313,9 @@ class TransferTransactionCtrl {
             // Set current account mosaics names if mosaicOwned is not undefined
             if (undefined !== this._DataBridge.mosaicOwned[acct]) {
                 this.currentAccountMosaicData = this._DataBridge.mosaicOwned[acct];
-                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort(); 
+                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort();
             } else {
-                this.currentAccountMosaicNames = ["nem:xem"]; 
+                this.currentAccountMosaicNames = ["nem:xem"];
                 this.currentAccountMosaicData = "";
             }
             // Default selected is nem:xem
@@ -331,6 +334,8 @@ class TransferTransactionCtrl {
         this.formData.recipient = '';
         // Encrypt message set to false
         this.formData.encryptMessage = false;
+        // Reset cleaned recipient address from $RootScope
+        this._RootScope.address = '';
     }
 
     /**
