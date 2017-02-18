@@ -174,6 +174,12 @@ th {
   min-width: 55px;
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
   padding-top: 40px; }
+  th a, th a:active, th a:focus {
+    color: grey;
+    text-decoration: none; }
+  th a:hover {
+    color: #69b2e5;
+    text-decoration: none; }
 
 .table-hover > tbody > tr:hover {
   background-color: rgba(105, 178, 229, 0.1); }
@@ -567,10 +573,19 @@ input[type=checkbox]:checked + label:before {
     margin-left: 0px !important;
     color: grey !important; }
 
-.nodes .modal-sm {
-  min-width: 600px; }
-  .nodes .modal-sm .col-sm-12 {
+.modal .modal-sm {
+  min-width: 700px; }
+  .modal .modal-sm .col-sm-12 {
     padding: 40px; }
+  .modal .modal-sm .btn-danger {
+    width: 100%;
+    border-radius: 0; }
+  .modal .modal-sm .book {
+    border-radius: 0px;
+    background: transparent;
+    padding-left: 0px; }
+    .modal .modal-sm .book:hover {
+      color: #3e9cdd; }
 
 /*** GLOBAL FOOTER STYLES ***/
 footer {
