@@ -31,7 +31,6 @@ coverage
 build/Release
 
 # App builds
-build
 dist
 cache
 
