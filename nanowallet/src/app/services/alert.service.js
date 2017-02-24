@@ -383,6 +383,13 @@ export default class Alert {
         });
     }
 
+    invalidAddress(addr) {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_ADDRESS'),
+            className: 'danger'
+        });
+    }
+
     /***
      * Success alerts
      */

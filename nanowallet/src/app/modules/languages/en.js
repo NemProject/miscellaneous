@@ -506,6 +506,7 @@ function EnglishProvider($translateProvider) {
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
+        ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -518,7 +519,7 @@ function EnglishProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: 'Transaction successfully signed !',
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
-        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Address book successfully imported !',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
