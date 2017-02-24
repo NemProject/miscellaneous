@@ -24,6 +24,7 @@ function PolishProvider($translateProvider) {
         HEADER_NODE_CUSTOM: 'Własny serwer',
         HEADER_NODE_CONNECT: 'Połącz',
         HEADER_NODE_CUSTOM_INFO: 'IP serwera lub domena',
+        HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
         HEADER_PURGE: 'Wyczyść',
         HEADER_PURGE_MESSAGE: 'Proszę potwierdzić czyszczenie pamięci przeglądarki. Po wciśnięciu "OK" wszystkie portfele w lokalnej pamięci zostaną usunięte i nie będzie można ich odzyskać. Zgadzasz się z tym, że posiadasz kopie zapasowe portfeli i że fundusze są zabezpieczone.',
 
@@ -347,6 +348,22 @@ function PolishProvider($translateProvider) {
         PORTAL_APOSTILLE_BTN_1: 'Utwórz',
         PORTAL_APOSTILLE_BTN_2: 'Audytuj',
 
+        // ADDRESS BOOK MODULE
+        ADDRESS_BOOK_TITLE: 'Address book',
+        ADDRESS_BOOK_LIST: 'Contacts',
+        ADDRESS_BOOK_NAVIGATION: 'Navigation',
+        ADDRESS_BOOK_NEW: 'New contact',
+        ADDRESS_BOOK_EDIT: 'Edit contact',
+        ADDRESS_BOOK_REMOVE: 'Remove contact',
+        ADDRESS_BOOK_NEW_BTN: 'Add',
+        ADDRESS_BOOK_EDIT_BTN: 'Save',
+        ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+        ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+        ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+        ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+        ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+        ADDRESS_BOOK_ACTIONS: 'Actions',
+
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
         EXPLORER_NAV_NSM: 'Namespaces i Mozaiki',
@@ -493,6 +510,7 @@ function PolishProvider($translateProvider) {
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+        ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -505,6 +523,7 @@ function PolishProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: 'Podpisanie transakcji powiodło się !',
         ALERT_NTY_FILE_SUCCESS: 'Udało się załadować plik nty !',
         ALERT_INCOMING_TX_FROM: 'Transakcja przychodząca od ',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Zamień konto na konto z multipodpisem',

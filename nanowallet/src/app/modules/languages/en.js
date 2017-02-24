@@ -24,6 +24,7 @@ function EnglishProvider($translateProvider) {
         HEADER_NODE_CUSTOM: 'Custom node',
         HEADER_NODE_CONNECT: 'Connect',
         HEADER_NODE_CUSTOM_INFO: 'Node ip or domain',
+        HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
         HEADER_PURGE: 'Purge',
         HEADER_PURGE_MESSAGE: 'Please confirm the purge of local storage. By clicking "OK" all wallets in local storage will be deleted and will not be recoverable. You agree that all wallets have been backed up and funds are secured.',
 
@@ -359,7 +360,6 @@ function EnglishProvider($translateProvider) {
         ADDRESS_BOOK_CONTACT_LABEL: 'Label',
         ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
         ADDRESS_BOOK_ACTIONS: 'Actions',
-        ADDRESS_BOOK_MAX_NUMBER: 'Maximum contacts per batch is',
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',

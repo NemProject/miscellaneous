@@ -24,6 +24,7 @@ function JapaneseProvider($translateProvider) {
       HEADER_NODE_CUSTOM: "カスタムノード",
       HEADER_NODE_CONNECT: "接続",
       HEADER_NODE_CUSTOM_INFO: "ノードの IP もしくは、ドメイン",
+      HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
       HEADER_PURGE: "アカウントデータの削除(パージ)",
       HEADER_PURGE_MESSAGE: "必ずバックアップを行った上で実行して下さい。OK をクリックすると、ローカルストレージに登録されているすべてのウォレットが削除(パージ)されます。すべてのウォレットをバックアップしていた場合、残高は安全です。（回復にはバックアップファイルの再読み込みが必要になります）",
 
@@ -350,6 +351,22 @@ function JapaneseProvider($translateProvider) {
       PORTAL_APOSTILLE_BTN_1: "作成",
       PORTAL_APOSTILLE_BTN_2: "監査（公証の確認）",
 
+      // ADDRESS BOOK MODULE
+      ADDRESS_BOOK_TITLE: 'Address book',
+      ADDRESS_BOOK_LIST: 'Contacts',
+      ADDRESS_BOOK_NAVIGATION: 'Navigation',
+      ADDRESS_BOOK_NEW: 'New contact',
+      ADDRESS_BOOK_EDIT: 'Edit contact',
+      ADDRESS_BOOK_REMOVE: 'Remove contact',
+      ADDRESS_BOOK_NEW_BTN: 'Add',
+      ADDRESS_BOOK_EDIT_BTN: 'Save',
+      ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+      ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+      ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+      ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+      ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+      ADDRESS_BOOK_ACTIONS: 'Actions',
+
       // EXPLORER MODULE NAV
       EXPLORER_NAV_HOME: "ホーム",
       EXPLORER_NAV_NSM: "ネームスペースとモザイク",
@@ -496,6 +513,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
       ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
       ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+      ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -508,6 +526,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_SIGNATURE_SUCCESS: "トランザクションは正常にサインされました。",
       ALERT_NTY_FILE_SUCCESS: ".nty ファイルは正常にロードされました。",
       ALERT_INCOMING_TX_FROM: "トランザクションを受信",
+      ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
 
       // CONVERT ACCOUNT TO MULTISIG
       AGGREGATE_MODIFICATION_TITLE: "マルチシグアカウントへ変換",

@@ -24,6 +24,7 @@ function ChineseProvider($translateProvider) {
         HEADER_NODE_CUSTOM: '自定义节点',
         HEADER_NODE_CONNECT: '连接',
         HEADER_NODE_CUSTOM_INFO: '节点IP或域名',
+        HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
         HEADER_PURGE: '清理',
         HEADER_PURGE_MESSAGE: '请确认清理功能将删除您本地保存的全部信息。如确认，点击OK，本地存储的所有钱包信息将被全部删除，请确认所有钱包均已做好备份，确保资金安全。',
 
@@ -349,6 +350,22 @@ function ChineseProvider($translateProvider) {
         PORTAL_APOSTILLE_BTN_1: '创建',
         PORTAL_APOSTILLE_BTN_2: '审计',
 
+        // ADDRESS BOOK MODULE
+        ADDRESS_BOOK_TITLE: 'Address book',
+        ADDRESS_BOOK_LIST: 'Contacts',
+        ADDRESS_BOOK_NAVIGATION: 'Navigation',
+        ADDRESS_BOOK_NEW: 'New contact',
+        ADDRESS_BOOK_EDIT: 'Edit contact',
+        ADDRESS_BOOK_REMOVE: 'Remove contact',
+        ADDRESS_BOOK_NEW_BTN: 'Add',
+        ADDRESS_BOOK_EDIT_BTN: 'Save',
+        ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+        ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+        ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+        ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+        ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+        ADDRESS_BOOK_ACTIONS: 'Actions',
+
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: '主页',
         EXPLORER_NAV_NSM: '命名空间和马赛克',
@@ -494,6 +511,7 @@ function ChineseProvider($translateProvider) {
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+        ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -506,6 +524,7 @@ function ChineseProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: '交互已成功签署！',
         ALERT_NTY_FILE_SUCCESS: '成功加载nty文件！',
         ALERT_INCOMING_TX_FROM: '接收交互，来源',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: '变更账户至多重签名',
