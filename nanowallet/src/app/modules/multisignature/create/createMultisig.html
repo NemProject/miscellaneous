@@ -10,8 +10,7 @@
       <div class="col-md-6">
         <div class="panel-heading">
           <div class="tabDescription">
-            <span ng-show="!$ctrl.useCustomAccount">{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}</span>
-            <span ng-show="$ctrl.useCustomAccount">{{ 'MOSAIC_DEFINITION_MULTISIG_NAME' | translate }}</span>
+            <span >{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
             <li ng-show="$ctrl.haveMoreThanOneAccount" ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
