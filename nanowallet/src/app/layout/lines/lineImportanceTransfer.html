@@ -1,4 +1,4 @@
-<table id="txTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'IMPORTANCE_TRANSFER_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="txTable" class="table table-bordered table-hover" title="{{ 'IMPORTANCE_TRANSFER_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;">
         <tr data-toggle="collapse" data-target="#importanceTx{{number}}" style="outline:0">
             <td class="importanceTx" style="overflow:hidden;text-overflow: ellipsis;"><tt><span class="fa fa-chain text-danger" ng-show="!parent"></span> <span class="fa fa-chain text-danger" ng-show="parent"></span> {{ 'IMPORTANCE_TRANSFER_NAME' | translate }}</tt></td>

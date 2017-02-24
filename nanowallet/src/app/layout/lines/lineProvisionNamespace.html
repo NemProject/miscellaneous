@@ -1,4 +1,4 @@
-<table id="NSTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'NAMESPACE_PROVISION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="NSTable" class="table table-bordered table-hover" title="{{ 'NAMESPACE_PROVISION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#NStable{{number}}">
             <td class="namespaceTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-sitemap text-danger" ng-show="!parent"></span> <span class="fa fa-sitemap text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_NS_CREATE' | translate }} "<span class="text-muted">{{tx.parent}}</span><span ng-show="tx.parent">.</span><strong>{{tx.newPart}}</strong>"</tt></td>
