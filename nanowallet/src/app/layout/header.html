@@ -93,14 +93,14 @@
             <fieldset class="form-group" autocomplete="off">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'HEADER_NODE_CUSTOM' | translate }}: </label>
+                  <label data-toggle="tooltip" data-placement="bottom" title="{{ 'ACCOUNT_CUSTOM_NODE' | translate }}">{{ 'HEADER_NODE_CUSTOM' | translate }}: <i class="fa fa-question-circle-o"></i> </label>
                 </span>
                 <input class="form-control"
                     type="number" autocomplete="off"
                     placeholder="{{ 'HEADER_NODE_CUSTOM_INFO' | translate }}"
                     ng-model="$ctrl.customNode" ng-model-options="{debounce:500}"/>
                 <span class="input-group-btn adding">
-                  <button type="button" class="btn btn-warning" ng-click="$ctrl.changeNode($ctrl.customNode)" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
+                  <button type="button" class="btn btn-warning" ng-click="$ctrl.changeNode($ctrl.customNode)">
                     <i class="fa fa-plus"></i>
                   </button>
                 </span>

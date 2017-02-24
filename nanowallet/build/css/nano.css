@@ -358,8 +358,11 @@ input.form-control.short {
 .text-success {
   color: #00b300; }
 
-fieldset {
-  overflow: hidden; }
+fieldset .form-control {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 260px; }
 
 .reverseEllipsis {
   white-space: nowrap;
@@ -444,6 +447,28 @@ fieldset {
     cursor: not-allowed; }
 
 /*** CHROME SPECIFIC STYLES ***/
+/*** TOOLTIP GLOBAL STYLES ***/
+.tooltip-inner {
+  color: white;
+  border: 1px solid #69b2e5;
+  background: #69b2e5; }
+
+.tooltip.top .tooltip-arrow {
+  border-top-color: #69b2e5; }
+
+.tooltip.left .tooltip-arrow {
+  border-left-color: #69b2e5; }
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: #69b2e5; }
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #69b2e5; }
+
+i.fa-question-circle-o, i.fa-question {
+  font-size: 16px;
+  vertical-align: top; }
+
 /*** FILE UPLOAD GLOBAL STYLES ***/
 .fileUpload {
   position: relative;

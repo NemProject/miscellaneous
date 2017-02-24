@@ -5,9 +5,9 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet) {
     $rootScope.$on('$stateChangeSuccess', (event, toState) => {
         $rootScope.setPageTitle(toState.title);
         // enable tooltips globally
-        // $timeout( function() {
-        //     $('[data-toggle="tooltip"]').tooltip()
-        // });
+        $timeout( function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
     });
 
     // Helper method for setting the page's title

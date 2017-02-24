@@ -275,9 +275,13 @@ input.form-control.short{
   color: $greenLite;
 }
 
-fieldset {
-  overflow: hidden;
+fieldset .form-control {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 260px;
 }
+
 .reverseEllipsis {
   white-space: nowrap;
   max-width: 300px;
@@ -381,6 +385,28 @@ fieldset {
 // 	-webkit-box-shadow:0 0 0 500px $blueXLite inset;
 // }
 
+/*** TOOLTIP GLOBAL STYLES ***/
+.tooltip-inner {
+	color: $white;
+	border: 1px solid $blue;
+	background: $blue;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: $blue;
+}
+.tooltip.left .tooltip-arrow {
+  border-left-color: $blue;
+}
+.tooltip.right .tooltip-arrow {
+  border-right-color: $blue;
+}
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: $blue;
+}
+i.fa-question-circle-o, i.fa-question {
+	font-size: 16px;
+	vertical-align: top;
+}
 /*** FILE UPLOAD GLOBAL STYLES ***/
 .fileUpload {
     position: relative;

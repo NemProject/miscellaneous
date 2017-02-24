@@ -62,7 +62,7 @@
                 <input class="form-control form-control-lg" type="text" placeholder="{{'FORM_RECIPIENT_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.rawRecipient" ng-model-options="{debounce:500}" ng-change="$ctrl.processRecipientInput()"/>
                   <span class="input-group-btn adding">
                     <!-- Disabled if no public key or no address or cosig === multisig -->
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addressBookModal" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#addressBookModal" role="tooltip" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
                       <i class="fa">&#xf2b9;</i>
                     </button>
                   </span>
