@@ -89,9 +89,9 @@ class TransferTransactionCtrl {
 
         // Contacts to address book pagination properties
         this.currentPageAb = 0;
-        this.pageSizeAb = 10;
+        this.pageSizeAb = 5;
         this.numberOfPagesAb = function() {
-            return Math.ceil(this.contacts.length / this.pageSizeAb);
+            return Math.ceil(this.contacts.items.length / this.pageSizeAb);
         }
 
         // Invoice model for QR
