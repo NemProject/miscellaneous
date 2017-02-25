@@ -364,6 +364,10 @@ fieldset .form-control {
   text-overflow: ellipsis;
   max-width: 260px; }
 
+fieldset .form-control.formFloat {
+  overflow: visible;
+  white-space: normal; }
+
 .reverseEllipsis {
   white-space: nowrap;
   max-width: 300px;
