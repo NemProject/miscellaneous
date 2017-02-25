@@ -514,6 +514,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
       ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
       ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
+      ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -526,7 +527,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_SIGNATURE_SUCCESS: "トランザクションは正常にサインされました。",
       ALERT_NTY_FILE_SUCCESS: ".nty ファイルは正常にロードされました。",
       ALERT_INCOMING_TX_FROM: "トランザクションを受信",
-      ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Successfully import !',
+      ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Address book successfully imported !',
 
       // CONVERT ACCOUNT TO MULTISIG
       AGGREGATE_MODIFICATION_TITLE: "マルチシグアカウントへ変換",
