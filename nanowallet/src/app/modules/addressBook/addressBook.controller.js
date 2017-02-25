@@ -1,8 +1,9 @@
 import helpers from '../../utils/helpers';
 import CryptoHelpers from '../../utils/CryptoHelpers';
+import Address from '../../utils/Address';
 
 class AddressBookCtrl {
-    constructor($localStorage, DataBridge, Wallet, Alert, $location, $filter, $q, $rootScope) {
+    constructor($localStorage, DataBridge, Wallet, Alert, $location, $filter, $state) {
         'ngInject';
 
         // DataBidge service
@@ -17,12 +18,10 @@ class AddressBookCtrl {
         this._storage = $localStorage;
         // Filters
         this._$filter = $filter;
-        // Promises
-        this._$q = $q;
         // Address
         this.accountAddress = '';
-        // $rootScope
-        this._$rootScope = $rootScope;
+        // $state
+        this._$state = $state;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -111,6 +110,13 @@ class AddressBookCtrl {
             return;
         }
 
+        // Check address
+        if(!Address.isValid(this.formData.address) || !Address.isFromNetwork(this.formData.address, this._Wallet.network)) {
+            this._Alert.invalidAddress();
+            this.okPressed = false;
+            return;
+        }
+
         this.contacts.items.push({
             "label": this.formData.label,
             "address": this.formData.address
@@ -157,6 +163,13 @@ class AddressBookCtrl {
         } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
             this._Alert.invalidPassword();
             // Enable send button
+            this.okPressed = false;
+            return;
+        }
+
+        // Check address
+        if(!Address.isValid(this.formData.address) || !Address.isFromNetwork(this.formData.address, this._Wallet.network)) {
+            this._Alert.invalidAddress();
             this.okPressed = false;
             return;
         }
@@ -304,9 +317,9 @@ class AddressBookCtrl {
      * @param address - account address
      */
     transferTransaction(address) {
-        this._$rootScope.address = address;
-        this._location.path('/transfer-transactions');
+        this._$state.go("app.transferTransaction", {address: address});
     }
+
 }
 
 export default AddressBookCtrl;

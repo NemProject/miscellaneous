@@ -283,7 +283,7 @@
 <div id="addressBookModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm" role="document">
         <!-- Modal content-->
-        <div class="modal-content" ng-controller="AddressBookCtrl as address_book_ctrl">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title"><i class="fa">&#xf2b9;</i>&nbsp;&nbsp;{{ 'ADDRESS_BOOK_TITLE' | translate }}</h3>
@@ -291,7 +291,7 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-sm-12">
-                <table ng-show="address_book_ctrl.contacts.items.length" class="table table-condensed">
+                <table ng-show="$ctrl.contacts.items.length" class="table table-condensed">
                     <thead>
                         <tr>
                             <th>
@@ -303,7 +303,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="contact in address_book_ctrl.contacts.items | orderBy:'label':false | startFrom:address_book_ctrl.currentPage*address_book_ctrl.pageSize | limitTo:address_book_ctrl.pageSize">
+                        <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:'label':false | startFrom:$ctrl.currentPageAb*$ctrl.pageSizeAb | limitTo:$ctrl.pageSizeAb">
                             <td>{{contact.label}}</td>
                             <td>
                                 <button type="button" class="btn book" data-dismiss="modal" ng-click="$ctrl.formData.rawRecipient = contact.address; $ctrl.processRecipientInput()">{{contact.address}}</button>
@@ -311,15 +311,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <p ng-show="!address_book_ctrl.contacts.items.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+                <p ng-show="!$ctrl.contacts.items.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>
         </div>
-            <div class="modal-footer clearfix">
-                <div class="custom-pagination" ng-show="address_book_ctrl.contacts.items.length > address_book_ctrl.pageSize">
-                    <button class="buttonStyle" ng-disabled="address_book_ctrl.currentPage == 0" ng-click="address_book_ctrl.currentPage = address_book_ctrl.currentPage-1">
-                        <span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{address_book_ctrl.currentPage+1}}/{{address_book_ctrl.numberOfPages()}}</b>
-                    <button class="buttonStyle" ng-disabled="address_book_ctrl.currentPage+1 >= address_book_ctrl.numberOfPages()" ng-click="address_book_ctrl.currentPage = address_book_ctrl.currentPage+1">
+             <div class="modal-footer clearfix">
+                <div class="custom-pagination" ng-show="$ctrl.contacts.items.length > $ctrl.pageSizeAb">
+                    <button class="buttonStyle" ng-disabled="$ctrl.currentPageAb == 0" ng-click="$ctrl.currentPageAb = $ctrl.currentPageAb-1">
+                        <span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageAb+1}}/{{$ctrl.numberOfPagesAb()}}</b>
+                    <button class="buttonStyle" ng-disabled="$ctrl.currentPageAb+1 >= $ctrl.numberOfPagesAb()" ng-click="$ctrl.currentPageAb = $ctrl.currentPageAb+1">
                         <span class="fa fa-chevron-right" aria-hidden="true"></span>
                     </button>
                 </div>

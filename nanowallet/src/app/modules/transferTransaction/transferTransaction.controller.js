@@ -4,7 +4,7 @@ import CryptoHelpers from '../../utils/CryptoHelpers';
 import Network from '../../utils/Network';
 
 class TransferTransactionCtrl {
-    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $rootScope) {
+    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $state, $localStorage) {
         'ngInject';
 
         // Alert service
@@ -19,8 +19,11 @@ class TransferTransactionCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
-        // RootScope object
-        this._RootScope = $rootScope;
+        // $state
+        this._$state = $state;
+        //Local storage
+        this._storage = $localStorage;
+
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
             this._Alert.noWalletLoaded();
@@ -29,11 +32,14 @@ class TransferTransactionCtrl {
         }
 
         /**
-         * Default transfer transaction properties
+         * Default transfer transaction properties 
          */
         this.formData = {};
         // Alias or address user type in
-        this.formData.rawRecipient = ($rootScope.address) ? $rootScope.address : '';
+        this.formData.rawRecipient = this._$state.params.address.length ? this._$state.params.address : '';
+        if(this.formData.rawRecipient.length) {
+            this.processRecipientInput();
+        }
         // Cleaned recipient from @alias or input
         this.formData.recipient = '';
         this.formData.recipientPubKey = '';
@@ -74,6 +80,20 @@ class TransferTransactionCtrl {
             'privateKey': '',
         };
 
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && this._storage.contacts.length) {
+            let val = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts) ;
+            this.contacts = val === false ? [] : val;
+        }
+
+        // Contacts to address book pagination properties
+        this.currentPageAb = 0;
+        this.pageSizeAb = 5;
+        this.numberOfPagesAb = function() {
+            return Math.ceil(this.contacts.items.length / this.pageSizeAb);
+        }
+
         // Invoice model for QR
         this.invoiceData = {
             "v": this._Wallet.network === Network.data.Testnet.id ? 1 : 2,
@@ -93,8 +113,6 @@ class TransferTransactionCtrl {
         this.updateInvoiceQR();
 
         this.updateFees();
-        // Address Book
-        this.processRecipientInput();
     }
 
     /**
@@ -152,7 +170,7 @@ class TransferTransactionCtrl {
 
     /**
      * processRecipientInput() Process recipient input and get data from network
-     *
+     * 
      * @note: I'm using debounce in view to get data typed with a bit of delay,
      * it limits network requests
      */
@@ -206,14 +224,14 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientData() Get recipient account data from network
-     *
+     * 
      * @param address: The recipient address
      */
     getRecipientData(address) {
         return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
                     // Store recipient public key (needed to encrypt messages)
                     this.formData.recipientPubKey = data.account.publicKey;
-                    console.log(this.formData.recipientPubKey)
+                    //console.log(this.formData.recipientPubKey)
                     // Set the address to send to
                     this.formData.recipient = address;
                 },
@@ -227,7 +245,7 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientDataFromAlias() Get recipient account data from network using @alias
-     *
+     * 
      * @param alias: The recipient alias (namespace)
      */
     getRecipientDataFromAlias(alias) {
@@ -260,7 +278,7 @@ class TransferTransactionCtrl {
      * attachMosaic() Get selected mosaic and push it in mosaics array
      */
     attachMosaic() {
-        // increment counter
+        // increment counter 
         this.counter++;
         // Get current account
         let acct = this._Wallet.currentAccount.address;
@@ -288,8 +306,8 @@ class TransferTransactionCtrl {
 
     /**
      * removeMosaic() Remove a mosaic from mosaics array
-     *
-     * @param index: Index of mosaic object in the array
+     * 
+     * @param index: Index of mosaic object in the array 
      */
     removeMosaic(index) {
         this.formData.mosaics.splice(index, 1);
@@ -313,9 +331,9 @@ class TransferTransactionCtrl {
             // Set current account mosaics names if mosaicOwned is not undefined
             if (undefined !== this._DataBridge.mosaicOwned[acct]) {
                 this.currentAccountMosaicData = this._DataBridge.mosaicOwned[acct];
-                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort();
+                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort(); 
             } else {
-                this.currentAccountMosaicNames = ["nem:xem"];
+                this.currentAccountMosaicNames = ["nem:xem"]; 
                 this.currentAccountMosaicData = "";
             }
             // Default selected is nem:xem
@@ -334,8 +352,6 @@ class TransferTransactionCtrl {
         this.formData.recipient = '';
         // Encrypt message set to false
         this.formData.encryptMessage = false;
-        // Reset cleaned recipient address from $RootScope
-        this._RootScope.address = '';
     }
 
     /**
