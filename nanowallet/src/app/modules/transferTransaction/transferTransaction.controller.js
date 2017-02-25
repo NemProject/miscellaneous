@@ -82,7 +82,7 @@ class TransferTransactionCtrl {
 
         this.contacts = [];
 
-        if(this._storage.contacts.length) {
+        if(undefined !== this._storage.contacts && this._storage.contacts.length) {
             let val = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts) ;
             this.contacts = val === false ? [] : val;
         }
