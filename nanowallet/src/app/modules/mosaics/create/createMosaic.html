@@ -42,7 +42,7 @@
                 <span class="input-group-btn">
                   <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
                 </span>
-                <div class="form-control" readOnly>
+                <div class="form-control formFloat" readOnly>
                   <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly />
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
@@ -93,7 +93,7 @@
                     <span class="input-group-btn someShort">
                       <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
                     </span>
-                    <div class="form-control" readOnly>
+                    <div class="form-control formFloat" readOnly>
                       <span class="feeAmount">
                         <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
                         <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
@@ -110,7 +110,7 @@
                     <span class="input-group-btn short">
                       <label>{{ 'FORM_SIDE_BTN_RENTAL_FEE' | translate }}: </label>
                     </span>
-                    <div class="form-control" readOnly>
+                    <div class="form-control formFloat" readOnly>
                       <span class="feeAmount">
                         <span>{{($ctrl.formData.mosaicFee | fmtNemValue)[0]}}</span>
                       </span>
@@ -250,7 +250,7 @@
                         <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
                       </span>
                       <div class="form-control formFloat">
-                        <input class="levy" type="number" ng-model="$ctrl.formData.levy.fee">
+                        <input class="levy" type="number" ng-model="$ctrl.formData.levy.fee" min="0" max="900000000">
                         <label class="floatRight">{{ $ctrl.selectedMosaic }}</label>
                       </div>
                     </div>

@@ -43,7 +43,7 @@
               <span class="input-group-btn">
                <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}</button>
               </span>
-              <div class="form-control" readOnly>
+              <div class="form-control formFloat" readOnly>
                 <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
                 <label class="floatRight"><small>XEM</small></label>
               </div>
@@ -71,7 +71,7 @@
           </fieldset>
           <!-- CHECKBOX TO ALLOW ENTERING OF PUBLIC KEY -->
           <div class="row checkboxes">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <fieldset class="form-group">
                 <input id="box5" type="checkbox" ng-model="$ctrl.customKey" ng-change="$ctrl.updateRemoteAccount()">
                 <label for="box5">{{ 'IMPORTANCE_TRANSFER_CUSTOM_KEY' | translate }}</label>
@@ -95,7 +95,7 @@
               <span class="input-group-btn">
                 <label>{{'FORM_SIDE_BTN_TX_FEE' | translate}}: </label>
               </span>
-              <div class="form-control" readOnly>
+              <div class="form-control formFloat" readOnly>
                 <span class="feeAmount">
                   <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
                   <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>

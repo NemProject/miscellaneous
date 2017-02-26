@@ -224,7 +224,7 @@ th {
   float: right; }
 
 .formFloat .mosaic {
-  max-width: 5%;
+  max-width: 15%;
   text-overflow: hidden;
   white-space: nowrap; }
 
@@ -282,6 +282,11 @@ label {
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle; }
+  .input-group-btn.showHide, .input-group-btn.dLoad {
+    max-width: 40px;
+    min-width: 40px; }
+    .input-group-btn.showHide .btn, .input-group-btn.dLoad .btn {
+      border-radius: 0px; }
   .input-group-btn.short {
     min-width: 130px; }
   .input-group-btn.adding {
@@ -781,6 +786,8 @@ textarea {
   .mosaicsAttached th:nth-of-type(5), .mosaicsAttached td:nth-of-type(5) {
     width: 10%;
     text-align: center; }
+    .mosaicsAttached th:nth-of-type(5) span, .mosaicsAttached td:nth-of-type(5) span {
+      color: #d9534f; }
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap .row1 {
@@ -896,6 +903,29 @@ textarea {
 .rejected {
   float: right; }
 
+.create-apostille-page tr th:first-child, .create-apostille-page tr td:first-child {
+  width: 15%; }
+
+.create-apostille-page tr th:nth-of-type(2), .create-apostille-page tr td:nth-of-type(2) {
+  width: 15%; }
+
+.create-apostille-page tr th:nth-of-type(3), .create-apostille-page tr td:nth-of-type(3) {
+  width: 15%; }
+
+.create-apostille-page tr th:nth-of-type(4), .create-apostille-page tr td:nth-of-type(4) {
+  width: 20%; }
+
+.create-apostille-page tr th:nth-of-type(5), .create-apostille-page tr td:nth-of-type(5) {
+  width: 10%; }
+
+.create-apostille-page tr th:nth-of-type(6), .create-apostille-page tr td:nth-of-type(6) {
+  width: 10%; }
+
+.create-apostille-page tr th:nth-of-type(7), .create-apostille-page tr td:nth-of-type(7) {
+  width: 10%; }
+  .create-apostille-page tr th:nth-of-type(7) i, .create-apostille-page tr td:nth-of-type(7) i {
+    color: #d9534f; }
+
 /*** APOSTILLE HISTORY PAGE ***/
 .apostille-history-page tr th:first-child, .apostille-history-page tr td:first-child {
   width: 22%; }
@@ -920,8 +950,12 @@ textarea {
   cursor: pointer; }
   .apostille-history-page .backupPurge span {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     color: rgba(0, 0, 0, 0.3); }
+  .apostille-history-page .backupPurge i.fa-trash {
+    color: #d9534f; }
+  .apostille-history-page .backupPurge i.fa-download {
+    color: green; }
   .apostille-history-page .backupPurge span:first-of-type {
     margin-right: 20px; }
 

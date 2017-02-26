@@ -108,7 +108,7 @@
               <span class="input-group-btn">
                 <label>{{'FORM_SIDE_BTN_TX_FEE' | translate}}: </label>
               </span>
-              <div class="form-control" readOnly>
+              <div class="form-control formFloat" readOnly>
                 <span class="feeAmount">
                   <!-- Multisig fee -->
                   <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>

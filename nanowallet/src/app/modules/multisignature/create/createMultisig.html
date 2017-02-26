@@ -48,7 +48,7 @@
                 <span class="input-group-btn">
                   <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
                 </span>
-                <div class="form-control" readOnly>
+                <div class="form-control formFloat" readOnly>
                   <input class="readOnly" type="text" value="{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[1] }}" readOnly/>
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
@@ -113,7 +113,7 @@
                 <span class="input-group-btn">
                   <label>{{'GENERAL_FEE' | translate}}: </label>
                 </span>
-                <div class="form-control" readOnly>
+                <div class="form-control formFloat" readOnly>
                   <span class="feeAmount">
                     <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
                   </span>

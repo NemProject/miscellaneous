@@ -129,7 +129,7 @@ tt {
 }
 .formFloat {
   .mosaic {
-    max-width: 5%;
+    max-width: 15%;
     text-overflow: hidden;
     white-space: nowrap;
   }
@@ -190,6 +190,13 @@ label {
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle;
+	&.showHide, &.dLoad {
+		max-width: $pad * 2;
+		min-width: $pad * 2;
+		.btn {
+			border-radius: 0px;
+		}
+	}
   &.short {
     min-width: 130px;
   }
@@ -787,6 +794,9 @@ textarea {
   th:nth-of-type(5), td:nth-of-type(5) {
     width: 10%;
     text-align: center;
+		span {
+			color: $red;
+		}
   }
 }
 
@@ -928,7 +938,33 @@ textarea {
 .rejected {
   float: right;
 }
-
+.create-apostille-page {
+  tr th:first-child, tr td:first-child {
+    width: 15%;
+  }
+  tr th:nth-of-type(2), tr td:nth-of-type(2) {
+    width: 15%;
+  }
+  tr th:nth-of-type(3), tr td:nth-of-type(3) {
+    width: 15%;
+  }
+  tr th:nth-of-type(4), tr td:nth-of-type(4) {
+    width: 20%;
+  }
+  tr th:nth-of-type(5), tr td:nth-of-type(5) {
+    width: 10%;
+  }
+  tr th:nth-of-type(6), tr td:nth-of-type(6) {
+    width: 10%;
+  }
+	tr th:nth-of-type(7), tr td:nth-of-type(7) {
+    width: 10%;
+		// text-align: center;
+		i {
+			color: $red;
+		}
+  }
+}
 /*** APOSTILLE HISTORY PAGE ***/
 .apostille-history-page {
   tr th:first-child, tr td:first-child {
@@ -954,9 +990,15 @@ textarea {
     cursor: pointer;
     span {
       font-size: 13px;
-      font-weight: 300;
+      font-weight: 400;
       color: $gray;
     }
+		i.fa-trash{
+			color: $red;
+		}
+		i.fa-download{
+			color: $green;
+		}
     span:first-of-type(){
       margin-right: $pad;
     }
