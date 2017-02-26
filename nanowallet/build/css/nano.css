@@ -565,6 +565,10 @@ input[type=checkbox]:checked + label:before {
   letter-spacing: 8px; }
 
 /* allow space for check mark */
+.checkboxes input[disabled] + label:before {
+  color: rgba(0, 0, 0, 0.3);
+  cursor: no-drop; }
+
 /*** MAIN HEADER/NAVBAR STYLES ***/
 .navbar-brand {
   padding-left: 30px; }

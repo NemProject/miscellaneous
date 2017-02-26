@@ -505,7 +505,12 @@ input[type=checkbox]:checked + label:before {
 input[type=checkbox]:checked + label:before {
    letter-spacing: 8px;
 } /* allow space for check mark */
-
+.checkboxes {
+	input[disabled] + label:before {
+		color: $gray;
+		cursor: no-drop;
+	}
+}
 
 /*** MAIN HEADER/NAVBAR STYLES ***/
 .navbar-brand {
