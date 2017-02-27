@@ -551,6 +551,10 @@ input[type=checkbox]:checked + label:before {
         color: grey;
       }
     }
+		.dropdown-menu {
+			min-width: 200px;
+			width: 200px;
+		}
   }
   .login {
     text-transform: uppercase;
@@ -807,7 +811,7 @@ textarea {
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap{
-  .row1 {
+  .row1, .row2, .row3 {
     padding-bottom: $pad * 2;
   }
   .panel-heading {
@@ -995,7 +999,7 @@ textarea {
     cursor: pointer;
     span {
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 500;
       color: $gray;
     }
 		i.fa-trash{

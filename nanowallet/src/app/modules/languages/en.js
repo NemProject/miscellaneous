@@ -344,6 +344,8 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: 'Use the NEM Apostille service to create blockchain based notarizations to time stamp, follow and audit file authenticity.',
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
+        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+        PORTAL_ADDRESS_BOOK_BTN: 'Use address book',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',

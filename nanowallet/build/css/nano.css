@@ -48,13 +48,13 @@ table.top {
   font-family: 'Roboto';
   font-size: 12px;
   color: grey;
-  font-weight: 400; }
+  font-weight: 500; }
 
 tt, .dashboard-page .harvestedBlocks th, .amountTx, .mosaicChange, .messageTx, td:last-of-type {
   font-family: 'Roboto';
   font-size: 13px;
   color: grey;
-  font-weight: 400; }
+  font-weight: 500; }
 
 /*** GLOBAL EXTENDS END ***/
 /*** MOSTLY DEPRECATED STYLES, place new styles in _new.scss ***/
@@ -600,6 +600,9 @@ input[type=checkbox]:checked + label:before {
     font-weight: 500; }
     .navbar-default .navbar-nav li a.active {
       color: grey; }
+  .navbar-default .navbar-nav li .dropdown-menu {
+    min-width: 200px;
+    width: 200px; }
   .navbar-default .login {
     text-transform: uppercase;
     border-left: 1px solid rgba(0, 0, 0, 0.05); }
@@ -794,7 +797,7 @@ textarea {
       color: #d9534f; }
 
 /*** SERVICES/PORTAL PAGE ***/
-.portalWrap .row1 {
+.portalWrap .row1, .portalWrap .row2, .portalWrap .row3 {
   padding-bottom: 40px; }
 
 .portalWrap .panel-heading {
@@ -954,7 +957,7 @@ textarea {
   cursor: pointer; }
   .apostille-history-page .backupPurge span {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 500;
     color: rgba(0, 0, 0, 0.3); }
   .apostille-history-page .backupPurge i.fa-trash {
     color: #d9534f; }
