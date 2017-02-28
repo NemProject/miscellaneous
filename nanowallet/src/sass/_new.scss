@@ -190,6 +190,9 @@ label {
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle;
+	&.message {
+		vertical-align: top;
+	}
 	&.showHide, &.dLoad {
 		max-width: $pad * 2;
 		min-width: $pad * 2;
@@ -774,7 +777,7 @@ td:last-of-type {
 textarea {
   border-bottom: $borderUnderline;
   box-shadow: inherit;
-  max-height: 60px;
+  // height: 60px;
 }
 .form-control:focus {
   box-shadow: none;

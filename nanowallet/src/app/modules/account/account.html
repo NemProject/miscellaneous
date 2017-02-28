@@ -193,11 +193,14 @@
         <div class="modal-body">
           <div id="mobileWalletQR"></div>
           <div id="mobileWalletForm">
+            <!-- Password Field -->
             <fieldset class="form-group">
-              <input class="form-control"
-                type="password"
-                placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.common.password"/>
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}: </label>
+                </span>
+                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
             </fieldset>
             <button class="btn btn-success"
               type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.generateWalletQR()">

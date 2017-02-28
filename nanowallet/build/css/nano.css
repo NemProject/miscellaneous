@@ -282,6 +282,8 @@ label {
 .input-group-btn {
   min-width: 170px;
   vertical-align: middle; }
+  .input-group-btn.message {
+    vertical-align: top; }
   .input-group-btn.showHide, .input-group-btn.dLoad {
     max-width: 40px;
     min-width: 40px; }
@@ -767,8 +769,7 @@ table.top {
 
 textarea {
   border-bottom: 1px solid rgba(105, 178, 229, 0.6) !important;
-  box-shadow: inherit;
-  max-height: 60px; }
+  box-shadow: inherit; }
 
 .form-control:focus {
   box-shadow: none; }
