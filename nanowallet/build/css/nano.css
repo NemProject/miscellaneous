@@ -909,7 +909,12 @@ textarea {
 
 /*** APOSTILLE ADD PAGE ***/
 .rejected {
-  float: right; }
+  float: right;
+  margin-top: 40px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 900; }
+  .rejected i {
+    color: #69b2e5; }
 
 .create-apostille-page tr th:first-child, .create-apostille-page tr td:first-child {
   width: 15%; }

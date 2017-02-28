@@ -136,12 +136,18 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="panel-heading">
-          <h4>{{ 'APOSTILLE_FILES_TO_NOTARIZE' | translate }}</h4>
-          <span ng-show="$ctrl.rejected.length" class="rejected"><b>{{ 'APOSTILLE_REJECTED' | translate }}: {{$ctrl.rejected.length}}</b> - <a style="color:white;cursor:pointer;"><i ng-show="!$ctrl.viewRejected" class="fa fa-eye" ng-click="$ctrl.viewRejected = true"></i><i ng-show="$ctrl.viewRejected" class="fa fa-eye-slash" ng-click="$ctrl.viewRejected = false"></i></a></span>
-          <div style="float: right; position: relative; display: block;" ng-show="$ctrl.filesToApostille.length > 5 && !$ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
-          <div style="float: right; position: relative; display: block;" ng-show="$ctrl.rejected.length > 5 && $ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej == 0" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageRej+1}}/{{$ctrl.numberOfPagesRej()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej+1 >= $ctrl.numberOfPagesRej()" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+          <div class="row">
+            <div class="col-md-6">
+              <h4>{{ 'APOSTILLE_FILES_TO_NOTARIZE' | translate }}</h4>
+            </div>
+            <div class="col-md-6">
+              <span ng-show="$ctrl.rejected.length" class="rejected"><b>{{ 'APOSTILLE_REJECTED' | translate }}: {{$ctrl.rejected.length}}</b> - <a><i ng-show="!$ctrl.viewRejected" class="fa fa-eye" ng-click="$ctrl.viewRejected = true"></i><i ng-show="$ctrl.viewRejected" class="fa fa-eye-slash" ng-click="$ctrl.viewRejected = false"></i></a></span>
+              <div style="float: right; position: relative; display: block;" ng-show="$ctrl.filesToApostille.length > 5 && !$ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+              <div style="float: right; position: relative; display: block;" ng-show="$ctrl.rejected.length > 5 && $ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej == 0" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageRej+1}}/{{$ctrl.numberOfPagesRej()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej+1 >= $ctrl.numberOfPagesRej()" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+            </div>
+          </div>
         </div>
-        <table  ng-show="!$ctrl.viewRejected" class="table table-bordered table-hover table-striped table-condensed" style="border:1px solid #444;table-layout:fixed;word-break:break-all;">
+        <table  ng-show="!$ctrl.viewRejected" class="table table-condensed" style="table-layout:fixed;word-break:break-all;">
           <thead style="color:white;">
             <tr>
               <th>{{ 'APOSTILLE_FILENAME' | translate }}</th>
