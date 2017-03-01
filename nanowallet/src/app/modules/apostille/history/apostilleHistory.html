@@ -12,14 +12,30 @@
       <input id="uploadNty" style="visibility:hidden;position:absolute;" import-nty-file="$ctrl.loadNty($fileContent)" type="file">
 
       <div class="col-md-12">
-        <div class="panel-heading">
-          {{ 'EXPLORER_APOSTILLES_YOURS' | translate }}
-          <div ng-show="$ctrl._Wallet.ntyData.data.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
-          <div class="backupPurge">
-            <span ng-click="$ctrl.download()"><i class="fa fa-download"></i> {{ 'APOSTILLE_HISTORY_BACKUP' | translate }}</span>
-            <span ng-click="$ctrl.purge()"><i class="fa fa-trash"></i> {{ 'APOSTILLE_HISTORY_PURGE' | translate }}</span>
+        <div class="row">
+          <div class="col-md-6">
+          <h4>{{ 'EXPLORER_APOSTILLES_YOURS' | translate }}</h4>
+          </div>
+          <div class="col-md-6">
+            <div class="backupPurge">
+              <span ng-click="$ctrl.download()"><i class="fa fa-download"></i> {{ 'APOSTILLE_HISTORY_BACKUP' | translate }}</span>
+              <span ng-click="$ctrl.purge()"><i class="fa fa-trash"></i> {{ 'APOSTILLE_HISTORY_PURGE' | translate }}</span>
+            </div>
+            <div class="nav nav-tabs arrows">
+              <div ng-show="$ctrl._Wallet.ntyData.data.length > 5">
+                <button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1">
+                  <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                </button>
+                <b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b>
+                <button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1">
+                  <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
+
         <table class="table table-condensed">
           <thead>
             <tr>

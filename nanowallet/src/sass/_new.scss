@@ -291,6 +291,18 @@ fieldset .form-control {
 	text-overflow: ellipsis;
 	max-width: 260px;
 }
+// fieldset .form-control[type="password"] {
+// 	overflow: visible;
+// 	white-space: normal;
+// 	background: red;
+// 	color: green;
+// }
+fieldset .form-control.password {
+	overflow: visible;
+	white-space: normal;
+	// text-overflow: ellipsis;
+	// max-width: 260px;
+}
 fieldset .form-control.formFloat {
 	overflow: visible;
 	white-space: normal;
@@ -951,7 +963,7 @@ textarea {
   float: right;
 	margin-top: $pad * 2;
 	color: $gray;
-	font-weight: 900;
+	font-weight: 300;
 	i {
 		color: $blue;
 	}
@@ -1006,6 +1018,7 @@ textarea {
   .backupPurge {
     float: right;
     cursor: pointer;
+		margin-top: $pad * 2;
     span {
       font-size: 13px;
       font-weight: 500;
@@ -1021,6 +1034,10 @@ textarea {
       margin-right: $pad;
     }
   }
+	.arrows {
+		margin-right: $pad;
+		margin-top: $pad * 1.9;
+	}
   .buttans {
     .col-md-12 {
       margin-top: $pad / 4;

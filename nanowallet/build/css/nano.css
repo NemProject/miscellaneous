@@ -371,6 +371,10 @@ fieldset .form-control {
   text-overflow: ellipsis;
   max-width: 260px; }
 
+fieldset .form-control.password {
+  overflow: visible;
+  white-space: normal; }
+
 fieldset .form-control.formFloat {
   overflow: visible;
   white-space: normal; }
@@ -912,7 +916,7 @@ textarea {
   float: right;
   margin-top: 40px;
   color: rgba(0, 0, 0, 0.3);
-  font-weight: 900; }
+  font-weight: 300; }
   .rejected i {
     color: #69b2e5; }
 
@@ -960,7 +964,8 @@ textarea {
 
 .apostille-history-page .backupPurge {
   float: right;
-  cursor: pointer; }
+  cursor: pointer;
+  margin-top: 40px; }
   .apostille-history-page .backupPurge span {
     font-size: 13px;
     font-weight: 500;
@@ -971,6 +976,10 @@ textarea {
     color: green; }
   .apostille-history-page .backupPurge span:first-of-type {
     margin-right: 20px; }
+
+.apostille-history-page .arrows {
+  margin-right: 20px;
+  margin-top: 38px; }
 
 .apostille-history-page .buttans .col-md-12 {
   margin-top: 5px; }
