@@ -19,16 +19,18 @@
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.addressBook" show-authed="true"><i class="fa">&#xf2ba; </i> {{ 'ADDRESS_BOOK_TITLE' | translate }}</a></li>
         <!-- <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-wrench"></i> {{ 'HEADER_SERVICES' | translate }}</a></li> -->
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i> {{ 'HEADER_EXPLORER' | translate }}</a></li>
+        
 
-        <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="!balanceToBtc && !balanceToUsd" show-account-data="balance" show-authed="true" ng-click="balanceToUsd = true;">
-          <b>0.000000 XEM</b></a>
-        </li>
-        <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToUsd" show-authed="true" ng-click="balanceToUsd = false;balanceToBtc = true;">
-          <i class="fa fa-usd"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * $ctrl._DataBridge.marketInfo.price_usd | currencyFormat }}</b></a>
-        </li>
-        <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToBtc" show-authed="true" ng-click="balanceToBtc = false;">
-          <i class="fa fa-btc"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * $ctrl._DataBridge.marketInfo.price_btc | btcFormat }}</b></a>
-        </li>
+        <li class="money">
+          <a style="float: left;outline: 0px;font-size: 90%;cursor: pointer;display: inherit;" show-authed="true"><b>{{dispCurrency}}</b></a>
+          <select 
+          style="float: left;margin-right: 20px;margin-top: 8px; min-width:auto; width:auto;"
+          class="form-control input-inline input-medium"
+          ng-model="dispCurrency" ng-options="(mos.quantity+' '+(mos.mosaicId.name|uppercase)) as (mos.mosaicId.namespaceId+':'+(mos.mosaicId.name|uppercase)) for mos in $ctrl._DataBridge.mosaicOwned[$ctrl._Wallet.currentAccount.address]">
+          <option value="">-- Select a currency --</option>
+
+        </select>
+        </li>  
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a class="login" ui-sref-active="active" ui-sref="app.login" show-authed="false"><small><b>{{ 'HEADER_LOGIN_BUTTON' | translate }}</b></small></a></li>
