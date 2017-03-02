@@ -224,7 +224,7 @@ th {
   float: right; }
 
 .formFloat .mosaic {
-  max-width: 40%;
+  max-width: 15%;
   text-overflow: hidden;
   white-space: nowrap; }
 

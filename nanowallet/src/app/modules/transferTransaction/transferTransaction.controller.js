@@ -149,14 +149,7 @@ class TransferTransactionCtrl {
     setMosaicTransfer() {
         if (this.formData.isMosaicTransfer) {
             // Set the initial mosaic array
-            this.formData.mosaics = [{
-                'mosaicId': {
-                    'namespaceId': 'nem',
-                    'name': 'xem'
-                },
-                'quantity': 0,
-                'gid': 'mos_id_0'
-            }];
+            this.formData.mosaics = [];
             // In case of mosaic transfer amount is used as multiplier,
             // set to 1 as default
             this.formData.amount = 1;
@@ -294,7 +287,7 @@ class TransferTransactionCtrl {
             return helpers.mosaicIdToName(mosaic.mosaicId) === helpers.mosaicIdToName(w.mosaicId);
         });
         // If not present, update the array
-        if (elem.length === 0) {
+        if(elem.length === 0) {
             this.formData.mosaics.push({
                 'mosaicId': mosaic['mosaicId'],
                 'quantity': 0,
