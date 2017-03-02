@@ -206,7 +206,12 @@ class Transactions {
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
         let msgFee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 && message.payload.length || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 && message.payload.length ? Math.max(1, Math.floor((message.payload.length / 32) + 1)) : message.payload.length ? Math.max(1, Math.floor(message.payload.length / 2 / 16)) * 2 : 0;
-        let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
+        // No fees in Mijin 
+        let fee;
+        if(this._Wallet.network === Network.data.Mijin.id) fee = 0;
+        // Calculate fees for Mainnet or Testnet
+        else fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
+
         let totalFee = (msgFee + fee) * 1000000;
         let custom = {
             'recipient': recipientCompressedKey.toUpperCase().replace(/-/g, ''),

@@ -1,6 +1,6 @@
 const AppConstants = {
     //Application name
-    appName: 'Nano Wallet',
+    appName: 'Nano Wallet - DF',
 
     version: 'BETA 1.2.12',
 
@@ -16,13 +16,13 @@ const AppConstants = {
     mainnetDisabled: false,
 
     // Activate/Deactivate mijin
-    mijinDisabled: true,
+    mijinDisabled: false,
 
     // Available languages
     languages: [{
         name: "English",
         key: "en"
-    }, {
+    }/*, {
         name: "Chinese",
         key: "cn"
     }, {

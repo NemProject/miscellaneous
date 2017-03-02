@@ -577,7 +577,9 @@ input[type=checkbox]:checked + label:before {
 
 /*** MAIN HEADER/NAVBAR STYLES ***/
 .navbar-brand {
-  padding-left: 30px; }
+  padding-left: 16px; }
+  .navbar-brand img {
+    max-width: 50px; }
   .navbar-brand span:first-of-type {
     font-weight: 100; }
   .navbar-brand span:last-of-type {
@@ -800,6 +802,9 @@ textarea {
     text-align: center; }
     .mosaicsAttached th:nth-of-type(5) span, .mosaicsAttached td:nth-of-type(5) span {
       color: #d9534f; }
+
+.mosaicTransfer {
+  display: none; }
 
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap .row1, .portalWrap .row2, .portalWrap .row3 {
