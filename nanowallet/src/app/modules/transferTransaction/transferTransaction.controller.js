@@ -32,10 +32,9 @@ class TransferTransactionCtrl {
         }
 
         /**
-         * Default transfer transaction properties
+         * Default transfer transaction properties 
          */
         this.formData = {};
-
         // Alias or address user type in
         this.formData.rawRecipient = this._$state.params.address.length ? this._$state.params.address : '';
         if(this.formData.rawRecipient.length) {
@@ -45,7 +44,7 @@ class TransferTransactionCtrl {
         this.formData.recipient = '';
         this.formData.recipientPubKey = '';
         this.formData.message = '';
-        this.formData.amount = 1;
+        this.formData.amount = 0;
         this.formData.fee = 0;
         this.formData.encryptMessage = false;
         // Multisig data
@@ -57,7 +56,7 @@ class TransferTransactionCtrl {
         this.counter = 1;
         this.formData.mosaics = null;
         this.mosaicsMetaData = this._DataBridge.mosaicDefinitionMetaDataPair;
-        this.formData.isMosaicTransfer = true;
+        this.formData.isMosaicTransfer = false;
         this.currentAccountMosaicNames = [];
         this.selectedMosaic = "nem:xem";
         // Mosaics data for current account
@@ -149,7 +148,14 @@ class TransferTransactionCtrl {
     setMosaicTransfer() {
         if (this.formData.isMosaicTransfer) {
             // Set the initial mosaic array
-            this.formData.mosaics = [];
+            this.formData.mosaics = [{
+                'mosaicId': {
+                    'namespaceId': 'nem',
+                    'name': 'xem'
+                },
+                'quantity': 0,
+                'gid': 'mos_id_0'
+            }];
             // In case of mosaic transfer amount is used as multiplier,
             // set to 1 as default
             this.formData.amount = 1;
@@ -164,7 +170,7 @@ class TransferTransactionCtrl {
 
     /**
      * processRecipientInput() Process recipient input and get data from network
-     *
+     * 
      * @note: I'm using debounce in view to get data typed with a bit of delay,
      * it limits network requests
      */
@@ -218,7 +224,7 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientData() Get recipient account data from network
-     *
+     * 
      * @param address: The recipient address
      */
     getRecipientData(address) {
@@ -239,7 +245,7 @@ class TransferTransactionCtrl {
 
     /**
      * getRecipientDataFromAlias() Get recipient account data from network using @alias
-     *
+     * 
      * @param alias: The recipient alias (namespace)
      */
     getRecipientDataFromAlias(alias) {
@@ -272,7 +278,7 @@ class TransferTransactionCtrl {
      * attachMosaic() Get selected mosaic and push it in mosaics array
      */
     attachMosaic() {
-        // increment counter
+        // increment counter 
         this.counter++;
         // Get current account
         let acct = this._Wallet.currentAccount.address;
@@ -287,7 +293,7 @@ class TransferTransactionCtrl {
             return helpers.mosaicIdToName(mosaic.mosaicId) === helpers.mosaicIdToName(w.mosaicId);
         });
         // If not present, update the array
-        if(elem.length === 0) {
+        if (elem.length === 0) {
             this.formData.mosaics.push({
                 'mosaicId': mosaic['mosaicId'],
                 'quantity': 0,
@@ -300,8 +306,8 @@ class TransferTransactionCtrl {
 
     /**
      * removeMosaic() Remove a mosaic from mosaics array
-     *
-     * @param index: Index of mosaic object in the array
+     * 
+     * @param index: Index of mosaic object in the array 
      */
     removeMosaic(index) {
         this.formData.mosaics.splice(index, 1);
@@ -325,9 +331,9 @@ class TransferTransactionCtrl {
             // Set current account mosaics names if mosaicOwned is not undefined
             if (undefined !== this._DataBridge.mosaicOwned[acct]) {
                 this.currentAccountMosaicData = this._DataBridge.mosaicOwned[acct];
-                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort();
+                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort(); 
             } else {
-                this.currentAccountMosaicNames = ["nem:xem"];
+                this.currentAccountMosaicNames = ["nem:xem"]; 
                 this.currentAccountMosaicData = "";
             }
             // Default selected is nem:xem
