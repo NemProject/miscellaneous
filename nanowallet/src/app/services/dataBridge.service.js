@@ -298,15 +298,11 @@ class DataBridge {
             let mosaicCallback = (d, address) => {
                 this._$timeout(() => {
                     let mosaicName = helpers.mosaicIdToName(d.mosaicId);
-
-                    // DF doesn't need nem:xem assets to be shown
-                    if(mosaicName != "nem:xem"){
-                        if (!(address in this.mosaicOwned)) {
-                            this.mosaicOwned[address] = {};
-                        }
-                        this.mosaicOwned[address][mosaicName] = d;
-                        this.mosaicOwnedSize[address] = Object.keys(this.mosaicOwned[address]).length;
+                    if (!(address in this.mosaicOwned)) {
+                        this.mosaicOwned[address] = {};
                     }
+                    this.mosaicOwned[address][mosaicName] = d;
+                    this.mosaicOwnedSize[address] = Object.keys(this.mosaicOwned[address]).length;
                 }, 0);
             }
 

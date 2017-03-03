@@ -529,10 +529,7 @@ input[type=checkbox]:checked + label:before {
 
 /*** MAIN HEADER/NAVBAR STYLES ***/
 .navbar-brand {
-	img {
-		max-width: 50px;
-	}
-  padding-left: $pad * .8;
+  padding-left: $pad * 1.5;
   span:first-of-type {
     font-weight: 100;
   }
@@ -826,9 +823,7 @@ textarea {
 		}
   }
 }
-.mosaicTransfer {
-	display: none;
-}
+
 /*** SERVICES/PORTAL PAGE ***/
 .portalWrap{
   .row1, .row2, .row3 {
