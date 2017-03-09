@@ -73,6 +73,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_LEVY: "徴収",
       GENERAL_LEVY_TYPES: "徴収タイプ",
       GENERAL_LEVY_TYPES_NOTE: "I - コンスタント型手数料; II - パーセンテージ型手数料",
+      GENERAL_LEVY_TYPE_1: 'constant fee',
+      GENERAL_LEVY_TYPE_2: 'percentage based',
       GENERAL_SEND: "送信",
       GENERAL_TO: "宛先",
       GENERAL_HASH: "ハッシュ",
@@ -145,6 +147,8 @@ function JapaneseProvider($translateProvider) {
       TRANSFER_TRANSACTION_ATTACH: "添付",
       TRANSFER_TRANSACTION_MOSAICS_ATTACHED: "添付するモザイク",
       TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: "メッセージを暗号化",
+      TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
+      TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
       // TRANSACTION LINES
       LINE_TX_DETAILS_FROM: "送り主（From）",

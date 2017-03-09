@@ -73,6 +73,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_LEVY: '征费',
         GENERAL_LEVY_TYPES: '征费类型',
         GENERAL_LEVY_TYPES_NOTE: 'I - 固定费用; II - 百分比方式',
+        GENERAL_LEVY_TYPE_1: 'constant fee',
+        GENERAL_LEVY_TYPE_2: 'percentage based',
         GENERAL_SEND: '发送',
         GENERAL_TO: '目标',
         GENERAL_HASH: 'Hash',
@@ -144,6 +146,8 @@ function ChineseProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: '附加',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: '马赛克加入完成',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: '加密消息',
+        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
+        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: '来自',

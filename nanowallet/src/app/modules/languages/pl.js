@@ -73,6 +73,8 @@ function PolishProvider($translateProvider) {
         GENERAL_LEVY: 'Podatek',
         GENERAL_LEVY_TYPES: 'Typy podatku',
         GENERAL_LEVY_TYPES_NOTE: 'I - stała opłata; II - podatek procentowy',
+        GENERAL_LEVY_TYPE_1: 'constant fee',
+        GENERAL_LEVY_TYPE_2: 'percentage based',
         GENERAL_SEND: 'Wyślij',
         GENERAL_TO: 'Do',
         GENERAL_HASH: 'Hasz',
@@ -144,6 +146,8 @@ function PolishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Załącz',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Załączone mozaiki',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Szyfruj wiadomość',
+        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
+        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'Od',

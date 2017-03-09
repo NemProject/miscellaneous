@@ -371,6 +371,9 @@ fieldset .form-control {
   text-overflow: ellipsis;
   max-width: 260px; }
 
+fieldset .form-control-static {
+  padding-top: 0px; }
+
 fieldset .form-control.password {
   overflow: visible;
   white-space: normal; }
