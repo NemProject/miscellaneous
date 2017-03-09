@@ -259,6 +259,15 @@ label {
   border-color: $blueLite !important;
   color: white !important;
 }
+.btn-success.mosaics {
+	background: $red;
+	border: 1px solid $red;
+}
+.btn-success.mosaics:hover, .btn-success.mosaics:active, .btn-success.mosaics:focus {
+  background-color: $red !important;
+  border-color: $red !important;
+  color: white !important;
+}
 .button-warning {
   max-width: 50px;
 }

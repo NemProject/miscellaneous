@@ -340,6 +340,15 @@ label {
   border-color: rgba(105, 178, 229, 0.6) !important;
   color: white !important; }
 
+.btn-success.mosaics {
+  background: #d9534f;
+  border: 1px solid #d9534f; }
+
+.btn-success.mosaics:hover, .btn-success.mosaics:active, .btn-success.mosaics:focus {
+  background-color: #d9534f !important;
+  border-color: #d9534f !important;
+  color: white !important; }
+
 .button-warning {
   max-width: 50px; }
 
