@@ -129,10 +129,13 @@ tt {
 }
 .formFloat {
   .mosaic {
-    max-width: 15%;
+    max-width: 40%;
     text-overflow: hidden;
     white-space: nowrap;
   }
+	.floatRight {
+		max-width: 60%
+	}
   input {
     width: 88%;
     border: 0px;
