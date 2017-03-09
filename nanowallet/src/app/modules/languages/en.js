@@ -73,6 +73,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_LEVY: 'Levy',
         GENERAL_LEVY_TYPES: 'Levy types',
         GENERAL_LEVY_TYPES_NOTE: 'I - constant fee; II - percentage based',
+        GENERAL_LEVY_TYPE_1: 'constant fee',
+        GENERAL_LEVY_TYPE_2: 'percentage based',
         GENERAL_SEND: 'Send',
         GENERAL_TO: 'To',
         GENERAL_HASH: 'Hash',
@@ -144,6 +146,8 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaics attached',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Encrypt message',
+        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
+        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'From',

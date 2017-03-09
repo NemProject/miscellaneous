@@ -31,6 +31,7 @@
         </div>
         <!-- Transaction form -->
         <div class="panel-body" ng-show="!$ctrl.invoice">
+
           <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
             <!-- SELECT MULTISIG ACCOUNT -->
             <div class="input-group">
@@ -66,7 +67,6 @@
                       <i class="fa">&#xf2b9;</i>
                     </button>
                   </span>
-
                 </div>
             </fieldset>
             <!-- ADDRESS THAT BELONGS TO ALIAS -->
@@ -116,6 +116,30 @@
                 </div>
               </div>
             </fieldset>
+            <!-- MOSAIC SELECT -->
+            <fieldset class="form-group" ng-show="$ctrl.formData.isMosaicTransfer">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label class="control-label">Currency: </label>
+                </span>
+                <select class="col-sm-7 form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" required="required" id="mosaic" ng-disabled="!$ctrl.formData.isMosaicTransfer"></select>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-success" ng-click="$ctrl.attachMosaic()" ng-disabled="!$ctrl.formData.isMosaicTransfer">{{ 'TRANSFER_TRANSACTION_ATTACH' | translate }}</button>
+                </span>
+              </div>
+            </fieldset>
+            <!-- MOSAIC BALANCE -->
+            <div class="form-group" ng-show="$ctrl.selectedMosaic !== 'nem:xem'">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
+                </span>
+                <div class="form-control formFloat" disabled>
+                  <input class="readOnly mosaic" type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
+                  <label class="floatRight"><small>{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.namespaceId}}:{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.name}}</small></label>
+                </div>
+              </div>
+            </div>
             <!-- Checkbox Fields -->
             <div class="row checkboxes">
               <div class="col-sm-6">
@@ -132,7 +156,7 @@
               </div>
             </div>
           <!-- Password Field -->
-          <fieldset class="form-group">
+          <fieldset class="form-group" ng-show="!$ctrl.invoice && !$ctrl.formData.isMosaicTransfer">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{ 'FORM_PASSWORD' | translate }}: </label>
@@ -141,7 +165,7 @@
             </div>
           </fieldset>
           <!-- Send button disabled if already pressed or no password or no clean recipient address or message is supposed to be encrypted but no recipient public key or is a mosaic transfer and no mosaics in array -->
-          <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length" ng-click="$ctrl.send()">
+          <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && !$ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
           </button>
         </fieldset>
@@ -184,86 +208,80 @@
       <!-- Mosaics part -->
       <div class="mosaic col-lg-6 col-md-12" ng-show="$ctrl.formData.isMosaicTransfer">
         <div class="panel-heading">
-          <h3>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }} <i class="fa fa-paperclip"></i></h3>
+          <h3>{{ 'TRANSFER_TRANSACTION_MOSAICS_ATTACHED' | translate }} <i class="fa fa-paperclip"></i></h3>
         </div>
-        <div class="panel-body">
-          <div class="form-group">
-            <div class="input-group">
-              <select class="col-sm-7 form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" required="required" id="mosaic" ng-disabled="!$ctrl.formData.isMosaicTransfer"></select>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-success" ng-click="$ctrl.attachMosaic()" ng-disabled="!$ctrl.formData.isMosaicTransfer">{{ 'TRANSFER_TRANSACTION_ATTACH' | translate }}</button>
-              </span>
-            </div>
-          </div>
-          <!-- MOSAIC BALANCE -->
-          <div class="form-group" ng-show="$ctrl.selectedMosaic !== 'nem:xem'">
+        <!-- NEW MOSAIC DISPLAY -->
+        <div class="panel-body" ng-repeat="mos in $ctrl.formData.mosaics">
+          <!-- ATTACHED MOSAIC NAME -->
+          <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
+                <label>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }}: </label>
               </span>
-              <div class="form-control formFloat" disabled>
-                <input class="readOnly mosaic" type="text" value="{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}.{{($ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].quantity | fmtSupply:$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[1]}}" readOnly/>
-                <label class="floatRight"><small>{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.namespaceId}}:{{$ctrl.currentAccountMosaicData[$ctrl.selectedMosaic].mosaicId.name}}</small></label>
-              </div>
+              <input type="text" class="form-control" value="{{mos.mosaicId.namespaceId}}:{{mos.mosaicId.name}}" readOnly>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-success mosaics" ng-click="$ctrl.removeMosaic($index)" ng-disabled="!$ctrl.formData.isMosaicTransfer">{{ 'GENERAL_REMOVE' | translate }}</button>
+              </span>
             </div>
-          </div>
-
-        <!-- Mosaics attached table -->
-        <div class="panel-default mosaicsAttached">
-          <div class="panel-heading">
-            <h3> {{ 'TRANSFER_TRANSACTION_MOSAICS_ATTACHED' | translate }}</h3>
-          </div>
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>{{ 'GENERAL_MOSAIC' | translate }}</th>
-                <th>{{ 'GENERAL_AMOUNT' | translate }}</th>
-                <th>{{ 'GENERAL_TOTAL' | translate }}</th>
-                <th>{{ 'GENERAL_LEVY' | translate }}</th>
-                <th>{{ 'GENERAL_REMOVE' | translate }}</th>
-              </tr>
-            </thead>
-          </table>
-          <table class="table table-condensed">
-            <tbody>
-              <tr ng-repeat="mos in $ctrl.formData.mosaics">
-                <td style="overflow:hidden;text-overflow: ellipsis;" title="{{mos.mosaicId.namespaceId}}:{{mos.mosaicId.name}}"><span class="text-muted">{{mos.mosaicId.namespaceId}}</span>:{{mos.mosaicId.name}}</span>
-                </td>
-                <td><input id="{{mos.gid}}" type="number" class="form-control" ng-model="mos.quantity" placeholder="1" min="0" ng-change="$ctrl.updateFees()"></td>
-                <td><strong>{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[0]}}</strong>
+          </fieldset>
+          <!-- ATTACHED MOSAIC AMOUNT TO SEND -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'GENERAL_AMOUNT' | translate }}: </label>
+              </span>
+              <input id="{{mos.gid}}" type="number" class="form-control" ng-model="mos.quantity" placeholder="1" min="0" ng-change="$ctrl.updateFees()">
+            </div>
+          </fieldset>
+          <!-- ATTACHED MOSAIC TOTAL -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'GENERAL_TOTAL' | translate }}: </label>
+              </span>
+              <fieldset class="form-control" ng-model="mos.quantity" disabled><strong>{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[0]}}</strong>
                 <span class="text-muted">.{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[1]}}</span>
-                <td>
-                  <tag-levy mos="mos" tx="$ctrl.formData" mosaics="$ctrl.mosaicsMetaData">
-                    <div ng-show="levy.type">
-                      <p class="form-control-static">
-                        <!-- tx.amount * 1000000 because it needs to be in micro xem in fmtLevyFee filter -->
-                        <strong>{{mos | fmtLevyFee:tx.amount*1000000:levy:mosaics}}</strong>
-                        <span class="text-muted">{{levy.mosaicId.namespaceId}}</span>:{{levy.mosaicId.name}}
-                        <span ng-show="levy.type === 1">- I<!--({{ 'TRANSFER_INFO_LEVY_TYPE_1' | translate }})--></span>
-                        <span ng-show="levy.type === 2">- II<!--({{ 'TRANSFER_INFO_LEVY_TYPE_2' | translate }})--></span>
-                      </p>
-                    </div>
-                    <div ng-show="!levy.type">
-                            {{ 'GENERAL_NONE' | translate }}
-                    </div>
-                  </tag-levy>
-                </td>
-                <td>
-                  <a ng-click="$ctrl.removeMosaic($index)">
-                    <span class="fa fa-times"></span>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="panel-body" ng-show="!$ctrl.formData.mosaics.length">
-            <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-          </div>
-          <div class="bg-info">
-            <small><i><b>{{ 'GENERAL_LEVY_TYPES' | translate }}: {{ 'GENERAL_LEVY_TYPES_NOTE' | translate }}</b></i></small>
-          </div>
+              </fieldset>
+            </div>
+          </fieldset>
+
+          <!-- ATTACHED LEVY NAME -->
+          <fieldset class="form-group">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'TRANSFER_TRANSACTION_ATTACHED_LEVY' | translate }}: </label>
+              </span>
+              <tag-levy class="form-control" mos="mos" tx="$ctrl.formData" mosaics="$ctrl.mosaicsMetaData" readOnly>
+                <div ng-show="levy.type">
+                  <p class="form-control-static">
+                    <!-- tx.amount * 1000000 because it needs to be in micro xem in fmtLevyFee filter -->
+                    <strong>{{mos | fmtLevyFee:tx.amount*1000000:levy:mosaics}}</strong>
+                    <span class="text-muted">{{levy.mosaicId.namespaceId}}</span>:{{levy.mosaicId.name}}
+                    <span ng-show="levy.type === 1">-- {{ 'GENERAL_LEVY_TYPE_1' | translate }}</span>
+                    <span ng-show="levy.type === 2">-- {{ 'GENERAL_LEVY_TYPE_2' | translate }}</span>
+                  </p>
+                </div>
+                <div ng-show="!levy.type">
+                  {{ 'GENERAL_NONE' | translate }}
+                </div>
+              </tag-levy>
+            </div>
+          </fieldset>
+
         </div>
-      </div>
+
+        <fieldset class="form-group" ng-show="!$ctrl.invoice && $ctrl.formData.isMosaicTransfer">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <label>{{ 'FORM_PASSWORD' | translate }}: </label>
+            </span>
+            <input class="form-control password" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+          </div>
+        </fieldset>
+        <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && $ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length" ng-click="$ctrl.send()">
+            <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
+        </button>
+
     </div>
       <!-- QR CODE IS HERE -->
       <div class="col-lg-5" ng-show="$ctrl.invoice">
