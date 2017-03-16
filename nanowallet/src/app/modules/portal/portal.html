@@ -156,55 +156,35 @@
   	<div class="col-sm-12 col-lg-3">
       <br>
       <!-- MARKET INFO WIDGET -->
-      <div class="market-info">
+        <div class="market-info" ng-show="$ctrl._DataBridge.marketInfo.highestBid && $ctrl._DataBridge.btcPrice.last">
         <div class="row">
           <div class="col-md-6 col-sm-3 header">
             {{ 'DASHBOARD_MARKET_INFO_CAP' | translate }}:
             <br>
-            <span><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.market_cap_usd | currencyFormat}}</span>
+            <span><i class="fa fa-usd"></i> {{($ctrl._DataBridge.marketInfo.highestBid * 8999999999) * $ctrl._DataBridge.btcPrice.last | currencyFormat}}</span>
           </div>
           <div class="col-md-6 col-sm-3 header">
             {{ 'DASHBOARD_MARKET_INFO_VOLUME' | translate }}:
             <br>
-            <span><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo['24h_volume_usd'] | currencyFormat}}</span>
+            <span><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.baseVolume * $ctrl._DataBridge.btcPrice.last | currencyFormat}}</span>
           </div>
           <div class="col-md-6 col-sm-3 header ticker">
             {{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }} in USD:
             <br>
-            <span><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.price_usd}}</span>
+            <span><i class="fa fa-usd"></i> {{$ctrl.toFixed4($ctrl._DataBridge.marketInfo.highestBid * $ctrl._DataBridge.btcPrice.last)}}</span>
           </div>
           <div class="col-md-6 col-sm-3 ticker header">
             {{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }} in Bitcoin:
             <br>
-            <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataBridge.marketInfo.price_btc}}</span>
+            <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataBridge.marketInfo.highestBid}}</span>
           </div>
-        </div>
-
-        <div class="row marketPercents">
-          <div class="col-lg-12 col-sm-12 header ticker">
+          <div class="col-md-6 col-sm-3 ticker header">
             {{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-4">
-            <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_1H' | translate }}: </b>
-            <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_1h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h > 0"></span>
-              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_1h < 0"></span>
-              {{$ctrl._DataBridge.marketInfo.percent_change_1h}} %
-            </span>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-4">
-            <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_24H' | translate }}: </b>
-            <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_24h < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h > 0"></span>
-              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_24h < 0"></span>
-              {{$ctrl._DataBridge.marketInfo.percent_change_24h}} %</span>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-4">
-            <b>{{ 'DASHBOARD_MARKET_INFO_CHANGES_7D' | translate }}: </b>
-            <span ng-style="$ctrl._DataBridge.marketInfo.percent_change_7d < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d > 0"></span>
-              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percent_change_7d < 0"></span>
-              {{$ctrl._DataBridge.marketInfo.percent_change_7d}} %
+            <br>
+            <span ng-style="$ctrl._DataBridge.marketInfo.percentChange < 0 ? { 'color': 'red'} : { 'color': 'green'}">
+              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percentChange > 0" style="color:green;"></span>
+              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percentChange < 0" style="color:red;"></span>
+              {{$ctrl._DataBridge.marketInfo.percentChange | currencyFormat}} %
             </span>
           </div>
         </div>

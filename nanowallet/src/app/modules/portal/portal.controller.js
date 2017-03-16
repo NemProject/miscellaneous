@@ -20,6 +20,13 @@ class PortalCtrl {
         
     }
 
+    /**
+     * Fix a value to 4 decimals
+     */
+    toFixed4(value) {
+        return value.toFixed(4);
+    }
+
 
 }
 
