@@ -44,7 +44,7 @@ Before update make sure that you don't have any wallets stored into the NanoWall
 
 ##### OR #####
 
-5) Build NanoWallet apps for production, default set to : win64,osx64,linux64
+5) Build NanoWallet apps, default set to : win64,osx64,linux64
 
 <pre>gulp build-app</pre>
 
