@@ -364,6 +364,30 @@ let convertDateToString = function(date) {
     return date.toDateString();
 };
 
+/**
+ * Check if an input amount is valid
+ *
+ * @param {string} n - The number as a string
+ *
+ * @return {boolean} - True if valid, false otherwise
+ */
+let isAmountValid = function(n) {
+    // Force n as a string and replace decimal comma by a dot if any
+    var nn = Number(n.toString().replace(/,/g, '.'));
+    return !Number.isNaN(nn) && Number.isFinite(nn) && nn >= 0;
+}
+
+/**
+ * Clean an input amount and return it as number
+ *
+ * @param {string} n - The number as a string
+ *
+ * @return {number} - The clean amount
+ */
+let cleanAmount = function(n) {
+    return Number(n.toString().replace(/,/g, '.'));
+}
+
 module.exports = {
     haveWallet,
     haveAddressBook,
@@ -384,5 +408,7 @@ module.exports = {
     checkAndFormatUrl,
     createTimeStamp,
     getTimestampShort,
-    convertDateToString
+    convertDateToString,
+    isAmountValid,
+    cleanAmount
 }
