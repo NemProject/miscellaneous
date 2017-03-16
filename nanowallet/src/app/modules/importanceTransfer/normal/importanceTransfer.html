@@ -30,7 +30,16 @@
                 <span class="input-group-btn">
                   <label>{{ 'IMPORTANCE_TRANSFER_REMOTE_PUBLIC' | translate }}: </label>
                 </span>
-                <input type="text" class="form-control" ng-model="$ctrl.formData.remoteAccount" placeholder="0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6">
+                <input type="text" class="form-control" ng-model="$ctrl.formData.remoteAccount" placeholder="0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6" ng-change="$ctrl.generateAddress();">
+              </div>
+            </fieldset>
+            <!-- GENERATED REMOTE ACCOUNT -->
+            <fieldset class="form-group" ng-show="$ctrl.customKey && $ctrl.generatedRemoteAccount.length">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'IMPORTANCE_TRANSFER_REMOTE_ACCOUNT' | translate }}: </label>
+                </span>
+                <input type="text" class="form-control" ng-model="$ctrl.generatedRemoteAccount" readOnly>
               </div>
             </fieldset>
             <!-- CHECKBOX TO ALLOW ENTERING OF PUBLIC KEY -->
@@ -71,9 +80,9 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                  <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
-                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
               </div>
             </fieldset>
             <!-- SEND FIELD -->
@@ -120,7 +129,7 @@
         </div>
         <br>
         <div class="panel-heading">
-          <h3>Delegated account Keys</h3>
+          <h3>{{ 'IMPORTANCE_TRANSFER_DELEGATED_KEYS' | translate }}</h3>
         </div>
         <div class="panel-body">
         <!-- DELEGATED PUBLIC KEY -->
@@ -139,7 +148,7 @@
                 <label ng-show="!$ctrl.commonDelegated.delegatedPrivateKey.length">{{ 'FORM_PASSWORD' | translate }}:</label>
                 <label ng-show="$ctrl.commonDelegated.delegatedPrivateKey.length">{{ 'ACCOUNT_DELEGATED_PRIVATE_KEY' | translate }}</label>
               </span>
-              <input class="form-control" type="password" ng-model="$ctrl.commonDelegated.password" placeholder="Reveal delegated private key*" ng-show="!$ctrl.commonDelegated.delegatedPrivateKey"/>
+              <input class="form-control" type="password" ng-model="$ctrl.commonDelegated.password" placeholder="{{ 'IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER' | translate }}" ng-show="!$ctrl.commonDelegated.delegatedPrivateKey"/>
               <input class="form-control" ng-show="$ctrl.commonDelegated.delegatedPrivateKey" ng-model="$ctrl.commonDelegated.delegatedPrivateKey" readOnly></input>
               <span class="input-group-btn showHide">
                 <button class="btn btn-primary" type="button" ng-show="!$ctrl.commonDelegated.delegatedPrivateKey.length" ng-click="$ctrl.revealDelegatedPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
@@ -153,21 +162,23 @@
           </fieldset>
         </div>
 
-                  <!-- START/STOP HARVESTING -->
-
+        <!-- START/STOP HARVESTING -->
         <div class="panel-heading">
           <h3>{{ 'ACCOUNT_START_STOP_HARVESTING' | translate }}</h3>
         </div>
-        <div ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'ACTIVE'">
 
-        <div ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000">
+        <div class="panel-body" ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'ACTIVE'">
 
-          <p class="bg-info">
-            <span ng-bind-html="'ACCOUNT_HARVESTING_NOTE' | translate" ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000"></span>
-          </p>
+        <p class="bg-info" ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000">
+            <span ng-bind-html="'ACCOUNT_HARVESTING_NOTE' | translate"></span>
+        </p>
+
+        <div class="form-group" ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000">
 
           <div class="form-group">
-            <input type="password" class="form-control" ng-model="$ctrl.commonHarvesting.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"></input>
+            <fieldset>
+              <input type="password" class="form-control" ng-model="$ctrl.commonHarvesting.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-class="!$ctrl.commonHarvesting.password.length ? 'has-error' : ''"></input>
+            </fieldset>
           </div>
 
           <div class="input-group">
@@ -175,8 +186,8 @@
           <select class="form-control" style="width:100%;" ng-model="$ctrl.harvestingNode" ng-options="(node.uri | toHostname) as (node.uri | toHostname) for node in $ctrl.nodes" ng-style="$ctrl.customHarvestingNode ? {'display': 'none'} : $ctrl.showSupernodes ? {'display': 'none'} : ''" ng-disabled="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-change="$ctrl.checkNode();$ctrl.updateDelegatedData();"><option value="" disabled selected>{{ 'ACCOUNT_HARVESTING_NODE_SELECT' | translate }}</option></select>
            <select class="form-control" style="width:100%;" ng-model="$ctrl.harvestingNode" ng-options="node.ip as node.ip for node in $ctrl.nodes" ng-style="$ctrl.customHarvestingNode ? {'display': 'none'} : !$ctrl.showSupernodes ? {'display': 'none'} : ''" ng-disabled="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-change="$ctrl.checkNode();$ctrl.updateDelegatedData();"><option value="" disabled selected>{{ 'ACCOUNT_HARVESTING_NODE_SELECT' | translate }}</option></select>
             <span class="input-group-btn">
-              <button ng-class="!$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = false;" title="{{'ACCOUNT_CUSTOM_NODE' | translate}}"><i class="fa fa-cloud"></i></button>
-              <button ng-class="$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = true;" title="{{'ACCOUNT_NODE_FROM_LIST' | translate}}"><i class="fa fa-edit"></i></button>
+              <button ng-class="!$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = false;" title="{{ 'ACCOUNT_NODE_FROM_LIST' | translate}}"><i class="fa fa-cloud"></i></button>
+              <button ng-class="$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = true;" title="{{'ACCOUNT_CUSTOM_NODE' | translate}}"><i class="fa fa-edit"></i></button>
                <button class="btn btn-primary" type="button" ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" ng-disabled="$ctrl.noFreeSlots || !$ctrl.commonHarvesting.password.length" ng-click="$ctrl.startDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_START' | translate}}"><i class="fa fa-play-circle-o"></i></button>
                 <button class="btn btn-primary" type="button" ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-click="$ctrl.stopDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_STOP' | translate}}" ng-disabled="!$ctrl.commonHarvesting.password.length"><i class="fa fa-stop-circle-o"></i></button>
             </span>
@@ -186,10 +197,10 @@
         <p class="bg-info text-center" ng-show="$ctrl.noFreeSlots && $ctrl.delegatedData.meta.status === 'LOCKED' && $ctrl._DataBridge.accountData.account.vestedBalance / 1000000 > 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_NO_SLOTS' | translate }}</p>
         <p class="bg-info" ng-show="$ctrl._DataBridge.accountData.account.vestedBalance / 1000000 < 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_BELOW_THRESHOLD' | translate }}</p>
       </div>
-      <div ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'ACTIVATING'">
+      <div class="panel-body" ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'ACTIVATING'">
         <p class="bg-info"><i class="fa fa-exclamation-triangle "></i> {{ 'IMPORTANCE_TRANSFER_REMOTE_ACTIVATING' | translate }}</p>
       </div>
-      <div ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'INACTIVE'">
+      <div class="panel-body" ng-show="$ctrl._DataBridge.accountData.meta.remoteStatus === 'INACTIVE'">
         <p class="bg-info"><i class="fa fa-exclamation-triangle "></i> {{ 'IMPORTANCE_TRANSFER_REMOTE_INACTIVE' | translate }}</p>
       </div>
       </div>

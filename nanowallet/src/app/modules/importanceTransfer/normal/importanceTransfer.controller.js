@@ -38,6 +38,8 @@ class ImportanceTransferCtrl {
         this.remoteAccountAddress = Address.toAddress(this._Wallet.currentAccount.child, this._Wallet.network);
         // Remote account public key
         this.formData.remoteAccount = this._Wallet.currentAccount.child;
+        // Account generated from custom public key
+        this.generatedRemoteAccount = '';
         this.formData.mode = 1;
         this.formData.fee = 0;
         // Multisig data
@@ -141,6 +143,17 @@ class ImportanceTransferCtrl {
     }
 
     /**
+     * Generate address of the custom public key
+     */
+    generateAddress() {
+        if(this.formData.remoteAccount.length === 64) {
+           this.generatedRemoteAccount = Address.toAddress(this.formData.remoteAccount, this._Wallet.network);
+        } else {
+            this.generatedRemoteAccount = '';
+        }
+    }
+
+    /**
      * updateFee() Update transaction fee
      */
     updateFee() {
@@ -154,6 +167,7 @@ class ImportanceTransferCtrl {
     updateRemoteAccount() {
         if (this.customKey) {
             this.formData.remoteAccount = '';
+            this.generatedRemoteAccount = '';
         } else {
             this.formData.remoteAccount = this._Wallet.currentAccount.child;
         }
