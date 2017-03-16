@@ -82,6 +82,10 @@ function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $
                         } else {
                             recipientPubKey = tx.signer;
                         }
+                        if(!recipientPubKey) {
+                            Alert.noPublicKeyForDecoding();
+                            return;
+                        }
                         let decoded = CryptoHelpers.decode(scope.walletScope.common.privateKey, recipientPubKey, tx.message.payload);
                         // Decode the message
                         if (!decoded) {

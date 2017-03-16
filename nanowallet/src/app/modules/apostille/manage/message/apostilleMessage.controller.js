@@ -243,6 +243,7 @@ class ApostilleMessageCtrl {
         } else {
              this.formData.message = '';
         }
+        this.updateFees();
     }
 
     /**
