@@ -1,8 +1,8 @@
-<table id="MDSTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'MOSAIC_SUPPLY_CHANGE_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="MDSTable" class="table table-bordered table-hover" title="{{ 'MOSAIC_SUPPLY_CHANGE_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#MDStable{{number}}">
-            <td style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-upload text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_EDIT' | translate }} <span class="text-muted">{{tx.mosaicId.namespaceId}}</span>:<strong>{{tx.mosaicId.name}}</strong>"</tt></td>
-            <td>
+            <td class="sentTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-th-large text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_EDIT' | translate }} <span class="text-muted">{{tx.mosaicId.namespaceId}}</span>:<strong>{{tx.mosaicId.name}}</strong>"</tt></td>
+            <td class="mosaicChange">
                 <span ng-show="!parent">
                     <strong>{{((tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
@@ -13,7 +13,7 @@
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>
-            <td></td>
+            <td class="messageTx"></td>
             <td>{{tx.timeStamp | fmtNemDate}}</td>
         </tr>
         </tody>
@@ -77,7 +77,7 @@
                 <hr style="border-style: dashed;margin:5px;" />
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-sm-3"><b>{{ 'GENERAL_NAME' | translate }}</b></div>
             <div class="col-sm-9">
@@ -129,7 +129,7 @@
                 <hr style="border-style: dashed;margin:5px;" />
             </div>
         </div>
-    
+
         <div class="row">
             <div class="col-sm-3"><b>{{ 'GENERAL_BLOCK' | translate }}</b></div>
             <div class="col-sm-9">
@@ -139,7 +139,7 @@
         </div>
 
         <div class="row">
-                <div class="col-sm-3"> 
+                <div class="col-sm-3">
                     <b>{{ 'LINE_TX_DETAILS_HASH' | translate }}</b>
                 </div>
                 <div class="col-sm-9">

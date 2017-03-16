@@ -4,9 +4,17 @@ function EnglishProvider($translateProvider) {
     $translateProvider.translations('en', {
 
         // HEADER COMPONENT
+        WALLET_NAME_1: 'nano',
+        WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'The secure interface connecting to the NEM platform',
         HEADER_LOGIN_BUTTON: 'Login',
         HEADER_SIGNUP_BUTTON: 'Sign Up',
+        HEADER_DASHBOARD: 'Dashboard',
+        HEADER_WALLET: 'Wallet',
+        HEADER_SERVICES: 'Services',
+        HEADER_EXPLORER: 'Explorer',
+        HEADER_NODE: 'Node',
+        HEADER_ACCOUNT: 'Account',
         HEADER_LANG_TITLE: 'Language',
         HEADER_LANG_SELECT: 'Select a language',
         HEADER_NODE_BLOCK_HEIGHT: 'Block height',
@@ -16,11 +24,13 @@ function EnglishProvider($translateProvider) {
         HEADER_NODE_CUSTOM: 'Custom node',
         HEADER_NODE_CONNECT: 'Connect',
         HEADER_NODE_CUSTOM_INFO: 'Node ip or domain',
+        HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
         HEADER_PURGE: 'Purge',
         HEADER_PURGE_MESSAGE: 'Please confirm the purge of local storage. By clicking "OK" all wallets in local storage will be deleted and will not be recoverable. You agree that all wallets have been backed up and funds are secured.',
-        
+
         // FOOTER COMPONENT
-        FOOTER_POWERED_BY: 'Powered by NEM technology.',
+        FOOTER_POWERED_BY_1: 'Powered by',
+        FOOTER_POWERED_BY_2: 'NEM technology.',
         FOOTER_VERSION: 'Version',
 
         // DASHBOARD MODULE
@@ -54,6 +64,7 @@ function EnglishProvider($translateProvider) {
         GENERAL_MESSAGE: 'Message',
         GENERAL_DATE: 'Date',
         GENERAL_TAB_NORMAL: 'Normal',
+        GENERAL_TAB_SEND: 'Send',
         GENERAL_TAB_MULTISIG: 'Multisig',
         GENERAL_TOTAL: 'Total',
         GENERAL_REMOVE: 'Remove',
@@ -62,9 +73,12 @@ function EnglishProvider($translateProvider) {
         GENERAL_LEVY: 'Levy',
         GENERAL_LEVY_TYPES: 'Levy types',
         GENERAL_LEVY_TYPES_NOTE: 'I - constant fee; II - percentage based',
+        GENERAL_LEVY_TYPE_1: 'constant fee',
+        GENERAL_LEVY_TYPE_2: 'percentage based',
         GENERAL_SEND: 'Send',
         GENERAL_TO: 'To',
         GENERAL_HASH: 'Hash',
+        GENERAL_HASH_FUNCTION: 'Hash Function',
         GENERAL_NAME: 'Name',
         GENERAL_INFORMATION: 'Information',
         GENERAL_ADDRESS: 'Address',
@@ -80,6 +94,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_NO: 'No',
         GENERAL_TAGS: 'Tags',
         GENERAL_SINK: 'Sink',
+        GENERAL_SINK_ADDRESS: 'Sink Address',
+        GENERAL_STORAGE: 'Storage',
         GENERAL_REASON: 'Reason',
         GENERAL_TRANSACTION_HASH: 'Transaction hash',
         GENERAL_TRANSACTION_ID: 'Transaction ID',
@@ -124,12 +140,14 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_NAME: 'Transfer transaction',
         TRANSFER_TRANSACTION_MULTISIG_NAME: 'Multisignature transfer transaction',
         TRANSFER_TRANSACTION_INVOICE: 'Create invoice',
-        TRANSFER_TRANSACTION_TAB_INVOICE: 'Invoice',
+        TRANSFER_TRANSACTION_TAB_INVOICE: 'Receive',
         TRANSFER_TRANSACTION_MOSAIC_TRANSFER: 'Mosaic transfer',
         TRANSFER_TRANSACTION_ATTACH_MOSAIC: 'Attach mosaic',
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaics attached',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Encrypt message',
+        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
+        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'From',
@@ -192,6 +210,8 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_MULTISIG_NAME: 'Multisignature mosaic definition transaction',
         MOSAIC_DEFINITION_QUANTITY: 'Quantity',
         MOSAIC_DEFINITION_DIV: 'Divisibility',
+        MOSAIC_DEFINITION_TOTAL_SUPPLY: 'Total supply',
+        MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
         MOSAIC_DEFINITION_DESCRPITION: 'Description',
         MOSAIC_DEFINITION_INITIAL_SUPPLY: 'Initial supply',
         MOSAIC_DEFINITION_MUTABLE_SUPPLY: 'Mutable supply',
@@ -210,6 +230,7 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: 'Sending',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: 'will imply levy of',
         MOSAIC_DEFINITION_PARENT: 'Parent Namespace',
+        MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: 'The maximum length for a mosaic name is 32 characters. Allowed characters are:',
         MOSAIC_DEFINITION_INFORMATION_2: 'The first character must be a letter from the alphabet.',
         MOSAIC_DEFINITION_INFORMATION_3: 'The description may not exceed a length of 512 characters. There is no limitation for the characters used in the description.',
@@ -244,12 +265,28 @@ function EnglishProvider($translateProvider) {
         NAMESPACE_PROVISION_TITLE: 'Create namespace & sub-namespace',
         NAMESPACE_PROVISION_NAME: 'Provision namespace transaction',
         NAMESPACE_PROVISION_MULTISIG_NAME: 'Multisignature provision namespace transaction',
-        NAMESPACE_PROVISION_PARENT: 'Parent Namespace (excluding level 3)',
-        NAMESPACE_PROVISION_NEW_ROOT: 'New root',
+        NAMESPACE_PROVISION_PARENT: 'Parent Namespace',
+        NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
+        NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: 'Namespace name',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:',
         NAMESPACE_PROVISION_INFORMATION_2: 'However a part is only allowed to begin with a letter of the alphabet, thus \'alice\' is an allowed part for a root namespace while \'1alice\' is not. Certain strings are reserved and thus not allowed as namespace parts. Among the disallowed namespace parts are:',
-        NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.', 
+        NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.',
+
+        // RENEW NAMESPACE MODULE
+        RENEW_NS_TITLE: 'Renew namespaces',
+        RENEW_NS_NONE: 'No namespace to renew',
+        RENEW_NS_INFORMATION_TITLE: 'Renewing Namespaces',
+        RENEW_NS_INFORMATION_TITLE_1: 'Fees',
+        RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
+        RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
+        RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
+        RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
+        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
+        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
+        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.',
 
         // ACCOUNT MODULE
         ACCOUNT_TITLE: 'Account',
@@ -268,7 +305,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_HARVESTING_NO_SLOTS: 'No free slots on selected node, please choose another',
         ACCOUNT_HARVESTING_BELOW_THRESHOLD: 'You need 10\'000 vested XEM to start delegated harvesting',
         ACCOUNT_ACCOUNT_SELECT: 'Select another account',
-        ACCOUNT_ACCOUNT_SELECT_LABEL: 'Use another account',
+        ACCOUNT_ACCOUNT_SELECT_LABEL: 'Choose Account',
         ACCOUNT_WALLET_KEYS: 'Wallet & keys',
         ACCOUNT_ADD_NEW_ACCOUNT: 'Add new account',
         ACCOUNT_ADD_NEW_ACCOUNT_BTN: 'Add a new account into wallet',
@@ -311,22 +348,40 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: 'Use the NEM Apostille service to create blockchain based notarizations to time stamp, follow and audit file authenticity.',
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
+        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+        PORTAL_ADDRESS_BOOK_BTN: 'Use address book',
+
+        // ADDRESS BOOK MODULE
+        ADDRESS_BOOK_TITLE: 'Address book',
+        ADDRESS_BOOK_LIST: 'Contacts',
+        ADDRESS_BOOK_NAVIGATION: 'Navigation',
+        ADDRESS_BOOK_NEW: 'New contact',
+        ADDRESS_BOOK_EDIT: 'Edit contact',
+        ADDRESS_BOOK_REMOVE: 'Remove contact',
+        ADDRESS_BOOK_NEW_BTN: 'Add',
+        ADDRESS_BOOK_EDIT_BTN: 'Save',
+        ADDRESS_BOOK_REMOVE_BTN: 'Remove',
+        ADDRESS_BOOK_EXPORT_BTN: 'Export address book',
+        ADDRESS_BOOK_IMPORT_BTN: 'Import address book',
+        ADDRESS_BOOK_CONTACT_LABEL: 'Label',
+        ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
+        ADDRESS_BOOK_ACTIONS: 'Actions',
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: 'Home',
-        EXPLORER_NAV_NSM: 'Namespaces & Mosaics', 
+        EXPLORER_NAV_NSM: 'Namespaces & Mosaics',
         EXPLORER_NAV_APOSTILLES: 'Apostilles',
 
         // EXPLORER HOME MODULE
-        EXPLORER_HOME_TITLE: 'Explorer - Home', 
+        EXPLORER_HOME_TITLE: 'Explorer - Home',
         EXPLORER_HOME_NS: 'Your Namespaces',
         EXPLORER_HOME_MOSAICS: 'Your Mosaics',
-        EXPLORER_HOME_NS_MULTISIG: 'Namespaces owned by multisig accounts',
+        EXPLORER_HOME_NS_MULTISIG: 'Multisig Owned Namespaces',
         EXPLORER_HOME_MOSAICS_LEVY: 'Levy mosaic',
 
         // EXPLORER NAMESPACES AND MOSAICS
         EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
-        EXPLORER_NS_MOS_SELECT_MOS: 'Select a mosaic to show details',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Selected Mosaic Details',
         EXPLORER_NS_MOS_SEARCH: 'Search namespace',
 
         // EXPLORER APOSTILLES MODULE
@@ -337,6 +392,7 @@ function EnglishProvider($translateProvider) {
 
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
+        ACCOUNTS_EXPLORER_SEARCH: 'Search',
 
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
@@ -346,6 +402,7 @@ function EnglishProvider($translateProvider) {
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Create apostilles',
+        APOSTILLE_CREATE_HELP: 'Want more info on apostille?',
         APOSTILLE_TRANSACTION_NAME: 'Apostille transaction',
         APOSTILLE_TRANSACTION_MULTISIG_NAME: 'Multisignature apostille transaction',
         APOSTILLE_KEEP_PRIVATE: 'Private, transferable, and updateable',
@@ -358,7 +415,7 @@ function EnglishProvider($translateProvider) {
         APOSTILLE_NAME_TOO_LONG: 'File name is too long, 32 characters maximum allowed.',
         APOSTILLE_MAX_NUMBER: 'Maximum apostilles per batch is 25',
         APOSTILLE_INFORMATION_1: 'Each file uploaded is processed automatically with options set on the left panel. You can add new files, change parameters and then add more files with different options. It\'ll also work if you switch to the multisig tab and add more files.',
-        APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.', 
+        APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.',
         APOSTILLE_INFORMATION_3: 'The dedicated HD account can be put under a multisig contract so that it may be transferred to others via 1-of-1 or any m-of-n multisig contract combination. It can also have additional information sent to it via messages with updates and augments to the original document or the product it represents.',
         APOSTILLE_INFORMATION_4: 'When two or more parties want to both approve of a blockchain timestamp, e.g. binding contracts, the account making the blockchain notarization can be put in an n-of-n multisig contract.',
         APOSTILLE_INFORMATION_5: 'For accounts in a multisignature contract that have selected "<b>Private, transferable, and updateable</b>", the initiating cosigner\'s private key is used to sign the hash and create a dedicated HD account, not the account that was multisigged.',
@@ -454,6 +511,8 @@ function EnglishProvider($translateProvider) {
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
+        ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
+        ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -466,23 +525,31 @@ function EnglishProvider($translateProvider) {
         ALERT_SIGNATURE_SUCCESS: 'Transaction successfully signed !',
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
+        ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Address book successfully imported !',
 
+        // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
         AGGREGATE_MODIFICATION_NAME: 'Aggregate modification transaction',
         AGGREGATE_MODIFICATION_MULTISIG_NAME: 'Multisignature aggregate modification transaction',
+        AGGREGATE_ACCOUNT_SELECT_TITLE: 'Account to Convert',
         AGGREGATE_ACCOUNT_SELECT: 'Select an account to convert',
-        AGGREGATE_CUSTOM_ACCOUNT: 'Use custom account',
+        AGGREGATE_CUSTOM_ACCOUNT: 'Import Key',
+        AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE: 'Address private key',
         AGGREGATE_ACCOUNT_TO_CONVERT: 'Account to convert address',
         AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE: 'Account to convert private key',
         AGGREGATE_ADD_PLACEHOLDER: 'Cosignatory account or @alias to add',
-        AGGREGATE_ADD_BTN_TITLE: 'Add cosignatory',
+        AGGREGATE_ADD_BTN_TITLE: 'Add Signer',
         AGGREGATE_MIN_SIGNATURES: 'Minimum signatures required',
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimum signatures needed to validate a transaction',
         AGGREGATE_MODIFICATION_LIST: 'Modifications list',
+        AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
+
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Edit a multisignature contract',
+        AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Select an account to edit',
+        AGGREGATE_ADD_REMOVE_TITLE: 'Add/Remove signer',
         AGGREGATE_ADD_REMOVE_PLACEHOLDER: 'Cosignatory account or @alias to add',
-        AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Relative change on minimum signatures',
+        AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Change Sigs Needed',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Number of signatures to add (n) or remove (-n) - Automated removals',
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Selected account information',
         AGGREGATE_MIN_SIGNATURES: 'Min signatures',
@@ -494,6 +561,7 @@ function EnglishProvider($translateProvider) {
         LOGIN_UPGRADE_MESSAGE: 'Selected wallet needs an upgrade. This action will generate a child public key and add it into your main account. Download of updated wallet will be automatically triggered at success, you <b><u>must</u></b> download it !',
         LOGIN_UPGRADE_BUTTON: 'Upgrade wallet',
         LOGIN_IMPORT_BUTTON: 'Import Wallet',
+        LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
         LOGIN_SELECT_WALLET: 'Select a wallet in local storage',
         LOGIN_LOGIN_BUTTON: 'Sign In',
 
@@ -537,6 +605,9 @@ function EnglishProvider($translateProvider) {
         FORM_PASSWORD_FIELD_PLACEHOLDER: 'Enter your wallet password or passphrase',
         FORM_WALLET_NAME_FIELD_PLACEHOLDER: 'Wallet name',
         FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER: 'Password',
+        FORM_PASSWORD: 'Password',
+        FORM_PASSWORD_CONFIRM: 'Confirm Password',
+        FORM_PASSPHRASE_CONFIRM: 'Confirm Passphrase',
         FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER: 'Confirm your password',
         FORM_PASSPHRASE_FIELD_PLACEHOLDER: 'Passphrase',
         FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER: 'Confirm your passphrase',
@@ -552,15 +623,7 @@ function EnglishProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Alias of',
         FORM_MESSAGE_PLACEHOLDER: 'Message',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
-
-        RENEW_NS_TITLE: 'Renew namespaces',
-        RENEW_NS_NONE: 'No namespace to renew',
-        RENEW_NS_INFORMATION_1: 'You can renew a namespace starting from one month before it expires.',
-        RENEW_NS_INFORMATION_2: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
-        RENEW_NS_ALERT_PART_1: '<b>Warning !</b> The namespace:',
-        RENEW_NS_ALERT_PART_2: 'will expire in less than a month ! ',
-        RENEW_NS_ALERT_PART_3: 'Consult the <b>renew page</b> for more information.'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
     });
 
 }

@@ -1,163 +1,173 @@
 <div class="create-multisig-page">
-
-  <div class="banner-left">
-    <div class="container">
-      <h2><i class="fa fa-hashtag"></i> {{ 'AGGREGATE_MODIFICATION_TITLE' | translate }}</h2>
+  <div class="container-fluid main">
+    <div class="row">
+      <div class="col-sm-8">
+        <h2>{{ 'AGGREGATE_MODIFICATION_TITLE' | translate }}</h2>
+      </div>
     </div>
-  </div>
+    <div class="row">
 
-  <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
-
-  	<div class="col-md-6">
-   <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
-              <i class="fa fa-chevron-right"></i> {{ 'AGGREGATE_MODIFICATION_NAME' | translate }}
-            </div>
-            <div class="panel-body">
-            	 <fieldset>
-
-            <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.common.password"/>
-            </fieldset>
-
+      <div class="col-md-6">
+        <div class="panel-heading">
+          <div class="tabDescription">
+            <span >{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}</span>
+          </div>
+          <ul class="nav nav-tabs">
+            <li ng-show="$ctrl.haveMoreThanOneAccount" ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}</a></li>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <fieldset>
+            <!-- ACCOUNT TO CONVERT TO MULTISIG -->
             <fieldset class="form-group" ng-show="$ctrl.haveMoreThanOneAccount && !$ctrl.useCustomAccount">
             	<div class="input-group">
-             	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
-             		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
-            	</select>
-            	<span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}">
-                          <i class="fa fa-edit"></i></button>
-                  </span>
-            </div>
-            </fieldset>
-
-            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
-            	<div class="input-group" ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}">
-             	<input class="form-control form-control-lg"
-                type="text"
-                placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT' | translate }}"
-                ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();"/>
-            	<span class="input-group-btn" ng-show="$ctrl.haveMoreThanOneAccount">
-                        <button type="button" class="btn btn-default" ng-click="$ctrl.useCustomAccount = false;$ctrl.resetMultisigData();" title="{{ 'AGGREGATE_SELECT_WALLET_ACCOUNT' | translate }}">
-                          <i class="fa fa-caret-square-o-down"></i></button>
-                  </span>
-            </div>
-            </fieldset>
-
-            <fieldset class="form-group" ng-show="$ctrl.multisigInfoData.account">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                           <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}</button>
-                        </span>
-                                <input class="form-control" style="text-align:right;" type="text" value="{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[1] }}" readOnly/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
-                                </span>
-                            </div>
-                        </fieldset>
-
-            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
-             	<input class="form-control form-control-lg"
-                type="password"
-                placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE' | translate }}"
-                ng-model="$ctrl.common.privateKey"/>
-            </fieldset>
-
-            <fieldset class="form-group">
-            	 <div class="input-group">
-              <input class="form-control form-control-lg"
-                type="text"
-                placeholder="{{ 'AGGREGATE_ADD_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.formData.cosignatoryToAdd" ng-model-options="{debounce:500}" ng-change="$ctrl.processCosignatoryToAdd();"/>
                 <span class="input-group-btn">
-                		<!-- Disabled if no public key or no address or cosig === multisig -->
-                        <button type="button" class="btn btn-success" ng-click="$ctrl.addCosig()" ng-disabled="!$ctrl.formData.cosignatoryPubKey || !$ctrl.formData.cosignatoryAddress || $ctrl.useCustomAccount && $ctrl.formData.cosignatoryAddress === $ctrl.multisigInfoData.account.address || !$ctrl.useCustomAccount && $ctrl.formData.cosignatoryAddress === $ctrl.selectedWalletAccount.address || !$ctrl.formData.accountToConvert" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
-                          <i class="fa fa-plus"></i></button>
-                  </span>
-            </div>
+                  <label>{{ 'AGGREGATE_ACCOUNT_SELECT_TITLE' | translate }}: </label>
+                </span>
+               	<select class="form-control" ng-options="account as (account.label || account.address) for (index, account) in $ctrl._Wallet.current.accounts" ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();">
+               		<option value="" disabled selected> {{ 'AGGREGATE_ACCOUNT_SELECT' | translate }}</option>
+              	</select>
+              </div>
             </fieldset>
-
-             <fieldset class="form-group" ng-show="$ctrl.showAlias">
-                <div class="input-group">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}</button>
-                  </span>
-              <input class="form-control form-control-lg"
-                type="text"
-                ng-model="$ctrl.aliasAddress" readOnly/>
-             </div>
+            <!-- ACCOUNT TO CONVERT TO MULTISIG MANUALLY -->
+            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
+              <div class="input-group"> <!--  ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}" -->
+                <span class="input-group-btn">
+                  <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
+                </span>
+                <input class="form-control"
+                  type="text"
+                  placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT' | translate }}"
+                  ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();"/>
+              </div>
             </fieldset>
-
-            <fieldset class="form-group">
-            	<label>{{ 'AGGREGATE_MIN_SIGNATURES' | translate }}</label>
-              <input class="form-control form-control-lg"
-                type="number"
-                placeholder="{{ 'AGGREGATE_MIN_SIGNATURES_PLACEHOLDER' | translate }}"
-                ng-model="$ctrl.formData.minCosigs" min="1" ng-change="$ctrl.updateFee();"/>
-            </fieldset>
-
-             <fieldset class="form-group">
+            <!-- MULTISIG ACCOUNT BALANCE -->
+            <fieldset class="form-group" ng-show="$ctrl.multisigInfoData.account">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}</button>
+                  <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
                 </span>
-                <p style="display: table-cell; vertical-align: middle; border: 1px solid rgb(68, 68, 68);background-color:#fff;text-align:right;">
-                  <span style="margin-right:10px;">
-                  <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
-                </span>
-                </p>
+                <div class="form-control formFloat" readOnly>
+                  <input class="readOnly" type="text" value="{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[1] }}" readOnly/>
+                  <label class="floatRight"><small>XEM</small></label>
+                </div>
+              </div>
+            </fieldset>
+            <!-- ACCOUNT TO CONVERT MANUALLY PRIVATE KEY -->
+            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
+              <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" type="button" style="cursor:default;opacity:1;" disabled><small>XEM</small></button>
+                  <label>{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE' | translate }}</label>
+                </span>
+                <input class="form-control"
+                  type="password"
+                  placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE' | translate }}"
+                  ng-model="$ctrl.common.privateKey"/>
+              </div>
+            </fieldset>
+            <!-- ADD SIGNER ACCOUNT -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'AGGREGATE_ADD_BTN_TITLE' | translate}}</label>
+                </span>
+                <input class="form-control"
+                    type="text"
+                    placeholder="{{ 'AGGREGATE_ADD_PLACEHOLDER' | translate }}"
+                    ng-model="$ctrl.formData.cosignatoryToAdd" ng-model-options="{debounce:500}" ng-change="$ctrl.processCosignatoryToAdd();"/>
+                <span class="input-group-btn adding">
+                  <!-- Disabled if no public key or no address or cosig === multisig -->
+                  <button type="button" class="btn btn-warning" ng-click="$ctrl.addCosig()" ng-disabled="!$ctrl.formData.cosignatoryPubKey || !$ctrl.formData.cosignatoryAddress || $ctrl.useCustomAccount && $ctrl.formData.cosignatoryAddress === $ctrl.multisigInfoData.account.address || !$ctrl.useCustomAccount && $ctrl.formData.cosignatoryAddress === $ctrl.selectedWalletAccount.address || !$ctrl.formData.accountToConvert" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </span>
               </div>
-            </fieldset>                                     
-
-            <button class="btn btn-success pull-xs-right"
-              type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || !$ctrl.useCustomAccount && !$ctrl.common.password.length || $ctrl.useCustomAccount && !$ctrl.common.privateKey || !$ctrl.cosignatoryArray.length" ng-click="$ctrl.send()">
+            </fieldset>
+            <!-- SHOW ADDRESS TO ADD IF ALIAS USED-->
+            <fieldset class="form-group" ng-show="$ctrl.showAlias">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'FORM_SIDE_BTN_ALIAS_OF' | translate}}: </label>
+                </span>
+                <input class="form-control"
+                  type="text"
+                  ng-model="$ctrl.aliasAddress" readOnly/>
+              </div>
+            </fieldset>
+            <!-- # OF SIGNERS REQUIRED -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'AGGREGATE_MIN_SIGNATURES' | translate }}: </label>
+                </span>
+                <input class="form-control"
+                  type="number"
+                  placeholder="{{ 'AGGREGATE_MIN_SIGNATURES_PLACEHOLDER' | translate }}"
+                  ng-model="$ctrl.formData.minCosigs" min="1" ng-change="$ctrl.updateFee();"/>
+              </div>
+            </fieldset>
+            <!-- TRANSACTION FEES -->
+            <fieldset class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{'GENERAL_FEE' | translate}}: </label>
+                </span>
+                <div class="form-control formFloat" readOnly>
+                  <span class="feeAmount">
+                    <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
+                  </span>
+                  <label class="floatRight"><small>XEM</small></label>
+                </div>
+              </div>
+            </fieldset>
+            <!-- PASSWORD FIELD -->
+            <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                </span>
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              </div>
+            </fieldset>
+            <!-- SEND TRANSACTION -->
+            <button class="btn btn-success"
+              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.useCustomAccount && !$ctrl.common.password.length || $ctrl.useCustomAccount && !$ctrl.common.privateKey || !$ctrl.cosignatoryArray.length" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
-            </button> 
-
-
-        </fieldset>
-            </div>
+            </button>
+          </fieldset>
         </div>
-    </div>
-
-    <div class="col-md-6 noPaddingLeft">
-
-    <div class="panel panel-default">
-            <div class="panel-heading">
-               <i class="fa fa-table"></i> {{ 'AGGREGATE_MODIFICATION_LIST' | translate }} 
-               <div style="float: right; position: relative; display: block;" ng-show="$ctrl.cosignatoryArray.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
-            </div>
-             <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed">
-                <thead>
-                    <tr>
-                        <th>{{ 'GENERAL_ADDRESS' | translate }}</th>
-                        <th>{{ 'GENERAL_ACTION' | translate }}</th>
-                        <th>{{ 'GENERAL_REMOVE' | translate }}</th>
-                    </tr>
-                </thead>
-            </table>
-            <table class="table table-bordered table-hover table-striped table-condensed" style="table-layout:fixed" ng-show="$ctrl.cosignatoryArray.length">
-                <tbody>
-                    <tr ng-repeat="acct in $ctrl.cosignatoryArray | reverse | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
-                       <td style="word-break:break-all">{{acct.address}}</td>
-                       <td>{{ 'GENERAL_ADD' | translate }}</td>
-                       <td><i class="fa fa-times" style="color:red;cursor:pointer;" ng-click="$ctrl.removeCosignFromList($ctrl.cosignatoryArray, acct)"></i></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="panel-body" ng-show="!$ctrl.cosignatoryArray.length">
-                <p style="margin:0;">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-            </div>
-          </div>
-
       </div>
 
-</div>
+      <div class="col-md-6">
+        <!-- LIST OF SIGNERS TO BE ADDED -->
+        <div class="panel-heading">
+          <h3>{{ 'AGGREGATE_COSIG_LIST' | translate }}</h3>
+          <div style="float: right; position: relative; display: block;" ng-show="$ctrl.cosignatoryArray.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+        </div>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>{{ 'GENERAL_ADDRESS' | translate }}</th>
+              <th>{{ 'GENERAL_ACTION' | translate }}</th>
+              <th>{{ 'GENERAL_REMOVE' | translate }}</th>
+            </tr>
+          </thead>
+        </table>
+        <table class="table table-condensed" style="table-layout:fixed" ng-show="$ctrl.cosignatoryArray.length">
+          <tbody>
+            <tr ng-repeat="acct in $ctrl.cosignatoryArray | reverse | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
+              <td style="word-break:break-all">{{acct.address}}</td>
+              <td>{{ 'GENERAL_ADD' | translate }}</td>
+              <td><i class="fa fa-times" style="color:red;cursor:pointer;" ng-click="$ctrl.removeCosignFromList($ctrl.cosignatoryArray, acct)"></i></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="panel-body bg-info" ng-show="!$ctrl.cosignatoryArray.length">
+          <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</div>

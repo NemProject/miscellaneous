@@ -6,8 +6,6 @@ logs
 *.log
 npm-debug.log*
 
-build
-
 # Runtime data
 pids
 *.pid
@@ -31,6 +29,10 @@ coverage
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+
+# App builds
+dist
+cache
 
 # Dependency directories
 node_modules

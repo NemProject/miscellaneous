@@ -4,7 +4,7 @@ import CryptoHelpers from '../../utils/CryptoHelpers';
 import Network from '../../utils/Network';
 
 class TransferTransactionCtrl {
-    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge) {
+    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $state, $localStorage) {
         'ngInject';
 
         // Alert service
@@ -19,6 +19,10 @@ class TransferTransactionCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
+        // $state
+        this._$state = $state;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -32,7 +36,10 @@ class TransferTransactionCtrl {
          */
         this.formData = {};
         // Alias or address user type in
-        this.formData.rawRecipient = '';
+        this.formData.rawRecipient = this._$state.params.address.length ? this._$state.params.address : '';
+        if(this.formData.rawRecipient.length) {
+            this.processRecipientInput();
+        }
         // Cleaned recipient from @alias or input
         this.formData.recipient = '';
         this.formData.recipientPubKey = '';
@@ -72,6 +79,20 @@ class TransferTransactionCtrl {
             'password': '',
             'privateKey': '',
         };
+
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && this._storage.contacts.length) {
+            let val = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts) ;
+            this.contacts = val === false ? [] : val;
+        }
+
+        // Contacts to address book pagination properties
+        this.currentPageAb = 0;
+        this.pageSizeAb = 5;
+        this.numberOfPagesAb = function() {
+            return Math.ceil(this.contacts.items.length / this.pageSizeAb);
+        }
 
         // Invoice model for QR
         this.invoiceData = {
@@ -210,7 +231,7 @@ class TransferTransactionCtrl {
         return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
                     // Store recipient public key (needed to encrypt messages)
                     this.formData.recipientPubKey = data.account.publicKey;
-                    console.log(this.formData.recipientPubKey)
+                    //console.log(this.formData.recipientPubKey)
                     // Set the address to send to
                     this.formData.recipient = address;
                 },

@@ -302,42 +302,42 @@ export default class Alert {
        this._ngToast.create({
             content: this._$filter('translate')('ALERT_EMPTY_DECODED_MSG'),
             className: 'danger'
-        }); 
+        });
     }
 
     invalidNamespaceName() {
        this._ngToast.create({
             content: this._$filter('translate')('ALERT_INVALID_NS_NAME'),
             className: 'danger'
-        }); 
+        });
     }
 
     invalidMosaicName() {
        this._ngToast.create({
             content: this._$filter('translate')('ALERT_INVALID_MOSAIC_NAME'),
             className: 'danger'
-        }); 
+        });
     }
 
     invalidMosaicDescription() {
        this._ngToast.create({
             content: this._$filter('translate')('ALERT_MOSAIC_DESCRIPTION'),
             className: 'danger'
-        }); 
+        });
     }
 
     errorFetchingIncomingTxes(message) {
          this._ngToast.create({
             content: this._$filter('translate')('ALERT_GET_INCOMING_TXES_ERROR') + message,
             className: 'danger'
-        }); 
+        });
     }
 
     connectionError() {
          this._ngToast.create({
             content: this._$filter("translate")("GENERAL_CONNECTION_ERROR"),
             className: 'danger'
-        }); 
+        });
     }
 
     errorGetMosaicsDefintions(message) {
@@ -368,11 +368,25 @@ export default class Alert {
         });
     }
 
+    invalidAddressBookFile() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_ADDRESS_BOOK_FILE'),
+            className: 'danger'
+        });
+    }
+    
     namespaceExpiryNotice(ns, blocks) {
         this._ngToast.create({
             content: this._$filter("translate")("RENEW_NS_ALERT_PART_1") + ' <b>'+ns+'</b> ' + this._$filter("translate")("RENEW_NS_ALERT_PART_2") + ' (~' + blocks + ' ' + this._$filter("translate")("GENERAL_BLOCKS") + '). ' + this._$filter("translate")("RENEW_NS_ALERT_PART_3") ,
             className: 'warning',
             timeout: 10000
+        });
+    }
+
+    invalidAddress(addr) {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_ADDRESS'),
+            className: 'danger'
         });
     }
 
@@ -438,6 +452,13 @@ export default class Alert {
     ntyFileSuccess() {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_NTY_FILE_SUCCESS'),
+            className: 'success'
+        });
+    }
+
+    addressBookFileSuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_ADDRESS_BOOK_FILE_SUCCESS'),
             className: 'success'
         });
     }

@@ -43,6 +43,7 @@ import './modules/mosaics';
 import './modules/explorer';
 import './modules/importanceTransfer';
 import './modules/changelly';
+import './modules/addressBook';
 import './modules/faq';
 
 // Create and bootstrap application
@@ -86,7 +87,8 @@ const requires = [
     'chart.js',
     'pascalprecht.translate',
     'app.lang',
-    'app.changelly'
+    'app.changelly',
+    'app.addressBook'
 ];
 
 window.$ = window.jQuery = $;

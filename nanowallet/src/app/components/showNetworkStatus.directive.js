@@ -10,7 +10,7 @@ function ShowNetworkStatus(DataBridge) {
                 // If user detected
                 if (val) {
                     element.css({
-                        color: '#5cb85c'
+                        color: 'green'
                     });
                 } else {
                     element.css({

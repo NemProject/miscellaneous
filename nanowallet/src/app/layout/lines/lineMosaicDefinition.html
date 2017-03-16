@@ -1,8 +1,8 @@
-<table id="MSTable" class="table table-bordered table-hover" data-toggle="tooltip" data-placement="{{tooltipPosition}}" title="{{ 'MOSAIC_DEFINITION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="MSTable" class="table table-bordered table-hover" title="{{ 'MOSAIC_DEFINITION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#MStable{{number}}">
-            <td style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-upload text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_CREATE' | translate }} "<span class="text-muted">{{tx.mosaicDefinition.id.namespaceId}}</span>:<strong>{{tx.mosaicDefinition.id.name}}</strong>"</tt></td>
-            <td>
+            <td class="mosaicTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-th text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_CREATE' | translate }} "<span class="text-muted">{{tx.mosaicDefinition.id.namespaceId}}</span>:<strong>{{tx.mosaicDefinition.id.name}}</strong>"</tt></td>
+            <td class="amountTx">
                 <span ng-show="!parent">
                     <strong>{{((tx.creationFee+tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.creationFee+tx.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
@@ -13,7 +13,7 @@
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>
-            <td></td>
+            <td class="messageTx"></td>
             <td>{{tx.timeStamp | fmtNemDate}}</td>
         </tr>
         </tody>
@@ -59,7 +59,7 @@
 
                 </div>
 
-       
+
         <div class="row">
             <div class="col-sm-3"><b>{{ 'GENERAL_AMOUNT' | translate }}</b></div>
             <div class="col-sm-9">
@@ -216,7 +216,7 @@
             </div>
         </div>
         <div class="row">
-                <div class="col-sm-3"> 
+                <div class="col-sm-3">
                     <b>{{ 'LINE_TX_DETAILS_HASH' | translate }}</b>
                 </div>
                 <div class="col-sm-9">

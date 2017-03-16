@@ -1,6 +1,10 @@
 <footer>
-  <div class="container">
-      {{ 'FOOTER_POWERED_BY' | translate }}
-    <span style="float:right;"><b>{{ 'FOOTER_VERSION' | translate }}: </b> <small>{{ $ctrl._AppConstants.version }}</small></span>
+  <div class="container-fluid">
+    <div class="col-lg-6 col-sm-6">
+      {{ 'FOOTER_POWERED_BY_1' | translate }} <b>{{ 'FOOTER_POWERED_BY_2' | translate }}</b>
+    </div>
+    <div class="col-lg-6 col-sm-6">
+    {{ 'FOOTER_VERSION' | translate }}: <b>{{ $ctrl._AppConstants.version }}</b>
+  </div>
   </div>
 </footer>
