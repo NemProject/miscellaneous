@@ -133,9 +133,9 @@ tt {
     text-overflow: hidden;
     white-space: nowrap;
   }
-	.floatRight {
-		max-width: 60%
-	}
+  .floatRight {
+   max-width: 60%
+ }
   input {
     width: 88%;
     border: 0px;
@@ -263,8 +263,8 @@ label {
   color: white !important;
 }
 .btn-success.mosaics {
-	background: $red;
-	border: 1px solid $red;
+  background: $red;
+  border: 1px solid $red;
 }
 .btn-success.mosaics:hover, .btn-success.mosaics:active, .btn-success.mosaics:focus {
   background-color: $red !important;
@@ -304,7 +304,7 @@ fieldset .form-control {
 	max-width: 260px;
 }
 fieldset .form-control-static{
-	padding-top: 0px;
+ padding-top: 0px;
 }
 fieldset .form-control.password {
 	overflow: visible;
@@ -318,6 +318,13 @@ fieldset .form-control.formFloat {
 	// text-overflow: ellipsis;
 	// max-width: 260px;
 }
+.has-error {
+  color: $red;
+}
+fieldset .form-control.has-error {
+  border-bottom-color: $red !important;
+}
+
 
 .reverseEllipsis {
   white-space: nowrap;
