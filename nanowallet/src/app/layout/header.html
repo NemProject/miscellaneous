@@ -15,24 +15,31 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account">
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.dashboard" show-authed="true"><i class="fa fa-home"></i> {{ 'HEADER_DASHBOARD' | translate }}</a></li>
-        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-send"></i> {{ 'HEADER_WALLET' | translate }}</a></li>
+        <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.transferTransaction" show-authed="true"><i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}</a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.portal" show-authed="true"><i class="fa fa-wrench"></i> {{ 'HEADER_SERVICES' | translate }}</a></li>
         <li><a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true"><i class="fa fa-globe"></i> {{ 'HEADER_EXPLORER' | translate }}</a></li>
 
         <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="!balanceToBtc && !balanceToUsd" show-account-data="balance" show-authed="true" ng-click="balanceToUsd = true;">
           <b>0.000000 XEM</b></a>
         </li>
-        <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToUsd" show-authed="true" ng-click="balanceToUsd = false;balanceToBtc = true;">
-          <i class="fa fa-usd"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * $ctrl._DataBridge.marketInfo.price_usd | currencyFormat }}</b></a>
+        <li class="money">
+          <a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToUsd" show-authed="true" ng-click="balanceToUsd = false;balanceToBtc = true;">
+            <span ng-show="$ctrl._DataBridge.marketInfo.highestBid && $ctrl._DataBridge.btcPrice.last"><i class="fa fa-usd"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * ($ctrl._DataBridge.marketInfo.highestBid * $ctrl._DataBridge.btcPrice.last) | currencyFormat }}</b></span>
+            <span ng-show="!$ctrl._DataBridge.marketInfo.highestBid || !$ctrl._DataBridge.btcPrice.last"><b>No <i class="fa fa-usd"></i> market data</b></span>
+          </a>
         </li>
-        <li class="money"><a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToBtc" show-authed="true" ng-click="balanceToBtc = false;">
-          <i class="fa fa-btc"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * $ctrl._DataBridge.marketInfo.price_btc | btcFormat }}</b></a>
+        <li class="money">
+          <a style="outline:0;font-size:90%;cursor:pointer;" ng-show="balanceToBtc" show-authed="true" ng-click="balanceToBtc = false;">
+            <span ng-show="$ctrl._DataBridge.marketInfo.highestBid"><i class="fa fa-btc"></i> <b>{{ $ctrl._DataBridge.accountData.account.balance / 1000000 * $ctrl._DataBridge.marketInfo.highestBid | btcFormat }}</b></span>
+            <span ng-show="!$ctrl._DataBridge.marketInfo.highestBid"><b>No <i class="fa fa-btc"></i> market data</span></b>
+          </a>
+       </b></a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a class="login" ui-sref-active="active" ui-sref="app.login" show-authed="false"><small><b>{{ 'HEADER_LOGIN_BUTTON' | translate }}</b></small></a></li>
         <li><a style="outline:0;text-transform: uppercase;" ui-sref-active="active" ui-sref="app.signup" show-authed="false"><small><b>{{ 'HEADER_SIGNUP_BUTTON' | translate }}</b></small></a></li>
-        <li class="node"><a data-toggle="modal" data-target=".nodes" aria-haspopup="true" aria-expanded="false" show-authed="true"><i class="fa fa-circle-o" show-network-status></i> {{ 'HEADER_NODE' | translate }}</a></li>
+        <li class="node" style="cursor:pointer;"><a data-toggle="modal" data-target=".nodes" aria-haspopup="true" aria-expanded="false" show-authed="true"><i class="fa fa-circle-o" show-network-status></i> {{ 'HEADER_NODE' | translate }}</a></li>
         <li class="account" ng-show="$ctrl._DataBridge.accountData.meta && $ctrl._DataBridge.accountData.account"><a ui-sref-active="active" ui-sref="app.account" show-authed="true">{{ 'HEADER_ACCOUNT' | translate }}</a></li>
         <li class="account2" ng-show="$ctrl._Wallet.currentAccount.label"><a>: {{ $ctrl._Wallet.currentAccount.label }}</a></li>
         <li style="display:none"><a style="outline:0;cursor:default;" show-authed="true" show-block-height></a></li>
