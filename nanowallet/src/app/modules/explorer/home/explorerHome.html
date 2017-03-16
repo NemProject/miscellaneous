@@ -30,12 +30,10 @@
             <h4>{{ 'EXPLORER_HOME_NS_MULTISIG' | translate }}</h4>
           </div>
           <div class="panel-body">
-            <div ng-repeat="multisig in $ctrl._DataBridge.accountData.meta.cosignatoryOf">
-              <ul class="list-group" ng-repeat="namespace in $ctrl._DataBridge.namespaceOwned[multisig.address]" ng-show="$ctrl._DataBridge.namespaceOwned[multisig.address]">
-                <li class="list-group-item">{{namespace.fqn}}</li>
+              <ul class="list-group" ng-repeat="namespace in $ctrl.nsOwnedMultisig">
+                <li class="list-group-item">{{namespace}}</li>
               </ul>
-              <p  class="nothing" ng-show="!$ctrl._DataBridge.namespaceOwned[multisig.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-            </div>
+              <p  class="nothing" ng-show="!$ctrl.nsOwnedMultisig.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
           </div>
         </div>
       </div>

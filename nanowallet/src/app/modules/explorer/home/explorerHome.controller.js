@@ -22,6 +22,20 @@ class ExplorerHomeCtrl {
             return;
         }
 
+        this.nsOwnedMultisig = [];
+        
+        if(this._DataBridge.accountData.meta.cosignatoryOf.length) {
+            for(let i=0; i < this._DataBridge.accountData.meta.cosignatoryOf.length; i++) {
+                let multisig = this._DataBridge.accountData.meta.cosignatoryOf[i].address;
+                if(undefined !== this._DataBridge.namespaceOwned[multisig]) {
+                    let namesArray = Object.keys(this._DataBridge.namespaceOwned[multisig]);
+                    for (let k=0; k < namesArray.length; k++) {
+                        let namespace = this._DataBridge.namespaceOwned[multisig][namesArray[k]].fqn
+                        this.nsOwnedMultisig.push(namespace);
+                    }
+                }
+            }
+        }
     }
 
    
