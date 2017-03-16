@@ -78,62 +78,38 @@ class Transactions {
      * @return {number} - The fee amount for the mosaics in the transaction
      */
     calculateMosaicsFee(multiplier, mosaics, attachedMosaics) {
-        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
-            let totalFee = 0;
-            let fee = 0;
-            let supplyRelatedAdjustment = 0;
-            for (let i = 0; i < attachedMosaics.length; i++) {
-                let m = attachedMosaics[i];
-                let mosaicName = helpers.mosaicIdToName(m.mosaicId);
-                if (!(mosaicName in mosaics)) {
-                    return ['unknown mosaic divisibility', data];
-                }
-                let mosaicDefinitionMetaDataPair = mosaics[mosaicName];
-                let divisibilityProperties = $.grep(mosaicDefinitionMetaDataPair.mosaicDefinition.properties, function(w) {
-                    return w.name === "divisibility";
-                });
-                let divisibility = divisibilityProperties.length === 1 ? ~~(divisibilityProperties[0].value) : 0;
+        let totalFee = 0;
+        let fee = 0;
+        let supplyRelatedAdjustment = 0;
+        for (let i = 0; i < attachedMosaics.length; i++) {
+            let m = attachedMosaics[i];
+            let mosaicName = helpers.mosaicIdToName(m.mosaicId);
+            if (!(mosaicName in mosaics)) {
+                return ['unknown mosaic divisibility', data];
+            }
+            let mosaicDefinitionMetaDataPair = mosaics[mosaicName];
+            let divisibilityProperties = $.grep(mosaicDefinitionMetaDataPair.mosaicDefinition.properties, function(w) {
+                return w.name === "divisibility";
+            });
+            let divisibility = divisibilityProperties.length === 1 ? ~~(divisibilityProperties[0].value) : 0;
 
-                let supply = mosaicDefinitionMetaDataPair.supply;
-                let quantity = m.quantity;
-                // Small business mosaic fee
-                if (supply <= 10000 && divisibility === 0) {
-                    fee = 1;
-                } else {
-                    let maxMosaicQuantity = 9000000000000000;
-                    let totalMosaicQuantity = supply * Math.pow(10, divisibility)
-                    supplyRelatedAdjustment = Math.floor(0.8 * Math.log(maxMosaicQuantity / totalMosaicQuantity));
-                    let numNem = helpers.calcXemEquivalent(multiplier, quantity, supply, divisibility);
-                    // Using Math.ceil below because xem equivalent returned is sometimes a bit lower than it should
-                    // Ex: 150'000 of nem:xem gives 149999.99999999997
-                    fee = helpers.calcMinFee(Math.ceil(numNem));
+            let supply = mosaicDefinitionMetaDataPair.supply;
+            let quantity = m.quantity;
+            // Small business mosaic fee
+            if (supply <= 10000 && divisibility === 0) {
+                fee = 1;
+            } else {
+                let maxMosaicQuantity = 9000000000000000;
+                let totalMosaicQuantity = supply * Math.pow(10, divisibility)
+                supplyRelatedAdjustment = Math.floor(0.8 * Math.log(maxMosaicQuantity / totalMosaicQuantity));
+                let numNem = helpers.calcXemEquivalent(multiplier, quantity, supply, divisibility);
+                // Using Math.ceil below because xem equivalent returned is sometimes a bit lower than it should
+                // Ex: 150'000 of nem:xem gives 149999.99999999997
+                fee = helpers.calcMinFee(Math.ceil(numNem));
                 }
                 totalFee += Math.max(1, fee - supplyRelatedAdjustment);
-            }
-            return Math.max(1, totalFee);
-        } else {
-            let totalFee = 0;
-            for (let i = 0; i < attachedMosaics.length; i++) {
-                let m = attachedMosaics[i];
-                let mosaicName = helpers.mosaicIdToName(m.mosaicId);
-                if (!(mosaicName in mosaics)) {
-                    return ['unknown mosaic divisibility', data];
-                }
-                let mosaicDefinitionMetaDataPair = mosaics[mosaicName];
-                let divisibilityProperties = $.grep(mosaicDefinitionMetaDataPair.mosaicDefinition.properties, function(w) {
-                    return w.name === "divisibility";
-                });
-                let divisibility = divisibilityProperties.length === 1 ? ~~(divisibilityProperties[0].value) : 0;
-
-                let supply = mosaicDefinitionMetaDataPair.supply;
-                let quantity = m.quantity;
-                let numNem = helpers.calcXemEquivalent(multiplier, quantity, supply, divisibility);
-                let fee = Math.ceil(Math.max(10 - numNem, 2, Math.floor(Math.atan(numNem / 150000.0) * 3 * 33)));
-
-                totalFee += fee;
-            }
-            return (totalFee * 5) / 4;
         }
+        return Math.max(1, totalFee);
     }
 
     /**
@@ -146,7 +122,7 @@ class Transactions {
      * @return {object} - A [MultisigTransaction]{@link http://bob.nem.ninja/docs/#multisigTransaction} object
      */
     _multisigWrapper(senderPublicKey, innerEntity, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigTransaction, senderPublicKey, timeStamp, due, version);
         let custom = {
@@ -202,11 +178,11 @@ class Transactions {
      * @return {object} - A [TransferTransaction]{@link http://bob.nem.ninja/docs/#transferTransaction} object
      */
     _constructTransfer(senderPublicKey, recipientCompressedKey, amount, message, due, mosaics, mosaicsFee) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
-        let msgFee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 && message.payload.length || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 && message.payload.length ? Math.max(1, Math.floor((message.payload.length / 32) + 1)) : message.payload.length ? Math.max(1, Math.floor(message.payload.length / 2 / 16)) * 2 : 0;
-        let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? helpers.calcMinFee(amount / 1000000) : Math.ceil(Math.max(10 - (amount / 1000000), 2, Math.floor(Math.atan((amount / 1000000) / 150000.0) * 3 * 33)));
+        let msgFee = message.payload.length ? Math.max(1, Math.floor((message.payload.length / 2) / 32) + 1) : 0;
+        let fee = mosaics ? mosaicsFee : helpers.calcMinFee(amount / 1000000);
         let totalFee = (msgFee + fee) * 1000000;
         let custom = {
             'recipient': recipientCompressedKey.toUpperCase().replace(/-/g, ''),
@@ -228,7 +204,7 @@ class Transactions {
      * @return {object} - A [MultisigAggregateModificationTransaction]{@link http://bob.nem.ninja/docs/#multisigAggregateModificationTransaction} object
      */
     _constructAggregate(tx, signatoryArray) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(2);
         let due = this._Wallet.network === Network.data.Testnet.id ? 60 : 24 * 60;
         let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
@@ -273,7 +249,7 @@ class Transactions {
      * @return {object} - A [MultisigCosignatoryModification]{@link http://bob.nem.ninja/docs/#multisigCosignatoryModification} object
      */
     _constructAggregateModifications(senderPublicKey, tx, signatoryArray) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version;
         let custom;
         let totalFee;
@@ -332,20 +308,11 @@ class Transactions {
         let actualSender = tx.isMultisig ? tx.multisigAccount.publicKey : kp.publicKey.toString();
         let rentalFeeSink = tx.rentalFeeSink.toString();
         let rentalFee;
-        if (this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
-            // Set fee depending if namespace or sub
-            if (tx.namespaceParent) {
-                rentalFee = 200 * 1000000;
-            } else {
-                rentalFee = 5000 * 1000000;
-            }
+        // Set fee depending if namespace or sub
+        if (tx.namespaceParent) {
+            rentalFee = 200 * 1000000;
         } else {
-            // Set fee depending if namespace or sub
-            if (tx.namespaceParent) {
-                rentalFee = 5000 * 1000000;
-            } else {
-                rentalFee = 50000 * 1000000;
-            }
+            rentalFee = 5000 * 1000000;
         }
         let namespaceParent = tx.namespaceParent ? tx.namespaceParent.fqn : null;
         let namespaceName = tx.namespaceName.toString();
@@ -370,10 +337,10 @@ class Transactions {
      * @return {object} - A [ProvisionNamespaceTransaction]{@link http://bob.nem.ninja/docs/#provisionNamespaceTransaction} object
      */
     _constructNamespace(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, namespaceName, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = 20 * 1000000;
         let custom = {
             'rentalFeeSink': rentalFeeSink.toUpperCase().replace(/-/g, ''),
             'rentalFee': rentalFee,
@@ -397,12 +364,7 @@ class Transactions {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
         let actualSender = tx.isMultisig ? tx.multisigAccount.publicKey : kp.publicKey.toString();
         let rentalFeeSink = tx.mosaicFeeSink.toString();
-        let rentalFee;
-        if(this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000) {
-            rentalFee = 500 * 1000000;
-        } else {
-            rentalFee = 50000 * 1000000;
-        }
+        let rentalFee = 500 * 1000000;
         let namespaceParent = tx.namespaceParent.fqn;
         let mosaicName = tx.mosaicName.toString();
         let mosaicDescription = tx.mosaicDescription.toString();
@@ -432,11 +394,11 @@ class Transactions {
      * @return {object} - A [MosaicDefinitionCreationTransaction]{@link http://bob.nem.ninja/docs/#mosaicDefinitionCreationTransaction} object
      */
     _constructMosaicDefinition(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, mosaicName, mosaicDescription, mosaicProperties, levy, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicDefinition, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = 20 * 1000000;
         let levyData = levy ? {
             'type': levy.feeType,
             'recipient': levy.address.toUpperCase().replace(/-/g, ''),
@@ -498,11 +460,11 @@ class Transactions {
      * @return {object} - A [MosaicSupplyChangeTransaction]{@link http://bob.nem.ninja/docs/#mosaicSupplyChangeTransaction} object
      */
     _constructMosaicSupply(senderPublicKey, mosaicId, supplyType, delta, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicSupply, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id && this._DataBridge.nisHeight >= 572500 || this._Wallet.network === Network.data.Mainnet.id && this._DataBridge.nisHeight >= 875000 ? 20 * 1000000 : 2 * 3 * 18 * 1000000;
+        let fee = 20 * 1000000;
         let custom = {
             'mosaicId': mosaicId,
             'supplyType': supplyType,
@@ -543,7 +505,7 @@ class Transactions {
      * @return {object} - An [ImportanceTransferTransaction]{@link http://bob.nem.ninja/docs/#importanceTransferTransaction} object
      */
     _constructImportanceTransfer(senderPublicKey, recipientKey, mode, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ImportanceTransfer, senderPublicKey, timeStamp, due, version);
         let custom = {
@@ -619,7 +581,7 @@ class Transactions {
      * @return {object} - An [MultisigSignatureTransaction]{@link http://bob.nem.ninja/docs/#multisigSignatureTransaction} object
      */
     _constructSignature(senderPublicKey, otherAccount, otherHash, due) {
-        let timeStamp = helpers.createNEMTimeStamp();
+        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigSignature, senderPublicKey, timeStamp, due, version);
         let totalFee = (2 * 3) * 1000000;
