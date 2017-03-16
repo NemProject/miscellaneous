@@ -129,6 +129,18 @@ class UpdateApostilleCtrl {
         // Load nty Data if any
         this._Wallet.setNtyData();
 
+        /**
+         * Fix safari and chrome CORS issue
+         */
+        this.certificateLocation = "./images/certificate.png";
+
+        let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+
+        if (isChrome || isSafari) {
+            this.certificateLocation = "https://raw.githubusercontent.com/NemProject/NanoWallet/master/src/images/certificate.png";
+        }
+
     }
 
     /**
@@ -538,7 +550,7 @@ class UpdateApostilleCtrl {
                     return resolve(canvas.toDataURL());
                 };
             imageObj.crossOrigin = "Anonymous";
-            imageObj.src = "./images/certificate.png";
+            imageObj.src = this.certificateLocation;
         });
     }
 
