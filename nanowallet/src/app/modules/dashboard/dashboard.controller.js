@@ -94,6 +94,20 @@ class DashboardCtrl {
             // Alert error
             this._Alert.errorGetMarketInfo(); 
         });
+        // Gets btc price
+        this._NetworkRequests.getBtcPrice().then((data) => {
+            this._DataBridge.btcPrice = data;
+        },
+        (err) => {
+            this._Alert.errorGetBtcPrice();
+        });
+    }
+
+    /**
+     * Fix a value to 4 decimals
+     */
+    toFixed4(value) {
+        return value.toFixed(4);
     }
 
 
