@@ -390,6 +390,48 @@ export default class Alert {
         });
     }
 
+    invalidAmount() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_AMOUNT'),
+            className: 'danger'
+        });
+    }
+
+    invalidPrivateKey() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_INVALID_PRIVATE_KEY'),
+            className: 'danger'
+        });
+    }
+
+    fileSizeError(filename) {
+        this._ngToast.create({
+            content: filename + this._$filter("translate")("ALERT_FILE_SIZE_ERROR"),
+            className: 'danger'
+        });
+    }
+
+    noPublicKeyForDecoding() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_MESSAGE_DECODE_KEY_ERROR"),
+            className: 'danger'
+        });
+    }
+
+    errorGetTimeSync() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_FETCH_TIME_SYNC_ERROR"),
+            className: 'danger'
+        });
+    }
+
+    errorGetBtcPrice() {
+        this._ngToast.create({
+            content:'Error while trying to fetch Bitcoin price',
+            className: 'danger'
+        });
+    }
+
     /***
      * Success alerts
      */
