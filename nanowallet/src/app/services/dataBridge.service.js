@@ -128,6 +128,27 @@ class DataBridge {
          * @type {object|undefined}
          */
         this.marketInfo = undefined;
+
+        /**
+         * The Bitcoin price value
+         *
+         * @type {object|undefined}
+         */
+        this.btcPrice = undefined;
+
+        /**
+         * The network time
+         *
+         * @type {number}
+         */
+        this.netWorkTime = undefined;
+
+        /**
+         * Store the time sync interval function
+         *
+         * @type {setInterval}
+         */
+        this.timeSyncInterval = undefined;
     }
 
     /**
@@ -146,9 +167,25 @@ class DataBridge {
             // Reset at new connection
             this.reset();
 
+            // Start time sync
+            this.timeSync();
+
             /***
              * Few network requests happen on socket connection
              */
+
+             /**
+             * Fetch network time
+             */
+            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+                this._$timeout(() => {
+                    this.netWorkTime = res.receiveTimeStamp / 1000;
+                });
+            },(err) => {
+                this._$timeout(() => {
+                    this._Alert.errorGetTimeSync();
+                });
+            });
 
             // Gets current height
             this._NetworkRequests.getHeight(helpers.getHostname(this._Wallet.node)).then((height) => {
@@ -192,14 +229,28 @@ class DataBridge {
             this._NetworkRequests.getMarketInfo().then((data) => {
                     this._$timeout(() => {
                         this.marketInfo = data;
+
                     });
-                },
-                (err) => {
+            },
+            (err) => {
                     this._$timeout(() => {
                         this._Alert.errorGetMarketInfo();
                         this.marketInfo = undefined;
                     });
-                });
+            });
+
+            // Gets btc price
+            this._NetworkRequests.getBtcPrice().then((data) => {
+                    this._$timeout(() => {
+                        this.btcPrice = data;
+                    });
+            },
+            (err) => {
+                    this._$timeout(() => {
+                        this._Alert.errorGetBtcPrice();
+                        this.btcPrice = undefined;
+                    });
+            });
 
             // Set connection status
             this._$timeout(() => {
@@ -360,6 +411,25 @@ class DataBridge {
         this.harvestedBlocks = [];
         this.delegatedData = undefined;
         this.marketInfo = undefined;
+        this.netWorkTime = undefined;
+        clearInterval(this.timeSyncInterval)
+    }
+
+    /**
+     * Fetch network time every minute
+     */
+    timeSync() {
+        this.timeSyncInterval = setInterval(() => { 
+            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+                this._$timeout(() => {
+                    this.netWorkTime = res.receiveTimeStamp / 1000;
+                });
+            },(err) => {
+                this._$timeout(() => {
+                    this._Alert.errorGetTimeSync();
+                });
+            });
+        }, 60 * 1000);
     }
 
 }

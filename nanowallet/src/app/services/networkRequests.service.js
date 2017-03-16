@@ -234,13 +234,24 @@ class NetworkRequests {
     };
 
     /**
-     * Gets market information from CoinMarketCap api
+     * Gets market information from Poloniex api
      *
      * @return {object} - A MarketInfo object
      */
     getMarketInfo(){
-        return this._$http.get('https://api.coinmarketcap.com/v1/ticker/nem/').then((res) => {
-            return res.data[0];
+        return this._$http.get('https://poloniex.com/public?command=returnTicker').then((res) => {
+            return res.data["BTC_XEM"];
+        });
+    };
+
+    /**
+     * Gets BTC price from blockchain.info API
+     *
+     * @return {object} - A MarketInfo object
+     */
+    getBtcPrice(){
+        return this._$http.get('https://blockchain.info/ticker', {params: {"cors": true}}).then((res) => {
+            return res.data["USD"];
         });
     };
 
@@ -275,6 +286,7 @@ class NetworkRequests {
         return this._$http.get('http://' + host + ':' + port + '/heartbeat')
         .then(
             (res) => {
+                console.log(res)
                 return res.data;
             }
         );
@@ -435,6 +447,23 @@ class NetworkRequests {
         let port = this.getPort();
         let obj = {'params':{'address':address, 'hash': txHash}};
      return this._$http.get('http://' + host + ':' + port + '/account/transfers/all', obj)
+        .then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Get network time in ms
+     *
+     * @param {string} host - An host ip or domain
+     *
+     * @return {object} - A [communicationTimeStamps]{@link http://bob.nem.ninja/docs/#communicationTimeStamps} object
+     */
+    getNEMTime(host) {
+        let port = this.getPort();
+        return this._$http.get('http://' + host + ':' + port + '/time-sync/network-time')
         .then(
             (res) => {
                 return res.data;
