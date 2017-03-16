@@ -1,6 +1,8 @@
 import CryptoHelpers from '../../utils/CryptoHelpers';
 import Network from '../../utils/Network';
 import helpers from '../../utils/helpers';
+import KeyPair from '../../utils/KeyPair';
+import Address from '../../utils/Address';
 
 class SignupCtrl {
     constructor(AppConstants, $state, Alert, WalletBuilder, $localStorage, $timeout) {
@@ -27,6 +29,8 @@ class SignupCtrl {
         this._storage.wallets = this._storage.wallets || [];
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
+
+        this.formData = {};
 
         // Wallet types
         this.walletTypes = [{
@@ -194,7 +198,7 @@ class SignupCtrl {
      */
     createPrivateKeyWallet() {
             // Check form
-            if (!this.formData || !this.formData.walletName || !this.formData.password || !this.formData.confirmPassword || !this.formData.address || !this.formData.privateKey) {
+            if (!this.formData || !this.formData.walletName || !this.formData.password || !this.formData.confirmPassword || !this.formData.privateKey) {
                 this._Alert.missingFormData();
                 return;
             }
@@ -211,13 +215,12 @@ class SignupCtrl {
                 return;
             }
 
-            // Check if address match private key provided
-            if (!CryptoHelpers.checkAddress(this.formData.privateKey, this.network, this.formData.address.toUpperCase().replace(/-/g, ''))) {
-                this._Alert.invalidKeyForAddress();
-                return;
-            }
+            if (this.formData.privateKey.length === 64 || this.formData.privateKey.length === 66) {
 
-            this.okPressed = true;
+                let kp = KeyPair.create(this.formData.privateKey);
+                this.formData.address = Address.toAddress(kp.publicKey.toString(), this.network);
+
+                this.okPressed = true;
 
                 // Create the wallet from form data
                 return this._WalletBuilder.createPrivateKeyWallet(this.formData.walletName, this.formData.password, this.formData.address, this.formData.privateKey, this.network).then((wallet) => {
@@ -241,6 +244,21 @@ class SignupCtrl {
                     this._Alert.createWalletFailed(err);
                     this.okPressed = false;
                 });
+            } else {
+                this._Alert.invalidPrivateKey();
+            }
+    }
+
+    generateAddress() {
+        if(undefined !== this.formData.privateKey && this.formData.privateKey.length) {
+            if (this.formData.privateKey.length === 64 || this.formData.privateKey.length === 66) {
+                let kp = KeyPair.create(this.formData.privateKey);
+                this.formData.address = Address.toAddress(kp.publicKey.toString(), this.network);
+            } else {
+                this.formData.address = "";
+                this._Alert.invalidPrivateKey();
+            }
+        }
     }
 
 }

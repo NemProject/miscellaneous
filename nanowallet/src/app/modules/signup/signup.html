@@ -91,6 +91,11 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_CREATE_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <i class="fa fa-exclamation-triangle"></i> 
+            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <button class="btn btn-success pull-xs-right"
             type="submit" ng-click="$ctrl.createWallet()">
@@ -150,6 +155,11 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_BRAIN_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <i class="fa fa-exclamation-triangle"></i> 
+            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <!-- CONFIRM BUTTON -->
           <button class="btn btn-success pull-xs-right"
@@ -174,18 +184,6 @@
                 ng-model="$ctrl.formData.walletName" />
             </div>
           </fieldset>
-          <!-- ADDRESS TO ADD -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{'FORM_ADDRESS_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="text"
-                placeholder="{{'FORM_ADDRESS_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.address" />
-            </div>
-          </fieldset>
           <!-- PRIVATE KEY OF ADDRESS TO ADD -->
           <fieldset class="form-group">
             <div class="input-group">
@@ -195,7 +193,18 @@
               <input class="form-control"
                 type="password"
                 placeholder="{{'FORM_PRIVATE_KEY_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.privateKey" />
+                ng-model="$ctrl.formData.privateKey" ng-change="$ctrl.generateAddress();" />
+            </div>
+          </fieldset>
+          <!-- ADDRESS TO ADD -->
+          <fieldset class="form-group" ng-show="$ctrl.formData.address.length">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{'FORM_ADDRESS_FIELD_PLACEHOLDER' | translate}}: </label>
+              </span>
+              <input class="form-control"
+                type="text"
+                ng-model="$ctrl.formData.address" readOnly/>
             </div>
           </fieldset>
           <!-- SELECT NETWORK -->
@@ -206,7 +215,7 @@
               </span>
               <select class="form-control"
                 ng-model="$ctrl.network"
-                ng-change="$ctrl.changeNetwork($ctrl.network)"
+                ng-change="$ctrl.changeNetwork($ctrl.network);$ctrl.generateAddress();"
                 ng-options="network.id as (network.id | toNetworkName) for network in $ctrl.networks">
                 <option value="" disabled selected>{{'SIGNUP_NETWORK_SELECT' | translate}}</option>
               </select>
@@ -240,6 +249,11 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_PRIVATE_KEY_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <i class="fa fa-exclamation-triangle"></i> 
+            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
+              <br><br>
+            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <!-- CONFIRM BUTTON -->
           <button class="btn btn-success pull-xs-right"
