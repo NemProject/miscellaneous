@@ -43,7 +43,7 @@
                   <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
                 </span>
                 <div class="form-control formFloat" readOnly>
-                  <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly />
+                  <input class="readOnly" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly />
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
               </div>
@@ -124,9 +124,9 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                  <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
-                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
               </div>
             </fieldset>
             <!-- SEND TRANSACTION -->
@@ -274,7 +274,7 @@
                 </div>
               </div>
 
-              <div class="panel-footer bg-info" ng-show="$ctrl.hasLevy && !$ctrl.showInfo">
+              <div class="panel-footer bg-info">
                 <div ng-show="$ctrl.formData.levy.feeType === 1">
                   {{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1_NOTE' | translate }}
                   <strong>{{($ctrl.formData.levy.fee | fmtSupply:$ctrl._DataBridge.mosaicOwned[$ctrl.currentAccount][$ctrl.selectedMosaic].mosaicId:$ctrl._DataBridge.mosaicDefinitionMetaDataPair)[0]}}</strong>
@@ -308,7 +308,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Creating a Mosaic*</h4>
+        <h4 class="modal-title">{{ 'MOSAIC_DEFINITION_INFORMATION_TITLE' | translate }}</h4>
       </div>
       <div class="modal-body">
         <div>
@@ -362,7 +362,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
