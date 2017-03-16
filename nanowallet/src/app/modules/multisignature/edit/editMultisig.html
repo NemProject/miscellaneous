@@ -95,9 +95,9 @@
             <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                  <label ng-class="!$ctrl.common.password.length ? 'has-error': ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
-                <input class="form-control " type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                <input class="form-control " type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error': ''"/>
               </div>
             </fieldset>
             <!-- SEND TRANSACTION -->
