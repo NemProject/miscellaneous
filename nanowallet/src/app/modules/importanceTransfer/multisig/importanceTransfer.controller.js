@@ -47,6 +47,8 @@ class MultisigImportanceTransferCtrl {
         this.formData.innerFee = 0;
         this.formData.isMultisig = true;
         this.formData.multisigAccount = '';
+        // Address generted from the custm public key
+        this.customGeneratedRemote = '';
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
@@ -192,8 +194,20 @@ class MultisigImportanceTransferCtrl {
     updateRemoteAccount() {
         if (this.customKey) {
             this.formData.remoteAccount = '';
+            this.customGeneratedRemote = '';
         } else {
             this.generateData();
+        }
+    }
+
+    /**
+     * Generate address of the custom public key
+     */
+    generateAddress() {
+        if(this.formData.remoteAccount.length === 64) {
+           this.customGeneratedRemote = Address.toAddress(this.formData.remoteAccount, this._Wallet.network);
+        } else {
+            this.customGeneratedRemote = '';
         }
     }
 
@@ -343,7 +357,7 @@ class MultisigImportanceTransferCtrl {
         this.okPressed = true;
 
         // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
+        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
             this._Alert.invalidPassword();
             // Enable send button
             this.okPressed = false;
