@@ -23,6 +23,8 @@ class TransferTransactionCtrl {
         this._$state = $state;
         //Local storage
         this._storage = $localStorage;
+        // use helpers in view
+        this._helpers = helpers;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -44,6 +46,7 @@ class TransferTransactionCtrl {
         this.formData.recipient = '';
         this.formData.recipientPubKey = '';
         this.formData.message = '';
+        this.rawAmount = 0;
         this.formData.amount = 0;
         this.formData.fee = 0;
         this.formData.encryptMessage = false;
@@ -81,6 +84,7 @@ class TransferTransactionCtrl {
         };
 
         this.contacts = [];
+        this.contacts.items = [];
 
         if(undefined !== this._storage.contacts && this._storage.contacts.length) {
             let val = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts) ;
@@ -158,11 +162,13 @@ class TransferTransactionCtrl {
             }];
             // In case of mosaic transfer amount is used as multiplier,
             // set to 1 as default
+            this.rawAmount = 1;
             this.formData.amount = 1;
         } else {
             // Reset mosaics array
             this.formData.mosaics = null;
             // Reset amount
+            this.rawAmount = 0;
             this.formData.amount = 0;
         }
         this.updateFees();
@@ -213,6 +219,13 @@ class TransferTransactionCtrl {
      * updateFees() Update transaction fee
      */
     updateFees() {
+        if(!helpers.isAmountValid(this.rawAmount)) {
+            this._Alert.invalidAmount();
+            return;
+        } else {
+          this.formData.amount = helpers.cleanAmount(this.rawAmount);
+          //console.log(this.formData.amount)
+        }
         let entity = this._Transactions.prepareTransfer(this.common, this.formData, this.mosaicsMetaData);
         if (this.formData.isMultisig) {
             this.formData.innerFee = entity.otherTrans.fee;
@@ -360,6 +373,7 @@ class TransferTransactionCtrl {
     resetData() {
         this.formData.rawRecipient = '';
         this.formData.message = '';
+        this.rawAmount = 0;
         this.formData.amount = 0;
         this.formData.invoiceRecipient = this._Wallet.currentAccount.address;
     }

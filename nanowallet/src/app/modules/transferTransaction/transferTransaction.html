@@ -85,7 +85,7 @@
                   <label>{{'GENERAL_AMOUNT' | translate}}: </label>
                 </span>
                 <div class="form-control formFloat" ng-disabled="$ctrl.formData.isMosaicTransfer">
-                  <input type="number" ng-disabled="$ctrl.formData.isMosaicTransfer" ng-model="$ctrl.formData.amount" min="0" ng-change="$ctrl.updateFees();"/>
+                  <input type="text" ng-disabled="$ctrl.formData.isMosaicTransfer" ng-model="$ctrl.rawAmount" ng-change="$ctrl.updateFees();"/>
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
               </div>
@@ -129,7 +129,7 @@
               </div>
             </fieldset>
             <!-- MOSAIC BALANCE -->
-            <div class="form-group" ng-show="$ctrl.selectedMosaic !== 'nem:xem'">
+            <div class="form-group" ng-show="$ctrl.formData.isMosaicTransfer && $ctrl.selectedMosaic !== 'nem:xem'">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{'FORM_SIDE_BTN_BALANCE' | translate}}: </label>
@@ -159,13 +159,13 @@
           <fieldset class="form-group" ng-show="!$ctrl.invoice && !$ctrl.formData.isMosaicTransfer">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD' | translate }}: </label>
+                <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}: </label>
               </span>
-              <input class="form-control password" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              <input class="form-control password" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
             </div>
           </fieldset>
           <!-- Send button disabled if already pressed or no password or no clean recipient address or message is supposed to be encrypted but no recipient public key or is a mosaic transfer and no mosaics in array -->
-          <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && !$ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length" ng-click="$ctrl.send()">
+          <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && !$ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length || !$ctrl._helpers.isAmountValid($ctrl.rawAmount)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
           </button>
         </fieldset>
@@ -210,13 +210,13 @@
         <div class="panel-heading">
           <h3>{{ 'TRANSFER_TRANSACTION_MOSAICS_ATTACHED' | translate }} <i class="fa fa-paperclip"></i></h3>
         </div>
-        <!-- NEW MOSAIC DISPLAY -->
+         <!-- NEW MOSAIC DISPLAY -->
         <div class="panel-body" ng-repeat="mos in $ctrl.formData.mosaics">
           <!-- ATTACHED MOSAIC NAME -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'TRANSFER_TRANSACTION_ATTACH_MOSAIC' | translate }}: </label>
+                <label>{{ 'GENERAL_MOSAIC' | translate }}: </label>
               </span>
               <input type="text" class="form-control" value="{{mos.mosaicId.namespaceId}}:{{mos.mosaicId.name}}" readOnly>
               <span class="input-group-btn">
@@ -239,7 +239,7 @@
               <span class="input-group-btn">
                 <label>{{ 'GENERAL_TOTAL' | translate }}: </label>
               </span>
-              <fieldset class="form-control" ng-model="mos.quantity" disabled><strong>{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[0]}}</strong>
+              <fieldset class="form-control" disabled><strong>{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[0]}}</strong>
                 <span class="text-muted">.{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl.mosaicsMetaData)[1]}}</span>
               </fieldset>
             </div>
@@ -249,7 +249,7 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'TRANSFER_TRANSACTION_ATTACHED_LEVY' | translate }}: </label>
+                <label>{{ 'GENERAL_LEVY' | translate }}: </label>
               </span>
               <tag-levy class="form-control" mos="mos" tx="$ctrl.formData" mosaics="$ctrl.mosaicsMetaData" readOnly>
                 <div ng-show="levy.type">
@@ -273,16 +273,16 @@
         <fieldset class="form-group" ng-show="!$ctrl.invoice && $ctrl.formData.isMosaicTransfer">
           <div class="input-group">
             <span class="input-group-btn">
-              <label>{{ 'FORM_PASSWORD' | translate }}: </label>
+              <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}: </label>
             </span>
-            <input class="form-control password" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+            <input class="form-control password" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
           </div>
         </fieldset>
-        <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && $ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length" ng-click="$ctrl.send()">
+        <button class="btn btn-success" type="submit" ng-show="!$ctrl.invoice && $ctrl.formData.isMosaicTransfer" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.recipient.length !== 40 || $ctrl.formData.encryptMessage && $ctrl.formData.recipientPubKey.length !== 64 || $ctrl.formData.isMosaicTransfer && !$ctrl.formData.mosaics.length || !$ctrl._helpers.isAmountValid($ctrl.rawAmount)" ng-click="$ctrl.send()">
             <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
         </button>
 
-    </div>
+      </div>
       <!-- QR CODE IS HERE -->
       <div class="col-lg-5" ng-show="$ctrl.invoice">
         <div class="panel-heading">
