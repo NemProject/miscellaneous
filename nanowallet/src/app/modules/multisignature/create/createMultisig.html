@@ -13,7 +13,7 @@
             <span >{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
-            <li ng-show="$ctrl.haveMoreThanOneAccount" ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.updateCurrentAccountNSM();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
+            <li ng-show="$ctrl.haveMoreThanOneAccount" ng-class="$ctrl.useCustomAccount ? '' : 'active'"><a ng-click="$ctrl.useCustomAccount = false;$ctrl.formData.accountToConvert = '';$ctrl.common.privateKey = '';$ctrl.resetMultisigData();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
             <li ng-class="$ctrl.useCustomAccount ? 'active' : ''"><a ng-click="$ctrl.useCustomAccount = true;$ctrl.formData.accountToConvert = '';$ctrl.resetMultisigData();">{{ 'AGGREGATE_CUSTOM_ACCOUNT' | translate }}</a></li>
           </ul>
         </div>
@@ -30,16 +30,27 @@
               	</select>
               </div>
             </fieldset>
-            <!-- ACCOUNT TO CONVERT TO MULTISIG MANUALLY -->
+            <!-- ACCOUNT TO CONVERT MANUALLY PRIVATE KEY -->
             <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
-              <div class="input-group"> <!--  ng-style="!$ctrl.haveMoreThanOneAccount ? {'display': 'inherit'} : {}" -->
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <label ng-class="!$ctrl.common.privateKey.length ? 'has-error': ''">{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE' | translate }}</label>
+                </span>
+                <input class="form-control"
+                  type="password"
+                  placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE' | translate }}"
+                  ng-model="$ctrl.common.privateKey" ng-change="$ctrl.processAccountToConvert();" ng-class="!$ctrl.common.privateKey.length ? 'has-error': ''"/>
+              </div>
+            </fieldset>
+            <!-- ACCOUNT TO CONVERT TO MULTISIG MANUALLY -->
+            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount && $ctrl.formData.accountToConvert.length == 40 || $ctrl.useCustomAccount && $ctrl.formData.accountToConvert.length == 40">
+              <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
                 </span>
                 <input class="form-control"
                   type="text"
-                  placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT' | translate }}"
-                  ng-model="$ctrl.formData.accountToConvert" ng-model-options="{debounce:500}" ng-change="$ctrl.processAccountToConvert();"/>
+                  ng-model="$ctrl.formData.accountToConvert" readOnly/>
               </div>
             </fieldset>
             <!-- MULTISIG ACCOUNT BALANCE -->
@@ -52,18 +63,6 @@
                   <input class="readOnly" type="text" value="{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl.multisigInfoData.account.balance | fmtNemValue)[1] }}" readOnly/>
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
-              </div>
-            </fieldset>
-            <!-- ACCOUNT TO CONVERT MANUALLY PRIVATE KEY -->
-            <fieldset class="form-group" ng-show="!$ctrl.haveMoreThanOneAccount || $ctrl.useCustomAccount">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE_TITLE' | translate }}</label>
-                </span>
-                <input class="form-control"
-                  type="password"
-                  placeholder="{{ 'AGGREGATE_ACCOUNT_TO_CONVERT_PRIVATE' | translate }}"
-                  ng-model="$ctrl.common.privateKey"/>
               </div>
             </fieldset>
             <!-- ADD SIGNER ACCOUNT -->
@@ -125,14 +124,14 @@
             <fieldset class="form-group" ng-show="!$ctrl.useCustomAccount">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                  <label ng-class="!$ctrl.common.password.length ? 'has-error': ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
-                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                <input class="form-control form-control-lg" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error': ''"/>
               </div>
             </fieldset>
             <!-- SEND TRANSACTION -->
             <button class="btn btn-success"
-              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.useCustomAccount && !$ctrl.common.password.length || $ctrl.useCustomAccount && !$ctrl.common.privateKey || !$ctrl.cosignatoryArray.length" ng-click="$ctrl.send()">
+              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.useCustomAccount && !$ctrl.common.password.length || $ctrl.useCustomAccount && !$ctrl.common.privateKey || !$ctrl.cosignatoryArray.length || !$ctrl.formData.accountToConvert" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
             </button>
           </fieldset>

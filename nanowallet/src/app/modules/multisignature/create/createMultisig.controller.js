@@ -116,7 +116,7 @@ class CreateMultisigCtrl {
      * Set right address and get data of account to convert
      */
     processAccountToConvert() {
-        if (!this.formData.accountToConvert) {
+        if (!this.formData.accountToConvert && !this.useCustomAccount) {
             // Reset multisig data and properties
             this.resetMultisigData();
             return;
@@ -124,7 +124,18 @@ class CreateMultisigCtrl {
         let address;
         // Set address depending if custom or not
         if (this.useCustomAccount) {
-            address = this.formData.accountToConvert.toUpperCase().replace(/-/g, '');
+            this.formData.accountToConvert = "";
+            if(this.common.privateKey.length === 64 || this.common.privateKey.length === 66) {
+                let pk = KeyPair.create(this.common.privateKey);
+                address = Address.toAddress(pk.publicKey.toString(), this._Wallet.network);
+                this.formData.accountToConvert = address;
+            } else {
+                // Clean the array of modifications
+                this.cosignatoryArray = [];
+                // Reset multisig data and properties
+                this.resetMultisigData();
+                return;
+            }
         } else {
             address = this.formData.accountToConvert.address;
             this.selectedWalletAccount = this.formData.accountToConvert;
@@ -276,6 +287,7 @@ class CreateMultisigCtrl {
      * Reset data stored and properties for multisig account
      */
     resetMultisigData() {
+        this.formData.accountToConvert = "";
         // Reset public key data
         this.formData.multisigPubKey = '';
         // Reset multisig data stored
@@ -338,9 +350,16 @@ class CreateMultisigCtrl {
             }
         }
 
-        // Generate the multisig account public key
-        let kp = KeyPair.create(this.common.privateKey);
-        this.formData.multisigPubKey = kp.publicKey.toString();
+        if (this.common.privateKey.length === 64 || this.common.privateKey.length === 66) {
+            // Generate the multisig account public key
+            let kp = KeyPair.create(this.common.privateKey);
+            this.formData.multisigPubKey = kp.publicKey.toString();
+        } else {
+            // Enable send button
+            this.okPressed = false;
+            this._Alert.invalidPrivateKey();
+            return;
+        }
 
         // Build the entity to serialize
         let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
@@ -360,7 +379,7 @@ class CreateMultisigCtrl {
                 // Delete private key in common
                 this.common.privateKey = '';
                 // Reset data
-                this.resetCosignatoryData();
+                //this.resetCosignatoryData();
                 this.resetMultisigData();
                 this.cosignatoryArray = [];
             },
