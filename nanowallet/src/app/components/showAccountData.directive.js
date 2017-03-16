@@ -11,7 +11,7 @@ function ShowAccountData(DataBridge, $filter) {
                     if (attrs.showAccountData === 'balance') {
                         element.html("<span><b>" + $filter('fmtNemValue')(val.account.balance)[0] + "."+ $filter('fmtNemValue')(val.account.balance)[1] +" XEM</b></span>")
                     } else if (attrs.showAccountData === 'importance') {
-                        element.html("<span>" + $filter('fmtNemImportanceScore')(val.account.importance) + "* 10<sup>(-5)</sup></span>")
+                        element.html("<span>" + $filter('fmtNemImportanceScore')(val.account.importance)[0] + "." + $filter('fmtNemImportanceScore')(val.account.importance)[1] + "* 10<sup>(-4)</sup></span>")
                     } else if (attrs.showAccountData === 'harvestedBlocks') {
                         element.html("<span>" + val.account.harvestedBlocks + "</span>")
                     } else if (attrs.showAccountData === 'address') {
@@ -29,7 +29,7 @@ function ShowAccountData(DataBridge, $filter) {
                     if (attrs.showAccountData === 'balance') {
                         element.html("<span><b>" + $filter('fmtNemValue')(0) + "." + $filter('fmtNemValue')(1) +" XEM</b></span>")
                     } else if (attrs.showAccountData === 'importance') {
-                        element.html("<span><b>" + $filter('fmtNemImportanceScore')(0) + "* 10<sup>(-5)</sup></b></span>")
+                        element.html("<span><b>" + $filter('fmtNemImportanceScore')(0) + "* 10<sup>(-4)</sup></b></span>")
                     } else if (attrs.showAccountData === 'harvestedBlocks') {
                         element.html("<span><b>0</b></span>")
                     }

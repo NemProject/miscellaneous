@@ -113,7 +113,7 @@ let fmtLevyFee = ['fmtSupplyFilter', function(fmtSupplyFilter) {
 *
 * @param data: The importance score
 *
-* @return a formatted importance score at 10^-5
+* @return a formatted importance score at 10^-4
 */
 let fmtNemImportanceScore = function() {
     return function fmtNemImportanceScore(data) {
