@@ -15,14 +15,14 @@
       </div>
     </div>
 
-    <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-info" ng-click="$ctrl.uploadNty()"><b><i class="fa fa-exclamation-triangle "></i> {{ 'APOSTILLE_NO_NTY' | translate }}</b></p>
+    <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-info" ng-click="$ctrl.uploadNty()" style="cursor:pointer"><b><i class="fa fa-exclamation-triangle "></i> {{ 'APOSTILLE_NO_NTY' | translate }}</b></p>
     <input id="uploadNty" style="visibility:hidden;position:absolute;" import-nty-file="$ctrl.loadNty($fileContent)" type="file">
 
     <div class="row">
       <div class="col-sm-7">
         <div class="panel-heading">
           <div class="tabDescription">
-            <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'APOSTILLE_TRANSACTION_NAME' | translate }}</span>
+            <span ng-show="!$ctrl.formData.isMultisig">{{ 'APOSTILLE_TRANSACTION_NAME' | translate }}</span>
             <span ng-show="$ctrl.formData.isMultisig">{{ 'APOSTILLE_TRANSACTION_MULTISIG_NAME' | translate }}</span>
           </div>
           <ul class="nav nav-tabs">
@@ -47,7 +47,7 @@
                 <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
               </span>
               <div class="form-control formFloat" readOnly>
-                <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
+                <input class="readOnly" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
                 <label class="floatRight"><small>XEM</small></label>
               </div>
             </div>
@@ -56,9 +56,9 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'GENERAL_TAGS' | translate }}: </label>
+                <label ng-class="$ctrl.common.password.length && !$ctrl.formData.tags.length ? 'has-error' : ''">{{ 'GENERAL_TAGS' | translate }}: </label>
               </span>
-              <input class="form-control" type="text" placeholder="{{ 'GENERAL_TAGS' | translate }}" ng-model="$ctrl.formData.tags" ng-disabled="!$ctrl.common.password"/>
+              <input class="form-control" type="text" placeholder="{{ 'GENERAL_TAGS' | translate }}" ng-model="$ctrl.formData.tags" ng-disabled="!$ctrl.common.password" ng-class="$ctrl.common.password.length && !$ctrl.formData.tags.length ? 'has-error' : ''"/>
             </div>
           </fieldset>
           <!-- HASH FUNCTION -->
@@ -85,9 +85,9 @@
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
               </span>
-              <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+              <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
             </div>
           </fieldset>
           <!-- SEND TRANSACTION -->
@@ -124,7 +124,12 @@
               </div>
               <!-- ADD FILE -->
               <div class="drop" ng-style="$ctrl.common.password.length===0 || $ctrl.formData.tags.length===0 ? { 'background-color':'#eeeeee', 'cursor': 'not-allowed'} : { 'background-color':'white', 'cursor': 'pointer' }" style="height:220px;" ng-show="$ctrl.formData.isFiles">
-              <p style="padding-top:100px;"><b class="text-muted" style="color:#444;"><span class="fa fa-cloud-upload"></span> <i>{{ 'GENERAL_DROPBOX' | translate }} </i></b></p>
+              <p style="padding-top:100px;">
+                <b class="text-muted" style="color:#444;">
+                  <span ng-show="$ctrl.common.password.length && $ctrl.formData.tags.length"><span class="fa fa-cloud-upload"></span> <i>{{ 'GENERAL_DROPBOX' | translate }} </i></span>
+                  <span ng-show="!$ctrl.common.password.length || !$ctrl.formData.tags.length"><span class="fa fa-lock"></span> <i>{{ 'APOSTILLE_DROPBOX_MESSAGE' | translate }}</i></span>
+                </b>
+              </p>
               <input type="file" multiple class="upload" id="fileToNotary" style="height: 220px; width: 100%; position: relative; margin-top: -130px;" import-apostille-files="$ctrl.processFile($fileContent, $fileData)" ng-disabled="$ctrl.common.password.length===0 || $ctrl.formData.tags.length===0" />
               </div>
             </div>
@@ -141,7 +146,7 @@
               <h4>{{ 'APOSTILLE_FILES_TO_NOTARIZE' | translate }}</h4>
             </div>
             <div class="col-md-6">
-              <span ng-show="$ctrl.rejected.length" class="rejected"><b>{{ 'APOSTILLE_REJECTED' | translate }}: {{$ctrl.rejected.length}}</b> - <a><i ng-show="!$ctrl.viewRejected" class="fa fa-eye" ng-click="$ctrl.viewRejected = true"></i><i ng-show="$ctrl.viewRejected" class="fa fa-eye-slash" ng-click="$ctrl.viewRejected = false"></i></a></span>
+              <span ng-show="$ctrl.rejected.length" class="rejected"><b>{{ 'APOSTILLE_REJECTED' | translate }}: {{$ctrl.rejected.length}}</b> - <a><i ng-show="!$ctrl.viewRejected" class="fa fa-eye" ng-click="$ctrl.viewRejected = true" style="cursor:pointer"></i><i ng-show="$ctrl.viewRejected" class="fa fa-eye-slash" ng-click="$ctrl.viewRejected = false" style="cursor:pointer"></i></a></span>
               <div style="float: right; position: relative; display: block;" ng-show="$ctrl.filesToApostille.length > 5 && !$ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
               <div style="float: right; position: relative; display: block;" ng-show="$ctrl.rejected.length > 5 && $ctrl.viewRejected"><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej == 0" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageRej+1}}/{{$ctrl.numberOfPagesRej()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPageRej+1 >= $ctrl.numberOfPagesRej()" ng-click="$ctrl.currentPageRej = $ctrl.currentPageRej+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
             </div>
@@ -208,7 +213,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Creating an Apostille*</h4>
+        <h4 class="modal-title">{{ 'APOSTILLE_INFORMATION_TITLE' | translate }}</h4>
       </div>
       <div class="modal-body">
         <div>
@@ -223,7 +228,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-success" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
 
       </div>
     </div><!-- /.modal-content -->
