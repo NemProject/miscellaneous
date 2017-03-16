@@ -21,7 +21,13 @@ function ImportApostilleFiles($parse, Alert) {
                         };
                     })((onChangeEvent.srcElement || onChangeEvent.target).files[i]);
 
-                    reader.readAsDataURL((onChangeEvent.srcElement || onChangeEvent.target).files[i]);
+                    if ((onChangeEvent.srcElement || onChangeEvent.target).files[i].size / 1000000 > 100) {
+                        scope.$apply(function() {   
+                            Alert.fileSizeError((onChangeEvent.srcElement || onChangeEvent.target).files[i].name);
+                        });
+                    } else {
+                        reader.readAsDataURL((onChangeEvent.srcElement || onChangeEvent.target).files[i]);
+                    }
                 }
             });
         }
