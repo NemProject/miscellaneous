@@ -434,15 +434,15 @@ function updateResult(bip32_source_key, bip32_derivation_path, k_index, i_index,
             // if this is the case then there's an error state set on the source key
             return reject("Error state set on the source key")
         }
-        console.log("Deriving: " + p);
+        //console.log("Deriving: " + p);
         result = bip32_source_key.derive(p);
     } catch (err) {
         return reject(err);
     }
 
     if (result.has_private_key) {
-        console.log('Derived private key: ' + result.extended_private_key_string("base58"));
-        console.log('Derived private key HEX: ' + Crypto.util.bytesToHex(result.eckey.priv.toByteArrayUnsigned()));
+        //console.log('Derived private key: ' + result.extended_private_key_string("base58"));
+        //console.log('Derived private key HEX: ' + Crypto.util.bytesToHex(result.eckey.priv.toByteArrayUnsigned()));
         let privkeyBytes = result.eckey.priv.toByteArrayUnsigned();
         while (privkeyBytes.length < 32) {
             privkeyBytes.unshift(0);
