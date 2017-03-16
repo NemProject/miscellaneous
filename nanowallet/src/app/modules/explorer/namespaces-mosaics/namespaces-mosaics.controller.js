@@ -1,7 +1,7 @@
 import helpers from '../../../utils/helpers';
 
 class ExplorerNamespacesMosaicsCtrl {
-    constructor(Wallet, NetworkRequests, Alert, $location, $filter) {
+    constructor(Wallet, NetworkRequests, Alert, $location, $filter, DataBridge) {
         'ngInject';
 
         // Wallet service
@@ -14,6 +14,7 @@ class ExplorerNamespacesMosaicsCtrl {
         this._location = $location;
         // Filters
         this._$filter = $filter;
+        this._DataBridge = DataBridge;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -27,7 +28,7 @@ class ExplorerNamespacesMosaicsCtrl {
         this.mosaics = [];
         this.selectedMosaic = undefined;
         this.selectedMosaicName = this._$filter("translate")("EXPLORER_NS_MOS_SELECT_MOS");
-        this.selectedMosaicMetaDatapair = {};
+        this.selectedMosaicLevyDefinition = {};
         this.selectedNamespaceName = "";
         this.selectedSubNamespaceName = "";
         this.searchText = "";
@@ -144,29 +145,36 @@ class ExplorerNamespacesMosaicsCtrl {
     };
 
     /**
-     * Set mosaic data to display details and get all mosaics definitions owned by the account for levy details
+     * Set mosaic data to display details
      *
      * @param {object} mosaic - A mosaic object
      */
     processMosaic(mosaic) {
-        this.selectedMosaicMetaDatapair = {};
+        this.selectedMosaicLevyDefinition = {};
         this.selectedMosaic = mosaic;
         this.selectedMosaicName = helpers.mosaicIdToName(mosaic.id);
-        return this._NetworkRequests.getMosaicsDefinitions(helpers.getHostname(this._Wallet.node), this._$filter("fmtPubToAddress")(mosaic.creator, this._Wallet.network)).then((res) => {
-            if(res.data.length) {
-                for (let i = 0; i < res.data.length; ++i) {
-                    this.selectedMosaicMetaDatapair[helpers.mosaicIdToName(res.data[i].id)] = {};
-                    this.selectedMosaicMetaDatapair[helpers.mosaicIdToName(res.data[i].id)].mosaicDefinition = res.data[i];
-                }
-            }
-        }, 
-        (err) => {
-             if(err.status === -1) {
-                this._Alert.connectionError();
+        if (undefined !== mosaic.levy.type) {
+            if(helpers.mosaicIdToName(mosaic.levy.mosaicId) === 'nem:xem' || undefined !== this._DataBridge.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mosaic.levy.mosaicId)]) {
+                this.selectedMosaicLevyDefinition = this._DataBridge.mosaicDefinitionMetaDataPair;
             } else {
-                this._Alert.errorGetMosaicsDefintions(err.data.message);
+                // Fetch mosaic definitions owned by creator
+                this._NetworkRequests.getMosaicsDefinitions(helpers.getHostname(this._Wallet.node), this._$filter("fmtPubToAddress")(mosaic.creator, this._Wallet.network)).then((res) => {
+                    if(res.data.length) {
+                        for (let i = 0; i < res.data.length; ++i) {
+                            this.selectedMosaicLevyDefinition[helpers.mosaicIdToName(res.data[i].id)] = {};
+                            this.selectedMosaicLevyDefinition[helpers.mosaicIdToName(res.data[i].id)].mosaicDefinition = res.data[i];
+                        }
+                    }
+                }, 
+                (err) => {
+                     if(err.status === -1) {
+                        this._Alert.connectionError();
+                    } else {
+                        this._Alert.errorGetMosaicsDefintions(err.data.message);
+                    }
+                });
             }
-        });
+        }
     }
 
     /**

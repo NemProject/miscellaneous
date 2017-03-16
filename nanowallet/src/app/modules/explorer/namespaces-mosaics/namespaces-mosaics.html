@@ -120,8 +120,8 @@
               <tr ng-show="$ctrl.selectedMosaic.levy.type">
                 <td>{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE' | translate }}</td>
                 <td>
-                  <span ng-show="$ctrl.selectedMosaic.levy.type === 1">{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }} ({{$ctrl.selectedMosaic | fmtLevyFee:1:$ctrl.selectedMosaic.levy:$ctrl.selectedMosaicMetaDatapair}})</span>
-                  <span ng-show="$ctrl.selectedMosaic.levy.type === 2">{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }} (x{{($ctrl.selectedMosaic.levy.fee / 10000).toFixed(4)}})</span>
+                  <span ng-show="$ctrl.selectedMosaic.levy.type === 1">{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_1' | translate }} ({{$ctrl.selectedMosaic | fmtLevyFee:1:$ctrl.selectedMosaic.levy:$ctrl.selectedMosaicLevyDefinition}})</span>
+                  <span ng-show="$ctrl.selectedMosaic.levy.type === 2">{{ 'MOSAIC_DEFINITION_LEVY_FEE_TYPE_2' | translate }} (x{{($ctrl.selectedMosaic.levy.fee / 10000).toFixed(4)}})</span>
                 </td>
               </tr>
               <tr>
