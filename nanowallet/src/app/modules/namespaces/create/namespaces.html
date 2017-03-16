@@ -37,13 +37,13 @@
                   <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}</label>
                 </span>
                 <div class="form-control formFloat" readOnly>
-                  <input class="readOnly" type="number" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
+                  <input class="readOnly" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
                   <label class="floatRight"><small>XEM</small></label>
                 </div>
               </div>
             </fieldset>
             <!-- PARENT NAMESPACE -->
-            <fieldset class="form-group" ng-show="!$ctrl.customKey">
+            <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
@@ -57,7 +57,7 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label ng-show="!$ctrl.customKey">{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
+                  <label>{{ 'NAMESPACE_PROVISION_NS' | translate }}: </label>
                 </span>
                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
              </div>
@@ -110,9 +110,9 @@
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
+                  <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
-                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
+                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
               </div>
             </fieldset>
             <!-- SEND TRANSACTION -->
@@ -124,24 +124,17 @@
       </div>
 
       <div class="col-md-3 col-lg-5">
-        <!-- <div class="panel-heading">
-          <h3>{{ 'GENERAL_INFORMATION' | translate }}</h3>
-        </div> -->
-
             <div class="panel-heading">
 
-              <h3>Namespace Restrictions</h3>
+              <h3>{{ 'NAMESPACE_PROVISION_RESTRICTIONS' | translate }}</h3>
             </div>
             <div class="panel-body row">
               <div class="col-md-12 col-lg-12">
-          <p>Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:
-          </p>
+          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_1' | translate }}</p>
           <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
-          <p> Disallowed namespaces are below. This list is not final and can be extended in the future
-          </p>
+          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_2' | translate }}</p>
           <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
-          <p>The namespace may have up to 3 parts, thus 'qm.metals.silver' is valid while 'qm.metals.silver.coin' is not.
-          </p>
+          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_3' | translate }}</p>
         </div>
       </div>
       </div>
