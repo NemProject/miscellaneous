@@ -73,8 +73,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_LEVY: "徴収",
       GENERAL_LEVY_TYPES: "徴収タイプ",
       GENERAL_LEVY_TYPES_NOTE: "I - コンスタント型手数料; II - パーセンテージ型手数料",
-      GENERAL_LEVY_TYPE_1: 'constant fee',
-      GENERAL_LEVY_TYPE_2: 'percentage based',
+      GENERAL_LEVY_TYPE_1: 'Constant fee',
+      GENERAL_LEVY_TYPE_2: 'Percentage based',
       GENERAL_SEND: "送信",
       GENERAL_TO: "宛先",
       GENERAL_HASH: "ハッシュ",
@@ -136,6 +136,10 @@ function JapaneseProvider($translateProvider) {
       GENERAL_CREATE: 'Create',
       GENERAL_RENEW: 'Renew',
 
+      // HOME MODULE
+      HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
+      HOME_RECOMMENDED_BROWSERS: 'Recommended browsers are:',
+
       // TRANSFER TRANSACTION MODULE
       TRANSFER_TRANSACTION_TITLE: "送受信",
       TRANSFER_TRANSACTION_NAME: "トランスファートランザクション（通常トランザクション）",
@@ -147,8 +151,6 @@ function JapaneseProvider($translateProvider) {
       TRANSFER_TRANSACTION_ATTACH: "添付",
       TRANSFER_TRANSACTION_MOSAICS_ATTACHED: "添付するモザイク",
       TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: "メッセージを暗号化",
-      TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
-      TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
       // TRANSACTION LINES
       LINE_TX_DETAILS_FROM: "送り主（From）",
@@ -204,6 +206,8 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: "あなたは、インポータンストランスファートランザクションを開始した連署者ではありません。従って委任収穫を開始または停止することができません。収穫操作権限を取り戻す方法をタブから確認してください。",
       IMPORTANCE_TRANSFER_MULTISIG_SELECT: "マルチシグアカウントを選択",
       IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください",
+      IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
+      IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
 
       // CREATE MOSAIC MODULE
       MOSAIC_DEFINITION_TITLE: "モザイクを作成",
@@ -231,6 +235,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: "送信モザイク",
       MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: "の場合、徴収されるモザイクは",
       MOSAIC_DEFINITION_PARENT: "親ネームスペース（名前空間）",
+      MOSAIC_DEFINITION_INFORMATION_TITLE: 'Creating a Mosaic',
       MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
       MOSAIC_DEFINITION_INFORMATION_1: "モザイク名は32文字が最長です。使用できる文字は以下の通りです。",
       MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベットから始めて下さい。",
@@ -272,6 +277,7 @@ function JapaneseProvider($translateProvider) {
       NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
       NAMESPACE_PROVISION_NS: 'Namespace',
       NAMESPACE_PROVISION_NS_NAME: "ネームスペースの名前",
+      NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace Restrictions',
       NAMESPACE_PROVISION_INFORMATION_1: "ネームスペースには制約があります。ルートネームスペースは16字以内で、ルート以下のネームスペースは64文字までです。使用できる文字は以下の通りです。",
       NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'1では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
       NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
@@ -354,6 +360,8 @@ function JapaneseProvider($translateProvider) {
       PORTAL_APOSTILLE_TEXT: "NEM アポスティーユ（公証機能）はブロックチェーンにファイル情報とタイムスタンプを刻んだ公証を作成し、ファイルの信憑性を監査できるようにする機能です。（Factomのような）",
       PORTAL_APOSTILLE_BTN_1: "作成",
       PORTAL_APOSTILLE_BTN_2: "監査（公証の確認）",
+      PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+      PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
 
       // ADDRESS BOOK MODULE
       ADDRESS_BOOK_TITLE: 'Address book',
@@ -419,6 +427,7 @@ function JapaneseProvider($translateProvider) {
       APOSTILLE_FILENAME: "ファイル名",
       APOSTILLE_NAME_TOO_LONG: "ファイル名が長すぎます。40文字以下にしてください。",
       APOSTILLE_MAX_NUMBER: "バッチあたりの最大アポスティーユ（公証）は25です。",
+      APOSTILLE_INFORMATION_TITLE: 'Creating an Apostille',
       APOSTILLE_INFORMATION_1: "アップロードされたファイルはそれぞれ左側のパネルに配置されたオプションを使って自動的に処理されます。新しいファイルを追加したり、パラメーターを変更したり、そしてさらに様々なオプションがついたファイルを加えることもできます。それはマルチシグのタブに切り替えて新しいファイルを追加していくときにも使用することができます。",
       APOSTILLE_INFORMATION_2: "<b>プライベート、譲渡、アップデート可能</b>を選択をすれば、あなたのファイルのハッシュはあなたのプライベートキーで署名され、専用の階層的決定性（HD）アカウントへと送られることになります。このように、あなたがそれを共有しない限り、あなた以外の人間がどのような内容がタイムスタンプされたのかを知ることは不可能です。",
       APOSTILLE_INFORMATION_3: "専用のHDアカウントはマルチシグのコントラクトの下に置くことができ、1-of-1やあらゆるm-of-nのマルチシグのコントラクトの組合せを通じて他者へ譲渡することができます。オリジナルのドキュメントやそれが表す製品へのアップデートもしくは拡張を通知するメッセージを送ることで、アカウントへ追加の情報を記載することもできます。",
@@ -432,6 +441,8 @@ function JapaneseProvider($translateProvider) {
       APOSTILLE_CREATE_TEXT: "テキストドキュメントを作成",
       APOSTILLE_ENTER_TEXT: "公証するテキストを入力してください...",
       APOSTILLE_DOCUMENT_TITLE: "ドキュメントタイトル",
+      APOSTILLE_DROPBOX_MESSAGE: 'Please enter your password and desired tag(s) before selecting files',
+      APOSTILLE_DROPBOX_MESSAGE_2: 'Please enter your password before selecting files',
 
       // AUDIT APOSTILLE MODULE
       APOSTILLE_AUDIT_TITLE: "アポスティーユ（公証）を監査",
@@ -519,6 +530,11 @@ function JapaneseProvider($translateProvider) {
       ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
       ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
       ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
+      ALERT_INVALID_AMOUNT: 'Amount is not valid !',
+      ALERT_INVALID_PRIVATE_KEY: 'Provided private key is not valid !',
+      ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
+      ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
+      ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -581,6 +597,8 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_NETWORK_SELECT: "ネットワークを選択してください。",
       SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはパスワードのみによって、ハッシュ化されております。そのため、「安全な」パスワードを考える必要があります。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
       SIGNUP_PRIVATE_KEY_WALLET_WARNING: "プライベートキーウォレットはパスワードのみによって、ハッシュ化されております。そのため、「安全な」パスワードを選んでください。",
+      SIGNUP_COMMON_WALLET_WARNING: 'Wallets are stored <a><b>temporarily</b></a> in the browser local storage! You should have triggered a download after creating the wallet. It is the .wlt file used as a backup and to import back if your browser\’s local storage is erased. If you don\'t get a backup .wlt file, log into your account, copy your private key and paste it somewhere safe. It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+      SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have read and understood the above warnings.',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",

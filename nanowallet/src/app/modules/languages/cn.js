@@ -73,8 +73,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_LEVY: '征费',
         GENERAL_LEVY_TYPES: '征费类型',
         GENERAL_LEVY_TYPES_NOTE: 'I - 固定费用; II - 百分比方式',
-        GENERAL_LEVY_TYPE_1: 'constant fee',
-        GENERAL_LEVY_TYPE_2: 'percentage based',
+        GENERAL_LEVY_TYPE_1: 'Constant fee',
+        GENERAL_LEVY_TYPE_2: 'Percentage based',
         GENERAL_SEND: '发送',
         GENERAL_TO: '目标',
         GENERAL_HASH: 'Hash',
@@ -135,6 +135,10 @@ function ChineseProvider($translateProvider) {
         GENERAL_CREATE: 'Create',
         GENERAL_RENEW: 'Renew',
 
+        // HOME MODULE
+        HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
+        HOME_RECOMMENDED_BROWSERS: 'Recommended browsers are:',
+
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: '发送和接收',
         TRANSFER_TRANSACTION_NAME: '传输交互',
@@ -146,8 +150,6 @@ function ChineseProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: '附加',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: '马赛克加入完成',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: '加密消息',
-        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
-        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: '来自',
@@ -188,7 +190,7 @@ function ChineseProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MODE_1: '激活',
         IMPORTANCE_TRANSFER_MODE_2: '取消激活',
         IMPORTANCE_TRANSFER_TITLE: '管理远程账户',
-	      IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE: 'Manage delegated account of multisignature accounts',
+	    IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE: 'Manage delegated account of multisignature accounts',
         IMPORTANCE_TRANSFER_CUSTOM_KEY: '使用远程公钥',
         IMPORTANCE_TRANSFER_MODE_SELECT: '选择模式',
         IMPORTANCE_TRANSFER_REMOTE_ACCOUNT: '远程账户',
@@ -203,6 +205,8 @@ function ChineseProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
+        IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: '创建马赛克',
@@ -230,6 +234,7 @@ function ChineseProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: '发送中',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: '将包含税金',
         MOSAIC_DEFINITION_PARENT: '父命名空间',
+        MOSAIC_DEFINITION_INFORMATION_TITLE: 'Creating a Mosaic',
         MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: '马赛克允许最长32个字符允许使用的字符集：',
         MOSAIC_DEFINITION_INFORMATION_2: '第一个字符必须是英文字母。',
@@ -271,6 +276,7 @@ function ChineseProvider($translateProvider) {
         NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
         NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: '命名空间名',
+        NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace Restrictions',
         NAMESPACE_PROVISION_INFORMATION_1: '命名空间所使用的长度和字符均存在限制。根命名空间长度限制为16个字符以内，二级命名空间长度限制为64个字符以内。有效的字符有：',
         NAMESPACE_PROVISION_INFORMATION_2: '命名空间的首个字符必须使用英文字母。 \'alice\'是有效命名空间，而 \'1alice\'不是。部分字符串被保留，不可用于命名空间的申请。不被允许的命名空间包含字符串如下：',
         NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
@@ -353,6 +359,8 @@ function ChineseProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: '使用NEM Apostille服务创建区块链公证时间戳,跟踪和审计文件认证状态。',
         PORTAL_APOSTILLE_BTN_1: '创建',
         PORTAL_APOSTILLE_BTN_2: '审计',
+        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+        PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -417,6 +425,7 @@ function ChineseProvider($translateProvider) {
         APOSTILLE_FILENAME: '文件名',
         APOSTILLE_NAME_TOO_LONG: '文件名过长，最多允许40个字符。',
         APOSTILLE_MAX_NUMBER: '最大的一批公证文件数为25',
+        APOSTILLE_INFORMATION_TITLE: 'Creating an Apostille',
         APOSTILLE_INFORMATION_1: '每个文件的上传均以在左栏的选项为准自动处理。您可以添加文件，变更类型或添加其他属性。您也可以切换至多重签名标签页添加更多文件',
         APOSTILLE_INFORMATION_2: '"<b>需保密</b>" 在于您文件的hash都会被您的私钥加密，并发送至一个HD账户。以这种方式，除了你以外的任何人都无法获取接受认证的信息或认证本身。',
         APOSTILLE_INFORMATION_3: 'The dedicated HD account can be put under a multisig contract so that it may be transferred to others via 1-of-1 or any m-of-n multisig contract combination. It can also have additional information sent to it via messages with updates and augments to the original document or the product it represents.',
@@ -430,6 +439,8 @@ function ChineseProvider($translateProvider) {
         APOSTILLE_CREATE_TEXT: '创建字符文档',
         APOSTILLE_ENTER_TEXT: '输入需要公证的信息',
         APOSTILLE_DOCUMENT_TITLE: 'Document title',
+        APOSTILLE_DROPBOX_MESSAGE: 'Please enter your password and desired tag(s) before selecting files',
+        APOSTILLE_DROPBOX_MESSAGE_2: 'Please enter your password before selecting files',
 
         // AUDIT APOSTILLE MODULE
         APOSTILLE_AUDIT_TITLE: '审计公证',
@@ -517,6 +528,11 @@ function ChineseProvider($translateProvider) {
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
         ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
+        ALERT_INVALID_AMOUNT: 'Amount is not valid !',
+        ALERT_INVALID_PRIVATE_KEY: 'Provided private key is not valid !',
+        ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
+        ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
+        ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -580,6 +596,8 @@ function ChineseProvider($translateProvider) {
         SIGNUP_NETWORK_SELECT: 'Select a network', //
         SIGNUP_BRAIN_WALLET_WARNING: '请阅读脑钱包的<a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">风险</a>。脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。 请遵从<a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>国际密码安全标准。',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: '脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。',
+        SIGNUP_COMMON_WALLET_WARNING: 'Wallets are stored <a><b>temporarily</b></a> in the browser local storage! You should have triggered a download after creating the wallet. It is the .wlt file used as a backup and to import back if your browser\’s local storage is erased. If you don\'t get a backup .wlt file, log into your account, copy your private key and paste it somewhere safe. It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have read and understood the above warnings.',
 
         // FAQ MODULE
         FAQ_TITLE: '疑难解答',

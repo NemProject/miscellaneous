@@ -73,8 +73,8 @@ function PolishProvider($translateProvider) {
         GENERAL_LEVY: 'Podatek',
         GENERAL_LEVY_TYPES: 'Typy podatku',
         GENERAL_LEVY_TYPES_NOTE: 'I - stała opłata; II - podatek procentowy',
-        GENERAL_LEVY_TYPE_1: 'constant fee',
-        GENERAL_LEVY_TYPE_2: 'percentage based',
+        GENERAL_LEVY_TYPE_1: 'Constant fee',
+        GENERAL_LEVY_TYPE_2: 'Percentage based',
         GENERAL_SEND: 'Wyślij',
         GENERAL_TO: 'Do',
         GENERAL_HASH: 'Hasz',
@@ -135,6 +135,10 @@ function PolishProvider($translateProvider) {
         GENERAL_CREATE: 'Create',
         GENERAL_RENEW: 'Renew',
 
+        // HOME MODULE
+        HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
+        HOME_RECOMMENDED_BROWSERS: 'Recommended browsers are:',
+
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
         TRANSFER_TRANSACTION_NAME: 'Transakcja transferu',
@@ -146,8 +150,6 @@ function PolishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Załącz',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Załączone mozaiki',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Szyfruj wiadomość',
-        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
-        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'Od',
@@ -203,7 +205,8 @@ function PolishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'Nie jesteś sygnatariuszem, który zainicjował transfer przeniesienia znaczenia, dlatego nie możesz uruchomić lub zatrzymać delegowanego zbierania bloków. Proszę przeczytaj powyżej jak przejąć spowrotem kontrolę nad zbieraniem.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Wybierz konto z multipodpisem',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Wybierz konto z multipodpisem aby zobaczyć status',
-
+        IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Utwórz mozaikę',
@@ -231,6 +234,7 @@ function PolishProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: 'Wysyłanie',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: 'należny podatek',
         MOSAIC_DEFINITION_PARENT: 'Główna Namespace',
+        MOSAIC_DEFINITION_INFORMATION_TITLE: 'Creating a Mosaic',
         MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: 'Maksymalna długość nazwy mozaiki wynosi 32 znaki. Dozwolone znaki to:',
         MOSAIC_DEFINITION_INFORMATION_2: 'Pierwszy znak musi być literą z alfabetu.',
@@ -272,6 +276,7 @@ function PolishProvider($translateProvider) {
         NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
         NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: 'Nazwa Namespace',
+        NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace Restrictions',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces mają pewne ograniczenia w odniesieniu do akceptowanych znaków jak również długości nazw. Namespace główna może mieć długość do 16 znaków, podczas gdy sub-namespace może mieć długość 64 znaków. Poprawne znaki to:',
         NAMESPACE_PROVISION_INFORMATION_2: 'Nazwa Namespace musi zaczynać się od litery z alfabetu, wobec tego \'alice\' jest dozwoloną nazwą dla Głównej Namespace, podczas gdy \'1alice\' nie jest. Pewne ciągi znaków są zarezerwowane i nie można ich użyć jako nazwy Namespace. Wśród tych ciągów znaków są:',
         NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
@@ -351,6 +356,8 @@ function PolishProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: 'Użyj usługi NEM Apostil, aby stworzyć notaryzacje oparte na blockchainie w celu datowania, śledzenia i  badania autentyczności plików.',
         PORTAL_APOSTILLE_BTN_1: 'Utwórz',
         PORTAL_APOSTILLE_BTN_2: 'Audytuj',
+        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+        PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -416,6 +423,7 @@ function PolishProvider($translateProvider) {
         APOSTILLE_FILENAME: 'Nazwa pliku',
         APOSTILLE_NAME_TOO_LONG: 'Nazwa pliku jest zbyt długa, dozwolone maksimum 40 znaków.',
         APOSTILLE_MAX_NUMBER: 'Maksimum apostili w partii to 25',
+        APOSTILLE_INFORMATION_TITLE: 'Creating an Apostille',
         APOSTILLE_INFORMATION_1: 'Każdy przesłany plik jest automatycznie przetwarzany z użyciem opcji ustawionych na lewym panelu. Możesz dodać nowe pliki, zmienić parametry, a następnie dodać więcej plików z innymi ustawieniami. Możesz również przełączyć na zakładkę Multipodpis i dodać więcej plików.',
         APOSTILLE_INFORMATION_2: 'Opcja "<b>Prywatne, transferowalne i aktualizowalne</b>" oznacza, że hasze Twoich plików są podpisane za pomocą twojego klucza prywatnego i wysłane do dedykowanego hierarchicznie deterministycznego (HD) konta. Tym sposobem tylko ty wiesz jaka zawartość została oznakowana, chyba, że ujawnisz tą zawartość.',
         APOSTILLE_INFORMATION_3: 'Dedykowane konto HD może zostać przekonwertowane na kontrakt z multipodpisem tak, aby można je było przesyłać poprzez kontrakt 1-z-1 lub m-z-n. Może posiadać również dodatkowe informacje przesyłane do niego za pośrednictwem wiadomości z aktualizacjami oraz zmianami w oryginalnym dokumencie lub produkcie, który reprezentuje.',
@@ -429,6 +437,8 @@ function PolishProvider($translateProvider) {
         APOSTILLE_CREATE_TEXT: 'Utwórz dokument tekstowy',
         APOSTILLE_ENTER_TEXT: 'Wpisz tekst do notaryzowania...',
         APOSTILLE_DOCUMENT_TITLE: 'Tytuł dokumentu',
+        APOSTILLE_DROPBOX_MESSAGE: 'Please enter your password and desired tag(s) before selecting files',
+        APOSTILLE_DROPBOX_MESSAGE_2: 'Please enter your password before selecting files',
 
         // AUDIT APOSTILLE MODULE
         APOSTILLE_AUDIT_TITLE: 'Weryfikuj apostile',
@@ -516,6 +526,11 @@ function PolishProvider($translateProvider) {
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
         ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
+        ALERT_INVALID_AMOUNT: 'Amount is not valid !',
+        ALERT_INVALID_PRIVATE_KEY: 'Provided private key is not valid !',
+        ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
+        ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
+        ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -579,6 +594,8 @@ function PolishProvider($translateProvider) {
         SIGNUP_NETWORK_SELECT: 'Wybierz sieć', //
         SIGNUP_BRAIN_WALLET_WARNING: 'Proszę, przeczytaj o <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">niebezpieczeństwach</a> związanych z używaniem brain wallet. Brain wallet używa tylko zakodowanego wielokrotnie hasła, dlatego istotne jest, aby wybrać BEZPIECZNE hasło. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Portfel z klucza prywatnego używa TYLKO wielokrotnie zakodowanego hasła, dlatego istotne jest, aby wybrać BEZPIECZNE hasło.',
+        SIGNUP_COMMON_WALLET_WARNING: 'Wallets are stored <a><b>temporarily</b></a> in the browser local storage! You should have triggered a download after creating the wallet. It is the .wlt file used as a backup and to import back if your browser\’s local storage is erased. If you don\'t get a backup .wlt file, log into your account, copy your private key and paste it somewhere safe. It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have read and understood the above warnings.',
 
         // FAQ MODULE
         FAQ_TITLE: 'Często zadawane pytania',

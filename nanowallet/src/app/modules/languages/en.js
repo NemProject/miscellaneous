@@ -73,8 +73,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_LEVY: 'Levy',
         GENERAL_LEVY_TYPES: 'Levy types',
         GENERAL_LEVY_TYPES_NOTE: 'I - constant fee; II - percentage based',
-        GENERAL_LEVY_TYPE_1: 'constant fee',
-        GENERAL_LEVY_TYPE_2: 'percentage based',
+        GENERAL_LEVY_TYPE_1: 'Constant fee',
+        GENERAL_LEVY_TYPE_2: 'Percentage based',
         GENERAL_SEND: 'Send',
         GENERAL_TO: 'To',
         GENERAL_HASH: 'Hash',
@@ -135,6 +135,10 @@ function EnglishProvider($translateProvider) {
         GENERAL_CREATE: 'Create',
         GENERAL_RENEW: 'Renew',
 
+        // HOME MODULE
+        HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
+        HOME_RECOMMENDED_BROWSERS: 'Recommended browsers are:',
+
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Send & Receive',
         TRANSFER_TRANSACTION_NAME: 'Transfer transaction',
@@ -146,8 +150,6 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaics attached',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Encrypt message',
-        TRANSFER_TRANSACTION_MOSAIC_BALANCE: 'Mosaic Balance',
-        TRANSFER_TRANSACTION_ATTACHED_LEVY: 'Attached Levy',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'From',
@@ -203,6 +205,8 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
+        IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',  
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Create a mosaic',
@@ -230,6 +234,7 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_2: 'Sending',
         MOSAIC_DEFINITION_LEVY_FEE_TYPE_2_NOTE_3: 'will imply levy of',
         MOSAIC_DEFINITION_PARENT: 'Parent Namespace',
+        MOSAIC_DEFINITION_INFORMATION_TITLE: 'Creating a Mosaic',
         MOSAIC_DEFINITION_INFORMATION: 'Want more info about mosaics?',
         MOSAIC_DEFINITION_INFORMATION_1: 'The maximum length for a mosaic name is 32 characters. Allowed characters are:',
         MOSAIC_DEFINITION_INFORMATION_2: 'The first character must be a letter from the alphabet.',
@@ -269,6 +274,7 @@ function EnglishProvider($translateProvider) {
         NAMESPACE_PROVISION_NEW_ROOT: 'New root Namespace',
         NAMESPACE_PROVISION_NS: 'Namespace',
         NAMESPACE_PROVISION_NS_NAME: 'Namespace name',
+        NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace Restrictions',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces have certain restrictions with respect to the characters being allowed in the parts as well as the length of a part. A root namespace may have a length of 16 characters while sub-namespaces may have a length of 64 characters. Valid characters are:',
         NAMESPACE_PROVISION_INFORMATION_2: 'However a part is only allowed to begin with a letter of the alphabet, thus \'alice\' is an allowed part for a root namespace while \'1alice\' is not. Certain strings are reserved and thus not allowed as namespace parts. Among the disallowed namespace parts are:',
         NAMESPACE_PROVISION_INFORMATION_3: 'This list is not final and can be extended in the future. Thus \'user.alice\' or \'alice.user\' are not allowed in the NEM namespace system. The namespace may have up to 3 parts, thus \'qm.metals.silver\' is valid while \'qm.metals.silver.coin\' is not.',
@@ -349,7 +355,7 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
         PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
-        PORTAL_ADDRESS_BOOK_BTN: 'Use address book',
+        PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -414,6 +420,7 @@ function EnglishProvider($translateProvider) {
         APOSTILLE_FILENAME: 'File name',
         APOSTILLE_NAME_TOO_LONG: 'File name is too long, 32 characters maximum allowed.',
         APOSTILLE_MAX_NUMBER: 'Maximum apostilles per batch is 25',
+        APOSTILLE_INFORMATION_TITLE: 'Creating an Apostille',
         APOSTILLE_INFORMATION_1: 'Each file uploaded is processed automatically with options set on the left panel. You can add new files, change parameters and then add more files with different options. It\'ll also work if you switch to the multisig tab and add more files.',
         APOSTILLE_INFORMATION_2: '"<b>Private, transferable, and updateable</b>" option means that the hashes of your files are signed with your private key and sent to a dedicated hierarchical deterministic (HD) account. This way it is not possible for anyone but you to know what content has been time stamped unless you share the content.',
         APOSTILLE_INFORMATION_3: 'The dedicated HD account can be put under a multisig contract so that it may be transferred to others via 1-of-1 or any m-of-n multisig contract combination. It can also have additional information sent to it via messages with updates and augments to the original document or the product it represents.',
@@ -427,6 +434,8 @@ function EnglishProvider($translateProvider) {
         APOSTILLE_CREATE_TEXT: 'Create text document',
         APOSTILLE_ENTER_TEXT: 'Enter text to notarize...',
         APOSTILLE_DOCUMENT_TITLE: 'Document title',
+        APOSTILLE_DROPBOX_MESSAGE: 'Please enter your password and desired tag(s) before selecting files',
+        APOSTILLE_DROPBOX_MESSAGE_2: 'Please enter your password before selecting files',
 
         // AUDIT APOSTILLE MODULE
         APOSTILLE_AUDIT_TITLE: 'Audit apostilles',
@@ -513,6 +522,11 @@ function EnglishProvider($translateProvider) {
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
         ALERT_INVALID_ADDRESS: 'Provided address is not valid !',
+        ALERT_INVALID_AMOUNT: 'Amount is not valid !',
+        ALERT_INVALID_PRIVATE_KEY: 'Provided private key is not valid !',
+        ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
+        ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
+        ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -573,10 +587,12 @@ function EnglishProvider($translateProvider) {
         SIGNUP_CREATE_WALLET_BUTTON: 'Create simple wallet',
         SIGNUP_PRIVATE_KEY_WALLET_BUTTON: 'Create private key wallet',
         SIGNUP_BRAIN_WALLET_BUTTON: 'Create brain wallet',
-        SIGNUP_CREATE_WALLET_WARNING: 'Please read about <a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank">dangers</a> that client side generated keys pose, we are not responsible of loss that could be due to entropy of key generation. Even if very few chances to happen it is still recommended to use a private key generated from a NEM client.',
+        SIGNUP_CREATE_WALLET_WARNING: 'Please read about <a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank"><b>dangers</b></a> that client side generated keys pose; we are not responsible for any loss that could be due to the entropy of key generation. Even if it is unlikely to happen, it is still recommended to use a private key generated from a NEM client (NCC).',
         SIGNUP_NETWORK_SELECT: 'Select a network', //
         SIGNUP_BRAIN_WALLET_WARNING: 'Please read about <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">dangers</a> that brain wallet poses. Brain wallet uses ONLY password hashed multiple times, therefore it\'s crucial to select a SAFE password. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Private key wallet uses ONLY password hashed multiple times, therefore it\'s crucial to select a SAFE password.',
+        SIGNUP_COMMON_WALLET_WARNING: 'Wallets are stored <a><b>temporarily</b></a> in the browser local storage! You should have triggered a download after creating the wallet. It is the .wlt file used as a backup and to import back if your browser\’s local storage is erased. If you don\'t get a backup .wlt file, log into your account, copy your private key and paste it somewhere safe. It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have read and understood the above warnings.',
 
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',
