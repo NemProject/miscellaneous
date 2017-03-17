@@ -321,6 +321,16 @@ class DataBridge {
                         }
                         console.log("Unconfirmed data: ", d);
                     }
+
+                    if(d.transaction.mosaics.length) {
+                        for (let i = 0; i < d.transaction.mosaics.length; i++) {
+                            let mos = d.transaction.mosaics[i];
+                            if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)]){
+                                // Fetch definition from network
+                                getMosaicDefinitionMetaDataPair(mos);
+                            }
+                        }
+                    }
                 }, 0);
             }
 
@@ -373,6 +383,33 @@ class DataBridge {
                         });                  
                     }
                 }, 0);
+            }
+
+            let getMosaicDefinitionMetaDataPair = (mos) => {
+                if (undefined !== mos.mosaicId) {
+                    // Fetch definition from network
+                    return this._NetworkRequests.getOtherMosaic(helpers.getHostname(this._Wallet.node), mos.mosaicId.namespaceId).then((res) => {
+                        if(res.data.length) {
+                            for(let i = 0; i < res.data.length; i++) {
+                                if (res.data[i].mosaic.id.namespaceId == mos.mosaicId.namespaceId && res.data[i].mosaic.id.name == mos.mosaicId.name) {
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)] = {};
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].supply = res.data[i].mosaic.properties[1].value;
+                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].mosaicDefinition = res.data[i].mosaic;
+
+                                    if(undefined !== res.data[i].mosaic.levy) {
+                                        if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(res.data[i].mosaic.levy.mosaicId)]) {
+                                            // Fetch definition from network
+                                            return getMosaicDefinitionMetaDataPair(res.data[i].mosaic.levy);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    (err) => {
+                        this._Alert.transactionError('Failed to fetch definition of ' + helpers.mosaicIdToName(mos.mosaicId));
+                    });
+                }
             }
 
 

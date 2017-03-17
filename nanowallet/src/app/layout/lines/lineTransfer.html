@@ -1,4 +1,4 @@
-<table id="txTable" class="table table-bordered table-hover" title="{{ 'TRANSFER_TRANSACTION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="txTable" class="table table-bordered table-hover" title="{{ 'TRANSFER_TRANSACTION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta);checkMosaic(tx, mosaicDefinitionMetaDataPair);">
     <tbody style="outline:0;">
         <tr data-toggle="collapse" data-target="#table{{number}}" style="outline:0">
             <td class="sentTx" style="overflow:hidden;text-overflow: ellipsis;" ng-show="tx.recipient !== mainAccount && !parent"><span class="fa fa-send-o text-danger"></span> <tt>{{tx.recipient | fmtAddress}}</tt></td>
@@ -35,7 +35,6 @@
                 </span>
                 <div class="row" id="needsSignature-{{tx.timeStamp}}" ng-show="needsSignature">
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
-                </div>
                 </div>
             </td>
             <td class="messageTx" ng-show="!tx.message.type"></td>

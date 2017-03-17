@@ -471,6 +471,24 @@ class NetworkRequests {
         );
     }
 
+    /**
+     * Gets mosaics of a parent namespace
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} id - The full mosaic id
+     *
+     * @return {object} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
+     */
+    getOtherMosaic(host, id){
+        let port = this.getPort();
+        let obj = {'params':{ 'namespace':id}};
+        return this._$http.get('http://' + host + ':' + port + '/namespace/mosaic/definition/page', obj).then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
 }
 
 export default NetworkRequests;
