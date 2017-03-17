@@ -8,7 +8,9 @@
     </div>
     <div class="row">
 
-      <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-info" ng-click="$ctrl.uploadNty()"><b><i class="fa  fa-exclamation-triangle "></i> {{ 'EXPLORER_APOSTILLES_NO_NTY' | translate }}</b></p>
+      <p ng-show="$ctrl._Wallet.ntyData === undefined" class="bg-info" ng-click="$ctrl.uploadNty()" style="cursor:pointer">
+        <b><i class="fa  fa-exclamation-triangle"></i> {{ 'EXPLORER_APOSTILLES_NO_NTY' | translate }}</b>
+      </p>
       <input id="uploadNty" style="visibility:hidden;position:absolute;" import-nty-file="$ctrl.loadNty($fileContent)" type="file">
 
       <div class="col-md-12">
@@ -53,7 +55,7 @@
             <tr ng-repeat="ap in $ctrl._Wallet.ntyData.data | reverse | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
               <td>{{ap.filename}}</td>
               <td>{{ap.tags}}</td>
-              <td ui-sref="app.accountsExplorer({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})"><a>{{ap.dedicatedAccount}}</a></td>
+              <td ui-sref="app.accountsExplorer({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})" style="cursor:pointer"><a>{{ap.dedicatedAccount}}</a></td>
               <td>
                 <span ng-show="!ap.txMultisigHash.length">
                   <a href="{{$ctrl._Wallet.chainLink}}{{ap.txHash}}" target="_blank">
