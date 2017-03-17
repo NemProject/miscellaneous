@@ -82,7 +82,7 @@
             <div class="input-group">
               <span class="input-group-btn short">
                 <label ng-show="!$ctrl.showPrivateKeyField">{{ 'FORM_PASSWORD' | translate }}:</label>
-                <label ng-show="$ctrl.showPrivateKeyField">Private Key:* </label>
+                <label ng-show="$ctrl.showPrivateKeyField">{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
               </span>
               <input class="form-control" type="password" ng-model="$ctrl.common.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-show="!$ctrl.showPrivateKeyField"/>
               <input class="form-control" ng-show="$ctrl.showPrivateKeyField" ng-model="$ctrl.common.privateKey" readOnly></input>
@@ -191,7 +191,7 @@
           <h4 class="modal-title">{{ 'ACCOUNT_WALLET_QR_ANDROID_IOS_TITLE' | translate }}</h4>
         </div>
         <div class="modal-body">
-          <div id="mobileWalletQR"></div>
+          <div class="text-center" id="mobileWalletQR"></div>
           <div id="mobileWalletForm">
             <!-- Password Field -->
             <fieldset class="form-group">
