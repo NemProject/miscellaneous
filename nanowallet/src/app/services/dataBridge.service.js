@@ -141,7 +141,7 @@ class DataBridge {
          *
          * @type {number}
          */
-        this.netWorkTime = undefined;
+        this.networkTime = undefined;
 
         /**
          * Store the time sync interval function
@@ -179,7 +179,7 @@ class DataBridge {
              */
             this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
                 this._$timeout(() => {
-                    this.netWorkTime = res.receiveTimeStamp / 1000;
+                    this.networkTime = res.receiveTimeStamp / 1000;
                 });
             },(err) => {
                 this._$timeout(() => {
@@ -448,7 +448,7 @@ class DataBridge {
         this.harvestedBlocks = [];
         this.delegatedData = undefined;
         this.marketInfo = undefined;
-        this.netWorkTime = undefined;
+        this.networkTime = undefined;
         clearInterval(this.timeSyncInterval)
     }
 
@@ -459,7 +459,7 @@ class DataBridge {
         this.timeSyncInterval = setInterval(() => { 
             this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
                 this._$timeout(() => {
-                    this.netWorkTime = res.receiveTimeStamp / 1000;
+                    this.networkTime = res.receiveTimeStamp / 1000;
                 });
             },(err) => {
                 this._$timeout(() => {

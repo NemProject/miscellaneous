@@ -122,7 +122,8 @@ class Transactions {
      * @return {object} - A [MultisigTransaction]{@link http://bob.nem.ninja/docs/#multisigTransaction} object
      */
     _multisigWrapper(senderPublicKey, innerEntity, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigTransaction, senderPublicKey, timeStamp, due, version);
         let custom = {
@@ -178,7 +179,8 @@ class Transactions {
      * @return {object} - A [TransferTransaction]{@link http://bob.nem.ninja/docs/#transferTransaction} object
      */
     _constructTransfer(senderPublicKey, recipientCompressedKey, amount, message, due, mosaics, mosaicsFee) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
         let msgFee = message.payload.length ? Math.max(1, Math.floor((message.payload.length / 2) / 32) + 1) : 0;
@@ -204,7 +206,8 @@ class Transactions {
      * @return {object} - A [MultisigAggregateModificationTransaction]{@link http://bob.nem.ninja/docs/#multisigAggregateModificationTransaction} object
      */
     _constructAggregate(tx, signatoryArray) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(2);
         let due = this._Wallet.network === Network.data.Testnet.id ? 60 : 24 * 60;
         let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
@@ -249,7 +252,8 @@ class Transactions {
      * @return {object} - A [MultisigCosignatoryModification]{@link http://bob.nem.ninja/docs/#multisigCosignatoryModification} object
      */
     _constructAggregateModifications(senderPublicKey, tx, signatoryArray) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version;
         let custom;
         let totalFee;
@@ -337,7 +341,8 @@ class Transactions {
      * @return {object} - A [ProvisionNamespaceTransaction]{@link http://bob.nem.ninja/docs/#provisionNamespaceTransaction} object
      */
     _constructNamespace(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, namespaceName, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
         let fee = 20 * 1000000;
@@ -394,7 +399,8 @@ class Transactions {
      * @return {object} - A [MosaicDefinitionCreationTransaction]{@link http://bob.nem.ninja/docs/#mosaicDefinitionCreationTransaction} object
      */
     _constructMosaicDefinition(senderPublicKey, rentalFeeSink, rentalFee, namespaceParent, mosaicName, mosaicDescription, mosaicProperties, levy, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicDefinition, senderPublicKey, timeStamp, due, version);
 
@@ -460,7 +466,8 @@ class Transactions {
      * @return {object} - A [MosaicSupplyChangeTransaction]{@link http://bob.nem.ninja/docs/#mosaicSupplyChangeTransaction} object
      */
     _constructMosaicSupply(senderPublicKey, mosaicId, supplyType, delta, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicSupply, senderPublicKey, timeStamp, due, version);
 
@@ -505,7 +512,8 @@ class Transactions {
      * @return {object} - An [ImportanceTransferTransaction]{@link http://bob.nem.ninja/docs/#importanceTransferTransaction} object
      */
     _constructImportanceTransfer(senderPublicKey, recipientKey, mode, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ImportanceTransfer, senderPublicKey, timeStamp, due, version);
         let custom = {
@@ -581,7 +589,8 @@ class Transactions {
      * @return {object} - An [MultisigSignatureTransaction]{@link http://bob.nem.ninja/docs/#multisigSignatureTransaction} object
      */
     _constructSignature(senderPublicKey, otherAccount, otherHash, due) {
-        let timeStamp = Math.floor(this._DataBridge.netWorkTime);
+        let d = new Date();
+        let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigSignature, senderPublicKey, timeStamp, due, version);
         let totalFee = (2 * 3) * 1000000;
