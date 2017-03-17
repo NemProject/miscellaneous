@@ -26,15 +26,16 @@ let haveWallet = function(walletName, array) {
  * Check if address book already present in an array
  *
  * @param {string} addressBookName - A address book name
- * @param {array} array - A address books array
+ * @param {object} obj - A address books object of objects
  *
  * @return {boolean} - True if present, false otherwise
  */
-let haveAddressBook = function(addressBookName, array) {
+let haveAddressBook = function(addressBookName, obj) {
     let i = null;
+    let array = Object.keys(obj);
     for (i = 0; array.length > i; i++) {
-        if (array[i].name === addressBookName) {
-            return array[i];
+        if (obj[array[i]] === addressBookName) {
+            return obj[array[i]];
         }
     }
     return false;

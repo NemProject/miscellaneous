@@ -83,19 +83,17 @@ class TransferTransactionCtrl {
             'privateKey': '',
         };
 
-        this.contacts = [];
-        this.contacts.items = [];
+        this.contacts = []
 
-        if(undefined !== this._storage.contacts && this._storage.contacts.length) {
-            let val = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts) ;
-            this.contacts = val === false ? [] : val;
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
         }
 
         // Contacts to address book pagination properties
         this.currentPageAb = 0;
         this.pageSizeAb = 5;
         this.numberOfPagesAb = function() {
-            return Math.ceil(this.contacts.items.length / this.pageSizeAb);
+            return Math.ceil(this.contacts.length / this.pageSizeAb);
         }
 
         // Invoice model for QR

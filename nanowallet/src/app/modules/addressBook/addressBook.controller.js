@@ -45,15 +45,8 @@ class AddressBookCtrl {
         this.propertyName = 'label';
 
         // Contact list
-        this._storage.contacts = this._storage.contacts || [];
-        this.contacts = helpers.haveAddressBook(this._Wallet.currentAccount.address, this._storage.contacts);
-
-        if (this.contacts === false) {
-            this.contacts = {
-                name: this._Wallet.currentAccount.address,
-                items: []
-            };
-        }
+        this._storage.contacts = this._storage.contacts || {};
+        this.contacts = undefined !== this._storage.contacts[this._Wallet.currentAccount.address] ? this._storage.contacts[this._Wallet.currentAccount.address] : [];
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
@@ -68,7 +61,7 @@ class AddressBookCtrl {
         this.currentPage = 0;
         this.pageSize = 10;
         this.numberOfPages = function() {
-            return Math.ceil(this.contacts.items.length / this.pageSize);
+            return Math.ceil(this.contacts.length / this.pageSize);
         }
     }
 
@@ -117,7 +110,7 @@ class AddressBookCtrl {
             return;
         }
 
-        this.contacts.items.push({
+        this.contacts.push({
             "label": this.formData.label,
             "address": this.formData.address
         });
@@ -174,9 +167,9 @@ class AddressBookCtrl {
             return;
         }
 
-        var indexOfElem = this.contacts.items.indexOf(this.editElem);
-        this.contacts.items[indexOfElem].label = this.formData.label;
-        this.contacts.items[indexOfElem].address = this.formData.address;
+        var indexOfElem = this.contacts.indexOf(this.editElem);
+        this.contacts[indexOfElem].label = this.formData.label;
+        this.contacts[indexOfElem].address = this.formData.address;
 
         // Save data to locale storage
         this.saveAddressBook();
@@ -222,11 +215,11 @@ class AddressBookCtrl {
 
         // If the deleted element is the elem 0 and length of array mod 5 gives 0 (means it is the last object of the page),
         // we return a page behind unless it is page 1.
-        if (this.contacts.items.indexOf(this.removeElem) === 0 && this.currentPage + 1 > 1 && (this.contacts.items.length - 1) % 5 === 0) {
+        if (this.contacts.indexOf(this.removeElem) === 0 && this.currentPage + 1 > 1 && (this.contacts.length - 1) % 5 === 0) {
             this.currentPage = this.currentPage - 1;
         }
 
-        this.contacts.items.splice(this.contacts.items.indexOf(this.removeElem), 1);
+        this.contacts.splice(this.contacts.indexOf(this.removeElem), 1);
         this.removeElem = {};
 
         this.saveAddressBook();
@@ -239,15 +232,7 @@ class AddressBookCtrl {
 
     // Save data to locale storage
     saveAddressBook() {
-        let i = null;
-        for (i = 0; this._storage.contacts.length > i; i++) {
-            if (this._storage.contacts[i].name === this._Wallet.currentAccount.address) {
-                this._storage.contacts[i] = this.contacts;
-                return true;
-            }
-        }
-
-        this._storage.contacts.push(this.contacts);
+        this._storage.contacts[this._Wallet.currentAccount.address] = this.contacts;
     }
 
     /**
@@ -264,7 +249,7 @@ class AddressBookCtrl {
      */
     exportAddressBook() {
         // Wallet object string to word array
-        let contacts = this.contacts.items;
+        let contacts = this.contacts;
 
         for (var i = 0; i < contacts.length; i++) {
             delete contacts[i].$$hashKey;
@@ -297,7 +282,7 @@ class AddressBookCtrl {
         if (contacts.length) {
             for (var i = 0; i < contacts.length; i++) {
                 if (typeof contacts[i].label != 'undefined' && typeof contacts[i].address != 'undefined') {
-                    this.contacts.items.push(contacts[i]);
+                    this.contacts.push(contacts[i]);
                 }
             }
 

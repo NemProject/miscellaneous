@@ -309,7 +309,7 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-sm-12">
-                <table ng-show="$ctrl.contacts.items.length" class="table table-condensed">
+                <table ng-show="$ctrl.contacts.length" class="table table-condensed">
                     <thead>
                         <tr>
                             <th>
@@ -321,7 +321,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:'label':false | startFrom:$ctrl.currentPageAb*$ctrl.pageSizeAb | limitTo:$ctrl.pageSizeAb">
+                        <tr ng-repeat="contact in $ctrl.contacts | orderBy:'label':false | startFrom:$ctrl.currentPageAb*$ctrl.pageSizeAb | limitTo:$ctrl.pageSizeAb">
                             <td>{{contact.label}}</td>
                             <td>
                                 <button type="button" class="btn book" data-dismiss="modal" ng-click="$ctrl.formData.rawRecipient = contact.address; $ctrl.processRecipientInput()">{{contact.address}}</button>
@@ -329,12 +329,12 @@
                         </tr>
                     </tbody>
                 </table>
-                <p ng-show="!$ctrl.contacts.items.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
+                <p ng-show="!$ctrl.contacts.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>
         </div>
              <div class="modal-footer clearfix">
-                <div class="custom-pagination" ng-show="$ctrl.contacts.items.length > $ctrl.pageSizeAb">
+                <div class="custom-pagination" ng-show="$ctrl.contacts.length > $ctrl.pageSizeAb">
                     <button class="buttonStyle" ng-disabled="$ctrl.currentPageAb == 0" ng-click="$ctrl.currentPageAb = $ctrl.currentPageAb-1">
                         <span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPageAb+1}}/{{$ctrl.numberOfPagesAb()}}</b>
                     <button class="buttonStyle" ng-disabled="$ctrl.currentPageAb+1 >= $ctrl.numberOfPagesAb()" ng-click="$ctrl.currentPageAb = $ctrl.currentPageAb+1">

@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-success" ng-click="$ctrl.addContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
               </li>
               <li>
-                <button type="button" ng-disabled="!$ctrl.contacts.items.length" class="btn btn-success" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
+                <button type="button" ng-disabled="!$ctrl.contacts.length" class="btn btn-success" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
                 <a id="exportAddressBook" class="hidden" target="_blank"></a>
               </li>
               <li>
@@ -32,7 +32,7 @@
       <div class="col-sm-9">
           <div class="panel-heading">
             <h3>{{ 'ADDRESS_BOOK_LIST' | translate }}</h3>
-            <div ng-show="$ctrl.contacts.items.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+            <div ng-show="$ctrl.contacts.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
           </div>
           <table  class="table table-condensed">
             <thead>
@@ -47,7 +47,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="contact in $ctrl.contacts.items | orderBy:$ctrl.propertyName:$ctrl.revers | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
+            <tr ng-repeat="contact in $ctrl.contacts | orderBy:$ctrl.propertyName:$ctrl.revers | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
               <td>{{contact.label}}</td>
               <td>{{contact.address}}</td>
               <td class="actions row">
@@ -64,7 +64,7 @@
             </tr>
             </tbody>
           </table>
-          <div class="panel-body" ng-show="!$ctrl.contacts.items.length">
+          <div class="panel-body" ng-show="!$ctrl.contacts.length">
             <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
           </div>
           <!-- <div class="text-center bg-info">
