@@ -322,7 +322,7 @@ class DataBridge {
                         console.log("Unconfirmed data: ", d);
                     }
 
-                    if(d.transaction.mosaics.length) {
+                    if(undefined !== d.transaction.mosaics && d.transaction.mosaics.length) {
                         for (let i = 0; i < d.transaction.mosaics.length; i++) {
                             let mos = d.transaction.mosaics[i];
                             if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)]){
