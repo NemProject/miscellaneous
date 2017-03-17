@@ -709,6 +709,7 @@ footer {
   .bg-info {
     color: white;
     border: $blueLite;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
     a {
       color: red;
     }
