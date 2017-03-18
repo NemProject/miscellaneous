@@ -219,8 +219,8 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_FINAL_NAME: 'Full Name',
       MOSAIC_DEFINITION_DESCRPITION: "説明",
       MOSAIC_DEFINITION_INITIAL_SUPPLY: "初期供給量",
-      MOSAIC_DEFINITION_MUTABLE_SUPPLY: "供給量ロック（チェック有で総量変更可 ）",
-      MOSAIC_DEFINITION_TRANSFERABLE: "譲渡許可（チェック有で自由送信許可",
+      MOSAIC_DEFINITION_MUTABLE_SUPPLY: "供給量変更可",
+      MOSAIC_DEFINITION_TRANSFERABLE: "譲渡許可（チェック有で自由送信許可)",
       MOSAIC_DEFINITION_PROPERTIES: "プロパティ",
       MOSAIC_DEFINITION_MOSAIC_PROPERTIES: "モザイクのプロパティ",
       MOSAIC_DEFINITION_REQUIRES_LEVY: "徴収を要求",
@@ -279,8 +279,8 @@ function JapaneseProvider($translateProvider) {
       NAMESPACE_PROVISION_NS_NAME: "ネームスペースの名前",
       NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace Restrictions',
       NAMESPACE_PROVISION_INFORMATION_1: "ネームスペースには制約があります。ルートネームスペースは16字以内で、ルート以下のネームスペースは64文字までです。使用できる文字は以下の通りです。",
-      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'1では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
-      NAMESPACE_PROVISION_INFORMATION_3: '这个清单将可能会增加内容，请注意查看。 \'user.alice\' 和 \'alice.user\' 都不被NEM命名空间系统允许申请。命名空间最多可以被定义为三层，如\'gimre.metals.silver\' 有效，而 \'gimre.metals.silver.coin\' 无效。',
+      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
+　　　　　　　　　　　　NAMESPACE_PROVISION_INFORMATION_3: 'このリストは最終的なものではなく、将来拡張される事があります。 したがって、\'user.alice\' または \'alice.user\' はNEMのネームスペースでは使用できません。ネームスペースには最大3つの部分で構成されるので、\'gimre.metals.silver\'は有効ですが、\'gimre.metals.silver.coin\' は有効ではありません。',
 
       // RENEW NAMESPACE MODULE
       RENEW_NS_TITLE: 'Renew namespaces',
