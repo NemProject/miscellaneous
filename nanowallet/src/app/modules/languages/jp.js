@@ -141,8 +141,8 @@ function JapaneseProvider($translateProvider) {
 
       // TRANSFER TRANSACTION MODULE
       TRANSFER_TRANSACTION_TITLE: "送金と請求",
-      TRANSFER_TRANSACTION_NAME: "トランスファートランザクション（通常トランザクション）",
-      TRANSFER_TRANSACTION_MULTISIG_NAME: "マルチシグトランスファートランザクション（通常トランザクション）",
+      TRANSFER_TRANSACTION_NAME: "トランスファートランザクション", //画面崩れ防止の為短く変更："トランスファートランザクション（通常トランザクション）"
+      TRANSFER_TRANSACTION_MULTISIG_NAME: "マルチシグトランスファートランザクション", //画面崩れ防止の為短く変更："マルチシグトランスファートランザクション（通常トランザクション）"
       TRANSFER_TRANSACTION_INVOICE: "請求書を作成",
       TRANSFER_TRANSACTION_TAB_INVOICE: "請求書",
       TRANSFER_TRANSACTION_MOSAIC_TRANSFER: "モザイクを送信",
@@ -184,8 +184,8 @@ function JapaneseProvider($translateProvider) {
       LINE_TX_DETAILS_MULTISIG_AFFECTED: "影響するアカウント",
 
       // IMPORTANCE MODULE
-      IMPORTANCE_TRANSFER_NAME: "インポータンストランスファートランザクション（委任モード操作等）",
-      IMPORTANCE_TRANSFER_MULTISIG_NAME: "マルチシグインポータンストランスファートランザクション（委任モード操作等）",
+      IMPORTANCE_TRANSFER_NAME: "インポータンストランスファートランザクション",//長すぎて崩れる："インポータンストランスファートランザクション（委任モード操作等）"
+      IMPORTANCE_TRANSFER_MULTISIG_NAME: "マルチシグインポータンストランスファートランザクション",//長すぎて崩れる："マルチシグインポータンストランスファートランザクション（委任モード操作等）"
       IMPORTANCE_TRANSFER_MODE: "モード選択",
       IMPORTANCE_TRANSFER_MODE_1: "委任有効化（Activate）",
       IMPORTANCE_TRANSFER_MODE_2: "委任無効化（Deactivate）",
