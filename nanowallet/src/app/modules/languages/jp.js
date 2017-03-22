@@ -88,7 +88,6 @@ function JapaneseProvider($translateProvider) {
       GENERAL_CLOSE: "閉じる",
       GENERAL_COMING_SOON: "近日公開",
       GENERAL_NONE: "なし",
-      GENERAL_NO_NTY: "拡張子 .nty のファイルがロードされない場合、こちらをクリックするか、新しく自動で作られたファイルをインポートしてください。",
       GENERAL_DROPBOX: "ファイルをここへドラッグ & ドロップするか、ファイル選択ウィンドウを開いてください。",
       GENERAL_NETWORK_FEE: "ネットワーク手数料",
       GENERAL_YES: "はい",
@@ -313,7 +312,6 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_HARVESTING_BELOW_THRESHOLD: "デリゲートハーベスティングを開始する為には既得バランスが 10000 XEM 以上必要です。",
       ACCOUNT_ACCOUNT_SELECT: "別のアカウントを選択",
       ACCOUNT_ACCOUNT_SELECT_LABEL: "別のアカウントに切り替える",
-      ACCOUNT_ACCOUNT_SELECT_BTN_NOTE: "アカウントを変更",
       ACCOUNT_WALLET_KEYS: "ウォレット ＆ 鍵",
       ACCOUNT_ADD_NEW_ACCOUNT: "新規アカウントを追加",
       ACCOUNT_ADD_NEW_ACCOUNT_BTN: "ウォレットに新規アカウント(アドレス)を追加",
@@ -342,8 +340,6 @@ function JapaneseProvider($translateProvider) {
       PORTAL_MULTISIG_BTN_2: "既存コントラクトを編集",
       PORTAL_HARVESTING_TITLE: "デリゲートハーベスティング（委任）",
       PORTAL_HARVESTING_TEXT: "デリゲートハーベスティングは、アカウントが起動していない時間でもリモート・ノードを介して「マイニング（ハーベスト）」を可能にする機能です。",
-      PORTAL_HARVESTING_BTN_1: "リモートアカウントを管理",
-      PORTAL_HARVESTING_BTN_2: "マルチシグリモートアカウントを管理",
       PORTAL_CHANGELLY_TITLE: "Changelly （XEM等の両替サイト）",
       PORTAL_CHANGELLY_TEXT: "最適なレートで XEM を交換できる Changelly ウィジェットを使用できます。",
       PORTAL_CHANGELLY_BTN: "XEM を購入",
@@ -406,7 +402,6 @@ function JapaneseProvider($translateProvider) {
 
       // APOSTILLE HISTORY MODULE
       APOSTILLE_HISTORY_TITLE: "アポスティーユの履歴",
-      //APOSTILLE_HISTORY_BTN_MESSAGE: "更新 / メッセージ",
       APOSTILLE_HISTORY_BTN_TRANSFER: "所有権の譲渡 / 分割",
       APOSTILLE_HISTORY_BACKUP: "公証データのバックアップ",
       APOSTILLE_HISTORY_PURGE: "公証データのパージ",
@@ -457,8 +452,8 @@ function JapaneseProvider($translateProvider) {
       APOSTILLE_AUDIT_ERROR_SIGNATURE: "署名認証に失敗したためエラーが発生しました。",
       APOSTILLE_AUDIT_INFORMATION_1: "監査できるファイルは、<b>アポスティーユ形式（公証済形式）</ b>でなければなりません。",
       APOSTILLE_AUDIT_INFORMATION_2: "ファイル名でそれらを認識できます。",
-      APOSTILLE_AUDIT_NON_SIGNED: "署名なしの例:",
-      APOSTILLE_AUDIT_SIGNED: "署名の例:",
+      //APOSTILLE_AUDIT_NON_SIGNED: "署名なしの例:",
+      //APOSTILLE_AUDIT_SIGNED: "署名の例:",
       APOSTILLE_AUDIT_FILES: "監査ファイル",
 
       // APOSTILLE MESSAGE MODULE
@@ -520,7 +515,6 @@ function JapaneseProvider($translateProvider) {
       ALERT_INVALID_NS_NAME: "ネームスペース名が無効です。",
       ALERT_INVALID_MOSAIC_NAME: "モザイク名が無効です。",
       ALERT_MOSAIC_DESCRIPTION: "モザイクの概要が無効です。",
-      //ALERT_GET_INCOMING_TXES_ERROR: "トランザクションの取り込み中にエラーが起きました。ノードを変更するかネットワーク接続を確認してからもう一度行ってみてください。",
       ALERT_GET_INCOMING_TXES_ERROR: '入力トランザクションの取得エラー, 理由: ',
       ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'モザイク定義の取得エラー, 理由: ',
       ALERT_GET_SUB_NS_ERROR: 'モザイク定義の取得エラー（SUB_NS）, 理由: ',
@@ -563,6 +557,7 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: "署名トランザクションを検証するために必要な最小連署者数",
       AGGREGATE_MODIFICATION_LIST: "修正リスト",
       AGGREGATE_COSIG_LIST: '連署者のリスト',
+
       AGGREGATE_MODIFICATION_EDIT_TITLE: "マルチシグネイチャーコントラクトを編集",
       AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'アカウントの編集',
       AGGREGATE_MODIFICATION_EDIT_SELECT: "編集するアカウントを選択",
@@ -571,6 +566,7 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_MODIFICATION_RELATIVE_CHANGE: "最小署名数の相対変化",
       AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: "\n追加または (n)削除(-n) する署名の数 - 自動除去",
       AGGREGATE_SELECTED_ACCOUNT_INFO: "選択されたアカウントの情報",
+      AGGREGATE_MIN_SIGNATURES: '最小署名者数',
       AGGREGATE_SELECT_WALLET_ACCOUNT: "使用するウォレットアカウント",
 
       // LOGIN MODULE
