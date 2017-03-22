@@ -138,7 +138,7 @@ function JapaneseProvider($translateProvider) {
 
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
-      HOME_RECOMMENDED_BROWSERS: '推奨ブラウザ："
+      HOME_RECOMMENDED_BROWSERS: '推奨ブラウザ：",
 
       // TRANSFER TRANSACTION MODULE
       TRANSFER_TRANSACTION_TITLE: "送受信",
