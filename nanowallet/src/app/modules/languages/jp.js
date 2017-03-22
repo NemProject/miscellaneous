@@ -4,8 +4,8 @@ function JapaneseProvider($translateProvider) {
     $translateProvider.translations('jp', {
 
       // HEADER COMPONENT
-      WALLET_NAME_1: 'ナノ',
-      WALLET_NAME_2: 'ウォレット',
+      WALLET_NAME_1: 'nano',
+      WALLET_NAME_2: 'Wallet',
       APP_NAME_SUB: "NEMプラットフォームに接続するための安全な方法\n(ボランティアによる日本語翻訳版)",
       HEADER_LOGIN_BUTTON: "ログイン",
       HEADER_SIGNUP_BUTTON: "アカウントの作成",
