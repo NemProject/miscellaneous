@@ -63,8 +63,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_AMOUNT: "量",
       GENERAL_MESSAGE: "メッセージ",
       GENERAL_DATE: "日時",
-      GENERAL_TAB_NORMAL: "ノーマル",
-      GENERAL_TAB_SEND: 'Send',
+      GENERAL_TAB_NORMAL: "ノーマル", // こちらは現在使われてない模様
+      GENERAL_TAB_SEND: 'ノーマル', //GENERAL_TAB_NORMAL:だったのが新規にこちらが使われる様になった
       GENERAL_TAB_MULTISIG: "マルチシグ",
       GENERAL_TOTAL: "トータル",
       GENERAL_REMOVE: "削除",
@@ -140,7 +140,7 @@ function JapaneseProvider($translateProvider) {
       HOME_RECOMMENDED_BROWSERS: '推奨ブラウザ：',
 
       // TRANSFER TRANSACTION MODULE
-      TRANSFER_TRANSACTION_TITLE: "送受信",
+      TRANSFER_TRANSACTION_TITLE: "送金と請求",
       TRANSFER_TRANSACTION_NAME: "トランスファートランザクション（通常トランザクション）",
       TRANSFER_TRANSACTION_MULTISIG_NAME: "マルチシグトランスファートランザクション（通常トランザクション）",
       TRANSFER_TRANSACTION_INVOICE: "請求書を作成",
