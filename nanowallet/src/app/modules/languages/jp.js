@@ -26,7 +26,7 @@ function JapaneseProvider($translateProvider) {
       HEADER_NODE_CUSTOM_INFO: "ノードの IP もしくは、ドメイン",
       HEADER_NODE_CUSTOM_TOOLTIP: 'あなた自身のNISノードを入力',
       HEADER_PURGE: "アカウントデータの削除(パージ)",
-      HEADER_PURGE_MESSAGE: "必ずを行った上で実行して下さい。OK をクリックすると、ローカルストレージに登録されているすべてのウォレットが削除(パージ)されます。すべてのウォレットをバックアップしていた場合、残高は安全です（回復にはバックアップファイルの再読み込みが必要になります）。",
+      HEADER_PURGE_MESSAGE: "必ずバックアップを行った上で実行して下さい。OK をクリックすると、ローカルストレージに登録されているすべてのウォレットが削除(パージ)されます。すべてのウォレットをバックアップしていた場合、残高は安全です（回復にはバックアップファイルの再読み込みが必要になります）。",
 
       // FOOTER COMPONENT
       FOOTER_POWERED_BY_1: 'Powered by',
