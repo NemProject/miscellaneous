@@ -387,7 +387,7 @@ function JapaneseProvider($translateProvider) {
 
       // EXPLORER NAMESPACES AND MOSAICS
       EXPLORER_NS_MOS_TITLE: "エクスプローラー - ネームスペースとモザイク",
-      EXPLORER_NS_MOS_SELECT_MOS: "モザイクを選択して詳細を表示",
+      EXPLORER_NS_MOS_SELECT_MOS: "モザイクの詳細",//"モザイクを選択して詳細を表示"だと長過ぎて”イクを選択して詳細を表示”になってしまう
       EXPLORER_NS_MOS_SEARCH: 'ネームスペースの検索',
 
       // EXPLORER APOSTILLES MODULE
