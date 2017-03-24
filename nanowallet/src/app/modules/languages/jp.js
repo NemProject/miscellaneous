@@ -38,7 +38,7 @@ function JapaneseProvider($translateProvider) {
       DASHBOARD_UNCONFIRMED: "未承認",
       DASHBOARD_CONFIRMED: "承認済",
       DASHBOARD_HARVEST_INCOME_TITLE: "直近 25 ブロックのハーベスト収入",
-      DASHBOARD_HARVEST_INCOME_NOTE: "0 手数料のブロックのみ",
+      DASHBOARD_HARVEST_INCOME_NOTE: "ハーベスト報酬0を除いたブロック",
       DASHBOARD_HARVEST_INCOME_MESSAGE: "直近 25 ブロックの手数料なし",
       DASHBOARD_NEWS_TITLE: "最新情報",
       DASHBOARD_HARVESTED_BLOCKS_TITLE: "ハーベストしたブロック",
