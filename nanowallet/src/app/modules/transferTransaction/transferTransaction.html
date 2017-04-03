@@ -14,7 +14,7 @@
           <!-- Title of panel -->
             <span ng-show="!$ctrl.formData.isMultisig && !$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_NAME' | translate }}</span>
             <span ng-show="$ctrl.formData.isMultisig">{{ 'TRANSFER_TRANSACTION_MULTISIG_NAME' | translate }}</span>
-            <span ng-show="$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_INVOICE' | translate }} Receive</span>
+            <span ng-show="$ctrl.invoice">{{ 'TRANSFER_TRANSACTION_INVOICE' | translate }}</span>
           </div>
           <!-- Tabbed modes -->
           <ul class="nav nav-tabs">
@@ -96,8 +96,9 @@
                 <span class="input-group-btn message">
                   <label>{{'FORM_MESSAGE_PLACEHOLDER' | translate}}: </label>
                 </span>
-                <textarea class="form-control" ng-model="$ctrl.formData.message" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateFees();"></textarea>
+                <textarea class="form-control" ng-model="$ctrl.formData.message" placeholder="{{'FORM_MESSAGE_PLACEHOLDER' | translate}}" rows="4" ng-change="$ctrl.updateFees();$ctrl.updateCharCount()" ng-class="$ctrl.charsLeft < 0 ? 'has-error' : ''"></textarea>
               </div>
+              <p style="float:right;margin-top:5px;"><b>{{ 'GENERAL_CHARACTERS_LEFT' | translate }}</b>: {{ $ctrl.charsLeft }}</p>
             </fieldset>
             <!-- Transaction fee calculation section -->
             <fieldset class="form-group">
@@ -120,7 +121,7 @@
             <fieldset class="form-group" ng-show="$ctrl.formData.isMosaicTransfer">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <label class="control-label">Currency: </label>
+                  <label class="control-label">{{ 'GENERAL_CURRENCY' | translate }}: </label>
                 </span>
                 <select class="col-sm-7 form-control" ng-options="mosaicName for mosaicName in $ctrl.currentAccountMosaicNames" ng-model="$ctrl.selectedMosaic" required="required" id="mosaic" ng-disabled="!$ctrl.formData.isMosaicTransfer"></select>
                 <span class="input-group-btn">
@@ -144,8 +145,21 @@
             <div class="row checkboxes">
               <div class="col-sm-6">
                 <fieldset class="form-group">
-                  <input id="box1" type="checkbox" ng-model="$ctrl.formData.encryptMessage" placeholder="" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();">
-                  <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label>
+                  <!-- Checkbox with tooltip -->
+                  <span ng-show="!$ctrl.formData.recipientPubKey.length && !$ctrl.formData.isMultisig" data-toggle="tooltip" data-placement="right" title="{{ 'TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP' | translate }}">
+                    <input id="box1" type="checkbox" ng-model="$ctrl.formData.encryptMessage" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();">
+                    <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label>
+                  </span>
+                  <!-- Checkbox with multisig tooltip -->
+                  <span ng-show="$ctrl.formData.isMultisig" data-toggle="tooltip" data-placement="right" title="{{ 'TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG' | translate }}">
+                    <input id="box1" type="checkbox" ng-model="$ctrl.formData.encryptMessage" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();">
+                    <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label>
+                  </span>
+                  <!-- Checkbox without tooltip -->
+                  <span ng-show="$ctrl.formData.recipientPubKey.length && !$ctrl.formData.isMultisig">
+                    <input id="box1" type="checkbox" ng-model="$ctrl.formData.encryptMessage" ng-disabled="$ctrl.formData.isMultisig || !$ctrl.formData.recipientPubKey.length" ng-change="$ctrl.updateFees();">
+                    <label for="box1">{{'TRANSFER_TRANSACTION_ENCRYPT_MESSAGE' | translate}}</label>
+                  </span>
                 </fieldset>
               </div>
               <div class="col-sm-6">

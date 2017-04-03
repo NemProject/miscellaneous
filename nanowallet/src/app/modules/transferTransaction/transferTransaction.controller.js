@@ -77,6 +77,9 @@ class TransferTransactionCtrl {
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
+        // Character counter
+        this.charsLeft = 1024;
+
         // Object to contain our password & private key data.
         this.common = {
             'password': '',
@@ -118,7 +121,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * generateQRCode() Generate QR using kjua lib
+     * Generate QR using kjua lib
      */
     generateQRCode(text) {
         let qrCode = kjua({
@@ -132,7 +135,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * updateInvoiceQR() Create the QR according to invoice data
+     * Create the QR according to invoice data
      */
     updateInvoiceQR() {
         // Clean input address
@@ -145,7 +148,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * setMosaicTransfer() Set or unset data for mosaic transfer
+     * Set or unset data for mosaic transfer
      */
     setMosaicTransfer() {
         if (this.formData.isMosaicTransfer) {
@@ -173,7 +176,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * processRecipientInput() Process recipient input and get data from network
+     * Process recipient input and get data from network
      * 
      * @note: I'm using debounce in view to get data typed with a bit of delay,
      * it limits network requests
@@ -214,7 +217,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * updateFees() Update transaction fee
+     * Update transaction fee
      */
     updateFees() {
         if(!helpers.isAmountValid(this.rawAmount)) {
@@ -234,7 +237,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * getRecipientData() Get recipient account data from network
+     * Get recipient account data from network
      * 
      * @param address: The recipient address
      */
@@ -255,7 +258,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * getRecipientDataFromAlias() Get recipient account data from network using @alias
+     * Get recipient account data from network using @alias
      * 
      * @param alias: The recipient alias (namespace)
      */
@@ -286,7 +289,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * attachMosaic() Get selected mosaic and push it in mosaics array
+     * Get selected mosaic and push it in mosaics array
      */
     attachMosaic() {
         // increment counter 
@@ -316,7 +319,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * removeMosaic() Remove a mosaic from mosaics array
+     * Remove a mosaic from mosaics array
      * 
      * @param index: Index of mosaic object in the array 
      */
@@ -326,7 +329,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * updateCurrentAccountMosaics() Get current account mosaics names
+     * Get current account mosaics names
      */
     updateCurrentAccountMosaics() {
         //Fix this.formData.multisigAccount error on logout
@@ -352,7 +355,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * resetRecipientData() Reset data stored for recipient
+     * Reset data stored for recipient
      */
     resetRecipientData() {
         // Reset public key data
@@ -366,7 +369,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * resetData() Reset form data
+     * Reset form data
      */
     resetData() {
         this.formData.rawRecipient = '';
@@ -377,7 +380,7 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Build and broadcast the transaction to the network
      */
     send() {
         // Disable send button;
@@ -421,6 +424,17 @@ class TransferTransactionCtrl {
                 this.okPressed = false;
                 this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
             });
+    }
+
+    /**
+     * Update message characters left 
+     */
+    updateCharCount() {
+        if(this.formData.message.length === 0) {
+            this.charsLeft = 1024;
+        } else {
+            this.charsLeft = 1024 - this.formData.message.length;
+        }
     }
 
 }
