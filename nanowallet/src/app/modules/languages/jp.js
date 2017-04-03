@@ -52,7 +52,12 @@ function JapaneseProvider($translateProvider) {
       DASHBOARD_MARKET_INFO_CHANGES_24H: "24 時間",
       DASHBOARD_MARKET_INFO_CHANGES_7D: "7 日間",
       DASHBOARD_MARKET_INFO_NOTE: "<a href=\"http://coinmarketcap.com/\" target=\"_blank\">CoinMarketCap</a> CoinMarketCapのデータは 5 分毎に更新されます。",
-
+      DASHBOARD_NOTICE_1: 'Nano Wallet Beta にようこそ！',
+      DASHBOARD_NOTICE_2: '問題の報告は<a href="https://github.com/NemProject/NanoWallet" target="_blank">こちら</a>へお願いします。',
+      DASHBOARD_NOTICE_3: 'NEMチームは、メインネット上でこのアプリケーションを利用することに起因する、資金の消失について責任を負いません。初めにテストネットにてNanoWalletの操作を行い、利用方法を習得する事をお勧めします。利用者は自身の資金を管理し、秘密鍵のバックアップを行う必要があります。',
+      DASHBOARD_NOTICE_4: 'すべての資金が安全にバックアップされていると確信しない限り、メインネットを使用しないでください。紙に秘密鍵を書き留めて、安全な場所に保管することをお勧めします。さらに、アカウントをLightwallet / NCCにインポートすることもできます。',
+      DASHBOARD_NOTICE_5: 'Thanks for your participation!',
+      
       // GENERAL
       GENERAL_BLOCK: "ブロック",
       GENERAL_BLOCKS: 'ブロック',
@@ -134,7 +139,9 @@ function JapaneseProvider($translateProvider) {
       GENERAL_REGISTER: '登録',
       GENERAL_CREATE: '作成',
       GENERAL_RENEW: '更新',
-
+      GENERAL_CHARACTERS_LEFT: 'Characters left',
+      GENERAL_CURRENCY: 'Currency',
+        
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
       HOME_RECOMMENDED_BROWSERS: '推奨ブラウザ：',
@@ -150,6 +157,8 @@ function JapaneseProvider($translateProvider) {
       TRANSFER_TRANSACTION_ATTACH: "添付",
       TRANSFER_TRANSACTION_MOSAICS_ATTACHED: "添付するモザイク",
       TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: "メッセージを暗号化",
+      TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'ネットワーク上に受信者の公開鍵がありません',
+      TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: "マルチシグアカウントを介した暗号化メッセージはありません",
 
       // TRANSACTION LINES
       LINE_TX_DETAILS_FROM: "送り主（From）",
