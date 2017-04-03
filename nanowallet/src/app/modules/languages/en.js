@@ -52,6 +52,11 @@ function EnglishProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CHANGES_24H: '24h',
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7d',
         DASHBOARD_MARKET_INFO_NOTE: '<a href="http://coinmarketcap.com/" target="_blank">CoinMarketCap</a> data updated every 5 minutes',
+        DASHBOARD_NOTICE_1: 'Welcome to the Nano Wallet Beta!',
+        DASHBOARD_NOTICE_2: 'Please <a href="https://github.com/NemProject/NanoWallet" target="_blank">report issues here</a>',
+        DASHBOARD_NOTICE_3: 'The NEM team is not responsible for any loss of funds due to using this app on the mainnet and we suggest primarily testing on the testnet to familiarize yourself with NanoWallet first. Users are responsible for their funds and having their private keys backed up.',
+        DASHBOARD_NOTICE_4: 'Do not use the mainnet unless you are confident all your funds are securely backed up. We suggest writing down private keys on paper and storing it in a safe place. Additionally, you can import your accounts into Lightwallet/NCC.',
+        DASHBOARD_NOTICE_5: 'Thanks for your participation!',
 
         // GENERAL
         GENERAL_BLOCK: 'Block',
@@ -134,6 +139,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_REGISTER: 'Register',
         GENERAL_CREATE: 'Create',
         GENERAL_RENEW: 'Renew',
+        GENERAL_CHARACTERS_LEFT: 'Characters left',
+        GENERAL_CURRENCY: 'Currency',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -150,6 +157,8 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaics attached',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Encrypt message',
+        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Recipient has no public key visible to the network',
+        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'No encrypted messages via multisig accounts',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'From',
@@ -304,7 +313,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_DELEGATED_PUBLIC: 'Delegated public key',
         ACCOUNT_HARVESTED_BLOCKS: 'Harvested blocks',
         ACCOUNT_START_STOP_HARVESTING: 'Start / Stop delegated harvesting',
-        ACCOUNT_HARVESTING_NOTE: 'If you was already harvesting <b>using Nano</b> and your local storage have been erased, select the node you was using to restore app status. (Your harvesting did not stop).',
+        ACCOUNT_HARVESTING_NOTE: ' If you were already harvesting <b>using Nano</b> and your local storage has been erased, select the node you used to restore the harvesting status in the application. (Your harvesting did not stop).',
         ACCOUNT_HARVESTING_NODE_SELECT: 'Select a node to harvest on',
         ACCOUNT_HARVESTING_START: 'Start delegated harvesting',
         ACCOUNT_HARVESTING_STOP: 'Stop delegated harvesting',
@@ -341,7 +350,7 @@ function EnglishProvider($translateProvider) {
         PORTAL_HARVESTING_TITLE: 'Delegated Harvesting',
         PORTAL_HARVESTING_TEXT: 'Delegated harvesting is the feature that allows "mining" even while your account is closed.',
         PORTAL_CHANGELLY_TITLE: 'Changelly Instant Exchange',
-        PORTAL_CHANGELLY_TEXT: 'Use the Changelly widget to exchange XEM at the best rates !',
+        PORTAL_CHANGELLY_TEXT: 'Use the Changelly widget to buy XEM at the best rates!',
         PORTAL_CHANGELLY_BTN: 'Buy XEM',
         PORTAL_NS_TITLE: 'Namespaces & Subdomains',
         PORTAL_NS_TEXT: 'Namespaces are domain names. Each namespace is unique and authenticates mosaics (assets) issued on it or on its subdomains.',
@@ -354,7 +363,7 @@ function EnglishProvider($translateProvider) {
         PORTAL_APOSTILLE_TEXT: 'Use the NEM Apostille service to create blockchain based notarizations to time stamp, follow and audit file authenticity.',
         PORTAL_APOSTILLE_BTN_1: 'Create',
         PORTAL_APOSTILLE_BTN_2: 'Audit',
-        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
+        PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to addresses to easily keep track of your contacts.',
         PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
 
         // ADDRESS BOOK MODULE
