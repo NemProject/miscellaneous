@@ -230,8 +230,12 @@ class TransferTransactionCtrl {
         let entity = this._Transactions.prepareTransfer(this.common, this.formData, this.mosaicsMetaData);
         if (this.formData.isMultisig) {
             this.formData.innerFee = entity.otherTrans.fee;
+            // Update characters left
+            this.charsLeft = entity.otherTrans.message.payload.length ? 1024 - (entity.otherTrans.message.payload.length / 2) : 1024;
         } else {
              this.formData.innerFee = 0;
+             // Update characters left
+             this.charsLeft = entity.message.payload.length ? 1024 - (entity.message.payload.length / 2) : 1024;
         }
         this.formData.fee = entity.fee;
     }
@@ -424,17 +428,6 @@ class TransferTransactionCtrl {
                 this.okPressed = false;
                 this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
             });
-    }
-
-    /**
-     * Update message characters left 
-     */
-    updateCharCount() {
-        if(this.formData.message.length === 0) {
-            this.charsLeft = 1024;
-        } else {
-            this.charsLeft = 1024 - this.formData.message.length;
-        }
     }
 
 }
