@@ -6,7 +6,7 @@ import Address from '../utils/Address';
 
 let incr = 0;
 
-function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $timeout, $state) {
+function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $timeout, $state, $localStorage) {
     'ngInject';
 
     return {
@@ -169,6 +169,26 @@ function TagTransaction(NetworkRequests, Alert, Wallet, $filter, Transactions, $
                         scope.walletScope.common.privateKey = "";
                         Alert.transactionError('Failed ' + res.data.error + " " + res.data.message);
                     });
+            }
+
+            /**
+             * Return contact label for an address
+             *
+             * @param {string} address - The address to look for
+             *
+             * @return {string|boolean} - The account label or false
+             */
+            scope.getContact = (address) => {
+                if(undefined !== $localStorage.contacts && undefined !== $localStorage.contacts[Wallet.currentAccount.address]) {
+                    let contact = helpers.getContact($localStorage.contacts[Wallet.currentAccount.address], address);
+                    if(!contact) {
+                        return false;
+                    } else {
+                        return contact;
+                    }
+                } else {
+                    return false;
+                }
             }
 
         }

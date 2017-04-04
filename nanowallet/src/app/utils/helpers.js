@@ -370,6 +370,25 @@ let cleanAmount = function(n) {
     return Number(n.toString().replace(/,/g, '.'));
 }
 
+/**
+ * Return contact label for an address
+ *
+ * @param {array} array - An array of contacts
+ * @param {string} address - The address to look for
+ *
+ * @return {string|boolean} - The account label or false
+ */
+let getContact = function(array, address) {
+    if(undefined === address || !array.length) return false;
+    let _address = address.toUpperCase().replace(/-/g, '');
+    for(let i = 0; i < array.length; i++) {
+        if(array[i].address === _address || array[i].address === address) {
+            return array[i].label;
+        }
+    }
+    return false;
+}
+
 module.exports = {
     haveWallet,
     needsSignature,
@@ -391,5 +410,6 @@ module.exports = {
     getTimestampShort,
     convertDateToString,
     isAmountValid,
-    cleanAmount
+    cleanAmount,
+    getContact
 }
