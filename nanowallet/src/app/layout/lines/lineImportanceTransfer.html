@@ -4,10 +4,10 @@
             <td class="importanceTx" style="overflow:hidden;text-overflow: ellipsis;"><tt><span class="fa fa-chain text-danger" ng-show="!parent"></span> <span class="fa fa-chain text-danger" ng-show="parent"></span> {{ 'IMPORTANCE_TRANSFER_NAME' | translate }}</tt></td>
             <td class="amountTx">
                 <span ng-show="!parent">
-                    <strong>{{((tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee) | fmtNemValue)[1]}}</span> XEM
+                    <span style="color:red">-</span> <strong>{{((tx.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
                 <span ng-show="parent">
-                    <strong>{{((tx.fee+parent.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee+parent.fee) | fmtNemValue)[1]}}</span> XEM
+                    <span style="color:red">-</span> <strong>{{((tx.fee+parent.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee+parent.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
                 <div class="row" ng-show="needsSignature">
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
@@ -42,14 +42,14 @@
                     <div class="row">
                         <div class="col-sm-3"><b>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}</b></div>
                         <div class="col-sm-9">
-                            <tt>{{tx.signer | fmtPubToAddress:networkId | fmtAddress}}</tt>
+                            <tt>{{ getContact(tx.signer | fmtPubToAddress:networkId | fmtAddress) || (tx.signer | fmtPubToAddress:networkId | fmtAddress) }}</tt>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-3"><b>{{ 'LINE_TX_DETAILS_ISSUER' | translate }}</b></div>
                         <div class="col-sm-9">
-                            <tt>{{parent.signer | fmtPubToAddress:networkId | fmtAddress}}</tt>
+                            <tt>{{ getContact(parent.signer | fmtPubToAddress:networkId | fmtAddress) || (parent.signer | fmtPubToAddress:networkId | fmtAddress) }}</tt>
                         </div>
                     </div>
 
@@ -102,7 +102,7 @@
                 <div class="row">
                     <div class="col-sm-1">&nbsp;</div>
                     <div class="col-sm-3"><b>{{ 'LINE_TX_DETAILS_COSIGNATORY' | translate }}</b></div>
-                    <div class="col-sm-8">{{sig.signer | fmtPubToAddress:networkId | fmtAddress}}</div>
+                    <div class="col-sm-8">{{ getContact(sig.signer | fmtPubToAddress:networkId | fmtAddress) || (sig.signer | fmtPubToAddress:networkId | fmtAddress) }}</div>
                 </div>
                 <div class="row">
                     <div class="col-sm-1">&nbsp;</div>
