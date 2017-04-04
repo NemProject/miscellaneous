@@ -52,6 +52,11 @@ function ChineseProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CHANGES_24H: '24h',
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7d',
         DASHBOARD_MARKET_INFO_NOTE: '<a href="http://coinmarketcap.com/" target="_blank">CoinMarketCap</a> 数据每5分钟更新一次',
+        DASHBOARD_NOTICE_1: 'Welcome to the Nano Wallet Beta!',
+        DASHBOARD_NOTICE_2: 'Please <a href="https://github.com/NemProject/NanoWallet" target="_blank">report issues here</a>',
+        DASHBOARD_NOTICE_3: 'The NEM team is not responsible for any loss of funds due to using this app on the mainnet and we suggest primarily testing on the testnet to familiarize yourself with NanoWallet first. Users are responsible for their funds and having their private keys backed up.',
+        DASHBOARD_NOTICE_4: 'Do not use the mainnet unless you are confident all your funds are securely backed up. We suggest writing down private keys on paper and storing it in a safe place. Additionally, you can import your accounts into Lightwallet/NCC.',
+        DASHBOARD_NOTICE_5: 'Thanks for your participation!',
 
         // GENERAL
         GENERAL_BLOCK: '块',
@@ -134,6 +139,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_REGISTER: 'Register',
         GENERAL_CREATE: 'Create',
         GENERAL_RENEW: 'Renew',
+        GENERAL_CHARACTERS_LEFT: 'Characters left',
+        GENERAL_CURRENCY: 'Currency',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -150,6 +157,8 @@ function ChineseProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: '附加',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: '马赛克加入完成',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: '加密消息',
+        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Recipient has no public key visible to the network',
+        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'No encrypted messages via multisig accounts',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: '来自',
