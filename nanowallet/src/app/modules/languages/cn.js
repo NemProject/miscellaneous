@@ -141,6 +141,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_RENEW: 'Renew',
         GENERAL_CHARACTERS_LEFT: 'Characters left',
         GENERAL_CURRENCY: 'Currency',
+        GENERAL_EDIT: 'Edit',
+        GENERAL_SEND_XEM: 'Send XEM',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -386,6 +388,7 @@ function ChineseProvider($translateProvider) {
         ADDRESS_BOOK_CONTACT_LABEL: 'Label',
         ADDRESS_BOOK_ACCOUNT_ADDRESS: 'Account address',
         ADDRESS_BOOK_ACTIONS: 'Actions',
+        ADDRESS_BOOK_CONFIRM_DELETE: 'Confirm deletion of address book entry',
 
         // EXPLORER MODULE NAV
         EXPLORER_NAV_HOME: '主页',

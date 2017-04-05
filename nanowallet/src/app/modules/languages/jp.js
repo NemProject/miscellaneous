@@ -141,6 +141,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_RENEW: '更新',
       GENERAL_CHARACTERS_LEFT: 'Characters left',
       GENERAL_CURRENCY: 'Currency',
+      GENERAL_EDIT: 'Edit',
+      GENERAL_SEND_XEM: 'Send XEM',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
@@ -381,6 +383,7 @@ function JapaneseProvider($translateProvider) {
       ADDRESS_BOOK_CONTACT_LABEL: 'ラベル',
       ADDRESS_BOOK_ACCOUNT_ADDRESS: 'アカウントのアドレス',
       ADDRESS_BOOK_ACTIONS: '操作',
+      ADDRESS_BOOK_CONFIRM_DELETE: 'Confirm deletion of address book entry',
 
       // EXPLORER MODULE NAV
       EXPLORER_NAV_HOME: "ホーム",
