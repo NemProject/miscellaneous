@@ -52,13 +52,13 @@
               <td>{{contact.address}}</td>
               <td class="actions row">
                 <div class="col-sm-4 inner">
-                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.transferTransaction(contact.address)">Send XEM</button>
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.transferTransaction(contact.address)">{{ 'GENERAL_SEND_XEM' | translate }}</button>
                 </div>
                 <div class="col-sm-4">
-                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.editContact(contact)">Edit</button>
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.editContact(contact)">{{ 'GENERAL_EDIT' | translate }}</button>
                 </div>
                 <div class="col-sm-4 inner">
-                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.removeContact(contact)">Remove</button>
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.removeContact(contact)">{{ 'GENERAL_REMOVE' | translate }}</button>
                 </div>
               </td>
             </tr>
@@ -146,7 +146,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-sm-12">
-            <h5>Confirm deletion of address book entry*</h5>
+            <h5>{{ 'ADDRESS_BOOK_CONFIRM_DELETE' | translate }}</h5>
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
