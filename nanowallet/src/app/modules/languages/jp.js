@@ -139,10 +139,10 @@ function JapaneseProvider($translateProvider) {
       GENERAL_REGISTER: '登録',
       GENERAL_CREATE: '作成',
       GENERAL_RENEW: '更新',
-      GENERAL_CHARACTERS_LEFT: 'Characters left',
-      GENERAL_CURRENCY: 'Currency',
-      GENERAL_EDIT: 'Edit',
-      GENERAL_SEND_XEM: 'Send XEM',
+      GENERAL_CHARACTERS_LEFT: '残り文字数',
+      GENERAL_CURRENCY: '通貨',
+      GENERAL_EDIT: '編集',
+      GENERAL_SEND_XEM: 'XEMの送金',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
@@ -383,7 +383,7 @@ function JapaneseProvider($translateProvider) {
       ADDRESS_BOOK_CONTACT_LABEL: 'ラベル',
       ADDRESS_BOOK_ACCOUNT_ADDRESS: 'アカウントのアドレス',
       ADDRESS_BOOK_ACTIONS: '操作',
-      ADDRESS_BOOK_CONFIRM_DELETE: 'Confirm deletion of address book entry',
+      ADDRESS_BOOK_CONFIRM_DELETE: 'アドレス帳からこの連絡先を本当に削除しますか？',
 
       // EXPLORER MODULE NAV
       EXPLORER_NAV_HOME: "ホーム",
@@ -431,7 +431,7 @@ function JapaneseProvider($translateProvider) {
       APOSTILLE_PRIVATE: "秘密",
       APOSTILLE_FILENAME: "ファイル名",
       APOSTILLE_NAME_TOO_LONG: "ファイル名が長すぎます。40文字以下にしてください。",
-      APOSTILLE_MAX_NUMBER: "バッチあたりの最大アポスティーユ（公証）は25です。",
+      APOSTILLE_MAX_NUMBER: "バッチあたりの最大アポスティーユ（公証）は25ファイルです。",
       APOSTILLE_INFORMATION_TITLE: '公証の作成',
       APOSTILLE_INFORMATION_1: "アップロードされたファイルはそれぞれ左側のパネルに配置されたオプションを使って自動的に処理されます。新しいファイルを追加したり、パラメーターを変更したり、そしてさらに様々なオプションがついたファイルを加えることもできます。それはマルチシグのタブに切り替えて新しいファイルを追加していくときにも使用することができます。",
       APOSTILLE_INFORMATION_2: "<b>プライベート、譲渡、アップデート可能</b>を選択をすれば、あなたのファイルのハッシュはあなたのプライベートキーで署名され、専用の階層的決定性（HD）アカウントへと送られることになります。このように、あなたがそれを共有しない限り、あなた以外の人間がどのような内容がタイムスタンプされたのかを知ることは不可能です。",
