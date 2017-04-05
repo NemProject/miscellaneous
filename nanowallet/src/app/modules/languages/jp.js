@@ -1,4 +1,4 @@
-unction JapaneseProvider($translateProvider) {
+function JapaneseProvider($translateProvider) {
     'ngInject'
 
     $translateProvider.translations('jp', {
