@@ -100,7 +100,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_TAGS: "タグ",
       GENERAL_SINK: "シンク（受信側）",
       GENERAL_SINK_ADDRESS: 'アドレス（受信側）',
-      GENERAL_STORAGE: 'ストレージ',
+      GENERAL_STORAGE: '保管先',
       GENERAL_REASON: "理由",
       GENERAL_TRANSACTION_HASH: "トランザクションハッシュ",
       GENERAL_TRANSACTION_ID: "トランザクション ID",
