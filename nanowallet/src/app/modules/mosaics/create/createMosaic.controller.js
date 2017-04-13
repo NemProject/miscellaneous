@@ -160,7 +160,7 @@ class createMosaicCtrl {
         if (m.length > 32 || /^\d/.test(m) || /^([_-])/.test(m)) {
             return false;
         }
-        let pattern = /^[a-z0-9.\-_]*$/;
+        let pattern = /^[a-z0-9\-_]*$/;
         // Test if has special chars or space excluding hyphens
         if (pattern.test(m) == false) {
             return false;
