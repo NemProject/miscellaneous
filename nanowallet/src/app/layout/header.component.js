@@ -105,6 +105,7 @@ class AppHeaderCtrl {
      */
     changeLanguage(key) {
         this._$translate.use(key.toString());
+        this._storage.lang = key.toString();
     };
 
     /**

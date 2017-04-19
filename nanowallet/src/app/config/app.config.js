@@ -1,4 +1,4 @@
-function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider, ngToastProvider, $translateProvider) {
+function AppConfig($httpProvider, $stateProvider, $localStorageProvider, $locationProvider, $urlRouterProvider, ngToastProvider, $translateProvider) {
     'ngInject';
 
     /*
@@ -18,7 +18,7 @@ function AppConfig($httpProvider, $stateProvider, $locationProvider, $urlRouterP
         animation: 'fade'
     });
 
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage($localStorageProvider.get('lang') || 'en');
 
 }
 
