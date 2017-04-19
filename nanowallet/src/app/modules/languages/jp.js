@@ -625,7 +625,7 @@ function JapaneseProvider($translateProvider) {
       FAQ_QUESTION_7: "どうすればこのプロジェクトをサポートできますか？",
       FAQ_ANSWER_7: "Nano ウォレットは Gimre氏 の lightwallet をベースに、Quantum_Mechanics が管理しています。lightwallet ソースはこちら",
       FAQ_ANSWER_7_2: "アポスティーユはJabo38と<a href=\"http://apostille.io\">apostille.io</a>ウェブサイト全体で取り組んでいるサービスです。\n<a href=\"https://forum.nem.io/t/nem-apostille-a-nem-notary-system-community-fund-proposal/2001\" target=\"_blank\">Apostille project</a>.",
-      FAQ_ANSWER_7_3: "下記のアドレスに対して、あなたがもし援助てくれるならば、我々は非常に嬉しい限りです( ◠ ◡ ◠ )",
+      FAQ_ANSWER_7_3: "下記のアドレスに対して、あなたがもし援助てくれるならば、我々は非常に嬉しい限りです^_^",
       FAQ_ANSWER_7_4: "Nano ウォレットプロジェクトファンド",
       FAQ_ANSWER_7_5: "アポスティーユ（公証）ファンド",
 
