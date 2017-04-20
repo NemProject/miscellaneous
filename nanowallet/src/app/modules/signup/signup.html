@@ -91,11 +91,6 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_CREATE_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <i class="fa fa-exclamation-triangle"></i> 
-            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <button class="btn btn-success pull-xs-right"
             type="submit" ng-click="$ctrl.createWallet()">
@@ -155,11 +150,6 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_BRAIN_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <i class="fa fa-exclamation-triangle"></i> 
-            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <!-- CONFIRM BUTTON -->
           <button class="btn btn-success pull-xs-right"
@@ -249,11 +239,6 @@
           <p class="bg-info">
             <i class="fa fa-exclamation-triangle"></i>
             <span ng-bind-html="'SIGNUP_PRIVATE_KEY_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <i class="fa fa-exclamation-triangle"></i> 
-            <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING' | translate"></span>
-              <br><br>
-            <span><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate}}</b></span>
           </p>
           <!-- CONFIRM BUTTON -->
           <button class="btn btn-success pull-xs-right"
@@ -268,4 +253,55 @@
   </div>
   <a id="downloadWallet" target="_blank"></a>
 
+</div>
+
+<!-- Modal -->
+<div id="safetyModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:900px;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> {{ 'SIGNUP_COMMON_WALLET_WARNING_TITLE' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <p><i class="fa fa-exclamation-triangle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_1' | translate "></span></p>
+          <hr style="border-color:#444;">
+          <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_2' | translate"></span></p>
+          <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_3' | translate"></span></p>
+          <div class="form-group">
+            <button type="button" class="btn btn-success" ng-click="!$ctrl.showRawWallet ? $ctrl.showRawWallet = true : $ctrl.showRawWallet = false">{{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_1' | translate }}</button>
+          </div>
+          <div ng-show="$ctrl.showRawWallet">
+            <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.rawWallet }}</code></pre>
+            <p class="bg-info"><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO' | translate"></span></p>
+            <hr style="border-color:#444;">
+         </div>
+          <p> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_4' | translate"></span></p>
+          <div class="form-group">
+           <button type="button" class="btn btn-success" ng-click="!$ctrl.showWalletPrivateKey ? $ctrl.showWalletPrivateKey = true : $ctrl.showWalletPrivateKey = false;">{{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_2' | translate }}</button>
+          </div>
+           <div ng-show="$ctrl.showWalletPrivateKey">
+            <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.walletPrivateKey }}</code></pre>
+            <p class="bg-info"><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO' | translate"></span></p>
+            <hr style="border-color:#444;">
+          </div>
+          <hr style="border-color:#444;" ng-show="!$ctrl.showWalletPrivateKey">
+          <p><i class="fa fa-exclamation-triangle"></i> {{ 'SIGNUP_COMMON_WALLET_WARNING_5' | translate }}</p>
+          <br>
+          <fieldset class="row checkboxes text-center form-group">
+            <input type="checkbox" id="box1" ng-model="$ctrl.haveWalletFile">
+            <label class="checkbox-inline" for="box1"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1' | translate }}</b></label>
+            <input type="checkbox" id="box2" ng-model="$ctrl.havePrivateKeySaved">
+            <label class="checkbox-inline" for="box2"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2' | translate }}</b></label> 
+          </fieldset>
+          <br>
+         <p class="text-center"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate }}</b></p>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" ng-disabled="!$ctrl.haveWalletFile || !$ctrl.havePrivateKeySaved" ng-click="$ctrl.redirect()">{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3' | translate }}</button>
+      </div>
+    </div>
+
+  </div>
 </div>
