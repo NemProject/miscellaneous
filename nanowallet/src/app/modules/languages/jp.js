@@ -618,7 +618,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記の警告を読み、理解したことに同意したことになります.',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: '私はウォレットファイルを適切にバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '私は秘密鍵を適切にバックアップしました',
-      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解しました',
+      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容に同意しました',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",
