@@ -8,7 +8,7 @@ import Network from '../../../utils/Network';
 import convert from '../../../utils/convert';
 
 class CreateApostilleCtrl {
-    constructor(DataBridge, Wallet, Alert, Transactions, $timeout, $location, $filter, $q) {
+    constructor(DataBridge, Wallet, Alert, Transactions, $timeout, $location, $filter, $q, $localStorage) {
         'ngInject';
 
         // DataBidge service
@@ -27,12 +27,20 @@ class CreateApostilleCtrl {
         this._$filter = $filter;
         // Promises
         this._$q = $q;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
             this._Alert.noWalletLoaded();
             this._location.path('/');
             return;
+        }
+
+        this.contacts = []
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
         }
 
         // Apostille hashing info array

@@ -39,7 +39,7 @@
                 <label for="namespaceParent" class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
               </span>
               <!-- Update account mosaics on change -->
-              <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountMosaics();$ctrl.updateCurrentAccountNS();$ctrl.setMessage();$ctrl.setMosaicTransfer();"></select>
+              <select class="form-control" ng-options="(acc.address | fmtContact:$ctrl.contacts) for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountMosaics();$ctrl.updateCurrentAccountNS();$ctrl.setMessage();$ctrl.setMosaicTransfer();"></select>
             </div>
           </fieldset>
           <!-- MULTISIG ACCOUNT BALANCE -->
@@ -88,7 +88,7 @@
           <fieldset class="form-group" ng-show="$ctrl.addNamespace">
             <div class="input-group">
               <span class="input-group-btn">
-                <label>{{'APOSTILLE_NTY_ACCOUNT' | translate}}</label>
+                <label>{{'GENERAL_NAMESPACE' | translate}}</label>
               </span>
               <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues" ng-model="$ctrl.namespaceParent" ng-change="$ctrl.setMessage();"></select>
             </div>
