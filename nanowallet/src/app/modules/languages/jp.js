@@ -608,16 +608,16 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_TITLE: 'アカウントを安全に使用する為に!',
       SIGNUP_COMMON_WALLET_WARNING_1: 'ウォレットはブラウザのローカルストレージに<b><u>一時的に</u></b>保存されます。ブラウザは、任意のアドオン等によりローカルストレージがクリアしてしまう事があります。 これはデータの損失につながり、簡単に取り消すことはできません。 あなたのウォレットが消去された時の為に、あなたのアカウントを復元する為の必要な情報がすべて揃っていることを確認することが非常に重要です。',
       SIGNUP_COMMON_WALLET_WARNING_2: 'ウォレットを作成した後、ダウンロードが開始されます。バックアップとして使用され、ブラウザのローカルストレージが消去された場合にインポートする<b><i>.wlt</i></b>ファイルです。',
-      SIGNUP_COMMON_WALLET_WARNING_3: 'バックアップ<b><i>.wlt</i></b>ファイルがない場合は、下のボタンをクリックして生のウォレットデータを表示し、ファイルを手動で作成します。',
-      SIGNUP_COMMON_WALLET_WARNING_4: 'ウォレットファイルを持っていても、アカウントの秘密鍵をバックアップすることは<b><u>必須</u></b>であり、下のボタンをクリックすると表示されます。',
+      SIGNUP_COMMON_WALLET_WARNING_3: 'バックアップ<b><i>.wlt</i></b>ファイルがない場合は、下のボタンをクリックしてウォレットデータを表示し、ファイルを手動で作成します。',
+      SIGNUP_COMMON_WALLET_WARNING_4: 'ウォレットファイルを持っていても、アカウントの秘密鍵のバックアップは<b><u>必修</u></b>です。下記ボタンをクリックすると表示されます。',
       SIGNUP_COMMON_WALLET_WARNING_5: 'あなたの秘密鍵がバックアップされていることを確認した後に、あなたのアカウントにあなたの責任において資金を送金してください。',
-      SIGNUP_COMMON_WALLET_WARNING_BTN_1: '生のウォレットファイルの表示',
+      SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'ウォレットファイルの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'ウォレットファイルを作成するには、空のテキストファイルを作成し、上記のBase64で作成されたキーを記入します。<br>ファイルを<b><i>yourWalletName.wlt</i></b>という名前で保存し、インポートすることができます。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'プライベートキーの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: '秘密鍵をバックアップするには、テキストファイルに保存して印刷するか、安全な場所に書き込んでください。 <br>秘密鍵はオフラインで保存することをお勧めします。',
       SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記全ての警告を読み理解し同意したことになります。',
-      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: '私はウォレットファイルを責任をもってバックアップしました',
-      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '私は秘密鍵を責任をもってバックアップしました',
+      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルを責任をもってバックアップしました',
+      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵を責任をもってバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
 
       // FAQ MODULE
