@@ -382,7 +382,8 @@ let getContact = function(array, address) {
     if(undefined === address || !array.length) return false;
     let _address = address.toUpperCase().replace(/-/g, '');
     for(let i = 0; i < array.length; i++) {
-        if(array[i].address === _address || array[i].address === address) {
+        let contactAddress = array[i].address.toUpperCase().replace(/-/g, '');
+        if(contactAddress === _address) {
             return array[i].label;
         }
     }

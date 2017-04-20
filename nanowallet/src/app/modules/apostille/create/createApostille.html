@@ -37,7 +37,7 @@
               <span class="input-group-btn">
                 <label>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}:</label>
               </span>
-              <select class="form-control" ng-options="acc.address for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount"></select>
+              <select class="form-control" ng-options="(acc.address | fmtContact:$ctrl.contacts) for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount"></select>
             </div>
           </fieldset>
           <!-- MULTISIG ACCOUNT BALANCE -->

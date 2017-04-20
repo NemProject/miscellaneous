@@ -2,7 +2,7 @@ import CryptoHelpers from '../../../utils/CryptoHelpers';
 import Sinks from '../../../utils/sinks';
 
 class editMosaicCtrl {
-    constructor($location, Wallet, Alert, Transactions, DataBridge) {
+    constructor($location, Wallet, Alert, Transactions, DataBridge, $localStorage) {
         'ngInject';
 
         // Alert service
@@ -15,6 +15,8 @@ class editMosaicCtrl {
         this._Transactions = Transactions;
         // DataBridge service
         this._DataBridge = DataBridge;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -42,6 +44,12 @@ class editMosaicCtrl {
         this.currentAccountMosaicNames = '';
         // Selected mosaic from view
         this.selectedMosaic = '';
+
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
+        }
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
