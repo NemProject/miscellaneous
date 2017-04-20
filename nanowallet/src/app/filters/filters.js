@@ -366,6 +366,29 @@ let btcFormat = function() {
     }
 }
 
+/**
+* Change an address to contact label if exists in address book
+*
+* @param {string} address - An address
+* @param {array} contacts - An array of contacts
+*
+* @return {string} - The contact label or address if not found
+*/
+let fmtContact = function() {
+    return function(address, contacts) {
+        if(undefined !== contacts && undefined !== address) {
+            let contact = helpers.getContact(contacts, address);
+            if(!contact) {
+                return address;
+            } else {
+                return contact;
+            }
+        } else {
+            return address;
+        }
+    }
+}
+
 module.exports = {
     toNetworkName,
     htmlSafe,
@@ -387,5 +410,6 @@ module.exports = {
     fmtAddress,
     toHostname,
     currencyFormat,
-    btcFormat
+    btcFormat,
+    fmtContact
 }

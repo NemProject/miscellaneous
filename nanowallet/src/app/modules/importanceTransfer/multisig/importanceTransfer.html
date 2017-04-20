@@ -32,7 +32,7 @@
               <span class="input-group-btn">
                 <label>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}: </label>
               </span>
-              <select class="form-control" ng-options="account as account.address for (index, account) in $ctrl._DataBridge.accountData.meta.cosignatoryOf" ng-model="$ctrl.formData.multisigAccount" ng-disabled="!$ctrl.common.password.length" ng-change="$ctrl.generateData()">
+              <select class="form-control" ng-options="(acc.address | fmtContact:$ctrl.contacts) for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-disabled="!$ctrl.common.password.length" ng-change="$ctrl.generateData()">
                 <option value="" disabled selected> {{'IMPORTANCE_TRANSFER_MULTISIG_SELECT' | translate}}</option>
               </select>
             </div>

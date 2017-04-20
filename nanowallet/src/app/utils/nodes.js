@@ -12,7 +12,7 @@ let defaultTestnetNode = 'http://bob.nem.ninja:7778';
  *
  * @type {string}
  */
-let defaultMainnetNode = 'http://alice6.nem.ninja:7778';
+let defaultMainnetNode = 'http://bigalice3.nem.ninja:7778';
 
 /**
  * The default mijin node

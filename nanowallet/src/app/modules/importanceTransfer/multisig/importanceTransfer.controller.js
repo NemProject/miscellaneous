@@ -53,6 +53,12 @@ class MultisigImportanceTransferCtrl {
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
+        }
+
         // To store multisig account data 
         this.multisigData = '';
 

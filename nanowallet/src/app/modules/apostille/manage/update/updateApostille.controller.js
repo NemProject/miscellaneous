@@ -7,7 +7,7 @@ import Nty from '../../../../utils/nty';
 import Network from '../../../../utils/Network';
 
 class UpdateApostilleCtrl {
-    constructor(DataBridge, Wallet, Alert, Transactions, $timeout, $location, $filter, $q, $stateParams) {
+    constructor(DataBridge, Wallet, Alert, Transactions, $timeout, $location, $filter, $q, $stateParams, $localStorage) {
         'ngInject';
 
         // DataBidge service
@@ -28,6 +28,8 @@ class UpdateApostilleCtrl {
         this._$q = $q;
         // State parameters
         this._$stateParams = $stateParams;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -66,6 +68,12 @@ class UpdateApostilleCtrl {
             name: this._$filter('translate')('APOSTILLE_KEEP_PRIVATE'),
             value: true
         }]
+
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
+        }
 
         /**
          * Default apostille properties

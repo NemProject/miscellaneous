@@ -86,7 +86,7 @@ class TransferTransactionCtrl {
             'privateKey': '',
         };
 
-        this.contacts = []
+        this.contacts = [];
 
         if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
             this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]

@@ -30,6 +30,14 @@ class SignupCtrl {
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
+        // Force users to confirm they have account keys safe
+        this.haveWalletFile = false;
+        this.havePrivateKeySaved = false;
+
+        // Wallet data to show
+        this.rawWallet = "";
+        this.walletPrivateKey = "";
+
         this.formData = {};
 
         // Wallet types
@@ -128,14 +136,34 @@ class SignupCtrl {
                             // On success concat new wallet to local storage wallets
                             this._storage.wallets = this._storage.wallets.concat(wallet);
                             this._Alert.createWalletSuccess();
-                            // Reset form data
-                            this.formData = "";
                             // Trigger download
                             this.download(wallet);
-                            console.log(this._storage.wallets);
+                            // Set wallet data for view
+                            this.rawWallet = this.encodeWallet(wallet);
+                            // We need private key so we create a common object with the wallet password
+                            let common = { "password": this.formData.password, "privateKey": "" };
+                            // Decrypt account private key
+                            if(!CryptoHelpers.passwordToPrivatekeyClear(common, wallet.accounts[0], wallet.accounts[0].algo, true)) {
+                                this.walletPrivateKey = "Cannot get the private key..";
+                            } else if (!CryptoHelpers.checkAddress(common.privateKey, wallet.accounts[0].network, wallet.accounts[0].address)) {
+                                this._Alert.invalidPassword();
+                                this.walletPrivateKey = "Wallet address does not correspond to decrypted private key..";
+                                // Enable send button
+                                this.okPressed = false;
+                                return;
+                            } else {
+                                // Set the decrypted private key 
+                                this.walletPrivateKey = common.privateKey;
+                            }
+                            // Unlock button
                             this.okPressed = false;
-                            // Redirect to login
-                            this._$state.go("app.login");
+                            // Reset form data
+                            this.formData = "";
+                            // Open modal and force user to backup data
+                            $('#safetyModal').modal({
+                              backdrop: 'static',
+                              keyboard: false
+                            }); 
                         }
                     }, 10);
                 },
@@ -176,14 +204,20 @@ class SignupCtrl {
                             // On success concat new wallet to local storage wallets
                             this._storage.wallets = this._storage.wallets.concat(wallet);
                             this._Alert.createWalletSuccess();
-                            // Reset form data
-                            this.formData = "";
                             // Trigger download
                             this.download(wallet)
-                            console.log(this._storage.wallets);
+                            // Set wallet data for view
+                            this.rawWallet = this.encodeWallet(wallet);
+                            this.walletPrivateKey = CryptoHelpers.derivePassSha(this.formData.password, 6000).priv;
+                            // Unlock button
                             this.okPressed = false;
-                            // Redirect to login
-                            this._$state.go("app.login");
+                            // Reset form data
+                            this.formData = "";
+                            // Open modal and force user to backup data
+                            $('#safetyModal').modal({
+                              backdrop: 'static',
+                              keyboard: false
+                            }); 
                         }
                     }, 10);
                 },
@@ -229,14 +263,20 @@ class SignupCtrl {
                             // On success concat new wallet to local storage wallets
                             this._storage.wallets = this._storage.wallets.concat(wallet);
                             this._Alert.createWalletSuccess();
-                            // Reset form data
-                            this.formData = "";
                             // Trigger download
                             this.download(wallet)
-                            console.log(this._storage.wallets);
+                            // Set wallet data for view
+                            this.rawWallet = this.encodeWallet(wallet);
+                            this.walletPrivateKey = this.formData.privateKey;
+                            // Unlock button
                             this.okPressed = false;
-                            // Redirect to login
-                            this._$state.go("app.login");
+                            // Reset form data
+                            this.formData = "";
+                            // Open modal and force user to backup data
+                            $('#safetyModal').modal({
+                              backdrop: 'static',
+                              keyboard: false
+                            }); 
                         }
                     }, 10);
                 },
@@ -259,6 +299,23 @@ class SignupCtrl {
                 this._Alert.invalidPrivateKey();
             }
         }
+    }
+
+    /**
+     * Redirect to login page
+     */
+    redirect() {
+        this._$state.go("app.login");
+    }
+
+    /**
+     * Encode a wallet object to base 64
+     */
+    encodeWallet(wallet) {
+        // Wallet object string to word array
+        var wordArray = CryptoJS.enc.Utf8.parse(JSON.stringify(wallet));
+        // Word array to base64
+        return CryptoJS.enc.Base64.stringify(wordArray);
     }
 
 }

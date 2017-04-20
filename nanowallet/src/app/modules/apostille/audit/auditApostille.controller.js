@@ -85,8 +85,8 @@ class AuditApostilleCtrl {
      * @param $fileData: Meta data of the file
      */
     processFile($fileContent, $fileData) {
-        console.log($fileContent);
-        console.log($fileData);
+        //console.log($fileContent);
+        //console.log($fileData);
 
         this.isProcessing = true;
 

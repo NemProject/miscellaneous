@@ -5,7 +5,7 @@ import Network from '../../../../utils/Network';
 import KeyPair from '../../../../utils/KeyPair';
 
 class ApostilleMessageCtrl {
-    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $stateParams) {
+    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $stateParams, $localStorage) {
         'ngInject';
 
         // Alert service
@@ -22,6 +22,8 @@ class ApostilleMessageCtrl {
         this._DataBridge = DataBridge;
         // State parameters
         this._$stateParams = $stateParams;
+        //Local storage
+        this._storage = $localStorage;
 
         // If no wallet show alert and redirect to home
         if (!this._Wallet.current) {
@@ -58,6 +60,12 @@ class ApostilleMessageCtrl {
 
         // Invoice mode not active by default
         this.invoice = false;
+
+        this.contacts = [];
+
+        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
+            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
+        }
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
