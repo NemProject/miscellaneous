@@ -58,6 +58,7 @@ const requires = [
     'app.transferTransaction',
     'app.createMultisig',
     'app.editMultisig',
+    'app.signMultisig',
     'app.namespaces',
     'app.renewNamespaces',
     'app.createMosaic',

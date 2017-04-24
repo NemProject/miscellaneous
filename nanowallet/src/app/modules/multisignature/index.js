@@ -22,4 +22,15 @@ editMultisigModule.config(EditMultisigConfig);
 import EditMultisigCtrl from './edit/editMultisig.controller';
 editMultisigModule.controller('EditMultisigCtrl', EditMultisigCtrl);
 
+// Create the module where our functionality can attach to
+let signMultisigModule = angular.module('app.signMultisig', []);
+
+// Include our UI-Router config settings
+import SignMultisigConfig from './sign/sign.config';
+signMultisigModule.config(SignMultisigConfig);
+
+// Controllers
+import SignMultisigCtrl from './sign/sign.controller';
+signMultisigModule.controller('SignMultisigCtrl', SignMultisigCtrl);
+
 export default createMultisigModule;
