@@ -352,6 +352,7 @@ function ChineseProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: '多重签名账户中提供可编辑的链上协议，是存储资金，实现共有账户的最佳实现方式',
         PORTAL_MULTISIG_BTN_1: '转换账户为多重签名',
         PORTAL_MULTISIG_BTN_2: '编辑已有协议',
+        PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: '委托收获',
         PORTAL_HARVESTING_TEXT: '委托收获是可以实现远程在线“挖矿”而不必保持原账号开启的途径',
         PORTAL_HARVESTING_BTN_1: '管理远程账户',
@@ -585,6 +586,9 @@ function ChineseProvider($translateProvider) {
         AGGREGATE_SELECTED_ACCOUNT_INFO: '已选账户信息',
         AGGREGATE_MIN_SIGNATURES: '最少签名数',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Use wallet account',
+
+        // SIGN MULTISIGNATURE TRANSACTIONS
+        SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
 
         // LOGIN MODULE
         LOGIN_MEMBER_TITLE: '已经是NEMber ？',

@@ -351,6 +351,7 @@ function PolishProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: 'Konta z multipodpisem to edytowalne kontrakty oparte na łańcuchu bloków, są najlepszym sposobem zabezpieczenia środków finansowych, umożliwiają wspólne rachunki i są podstawą DAO.',
         PORTAL_MULTISIG_BTN_1: 'Konwertuj na konto z multipodpisem',
         PORTAL_MULTISIG_BTN_2: 'Edytuj istniejący kontrakt',
+        PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: 'Delegowany Harvesting',
         PORTAL_HARVESTING_TEXT: 'Delegowane zbieranie to cecha, która umożliwia "mining" nawet kiedy Twoje konto jest zamknięte.',
         PORTAL_CHANGELLY_TITLE: 'Changelly Szybka Giełda',
@@ -583,6 +584,9 @@ function PolishProvider($translateProvider) {
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Informacja o wybranym koncie',
         AGGREGATE_MIN_SIGNATURES: 'Minimum sygnatur',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Użyj portfela konta',
+
+        // SIGN MULTISIGNATURE TRANSACTIONS
+        SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
 
         // LOGIN MODULE
         LOGIN_MEMBER_TITLE: 'Jesteś już członkiem NEM ?',

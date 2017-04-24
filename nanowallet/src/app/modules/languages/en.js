@@ -47,7 +47,7 @@ function EnglishProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CAP: 'Market cap',
         DASHBOARD_MARKET_INFO_PRICE: 'Price',
         DASHBOARD_MARKET_INFO_VOLUME: '24h volume',
-        DASHBOARD_MARKET_INFO_CHANGES: 'Percentage change',
+        DASHBOARD_MARKET_INFO_CHANGES: 'Percentage change (24h)',
         DASHBOARD_MARKET_INFO_CHANGES_1H: '1h',
         DASHBOARD_MARKET_INFO_CHANGES_24H: '24h',
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7d',
@@ -349,6 +349,7 @@ function EnglishProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: 'Multisig accounts are editable on-chain contracts, the most powerful way to secure funds, enable joint accounts, and are the foundation of DAO’s.',
         PORTAL_MULTISIG_BTN_1: 'Convert an account to multisig',
         PORTAL_MULTISIG_BTN_2: 'Edit existing contract',
+        PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: 'Delegated Harvesting',
         PORTAL_HARVESTING_TEXT: 'Delegated harvesting is the feature that allows "mining" even while your account is closed.',
         PORTAL_CHANGELLY_TITLE: 'Changelly Instant Exchange',
@@ -580,6 +581,9 @@ function EnglishProvider($translateProvider) {
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Selected account information',
         AGGREGATE_MIN_SIGNATURES: 'Min signatures',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Use wallet account',
+
+        // SIGN MULTISIGNATURE TRANSACTIONS
+        SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
 
         // LOGIN MODULE
         LOGIN_MEMBER_TITLE: 'Already a NEMber ?',

@@ -349,6 +349,7 @@ function RussianProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: 'Мультиподписные аккаунты являются редактируемыми контрактами, основаными на цепочке блоков. Они являются самым мощным средством финансовой защиты, позволяющие нескольким пользователям совместно управлять учётной записью.',
         PORTAL_MULTISIG_BTN_1: 'Конвертировать аккаунт в мультиподписной',
         PORTAL_MULTISIG_BTN_2: 'Редактировать существующий контракт',
+        PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: 'Делегированный сбор блоков',
         PORTAL_HARVESTING_TEXT: 'Делегированный сбор блоков позволяет «майнить», даже когда Ваш аккаунт закрыт.',
         PORTAL_CHANGELLY_TITLE: 'Changelly - мгновенный обмен',
@@ -579,6 +580,9 @@ function RussianProvider($translateProvider) {
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Номера подписей для добавления (n) или удаления (-n) - автоматическое удаление',
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Информакция о выбранном аккаунте',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Использовать текущий аккаунт кошелька',
+
+        // SIGN MULTISIGNATURE TRANSACTIONS
+        SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
 
         // LOGIN MODULE
         LOGIN_MEMBER_TITLE: 'Вход в кошелёк',
