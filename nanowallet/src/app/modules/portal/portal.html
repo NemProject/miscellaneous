@@ -31,6 +31,8 @@
             <button class="btn"  ui-sref="app.createMultisig">{{ 'PORTAL_MULTISIG_BTN_1' | translate }}</button>
             <br>
             <button class="btn" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</button>
+            <br>
+            <button class="btn"  ui-sref="app.signMultisig">{{ 'PORTAL_MULTISIG_BTN_3' | translate }}</button>
           </div>
         </div>
 
@@ -181,10 +183,10 @@
           <div class="col-md-6 col-sm-3 ticker header">
             {{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:
             <br>
-            <span ng-style="$ctrl._DataBridge.marketInfo.percentChange < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percentChange > 0" style="color:green;"></span>
-              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percentChange < 0" style="color:red;"></span>
-              {{$ctrl._DataBridge.marketInfo.percentChange | currencyFormat}} %
+            <span ng-style="$ctrl._DataBridge.marketInfo.percentChange * 100 < 0 ? { 'color': 'red'} : { 'color': 'green'}">
+              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percentChange * 100 > 0" style="color:green;"></span>
+              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percentChange * 100 < 0" style="color:red;"></span>
+              {{$ctrl._DataBridge.marketInfo.percentChange * 100 | currencyFormat}} %
             </span>
           </div>
         </div>
