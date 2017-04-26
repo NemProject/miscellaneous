@@ -349,7 +349,7 @@ function JapaneseProvider($translateProvider) {
       PORTAL_MULTISIG_TEXT: "NEMのマルチシグは編集可能なオンチェーンのコントラクトであり、連署アカウントを有効にすることで最も強力な資金保護方法にもなり、非中央集権型組織の基盤にもなります。",
       PORTAL_MULTISIG_BTN_1: "アカウントをマルチシグに変更",
       PORTAL_MULTISIG_BTN_2: "既存コントラクトを編集",
-      PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
+      PORTAL_MULTISIG_BTN_3: 'マルチシグトランザクションの署名',
       PORTAL_HARVESTING_TITLE: "デリゲートハーベスティング（委任）",
       PORTAL_HARVESTING_TEXT: "デリゲートハーベスティングは、アカウントが起動していない時間でもリモート・ノードを介して「マイニング（ハーベスト）」を可能にする機能です。",
       PORTAL_CHANGELLY_TITLE: "Changelly （XEM等の両替サイト）",
@@ -372,7 +372,7 @@ function JapaneseProvider($translateProvider) {
       // ADDRESS BOOK MODULE
       ADDRESS_BOOK_TITLE: 'アドレス帳',
       ADDRESS_BOOK_LIST: '連絡先',
-      ADDRESS_BOOK_NAVIGATION: 'Navigation',
+      ADDRESS_BOOK_NAVIGATION: 'ナビゲーション',
       ADDRESS_BOOK_NEW: '新規',
       ADDRESS_BOOK_EDIT: '編集',
       ADDRESS_BOOK_REMOVE: '削除',
@@ -583,7 +583,7 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_SELECT_WALLET_ACCOUNT: "使用するウォレットアカウント",
 
       // SIGN MULTISIGNATURE TRANSACTIONS
-      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
+      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションへの署名',
 
       // LOGIN MODULE
       LOGIN_MEMBER_TITLE: "あなたはNEMberですか？",
