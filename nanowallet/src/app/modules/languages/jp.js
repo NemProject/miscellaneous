@@ -583,7 +583,7 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_SELECT_WALLET_ACCOUNT: "使用するウォレットアカウント",
 
       // SIGN MULTISIGNATURE TRANSACTIONS
-      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションへの署名',
+      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションの署名',
 
       // LOGIN MODULE
       LOGIN_MEMBER_TITLE: "あなたはNEMberですか？",
