@@ -372,7 +372,7 @@ function JapaneseProvider($translateProvider) {
       // ADDRESS BOOK MODULE
       ADDRESS_BOOK_TITLE: 'アドレス帳',
       ADDRESS_BOOK_LIST: '連絡先',
-      ADDRESS_BOOK_NAVIGATION: 'Navigation',
+      ADDRESS_BOOK_NAVIGATION: 'ナビゲーション',
       ADDRESS_BOOK_NEW: '新規',
       ADDRESS_BOOK_EDIT: '編集',
       ADDRESS_BOOK_REMOVE: '削除',
