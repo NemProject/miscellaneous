@@ -427,7 +427,28 @@ export default class Alert {
 
     errorGetBtcPrice() {
         this._ngToast.create({
-            content:'Error while trying to fetch Bitcoin price',
+            content: this._$filter("translate")("ALERT_BTC_MARKET_ERROR"),
+            className: 'danger'
+        });
+    }
+
+    errorMultisigMinSignature() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_MULTISIG_MIN_SIGNATURE"),
+            className: 'danger'
+        });
+    }
+
+    cosignatoryRemovalLimit() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_COSIG_REMOVAL_LIMIT"),
+            className: 'danger'
+        });
+    }
+
+    errorMultisigMinSignatureInvalid() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_MULTISIG_MIN_SIGNATURE_INVALID"),
             className: 'danger'
         });
     }

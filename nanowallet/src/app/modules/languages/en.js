@@ -143,6 +143,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_CURRENCY: 'Currency',
         GENERAL_EDIT: 'Edit',
         GENERAL_SEND_XEM: 'Send XEM',
+        GENERAL_ACTIVE: 'Active',
+        GENERAL_INACTIVE: 'Inactive',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -217,7 +219,8 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
-        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',  
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
+        IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',    
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Create a mosaic',
@@ -315,7 +318,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_DELEGATED_PUBLIC: 'Delegated public key',
         ACCOUNT_HARVESTED_BLOCKS: 'Harvested blocks',
         ACCOUNT_START_STOP_HARVESTING: 'Start / Stop delegated harvesting',
-        ACCOUNT_HARVESTING_NOTE: ' If you were already harvesting <b>using Nano</b> and your local storage has been erased, select the node you used to restore the harvesting status in the application. (Your harvesting did not stop).',
+        ACCOUNT_HARVESTING_NOTE: 'The node used to harvest is stored in <b>browser local storage</b>. If it is erased the app won\'t know which node you were using and therefore the <b>harvesting status</b> will show <b>inactive</b>. In this case, select the node you were using and it will restore the harvesting status automatically. If status is not restored, check if you have selected the right node, otherwise, it means that the node have been rebooted and your account is not harvesting anymore.',
         ACCOUNT_HARVESTING_NODE_SELECT: 'Select a node to harvest on',
         ACCOUNT_HARVESTING_START: 'Start delegated harvesting',
         ACCOUNT_HARVESTING_STOP: 'Stop delegated harvesting',
@@ -540,6 +543,10 @@ function EnglishProvider($translateProvider) {
         ALERT_FILE_SIZE_ERROR: ' is too big, maximum size allowed is 100 MB',
         ALERT_MESSAGE_DECODE_KEY_ERROR: 'Message decryption failed because an account has no public key visible on the network',
         ALERT_FETCH_TIME_SYNC_ERROR: 'An error occured at fetching network time !',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
+        ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
+        ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
+        ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -613,6 +620,7 @@ function EnglishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_3: 'If you don\'t get a backup <b><i>.wlt</i></b> file, click on button below to reveal the raw wallet data and create the file manually:',
         SIGNUP_COMMON_WALLET_WARNING_4: 'Even if you have a wallet file it is <b><u>mandatory</u></b> to backup your account\'s private key, click on button below to reveal it:',
         SIGNUP_COMMON_WALLET_WARNING_5: 'It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Show raw wallet file',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'To make a wallet file, create an empty text file and put the above base 64 key into it. <br>Save the file as <b><i>yourWalletName.wlt</i></b> and it can now be imported.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Show private key',
