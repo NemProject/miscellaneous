@@ -143,8 +143,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_CURRENCY: '通貨',
       GENERAL_EDIT: '編集',
       GENERAL_SEND_XEM: 'XEMの送金',
-      GENERAL_ACTIVE: 'Active',
-      GENERAL_INACTIVE: 'Inactive',
+      GENERAL_ACTIVE: '有効',
+      GENERAL_INACTIVE: '無効',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
@@ -220,7 +220,7 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください。",
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
-      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
+      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベストの状況',
 
       // CREATE MOSAIC MODULE
       MOSAIC_DEFINITION_TITLE: "モザイクを作成",
@@ -543,10 +543,10 @@ function JapaneseProvider($translateProvider) {
       ALERT_FILE_SIZE_ERROR: ' が大きすぎます。最大サイズは100MBです。',
       ALERT_MESSAGE_DECODE_KEY_ERROR: 'アカウントの公開鍵がネットワーク上にないため、メッセージの暗号化に失敗しました。',
       ALERT_FETCH_TIME_SYNC_ERROR: 'ネットワークから時刻を取得中にエラーが発生しました!',
-      ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
-      ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
-      ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
-      ALERT_MULTISIG_MIN_SIGNATURE: 'Invalid number of minimum signatures',
+      ALERT_MULTISIG_MIN_SIGNATURE: 'マルチシグアカウントは、最低1名の署名者が必要です',
+      ALERT_BTC_MARKET_ERROR: 'Bitcoinの価格の取得に失敗しました',
+      ALERT_COSIG_REMOVAL_LIMIT: '一度に削除できる署名者は1名だけです',
+      ALERT_MULTISIG_MIN_SIGNATURE: '最小署名者数が無効な値です',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -623,6 +623,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_4: 'ウォレットファイルを持っていても、アカウントの秘密鍵のバックアップは<b><u>必修</u></b>です。下記ボタンをクリックすると表示されます。',
       SIGNUP_COMMON_WALLET_WARNING_5: 'あなたの秘密鍵がバックアップされていることを確認した後に、あなたのアカウントに自己の責任において資金を送金してください。',
       SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
+      SIGNUP_COMMON_WALLET_WARNING_6: 'それぞれのウォレットは、<b><u>主秘密鍵</u></b>（上に表示される）を持っています。それは2番目のアカウントを作成するためにも使用されます(BIP32)。この機能は<b><u>同じパスワード</u></b>を使用する必要があり、そうでない場合には同じプライマリ秘密鍵を利用しても、異なるセカンダリアカウントを生成します。あなたがデータをバックアップする際には、忘れずに<b><u>あなたのパスワードを書き留めてください</u></b>。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'ウォレットファイルの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'ウォレットファイルを作成するには、空のテキストファイルを作成し、上記のBase64で作成されたキーを記入します。<br>ファイルを<b><i>yourWalletName.wlt</i></b>という名前で保存し、インポートすることができます。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'プライベートキーの表示',
