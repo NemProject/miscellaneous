@@ -143,6 +143,8 @@ function RussianProvider($translateProvider) {
         GENERAL_CURRENCY: 'Валюта',
         GENERAL_EDIT: 'Редактировать',
         GENERAL_SEND_XEM: 'Отправить XEM',
+        GENERAL_ACTIVE: 'Active',
+        GENERAL_INACTIVE: 'Inactive',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Простите, но Вы не можете безопасно использовать NanoWallet в этом браузере...',
@@ -218,6 +220,7 @@ function RussianProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Пожалуйста, выберите мультиподписной аккаунта, чтобы показать статус',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Показать приватный ключ делегированного аккаунта',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Ключ делегированного аккаунта',
+        IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Создание мозайки',
@@ -540,6 +543,10 @@ function RussianProvider($translateProvider) {
         ALERT_FILE_SIZE_ERROR: ' слишком большой, максимальный размер 100 MB',
         ALERT_MESSAGE_DECODE_KEY_ERROR: 'Ошибка расшифровки сообщения, потому что аккаунт не имеет публичного ключ видимого в сети',
         ALERT_FETCH_TIME_SYNC_ERROR: 'Произошла ошибка при получении времени сети!',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
+        ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
+        ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Invalid number of minimum signatures',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Кошелёк успешно создан и загружен!',
@@ -614,6 +621,7 @@ function RussianProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_3: 'If you don\'t get a backup <b><i>.wlt</i></b> file, click on button below to reveal the raw wallet data and create the file manually:',
         SIGNUP_COMMON_WALLET_WARNING_4: 'Even if you have a wallet file it is <b><u>mandatory</u></b> to backup your account\'s private key, click on button below to reveal it:',
         SIGNUP_COMMON_WALLET_WARNING_5: 'It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
+        SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Show raw wallet file',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'To make a wallet file, create an empty text file and put the above base 64 key into it. <br>Save the file as <b><i>yourWalletName.wlt</i></b> and it can now be imported.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Show private key',
