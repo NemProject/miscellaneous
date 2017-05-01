@@ -269,6 +269,10 @@ class CreateMultisigCtrl {
     updateFee() {
         let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
         this.formData.fee = entity.fee;
+        if(!this.formData.minCosigs) {
+            this._Alert.errorMultisigMinSignature();
+            return;
+        }
     }
 
     /**
