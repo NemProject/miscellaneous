@@ -111,15 +111,20 @@
         </div> -->
         <div class="panel-body" ng-show="!$ctrl.showInfo">
           <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h5>{{ 'ACCOUNT_REMOTE_STATUS' | translate }}</h5>
             <span>{{ $ctrl._DataBridge.accountData.meta.remoteStatus }}</span>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <h5>{{ 'IMPORTANCE_TRANSFER_HARVESTING_STATUS' | translate }}</h5>
+            <span ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" style="text-transform: uppercase;color: green;">{{ 'GENERAL_ACTIVE' | translate }}</span>
+            <span ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" style="text-transform: uppercase;color: red;">{{ 'GENERAL_INACTIVE' | translate }}</span>
+          </div>
+          <div class="col-md-3">
             <h5>{{ 'ACCOUNT_VESTED_BALANCE' | translate }}</h5>
             <span>{{ ($ctrl._DataBridge.accountData.account.vestedBalance | fmtNemValue)[0] }},{{ ($ctrl._DataBridge.accountData.account.vestedBalance | fmtNemValue)[1] }} <small><b>XEM</b></small></span>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <h5>{{ 'ACCOUNT_HARVESTED_BLOCKS' | translate }}</h5>
             <span>
               <span ng-show="$ctrl._DataBridge.accountData.account.harvestedBlocks === 0">{{ 'IMPORTANCE_TRANSFER_NO_BLOCKS_HARVESTED' | translate }}</span>
