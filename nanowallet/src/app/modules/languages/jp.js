@@ -622,7 +622,6 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_3: 'バックアップした<b><i>.wlt</i></b>ファイルがない場合は、下のボタンをクリックしてウォレットデータを表示し、ファイルを手動で作成します。',
       SIGNUP_COMMON_WALLET_WARNING_4: 'ウォレットファイルを持っていても、アカウントの秘密鍵のバックアップは<b><u>必修</u></b>です。下記ボタンをクリックすると表示されます。',
       SIGNUP_COMMON_WALLET_WARNING_5: 'あなたの秘密鍵がバックアップされていることを確認した後に、あなたのアカウントに自己の責任において資金を送金してください。',
-      SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
       SIGNUP_COMMON_WALLET_WARNING_6: 'それぞれのウォレットは、<b><u>主秘密鍵</u></b>（上に表示される）を持っています。それは2番目のアカウントを作成するためにも使用されます(BIP32)。この機能は<b><u>同じパスワード</u></b>を使用する必要があり、そうでない場合には同じプライマリ秘密鍵を利用しても、異なるセカンダリアカウントを生成します。あなたがデータをバックアップする際には、忘れずに<b><u>あなたのパスワードを書き留めてください</u></b>。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'ウォレットファイルの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'ウォレットファイルを作成するには、空のテキストファイルを作成し、上記のBase64で作成されたキーを記入します。<br>ファイルを<b><i>yourWalletName.wlt</i></b>という名前で保存し、インポートすることができます。',
