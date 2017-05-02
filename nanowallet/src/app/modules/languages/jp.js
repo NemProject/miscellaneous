@@ -39,18 +39,18 @@ function JapaneseProvider($translateProvider) {
       DASHBOARD_CONFIRMED: "承認済",
       DASHBOARD_HARVEST_INCOME_TITLE: "直近 25 ブロックのハーベスト収入",
       DASHBOARD_HARVEST_INCOME_NOTE: "ハーベスト報酬0を除いたブロック",
-      DASHBOARD_HARVEST_INCOME_MESSAGE: "直近 25 ブロックの手数料なし",
+      DASHBOARD_HARVEST_INCOME_MESSAGE: "直近 25 ブロックの手数料は見つかりませんでした",
       DASHBOARD_NEWS_TITLE: "最新情報",
       DASHBOARD_HARVESTED_BLOCKS_TITLE: "ハーベストしたブロック",
       DASHBOARD_HARVESTED_BLOCKS_TH: "ハーベスト報酬",
       DASHBOARD_MARKET_INFO_TITLE: "相場情報",
       DASHBOARD_MARKET_INFO_CAP: "時価総額",
       DASHBOARD_MARKET_INFO_PRICE: "価格",
-      DASHBOARD_MARKET_INFO_VOLUME: "24 時間の出来高",
-      DASHBOARD_MARKET_INFO_CHANGES: "変動率",
-      DASHBOARD_MARKET_INFO_CHANGES_1H: "1 時間",
-      DASHBOARD_MARKET_INFO_CHANGES_24H: "24 時間",
-      DASHBOARD_MARKET_INFO_CHANGES_7D: "7 日間",
+      DASHBOARD_MARKET_INFO_VOLUME: "24時間の出来高",
+      DASHBOARD_MARKET_INFO_CHANGES: "24時間の変動率",
+      DASHBOARD_MARKET_INFO_CHANGES_1H: "1時間",
+      DASHBOARD_MARKET_INFO_CHANGES_24H: "24時間",
+      DASHBOARD_MARKET_INFO_CHANGES_7D: "7日間",
       DASHBOARD_MARKET_INFO_NOTE: "<a href=\"http://coinmarketcap.com/\" target=\"_blank\">CoinMarketCap</a> CoinMarketCapのデータは 5 分毎に更新されます。",
       DASHBOARD_NOTICE_1: 'Nano Wallet Beta にようこそ！',
       DASHBOARD_NOTICE_2: '問題の報告は<a href="https://github.com/NemProject/NanoWallet" target="_blank">こちら</a>へお願いします。',
@@ -143,8 +143,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_CURRENCY: '通貨',
       GENERAL_EDIT: '編集',
       GENERAL_SEND_XEM: 'XEMの送金',
-      GENERAL_ACTIVE: 'Active',
-      GENERAL_INACTIVE: 'Inactive',
+      GENERAL_ACTIVE: '有効',
+      GENERAL_INACTIVE: '無効',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全にNanoWalletを使用する事ができません。',
@@ -220,7 +220,7 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください。",
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
-      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
+      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベストの状況',
 
       // CREATE MOSAIC MODULE
       MOSAIC_DEFINITION_TITLE: "モザイクを作成",
@@ -543,10 +543,10 @@ function JapaneseProvider($translateProvider) {
       ALERT_FILE_SIZE_ERROR: ' が大きすぎます。最大サイズは100MBです。',
       ALERT_MESSAGE_DECODE_KEY_ERROR: 'アカウントの公開鍵がネットワーク上にないため、メッセージの暗号化に失敗しました。',
       ALERT_FETCH_TIME_SYNC_ERROR: 'ネットワークから時刻を取得中にエラーが発生しました!',
-      ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
-      ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
-      ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
-      ALERT_MULTISIG_MIN_SIGNATURE: 'Invalid number of minimum signatures',
+      ALERT_MULTISIG_MIN_SIGNATURE: 'マルチシグアカウントは、最低1名の署名者が必要です',
+      ALERT_BTC_MARKET_ERROR: 'Bitcoinの価格の取得に失敗しました',
+      ALERT_COSIG_REMOVAL_LIMIT: '一度に削除できる署名者は1名だけです',
+      ALERT_MULTISIG_MIN_SIGNATURE: '最小署名者数が無効な値です',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -590,7 +590,7 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_SELECT_WALLET_ACCOUNT: "使用するウォレットアカウント",
 
       // SIGN MULTISIGNATURE TRANSACTIONS
-      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションへの署名',
+      SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションの署名',
 
       // LOGIN MODULE
       LOGIN_MEMBER_TITLE: "あなたはNEMberですか？",
@@ -622,7 +622,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_3: 'バックアップした<b><i>.wlt</i></b>ファイルがない場合は、下のボタンをクリックしてウォレットデータを表示し、ファイルを手動で作成します。',
       SIGNUP_COMMON_WALLET_WARNING_4: 'ウォレットファイルを持っていても、アカウントの秘密鍵のバックアップは<b><u>必修</u></b>です。下記ボタンをクリックすると表示されます。',
       SIGNUP_COMMON_WALLET_WARNING_5: 'あなたの秘密鍵がバックアップされていることを確認した後に、あなたのアカウントに自己の責任において資金を送金してください。',
-      SIGNUP_COMMON_WALLET_WARNING_6: 'Each wallet has a <b><u>primary private key</u></b> (yours is shown above) that is used to create deterministic secondary accounts (BIP32). This feature requires to use the <b><u>same password</u></b> or it will generate different secondary accounts for the same primary private key. When backing up your data don\'t forget to <b><u>take note of your password</u></b>.',
+      SIGNUP_COMMON_WALLET_WARNING_6: 'それぞれのウォレットは、<b><u>主秘密鍵</u></b>（上に表示される）を持っています。それは2番目のアカウントを作成するためにも使用されます(BIP32)。この機能は<b><u>同じパスワード</u></b>を使用する必要があり、そうでない場合には同じプライマリ秘密鍵を利用しても、異なるセカンダリアカウントを生成します。あなたがデータをバックアップする際には、忘れずに<b><u>あなたのパスワードを書き留めてください</u></b>。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'ウォレットファイルの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'ウォレットファイルを作成するには、空のテキストファイルを作成し、上記のBase64で作成されたキーを記入します。<br>ファイルを<b><i>yourWalletName.wlt</i></b>という名前で保存し、インポートすることができます。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'プライベートキーの表示',
