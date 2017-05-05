@@ -143,8 +143,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_CURRENCY: '通貨',
       GENERAL_EDIT: '編集',
       GENERAL_SEND_XEM: 'XEMの送金',
-      GENERAL_ACTIVE: 'ACTIVE',
-      GENERAL_INACTIVE: 'INACTIVE',
+      GENERAL_ACTIVE: 'Active',
+      GENERAL_INACTIVE: 'Inactive',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全に NanoWallet を使用する事ができません。',
