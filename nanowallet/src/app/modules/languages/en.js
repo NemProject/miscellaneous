@@ -145,6 +145,9 @@ function EnglishProvider($translateProvider) {
         GENERAL_SEND_XEM: 'Send XEM',
         GENERAL_ACTIVE: 'Active',
         GENERAL_INACTIVE: 'Inactive',
+        GENERAL_ACTIVATING: "Activating",
+        GENERAL_DEACTIVATING: "Deactivating",
+        GENERAL_REMOTE: "Remote",
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
