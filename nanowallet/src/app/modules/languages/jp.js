@@ -132,7 +132,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_HISTORY: "履歴",
       GENERAL_REVEAL: "公開",
       GENERAL_QR: 'QR コード',
-      GENERAL_UPDATE:  'アップデート',
+      GENERAL_UPDATE: 'アップデート',
       GENERAL_UNKNOWN: '不明',
       GENERAL_IMPORTANCE: 'インポータンス',
       GENERAL_TRANSACTIONS: 'トランザクション',
