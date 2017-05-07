@@ -147,7 +147,11 @@
              <div class="row">
                <div class="col-md-3">
                  <h5>{{ 'ACCOUNT_REMOTE_STATUS' | translate }}</h5>
-                 <span>{{ $ctrl.multisigData.meta.remoteStatus }}</span>
+                <span ng-show="$ctrl.multisigData.meta.remoteStatus === 'ACTIVE'" style="text-transform: uppercase;color: green;">{{ 'GENERAL_ACTIVE' | translate }}</span>
+                <span ng-show="$ctrl.multisigData.meta.remoteStatus === 'INACTIVE'" style="text-transform: uppercase;color: red;">{{ 'GENERAL_INACTIVE' | translate }}</span>
+                <span ng-show="$ctrl.multisigData.meta.remoteStatus === 'ACTIVATING'" style="text-transform: uppercase;">{{ 'GENERAL_ACTIVATING' | translate }}</span>
+                <span ng-show="$ctrl.multisigData.meta.remoteStatus === 'DEACTIVATING'" style="text-transform: uppercase;">{{ 'GENERAL_DEACTIVATING' | translate }}</span>
+                <span  ng-show="$ctrl.multisigData.meta.remoteStatus === 'REMOTE'" style="text-transform: uppercase;">{{ 'GENERAL_REMOTE' | translate }}</span>
                </div>
                <div class="col-md-3">
                 <h5>{{ 'IMPORTANCE_TRANSFER_HARVESTING_STATUS' | translate }}</h5>
