@@ -224,6 +224,8 @@ function PolishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
+        IMPORTANCE_TRANSFER_START_HARVESTING: 'Start delegated harvesting',
+        IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Utwórz mozaikę',

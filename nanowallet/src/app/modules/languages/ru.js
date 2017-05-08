@@ -224,6 +224,8 @@ function RussianProvider($translateProvider) {
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Показать приватный ключ делегированного аккаунта',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Ключ делегированного аккаунта',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
+        IMPORTANCE_TRANSFER_START_HARVESTING: 'Start delegated harvesting',
+        IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Создание мозайки',
