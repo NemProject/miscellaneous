@@ -323,7 +323,6 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_DELEGATED_PUBLIC: "委任公開鍵",
       ACCOUNT_HARVESTED_BLOCKS: "ハーベストされたブロック",
       ACCOUNT_START_STOP_HARVESTING: "デリゲートハーベスティングを開始 / 停止",
-      ACCOUNT_HARVESTING_NOTE: "もし既に <b>NanoWallet を使用して</b>ハーベスティングを行っており、その状態でローカルストレージを消去した場合、アプリの状態を復元する為に使用しているノードを選択してください。（ハーベスティングは停止されません）",
       ACCOUNT_HARVESTING_NOTE: "このアカウントでハーベストに利用したノードは、<b>ブラウザのローカルストレージ</b>に保存されます。ブラウザのローカルストレージが削除されると、NanoWallet はどのノードを利用していたのかわからない為、<b>ハーベストの状況</b>に<b>無効</b>と表示されます。この場合、使用していたノードを再度選択すると、収穫情報が自動的に復元されます。ステータスが復元されない場合は、正しいノードが選択されているかを確認してください。それ以外の場合は、ノードが再起動されたために、このアカウントでハーベストされていないことを意味します。",
       ACCOUNT_HARVESTING_NODE_SELECT: "ハーベストを行うノードを選択",
       ACCOUNT_HARVESTING_START: "デリゲートハーベスティング（委任収穫）を開始",
