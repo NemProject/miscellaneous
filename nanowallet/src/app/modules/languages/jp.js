@@ -551,7 +551,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_MULTISIG_MIN_SIGNATURE: 'マルチシグアカウントは、最低1名の署名者が必要です',
       ALERT_BTC_MARKET_ERROR: 'Bitcoinの価格の取得に失敗しました',
       ALERT_COSIG_REMOVAL_LIMIT: '一度に削除できる署名者は1名だけです',
-      ALERT_MULTISIG_MIN_SIGNATURE: '最小署名者数が無効な値です',
+      ALERT_MULTISIG_MIN_SIGNATURE_INVALID: '最小署名者数が無効な値です',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",

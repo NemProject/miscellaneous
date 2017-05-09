@@ -557,7 +557,7 @@ function ChineseProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE: 'Multisignature account needs at least one minimum signature',
         ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
         ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
-        ALERT_MULTISIG_MIN_SIGNATURE: 'Invalid number of minimum signatures',
+        ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
