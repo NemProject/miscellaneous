@@ -224,6 +224,8 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
       IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベストの状況',
+      IMPORTANCE_TRANSFER_START_HARVESTING: 'Start delegated harvesting',
+      IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',
 
       // CREATE MOSAIC MODULE
       MOSAIC_DEFINITION_TITLE: "モザイクを作成",

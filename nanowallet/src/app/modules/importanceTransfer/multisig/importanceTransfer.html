@@ -213,10 +213,10 @@
               <span class="input-group-btn">
                 <button ng-class="!$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = false;" title="{{ 'ACCOUNT_NODE_FROM_LIST' | translate}}"><i class="fa fa-cloud"></i></button>
                 <button ng-class="$ctrl.customHarvestingNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.customHarvestingNode = true;" title="{{'ACCOUNT_CUSTOM_NODE' | translate}}"><i class="fa fa-edit"></i></button>
-                 <button class="btn btn-primary" type="button" ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" ng-disabled="$ctrl.noFreeSlots || !$ctrl.common.password.length" ng-click="$ctrl.startDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_START' | translate}}"><i class="fa fa-play-circle-o"></i></button>
-                  <button class="btn btn-primary" type="button" ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-click="$ctrl.stopDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_STOP' | translate}}" ng-disabled="!$ctrl.common.password.length"><i class="fa fa-stop-circle-o"></i></button>
               </span>
             </div>
+            <button class="btn btn-success" type="button" ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" ng-disabled="$ctrl.noFreeSlots || !$ctrl.common.password.length" ng-click="$ctrl.startDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_START' | translate}}" style="margin-top: 10px;width: 100%;"><i class="fa fa-play-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_START_HARVESTING' | translate }}</button>
+            <button class="btn btn-danger" type="button" ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-click="$ctrl.stopDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_STOP' | translate}}" ng-disabled="!$ctrl.common.password.length" style="margin-top: 10px;width: 100%;"><i class="fa fa-stop-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_STOP_HARVESTING' | translate }}</button>
           </div>
 
           <p class="bg-info text-center" ng-show="$ctrl.noFreeSlots && $ctrl.delegatedData.meta.status === 'LOCKED' && $ctrl.formData.multisigAccount.vestedBalance  / 1000000 > 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_NO_SLOTS' | translate }}</p>
