@@ -287,8 +287,8 @@ class EditMultisigCtrl {
                 return false;
             }
             let sigs = this.formData.minCosigs + this.multisigInfosData.minCosigs;
-            // If number of sigs is below one and if there is not only one cosignatory
-            if (sigs < 1 && this.multisigInfosData.minCosigs > 1) {
+            // If resulting number of sigs after change is below one and if there is more than one cosignatory
+            if (sigs < 1 && this.multisigInfosData.cosignatories.length > 1) {
                 if(!isSend) {
                     this._Alert.errorMultisigMinSignature();
                 }
