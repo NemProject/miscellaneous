@@ -496,7 +496,7 @@ class NetworkRequests {
      *
      * @return {array} - An array of supernodeInfo objects
      */
-    getNearestNode(coords) {
+    getNearestNodes(coords) {
         let obj = {
            "latitude": coords.latitude,
            "longitude": coords.longitude,

@@ -25,7 +25,7 @@ class HomeCtrl {
             // Get position
             navigator.geolocation.getCurrentPosition((res) => {
                 // Get the closest nodes
-                this._NetworkRequests.getNearestNode(res.coords).then((res) => {
+                this._NetworkRequests.getNearestNodes(res.coords).then((res) => {
                     // Pick a random node in the array
                     let node = res.data[Math.floor(Math.random()*res.data.length)];
                     // Set the node in local storage
