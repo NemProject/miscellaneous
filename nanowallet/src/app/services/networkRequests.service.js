@@ -477,7 +477,7 @@ class NetworkRequests {
      * @param {string} host - An host ip or domain
      * @param {string} id - The full mosaic id
      *
-     * @return {object} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
+     * @return {array} - An array of [MosaicDefinition]{@link http://bob.nem.ninja/docs/#mosaicDefinition} objects
      */
     getOtherMosaic(host, id){
         let port = this.getPort();
@@ -487,6 +487,25 @@ class NetworkRequests {
                 return res.data;
             }
         );
+    }
+
+    /**
+     * Gets the nearest nodes
+     *
+     * @param {object} coords - A coordinates object: https://www.w3schools.com/html/html5_geolocation.asp
+     *
+     * @return {array} - An array of supernodeInfo objects
+     */
+    getNearestNode(coords) {
+        let obj = {
+           "latitude": coords.latitude,
+           "longitude": coords.longitude,
+           "numNodes": 5
+        }
+        return this._$http.post('http://199.217.113.179:7782/nodes/nearest', obj)
+        .then((res) => {
+                return res.data;
+        });
     }
 
 }
