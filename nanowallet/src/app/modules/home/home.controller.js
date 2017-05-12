@@ -1,5 +1,5 @@
 class HomeCtrl {
-    constructor(AppConstants, NetworkRequests, $localStorage) {
+    constructor(AppConstants, NetworkRequests, $localStorage, $timeout) {
         'ngInject';
 
         this._NetworkRequests = NetworkRequests;
@@ -34,6 +34,9 @@ class HomeCtrl {
                     // If error it will use default node
                     console.log(err)
                 });
+            }, (err) => {
+                // If error it will use default node
+                console.log(err)
             });
         }
     }
