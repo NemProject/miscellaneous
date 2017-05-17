@@ -371,7 +371,7 @@ function JapaneseProvider($translateProvider) {
       PORTAL_MOSAIC_BTN_1: "モザイク作成",
       PORTAL_MOSAIC_BTN_2: "モザイク編集",
       PORTAL_APOSTILLE_TITLE: "アポスティーユ （公証機能）",
-      PORTAL_APOSTILLE_TEXT: "NEM アポスティーユ（公証機能）はブロックチェーンにファイル情報とタイムスタンプを刻んだ公証を作成し、ファイルの信憑性を監査できるようにする機能です。（Factomのような）",
+      PORTAL_APOSTILLE_TEXT: "NEM アポスティーユ（公証機能）はブロックチェーンにファイルの情報とタイムスタンプを刻んだ公証を作成し、ファイルの信頼性を監査できるようにする機能です。",
       PORTAL_APOSTILLE_BTN_1: "作成",
       PORTAL_APOSTILLE_BTN_2: "監査（公証の確認）",
       PORTAL_ADDRESS_BOOK_TEXT: 'アドレスにラベルを付けることによって、 連絡先を簡単に管理する事ができます。',
