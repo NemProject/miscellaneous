@@ -16,6 +16,9 @@ app.config(ChineseProvider);
 import PolishProvider from './pl';
 app.config(PolishProvider);
 
+import GermanProvider from './de';
+app.config(GermanProvider);
+
 import JapaneseProvider from './jp';
 app.config(JapaneseProvider);
 
