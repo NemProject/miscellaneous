@@ -50,6 +50,7 @@ class TransferTransactionCtrl {
         this.formData.amount = 0;
         this.formData.fee = 0;
         this.formData.encryptMessage = false;
+        this.formData.hexMessage = false;
         // Multisig data
         this.formData.innerFee = 0;
         this.formData.isMultisig = false;

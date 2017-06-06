@@ -258,6 +258,11 @@ let prepareMessage = function(common, tx) {
             'type': 2,
             'payload': CryptoHelpers.encode(common.privateKey, tx.recipientPubKey, tx.message.toString())
         };
+    } else if (tx.hexMessage) {
+        return {
+            'type': 1,
+            'payload': 'fe' + tx.message.toString()
+        };
     } else {
         return {
             'type': 1,

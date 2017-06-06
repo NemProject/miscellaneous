@@ -164,6 +164,7 @@ function ChineseProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: '附加',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: '马赛克加入完成',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: '加密消息',
+        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Recipient has no public key visible to the network',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'No encrypted messages via multisig accounts',
 

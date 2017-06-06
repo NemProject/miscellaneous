@@ -164,6 +164,7 @@ function GermanProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Anhang',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaik angehängt',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Nachricht verschlüsseln',
+        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Empfänger verfügt noch nicht über einen öffentlichen Schlüssel, hat also noch keine Transaktion im Netzwerk getätigt.',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'Die Verschlüsselung von Nachrichten bei Multi-Signatur Konten wird aktuell nicht unterstützt.',
 

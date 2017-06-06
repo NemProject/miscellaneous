@@ -164,6 +164,7 @@ function RussianProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Прикрепить',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Прикреплённые мозайки',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Зашифровать сообщение',
+        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'У получателя нет открытого ключа, видимого в сети',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'Нет зашифрованных сообщение через мультиподписной аккаунт',
 

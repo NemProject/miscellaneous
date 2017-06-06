@@ -164,6 +164,7 @@ function EnglishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Attach',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Mosaics attached',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Encrypt message',
+        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Recipient has no public key visible to the network',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'No encrypted messages via multisig accounts',
 

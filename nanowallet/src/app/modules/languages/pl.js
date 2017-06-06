@@ -164,6 +164,7 @@ function PolishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Załącz',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Załączone mozaiki',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Szyfruj wiadomość',
+        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Odbiorca nie ma klucza publicznego widocznego w sieci.',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'Brak zaszyfrowanych wiadomości przez konta z multipodpisem.',
 
