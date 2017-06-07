@@ -538,7 +538,7 @@ function EnglishProvider($translateProvider) {
         ALERT_MOSAIC_DESCRIPTION: 'Description of mosaic is invalid !',
         ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, reason: ',
         ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Error at fetching mosaics definitions, reason: ',
-        ALERT_GET_SUB_NS_ERROR: 'Error at fetching mosaics definitions, reason: ',
+        ALERT_GET_SUB_NS_ERROR: 'Error at fetching namespaces definitions, reason: ',
         ALERT_GET_MOSAICS_ERROR: 'Error at fetching mosaics, reason: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Error at fetching transactions, reason: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'This file is not in .adb format !',
