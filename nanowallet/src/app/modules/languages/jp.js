@@ -224,7 +224,7 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください。",
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
-      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベストの状況',
+      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベスティング',
       IMPORTANCE_TRANSFER_START_HARVESTING: 'デリゲートハーベスティングの開始',
       IMPORTANCE_TRANSFER_STOP_HARVESTING: 'デリゲートハーベスティングの停止',
 
@@ -324,7 +324,7 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_DELEGATED_PUBLIC: "委任公開鍵",
       ACCOUNT_HARVESTED_BLOCKS: "ハーベストされたブロック",
       ACCOUNT_START_STOP_HARVESTING: "デリゲートハーベスティングを開始 / 停止",
-      ACCOUNT_HARVESTING_NOTE: "このアカウントでハーベストに利用したノードは、<b>ブラウザのローカルストレージ</b>に保存されます。ブラウザのローカルストレージが削除されると、NanoWallet はどのノードを利用していたのかわからない為、<b>ハーベストの状況</b>に<b>無効</b>と表示されます。この場合、使用していたノードを再度選択すると、収穫情報が自動的に復元されます。ステータスが復元されない場合は、正しいノードが選択されているかを確認してください。それ以外の場合は、ノードが再起動されたために、このアカウントでハーベストされていないことを意味します。",
+      ACCOUNT_HARVESTING_NOTE: "このアカウントでハーベストに利用したノードは、<b>ブラウザのローカルストレージ</b>に保存されます。ブラウザのローカルストレージが削除されると、NanoWallet はどのノードを利用していたのかわからない為、<b>ハーベスティング</b>に<b>無効</b>と表示されます。この場合、使用していたノードを再度選択すると、収穫情報が自動的に復元されます。ステータスが復元されない場合は、正しいノードが選択されているかを確認してください。それ以外の場合は、ノードが再起動されたために、このアカウントでハーベストされていないことを意味します。",
       ACCOUNT_HARVESTING_NODE_SELECT: "ハーベストを行うノードを選択",
       ACCOUNT_HARVESTING_START: "デリゲートハーベスティング（委任収穫）を開始",
       ACCOUNT_HARVESTING_STOP: "デリゲートハーベスティング（委任収穫）を停止",
