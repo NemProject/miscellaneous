@@ -24,8 +24,14 @@ class createPollCtrl {
         this.MOCK_ADDRESS = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
         // Default poll Index
-        this.pollIndexAccount = "TAVGTNCVGALLUPZC4JTLKR2WX25RQM2QOK5BHBKC";
-
+        if(this._Wallet.network < 0){
+            //this.pollIndexAccount = "TAVGTNCVGALLUPZC4JTLKR2WX25RQM2QOK5BHBKC";
+            this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
+        }
+        else{
+            this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
+        }
+        
         // names of types
         this.pollTypes = ['POI', 'Simple'];
         //this.currentAccountMosaicNames = ["nem:xem"];
