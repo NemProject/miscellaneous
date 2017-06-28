@@ -31,4 +31,12 @@ servicesModule.service('NetworkRequests', NetworkRequestsService);
 import TransactionsService from './transactions.service';
 servicesModule.service('Transactions', TransactionsService);
 
+// Set nemUtils service
+import nemUtilsService from './nemUtils.service';
+servicesModule.service('nemUtils', nemUtilsService);
+
+// Set Voting service
+import VotingService from './voting.service';
+servicesModule.service('Voting', VotingService);
+
 export default servicesModule;
