@@ -363,7 +363,7 @@ class nemUtils {
      * @return {promise} - A promise that returns the account's importance score
      */
     getImportance(address, block) {
-        if (!block) {
+        if (!block || (block < 0)) {
             return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
                 return data.account.importance;
             }).catch();

@@ -569,7 +569,7 @@ class Voting {
         if (end) {
             blockPromise = this._nemUtils.getHeightByTimestamp(end);
         } else {
-            blockPromise = this._nemUtils.getCurrentHeight();
+            blockPromise = Promise.resolve(-1);
         }
         return blockPromise.then((block) => {
             endBlock = block;
@@ -592,7 +592,7 @@ class Voting {
                     });
                 })
             } else {
-                end = new Date().getTime();
+                end = -1;
             }
             var optionAddresses = [];
             for (var i = 0; i < optionTransactions.length; i++) {
@@ -600,7 +600,6 @@ class Voting {
                 optionAddresses.push(optionTransactions[i].map((transaction) => {
                     return Address.toAddress(transaction.transaction.signer, this._Wallet.network);
                 }));
-
             }
             //eliminate repetitions in array
             const unique = function(list) {
