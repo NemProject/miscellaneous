@@ -559,6 +559,8 @@ function ChineseProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
         ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_VOTING_ERROR: 'Invalid Vote',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -572,6 +574,8 @@ function ChineseProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: '成功加载nty文件！',
         ALERT_INCOMING_TX_FROM: '接收交互，来源',
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Address book successfully imported !',
+        ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+        ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: '变更账户至多重签名',
@@ -686,7 +690,17 @@ function ChineseProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: '别名',
         FORM_MESSAGE_PLACEHOLDER: '信息',
         FORM_MOSAIC_NAME_PLACEHOLDER: '马赛克名',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
+
+        // VOTING MODULE
+        PORTAL_VOTING_TITLE: 'Voting',
+        PORTAL_VOTING_TEXT: 'Create and vote on polls',
+        PORTAL_VOTING_BTN1: 'See Polls',
+        PORTAL_VOTING_BTN2: 'Create Poll',
+        FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+        FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+        FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }

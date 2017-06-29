@@ -173,7 +173,7 @@ function EnglishProvider($translateProvider) {
         LINE_TX_DETAILS_FROM_MULTISIG: 'From multisig',
         LINE_TX_DETAILS_WAITING: 'Transaction waiting to be included',
         LINE_TX_DETAILS_NEED_SIG: 'Needs cosignatories signatures',
-        LINE_TX_DETAILS_NEED_SIG_2: 'This transaction needs your signature',
+        LINE_TX_DETAILS_NEED_SIG_2: 'Needs your signature',
         LINE_TX_DETAILS_MESS_ENC: 'Encrypted',
         LINE_TX_DETAILS_MESS_DEC: 'Decode',
         LINE_TX_DETAILS_HASH: 'Hash',
@@ -695,7 +695,7 @@ function EnglishProvider($translateProvider) {
         FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
-        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }
