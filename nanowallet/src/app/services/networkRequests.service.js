@@ -517,7 +517,6 @@ class NetworkRequests {
         );
     }
 
-
     /**
      * Gets all transactions of an account from a transaction ID
      *
@@ -592,6 +591,22 @@ class NetworkRequests {
         });
     }
 
+    /**
+     * Gets the all supernodes by status
+     *
+     * @param {number} status - 0 for all nodes, 1 for active nodes, 2 for inactive nodes
+     *
+     * @return {array} - An array of supernodeInfo objects
+     */
+    getSupernodesBr(status) {
+        let obj = {
+           "status": undefined === status ? 1 : status
+        }
+        return this._$http.post('http://199.217.113.179:7782/nodes', obj)
+        .then((res) => {
+                return res.data;
+        });
+    }
 
     /**
      * Gets a block by its height
