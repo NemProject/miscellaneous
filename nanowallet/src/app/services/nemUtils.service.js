@@ -368,9 +368,19 @@ class nemUtils {
                 return data.account.importance;
             }).catch();
         } else {
-            return this._NetworkRequests.getHistoricalAccountData(helpers.getHostname(this._Wallet.node), address, block).then((data) => {
-                return data.data.data[0].importance;
-            }).catch();
+
+            if(this._Wallet.network < 0){
+                // Node with historical data activated
+                return this._NetworkRequests.getHistoricalAccountData('104.128.226.60', address, block).then((data) => {
+                    return data.data.data[0].importance;
+                }).catch();
+            }
+            else{
+                // Node with historical data activated
+                return this._NetworkRequests.getHistoricalAccountData('hugealice.nem.ninja', address, block).then((data) => {
+                    return data.data.data[0].importance;
+                }).catch();
+            }
         }
     }
 
