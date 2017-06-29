@@ -234,7 +234,6 @@ class pollsCtrl {
         }
         this.getPoll(this.inputAccount).then(()=>{
             this.searching = false;
-            this._scope.$digest();
         }).catch((e)=>{
             this.searching = false;
             this.loadingAddressError = true;
@@ -258,7 +257,6 @@ class pollsCtrl {
             this.pollIndexPrivate = indexInfo.private;
             this.getPolls().then(()=>{
                 this.searching = false;
-                this._scope.$digest();
             }).catch((e)=>{
                 throw e;
             });

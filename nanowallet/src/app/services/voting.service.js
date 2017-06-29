@@ -107,9 +107,10 @@ class Voting {
                 })
             };
             var optionsMessage = "options:" + JSON.stringify(optionsObj);
-            var whitelistMessage = "whitelist:" + JSON.stringify(details.whitelist.map((address) => {
+            details.whitelist = details.whitelist.map((address) => {
                 return address.toUpperCase().replace(/-/g, '');
-            }));
+            });
+            var whitelistMessage = "whitelist:" + JSON.stringify(details.whitelist);
             console.log("//2.send data to PA");
             console.log("//2.1.send formData");
             return this._nemUtils.sendMessage(PollAccount.address, formDataMessage, common).then(() => {

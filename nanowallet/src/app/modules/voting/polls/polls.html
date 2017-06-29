@@ -1,22 +1,17 @@
 <div class="voting-page">
 
-  <div class="banner-left" style="padding: 0px 15px 15px;">
-    <div class="container">
-    </div>
-  </div>
-
   <div class="container-fluid" style="padding-left: 20px; padding-right: 20px;">
+    <div class="row">
+      <div class="col-sm-11">
+        <h2>Vote and See Polls</h2>
+      </div>
+    </div>
 
     <div id="row1" class="row row1">
       <!-- Your content here -->
-      <div class="col-md-6" style="margin-top:10px">
+      <div class="col-md-6">
         <div class="panel panel-default">
-          <div class="panel-heading" style="background-color: rgb(68, 68, 68);border-radius: 0px;">
-            <i class="fa fa-chevron-right">&nbsp Vote and see Polls on the blockchain</i>
-          </div>
-          <div class="panel-body">
-            <br>
-
+          <div class="panel-heading">
             <!-- TABS -->
             <ul class="nav nav-tabs">
               <li ng-class="{ active: $ctrl.isTabSet(1) }">
@@ -32,6 +27,8 @@
                 <a ng-click="$ctrl.setTab(4)">Options</a>
               </li>
             </ul>
+          </div>
+          <div class="panel-body">
             <br>
             <!-- LIST -->
             <div class="pre-scrollable" ng-hide="$ctrl.isTabSet(4)">
@@ -76,7 +73,7 @@
         </div>
       </div>
 
-      <div class="col-md-6" style="margin-top:10px">
+      <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading" style="background-color: rgb(68, 68, 68); color: white;border-radius: 0px;">
             <i class="fa fa-chevron-right"></i>

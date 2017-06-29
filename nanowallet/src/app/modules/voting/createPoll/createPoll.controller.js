@@ -25,7 +25,7 @@ class createPollCtrl {
 
         // Default poll Index
         if(this._Wallet.network < 0){
-            this.pollIndexAccount = "TAKGYHOVDYN7TCZTEB7OIM6DTBOSMP5UPEH4YO6C";
+            this.pollIndexAccount = "TAVGTNCVGALLUPZC4JTLKR2WX25RQM2QOK5BHBKC";
             //this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
         }
         else{
