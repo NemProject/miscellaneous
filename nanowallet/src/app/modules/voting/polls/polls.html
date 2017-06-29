@@ -44,7 +44,7 @@
               <form>
                 <p>Search for a poll or a poll Index:</p>
                 <input type="text" ng-model="$ctrl.inputAccount" style="width:60%"/>
-                <br><br>
+                <p class="text-muted small">You can find a specific poll or index by typing the address for the poll account or the poll index account in the bar and clicking on the appropriate search button.</p>
                 <button type="submit" class="btn btn-success pull-xs-left" style="width:30%" ng-click="$ctrl.pollAddressInput();">Find Poll</button>
                 <button type="submit" class="btn btn-success pull-xs-left" style="width:30%" ng-click="$ctrl.pollIndexInput();">Find Index</button>
                 <div ng-show="$ctrl.searching"><i class="fa fa-spinner fa-spin"></i></div>
@@ -60,10 +60,11 @@
               <button class="btn btn-success pull-xs-left" style="width:25%" ng-click="$ctrl.createIndex = true;">Create a poll Index</button>
               <br>
               <br>
+              <!-- Created indexes -->
               <div ng-hide="$ctrl.createdIndexes.length === 0">
                 <label>created Indexes:</label>
                 <div ng-repeat="indexAddress in $ctrl.createdIndexes track by $index">
-                  <p>{{indexAddress}}</p>
+                  <a ng-click="$ctrl.inputAccount = indexAddress; $ctrl.pollIndexInput()">{{indexAddress}}</a>
                 </div>
               </div>
             </div>

@@ -204,6 +204,15 @@ let createNEMTimeStamp = function() {
 }
 
 /**
+ * Create a time stamp for a NEM transaction from a given timestamp
+ *
+ * @return {number} - The NEM transaction time stamp in milliseconds
+ */
+let toNEMTimeStamp = function(date) {
+    return Math.floor((date / 1000) - (NEM_EPOCH / 1000));
+}
+
+/**
  * Fix a private key
  *
  * @param {string} privatekey - An hex private key
@@ -307,7 +316,7 @@ let checkAndFormatUrl = function (node, defaultWebsocketPort) {
         }
         return node;
 }
- 
+
 /**
  * Create a time stamp
  *
@@ -407,6 +416,7 @@ module.exports = {
     getFileName,
     getExtension,
     createNEMTimeStamp,
+    toNEMTimeStamp,
     fixPrivateKey,
     calcMinFee,
     calcXemEquivalent,

@@ -33,7 +33,7 @@ class createPollCtrl {
         }
 
         // names of types
-        this.pollTypes = ['POI', 'Simple'];
+        this.pollTypes = ['POI', 'White List'];
         //this.currentAccountMosaicNames = ["nem:xem"];
 
         // Data of the poll to be sent
@@ -247,6 +247,65 @@ class createPollCtrl {
         return total;
     }
 
+    // clears all form fields
+    clearForm(){
+        // Data of the poll to be sent
+        this.formData = {};
+        this.formData.title = '';
+        this.formData.doe = NaN;
+        this.formData.multiple = false;
+        //this.formData.updatable = false;
+        this.formData.type = 0;
+        //this.formData.mosaic = 'nem:xem';
+        this.description = '';
+        this.options = ['yes', 'no'];
+        this.whitelist = [''];
+
+        // input data
+        this.hasWhitelist = false;
+        this.hasMosaic = false;
+        this.doeString = '';
+        this.typeString = this.pollTypes[0];
+        this.invalidData = true;
+
+        // Creation issues
+        this.issues = {};
+        this.issues.blankTitle = true;
+        this.issues.pastDate = false;
+        this.issues.invalidDate = true;
+        this.issues.blankOptions = [false, false];
+        this.issues.invalidAddresses = [];
+        this.issues.invalidIndexAccount = false;
+        this.issues.noPassword = true;
+
+        this.issues.titleTooLong = false;
+        this.issues.descriptionTooLong = false;
+        this.issues.optionsTooLong = false;
+        this.issues.whitelistTooLong = false;
+        this.issues.pollTooLong = false;
+
+        // Common
+        this.common = {
+            "password": "",
+            "privateKey": ""
+        };
+
+        // messages
+        this.formDataMessage = '';
+        this.descriptionMessage = '';
+        this.optionsMessage = '';
+        this.whitelistMessage = '';
+        this.pollMessage = '';
+
+        // calculated fee
+        this.fee = this.calculateFee();
+
+        // To lock our send button if a transaction is not finished processing
+        this.creating = false;
+
+        this.checkFormData();
+    }
+
     // creates the poll
     create() {
         this.creating = true;
@@ -280,10 +339,12 @@ class createPollCtrl {
         this._Voting.createPoll(details, this.pollIndexAccount, this.common).then(d => {
             this.creating = false;
             this._Alert.pollCreationSuccess();
+            this.clearForm();
         }).catch(err => {
             console.log(err.message);
             this._Alert.votingUnexpectedError(err.message);
             this.creating = false;
+            this.clearForm();
         });
     }
 

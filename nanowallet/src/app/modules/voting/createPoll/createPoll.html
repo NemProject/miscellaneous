@@ -31,7 +31,7 @@
             <br>
             <!-- DOE -->
             <label ng-class="($ctrl.issues.invalidDate || $ctrl.issues.pastDate) ? 'has-error' : ''" >Date of Ending</label>
-            <br>
+            <p class="text-muted small">If you only see a text box input a date in a valid ISO format [yyyy-MM-ddTHH:mm:ss], for example: 2017-12-28T14:57:00</p>
             <input type="datetime-local" class="form-control" ng-model="$ctrl.doeString" ng-class="($ctrl.issues.invalidDate || $ctrl.issues.pastDate) ? 'has-error' : ''" ng-change="$ctrl.setDoe(); $ctrl.checkFormData(); $ctrl.updateMessages();"/>
             <br>
             <input id="box1" type="checkbox" ng-model="$ctrl.formData.multiple"><label for="box1">Multiple choice</label>
@@ -44,7 +44,7 @@
             <!-- TYPE -->
             <label>Type: &nbsp</label><select class="col-sm-4 form-control" ng-model="$ctrl.typeString" ng-options="type for type in $ctrl.pollTypes" ng-change="$ctrl.changeType(); $ctrl.checkFormData(); $ctrl.updateMessages();"></select>
             <p class="text-muted small">POI: votes will be weighted against the Proof of Importance of the voting account.</p>
-            <p class="text-muted small">Simple poll (whitelist): Only addresses in the whitelist can vote. All votes count the same.</p>
+            <p class="text-muted small">White List Poll: Only addresses in the whitelist can vote. All votes count the same.</p>
             <!--p class="text-muted small">tokens: Only accounts with a certain token can vote. Vote weight is proportional to the amount of tokens.</p-->
           </div>
         </div>

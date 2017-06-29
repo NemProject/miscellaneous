@@ -60,8 +60,8 @@ class pollsCtrl {
         };
 
         // Tags for types
-        this.types = ["POI", ""];
-        this.classes = ["label label-success poi-tag", "label label-primary"];
+        this.types = ["POI", "WhiteList"];
+        this.classes = ["label label-success poi-tag", "label label-primary whitelist-tag"];
 
         // Poll list
         this.allPolls = [];  // Has all the poll headers on the poll Index (unfiltered)
@@ -444,7 +444,7 @@ class pollsCtrl {
             if (type === 0)
                 return "POI";
             if (type === 1)
-                return 'poll';
+                return 'WhiteList';
             /*if (type === 2)
                 return this.selectedPoll.formData.mosaic;
             */

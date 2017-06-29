@@ -461,6 +461,8 @@ class nemUtils {
         }
         return this.getTransactionsWithString(address2, '', options).then((data) => {
             if (data.length !== 0){
+                //console.log("transaction", data);
+                //console.log("add", Address.toAddress(data[1].), this._Wallet.network);
                 return 2;
             }
             else{
@@ -486,6 +488,7 @@ class nemUtils {
      */
     getHeightByTimestamp(timestamp) {
         //1.Approximate (60s average block time)
+        console.log("ts", timestamp);
         let nemTimestamp = helpers.toNEMTimeStamp(timestamp);
         let now = helpers.toNEMTimeStamp((new Date()).getTime());
         let elapsed = now - nemTimestamp;
