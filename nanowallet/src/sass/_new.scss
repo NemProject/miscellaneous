@@ -1265,3 +1265,33 @@ textarea {
     }
   }
 }
+
+// Voting
+.pre-scrollable {
+    max-height: 600px;
+    overflow-x: hidden;
+}
+.pre-scrollable > div {
+    overflow-wrap: break-word;
+}
+.poll-select {
+    width:100%;
+    white-space: normal;
+    font-weight:normal;
+}
+.poll-list-element {
+    border-bottom: 1px lightgrey solid;
+}
+.loading-div {
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.ongoing-warning {
+    padding: 10px;
+}
+
+.is-empty {
+    background-color: #e4b9b9;
+}

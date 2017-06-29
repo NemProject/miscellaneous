@@ -374,7 +374,7 @@ export default class Alert {
             className: 'danger'
         });
     }
-    
+
     namespaceExpiryNotice(ns, blocks) {
         this._ngToast.create({
             content: this._$filter("translate")("RENEW_NS_ALERT_PART_1") + ' <b>'+ns+'</b> ' + this._$filter("translate")("RENEW_NS_ALERT_PART_2") + ' (~' + blocks + ' ' + this._$filter("translate")("GENERAL_BLOCKS") + '). ' + this._$filter("translate")("RENEW_NS_ALERT_PART_3") ,
@@ -453,6 +453,27 @@ export default class Alert {
         });
     }
 
+    errorInsufficientBalance() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_INSUFFICIENT_BALANCE"),
+            className: 'danger'
+        });
+    }
+
+    votingUnexpectedError(err) {
+        this._ngToast.create({
+            content: err,
+            className: 'danger'
+        });
+    }
+
+    votingError() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_VOTING_ERROR"),
+            className: 'danger'
+        });
+    }
+
     /***
      * Success alerts
      */
@@ -522,6 +543,20 @@ export default class Alert {
     addressBookFileSuccess() {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_ADDRESS_BOOK_FILE_SUCCESS'),
+            className: 'success'
+        });
+    }
+
+    pollCreationSuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_POLL_CREATION_SUCCESS'),
+            className: 'success'
+        });
+    }
+
+    votingSuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_VOTING_SUCCESS'),
             className: 'success'
         });
     }

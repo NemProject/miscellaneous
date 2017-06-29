@@ -224,9 +224,9 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Key',
-        IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status', 
+        IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
         IMPORTANCE_TRANSFER_START_HARVESTING: 'Start delegated harvesting',
-        IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',   
+        IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Create a mosaic',
@@ -553,6 +553,8 @@ function EnglishProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
         ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_VOTING_ERROR: 'Invalid Vote',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded !',
@@ -566,6 +568,8 @@ function EnglishProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: 'Successfully loaded nty file !',
         ALERT_INCOMING_TX_FROM: 'Incoming transaction from ',
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Address book successfully imported !',
+        ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+        ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
@@ -681,7 +685,17 @@ function EnglishProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Alias of',
         FORM_MESSAGE_PLACEHOLDER: 'Message',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
+
+        // VOTING MODULE
+        PORTAL_VOTING_TITLE: 'Voting',
+        PORTAL_VOTING_TEXT: 'Create and vote on polls',
+        PORTAL_VOTING_BTN1: 'See Polls',
+        PORTAL_VOTING_BTN2: 'Create Poll',
+        FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+        FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+        FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
     });
 
 }
