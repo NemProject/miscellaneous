@@ -86,9 +86,7 @@ class nemUtils {
      */
     getTransactionsWithString(address, str, options) {
 
-        var signatoryPublicKey;
         var trans = [];
-        var promise;
 
         // Options is optional
         if (!options || options.constructor != Object)
@@ -124,13 +122,13 @@ class nemUtils {
                         if (transaction.type == 4100) {
                             transaction = transaction.otherTrans;
                         }
-
+                        // Regular transactions (multisig otherTrans is of type 257)
                         if (transaction.type == 257) {
                             // On this version we are only using decoded messages!
                             let msg = this._$filter('fmtHexMessage')(transaction.message);
 
                             // Check if transaction should be added depending on the message and its signer
-                            if (msg.includes(str, options.start) && (!signatoryPublicKey || signatoryPublicKey == transaction.signer)) {
+                            if (msg.includes(str, options.start) && (!options.fromAddress || Address.toAddress(transaction.signer, this._Wallet.network) == options.fromAddress)) {
                                 // We decode the message and store it
                                 transaction.message = msg;
                                 transactions[i].transaction = transaction;
@@ -146,29 +144,7 @@ class nemUtils {
             });
         }).bind(this);
 
-        // Obtain address' publicKey and set it to signatoryPublicKey
-        var getAccountData = (function(address) {
-            // console.log("Inquiring: "+address);
-            return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
-                signatoryPublicKey = data.account.publicKey;
-                return signatoryPublicKey;
-            });
-        }).bind(this);
-
-        // If the messages need to be signed by options.fromAddress
-        if (options && options.fromAddress) {
-            // Obtain address' publicKey
-            // console.log("Obtain address' "+options.fromAddress);
-            promise = getAccountData(options.fromAddress).then(() => {
-                // Obtain transactions and check they are from signatoryPublicKey
-                return getTx();
-            });
-        } else {
-            // Obtain all transactions
-            promise = getTx();
-        }
-
-        return promise;
+        return getTx();
     }
 
     /**
@@ -369,13 +345,12 @@ class nemUtils {
             }).catch();
         } else {
 
-            if(this._Wallet.network < 0){
+            if (this._Wallet.network < 0) {
                 // Node with historical data activated
                 return this._NetworkRequests.getHistoricalAccountData('104.128.226.60', address, block).then((data) => {
                     return data.data.data[0].importance;
                 }).catch();
-            }
-            else{
+            } else {
                 // Node with historical data activated
                 return this._NetworkRequests.getHistoricalAccountData('hugealice.nem.ninja', address, block).then((data) => {
                     return data.data.data[0].importance;
@@ -409,7 +384,7 @@ class nemUtils {
      *
      * @return {promise} - A promise that returns the blockchain's height
      */
-    getCurrentHeight(){
+    getCurrentHeight() {
         return this._NetworkRequests.getHeight(helpers.getHostname(this._Wallet.node));
     }
 
@@ -470,16 +445,14 @@ class nemUtils {
             limit: 1
         }
         return this.getTransactionsWithString(address2, '', options).then((data) => {
-            if (data.length !== 0){
-                //console.log("transaction", data);
-                //console.log("add", Address.toAddress(data[1].), this._Wallet.network);
+            if (data.length !== 0) {
+                console.log("transaction", data);
+                console.log("add", Address.toAddress(data[0].transaction.signer), this._Wallet.network);
                 return 2;
-            }
-            else{
-                return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1)
-                .then((transactions)=>{
-                    for(var i = 0; i < transactions.length; i++){
-                        if(transactions[i].transaction.recipient === address2){
+            } else {
+                return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1).then((transactions) => {
+                    for (var i = 0; i < transactions.length; i++) {
+                        if (transactions[i].transaction.recipient === address2) {
                             return 1;
                         }
                     }
@@ -512,26 +485,24 @@ class nemUtils {
             const findBlock = function(height) {
                 return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height).then((block) => {
                     let x = Math.floor((nemTimestamp - block.data.timeStamp) / 60);
-                    if(x < 0 && x > -5)
+                    if (x < 0 && x > -5)
                         x = -1;
-                    if(x > 0 && x < 5)
+                    if (x > 0 && x < 5)
                         x = 1;
-                    if(block.data.timeStamp <= nemTimestamp){
-                        return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height+1).then((nextBlock) => {
+                    if (block.data.timeStamp <= nemTimestamp) {
+                        return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height + 1).then((nextBlock) => {
                             //check if target
-                            if(nextBlock.data.timeStamp > nemTimestamp){
+                            if (nextBlock.data.timeStamp > nemTimestamp) {
                                 console.log("found", height);
                                 return height;
-                            }
-                            else{
+                            } else {
                                 console.log("go up", height, "+", x);
-                                return findBlock(height+x);
+                                return findBlock(height + x);
                             }
                         });
-                    }
-                    else{
+                    } else {
                         console.log("go down", height, x);
-                        return findBlock(height+x);
+                        return findBlock(height + x);
                     }
                 });
             }.bind(this);

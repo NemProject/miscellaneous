@@ -49,7 +49,7 @@ class pollsCtrl {
             //this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
         }
         else{
-            this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
+            this.pollIndexAccount = "NDIXTBITCK6DHIOWXPAVN5DA3JXZYCD7PLAZC6RN";
         }
         this.pollIndexPrivate = false;
 
