@@ -446,8 +446,6 @@ class nemUtils {
         }
         return this.getTransactionsWithString(address2, '', options).then((data) => {
             if (data.length !== 0) {
-                console.log("transaction", data);
-                console.log("add", Address.toAddress(data[0].transaction.signer), this._Wallet.network);
                 return 2;
             } else {
                 return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1).then((transactions) => {

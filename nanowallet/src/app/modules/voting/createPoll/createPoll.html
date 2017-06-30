@@ -22,7 +22,7 @@
             <!-- DESCRIPTION -->
             <label ng-class="($ctrl.issues.descriptionTooLong) ? 'has-error' : ''">Description</label>
             <br>
-            <textarea class="form-control" placeholder="{{ 'FORM_DESCRIPTION_FIELD_PLACEHOLDER' | translate }}" ng-class="($ctrl.issues.descriptionTooLong) ? 'has-error' : ''" ng-model="$ctrl.description" rows="4" ng-change="$ctrl.checkFormData(); $ctrl.updateMessages();"></textarea>
+            <textarea class="form-control poll-description-textarea" placeholder="{{ 'FORM_DESCRIPTION_FIELD_PLACEHOLDER' | translate }}" ng-class="($ctrl.issues.descriptionTooLong) ? 'has-error' : ''" ng-model="$ctrl.description" rows="4" ng-change="$ctrl.checkFormData(); $ctrl.updateMessages();"></textarea>
             <br>
             <!-- POLL INDEX -->
             <label ng-class="$ctrl.issues.invalidIndexAccount ? 'has-error' : ''" >Poll Index Account</label>
