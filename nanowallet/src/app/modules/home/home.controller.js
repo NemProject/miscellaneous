@@ -36,7 +36,18 @@ class HomeCtrl {
                 });
             }, (err) => {
                 // If error it will use default node
-                console.log(err)
+                console.log(err);
+                // Get all the active supernodes
+                this._NetworkRequests.getSupernodesBr().then((res) => {
+                    // Pick a random node in the array
+                    let node = res.data[Math.floor(Math.random()*res.data.length)];
+                    console.log(node)
+                    // Set the node in local storage
+                    this._storage.selectedMainnetNode = 'http://'+node.ip+':7778';
+                }, (err) => {
+                    // If error it will use default node
+                    console.log(err)
+                });
             });
         }
     }

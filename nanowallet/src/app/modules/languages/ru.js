@@ -553,6 +553,8 @@ function RussianProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
         ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_VOTING_ERROR: 'Invalid Vote',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Кошелёк успешно создан и загружен!',
@@ -566,6 +568,8 @@ function RussianProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: '*.nty файл успешно загружен!',
         ALERT_INCOMING_TX_FROM: 'Входящая транзакция от ',
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Адресная книга успешно импортирована!',
+        ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+        ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Конвертировать аккаунт в мультиподписной',
@@ -682,7 +686,17 @@ function RussianProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Псевдоним',
         FORM_MESSAGE_PLACEHOLDER: 'Сообщение',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Имя мозайки',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Адрес аккаунта или @псевдоним'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Адрес аккаунта или @псевдоним',
+
+        // VOTING MODULE
+        PORTAL_VOTING_TITLE: 'Voting',
+        PORTAL_VOTING_TEXT: 'Create and vote on polls',
+        PORTAL_VOTING_BTN1: 'See Polls',
+        PORTAL_VOTING_BTN2: 'Create Poll',
+        FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+        FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+        FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }

@@ -20,6 +20,12 @@ NCC is using a different way to generate the remote associated with an account. 
 
 Before update make sure that you don't have any wallets stored into the NanoWallet folder (you can place them anywhere you want). Then, just delete old version and unzip new version.
 
+###  Dashboard is empty and no balance is showing ###
+
+It is probably that the node you are connected to is down.
+Look at the navigation bar, at the top of the page.
+If the circle next to `Node` is red, click on it and select another node from the list.
+
 # Developers #
 
 ### Build from source ###

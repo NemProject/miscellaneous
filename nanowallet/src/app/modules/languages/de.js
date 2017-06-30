@@ -553,6 +553,8 @@ function GermanProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Fehler beim Abrufen des Bitcoin Preises',
         ALERT_COSIG_REMOVAL_LIMIT: 'Es kann jeweils nur ein Mitunterzeichner gleichzeitig entfernt werden',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Ungültige minimale Anzahl von Signaturen',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_VOTING_ERROR: 'Invalid Vote',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Die Wallet wurde erfolgreich Erstellt und geladen !',
@@ -566,6 +568,8 @@ function GermanProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: 'Öffnen der nty Datei war erfolgreich !',
         ALERT_INCOMING_TX_FROM: 'Eingehende Transaktion von ',
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Adressbuch erfolgreich Importiert !',
+        ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+        ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Ein Konto in ein Multi-Signatur Konto umwandeln',
@@ -681,7 +685,17 @@ function GermanProvider($translateProvider) {
         FORM_SIDE_BTN_ALIAS_OF: 'Alias von',
         FORM_MESSAGE_PLACEHOLDER: 'Nachricht',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Name des Mosaik',
-        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Kontoadresse oder @alias'
+        FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Kontoadresse oder @alias',
+
+        // VOTING MODULE
+        PORTAL_VOTING_TITLE: 'Voting',
+        PORTAL_VOTING_TEXT: 'Create and vote on polls',
+        PORTAL_VOTING_BTN1: 'See Polls',
+        PORTAL_VOTING_BTN2: 'Create Poll',
+        FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+        FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+        FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }

@@ -553,6 +553,8 @@ function JapaneseProvider($translateProvider) {
       ALERT_BTC_MARKET_ERROR: 'Bitcoinの価格の取得に失敗しました',
       ALERT_COSIG_REMOVAL_LIMIT: '一度に削除できる署名者は1名だけです',
       ALERT_MULTISIG_MIN_SIGNATURE_INVALID: '最小署名者数が無効な値です',
+      ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+      ALERT_VOTING_ERROR: 'Invalid Vote',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -566,6 +568,8 @@ function JapaneseProvider($translateProvider) {
       ALERT_NTY_FILE_SUCCESS: ".nty ファイルは正常にロードされました。",
       ALERT_INCOMING_TX_FROM: "トランザクションを受信",
       ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'アドレス帳のインポートに成功しました!',
+      ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+      ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
       // CONVERT ACCOUNT TO MULTISIG
       AGGREGATE_MODIFICATION_TITLE: "マルチシグアカウントへ変換",
@@ -683,7 +687,17 @@ function JapaneseProvider($translateProvider) {
       FORM_SIDE_BTN_ALIAS_OF: "エイリアス",
       FORM_MESSAGE_PLACEHOLDER: "メッセージ",
       FORM_MOSAIC_NAME_PLACEHOLDER: "モザイク名",
-      FORM_ADDRESS_ALIAS_PLACEHOLDER: 'アカウントアドレス 又は @エイリアス名'
+      FORM_ADDRESS_ALIAS_PLACEHOLDER: 'アカウントアドレス 又は @エイリアス名',
+
+      // VOTING MODULE
+      PORTAL_VOTING_TITLE: 'Voting',
+      PORTAL_VOTING_TEXT: 'Create and vote on polls',
+      PORTAL_VOTING_BTN1: 'See Polls',
+      PORTAL_VOTING_BTN2: 'Create Poll',
+      FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+      FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+      FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+      FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }

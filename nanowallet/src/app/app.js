@@ -45,6 +45,7 @@ import './modules/importanceTransfer';
 import './modules/changelly';
 import './modules/addressBook';
 import './modules/faq';
+import './modules/voting';
 
 // Create and bootstrap application
 const requires = [
@@ -89,7 +90,9 @@ const requires = [
     'pascalprecht.translate',
     'app.lang',
     'app.changelly',
-    'app.addressBook'
+    'app.addressBook',
+    'app.votingCreatePoll',
+    'app.votingPolls'
 ];
 
 window.$ = window.jQuery = $;

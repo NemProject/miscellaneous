@@ -81,8 +81,8 @@
                     </span>
                     <div class="form-control formFloat" readOnly>
                       <span class="feeAmount">
-                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}} +</span>
-                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}</span>
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
+                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -98,7 +98,7 @@
                     </span>
                     <div class="form-control formFloat" readOnly>
                       <span class="feeAmount">
-                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}</span>
+                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}.{{($ctrl.formData.rentalFee | fmtNemValue)[1]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>

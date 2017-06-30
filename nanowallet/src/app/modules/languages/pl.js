@@ -557,6 +557,8 @@ function PolishProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Błąd przy próbie pobrania ceny Bitcoina',
         ALERT_COSIG_REMOVAL_LIMIT: 'Tylko jeden sygnatariusz może być usunięty za każdym podejściem',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Nieprawidłowa liczba minimum wymaganych sygnatur',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_VOTING_ERROR: 'Invalid Vote',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -570,6 +572,8 @@ function PolishProvider($translateProvider) {
         ALERT_NTY_FILE_SUCCESS: 'Udało się załadować plik nty !',
         ALERT_INCOMING_TX_FROM: 'Transakcja przychodząca od ',
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Książka adresowa została zaimportowana !',
+        ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
+        ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Zamień konto na konto z multipodpisem',
@@ -692,7 +696,17 @@ function PolishProvider($translateProvider) {
         RENEW_NS_INFORMATION_2: 'Jeśli nie zostanie odnowiona na czas, wszystkie sub-namespaces i mozaiki utworzone pod nią zostaną utracone.',
         RENEW_NS_ALERT_PART_1: '<b>OSTRZEŻENIE !</b> Namespace:',
         RENEW_NS_ALERT_PART_2: 'wygaśnie w czasie krótszym niż 1 miesiąc ! ',
-        RENEW_NS_ALERT_PART_3: 'Sprawdź <b>stronę odnawiania</b> by dowiedzieć się więcej.'
+        RENEW_NS_ALERT_PART_3: 'Sprawdź <b>stronę odnawiania</b> by dowiedzieć się więcej.',
+
+        // VOTING MODULE
+        PORTAL_VOTING_TITLE: 'Voting',
+        PORTAL_VOTING_TEXT: 'Create and vote on polls',
+        PORTAL_VOTING_BTN1: 'See Polls',
+        PORTAL_VOTING_BTN2: 'Create Poll',
+        FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
+        FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
+        FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
     });
 
 }

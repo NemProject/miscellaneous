@@ -57,9 +57,54 @@ class NetworkRequests {
      * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
      */
     getAccountData(host, address) {
-    let port = this.getPort();
-      let obj = {'params':{'address':address}};
+        let port = this.getPort();
+        let obj = {'params':{'address':address}};
         return this._$http.get('http://' + host + ':' + port + '/account/get', obj)
+        .then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets the AccountMetaDataPair of an account from a certain block.
+     *
+     * @param {string} host - A host ip or domain
+     * @param {string} address - An account address
+     * @param {integer} block - the block number
+     *
+     * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
+     */
+    getHistoricalAccountData(host, address, block) {
+        let port = this.getPort();
+        let obj = {'params':
+            {
+                'address':address,
+                'startHeight': block,
+                'endHeight': block,
+                'increment': 1
+            }};
+        return this._$http.get('http://' + host + ':' + port + '/account/historical/get', obj)
+            .then(
+                (res) => {
+                    return res;
+                }
+            );
+    }
+
+    /**
+     * Gets the AccountMetaDataPair of an account from public key.
+     *
+     * @param {string} host - A host ip or domain
+     * @param {string} pubkey - An account public Key
+     *
+     * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
+     */
+    getAccountDataFromPublicKey(host, pubKey) {
+        let port = this.getPort();
+        let obj = {'params':{'publicKey':pubKey}};
+        return this._$http.get('http://' + host + ':' + port + '/account/get/from-public-key', obj)
         .then(
             (res) => {
                 return res.data;
@@ -417,6 +462,24 @@ class NetworkRequests {
     }
 
     /**
+     * Gets mosaics owned by an aacount
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     *
+     * @return {object} - An array of Mosaics owned{@link http://bob.nem.ninja/docs/#retrieving-mosaics-that-an-account-owns} objects
+     */
+    getOwnedMosaics(host, address){
+        let port = this.getPort();
+        let obj = {'params':{ 'address': address}};
+        return this._$http.get('http://' + host + ':' + port + '/account/mosaic/owned', obj).then(
+            (res) => {
+                return res.data.data;
+            }
+        );
+    }
+
+    /**
      * Gets all mosaics definitions of an account
      *
      * @param {string} host - An host ip or domain
@@ -447,6 +510,26 @@ class NetworkRequests {
         let port = this.getPort();
         let obj = {'params':{'address':address, 'hash': txHash}};
      return this._$http.get('http://' + host + ':' + port + '/account/transfers/all', obj)
+        .then(
+            (res) => {
+                return res.data;
+            }
+        );
+    }
+
+    /**
+     * Gets all transactions of an account from a transaction ID
+     *
+     * @param {string} host - An host ip or domain
+     * @param {string} address - An account address
+     * @param {string} txID - A starting transaction ID (optional)
+     *
+     * @return {array} - An array of [TransactionMetaDataPair]{@link http://bob.nem.ninja/docs/#transactionMetaDataPair} objects
+     */
+    getAllTransactionsFromID(host, address, txID){
+        let port = this.getPort();
+        let obj = {'params':{'address':address, 'id': txID}};
+        return this._$http.get('http://' + host + ':' + port + '/account/transfers/all', obj)
         .then(
             (res) => {
                 return res.data;
@@ -506,6 +589,44 @@ class NetworkRequests {
         .then((res) => {
                 return res.data;
         });
+    }
+
+    /**
+     * Gets the all supernodes by status
+     *
+     * @param {number} status - 0 for all nodes, 1 for active nodes, 2 for inactive nodes
+     *
+     * @return {array} - An array of supernodeInfo objects
+     */
+    getSupernodesBr(status) {
+        let obj = {
+           "status": undefined === status ? 1 : status
+        }
+        return this._$http.post('http://199.217.113.179:7782/nodes', obj)
+        .then((res) => {
+                return res.data;
+        });
+    }
+
+    /**
+     * Gets a block by its height
+     *
+     * @param {string} host - An host ip or domain
+     * @param {integer} height - the height of the block
+     *
+     * @return {object} - A block object
+     */
+    getBlockByHeight(host, height){
+        let obj = {
+            'height': height
+        };
+        let port = this.getPort();
+        return this._$http.post('http://' + host + ':' + port + '/block/at/public', obj)
+        .then(
+            (res) => {
+                return res;
+            }
+        );
     }
 
 }
