@@ -52,6 +52,7 @@ class createPollCtrl {
         this.hasWhitelist = false;
         this.hasMosaic = false;
         this.doeString = '';
+        this.doeISOString = '';
         this.typeString = this.pollTypes[0];
         this.invalidData = true;
 
@@ -123,8 +124,9 @@ class createPollCtrl {
     }
 
     // Sets the date of ending
-    setDoe() {
+    setDoe(isoString) {
         this.formData.doe = new Date(this.doeString).getTime();
+        this.doeISOString = isoString;
     }
 
     /**
@@ -150,14 +152,15 @@ class createPollCtrl {
             invalid = true;
         } else
             this.issues.blankTitle = false;
-
         //Date valid and > now
-        if (isNaN(this.formData.doe)) {
+        let match = this.doeISOString.match(/^(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d/);
+        if (isNaN(this.formData.doe) || !match) {
             this.issues.invalidDate = true;
             invalid = true;
         } else {
             this.issues.invalidDate = false;
         }
+
         if (this.formData.doe <= Date.now()) {
             this.issues.pastDate = true;
             invalid = true;
