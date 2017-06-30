@@ -64,6 +64,8 @@ class createPollCtrl {
         this.issues.invalidAddresses = [];
         this.issues.invalidIndexAccount = false;
         this.issues.noPassword = true;
+        this.issues.noOptions = false;
+        this.issues.noWhitelist = false;
 
         this.issues.titleTooLong = false;
         this.issues.descriptionTooLong = false;
@@ -188,6 +190,19 @@ class createPollCtrl {
             invalid = true;
         } else {
             this.issues.invalidIndexAccount = false;
+        }
+
+        if (this.options.length === 0) {
+            this.issues.noOptions = true;
+            invalid = true;
+        } else {
+            this.issues.noOptions = false;
+        }
+        if (this.hasWhitelist && this.whitelist.length === 0) {
+            this.issues.noWhitelist = true;
+            invalid = true;
+        } else {
+            this.issues.noWhitelist = false;
         }
         this.invalidData = invalid;
     }
