@@ -32,7 +32,7 @@
               <br>
               <!-- DOE -->
               <label ng-class="($ctrl.issues.invalidDate || $ctrl.issues.pastDate) ? 'has-error' : ''" >Date of Ending</label>
-              <p class="text-muted small">If you only see a text box input a date in a valid ISO format [yyyy-MM-ddTHH:mm:ss], for example: 2017-12-28T14:57:00</p>
+              <p class="text-muted small">If you only see a text box input a date in a valid ISO format [yyyy-MM-ddTHH:mm], for example: 2017-12-28T14:57</p>
               <input type="datetime-local" class="form-control" name="doeInput" ng-model="$ctrl.doeString" ng-class="($ctrl.issues.invalidDate || $ctrl.issues.pastDate) ? 'has-error' : ''" ng-change="$ctrl.setDoe(dataForm.doeInput.$viewValue); $ctrl.checkFormData(); $ctrl.updateMessages();"/>
             </form>
             <br>

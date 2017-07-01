@@ -448,7 +448,8 @@ class nemUtils {
             if (data.length !== 0) {
                 return 2;
             } else {
-                return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1).then((transactions) => {
+                return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1).then((resp) => {
+                    let transactions = resp.data;
                     for (var i = 0; i < transactions.length; i++) {
                         if (transactions[i].transaction.recipient === address2) {
                             return 1;
