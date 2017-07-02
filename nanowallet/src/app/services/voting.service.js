@@ -577,7 +577,7 @@ class Voting {
             return this.pollDetails(pollAddress);
         }).then((data) => {
             details = data;
-            //console.log("detailsPOI->", details);
+            console.log("details->", details);
             //get all Transactions
             for (var i = 0; i < details.options.addresses.length; i++) {
                 optionTransactions.push(this._nemUtils.getTransactionsWithString(details.options.addresses[i], ""));
@@ -775,7 +775,6 @@ class Voting {
             return Math.max.apply(null, data);
         });
     }
-
 }
 
 export default Voting;

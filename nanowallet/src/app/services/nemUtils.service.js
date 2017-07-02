@@ -429,6 +429,23 @@ class nemUtils {
     }
 
     /**
+     * getMultisigTransaction(transaction) returns the inner transaction from a multisig transaction
+     *
+     * @param {object} transaction - the transaction object
+     *
+     * @return {object} - the inner transaction if it is multisig
+     */
+    getMultisigTransaction(transaction){
+        if(transaction.transaction.type === 4100){
+            transaction.transaction = transaction.transaction.otherTrans;
+            return transaction;
+        }
+        else{
+            return transaction;
+        }
+    }
+
+    /**
      * existsTransaction(address1, address2) returns wether address 1 has ever sent a transaction to address2
      *
      * @param {string} address1 - sender address
@@ -449,7 +466,9 @@ class nemUtils {
                 return 2;
             } else {
                 return this._NetworkRequests.getUnconfirmedTxes(helpers.getHostname(this._Wallet.node), address1).then((resp) => {
-                    let transactions = resp.data;
+                    let transactions = resp.data.map((transaction)=>{
+                        return this.getMultisigTransaction(transaction);
+                    });
                     for (var i = 0; i < transactions.length; i++) {
                         if (transactions[i].transaction.recipient === address2) {
                             return 1;
