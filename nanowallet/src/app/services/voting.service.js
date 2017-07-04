@@ -182,7 +182,6 @@ class Voting {
         }
 
         let now = (new Date()).getTime();
-        //console.log("now", now, helpers.toNEMTimeStamp(now))
 
         // Mosaics data
         formData.mosaics = null;
@@ -197,10 +196,11 @@ class Voting {
                 // If code >= 2, it's an error
                 if (res.data.code >= 2) {
                     this._Alert.transactionError(res.data.message);
+                    throw res.data.message;
                 }
             }
-        }, (err) => {
-            this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+        }, (e) => {
+            throw e;
         });
     }
 

@@ -165,7 +165,7 @@ class pollsCtrl {
                     this.voting = false;
                 }).catch((err) => {
                     console.log(err.message);
-                    this._Alert.votingUnexpectedError(err.message);
+                    //this._Alert.votingUnexpectedError(err.message);
                     this.voting = false;
                 }));
             }
@@ -174,6 +174,8 @@ class pollsCtrl {
             this._Alert.votingSuccess();
             this.common.password = '';
             this._scope.$digest();
+        }).catch((err)=>{
+            this.common.password = '';
         });
     }
 
