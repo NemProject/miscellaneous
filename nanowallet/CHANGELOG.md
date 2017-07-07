@@ -3,7 +3,7 @@
 ## Version 1.4.0
 
     - New fee structure (on testnet)
-    - Voting module (on testnet), made by @shierve https://github.com/shierve7
+    - Voting module (on testnet), made by @shierve https://github.com/shierve
     - If user deny geoloc for nearest node, app will select a random supernode
     - Fixed languages
     - Minor fixes and improvements
