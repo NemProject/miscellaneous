@@ -501,12 +501,12 @@ class pollsCtrl {
             this.allPolls = data;
             this.loadingPolls = false;
             this.setTab(1);
+            // apply filters
+            this.updateList();
         }).catch((e)=>{
             this.loadingPolls = false;
             throw e;
         });
-        // apply filters
-        this.updateList();
     }
 
 }
