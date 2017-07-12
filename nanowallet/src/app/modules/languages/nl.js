@@ -128,7 +128,7 @@ function DutchProvider($translateProvider) {
         GENERAL_SUB_NAMESPACE: 'Sub-namespace',
         GENERAL_MOSAICS: 'Mozaïeken',
         GENERAL_VALUE: 'Waarde',
-        GENERAL_CONNECTION_ERROR: 'Er is een foutmelding opgestreden, de node is niet beschikbaar of je bent offline',
+        GENERAL_CONNECTION_ERROR: 'Er is een foutmelding opgetreden, de node is niet beschikbaar of je bent offline',
         GENERAL_HISTORY: 'Historie',
         GENERAL_REVEAL: 'Onthullen',
         GENERAL_QR: 'QR code',
