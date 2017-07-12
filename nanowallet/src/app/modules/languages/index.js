@@ -25,4 +25,7 @@ app.config(JapaneseProvider);
 import RussianProvider from './ru';
 app.config(RussianProvider);
 
+import DutchProvider from './nl';
+app.config(DutchProvider);
+
 export default app;
