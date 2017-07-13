@@ -396,37 +396,37 @@ function DutchProvider($translateProvider) {
         ADDRESS_BOOK_CONFIRM_DELETE: 'Confirm deletion of address book entry',
 
         // EXPLORER MODULE NAV
-        EXPLORER_NAV_HOME: 'Home',
-        EXPLORER_NAV_NSM: 'Namespaces & Mosaics',
+        EXPLORER_NAV_HOME: 'Thuis',
+        EXPLORER_NAV_NSM: 'Namespaces & Mozaïeken',
         EXPLORER_NAV_APOSTILLES: 'Apostilles',
 
         // EXPLORER HOME MODULE
-        EXPLORER_HOME_TITLE: 'Explorer - Home',
-        EXPLORER_HOME_NS: 'Your Namespaces',
-        EXPLORER_HOME_MOSAICS: 'Your Mosaics',
-        EXPLORER_HOME_NS_MULTISIG: 'Multisig Owned Namespaces',
-        EXPLORER_HOME_MOSAICS_LEVY: 'Levy mosaic',
+        EXPLORER_HOME_TITLE: 'Verkenner - Thuis',
+        EXPLORER_HOME_NS: 'Uw namespaces',
+        EXPLORER_HOME_MOSAICS: 'Uw mozaïeken',
+        EXPLORER_HOME_NS_MULTISIG: 'Multi-handtekening namespaces in bezit',
+        EXPLORER_HOME_MOSAICS_LEVY: 'Mozaïekheffing',
 
         // EXPLORER NAMESPACES AND MOSAICS
-        EXPLORER_NS_MOS_TITLE: 'Explorer - Namespaces and Mosaics',
-        EXPLORER_NS_MOS_SELECT_MOS: 'Selected Mosaic Details',
-        EXPLORER_NS_MOS_SEARCH: 'Search namespace',
+        EXPLORER_NS_MOS_TITLE: 'Verkenner - Namespaces and mozaïeken',
+        EXPLORER_NS_MOS_SELECT_MOS: 'Geselecteerde mozaïek details',
+        EXPLORER_NS_MOS_SEARCH: 'Zoek namespace',
 
         // EXPLORER APOSTILLES MODULE
-        EXPLORER_APOSTILLES_TITLE: 'Explorer - Apostilles',
-        EXPLORER_APOSTILLES_YOURS: 'Your apostilles',
-        EXPLORER_APOSTILLES_PUBLIC: 'Public sink',
-        EXPLORER_APOSTILLES_NO_NTY: 'No nty file loaded, please click here to import one.',
+        EXPLORER_APOSTILLES_TITLE: 'Verkenner - Apostilles',
+        EXPLORER_APOSTILLES_YOURS: 'Uw apostilles',
+        EXPLORER_APOSTILLES_PUBLIC: 'Openbare vergaarbak',
+        EXPLORER_APOSTILLES_NO_NTY: 'Geen nty bestand geladen, klik hier om te importeren.',
 
         // ACCOUNT EXPLORER
-        ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
-        ACCOUNTS_EXPLORER_SEARCH: 'Search',
+        ACCOUNTS_EXPLORER_TITLE: 'Vekernner - Accounts',
+        ACCOUNTS_EXPLORER_SEARCH: 'Zoeken',
 
         // APOSTILLE HISTORY MODULE
-        APOSTILLE_HISTORY_TITLE: 'Apostille history',
-        APOSTILLE_HISTORY_BTN_TRANSFER: 'Transfer / Split ownership',
-        APOSTILLE_HISTORY_BACKUP: 'Backup notary data',
-        APOSTILLE_HISTORY_PURGE: 'Purge notary data',
+        APOSTILLE_HISTORY_TITLE: 'Apostille historie',
+        APOSTILLE_HISTORY_BTN_TRANSFER: 'Overdragen / splitsen eigenaarsschap',
+        APOSTILLE_HISTORY_BACKUP: 'Back-up notariële data',
+        APOSTILLE_HISTORY_PURGE: 'Notariële data opschonen',
 
         // CREATE APOSTILLE MODULE
         APOSTILLE_CREATE_TITLE: 'Creëer apostilles',
