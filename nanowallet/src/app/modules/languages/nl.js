@@ -132,7 +132,7 @@ function DutchProvider($translateProvider) {
         GENERAL_HISTORY: 'Historie',
         GENERAL_REVEAL: 'Onthullen',
         GENERAL_QR: 'QR code',
-        GENERAL_UPDATE:  'Update',
+        GENERAL_UPDATE:  'Bijwerken',
         GENERAL_UNKNOWN: 'Onbekend',
         GENERAL_IMPORTANCE: 'Belangrijkheid',
         GENERAL_TRANSACTIONS: 'Transacties',
@@ -223,7 +223,7 @@ function DutchProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Selecteer een multi-handtekening account',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Selecteer een multi-handtekening account om de status weer te geven',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Onthul gedelegeerde privé-sleutel',
-        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Gedelegeerd account sleutel',
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Sleutel van gedelegeerd account ',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Oogststatus',
         IMPORTANCE_TRANSFER_START_HARVESTING: 'Start gedelegeerd oogsten',
         IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop gedelegeerd oogsten',
@@ -461,7 +461,7 @@ function DutchProvider($translateProvider) {
 
         // AUDIT APOSTILLE MODULE
         APOSTILLE_AUDIT_TITLE: 'Audit apostilles',
-        APOSTILLE_AUDIT_CHOOSE_NODE: 'Choose a node',
+        APOSTILLE_AUDIT_CHOOSE_NODE: 'Selecteer een node',
         APOSTILLE_AUDIT_CHOOSE_NODE_NOTE: 'Only a few nodes are able to search into the whole transaction history (option is disabled by default in NIS).', //
         APOSTILLE_AUDIT_WRONG_FORMAT: 'This file is not in apostille format !',
         APOSTILLE_AUDIT_FAIL_NO_PUBLIC_KEY: 'Verification failed, owner has no public key !',
@@ -476,21 +476,21 @@ function DutchProvider($translateProvider) {
         APOSTILLE_AUDIT_INFORMATION_2: 'You can recognize those by the filename:',
         //APOSTILLE_AUDIT_NON_SIGNED: 'Non signed exemple:',
         //APOSTILLE_AUDIT_SIGNED: 'Signed exemple:',
-        APOSTILLE_AUDIT_FILES: 'Audit files',
+        APOSTILLE_AUDIT_FILES: 'Audit-bestanden',
 
         // APOSTILLE MESSAGE MODULE
-        APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',
-        APOSTILLE_MESSAGE_NS_BRAND: 'Use my namespace to brand message',
-        APOSTILLE_MESSAGE_ADD_MOSAIC: 'Add mosaic',
-        APOSTILLE_NTY_ACCOUNT: 'Notarization account',
-        APOSTILLE_REQUEST_MESSAGE: 'Request message',
-        APOSTILLE_CREATE_MESSAGE_REQUEST: 'Create a message request',
+        APOSTILLE_MESSAGE_TITLE: 'Zend een bericht naar een notaris account',
+        APOSTILLE_MESSAGE_NS_BRAND: 'Gebruik mijn namespace om het bericht te markeren',
+        APOSTILLE_MESSAGE_ADD_MOSAIC: 'Voeg mozaïek toe',
+        APOSTILLE_NTY_ACCOUNT: 'Notaris account',
+        APOSTILLE_REQUEST_MESSAGE: 'Berichtverzoek',
+        APOSTILLE_CREATE_MESSAGE_REQUEST: 'Creëer een berichtverzoek',
 
         // TRANSFER APOSTILLE OWNLERSHIP MODULE
-        APOSTILLE_TRANSFER_TITLE: 'Transfer or Split apostille ownership',
+        APOSTILLE_TRANSFER_TITLE: 'Draag over of splits de apostille eigenaarsschap',
 
         // UPADTE APOSTILLE MODULE
-        APOSTILLE_UPDATE_TITLE: 'Update apostille',
+        APOSTILLE_UPDATE_TITLE: 'Apostille bijwerken',
 
         // ERROR ALERTS
         ALERT_MISSING_FORM_DATA: 'Vul het formulier in!',
@@ -615,15 +615,15 @@ function DutchProvider($translateProvider) {
         // SIGNUP MODULE
         SIGNUP_TITLE: 'Nieuw bij NEM?',
         SIGNUP_CREATE_WALLET_TITLE: 'Eenvoudige portemonnee',
-        SIGNUP_PRIVATE_KEY_WALLET_TITLE: 'Privé sleutel portemonnee',
+        SIGNUP_PRIVATE_KEY_WALLET_TITLE: 'Privé-sleutel portemonnee',
         SIGNUP_BRAIN_WALLET_TITLE: 'Brein portomonnee',
         SIGNUP_CREATE_WALLET_BUTTON: 'Maak een eenvoudige portemonnee',
-        SIGNUP_PRIVATE_KEY_WALLET_BUTTON: 'Maak een privé-portemonnee',
+        SIGNUP_PRIVATE_KEY_WALLET_BUTTON: 'Maak een privé-sleutel portemonnee',
         SIGNUP_BRAIN_WALLET_BUTTON: 'Maak een brein portemonnee',
         SIGNUP_CREATE_WALLET_WARNING: 'Lees alstublieft over <a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank"> <b> gevaren </ B> </a> die door de klant gegenereerde sleutels vormen; Wij zijn niet verantwoordelijk voor enig verlies dat zou kunnen zijn door de entropie van de belangrijkste generatie. Zelfs als het onwaarschijnlijk zal gebeuren, wordt het nog steeds aanbevolen om een privé-sleutel te gebruiken die is gegenereerd vanuit een NEM-client (NCC).',
-        SIGNUP_NETWORK_SELECT: 'Selecteer een netwerk', //
-        SIGNUP_BRAIN_WALLET_WARNING: 'Lees alstublieft over <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank"> gevaren </a> die brein portomonnee vormen. Brein portomonnee gebruiken ALLEEN een passphrase hash meerdere keren. Daarom is het van cruciaal belang een SAFE wachtwoordzin te selecteren met minstens 40 karakters. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank"> XKCD # 936 </a>',
-        SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Private sleutel wallets gebruiken ALLEEN een wachtwoord om de geïmporteerde private sleutel te coderen. Daarom is het van cruciaal belang om een veilig wachtwoord te selecteren.',
+        SIGNUP_NETWORK_SELECT: 'Selecteer een netwerk',
+        SIGNUP_BRAIN_WALLET_WARNING: 'Lees alstublieft over <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank"> gevaren </a> die brein portomonnee vormen. Brein portomonnees gebruikt ALLEEN de wachtwoordzin-hash meerdere keren. Daarom is het van cruciaal belang een VEILIGE wachtwoordzin te selecteren met minstens 40 karakters. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank"> XKCD # 936 </a>',
+        SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Privé-sleutel portomonnees gebruiken ALLEEN een wachtwoord om de geïmporteerde privé-sleutel te coderen. Daarom is het van cruciaal belang om een veilig wachtwoord te selecteren.',
         SIGNUP_COMMON_WALLET_WARNING_TITLE: 'Waarschuwing voor de veiligheid van het account',
         SIGNUP_COMMON_WALLET_WARNING_1: 'Portomonnees worden <b> tijdelijk </ b> opgeslagen in de lokale opslagruimte van de browser! Browsers kunnen worden geconfigureerd (bijvoorbeeld door add-ons) om de lokale opslag soms af te schaffen. Dit leidt tot verlies van de gegevens en kan niet gemakkelijk worden ongedaan gemaakt. In zo\'n geval zijn uw portemonnees weg, dus het is heel belangrijk om ervoor te zorgen dat u alle benodigde informatie hebt om uw accounts te herstellen.',
         SIGNUP_COMMON_WALLET_WARNING_2: 'Je zou een download moeten hebben geactiveerd nadat je de portemonnee hebt gemaakt. Het is het bestand <b> <i> .wlt </ i> </ b> dat als back-up wordt gebruikt en terug te importeren als de lokale opslag van uw browser is gewist.',
@@ -632,12 +632,12 @@ function DutchProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_5: 'Het is uw verantwoordelijkheid om altijd ervoor te zorgen dat u uw privé-sleutel back-up hebt gezet voordat u geld naar uw account verzendt.',
         SIGNUP_COMMON_WALLET_WARNING_6: 'Elke portemonnee heeft een <b> <u> primaire private sleutel </ u> </ b> (hierboven wordt weergegeven) die gebruikt wordt om deterministische secundaire accounts te maken (BIP32). Deze functie vereist het gebruik van het <b> <u> zelfde wachtwoord </ u> </ b> of het zal verschillende secundaire accounts genereren voor dezelfde primaire private sleutel. Wanneer u uw gegevens reserveert, vergeet u niet <b> <u> uw wachtwoord op te nemen </ u> </ b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Toon ruw portemonnee bestand',
-        SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'Om een portemonneebestand te maken, maak een leeg tekstbestand en zet de bovenstaande basis 64-sleutel erin. <br> Sla het bestand op als <b> <i> yourWalletName.wlt </ i> </ b> en het kan nu geïmporteerd worden.',
-        SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Toon privé sleutel',
-        SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'Als u van een privé sleutel een back-up wilt maken, sla het op in een tekstbestand, druk het of schrijf het ergens veilig op. <br> Het is aan te bevelen om de privé sleutel offline op te slaan.',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'Om een portemonneebestand te maken, maak een leeg tekstbestand en zet de bovenstaande basis 64-sleutel erin. <br> Sla het bestand op als <b> <i> JePortemonneeNaam.wlt </ i> </ b> en het kan nu geïmporteerd worden.',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Toon privé-sleutel',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'Als u van een privé-sleutel een back-up wilt maken, sla het op in een tekstbestand, druk het of schrijf het ergens veilig op. <br> Het is aan te bevelen om de privé sleutel offline op te slaan.',
         SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'Door hieronder te klikken gaat u akkoord dat u de bovenstaande waarschuwingen hebt gelezen en begrepen.',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'Ik heb mijn portemonneebestand',
-        SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Ik heb mijn privé sleutel en wachtwoord',
+        SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Ik heb mijn privé-sleutel en wachtwoord',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Ik ga akkoord',
 
         // FAQ MODULE
