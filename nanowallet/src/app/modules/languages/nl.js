@@ -347,7 +347,7 @@ function DutchProvider($translateProvider) {
         ACCOUNT_INFO_QR_TITLE: 'Account informatie QR',
         ACCOUNT_WALLET_QR_NOTE: 'De QR werkt alleen in een volgende versie van NEMpay mobiele app',
         ACCOUNT_WALLET_QR_ANDROID_IOS_TITLE: 'Portemonnee QR voor Android & IOS apps',
-        ACCOUNT_ADD_NEW_ACCOUNT_WARNING: 'All accounts are derived from your primary private key and password using BIP32, so both your primary private key and your password are needed to retrieve/recreate all your secondary accounts. <br> It is still <b>highly recommended</b> to backup your wallet after adding new accounts to not repeat the operation again if local storage is erased.',
+        ACCOUNT_ADD_NEW_ACCOUNT_WARNING: 'Alle accounts worden afgeleid van uw primaire privé-sleutel en wachtwoord met behulp van BIP32, dus zowel uw primaire privé-sleutel en uw wachtwoord zijn nodig om al uw secundaire accounts op te herhalen/opnieuw te maken. <br> Het is <b>sterk aanbevolen</b> om opnieuw een back-up van uw portemonnee te maken na het toevoegen van nieuwe accounts.',
         ACCOUNT_CUSTOM_NODE: 'Gebruik aangepaste node',
         ACCOUNT_NODE_FROM_LIST: 'Gebruik node uit de lijst',
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Gedelegeerde privé-sleutel',
