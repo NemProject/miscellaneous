@@ -391,44 +391,19 @@ class Wallet {
         if (!this.decrypt(common, primary, primary.algo, primary.network)) return Promise.reject(true);
         // Current number of accounts in wallet + 1
         let newAccountIndex = Object.keys(this.current.accounts).length;
-        //
-        let newAccount = nem.model.objects.create("account")("", label);
 
-        if (common.isHW) {
-            // Do derivation
-            return Promise.resolve(true);
-        } else {
-            return this.deriveAccount(common, newAccount).then((res) => {
-                // Generate remote for the new account
-                return this.deriveRemote(common, this.current.accounts[newAccountIndex]).then((res) => {
-                    return Promise.resolve(true)
-                },
-                (err) => {
-                    return Promise.reject(true);
-                });
-            }, 
-            (err) => {
-                return Promise.reject(true);
-            })
-        }    
+        return this.deriveAccount(common, label, newAccountIndex);
     }
 
-    /**
-     * Derive a new account from a wallet primary
-     *
-     * @param {object} common - A common object
-     * @param {object} newAccount - An account object
-     *
-     * @return {Promise} - A resolved promise with true if success, or a rejected promise
-     */
-    deriveAccount(common, newAccount) {
+    _deriveAccount(common, label, newAccountIndex) {
         // Account is always derived from the primary
         let primary = this.current.accounts[0];
         // Get private key
         if (!this.decrypt(common, primary, primary.algo, primary.network)) return Promise.reject(false);
 
-        // Current number of accounts in wallet + 1
-        let newAccountIndex = Object.keys(this.current.accounts).length;
+        if (common.isHW) {
+            return Promise.reject(true);
+        }
 
         // Derive the account at new index
         return CryptoHelpers.generateBIP32Data(common.privateKey, common.password, newAccountIndex, this.network).then((data) => {
@@ -436,16 +411,39 @@ class Wallet {
             let generatedPrivateKey = data.privateKey;
             // Encrypt generated account's private key
             let encrypted = nem.crypto.helpers.encodePrivKey(generatedPrivateKey, common.password);
+
             // Update new account object
+            let newAccount = nem.model.objects.create("account")("", label);
             newAccount.address = generatedAccount;
             newAccount.encrypted = encrypted.ciphertext;
             newAccount.iv = encrypted.iv;
+
+            return this.deriveRemote(common, newAccount).then((res) => {
+                return Promise.resolve(newAccount);
+            },
+            (err) => {
+                return Promise.reject(true);
+            });
+        });
+    }
+
+    /**
+     * Derive a new account from a wallet primary and add it to the wallet
+     *
+     * @param {object} common - A common object
+     * @param {number} newAccountIndex - The newAccountIndex of account in wallet
+     *
+     * @return {Promise} - A resolved promise with true if success, or a rejected promise
+     */
+    deriveAccount(common, label, newAccountIndex) {
+        return this._deriveAccount(common, label, newAccountIndex).then((account) => {
             // Set created object in wallet
-            this.current.accounts[newAccountIndex] = newAccount;
+            this.current.accounts[newAccountIndex] = account;
             // Show alert
             this._Alert.generateNewAccountSuccess();
             // Add the account into address book
-            this._AddressBook.addAccount(this.current.accounts[0].address, newAccount);
+            this._AddressBook.addAccount(this.current.accounts[0].address, account);
+
             return Promise.resolve(true);
         },
         (err) => {
