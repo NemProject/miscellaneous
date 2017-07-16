@@ -11,4 +11,8 @@ loginModule.config(loginConfig);
 import LoginCtrl from './login.controller';
 loginModule.controller('LoginCtrl', LoginCtrl);
 
+// Services
+import LoginService from './login.service';
+loginModule.service('Login', LoginService);
+
 export default loginModule;

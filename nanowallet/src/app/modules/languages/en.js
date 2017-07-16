@@ -738,7 +738,12 @@ function EnglishProvider($translateProvider) {
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
-        FORM_SELECT_MULTISIG: 'Select a multisignature account'
+        FORM_SELECT_MULTISIG: 'Select a multisignature account',
+
+        // TREZOR RELATED
+        TREZOR_TITLE: 'TREZOR',
+        TREZOR_TEXT: 'The TREZOR hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        TREZOR_BUTTON: 'Login with TREZOR'
     });
 
 }
