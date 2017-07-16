@@ -362,6 +362,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_NODE_FROM_LIST: 'Use node from list',
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Delegated private key',
         ACCOUNT_NO_PUBLIC_KEY: 'You need to make a transaction to get a public key',
+        ACCOUNT_SHOW_ON_TREZOR_BTN: 'Show on TREZOR',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Services',

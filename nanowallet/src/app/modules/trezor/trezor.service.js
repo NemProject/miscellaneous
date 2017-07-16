@@ -76,6 +76,18 @@ class Trezor {
         });
     }
 
+    showAccount(account) {
+        return new Promise((resolve, reject) => {
+            TrezorConnect.nemGetAddress(account.hdKeypath, account.network, true, (result) => {
+                if (result.success) {
+                    resolve(result.address);
+                } else {
+                    reject(result.error);
+                }
+            });
+        });
+    }
+
     // End methods region //
 
 }
