@@ -7,12 +7,13 @@ class TrezorCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, Alert, Login, Trezor) {
+    constructor(AppConstants, $timeout, Alert, Login, Trezor) {
         'ngInject';
 
         //// Module dependencies region ////
 
         this._AppConstants = AppConstants;
+        this._$timeout = $timeout;
         this._Alert = Alert;
         this._Login = Login;
         this._Trezor = Trezor;
@@ -68,7 +69,9 @@ class TrezorCtrl {
         this._Trezor.createWallet(this.network).then((wallet) => {
             this._Login.login({}, wallet);
         }, (error) => {
-            this._Alert.createWalletFailed(error);
+            this._$timeout(() => {
+                this._Alert.createWalletFailed(error);
+            });
         });
     }
 
