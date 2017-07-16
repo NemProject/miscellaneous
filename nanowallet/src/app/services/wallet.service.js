@@ -10,7 +10,7 @@ class Wallet {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, $localStorage, Alert, $timeout, $q, AddressBook) {
+    constructor(AppConstants, $localStorage, Alert, $timeout, $q, AddressBook, Trezor) {
         'ngInject';
 
         // Service dependencies region //
@@ -21,6 +21,9 @@ class Wallet {
         this._$timeout = $timeout;
         this._$q = $q;
         this._AddressBook = AddressBook;
+
+        // Trezor service
+        this._Trezor = Trezor;
 
         // End dependencies region //
 
@@ -258,6 +261,20 @@ class Wallet {
         return true;
     }
 
+    _transact(common, transaction) {
+        // HW wallet
+        if (common.isHW) {
+            // Serialize, sign and use nem.com.requests.transaction.announce(endpoint, serialized) to broadcast
+            if (this.algo == "trezor") {
+                return this._Trezor.serialize(transaction, this.currentAccount).then((serialized) => {
+                    return nem.com.requests.transaction.announce(this.node, JSON.stringify(serialized));
+                });
+            }
+        }
+        // Normal wallet
+        return nem.model.transactions.send(common, transaction, this.node);
+    }
+
     /**
      * Sign and send a prepared transaction
      *
@@ -267,13 +284,7 @@ class Wallet {
      * @return {boolean} - True if success, false otherwise
      */
     transact(common, transaction) {
-        // HW wallet
-        if (common.isHW) {
-            // Serialize, sign and use nem.com.requests.transaction.announce(endpoint, serialized) to broadcast
-            return Promise.reject(true);
-        }
-        // Normal wallet
-        return nem.model.transactions.send(common, transaction, this.node).then((res) => {
+        return this._transact(common, transaction).then((res) => {
             // If res code >= 2, it's an error
             if (res.code >= 2) {
                 this._Alert.transactionError(res.message);

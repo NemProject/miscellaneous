@@ -59,6 +59,23 @@ class Trezor {
         });
     }
 
+    serialize(transaction, account) {
+        return new Promise((resolve, reject) => {
+            TrezorConnect.nemSignTx(account.hdKeypath, transaction, (result) => {
+                if (result.success) {
+                    resolve(result.message);
+                } else {
+                    reject({
+                        "code": 0,
+                        "data": {
+                            "message": result.error
+                        }
+                    });
+                }
+            });
+        });
+    }
+
     // End methods region //
 
 }
