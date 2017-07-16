@@ -402,7 +402,11 @@ class Wallet {
         if (!this.decrypt(common, primary, primary.algo, primary.network)) return Promise.reject(false);
 
         if (common.isHW) {
-            return Promise.reject(true);
+            if (primary.algo == "trezor") {
+                return this._Trezor.createAccount(primary.network, newAccountIndex, label);
+            } else {
+                return Promise.reject(true);
+            }
         }
 
         // Derive the account at new index
