@@ -201,8 +201,8 @@ function DutchProvider($translateProvider) {
         LINE_TX_DETAILS_MULTISIG_AFFECTED: 'Account beïnvloed',
 
         // IMPORTANCE MODULE
-        IMPORTANCE_TRANSFER_NAME: 'Belangrijke (importance) transactie',
-        IMPORTANCE_TRANSFER_MULTISIG_NAME: 'Belangrijke (importance) multi-handtekening transactie',
+        IMPORTANCE_TRANSFER_NAME: 'Belangrijkheids transactie',
+        IMPORTANCE_TRANSFER_MULTISIG_NAME: 'Belangrijkheids multi-handtekening transactie',
         IMPORTANCE_TRANSFER_MODE: 'Modus',
         IMPORTANCE_TRANSFER_MODE_1: 'Activeren',
         IMPORTANCE_TRANSFER_MODE_2: 'Deactiveren',
