@@ -408,7 +408,7 @@ function DutchProvider($translateProvider) {
         EXPLORER_HOME_MOSAICS_LEVY: 'Mozaiekheffing',
 
         // EXPLORER NAMESPACES AND MOSAICS
-        EXPLORER_NS_MOS_TITLE: 'Verkenner - Namespaces and mozaieken',
+        EXPLORER_NS_MOS_TITLE: 'Verkenner - Namespaces en mozaieken',
         EXPLORER_NS_MOS_SELECT_MOS: 'Geselecteerde mozaiek details',
         EXPLORER_NS_MOS_SEARCH: 'Zoek namespace',
 
