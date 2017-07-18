@@ -419,7 +419,7 @@ function DutchProvider($translateProvider) {
         EXPLORER_APOSTILLES_NO_NTY: 'Geen .nty-bestand geladen, klik hier om te importeren.',
 
         // ACCOUNT EXPLORER
-        ACCOUNTS_EXPLORER_TITLE: 'Vekernner - Accounts',
+        ACCOUNTS_EXPLORER_TITLE: 'Verkenner - Accounts',
         ACCOUNTS_EXPLORER_SEARCH: 'Zoeken',
 
         // APOSTILLE HISTORY MODULE
