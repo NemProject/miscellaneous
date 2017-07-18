@@ -37,6 +37,9 @@ const AppConstants = {
     }, {
         name: "Русский",
         key: "ru"
+    }, {
+        name: "Nederlands",
+        key: "nl"
     }/*, {
         name: "Français",
         key: "fr"
