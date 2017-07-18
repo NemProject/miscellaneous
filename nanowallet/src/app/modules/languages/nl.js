@@ -24,7 +24,7 @@ function DutchProvider($translateProvider) {
         HEADER_NODE_CUSTOM: 'Aangepaste node',
         HEADER_NODE_CONNECT: 'Verbinden',
         HEADER_NODE_CUSTOM_INFO: 'Node ip of domein',
-        HEADER_NODE_CUSTOM_TOOLTIP: 'Vul hier je eigen NIS nide in',
+        HEADER_NODE_CUSTOM_TOOLTIP: 'Vul hier je eigen NIS node in',
         HEADER_PURGE: 'Opschonen',
         HEADER_PURGE_MESSAGE: 'Bevestig het opschonen van de lokale opslag. Door op "OK" te klikken worden alle portemonnees in de lokale opslag verwijderd en kunnen niet worden hersteld. U gaat akkoord dat alle portemonnees zijn gebackupped en uw geld veilig is opgeslagen.',
 
@@ -53,7 +53,7 @@ function DutchProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7d',
         DASHBOARD_MARKET_INFO_NOTE: '<a href="http://coinmarketcap.com/" target="_blank">CoinMarketCap</a> data wordt elke 5 minuten bijgewerkt',
         DASHBOARD_NOTICE_1: 'Welkom bij NanoWallet!',
-        DASHBOARD_NOTICE_2: '<a href="https://github.com/NemProject/NanoWallet" target="_blank">Meldt problemen hier</a>.',
+        DASHBOARD_NOTICE_2: '<a href="https://github.com/NemProject/NanoWallet" target="_blank">Meldt hier problemen</a>.',
         DASHBOARD_NOTICE_3: 'Het NEM-team advisseert u om eerst op het testnet vertrouwd te raken met NanoWallet voordat u het mainnet gaat gebruiken. Een eenvoudige gids vindt u <a href="https://blog.nem.io/nanowallet-tutorial/" target="_blank"> hier</a>. Gebruikers zijn zelf verantwoordelijk voor hun geld en moeten zelf van de persoonlijke sleutels een back-up maken. Het NEM-team is niet verantwoordelijk voor het verlies van geld door deze applicatie op de mainnet te gebruiken.',
         DASHBOARD_NOTICE_4: 'Wij raden u aan om persoonlijke sleutels op papier te zetten en op een veilige plaats op te slaan. Daarnaast kunt u uw accounts importeren in de Android- en iOS-apps als back-up.',
         DASHBOARD_NOTICE_5: 'Bedankt voor je deelname!',
