@@ -470,7 +470,7 @@ class nemUtils {
                         return this.getMultisigTransaction(transaction);
                     });
                     for (var i = 0; i < transactions.length; i++) {
-                        if (transactions[i].transaction.recipient === address2) {
+                        if ((transactions[i].transaction.recipient === address2) && (Address.toAddress(transactions[i].transaction.signer, this._Wallet.network) === address1)) {
                             return 1;
                         }
                     }
