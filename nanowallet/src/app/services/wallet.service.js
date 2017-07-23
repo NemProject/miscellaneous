@@ -261,12 +261,12 @@ class Wallet {
         return true;
     }
 
-    _transact(common, transaction) {
+    _transact(common, transaction, account) {
         // HW wallet
         if (common.isHW) {
             // Serialize, sign and use nem.com.requests.transaction.announce(endpoint, serialized) to broadcast
             if (this.algo == "trezor") {
-                return this._Trezor.serialize(transaction, this.currentAccount).then((serialized) => {
+                return this._Trezor.serialize(transaction, account).then((serialized) => {
                     return nem.com.requests.transaction.announce(this.node, JSON.stringify(serialized));
                 });
             }
@@ -279,12 +279,12 @@ class Wallet {
      * Sign and send a prepared transaction
      *
      * @param {object} common - A common object
-     * @param {object} transaction - A prepared transaction or raw transaction for the HW
+     * @param {object} transaction - A prepared transaction
      *
      * @return {boolean} - True if success, false otherwise
      */
-    transact(common, transaction) {
-        return this._transact(common, transaction).then((res) => {
+    transact(common, transaction, account) {
+        return this._transact(common, transaction, account || this.currentAccount).then((res) => {
             // If res code >= 2, it's an error
             if (res.code >= 2) {
                 this._Alert.transactionError(res.message);
