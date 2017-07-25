@@ -113,6 +113,7 @@ class pollsCtrl {
 
         // for creating indexes
         this.createPrivateIndex = false;
+        this.indexCreationFee = (this._Wallet.network < 0) ? 0.35 : 5;
 
         this.getPolls();
     }
