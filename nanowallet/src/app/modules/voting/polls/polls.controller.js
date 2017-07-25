@@ -86,7 +86,7 @@ class pollsCtrl {
         // Issues for not being able to vote
         this.issues = [];
         this.invalidVote = true;
-        this.alreadyVoted = false;
+        this.alreadyVoted = 0;
         this.pollFinished = false;
 
         // To lock our send button if a transaction is not finished processing
@@ -140,20 +140,26 @@ class pollsCtrl {
         }
         //Get list of addresses from the selected options
         var optionAddresses = [];
+        var optionStrings = [];
         let allAddresses = this.selectedPoll.options.addresses;
+        let allStrings = this.selectedPoll.options.strings;
         if (this.selectedPoll.formData.multiple) {
             optionAddresses = this.selectedOptions.map((i) => {
                 return allAddresses[i];
             });
+            optionStrings = this.selectedOptions.map((i) => {
+                return allStrings[i];
+            });
         } else {
             optionAddresses = [allAddresses[this.selectedOption]];
+            optionStrings = [allStrings[this.selectedOption]];
         }
 
         let votes = [];
         for (var i = 0; i < optionAddresses.length; i++) {
             if (this.multisigVote) {
-                votes.push(this._Voting.vote(optionAddresses[i], this.common, this.multisigAccount).then((data) => {
-                    this.alreadyVoted = true;
+                votes.push(this._Voting.vote(optionAddresses[i], this.common, this.multisigAccount, "vote for poll " + this.currentPollAddress + ' with option "' + optionStrings[i] + '"').then((data) => {
+                    this.alreadyVoted = 1;
                     this.voting = false;
                 }).catch((err) => {
                     console.log(err.message);
@@ -162,7 +168,7 @@ class pollsCtrl {
                 }));
             } else {
                 votes.push(this._Voting.vote(optionAddresses[i], this.common).then((data) => {
-                    this.alreadyVoted = true;
+                    this.alreadyVoted = 1;
                     this.voting = false;
                 }).catch((err) => {
                     console.log(err.message);
@@ -372,13 +378,13 @@ class pollsCtrl {
         this.loadingVote = true;
         if (this.multisigVote) {
             return this._Voting.hasVoted(this.multisigAccount.address, this.selectedPoll).then((resp) => {
-                this.alreadyVoted = (resp > 0);
+                this.alreadyVoted = resp;
                 this.loadingVote = false;
                 this._scope.$digest();
             });
         } else {
             return this._Voting.hasVoted(this._Wallet.currentAccount.address, this.selectedPoll).then((resp) => {
-                this.alreadyVoted = (resp > 0);
+                this.alreadyVoted = resp;
                 this.loadingVote = false;
                 this._scope.$digest();
             });

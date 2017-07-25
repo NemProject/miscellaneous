@@ -158,7 +158,7 @@ class Voting {
      *
      * @return {promise} - returns a promise that resolves when the vote has been sent
      */
-    vote(address, common, multisigAccount) {
+    vote(address, common, multisigAccount, message) {
         this._nemUtils.disableSuccessAlerts();
 
         var formData = {};
@@ -171,12 +171,14 @@ class Voting {
         formData.encryptMessage = false;
 
         // Multisig data
+        formData.innerFee = 0;
         if (!multisigAccount) {
-            formData.innerFee = 0;
             formData.isMultisig = false;
             formData.multisigAccount = '';
         } else {
-            formData.innerFee = 0;
+            if(message){
+                formData.message = message;
+            }
             formData.isMultisig = true;
             formData.multisigAccount = multisigAccount;
         }

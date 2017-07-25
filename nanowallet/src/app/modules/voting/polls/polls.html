@@ -125,7 +125,7 @@
                 <ul class="list-group">
                   <div ng-repeat="option in $ctrl.selectedPoll.options.strings track by $index">
                     <li class="list-group-item">
-                      <input id="{{option}}" type="checkbox" ng-click="$ctrl.toggleSelection($index); $ctrl.checkValidVote()"><label for="{{option}}" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted">{{option}}</label>
+                      <input id="{{option}}" type="checkbox" ng-click="$ctrl.toggleSelection($index); $ctrl.checkValidVote()"><label for="{{option}}" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted > 0">{{option}}</label>
                     </li>
                   </div>
                   <br>
@@ -139,7 +139,7 @@
                       <li class="list-group-item">
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" ng-model="$ctrl.selectedOption" ng-value="$index" ng-click="$ctrl.checkValidVote()" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted">
+                            <input type="radio" name="optionsRadios" ng-model="$ctrl.selectedOption" ng-value="$index" ng-click="$ctrl.checkValidVote()" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted > 0">
                               {{option}}
                           </label>
                         </div>
@@ -150,7 +150,7 @@
                 </ul>
               </div>
               <!-- Password and buttons -->
-              <div ng-hide="$ctrl.alreadyVoted || $ctrl.loadingVote">
+              <div ng-hide="$ctrl.alreadyVoted > 0 || $ctrl.loadingVote || $ctrl.pollFinished">
                 <span class="input-group-btn">
                   <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
                 </span>
@@ -161,10 +161,13 @@
                 <div class="row">
                   <div class="col-md-7" ng-hide="$ctrl.loadingVote">
                     <div ng-hide="$ctrl.alreadyVoted || $ctrl.pollFinished">
-                      <button class="btn btn-success pull-xs-left" type="submit" style="width:90%" ng-click="$ctrl.vote()" ng-disabled="$ctrl.voting || $ctrl.invalidVote || $ctrl.alreadyVoted">Vote</button>
+                      <button class="btn btn-success pull-xs-left" type="submit" style="width:90%" ng-click="$ctrl.vote()" ng-disabled="$ctrl.voting || $ctrl.invalidVote || $ctrl.alreadyVoted > 0">Vote</button>
                     </div>
-                    <div ng-show="$ctrl.alreadyVoted">
+                    <div ng-show="$ctrl.alreadyVoted === 2">
                       <p class="text-success">You have successfully Voted on this Poll</p>
+                    </div>
+                    <div ng-show="$ctrl.alreadyVoted === 1">
+                      <p class="text-warning">You have an unconfirmed Vote on this Poll</p>
                     </div>
                     <div ng-show="$ctrl.pollFinished">
                       <p class="text-danger">This poll has ended</p>
