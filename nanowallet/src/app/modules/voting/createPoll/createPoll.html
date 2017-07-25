@@ -16,9 +16,9 @@
           <div class="panel-body">
             <form name="dataForm">
               <!-- TITLE -->
-              <label ng-class="$ctrl.issues.blankTitle ? 'has-error' : ''" >Title</label>
-              <br>
-              <input type="text" class="form-control" placeholder="{{ 'FORM_TITLE_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.formData.title" ng-class="$ctrl.issues.blankTitle ? 'has-error' : ''" ng-change="$ctrl.checkFormData(); $ctrl.updateMessages();"/>
+              <label ng-class="($ctrl.issues.blankTitle || $ctrl.issues.titleTooLong) ? 'has-error' : ''" >Title</label>
+              <p class="text-muted small">140 characters max</p>
+              <input type="text" class="form-control" placeholder="{{ 'FORM_TITLE_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.formData.title" ng-class="($ctrl.issues.blankTitle || $ctrl.issues.titleTooLong) ? 'has-error' : ''" ng-change="$ctrl.checkFormData(); $ctrl.updateMessages();"/>
               <br>
               <!-- DESCRIPTION -->
               <label ng-class="($ctrl.issues.descriptionTooLong) ? 'has-error' : ''">Description</label>
@@ -27,7 +27,7 @@
               <br>
               <!-- POLL INDEX -->
               <label ng-class="$ctrl.issues.invalidIndexAccount ? 'has-error' : ''" >Poll Index Account</label>
-              <p class="text-muted small">The poll account where the poll will be saved. By default a public one is set.</p></p>
+              <p class="text-muted small">The poll account where the poll will be saved. By default a public one is set.</p>
               <input type="text" class="form-control" ng-model="$ctrl.pollIndexAccount" ng-class="$ctrl.issues.invalidIndexAccount ? 'has-error is-empty' : ''" ng-change="$ctrl.checkFormData()"/>
               <br>
               <!-- DOE -->
@@ -113,6 +113,9 @@
               <i class="fa fa-spinner fa-spin"></i>
             </div>
             <br>
+            <div ng-show="$ctrl.issues.titleTooLong">
+              <p class="text-danger">Title too long</p>
+            </div>
             <div ng-show="$ctrl.issues.descriptionTooLong">
               <p class="text-danger">Description too long</p>
             </div>
@@ -120,7 +123,7 @@
               <p class="text-danger">too many options / options too long</p>
             </div>
             <div ng-show="$ctrl.issues.pollTooLong">
-              <p class="text-danger">Whitelist too long / title too long</p>
+              <p class="text-danger">Whitelist too long</p>
             </div>
           </div>
         </div>

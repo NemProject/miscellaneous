@@ -240,7 +240,7 @@ class createPollCtrl {
         }
         this.pollMessage = "poll:" + JSON.stringify(header);
 
-        this.issues.titleTooLong = (this._nemUtils.getMessageLength(this.formDataMessage) > 1024);
+        this.issues.titleTooLong = (this._nemUtils.getMessageLength(this.formDataMessage) > 1024) || (this.formData.title.length > 140);
         this.issues.descriptionTooLong = (this._nemUtils.getMessageLength(this.descriptionMessage) > 1024);
         this.issues.optionsTooLong = (this._nemUtils.getMessageLength(this.optionsMessage) > 1024);
         this.issues.whitelistTooLong = (this._nemUtils.getMessageLength(this.whitelistMessage) > 1024);
