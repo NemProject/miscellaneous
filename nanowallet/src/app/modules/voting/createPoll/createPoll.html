@@ -17,7 +17,7 @@
             <form name="dataForm">
               <!-- TITLE -->
               <label ng-class="($ctrl.issues.blankTitle || $ctrl.issues.titleTooLong) ? 'has-error' : ''" >Title</label>
-              <p class="text-muted small">140 characters max</p>
+              <br>
               <input type="text" class="form-control" placeholder="{{ 'FORM_TITLE_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.formData.title" ng-class="($ctrl.issues.blankTitle || $ctrl.issues.titleTooLong) ? 'has-error' : ''" ng-change="$ctrl.checkFormData(); $ctrl.updateMessages();"/>
               <br>
               <!-- DESCRIPTION -->
