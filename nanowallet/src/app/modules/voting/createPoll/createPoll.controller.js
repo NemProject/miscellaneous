@@ -240,11 +240,11 @@ class createPollCtrl {
         }
         this.pollMessage = "poll:" + JSON.stringify(header);
 
-        this.issues.titleTooLong = (this.formDataMessage.length > 1024);
-        this.issues.descriptionTooLong = (this.descriptionMessage.length > 1024);
-        this.issues.optionsTooLong = (this.optionsMessage.length > 1024);
-        this.issues.whitelistTooLong = (this.whitelistMessage.length > 1024);
-        this.issues.pollTooLong = (this.pollMessage.length > 1024);
+        this.issues.titleTooLong = (this._nemUtils.getMessageLength(this.formDataMessage) > 1024);
+        this.issues.descriptionTooLong = (this._nemUtils.getMessageLength(this.descriptionMessage) > 1024);
+        this.issues.optionsTooLong = (this._nemUtils.getMessageLength(this.optionsMessage) > 1024);
+        this.issues.whitelistTooLong = (this._nemUtils.getMessageLength(this.whitelistMessage) > 1024);
+        this.issues.pollTooLong = (this._nemUtils.getMessageLength(this.pollMessage) > 1024);
 
         if (this.issues.titleTooLong || this.issues.descriptionTooLong || this.issues.optionsTooLong || this.issues.pollTooLong || (this.issues.whitelistTooLong && this.hasWhitelist))
             this.invalidData = true;

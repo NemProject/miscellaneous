@@ -389,7 +389,7 @@ class nemUtils {
     }
 
     /**
-     * getTransactionFee(message, amount) returns the fee that a message would cost
+     * getMessageFee(message, amount) returns the fee that a message would cost
      *
      * @param {string} message - message to be sent
      * @param {integer} amount - xm amount to be sent
@@ -426,6 +426,41 @@ class nemUtils {
         formData.innerFee = 0;
         formData.fee = entity.fee;
         return formData.fee;
+    }
+
+    /**
+     * getMessageLength(message) returns the real length in bytes for a string
+     *
+     * @param {string} message - message to be sent
+     *
+     * @return {integer} - An integer value that represents the byte length
+     */
+    getMessageLength(message) {
+        var common = {
+            "password": "",
+            "privateKey": ""
+        };
+        var formData = {};
+        formData.rawRecipient = '';
+        formData.recipient = '';
+        formData.recipientPubKey = '';
+        formData.message = message;
+        //var rawAmount = amount;
+        formData.fee = 0;
+        formData.encryptMessage = false;
+        // Multisig data
+        formData.innerFee = 0;
+        formData.isMultisig = false;
+        formData.multisigAccount = '';
+        // Mosaics data
+        var counter = 1;
+        formData.mosaics = null;
+        var mosaicsMetaData = this._DataBridge.mosaicDefinitionMetaDataPair;
+        formData.isMosaicTransfer = false;
+
+        formData.amount = helpers.cleanAmount(0);
+        let entity = this._Transactions.prepareTransfer(common, formData, mosaicsMetaData);
+        return entity.message.payload.length/2;
     }
 
     /**
@@ -489,7 +524,6 @@ class nemUtils {
      */
     getHeightByTimestamp(timestamp) {
         //1.Approximate (60s average block time)
-        console.log("ts", timestamp);
         let nemTimestamp = helpers.toNEMTimeStamp(timestamp);
         let now = helpers.toNEMTimeStamp((new Date()).getTime());
         let elapsed = now - nemTimestamp;
@@ -505,7 +539,7 @@ class nemUtils {
                     let x = Math.floor((nemTimestamp - block.data.timeStamp) / 60);
                     if (x < 0 && x > -5)
                         x = -1;
-                    if (x >= 0 && x < 5)
+                    if (x >= 0 && x <= 5)
                         x = 1;
                     if (block.data.timeStamp <= nemTimestamp) {
                         return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height + 1).then((nextBlock) => {

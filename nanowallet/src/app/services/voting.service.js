@@ -721,7 +721,7 @@ class Voting {
                     "options": []
                 };
                 for (var i = 0; i < details.options.strings.length; i++) {
-                    let percentage = (totalVotes === 0)
+                    let percentage = (totalVotes === 0 || totalImportance === 0)
                         ? (0)
                         : (voteCountsWeighted[i] * 100 / totalImportance);
                     resultsObject.options.push({"text": details.options.strings[i], "votes": voteCounts[i], "weighted": voteCountsWeighted[i], "percentage": percentage});
