@@ -20,6 +20,9 @@ class createPollCtrl {
             return;
         }
 
+        // Scroll to top of the page
+        window.scrollTo(0, 0);
+
         // Constants
         this.MOCK_ADDRESS = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
