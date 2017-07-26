@@ -237,6 +237,7 @@ class pollsCtrl {
         this.inputAddressValid = true;
         this.loadingAddressError = false;
         //check if it is a valid address
+        this.inputAccount = this.inputAccount.toUpperCase().replace(/-/g, '');
         this.inputAddressValid = this._nemUtils.isValidAddress(this.inputAccount);
         if(!this.inputAddressValid){
             this.inputAddressValid = false;
@@ -257,6 +258,7 @@ class pollsCtrl {
         this.inputAddressValid = true;
         this.loadingAddressError = false;
         //check if it is a valid address
+        this.inputAccount = this.inputAccount.toUpperCase().replace(/-/g, '');
         this.inputAddressValid = this._nemUtils.isValidAddress(this.inputAccount);
         if(!this.inputAddressValid){
             this.inputAddressValid = false;
