@@ -5,7 +5,7 @@
  *
  * @type {string}
  */
-let defaultTestnetNode = 'http://bob.nem.ninja:7778';
+let defaultTestnetNode = 'http://23.228.67.85:7778';
 
 /**
  * The default mainnet node
@@ -105,8 +105,6 @@ let mijinSearchNodes = [
  */
 let testnetNodes = [
 	{
-	    uri: 'http://bob.nem.ninja:7778'
-	}, {
 	        uri: 'http://104.128.226.60:7778'
 	}, {
 	        uri: 'http://23.228.67.85:7778'
