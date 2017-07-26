@@ -130,7 +130,7 @@ gulp.task('app', function () {
         buildType: 'versioned',
         winIco: './build/images/logomark.ico',
         macIcns: './build/images/NanoWallet.icns',
-        platforms: ['win64', 'osx64', 'linux32']
+        platforms: ['win64', 'osx64', 'linux64']
     });
     // Log stuff you want
     nw.on('log', function (msg) {
