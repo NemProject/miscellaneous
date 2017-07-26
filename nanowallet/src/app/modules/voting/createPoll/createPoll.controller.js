@@ -32,7 +32,7 @@ class createPollCtrl {
             //this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
         }
         else{
-            this.pollIndexAccount = "NDIXTBITCK6DHIOWXPAVN5DA3JXZYCD7PLAZC6RN";
+            this.pollIndexAccount = "NAZN26HYB7C5HVYVJ4SL3KBTDT773NZBAOMGRFZB";
         }
 
         // names of types
