@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.4.3
+
+    - Voting module on Mainnet
+    - Removed bob.nem.ninja and used MedAlice2 as default testnet node
+    - Minor fixes and improvements
+
 ## Version 1.4.0
 
     - New fee structure (on testnet)
