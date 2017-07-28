@@ -196,12 +196,13 @@ class Voting {
             // Check status
             if (res.status === 200) {
                 // If code >= 2, it's an error
+                console.log("code", res.data.code);
                 if (res.data.code >= 2) {
                     this._Alert.transactionError(res.data.message);
                     throw res.data.message;
                 }
             }
-        }, (e) => {
+        }).catch((e)=>{
             throw e;
         });
     }
@@ -642,7 +643,6 @@ class Voting {
             };
             // merge addresses from all options (they remain sorted)
             var allAddresses = optionAddresses.reduce(merge, []);
-            //console.log("addresses", allAddresses);
             //we don't need to do anything if there are no votes
             if (allAddresses.length === 0) {
                 var resultsObject = {
@@ -686,25 +686,21 @@ class Voting {
                 });
             }
             // Only valid votes now on optionAddresses
+            // to only request once for every address even in multiple votes
+            var uniqueAllAddresses = unique(allAddresses);
 
             // GET IMPORTANCES
-
-            var importances = new Array(allAddresses.length);
-            for (var i = 0; i < allAddresses.length; i++) {
-                importances[i] = this._nemUtils.getImportance(allAddresses[i], endBlock);
-            }
-            return Promise.all(importances).then((importances) => {
+            return this._nemUtils.getImportances(uniqueAllAddresses, endBlock).then((importances) => {
                 for(var i = 0; i < importances.length; i++){
-                    importances[i] /= occurences[allAddresses[i]];
+                    importances[i] /= occurences[uniqueAllAddresses[i]];
                 }
-                //console.log("importances", importances);
                 // calculate the sum of all importances
                 var totalImportance = importances.reduce((a, b) => {
                     return a + b;
                 }, 0);
                 var addressImportances = {}; // maps addresses to their importance
                 for (var i = 0; i < allAddresses.length; i++) {
-                    addressImportances[allAddresses[i]] = importances[i];
+                    addressImportances[uniqueAllAddresses[i]] = importances[i];
                 }
                 //count number of votes for each option
                 var voteCounts = optionAddresses.map((addresses) => {

@@ -161,19 +161,17 @@ class pollsCtrl {
                 votes.push(this._Voting.vote(optionAddresses[i], this.common, this.multisigAccount, "vote for poll " + this.currentPollAddress + ' with option "' + optionStrings[i] + '"').then((data) => {
                     this.alreadyVoted = 1;
                     this.voting = false;
-                }).catch((err) => {
-                    console.log(err.message);
-                    this._Alert.votingUnexpectedError(err.message);
+                }).catch((e) => {
                     this.voting = false;
+                    throw e;
                 }));
             } else {
                 votes.push(this._Voting.vote(optionAddresses[i], this.common).then((data) => {
                     this.alreadyVoted = 1;
                     this.voting = false;
-                }).catch((err) => {
-                    console.log(err.message);
-                    //this._Alert.votingUnexpectedError(err.message);
+                }).catch((e) => {
                     this.voting = false;
+                    throw e;
                 }));
             }
         }
@@ -181,8 +179,12 @@ class pollsCtrl {
             this._Alert.votingSuccess();
             this.common.password = '';
             this._scope.$digest();
-        }).catch((err)=>{
+        }, (e)=>{
+            this.voting = false;
+            throw e;
+        }).catch((e)=>{
             this.common.password = '';
+            this.voting = false;
         });
     }
 

@@ -360,6 +360,30 @@ class nemUtils {
     }
 
     /**
+     * getImportances(timestamp) returns an array of importances for an array of addresses
+     *
+     * @param {array} addresses - array with the addresses you want the importance for
+     * @param {integer} block - the block in which to request importances. Optional
+     *
+     * @return {promise} - a promise that returns an array with all the importances
+     */
+    getImportances(addresses, block) {
+        if (!block || (block < 0)) {
+            return this._NetworkRequests.getBatchAccountData(helpers.getHostname(this._Wallet.node), addresses).then((data) => {
+                return data.map((account)=>{
+                    return account.account.importance;
+                });
+            }).catch();
+        } else {
+            // avoid SPAM filters
+            let promises = addresses.map((address)=>{
+                return this.getImportance(address, block);
+            });
+            return Promise.all(promises);
+        }
+    }
+
+    /**
      * getOwnedMosaics(address) returns the number of a certain mosaic owned by an account
      *
      * @param {string} address - NEM address
