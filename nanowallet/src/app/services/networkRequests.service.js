@@ -84,8 +84,33 @@ class NetworkRequests {
         for(var i = 0; i < addresses.length; i++){
             obj.data.push({'account':addresses[i]});
         }
-        console.log("object", obj);
         return this._$http.post('http://' + host + ':' + port + '/account/get/batch', obj).then((res) => {
+            return res.data.data;
+        });
+    }
+
+    /**
+     * Gets the AccountMetaDataPair of an array of accounts from an historical height.
+     *
+     * @param {string} host - An host ip or domain
+     * @param {array} addresses - An array of account addresses
+     * @param {integer} block - The block height
+     *
+     * @return {object} - ACcount information for all the accounts on the given block
+     */
+    getBatchHistoricalAccountData(host, addresses, block) {
+        let port = this.getPort();
+        let obj = {
+            'accounts':[],
+            'startHeight': block,
+            'endHeight': block,
+            'incrementBy': 1
+        };
+        for(var i = 0; i < addresses.length; i++){
+            obj.accounts.push({'account':addresses[i]});
+        }
+        console.log("object", obj);
+        return this._$http.post('http://' + host + ':' + port + '/account/historical/get/batch', obj).then((res) => {
             return res.data.data;
         });
     }
@@ -95,7 +120,7 @@ class NetworkRequests {
      *
      * @param {string} host - A host ip or domain
      * @param {string} address - An account address
-     * @param {integer} block - the block number
+     * @param {integer} block - the block height
      *
      * @return {object} - An [AccountMetaDataPair]{@link http://bob.nem.ninja/docs/#accountMetaDataPair} object
      */

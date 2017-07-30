@@ -691,6 +691,7 @@ class Voting {
 
             // GET IMPORTANCES
             return this._nemUtils.getImportances(uniqueAllAddresses, endBlock).then((importances) => {
+                console.log("res Importances", importances);
                 for(var i = 0; i < importances.length; i++){
                     importances[i] /= occurences[uniqueAllAddresses[i]];
                 }

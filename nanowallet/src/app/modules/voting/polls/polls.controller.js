@@ -243,6 +243,7 @@ class pollsCtrl {
         this.inputAddressValid = this._nemUtils.isValidAddress(this.inputAccount);
         if(!this.inputAddressValid){
             this.inputAddressValid = false;
+            this.searching = false;
             return;
         }
         this.getPoll(this.inputAccount).then(()=>{
@@ -264,6 +265,7 @@ class pollsCtrl {
         this.inputAddressValid = this._nemUtils.isValidAddress(this.inputAccount);
         if(!this.inputAddressValid){
             this.inputAddressValid = false;
+            this.searching = false;
             return;
         }
         this._nemUtils.getFirstMessageWithString(this.inputAccount, 'pollIndex:').then((message)=>{
@@ -402,6 +404,8 @@ class pollsCtrl {
 
     // for setting polls list tabs
     setTab(tab) {
+        this.inputAddressValid = true;
+        this.loadingAddressError = false;
         this.createIndex = false;
         this.showDetails = false;
         this.tab = tab;

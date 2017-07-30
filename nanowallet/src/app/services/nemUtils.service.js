@@ -344,18 +344,10 @@ class nemUtils {
                 return data.account.importance;
             }).catch();
         } else {
-
-            if (this._Wallet.network < 0) {
-                // Node with historical data activated
-                return this._NetworkRequests.getHistoricalAccountData('104.128.226.60', address, block).then((data) => {
-                    return data.data.data[0].importance;
-                }).catch();
-            } else {
-                // Node with historical data activated
-                return this._NetworkRequests.getHistoricalAccountData('hugealice.nem.ninja', address, block).then((data) => {
-                    return data.data.data[0].importance;
-                }).catch();
-            }
+            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('37.120.167.22');
+            return this._NetworkRequests.getHistoricalAccountData(historicalNode, address, block).then((data) => {
+                return data.data.data[0].importance;
+            }).catch();
         }
     }
 
@@ -375,11 +367,12 @@ class nemUtils {
                 });
             }).catch();
         } else {
-            // avoid SPAM filters
-            let promises = addresses.map((address)=>{
-                return this.getImportance(address, block);
-            });
-            return Promise.all(promises);
+            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('37.120.167.22');
+            return this._NetworkRequests.getBatchHistoricalAccountData(historicalNode, addresses, block).then((data) => {
+                return data.map((account)=>{
+                    return account.data[0].importance;
+                });
+            }).catch();
         }
     }
 
