@@ -370,13 +370,18 @@ class pollsCtrl {
         }).then(()=>{
             this._scope.$digest();
         }).catch((e)=>{
+            this.loadingPoll = false;
             throw e;
         });
     }
 
     // selects a poll by the index on the polls list
     pollSelect(index) {
-        this.getPoll(this.pollsList[index].address);
+        this.getPoll(this.pollsList[index].address).then(()=>{
+            this.loadingAddressError = false;
+        }).catch((e)=>{
+            this.loadingAddressError = true;
+        });
     }
 
     // checks if the currently selected account has voted on the selected poll

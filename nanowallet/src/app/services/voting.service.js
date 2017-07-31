@@ -231,12 +231,22 @@ class Voting {
         var optionsPromise = this._nemUtils.getFirstMessageWithString(pollAddress, "options:", QueryOptions);
 
         return Promise.all([formDataPromise, descriptionPromise, optionsPromise]).then(([formDataResult, descriptionResult, optionsResult]) => {
-            if(formDataResult === ''){
+            if(formDataResult === '' || descriptionResult === '' || optionsResult === ''){
                 throw "Address is not a poll";
             }
             details.formData = (JSON.parse(formDataResult.replace('formData:', '')));
             details.description = (descriptionResult.replace('description:', ''));
             details.options = (JSON.parse(optionsResult.replace('options:', '')));
+
+            const unique = function(list) {
+                return list.sort().filter((item, pos, ary) => {
+                    return !pos || item !== ary[pos - 1];
+                });
+            };
+            if(details.options.addresses.length !== unique(details.options.addresses).length){
+                throw "Poll not well formed";
+            }
+
             if (details.formData.type === 1) {
                 return this._nemUtils.getFirstMessageWithString(pollAddress, "whitelist:", QueryOptions).then((whiteMsg) => {
                     details.whitelist = (JSON.parse(whiteMsg.replace('whitelist:', '')));
@@ -691,7 +701,6 @@ class Voting {
 
             // GET IMPORTANCES
             return this._nemUtils.getImportances(uniqueAllAddresses, endBlock).then((importances) => {
-                console.log("res Importances", importances);
                 for(var i = 0; i < importances.length; i++){
                     importances[i] /= occurences[uniqueAllAddresses[i]];
                 }
