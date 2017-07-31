@@ -344,7 +344,7 @@ class nemUtils {
                 return data.account.importance;
             }).catch();
         } else {
-            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('37.120.167.22');
+            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('88.99.192.82');
             return this._NetworkRequests.getHistoricalAccountData(historicalNode, address, block).then((data) => {
                 return data.data.data[0].importance;
             }).catch();
@@ -367,7 +367,7 @@ class nemUtils {
                 });
             }).catch();
         } else {
-            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('37.120.167.22');
+            let historicalNode = (this._Wallet.network < 0) ? ('104.128.226.60') : ('88.99.192.82');
             return this._NetworkRequests.getBatchHistoricalAccountData(historicalNode, addresses, block).then((data) => {
                 return data.map((account)=>{
                     return account.data[0].importance;
