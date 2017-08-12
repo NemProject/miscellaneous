@@ -162,6 +162,8 @@
                   <div class="col-md-7" ng-hide="$ctrl.loadingVote">
                     <div ng-hide="$ctrl.alreadyVoted || $ctrl.pollFinished">
                       <button class="btn btn-success pull-xs-left" type="submit" style="width:90%" ng-click="$ctrl.vote()" ng-disabled="$ctrl.voting || $ctrl.invalidVote || $ctrl.alreadyVoted > 0">Vote</button>
+                      <br><br>
+                      <p class="text-muted small">Voting has a fee of {{($ctrl.votingFee | fmtNemValue)[0]}}.{{($ctrl.votingFee | fmtNemValue)[1]}} XEM per option</p>
                     </div>
                     <div ng-show="$ctrl.alreadyVoted === 2">
                       <p class="text-success">You have successfully Voted on this Poll</p>
@@ -197,7 +199,7 @@
                         <div ng-repeat="option in $ctrl.results.options track by $index" style="text-align: left">
                           <b><ins>{{option.text}}</ins></b><br>
                           votes: {{option.votes}}<br>
-                          weighted score*: {{($ctrl.selectedPoll.formData.type === 0) ? ((option.weighted*100).toFixed(5)) : (option.weighted)}}<br>
+                          weighted score*: {{($ctrl.selectedPoll.formData.type === 0) ? ((option.weighted*100).toFixed(5) + '%') : (option.weighted)}}<br>
                           percentage: {{option.percentage.toFixed(2)}}<br>
                         </div>
                       </span>

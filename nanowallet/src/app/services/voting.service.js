@@ -664,6 +664,30 @@ class Voting {
                 });
                 return resultsObject;
             }
+            // Invalidate Exchange votes
+            const exchanges = [
+                'NBZMQO7ZPBYNBDUR7F75MAKA2S3DHDCIFG775N3D', //Poloniex
+                'ND2JRPQIWXHKAA26INVGA7SREEUMX5QAI6VU7HNR', //Bittrex
+                'NCP7UH5BT5OHPAWPFFVNR2453BNODJUZJ6777N3N', //HitBTC
+                'NCXDAHKIRVCMS2HEXBHYDSUWXABAYGVNLB3HZFWJ', //HitBTC
+                'NCCFO5QDFV5FS3BTBPEU2QO6UHZD7PHGFNCPISDL', //Bitcoin Indonesia
+                'ND7HQ73YTGNEYJT6PPVOR6GM2RHTVJTNRG2NW5B6', //Btc38
+                'NDKTFWVFDHDUL4L3GXQ32RVOHQ5IJ5DEAYHOJ7YS', //BTER
+                'NC2MYWXT3YOSAIBTWBCW7ZKCE4R4NIKYCF7S76UC', //BTER
+                'NCQJR647FLD7UM6FFVL4Z7DYLWJ3I6OGV5TMALUO', //Changelly
+                'NBLQ6PE7Z5CVANJNXGOR74UQLOJ2YMGJJOZ4YFAQ', //Changelly
+                'NAGJG3QFWYZ37LMI7IQPSGQNYADGSJZGJRD2DIYA', // Zaif
+                'NC3BI3DNMR2PGEOOMP2NKXQGSAKMS7GYRKVA5CSZ', // Coincheck
+            ];
+            optionAddresses = optionAddresses.map((addresses) => {
+                return addresses.filter((address) => {
+                    return (exchanges.indexOf(address) < 0);
+                });
+            });
+            allAddresses = allAddresses.filter((address) => {
+                return (exchanges.indexOf(address) < 0);
+            });
+
             //if not multiple invalidate multiple votes
             let occurences = {};
             if (details.formData.multiple) {

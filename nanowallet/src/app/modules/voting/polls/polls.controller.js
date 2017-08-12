@@ -47,12 +47,13 @@ class pollsCtrl {
         // testnet is -104 and mainnet is 104
         if(this._Wallet.network < 0){
             this.pollIndexAccount = "TAVGTNCVGALLUPZC4JTLKR2WX25RQM2QOK5BHBKC";
-            //this.pollIndexAccount = "TAZ73M4C3QDJRC6NFLQP3HAVW4FHYRWJOE7RASVZ";
         }
         else{
             this.pollIndexAccount = "NAZN26HYB7C5HVYVJ4SL3KBTDT773NZBAOMGRFZB";
         }
         this.pollIndexPrivate = false;
+
+        this.votingFee = this._nemUtils.getMessageFee("");
 
         // Common
         this.common = {

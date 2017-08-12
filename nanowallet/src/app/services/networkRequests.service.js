@@ -109,7 +109,6 @@ class NetworkRequests {
         for(var i = 0; i < addresses.length; i++){
             obj.accounts.push({'account':addresses[i]});
         }
-        console.log("object", obj);
         return this._$http.post('http://' + host + ':' + port + '/account/historical/get/batch', obj).then((res) => {
             return res.data.data;
         });
