@@ -539,7 +539,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_MOSAIC_DESCRIPTION: "モザイクの概要が無効です。",
       ALERT_GET_INCOMING_TXES_ERROR: '入力トランザクションの取得エラー, 理由: ',
       ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'モザイク定義の取得エラー, 理由: ',
-      ALERT_GET_SUB_NS_ERROR: 'モザイク定義の取得エラー（SUB_NS）, 理由: ',
+      ALERT_GET_SUB_NS_ERROR: 'ネームスペース定義の取得エラー（SUB_NS）, 理由: ',
       ALERT_GET_MOSAICS_ERROR: 'モザイク取得エラー, 理由: ',
       ALERT_GET_TRANSACTIONS_ERROR: 'トランザクション取得エラー, 理由: ',
       ALERT_INVALID_ADDRESS_BOOK_FILE: 'これは .adb ファイルではありません!',
