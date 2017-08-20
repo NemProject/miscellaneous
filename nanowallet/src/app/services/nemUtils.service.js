@@ -554,9 +554,9 @@ class nemUtils {
             const findBlock = function(height) {
                 return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height).then((block) => {
                     let x = Math.floor((nemTimestamp - block.data.timeStamp) / 60);
-                    if (x < 0 && x > -5)
+                    if (x < 0 && x > -10)
                         x = -1;
-                    if (x >= 0 && x <= 5)
+                    if (x >= 0 && x <= 10)
                         x = 1;
                     if (block.data.timeStamp <= nemTimestamp) {
                         return this._NetworkRequests.getBlockByHeight(helpers.getHostname(this._Wallet.node), height + 1).then((nextBlock) => {
