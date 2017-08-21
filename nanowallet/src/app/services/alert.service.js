@@ -485,7 +485,8 @@ export default class Alert {
         this._ngToast.create({
             className: 'danger',
             content: this._$filter('translate')('ALERT_NODE_SEEMS_OFFLINE'),
-            dismissOnTimeout: false
+            dismissOnTimeout: false,
+            dismissButton: true,
         });
     }
 
@@ -493,6 +494,17 @@ export default class Alert {
         this._ngToast.create({
             className: 'danger',
             content: this._$filter('translate')('ALERT_WEAK_PASSPHRASE')
+        });
+    }
+
+    brainWalletUpgrade() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_BRAIN_WALLET_UPGRADE'),
+            dismissOnTimeout: false,
+            additionalClasses: 'toast-text-left',
+            dismissButton: true,
+            dismissOnClick: false
         });
     }
 

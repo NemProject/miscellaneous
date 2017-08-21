@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 1.4.10
+
+
+    - New fee structure on Mainnet
+    - Added passphrase strength estimator to brain wallet: https://github.com/dropbox/zxcvbn
+    - Brain wallet passphrase requires 40 characters minimum
+    - Moved purge button into footer
+    - Show an alert asking to change node if not connected within 5 seconds after login
+    - Show an alert if user's brain wallet seems weak (< 40 characters)
+    - Minor fixes and improvements
+
 ## Version 1.4.3
 
     - Voting module on Mainnet
