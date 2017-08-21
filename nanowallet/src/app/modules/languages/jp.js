@@ -561,7 +561,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_BRAIN_PASSWORD_TOO_SHORT: 'ブレインウォレットのパスフレーズは最低でも40文字以上にしてください！',
       ALERT_NODE_SEEMS_OFFLINE: 'ノードがオフラインになっています。別のノードを選択してください。',
       ALERT_WEAK_PASSPHRASE: 'パスフレーズのセキュリティースコアは少なくとも3でなければなりません。',
-      ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/nano-wallet-beta-1-4-3-up-to-500-xem-bug-bounty" target="_blank"><u>here</u></a>.',
+      ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
       ALERT_BRAIN_WALLET_UPGRADE: 'ブレインウォレットのパスフレーズが弱すぎます! 全てのブレインウォレットは、少なくとも40文字以上のパスフレーズを使用する必要があります。<br>アカウント作成ページから新しいウォレットを作成し、それに資金を移すことをお勧めします。<br>詳しくは<a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>をご覧ください。',
 
       // SUCCESS ALERTS
