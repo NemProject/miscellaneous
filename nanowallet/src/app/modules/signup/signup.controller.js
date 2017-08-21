@@ -3,6 +3,7 @@ import Network from '../../utils/Network';
 import helpers from '../../utils/helpers';
 import KeyPair from '../../utils/KeyPair';
 import Address from '../../utils/Address';
+import zxcvbn from 'zxcvbn';
 
 class SignupCtrl {
     constructor(AppConstants, $state, Alert, WalletBuilder, $localStorage, $timeout) {
@@ -51,6 +52,8 @@ class SignupCtrl {
 
         // Default is "create a new wallet" (PRNG)
         this._selectedType = this.walletTypes[0];
+
+        this.passwordStrengthInfo = {};
     }
 
     /**
@@ -195,6 +198,16 @@ class SignupCtrl {
                 return;
             }
 
+            if (this.network === Network.data.Mainnet.id && this.formData.password.length < 40) {
+                this._Alert.brainPasswordTooShort();
+                return;
+            }
+
+            if (this.network === Network.data.Mainnet.id && zxcvbn(this.formData.password).score < 3) {
+                this._Alert.passphraseIsWeak();
+                return;
+            }
+
             this.okPressed = true;
 
                 // Create the wallet from form data
@@ -316,6 +329,13 @@ class SignupCtrl {
         var wordArray = CryptoJS.enc.Utf8.parse(JSON.stringify(wallet));
         // Word array to base64
         return CryptoJS.enc.Base64.stringify(wordArray);
+    }
+
+    /**
+     * Update the passphrase strength information
+     */
+    updatePasswordStrengthInfo() {
+        this.passwordStrengthInfo = zxcvbn(this.formData.password);
     }
 
 }
