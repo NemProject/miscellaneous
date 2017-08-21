@@ -309,7 +309,7 @@ function JapaneseProvider($translateProvider) {
       RENEW_NS_INFORMATION_TITLE_1: '手数料',
       RENEW_NS_INFORMATION_TITLE_2: 'ルートネームスペース',
       RENEW_NS_INFORMATION_TITLE_3: '更新期間',
-      RENEW_NS_INFORMATION_1: 'ネームスペースを更新すると、新しいネームスペースを取得するのと同額のコストがかかります（５０００XEM）.',
+      RENEW_NS_INFORMATION_1: 'ネームスペースを更新すると、新しいネームスペースを取得するのと同額のコストがかかります（100 XEM）.',
       RENEW_NS_INFORMATION_2: 'ルートネームスペースのみを更新する必要があります。すべてのサブネームスペースは、ルートネームスペースの更新時に自動的に更新されます。',
       RENEW_NS_INFORMATION_3: 'ネームスペース契約は、1年間有効なレンタル契約です。契約は有効期限の1ヶ月前から更新することができます。',
       RENEW_NS_INFORMATION_4: '期限内に更新されない場合は、その下に作成されたすべてのサブネームスペースとモザイクが失われます。',
