@@ -145,9 +145,12 @@ function EnglishProvider($translateProvider) {
         GENERAL_SEND_XEM: 'Send XEM',
         GENERAL_ACTIVE: 'Active',
         GENERAL_INACTIVE: 'Inactive',
-        GENERAL_ACTIVATING: "Activating",
-        GENERAL_DEACTIVATING: "Deactivating",
-        GENERAL_REMOTE: "Remote",
+        GENERAL_ACTIVATING: 'Activating',
+        GENERAL_DEACTIVATING: 'Deactivating',
+        GENERAL_REMOTE: 'Remote',
+        GENERAL_WARNING: 'Warning',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Length',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -555,6 +558,9 @@ function EnglishProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
         ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+        ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded!',
@@ -639,6 +645,8 @@ function EnglishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key and password',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'I agree',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',

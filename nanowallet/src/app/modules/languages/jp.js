@@ -148,6 +148,9 @@ function JapaneseProvider($translateProvider) {
       GENERAL_ACTIVATING: "有効化中",
       GENERAL_DEACTIVATING: "無効化中",
       GENERAL_REMOTE: "リモート",
+      GENERAL_WARNING: 'Warning',
+      GENERAL_SCORE: 'Score',
+      GENERAL_LENGTH: 'Length',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全に NanoWallet を使用する事ができません。',
@@ -555,6 +558,9 @@ function JapaneseProvider($translateProvider) {
       ALERT_MULTISIG_MIN_SIGNATURE_INVALID: '最小署名者数が無効な値です',
       ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
       ALERT_VOTING_ERROR: 'Invalid Vote',
+      ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+      ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+      ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -641,6 +647,8 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
+      SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+      SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",
