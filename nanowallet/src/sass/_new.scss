@@ -405,6 +405,15 @@ fieldset .form-control.has-error {
 }
 
 /*** DROPBOX GLOBAL STYLES ***/
+.toast-text-left {
+  text-align: left !important;
+}
+.alert > button.close {
+  opacity: 1;
+}
+.alert a {
+  color: white;
+}
 .drop {
   border: 1px dashed rgb(0, 166, 90);
   min-height: 35px;

@@ -467,7 +467,6 @@ class DataBridge {
         this.networkTime = undefined;
         clearInterval(this.timeSyncInterval);
         clearTimeout(this.connectTimeout);
-        this._Alert.dismiss();
     }
 
     /**

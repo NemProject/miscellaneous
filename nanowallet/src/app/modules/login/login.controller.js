@@ -1,6 +1,7 @@
 import helpers from '../../utils/helpers';
 import CryptoHelpers from '../../utils/CryptoHelpers';
 import Network from '../../utils/Network';
+import zxcvbn from 'zxcvbn';
 
 class LoginCtrl {
     constructor($localStorage, $location, Alert, Wallet, $timeout, AppConstants, Connector, DataBridge) {
@@ -93,6 +94,7 @@ class LoginCtrl {
             this._Alert.mijinDisabled();
             return;
         }
+
         // Check if the wallet have child or upgrade
         if (wallet.accounts[0].child) {
             // Decrypt/generate private key and check it. Returned private key is contained into this.common
@@ -106,6 +108,10 @@ class LoginCtrl {
                 // Enable send button
                 this.okPressed = false;
                 return;
+            }
+            // If brain wallet pass is weak
+            if(wallet.accounts[0].network === Network.data.Mainnet.id && wallet.accounts[0].algo === 'pass:6k' && this.common.password.length < 40) {
+                this._Alert.brainWalletUpgrade();
             }
             // Set the wallet object in Wallet service
             this._Wallet.setWallet(wallet);
