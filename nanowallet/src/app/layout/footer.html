@@ -4,7 +4,10 @@
       {{ 'FOOTER_POWERED_BY_1' | translate }} <b>{{ 'FOOTER_POWERED_BY_2' | translate }}</b>
     </div>
     <div class="col-lg-6 col-sm-6">
-    {{ 'FOOTER_VERSION' | translate }}: <b>{{ $ctrl._AppConstants.version }}</b>
-  </div>
+    	{{ 'FOOTER_VERSION' | translate }}: <b>{{ $ctrl._AppConstants.version }}</b>
+    	<span class="black-tooltip" style="color:red;margin-left:20px;cursor:pointer;" data-toggle="tooltip" title="{{ 'HEADER_PURGE' | translate }}" ng-click="$ctrl.purge();" ng-if="$ctrl._storage.wallets.length" show-authed="false">
+		    <i class="fa fa-trash"></i>
+		  </span>
+  	</div>
   </div>
 </footer>
