@@ -647,8 +647,8 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
-      SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: '推定パスフレーズ強度。',
-      SIGNUP_ESTIMATED_GUESS_TIMES: '推定解析時間。',
+      SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: '推定パスフレーズ強度',
+      SIGNUP_ESTIMATED_GUESS_TIMES: '推定解析時間',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",
