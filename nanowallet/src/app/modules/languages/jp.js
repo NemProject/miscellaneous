@@ -628,7 +628,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_BRAIN_WALLET_BUTTON: "ブレインウォレットを作成",
       SIGNUP_CREATE_WALLET_WARNING: "クライアント側で生成された鍵の<a href=\"https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface\" rel=\"nofollow\" target=\"_blank\">危険性</a>についてお読みください。鍵生成の偏りなどが原因で損失が発生しても保証できません。損失が発生する可能性は極めて低いですが、NEM クライアントから生成された秘密鍵を使用することをお勧めします。",
       SIGNUP_NETWORK_SELECT: "ネットワークを選択してください。",
-      SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはハッシュ化されたパスフェースのみを利用し何度も使用されます。したがって、少なくとも40文字以上の「安全な」パスフェースを選んでください。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
+      SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはハッシュ化されたパスフレーズのみを利用し何度も使用されます。したがって、少なくとも40文字以上の「安全な」パスフレーズを選んでください。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
       SIGNUP_PRIVATE_KEY_WALLET_WARNING: "プライベートキーウォレットは、インポートされた秘密鍵を暗号化するためにパスワードのみを使用します。したがって、「安全な」パスワードを利用する事が重要です。 ",
       //SIGNUP_COMMON_WALLET_WARNING: 'ウォレットは、<a><b>一時的に</b></a>ブラウザ内のローカルストレージに保存されます。ウォレット作成後に自動的にダウンロードされる .wlt ファイルはバックアップとして利用します。ブラウザのローカルストレージが削除された場合は、このファイルからインポート可能です。バックアップとして、.wlt ファイルを保存していない場合は、アカウントにログインして、秘密鍵をコピーし安全な場所にバックアップして下さい。バックアップされている事を確認してから、自己の責任に於いてアカウントに資金を送金してください。',
       //SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記の警告を読み、理解したことに同意したことになります。',
