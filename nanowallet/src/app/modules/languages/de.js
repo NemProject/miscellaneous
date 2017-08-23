@@ -309,7 +309,7 @@ function GermanProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Gebühren',
         RENEW_NS_INFORMATION_TITLE_2: 'Root Namensraum',
         RENEW_NS_INFORMATION_TITLE_3: 'Erneuerungsintervall',
-        RENEW_NS_INFORMATION_1: 'Für die Erneuerung eines Namensraumes fallen wie bei der Registrierung Kosten in Höhe von 5000 XEM an.',
+        RENEW_NS_INFORMATION_1: 'Für die Erneuerung eines Namensraumes fallen wie bei der Registrierung Kosten in Höhe von 100 XEM an.',
         RENEW_NS_INFORMATION_2: 'Eine Erneuerung wird nur bei Root Namensräumen benötigt. Alle dem Namensraum untergeordnete Namensräume werden automatisch mit verlängert.',
         RENEW_NS_INFORMATION_3: 'Namensräume sind Verträge innerhalb der Blockchain mit einer Laufzeit von einem Jahr. Der Vertrag kann einen Monat vor Ablauf verlängert werden. Die Verlängerung kann bis zu einem Monat nach Ablauf des Vertrages durchgeführt werden.',
         RENEW_NS_INFORMATION_4: 'Wird die Verlängerung nicht rechtzeitig abgeschlossen, gehen alle untergeordneten Namensräume sowie alle zugeordneten Mosaike entgültig verloren.',

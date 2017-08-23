@@ -309,7 +309,7 @@ function EnglishProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Fees',
         RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
         RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
-        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 100XEM.',
         RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of the root namespace.',
         RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
         RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be lost.',

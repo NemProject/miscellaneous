@@ -311,7 +311,7 @@ function PolishProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Opłaty',
         RENEW_NS_INFORMATION_TITLE_2: 'Główna Namespace',
         RENEW_NS_INFORMATION_TITLE_3: 'Okres odnowienia',
-        RENEW_NS_INFORMATION_1: 'Odnowienie namespace kosztuje tyle samo co rejestracja nowej namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_1: 'Odnowienie namespace kosztuje tyle samo co rejestracja nowej namespace, 100XEM.',
         RENEW_NS_INFORMATION_2: 'Tylko główne namespace potrzebują odnawiania. Wszystkie sub-namespace zostaną odnowione automatycznie po odnowieniu głównej namespace.',
         RENEW_NS_INFORMATION_3: 'Kotnrakty namespace są kontraktami zapisanymi w łańcuchu ważnymi przez rok. Kontrakt może zostać odnowiony nie wcześniej niż miesiąc przed jego datą wygaśnięcia.',
         RENEW_NS_INFORMATION_4: 'Jeśli nie zostanie odnowiona na czas, wszystkie sub-namespaces i mozaiki utworzone pod nią zostaną utracone.',
