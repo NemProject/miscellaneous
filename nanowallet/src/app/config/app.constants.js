@@ -2,7 +2,7 @@ const AppConstants = {
     //Application name
     appName: 'Nano Wallet',
 
-    version: 'BETA 1.4.10',
+    version: 'BETA 1.4.13',
 
     //Network
     defaultNetwork: 104,
