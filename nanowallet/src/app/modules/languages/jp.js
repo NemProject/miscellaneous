@@ -260,7 +260,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_TITLE: 'モザイクの作成',
       MOSAIC_DEFINITION_INFORMATION: 'モザイクについての詳細',
       MOSAIC_DEFINITION_INFORMATION_1: "モザイク名は32文字が最長です。使用できる文字は以下の通りです。",
-      MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベットから始めて下さい。",
+      MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベット又は数字で始めて下さい。",
       MOSAIC_DEFINITION_INFORMATION_3: "「説明」は512文字以内で記述できます。使用できる文字の制限はありません。",
       MOSAIC_DEFINITION_INFORMATION_4: "モザイクの動作は、プロパティ設定によってカスタマイズする事ができます：",
       MOSAIC_DEFINITION_INFORMATION_5: "供給量はモザイク全体の単位で、最小のサブユニットではありません。\n設定できる最小供給量の範囲は 0～90 億です。",
@@ -299,7 +299,7 @@ function JapaneseProvider($translateProvider) {
       NAMESPACE_PROVISION_NS_NAME: "ネームスペースの名前",
       NAMESPACE_PROVISION_RESTRICTIONS: 'ネームスペースの制限',
       NAMESPACE_PROVISION_INFORMATION_1: "ネームスペースには制約があります。ルートネームスペースは16字以内で、ルート以下のネームスペースは64文字までです。使用できる文字は以下の通りです。",
-      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
+      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベット又は数字で始めて下さい。\’alice\’はルートネームスペースとしては妥当ですが、\'_alice\'では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
       NAMESPACE_PROVISION_INFORMATION_3: 'このリストは最終的なものではなく、将来拡張される事があります。 したがって、\'user.alice\' または \'alice.user\' はNEMのネームスペースでは使用できません。ネームスペースには最大3つの部分で構成されるので、\'gimre.metals.silver\'は有効ですが、\'gimre.metals.silver.coin\' は有効ではありません。',
 
       // RENEW NAMESPACE MODULE
