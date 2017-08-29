@@ -133,8 +133,8 @@ class NamespacesCtrl {
      * @param ns: The namespace name
      */
     namespaceIsValid(ns) {
-        // Test if correct length and if name starts with number or hyphens
-        if (!this.formData.namespaceParent ? ns.length > 16 : ns.length > 64 || /^\d/.test(ns) || /^([_-])/.test(ns)) {
+        // Test if correct length and if name starts with hyphens
+        if ((!this.formData.namespaceParent ? ns.length > 16 : ns.length > 64) || /^([_-])/.test(ns)) {
             return false;
         }
         let pattern = /^[a-z0-9.\-_]*$/;
