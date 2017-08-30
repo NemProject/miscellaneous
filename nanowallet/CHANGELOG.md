@@ -1,7 +1,12 @@
 # Changelog
 
-## Version 1.4.10
+## Version 1.4.13
 
+    - Allow sub-namespaces and mosaic names to start with a number
+    - Fix secondary accounts: In **occasional** cases, secondary accounts private keys can start with '00' but BIP32 was omitting it, giving a 62 characters private key. Those **secondary accounts** will fail to send anything out even if password is valid (but recoverable).
+    - Update languages
+
+## Version 1.4.10
 
     - New fee structure on Mainnet
     - Added passphrase strength estimator to brain wallet: https://github.com/dropbox/zxcvbn
