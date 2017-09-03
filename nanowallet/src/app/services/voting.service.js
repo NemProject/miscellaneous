@@ -109,7 +109,6 @@ class Voting {
             }
             let optionsObj = {
                 strings: details.options,
-                addresses: OptionAddresses,
                 link: linkObj
             };
             var optionsMessage = "options:" + JSON.stringify(optionsObj);
@@ -249,7 +248,16 @@ class Voting {
                     return !pos || item !== ary[pos - 1];
                 });
             };
-            if(details.options.addresses.length !== unique(details.options.addresses).length){
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
+            if(orderedAddresses.length !== unique(orderedAddresses).length){
                 throw "Poll not well formed";
             }
 
@@ -304,7 +312,7 @@ class Voting {
             else{
                 orderedAddresses = details.options.addresses;
             }
-            for (var i = 0; i < details.options.addresses.length; i++) {
+            for (var i = 0; i < orderedAddresses.length; i++) {
                 optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
@@ -616,7 +624,7 @@ class Voting {
             else{
                 orderedAddresses = details.options.addresses;
             }
-            for (var i = 0; i < details.options.addresses.length; i++) {
+            for (var i = 0; i < orderedAddresses.length; i++) {
                 optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
@@ -823,8 +831,16 @@ class Voting {
      *                          2 if there is a confirmed vote
      */
     hasVoted(address, pollDetails) {
-        var addresses = pollDetails.options.addresses;
-        var confirmedPromises = addresses.map((optionAddress) => {
+        var orderedAddresses = [];
+        if(pollDetails.options.link){
+            orderedAddresses = pollDetails.options.strings.map((option)=>{
+                return pollDetails.options.link[option];
+            });
+        }
+        else{
+            orderedAddresses = pollDetails.options.addresses;
+        }
+        var confirmedPromises = orderedAddresses.map((optionAddress) => {
             return this._nemUtils.existsTransaction(address, optionAddress);
         });
         return Promise.all(confirmedPromises).then((data) => {

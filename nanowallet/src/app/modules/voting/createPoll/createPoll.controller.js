@@ -226,9 +226,6 @@ class createPollCtrl {
         }
         let optionsObj = {
             strings: this.options,
-            addresses: this.options.map((acc) => {
-                return this.MOCK_ADDRESS
-            }),
             link: linkMock
         };
         this.optionsMessage = "options:" + JSON.stringify(optionsObj);
