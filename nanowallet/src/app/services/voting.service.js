@@ -96,15 +96,21 @@ class Voting {
             return Promise.all(addresses);
         }).then((data) => {
             OptionAccounts = data;
+            var OptionAddresses = OptionAccounts.map((acc) => {
+                return acc.address
+            });
             //console.log("addresses", OptionAccounts);
             //GENERATE ALL THE MESSAGES
             var formDataMessage = "formData:" + JSON.stringify(details.formData);
             var descriptionMessage = "description:" + details.description;
+            let linkObj = {};
+            for(var i = 0; i < details.options.length; i++){
+                linkObj[details.options[i]] = OptionAddresses[i];
+            }
             let optionsObj = {
                 strings: details.options,
-                addresses: OptionAccounts.map((acc) => {
-                    return acc.address
-                })
+                addresses: OptionAddresses,
+                link: linkObj
             };
             var optionsMessage = "options:" + JSON.stringify(optionsObj);
             details.whitelist = details.whitelist.map((address) => {
@@ -289,8 +295,17 @@ class Voting {
         }).then((data) => {
             details = data;
             //get all Transactions
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
             for (var i = 0; i < details.options.addresses.length; i++) {
-                optionTransactions.push(this._nemUtils.getTransactionsWithString(details.options.addresses[i], ""));
+                optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
         }).then((data) => {
@@ -592,8 +607,17 @@ class Voting {
             details = data;
             console.log("details->", details);
             //get all Transactions
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
             for (var i = 0; i < details.options.addresses.length; i++) {
-                optionTransactions.push(this._nemUtils.getTransactionsWithString(details.options.addresses[i], ""));
+                optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
         }).then((data) => {
