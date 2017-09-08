@@ -274,7 +274,7 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'There are two fee types supported, absolute fee and percentile fee.',
         MOSAIC_DEFINITION_INFORMATION_14: 'The fee is specified as absolute quantity and thus does not depend on the quantity that is transferred.',
         MOSAIC_DEFINITION_INFORMATION_15: 'The fee is specified as multiple of the percentile of the quantity that is transferred. The fee is thus linearly increasing with the transferred mosaic quantity.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 1 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 0.05 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Change mosaic supply',
