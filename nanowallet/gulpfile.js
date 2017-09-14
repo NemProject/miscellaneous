@@ -124,7 +124,7 @@ gulp.task('views', function() {
 // Build App
 gulp.task('app', function () {
     var nw = new NwBuilder({
-        version: '0.14.6',
+        version: '0.25.0',
         files: './build/**',
         buildDir: './dist',
         buildType: 'versioned',
