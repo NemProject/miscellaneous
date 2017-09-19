@@ -274,7 +274,7 @@ function ChineseProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: '支持百分比和绝对值两种征费类型。',
         MOSAIC_DEFINITION_INFORMATION_14: '征费已选择使用绝对值，它将不取决于传输的量。',
         MOSAIC_DEFINITION_INFORMATION_15: '征费已选择为百分比。费用将随传输的量线性增加。',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 1 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 0.05 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: '变更马赛克供应量',

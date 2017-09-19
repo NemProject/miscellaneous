@@ -274,7 +274,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_13: "手数料の種類: 固定徴収方式とパーセンタイル徴収方式の2種類があります。",
       MOSAIC_DEFINITION_INFORMATION_14: "固定徴収方式の場合、徴収額は転送される量に依存しません。",
       MOSAIC_DEFINITION_INFORMATION_15: "パーセンタイル徴収方式の場合、徴収額は送信するモザイクの量に従って変化します。",
-      MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり1XEMが定額手数料となります。",
+      MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり0.05 XEMが定額手数料となります。",
 
       // EDIT MOSAIC MODULE
       MOSAIC_SUPPLY_CHANGE_TITLE: "モザイク供給量を変更",
