@@ -710,6 +710,16 @@ class Voting {
                 'NBLQ6PE7Z5CVANJNXGOR74UQLOJ2YMGJJOZ4YFAQ', //Changelly
                 'NAGJG3QFWYZ37LMI7IQPSGQNYADGSJZGJRD2DIYA', // Zaif
                 'NC3BI3DNMR2PGEOOMP2NKXQGSAKMS7GYRKVA5CSZ', // Coincheck
+                'NBRT3YQTVHLTYBDUXH2HHURI5KCYDWRWJ63YWIGG', //Yobit
+                'NBIBCNWDFAVVL3ARQTTQQJW7YAFB4TQDJ54YEMFP', //Poloniex
+                'NB3WWRCS56X7VQOKBJYCFDKZQF2UWJ3P77X7PBZC', //Bittrex
+                'NDGMCX74ANWTJ5E5DUOCP4WBKG5TI5S4N2VE3R2Q', //hitbtc
+                'NDGT3D6D2Z3HIQPX7XYZYG3SEDLVH2WP3VOYHVDX', //bitcoinio
+                'NCU7ZB7O7L4YRZHGY72NZPLNFWPZTQ2XVWSQLXHE', //btc38
+                'NAAX6TXVUEO4KP42CSFXASC6U2OFX5SNUHZNH5PF', //BTER
+                'NDWO7474V2MDVTXMIJRRPGZ7KEQBRQMRT46IE6P6', //cryptopia
+                'NDGIBNJP2GATIWTQZC4UIDGTTME7HE4YSBO2275H', //curex
+                'NABIYGNJNKPXW2KTRR5VHVQ3ZT6O4363Q4RCKCOQ', //changelly
             ];
             optionAddresses = optionAddresses.map((addresses) => {
                 return addresses.filter((address) => {
