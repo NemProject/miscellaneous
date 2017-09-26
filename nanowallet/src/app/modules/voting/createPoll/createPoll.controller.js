@@ -220,11 +220,13 @@ class createPollCtrl {
             delete formDataClone.mosaic;
         this.formDataMessage = "formData:" + JSON.stringify(formDataClone);
         this.descriptionMessage = "description:" + this.description;
+        let linkMock = {};
+        for(var i = 0; i < this.options.length; i++){
+            linkMock[this.options[i]] = this.MOCK_ADDRESS;
+        }
         let optionsObj = {
             strings: this.options,
-            addresses: this.options.map((acc) => {
-                return this.MOCK_ADDRESS
-            })
+            link: linkMock
         };
         this.optionsMessage = "options:" + JSON.stringify(optionsObj);
         this.whitelistMessage = "whitelist:" + JSON.stringify(this.whitelist.map((address) => {

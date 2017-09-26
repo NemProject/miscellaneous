@@ -96,15 +96,20 @@ class Voting {
             return Promise.all(addresses);
         }).then((data) => {
             OptionAccounts = data;
+            var OptionAddresses = OptionAccounts.map((acc) => {
+                return acc.address
+            });
             //console.log("addresses", OptionAccounts);
             //GENERATE ALL THE MESSAGES
             var formDataMessage = "formData:" + JSON.stringify(details.formData);
             var descriptionMessage = "description:" + details.description;
+            let linkObj = {};
+            for(var i = 0; i < details.options.length; i++){
+                linkObj[details.options[i]] = OptionAddresses[i];
+            }
             let optionsObj = {
                 strings: details.options,
-                addresses: OptionAccounts.map((acc) => {
-                    return acc.address
-                })
+                link: linkObj
             };
             var optionsMessage = "options:" + JSON.stringify(optionsObj);
             details.whitelist = details.whitelist.map((address) => {
@@ -243,7 +248,16 @@ class Voting {
                     return !pos || item !== ary[pos - 1];
                 });
             };
-            if(details.options.addresses.length !== unique(details.options.addresses).length){
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
+            if(orderedAddresses.length !== unique(orderedAddresses).length){
                 throw "Poll not well formed";
             }
 
@@ -289,8 +303,17 @@ class Voting {
         }).then((data) => {
             details = data;
             //get all Transactions
-            for (var i = 0; i < details.options.addresses.length; i++) {
-                optionTransactions.push(this._nemUtils.getTransactionsWithString(details.options.addresses[i], ""));
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
+            for (var i = 0; i < orderedAddresses.length; i++) {
+                optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
         }).then((data) => {
@@ -592,13 +615,23 @@ class Voting {
             details = data;
             console.log("details->", details);
             //get all Transactions
-            for (var i = 0; i < details.options.addresses.length; i++) {
-                optionTransactions.push(this._nemUtils.getTransactionsWithString(details.options.addresses[i], ""));
+            var orderedAddresses = [];
+            if(details.options.link){
+                orderedAddresses = details.options.strings.map((option)=>{
+                    return details.options.link[option];
+                });
+            }
+            else{
+                orderedAddresses = details.options.addresses;
+            }
+            for (var i = 0; i < orderedAddresses.length; i++) {
+                optionTransactions.push(this._nemUtils.getTransactionsWithString(orderedAddresses[i], ""));
             }
             return Promise.all(optionTransactions)
         }).then((data) => {
             optionTransactions = data;
             //console.log("optionTransactions", optionTransactions);
+            // Filter only the ones that voted before ending
             if (end) {
                 optionTransactions = optionTransactions.map((transactions) => {
                     return transactions.filter((transaction) => {
@@ -608,6 +641,12 @@ class Voting {
             } else {
                 end = -1;
             }
+            // Only ransactions with 0 xem and 0 mosaics (Invalidates votes from exchanges and other cheating attempts)
+            optionTransactions = optionTransactions.map((transactions) => {
+                return transactions.filter((transaction) => {
+                    return (transaction.transaction.amount === 0) && (!transaction.transaction.mosaics);
+                });
+            })
             var optionAddresses = [];
             for (var i = 0; i < optionTransactions.length; i++) {
                 //convert public keys to addresses
@@ -664,29 +703,6 @@ class Voting {
                 });
                 return resultsObject;
             }
-            // Invalidate Exchange votes
-            const exchanges = [
-                'NBZMQO7ZPBYNBDUR7F75MAKA2S3DHDCIFG775N3D', //Poloniex
-                'ND2JRPQIWXHKAA26INVGA7SREEUMX5QAI6VU7HNR', //Bittrex
-                'NCP7UH5BT5OHPAWPFFVNR2453BNODJUZJ6777N3N', //HitBTC
-                'NCXDAHKIRVCMS2HEXBHYDSUWXABAYGVNLB3HZFWJ', //HitBTC
-                'NCCFO5QDFV5FS3BTBPEU2QO6UHZD7PHGFNCPISDL', //Bitcoin Indonesia
-                'ND7HQ73YTGNEYJT6PPVOR6GM2RHTVJTNRG2NW5B6', //Btc38
-                'NDKTFWVFDHDUL4L3GXQ32RVOHQ5IJ5DEAYHOJ7YS', //BTER
-                'NC2MYWXT3YOSAIBTWBCW7ZKCE4R4NIKYCF7S76UC', //BTER
-                'NCQJR647FLD7UM6FFVL4Z7DYLWJ3I6OGV5TMALUO', //Changelly
-                'NBLQ6PE7Z5CVANJNXGOR74UQLOJ2YMGJJOZ4YFAQ', //Changelly
-                'NAGJG3QFWYZ37LMI7IQPSGQNYADGSJZGJRD2DIYA', // Zaif
-                'NC3BI3DNMR2PGEOOMP2NKXQGSAKMS7GYRKVA5CSZ', // Coincheck
-            ];
-            optionAddresses = optionAddresses.map((addresses) => {
-                return addresses.filter((address) => {
-                    return (exchanges.indexOf(address) < 0);
-                });
-            });
-            allAddresses = allAddresses.filter((address) => {
-                return (exchanges.indexOf(address) < 0);
-            });
 
             //if not multiple invalidate multiple votes
             let occurences = {};
@@ -799,8 +815,16 @@ class Voting {
      *                          2 if there is a confirmed vote
      */
     hasVoted(address, pollDetails) {
-        var addresses = pollDetails.options.addresses;
-        var confirmedPromises = addresses.map((optionAddress) => {
+        var orderedAddresses = [];
+        if(pollDetails.options.link){
+            orderedAddresses = pollDetails.options.strings.map((option)=>{
+                return pollDetails.options.link[option];
+            });
+        }
+        else{
+            orderedAddresses = pollDetails.options.addresses;
+        }
+        var confirmedPromises = orderedAddresses.map((optionAddress) => {
             return this._nemUtils.existsTransaction(address, optionAddress);
         });
         return Promise.all(confirmedPromises).then((data) => {

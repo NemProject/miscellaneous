@@ -142,17 +142,30 @@ class pollsCtrl {
         //Get list of addresses from the selected options
         var optionAddresses = [];
         var optionStrings = [];
-        let allAddresses = this.selectedPoll.options.addresses;
+        let allAddresses = this.selectedPoll.options.addresses; //will be null for old format polls
         let allStrings = this.selectedPoll.options.strings;
+        if(this.selectedPoll.options.link){ // not true if it is an old format poll
+            var link = this.selectedPoll.options.link;
+        }
         if (this.selectedPoll.formData.multiple) {
             optionAddresses = this.selectedOptions.map((i) => {
-                return allAddresses[i];
+                if(link){
+                    return link[allStrings[i]];
+                }
+                else{ //For compatibility with old polls
+                    return allAddresses[i];
+                }
             });
             optionStrings = this.selectedOptions.map((i) => {
                 return allStrings[i];
             });
         } else {
-            optionAddresses = [allAddresses[this.selectedOption]];
+            if(link){
+                optionAddresses = [link[allStrings[this.selectedOption]]];
+            }
+            else{
+                optionAddresses = [allAddresses[this.selectedOption]];
+            }
             optionStrings = [allStrings[this.selectedOption]];
         }
 
@@ -381,6 +394,7 @@ class pollsCtrl {
         this.getPoll(this.pollsList[index].address).then(()=>{
             this.loadingAddressError = false;
         }).catch((e)=>{
+            console.log("pollselect");
             this.loadingAddressError = true;
         });
     }
