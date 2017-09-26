@@ -148,6 +148,9 @@ function JapaneseProvider($translateProvider) {
       GENERAL_ACTIVATING: "有効化中",
       GENERAL_DEACTIVATING: "無効化中",
       GENERAL_REMOTE: "リモート",
+      GENERAL_WARNING: '警告',
+      GENERAL_SCORE: 'スコア',
+      GENERAL_LENGTH: '長さ',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全に NanoWallet を使用する事ができません。',
@@ -164,7 +167,7 @@ function JapaneseProvider($translateProvider) {
       TRANSFER_TRANSACTION_ATTACH: "添付",
       TRANSFER_TRANSACTION_MOSAICS_ATTACHED: "添付するモザイク",
       TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: "メッセージを暗号化",
-      TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
+      TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex メッセージ',
       TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'ネットワーク上に受信者の公開鍵がありません',
       TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: "マルチシグアカウントを介した暗号化メッセージはありません",
 
@@ -175,9 +178,9 @@ function JapaneseProvider($translateProvider) {
       LINE_TX_DETAILS_NEED_SIG: "複数署名を要求",
       LINE_TX_DETAILS_NEED_SIG_2: "このトランザクションはあなたの署名を必要としています。",
       LINE_TX_DETAILS_MESS_ENC: "暗号化されている",
-      LINE_TX_DETAILS_MESS_DEC: "復号化する",
+      LINE_TX_DETAILS_MESS_DEC: "復号する",
       LINE_TX_DETAILS_HASH: "ハッシュ",
-      LINE_TX_DETAILS_DEC_MESS: "メッセージを復号化",
+      LINE_TX_DETAILS_DEC_MESS: "メッセージを復号",
       LINE_TX_DETAILS_MOS_ATTACHED: "添付されたモザイク",
       LINE_TX_DETAILS_LEVY_TYPE_1: "コンスタント（定額）",
       LINE_TX_DETAILS_LEVY_TYPE_2: "パーセンタイル",
@@ -224,7 +227,7 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください。",
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
-      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベストの状況',
+      IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベスティング',
       IMPORTANCE_TRANSFER_START_HARVESTING: 'デリゲートハーベスティングの開始',
       IMPORTANCE_TRANSFER_STOP_HARVESTING: 'デリゲートハーベスティングの停止',
 
@@ -257,7 +260,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_TITLE: 'モザイクの作成',
       MOSAIC_DEFINITION_INFORMATION: 'モザイクについての詳細',
       MOSAIC_DEFINITION_INFORMATION_1: "モザイク名は32文字が最長です。使用できる文字は以下の通りです。",
-      MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベットから始めて下さい。",
+      MOSAIC_DEFINITION_INFORMATION_2: "最初の文字はアルファベット又は数字で始めて下さい。",
       MOSAIC_DEFINITION_INFORMATION_3: "「説明」は512文字以内で記述できます。使用できる文字の制限はありません。",
       MOSAIC_DEFINITION_INFORMATION_4: "モザイクの動作は、プロパティ設定によってカスタマイズする事ができます：",
       MOSAIC_DEFINITION_INFORMATION_5: "供給量はモザイク全体の単位で、最小のサブユニットではありません。\n設定できる最小供給量の範囲は 0～90 億です。",
@@ -271,7 +274,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_13: "手数料の種類: 固定徴収方式とパーセンタイル徴収方式の2種類があります。",
       MOSAIC_DEFINITION_INFORMATION_14: "固定徴収方式の場合、徴収額は転送される量に依存しません。",
       MOSAIC_DEFINITION_INFORMATION_15: "パーセンタイル徴収方式の場合、徴収額は送信するモザイクの量に従って変化します。",
-      MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり1XEMが定額手数料となります。",
+      MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり0.05 XEMが定額手数料となります。",
 
       // EDIT MOSAIC MODULE
       MOSAIC_SUPPLY_CHANGE_TITLE: "モザイク供給量を変更",
@@ -296,7 +299,7 @@ function JapaneseProvider($translateProvider) {
       NAMESPACE_PROVISION_NS_NAME: "ネームスペースの名前",
       NAMESPACE_PROVISION_RESTRICTIONS: 'ネームスペースの制限',
       NAMESPACE_PROVISION_INFORMATION_1: "ネームスペースには制約があります。ルートネームスペースは16字以内で、ルート以下のネームスペースは64文字までです。使用できる文字は以下の通りです。",
-      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベットで始めて下さい。’alice’はルートネームスペースとしては妥当ですが、'1alice'では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
+      NAMESPACE_PROVISION_INFORMATION_2: "ネームスペースの頭文字はアルファベット又は数字で始めて下さい。\’alice\’はルートネームスペースとしては妥当ですが、\'_alice\'では作成できません。予約語（システムとして既に使われている文字列）もネームスペースとしては認められません。許可されない語は以下の通りです。",
       NAMESPACE_PROVISION_INFORMATION_3: 'このリストは最終的なものではなく、将来拡張される事があります。 したがって、\'user.alice\' または \'alice.user\' はNEMのネームスペースでは使用できません。ネームスペースには最大3つの部分で構成されるので、\'gimre.metals.silver\'は有効ですが、\'gimre.metals.silver.coin\' は有効ではありません。',
 
       // RENEW NAMESPACE MODULE
@@ -306,7 +309,7 @@ function JapaneseProvider($translateProvider) {
       RENEW_NS_INFORMATION_TITLE_1: '手数料',
       RENEW_NS_INFORMATION_TITLE_2: 'ルートネームスペース',
       RENEW_NS_INFORMATION_TITLE_3: '更新期間',
-      RENEW_NS_INFORMATION_1: 'ネームスペースを更新すると、新しいネームスペースを取得するのと同額のコストがかかります（５０００XEM）.',
+      RENEW_NS_INFORMATION_1: 'ネームスペースを更新すると、新しいネームスペースを取得するのと同額のコストがかかります（100 XEM）.',
       RENEW_NS_INFORMATION_2: 'ルートネームスペースのみを更新する必要があります。すべてのサブネームスペースは、ルートネームスペースの更新時に自動的に更新されます。',
       RENEW_NS_INFORMATION_3: 'ネームスペース契約は、1年間有効なレンタル契約です。契約は有効期限の1ヶ月前から更新することができます。',
       RENEW_NS_INFORMATION_4: '期限内に更新されない場合は、その下に作成されたすべてのサブネームスペースとモザイクが失われます。',
@@ -324,7 +327,7 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_DELEGATED_PUBLIC: "委任公開鍵",
       ACCOUNT_HARVESTED_BLOCKS: "ハーベストされたブロック",
       ACCOUNT_START_STOP_HARVESTING: "デリゲートハーベスティングを開始 / 停止",
-      ACCOUNT_HARVESTING_NOTE: "このアカウントでハーベストに利用したノードは、<b>ブラウザのローカルストレージ</b>に保存されます。ブラウザのローカルストレージが削除されると、NanoWallet はどのノードを利用していたのかわからない為、<b>ハーベストの状況</b>に<b>無効</b>と表示されます。この場合、使用していたノードを再度選択すると、収穫情報が自動的に復元されます。ステータスが復元されない場合は、正しいノードが選択されているかを確認してください。それ以外の場合は、ノードが再起動されたために、このアカウントでハーベストされていないことを意味します。",
+      ACCOUNT_HARVESTING_NOTE: "このアカウントでハーベストに利用したノードは、<b>ブラウザのローカルストレージ</b>に保存されます。ブラウザのローカルストレージが削除されると、NanoWallet はどのノードを利用していたのかわからない為、<b>ハーベスティング</b>に<b>無効</b>と表示されます。この場合、使用していたノードを再度選択すると、収穫情報が自動的に復元されます。ステータスが復元されない場合は、正しいノードが選択されているかを確認してください。それ以外の場合は、ノードが再起動されたために、このアカウントでハーベストされていないことを意味します。",
       ACCOUNT_HARVESTING_NODE_SELECT: "ハーベストを行うノードを選択",
       ACCOUNT_HARVESTING_START: "デリゲートハーベスティング（委任収穫）を開始",
       ACCOUNT_HARVESTING_STOP: "デリゲートハーベスティング（委任収穫）を停止",
@@ -533,13 +536,13 @@ function JapaneseProvider($translateProvider) {
       ALERT_MULTISIG_CANNOT_BE_COSIG: "このマルチシグアカウントに連署者を設定できません。",
       ALERT_PURGE_CANCELLED: "アカウントデータ消去処理（パージ）はキャンセルされました。",
       ALERT_MAINNET_DISABLED: "Mainnetは無効です。別のネットワークを選択してください。",
-      ALERT_EMPTY_DECODED_MSG: "複合化されたメッセージはありません。",
+      ALERT_EMPTY_DECODED_MSG: "復号されたメッセージはありません。",
       ALERT_INVALID_NS_NAME: "ネームスペース名が無効です。",
       ALERT_INVALID_MOSAIC_NAME: "モザイク名が無効です。",
       ALERT_MOSAIC_DESCRIPTION: "モザイクの概要が無効です。",
       ALERT_GET_INCOMING_TXES_ERROR: '入力トランザクションの取得エラー, 理由: ',
       ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'モザイク定義の取得エラー, 理由: ',
-      ALERT_GET_SUB_NS_ERROR: 'モザイク定義の取得エラー（SUB_NS）, 理由: ',
+      ALERT_GET_SUB_NS_ERROR: 'ネームスペース定義の取得エラー（SUB_NS）, 理由: ',
       ALERT_GET_MOSAICS_ERROR: 'モザイク取得エラー, 理由: ',
       ALERT_GET_TRANSACTIONS_ERROR: 'トランザクション取得エラー, 理由: ',
       ALERT_INVALID_ADDRESS_BOOK_FILE: 'これは .adb ファイルではありません!',
@@ -555,6 +558,10 @@ function JapaneseProvider($translateProvider) {
       ALERT_MULTISIG_MIN_SIGNATURE_INVALID: '最小署名者数が無効な値です',
       ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
       ALERT_VOTING_ERROR: 'Invalid Vote',
+      ALERT_BRAIN_PASSWORD_TOO_SHORT: 'ブレインウォレットのパスフレーズは最低でも40文字以上にしてください！',
+      ALERT_NODE_SEEMS_OFFLINE: 'ノードがオフラインになっています。別のノードを選択してください。',
+      ALERT_WEAK_PASSPHRASE: 'パスフレーズのセキュリティースコアは少なくとも3でなければなりません。',
+      ALERT_BRAIN_WALLET_UPGRADE: 'ブレインウォレットのパスフレーズが弱すぎます! 全てのブレインウォレットは、少なくとも40文字以上のパスフレーズを使用する必要があります。<br>アカウント作成ページから新しいウォレットを作成し、それに資金を移すことをお勧めします。<br>詳しくは<a href="https://forum.nem.io/t/2791" target="_blank"><u>こちら</u></a>をご覧ください。',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -622,7 +629,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_BRAIN_WALLET_BUTTON: "ブレインウォレットを作成",
       SIGNUP_CREATE_WALLET_WARNING: "クライアント側で生成された鍵の<a href=\"https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface\" rel=\"nofollow\" target=\"_blank\">危険性</a>についてお読みください。鍵生成の偏りなどが原因で損失が発生しても保証できません。損失が発生する可能性は極めて低いですが、NEM クライアントから生成された秘密鍵を使用することをお勧めします。",
       SIGNUP_NETWORK_SELECT: "ネットワークを選択してください。",
-      SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはハッシュ化されたパスフェースのみを利用し何度も使用されます。したがって、少なくとも40文字以上の「安全な」パスフェースを選んでください。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
+      SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはハッシュ化されたパスフレーズのみを利用し何度も使用されます。したがって、少なくとも40文字以上の「安全な」パスフレーズを選んでください。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
       SIGNUP_PRIVATE_KEY_WALLET_WARNING: "プライベートキーウォレットは、インポートされた秘密鍵を暗号化するためにパスワードのみを使用します。したがって、「安全な」パスワードを利用する事が重要です。 ",
       //SIGNUP_COMMON_WALLET_WARNING: 'ウォレットは、<a><b>一時的に</b></a>ブラウザ内のローカルストレージに保存されます。ウォレット作成後に自動的にダウンロードされる .wlt ファイルはバックアップとして利用します。ブラウザのローカルストレージが削除された場合は、このファイルからインポート可能です。バックアップとして、.wlt ファイルを保存していない場合は、アカウントにログインして、秘密鍵をコピーし安全な場所にバックアップして下さい。バックアップされている事を確認してから、自己の責任に於いてアカウントに資金を送金してください。',
       //SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記の警告を読み、理解したことに同意したことになります。',
@@ -641,6 +648,8 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
+      SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: '推定パスフレーズ強度',
+      SIGNUP_ESTIMATED_GUESS_TIMES: '推定解析時間',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",

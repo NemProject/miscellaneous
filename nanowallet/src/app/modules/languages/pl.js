@@ -148,6 +148,9 @@ function PolishProvider($translateProvider) {
         GENERAL_ACTIVATING: 'Aktywowanie',
         GENERAL_DEACTIVATING: 'Dezaktywacja',
         GENERAL_REMOTE: 'Zdalny',
+        GENERAL_WARNING: 'Warning',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Length',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Przykro nam, ale nie możesz bezpiecznie użyć Nano Wallet\'a za pomocą tej przeglądarki...',
@@ -223,7 +226,7 @@ function PolishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Wybierz konto z multipodpisem',
         IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Wybierz konto z multipodpisem aby zobaczyć status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Odsłoń delegowany klucz prywatny.',
-        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegowane klucze konta.',
+        IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Klucze konta delegowanego.',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Status zbierania',
         IMPORTANCE_TRANSFER_START_HARVESTING: 'Zacznij delegowane zbieranie.',
         IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Zakończ delegowane zbieranie.',
@@ -271,7 +274,7 @@ function PolishProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'Dostępne są dwa rodzaje opłat: stała i procentowa.',
         MOSAIC_DEFINITION_INFORMATION_14: 'Opłata jest określona jako stała, a więc nie jest uzależniona od ilości mozaiki, która jest przekazywana.',
         MOSAIC_DEFINITION_INFORMATION_15: 'Opłata jest określona jako iloczn oprocentowania i transferowanej ilości. Wobc tego opłata wzrasta liniowo wraz z ilością transferowanej mozaiki.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Wysyłanie mozaiki na blockchainie NEM wymaga opłaty. Dokładna wartość opłaty jest obliczana w zależności od ich łącznej liczby i ilości wysyłanej podczas transakcji. <b>Mozaiki małych firm</b> otrzymują tańszą, stałą stawkę 1 XEM za transfer mozaiki. To mozaiki z ilością mniejszą niż 10 000 i podzielnością 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Wysyłanie mozaiki na blockchainie NEM wymaga opłaty. Dokładna wartość opłaty jest obliczana w zależności od ich łącznej liczby i ilości wysyłanej podczas transakcji. <b>Mozaiki małych firm</b> otrzymują tańszą, stałą stawkę 0.05 XEM za transfer mozaiki. To mozaiki z ilością mniejszą niż 10 000 i podzielnością 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Zmień ilość mozaiki',
@@ -308,7 +311,7 @@ function PolishProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Opłaty',
         RENEW_NS_INFORMATION_TITLE_2: 'Główna Namespace',
         RENEW_NS_INFORMATION_TITLE_3: 'Okres odnowienia',
-        RENEW_NS_INFORMATION_1: 'Odnowienie namespace kosztuje tyle samo co rejestracja nowej namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_1: 'Odnowienie namespace kosztuje tyle samo co rejestracja nowej namespace, 100XEM.',
         RENEW_NS_INFORMATION_2: 'Tylko główne namespace potrzebują odnawiania. Wszystkie sub-namespace zostaną odnowione automatycznie po odnowieniu głównej namespace.',
         RENEW_NS_INFORMATION_3: 'Kotnrakty namespace są kontraktami zapisanymi w łańcuchu ważnymi przez rok. Kontrakt może zostać odnowiony nie wcześniej niż miesiąc przed jego datą wygaśnięcia.',
         RENEW_NS_INFORMATION_4: 'Jeśli nie zostanie odnowiona na czas, wszystkie sub-namespaces i mozaiki utworzone pod nią zostaną utracone.',
@@ -490,7 +493,7 @@ function PolishProvider($translateProvider) {
         APOSTILLE_CREATE_MESSAGE_REQUEST: 'Stwórz żądanie wiadomości',
 
         // TRANSFER APOSTILLE OWNLERSHIP MODULE
-        APOSTILLE_TRANSFER_TITLE: 'Transfer lub podział własniści apostille\'a',
+        APOSTILLE_TRANSFER_TITLE: 'Transfer lub podział własności apostille\'a',
 
         // UPADTE APOSTILLE MODULE
         APOSTILLE_UPDATE_TITLE: 'Zaktualizuj apostille',
@@ -543,7 +546,7 @@ function PolishProvider($translateProvider) {
         //ALERT_GET_INCOMING_TXES_ERROR: 'Wystąpił błąd podczas próby pobrania przychodzących transakcji, zmień serwer lub sprawdź połączenie i spróbuj ponownie',
         ALERT_GET_INCOMING_TXES_ERROR: 'Wystąpił błąd podczas próby pobrania transakcji przychodzących, powód: ',
         ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Błąd przy pobieraniu definicji mozaiki, powód: ',
-        ALERT_GET_SUB_NS_ERROR: 'Błąd przy pobieraniu definicji mozaiki, powód: ',
+        ALERT_GET_SUB_NS_ERROR: 'Błąd przy pobieraniu definicji namespace, powód: ',
         ALERT_GET_MOSAICS_ERROR: 'Błąd przy pobieraniu mozaiki, powód: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Błąd przy pobieraniu transakcji, powód: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'Ten plik nie posiada formatu .adb !',
@@ -553,12 +556,16 @@ function PolishProvider($translateProvider) {
         ALERT_FILE_SIZE_ERROR: ' jest za duży, maksymalny dozwolony rozmiar pliku to 100 MB',
         ALERT_MESSAGE_DECODE_KEY_ERROR: 'Odkodowanie wiadomości nie powiodło się, konto nie posiada klucza publicznego widocznego w sieci',
         ALERT_FETCH_TIME_SYNC_ERROR: 'Wystąpił błąd przy pobieraniu czasu sieci !',
-        ALERT_MULTISIG_MIN_SIGNATURE: 'Konto wielowyrazowe wymaga przynajmniej jednego podpisu',
+        ALERT_MULTISIG_MIN_SIGNATURE: 'Konto z multipodpisem wymaga przynajmniej jednego podpisu',
         ALERT_BTC_MARKET_ERROR: 'Błąd przy próbie pobrania ceny Bitcoina',
         ALERT_COSIG_REMOVAL_LIMIT: 'Tylko jeden sygnatariusz może być usunięty za każdym podejściem',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Nieprawidłowa liczba minimum wymaganych sygnatur',
         ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+        ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -633,15 +640,17 @@ function PolishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_3: 'Jeśli nie pobrałeś pliku <b><i>.wlt</i></b>, kliknij na przycisk poniżej by odsłonić dane portfela i stworzyć plik manualnie:',
         SIGNUP_COMMON_WALLET_WARNING_4: 'Nawet jeżeli posiadasz plik portfela jest <b><u>wymagane</u></b> stworzenie kopii zapasowej klucza prywatnego, kliknij na przysk poniżej by go odsłonić:',
         SIGNUP_COMMON_WALLET_WARNING_5: 'Na użytkowniku leży odpowiedzialność posiadania kopii klucza prywatnego przed zdeponowaniem środków na koncie.',
-        SIGNUP_COMMON_WALLET_WARNING_6: 'Każdy portfel posiada <b><u>główny klucz prywatny</u></b> (Twój znajduje się powyżej), który służy do stworzenia zależnych kont podrzędnych (BIP32). Ta cecha wymaga użycia <b><u>tego samego hasła</u></b> lub wygeneruje ona inne konta podrzędne dla teg samego klucza prywatnego. Podczas tworzenia kopii zapasowej danych nie zapomnij <b><u>zanotować swojego hasła</u></b>.',
+        SIGNUP_COMMON_WALLET_WARNING_6: 'Każdy portfel posiada <b><u>główny klucz prywatny</u></b> (Twój znajduje się powyżej), który służy do stworzenia zależnych kont podrzędnych (BIP32). Ta cecha wymaga użycia <b><u>tego samego hasła</u></b> lub wygeneruje ona inne konta podrzędne dla tego samego klucza prywatnego. Podczas tworzenia kopii zapasowej danych nie zapomnij <b><u>zanotować swojego hasła</u></b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Pokaż czysty plik portfela',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'By stworzyć plik portfela, utwórz pusty plik tekstowy i skopiuj do niego powyższy klucz base 64. <br>Zapisz plik jako <b><i>Twoja_nazwa_porfela.wlt</i></b> by był możliwy do zaimportowania.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Pokaż klucz prywatny',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'By stworzyć kopię zapasową klucza prywatnego, zapisz go w pliku tekstowym, wydrukuj lub zapisz na kartce. <br>Sugerowane jest przechowywanie klucza prywatnego offline.',
-        SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'Klikanięcie poniże stanowi potwierdzenie przeczytania i zrozumienia powyższych ostrzeżeń.',
+        SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'Kliknięcie poniżej stanowi potwierdzenie przeczytania i zrozumienia powyższych ostrzeżeń.',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'Posiadam plik portfela',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Posiadam klucz prywatny',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Zgadzam się',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
         // FAQ MODULE
         FAQ_TITLE: 'Często zadawane pytania',

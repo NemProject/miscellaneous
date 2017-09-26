@@ -148,6 +148,9 @@ function ChineseProvider($translateProvider) {
         GENERAL_ACTIVATING: "Activating",
         GENERAL_DEACTIVATING: "Deactivating",
         GENERAL_REMOTE: "Remote",
+        GENERAL_WARNING: 'Warning',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Length',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -271,7 +274,7 @@ function ChineseProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: '支持百分比和绝对值两种征费类型。',
         MOSAIC_DEFINITION_INFORMATION_14: '征费已选择使用绝对值，它将不取决于传输的量。',
         MOSAIC_DEFINITION_INFORMATION_15: '征费已选择为百分比。费用将随传输的量线性增加。',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 1 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 0.05 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: '变更马赛克供应量',
@@ -308,7 +311,7 @@ function ChineseProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Fees',
         RENEW_NS_INFORMATION_TITLE_2: 'Root Namespaces',
         RENEW_NS_INFORMATION_TITLE_3: 'Renewal Period',
-        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_1: 'Renewing a namespace costs the same amount as registering a new namespace, 100XEM.',
         RENEW_NS_INFORMATION_2: 'Only root namespaces need to be renewed. All sub-namepsaces will be renewed automatically upon renewal of root namespace.',
         RENEW_NS_INFORMATION_3: 'Namespace contracts are on-chain rental contracts good for one year. The contract may be renewed one month prior to or after their expiration date.',
         RENEW_NS_INFORMATION_4: 'If not renewed in time, all sub-namespaces and mosaics created under it will be losts.',
@@ -561,6 +564,10 @@ function ChineseProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
         ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+        ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -644,6 +651,8 @@ function ChineseProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'I agree',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
         // FAQ MODULE
         FAQ_TITLE: '疑难解答',

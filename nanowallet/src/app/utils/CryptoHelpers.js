@@ -451,14 +451,16 @@ function updateResult(bip32_source_key, bip32_derivation_path, k_index, i_index,
         return reject("No private key available");
     }
 
-    let account = KeyPair.create(Crypto.util.bytesToHex(result.eckey.priv.toByteArrayUnsigned()));
+    // Fix the private key if leading '00' is omitted
+    let privateKey = ("0000000000000000000000000000000000000000000000000000000000000000" + Crypto.util.bytesToHex(result.eckey.priv.toByteArrayUnsigned()).replace(/^00/, '')).slice(-64);
+    let account = KeyPair.create(privateKey);
     let address = Address.toAddress(account.publicKey.toString(), network);
     console.log('BIP32 account generated: ' + address);
 
     return resolve({
         seed: bip32_source_key.extended_private_key_string("base58"),
         address: address,
-        privateKey: Crypto.util.bytesToHex(result.eckey.priv.toByteArrayUnsigned()),
+        privateKey: privateKey,
         publicKey: account.publicKey.toString()
     });
 }

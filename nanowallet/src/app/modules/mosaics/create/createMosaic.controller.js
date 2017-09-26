@@ -164,8 +164,8 @@ class createMosaicCtrl {
      * mosaicIsValid() Check validity of mosaic name
      */
     mosaicIsValid(m) {
-        // Test if correct length and if name starts with number or hyphens
-        if (m.length > 32 || /^\d/.test(m) || /^([_-])/.test(m)) {
+        // Test if correct length and if name starts with hyphens
+        if (m.length > 32 || /^([_-])/.test(m)) {
             return false;
         }
         let pattern = /^[a-z0-9\-_]*$/;

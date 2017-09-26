@@ -81,7 +81,7 @@ class Transactions {
         let totalFee = 0;
         let fee = 0;
         let supplyRelatedAdjustment = 0;
-        let factor = this._Wallet.network === Network.data.Testnet.id ? 0.05 : 1;
+        let factor = 0.05;
         for (let i = 0; i < attachedMosaics.length; i++) {
             let m = attachedMosaics[i];
             let mosaicName = helpers.mosaicIdToName(m.mosaicId);
@@ -110,7 +110,7 @@ class Transactions {
                 }
                 totalFee += factor * Math.max(1, fee - supplyRelatedAdjustment);
         }
-        return this._Wallet.network === Network.data.Testnet.id ? totalFee : Math.max(1, totalFee);
+        return totalFee;
     }
 
     /**
@@ -128,7 +128,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigTransaction, senderPublicKey, timeStamp, due, version);
         let custom = {
-            'fee': this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : 6000000,
+            'fee': 0.15 * 1000000,
             'otherTrans': innerEntity
         };
         let entity = $.extend(data, custom);
@@ -184,8 +184,8 @@ class Transactions {
         let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = mosaics ? this.CURRENT_NETWORK_VERSION(2) : this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.Transfer, senderPublicKey, timeStamp, due, version);
-        let msgFee = message.payload.length ? this._Wallet.network === Network.data.Testnet.id ? 0.05 * Math.max(1, Math.floor((message.payload.length / 2) / 32) + 1) : Math.max(1, Math.floor((message.payload.length / 2) / 32) + 1) : 0;
-        let fee = mosaics ? mosaicsFee : this._Wallet.network === Network.data.Testnet.id ? 0.05 * helpers.calcMinFee(amount / 1000000) : helpers.calcMinFee(amount / 1000000);
+        let msgFee = message.payload.length ? 0.05 * Math.max(1, Math.floor((message.payload.length / 2) / 32) + 1) : 0;
+        let fee = mosaics ? mosaicsFee : 0.05 * helpers.calcMinFee(amount / 1000000);
         let totalFee = (msgFee + fee) * 1000000;
         let custom = {
             'recipient': recipientCompressedKey.toUpperCase().replace(/-/g, ''),
@@ -212,7 +212,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(2);
         let due = this._Wallet.network === Network.data.Testnet.id ? 60 : 24 * 60;
         let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
-        let totalFee = this._Wallet.network === Network.data.Testnet.id ? 0.5 * 1000000 : (10 + 6 * signatoryArray.length + 6) * 1000000;
+        let totalFee = 0.5 * 1000000;
         let custom = {
             'fee': totalFee,
             'modifications': [],
@@ -266,13 +266,13 @@ class Transactions {
         }
         let data = this.CREATE_DATA(TransactionTypes.MultisigModification, tx.multisigPubKey, timeStamp, due, version);
         if (tx.minCosigs === null || tx.minCosigs === 0) {
-            totalFee = this._Wallet.network === Network.data.Testnet.id ? 0.5 * 1000000 : (10 + 6 * signatoryArray.length) * 1000000;
+            totalFee = 0.5 * 1000000;
             custom = {
                 'fee': totalFee,
                 'modifications': []
             };
         } else {
-            totalFee = this._Wallet.network === Network.data.Testnet.id ? 0.5 * 1000000 : (10 + 6 * signatoryArray.length + 6) * 1000000;
+            totalFee = 0.5 * 1000000;
             custom = {
                 'fee': totalFee,
                 'modifications': [],
@@ -315,9 +315,9 @@ class Transactions {
         let rentalFee;
         // Set fee depending if namespace or sub
         if (tx.namespaceParent) {
-            rentalFee = this._Wallet.network === Network.data.Testnet.id ? 10 * 1000000 : 200 * 1000000;
+            rentalFee = 10 * 1000000;
         } else {
-            rentalFee = this._Wallet.network === Network.data.Testnet.id ? 100 * 1000000 : 5000 * 1000000;
+            rentalFee = 100 * 1000000;
         }
         let namespaceParent = tx.namespaceParent ? tx.namespaceParent.fqn : null;
         let namespaceName = tx.namespaceName.toString();
@@ -346,7 +346,7 @@ class Transactions {
         let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.ProvisionNamespace, senderPublicKey, timeStamp, due, version);
-        let fee = this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : 20 * 1000000;
+        let fee = 0.15 * 1000000;
         let custom = {
             'rentalFeeSink': rentalFeeSink.toUpperCase().replace(/-/g, ''),
             'rentalFee': rentalFee,
@@ -370,7 +370,7 @@ class Transactions {
         let kp = KeyPair.create(helpers.fixPrivateKey(common.privateKey));
         let actualSender = tx.isMultisig ? tx.multisigAccount.publicKey : kp.publicKey.toString();
         let rentalFeeSink = tx.mosaicFeeSink.toString();
-        let rentalFee = this._Wallet.network === Network.data.Testnet.id ? 10 * 1000000 : 500 * 1000000;
+        let rentalFee = 10 * 1000000;
         let namespaceParent = tx.namespaceParent.fqn;
         let mosaicName = tx.mosaicName.toString();
         let mosaicDescription = tx.mosaicDescription.toString();
@@ -405,7 +405,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicDefinition, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : 20 * 1000000;
+        let fee = 0.15 * 1000000;
         let levyData = levy ? {
             'type': levy.feeType,
             'recipient': levy.address.toUpperCase().replace(/-/g, ''),
@@ -472,7 +472,7 @@ class Transactions {
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MosaicSupply, senderPublicKey, timeStamp, due, version);
 
-        let fee = this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : 20 * 1000000;
+        let fee = 0.15 * 1000000;
         let custom = {
             'mosaicId': mosaicId,
             'supplyType': supplyType,
@@ -520,7 +520,7 @@ class Transactions {
         let custom = {
             'remoteAccount': recipientKey,
             'mode': mode,
-            'fee': this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : 6000000
+            'fee': 0.15 * 1000000
         };
         let entity = $.extend(data, custom);
         return entity;
@@ -594,7 +594,7 @@ class Transactions {
         let timeStamp = Math.floor(this._DataBridge.networkTime) + Math.floor(d.getSeconds() / 10);
         let version = this.CURRENT_NETWORK_VERSION(1);
         let data = this.CREATE_DATA(TransactionTypes.MultisigSignature, senderPublicKey, timeStamp, due, version);
-        let totalFee = this._Wallet.network === Network.data.Testnet.id ? 0.15 * 1000000 : (2 * 3) * 1000000;
+        let totalFee = 0.15 * 1000000;
         let custom = {
             'otherHash': {
                 'data': otherHash

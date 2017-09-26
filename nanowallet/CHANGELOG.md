@@ -1,5 +1,27 @@
 # Changelog
 
+## Version 1.4.13
+
+    - Allow sub-namespaces and mosaic names to start with a number
+    - Fix secondary accounts: In **occasional** cases, secondary accounts private keys can start with '00' but BIP32 was omitting it, giving a 62 characters private key. Those **secondary accounts** will fail to send anything out even if password is valid (but recoverable).
+    - Update languages
+
+## Version 1.4.10
+
+    - New fee structure on Mainnet
+    - Added passphrase strength estimator to brain wallet: https://github.com/dropbox/zxcvbn
+    - Brain wallet passphrase requires 40 characters minimum
+    - Moved purge button into footer
+    - Show an alert asking to change node if not connected within 5 seconds after login
+    - Show an alert if user's brain wallet seems weak (< 40 characters)
+    - Minor fixes and improvements
+
+## Version 1.4.3
+
+    - Voting module on Mainnet
+    - Removed bob.nem.ninja and used MedAlice2 as default testnet node
+    - Minor fixes and improvements
+
 ## Version 1.4.0
 
     - New fee structure (on testnet)

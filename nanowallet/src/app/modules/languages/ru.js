@@ -148,6 +148,9 @@ function RussianProvider($translateProvider) {
         GENERAL_ACTIVATING: "Activating",
         GENERAL_DEACTIVATING: "Deactivating",
         GENERAL_REMOTE: "Remote",
+        GENERAL_WARNING: 'Warning',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Length',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Простите, но Вы не можете безопасно использовать NanoWallet в этом браузере...',
@@ -271,7 +274,7 @@ function RussianProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'Поддреживаются два типа оплаты комиссий: фиксированная и оплата в процентах.',
         MOSAIC_DEFINITION_INFORMATION_14: 'Плата определяется фиксированной и, таким образом, не зависит от количества, которе передается.',
         MOSAIC_DEFINITION_INFORMATION_15: 'Плата определяется в процентах и, таким образом, линейно возрастает, в зависимости от количество передаваемых мозайк.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Отправка мозайки в блокчейне NEM требует комиссию. Точная комиссия расчитывается в зависимости от их общего количества и сколько будет отправлено в течении транзакции. За передачу любой <b>мозайки малого бизнеса</b> комиссия составляет 1 XEM. Это мозайки с делимостью 0 и количеством ≤ 10000.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Отправка мозайки в блокчейне NEM требует комиссию. Точная комиссия расчитывается в зависимости от их общего количества и сколько будет отправлено в течении транзакции. За передачу любой <b>мозайки малого бизнеса</b> комиссия составляет 0.05 XEM. Это мозайки с делимостью 0 и количеством ≤ 10000.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Изменить объём поставки мозайки',
@@ -306,7 +309,7 @@ function RussianProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Комиссии',
         RENEW_NS_INFORMATION_TITLE_2: 'Корневые пространства имён',
         RENEW_NS_INFORMATION_TITLE_3: 'Период продления',
-        RENEW_NS_INFORMATION_1: 'Продление пространства имён стоит столько же, сколько и регистрация нового пространства имён - 5000 XEM',
+        RENEW_NS_INFORMATION_1: 'Продление пространства имён стоит столько же, сколько и регистрация нового пространства имён - 100 XEM',
         RENEW_NS_INFORMATION_2: 'Необходимо продлить только корневое пространство имён. Все подпространства пространства имён будут автоматически продлены, после продления корневого пространства имён.',
         RENEW_NS_INFORMATION_3: 'Контракты с пространством имён заключаются на основе договоров аренды на срок до одного года. Контракт может быть продлен за один месяц до или после даты его истечения.',
         RENEW_NS_INFORMATION_4: 'Если пространство имён не продлить во время, все подпространства имён и мозайки, созданые под ним, будут потеряны.',
@@ -555,6 +558,10 @@ function RussianProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
         ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+        ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Кошелёк успешно создан и загружен!',
@@ -640,6 +647,8 @@ function RussianProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'I agree',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',

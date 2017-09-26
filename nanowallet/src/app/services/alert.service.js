@@ -474,6 +474,40 @@ export default class Alert {
         });
     }
 
+    brainPasswordTooShort() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_BRAIN_PASSWORD_TOO_SHORT')
+        });
+    }
+
+    nodeSeemsOffline() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_NODE_SEEMS_OFFLINE'),
+            dismissOnTimeout: false,
+            dismissButton: true,
+        });
+    }
+
+    passphraseIsWeak() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_WEAK_PASSPHRASE')
+        });
+    }
+
+    brainWalletUpgrade() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_BRAIN_WALLET_UPGRADE'),
+            dismissOnTimeout: false,
+            additionalClasses: 'toast-text-left',
+            dismissButton: true,
+            dismissOnClick: false
+        });
+    }
+
     /***
      * Success alerts
      */
@@ -570,6 +604,14 @@ export default class Alert {
             content: this._$filter('translate')('ALERT_INCOMING_TX_FROM') + this._$filter('fmtPubToAddress')(signer, network),
             className: 'success'
         });
+    }
+
+    /***
+     * Other
+     */
+
+    dismiss() {
+        this._ngToast.dismiss();
     }
 
 }

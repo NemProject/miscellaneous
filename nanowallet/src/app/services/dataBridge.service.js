@@ -149,6 +149,13 @@ class DataBridge {
          * @type {setInterval}
          */
         this.timeSyncInterval = undefined;
+
+        /**
+         * Store the connection timeout
+         *
+         * @type {setInterval}
+         */
+        this.connectTimeout = undefined;
     }
 
     /**
@@ -160,6 +167,15 @@ class DataBridge {
 
         // Store the used connector to close it from anywhere easily
         this.connector = connector;
+
+        if(!this.connectTimeout) {
+            // Trigger alert if not connected within 5 seconds
+            this.connectTimeout = setTimeout(() => {
+                this._$timeout(() => {
+                    this._Alert.nodeSeemsOffline();
+                });
+            }, 5000);
+        }
 
         // Connect
         connector.connect(() => {
@@ -449,7 +465,8 @@ class DataBridge {
         this.delegatedData = undefined;
         this.marketInfo = undefined;
         this.networkTime = undefined;
-        clearInterval(this.timeSyncInterval)
+        clearInterval(this.timeSyncInterval);
+        clearTimeout(this.connectTimeout);
     }
 
     /**

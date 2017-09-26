@@ -10,7 +10,7 @@ function ShowAuthed(Wallet) {
                 if (val) {
                     if (attrs.showAuthed === 'true') {
                         element.css({
-                            display: 'inherit'
+                            display: 'inline-block'
                         })
                     } else {
                         element.css({
@@ -24,7 +24,7 @@ function ShowAuthed(Wallet) {
                         })
                     } else {
                         element.css({
-                            display: 'inherit'
+                            display: 'inline-block'
                         })
                     }
                 }

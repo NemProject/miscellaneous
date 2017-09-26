@@ -148,6 +148,9 @@ function GermanProvider($translateProvider) {
         GENERAL_ACTIVATING: "Aktivierung",
         GENERAL_DEACTIVATING: "Deaktivierung",
         GENERAL_REMOTE: "Remote",
+        GENERAL_WARNING: 'Warning',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Length',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'ACHTUNG! Es ist nicht sicher die Nano Wallet mit Ihrem Browser zu verwenden...',
@@ -271,7 +274,7 @@ function GermanProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'There are two fee types supported, absolute fee and percentile fee.',
         MOSAIC_DEFINITION_INFORMATION_14: 'The fee is specified as absolute quantity and thus does not depend on the quantity that is transferred.',
         MOSAIC_DEFINITION_INFORMATION_15: 'The fee is specified as multiple of the percentile of the quantity that is transferred. The fee is thus linearly increasing with the transferred mosaic quantity.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 1 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 0.05 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Bestand des Mosaiks ändern',
@@ -306,7 +309,7 @@ function GermanProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Gebühren',
         RENEW_NS_INFORMATION_TITLE_2: 'Root Namensraum',
         RENEW_NS_INFORMATION_TITLE_3: 'Erneuerungsintervall',
-        RENEW_NS_INFORMATION_1: 'Für die Erneuerung eines Namensraumes fallen wie bei der Registrierung Kosten in Höhe von 5000 XEM an.',
+        RENEW_NS_INFORMATION_1: 'Für die Erneuerung eines Namensraumes fallen wie bei der Registrierung Kosten in Höhe von 100 XEM an.',
         RENEW_NS_INFORMATION_2: 'Eine Erneuerung wird nur bei Root Namensräumen benötigt. Alle dem Namensraum untergeordnete Namensräume werden automatisch mit verlängert.',
         RENEW_NS_INFORMATION_3: 'Namensräume sind Verträge innerhalb der Blockchain mit einer Laufzeit von einem Jahr. Der Vertrag kann einen Monat vor Ablauf verlängert werden. Die Verlängerung kann bis zu einem Monat nach Ablauf des Vertrages durchgeführt werden.',
         RENEW_NS_INFORMATION_4: 'Wird die Verlängerung nicht rechtzeitig abgeschlossen, gehen alle untergeordneten Namensräume sowie alle zugeordneten Mosaike entgültig verloren.',
@@ -555,6 +558,10 @@ function GermanProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Ungültige minimale Anzahl von Signaturen',
         ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
+        ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Die Wallet wurde erfolgreich Erstellt und geladen !',
@@ -639,6 +646,8 @@ function GermanProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'Wallet Datei gesichert',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Privater Schlüssels und Kennwort gesichert',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Ich stimme zu',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
         // FAQ MODULE
         FAQ_TITLE: 'Häufig gestellte Fragen',

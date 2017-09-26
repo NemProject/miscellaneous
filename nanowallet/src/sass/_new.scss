@@ -405,6 +405,15 @@ fieldset .form-control.has-error {
 }
 
 /*** DROPBOX GLOBAL STYLES ***/
+.toast-text-left {
+  text-align: left !important;
+}
+.alert > button.close {
+  opacity: 1;
+}
+.alert a {
+  color: white;
+}
 .drop {
   border: 1px dashed rgb(0, 166, 90);
   min-height: 35px;
@@ -446,6 +455,9 @@ fieldset .form-control.has-error {
 }
 .tooltip.bottom .tooltip-arrow {
   border-bottom-color: $blue;
+}
+.black-tooltip + .tooltip > .tooltip-inner {
+background-color: #444;
 }
 i.fa-question-circle-o, i.fa-question {
 	font-size: 16px;
@@ -709,7 +721,7 @@ footer {
   .bg-info {
     color: white;
     border: $blueLite;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
     a {
       color: red;
     }
@@ -1294,4 +1306,8 @@ textarea {
 
 .is-empty {
     background-color: #e4b9b9;
+}
+
+.poll-description-textarea {
+    resize: vertical;
 }
