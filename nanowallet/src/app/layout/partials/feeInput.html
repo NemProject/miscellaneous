@@ -1,0 +1,17 @@
+<fieldset class="form-group">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <label>{{'GENERAL_FEE' | translate}}: </label>
+    </span>
+    <div class="form-control formFloat" readOnly>
+      <span class="feeAmount">
+       <!-- Transaction fee -->
+        <span>{{(tx.fee | fmtNemValue)[0]}}.{{(tx.fee | fmtNemValue)[1]}}</span>
+         <!-- Multisig fee -->
+        <span ng-show="isMultisig"> + {{(tx.otherTrans.fee + tx.fee | fmtNemValue)[0]}}.{{(tx.otherTrans.fee + tx.fee | fmtNemValue)[1]}}</span>
+        <span ng-show="tx.message.type === 2"> (+ encryption fees)</span>
+      </span>
+      <label class="floatRight"><small>XEM</small></label>
+    </div>
+  </div>
+</fieldset>

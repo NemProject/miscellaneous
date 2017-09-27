@@ -1,0 +1,9 @@
+<div class="arrows" ng-show="data.length > pageSize">
+    <button class="buttonStyle" ng-disabled="currentPage == 0" ng-click="decrement()">
+       	<span class="fa fa-chevron-left" aria-hidden="true"></span>
+    </button>
+    <b>{{currentPage+1}}/{{Helpers.calcNumberOfPages(data, pageSize)}}</b>
+    <button class="buttonStyle" ng-disabled="currentPage+1 >= Helpers.calcNumberOfPages(data, pageSize)" ng-click="increment()">
+       	<span class="fa fa-chevron-right" aria-hidden="true"></span>
+    </button>
+</div>
