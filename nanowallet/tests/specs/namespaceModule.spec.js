@@ -1,40 +1,37 @@
-import Sinks from '../../src/app/utils/sinks';
 import WalletFixture from '../data/wallet';
 import AccountDataFixture from '../data/accountData';
+import nem from 'nem-sdk';
 
 describe('Provision namespace transaction module tests', function() {
-    let $controller, $rootScope, Wallet, DataBridge, $q, $filter;
+    let $controller, $rootScope, Wallet, DataStore, $filter, Nodes;
 
     beforeEach(angular.mock.module('app'));
 
-    beforeEach(angular.mock.inject(function(_$controller_, _$rootScope_, _Wallet_, _DataBridge_, _$q_, _$filter_) {
+    beforeEach(angular.mock.inject(function(_$controller_, _$rootScope_, _Wallet_, _DataStore_, _$filter_, _Nodes_) {
         $controller = _$controller_;
         $rootScope = _$rootScope_;
         Wallet = _Wallet_;
-        DataBridge = _DataBridge_;
-        $q = _$q_;
+        DataStore = _DataStore_;
         $filter = _$filter_;
+        Nodes = _Nodes_;
     }));
 
     function createDummyWalletContextTestnet(Wallet) {
-        Wallet.setWallet(WalletFixture.testnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.testnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.testnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.testnetNamespaceOwned;
-        DataBridge.nisHeight = 999999999;
-
+        DataStore.account.metaData = AccountDataFixture.testnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.testnetNamespaceOwned;
+        DataStore.chain.height = 999999999;
     }
 
     function createDummyWalletContextMainnet(Wallet) {
-        Wallet.setWallet(WalletFixture.mainnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.mainnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.mainnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.mainnetNamespaceOwned;
-
-        DataBridge.nisHeight = 999999999;
-
+        DataStore.account.metaData = AccountDataFixture.mainnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.mainnetNamespaceOwned;
+        DataStore.chain.height = 999999999;
     }
 
     it("Default properties initialized", function() {
@@ -47,12 +44,9 @@ describe('Provision namespace transaction module tests', function() {
         scope.$digest();
         // Assert
         expect(ctrl.formData).toEqual({
-            rentalFeeSink: Sinks.sinks.namespace[Wallet.network],
-            rentalFee: 200*1000000,
+            rentalFeeSink: nem.model.sinks.namespace[Wallet.network],
             namespaceName: '',
             namespaceParent: { owner: 'TAF7BPDV22HCFNRJEWOGLRKBYQF65GBOLQPI5GGO', fqn: 'nano', height: 547741 },
-            fee: 20*1000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: {
                 "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
@@ -69,10 +63,7 @@ describe('Provision namespace transaction module tests', function() {
             }
         });
         expect(ctrl.okPressed).toBe(false);
-        expect(ctrl.common).toEqual({
-            'password': '',
-            'privateKey': '',
-        });
+        expect(ctrl.common).toEqual(nem.model.objects.get("common"));
     });
 
     it("Has right transaction fee on testnet", function() {
@@ -84,12 +75,11 @@ describe('Provision namespace transaction module tests', function() {
         });
 
         // Act
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(20000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
     it("Has right transaction fee on mainnet", function() {
@@ -101,15 +91,14 @@ describe('Provision namespace transaction module tests', function() {
         });
 
         // Act
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(108000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
-    it("Has right transaction fee if multisig", function() {
+    it("Has right transaction fee if multisig on testnet", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -119,12 +108,12 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(6000000);
-        expect(ctrl.formData.innerFee).toBe(20000000);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.multisigTransaction);
+        expect(ctrl.preparedTransaction.otherTrans.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
     it("Has right rental fee for root namespaces on testnet", function() {
@@ -137,11 +126,11 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.namespaceParent = null;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.rentalFee).toBe(5000 * 1000000);
+        expect(ctrl.preparedTransaction.rentalFee).toBe(nem.model.fees.rootProvisionNamespaceTransaction);
     });
 
     it("Has right rental fee for root namespaces on mainnet", function() {
@@ -154,11 +143,11 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.namespaceParent = null;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.rentalFee).toBe(50000 * 1000000);
+        expect(ctrl.preparedTransaction.rentalFee).toBe(nem.model.fees.rootProvisionNamespaceTransaction);
     });
 
     it("Has right rental fee for sub namespaces on testnet", function() {
@@ -171,11 +160,11 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.namespaceParent = 'nano';
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.rentalFee).toBe(200 * 1000000);
+        expect(ctrl.preparedTransaction.rentalFee).toBe(nem.model.fees.subProvisionNamespaceTransaction);
     });
 
     it("Has right rental fee for sub namespaces on mainnet", function() {
@@ -188,11 +177,11 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.namespaceParent = 'nano';
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.rentalFee).toBe(5000 * 1000000);
+        expect(ctrl.preparedTransaction.rentalFee).toBe(nem.model.fees.subProvisionNamespaceTransaction);
     });
 
     it("Has right sink on testnet", function() {
@@ -229,24 +218,23 @@ describe('Provision namespace transaction module tests', function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet);
-        DataBridge.namespaceOwned[1] = {
-            "nano.test.third": {
-                "owner": "TAF7BPDV22HCFNRJEWOGLRKBYQF65GBOLQPI5GGO",
-                "fqn": "nano.test.third",
-                "height": 547741
-            }
-        }
         let ctrl = $controller('NamespacesCtrl', {
             $scope: scope
         });
-        let NSarray = $filter('objValues')(DataBridge.namespaceOwned);
+        ctrl.namespaceOwned["nano.test.third"] = {
+            "owner": "TAF7BPDV22HCFNRJEWOGLRKBYQF65GBOLQPI5GGO",
+            "fqn": "nano.test.third",
+            "height": 547741
+        }
+        let NSarray = $filter('objValues')(ctrl.namespaceOwned);
 
         // Act & Assert
-        expect(ctrl.isNotNamespaceLevel3(NSarray[1]['nano'])).toBe(true);
-        expect(ctrl.isNotNamespaceLevel3(NSarray[0]['nano.test.third'])).toBe(false);
+        expect(ctrl.isNotLevel3(NSarray[0])).toBe(true);
+        expect(ctrl.isNotLevel3(NSarray[1])).toBe(false);
+        delete ctrl.namespaceOwned["nano.test.third"];
     });
 
-    it("Set right current address if multisig enabled", function() {
+    it("Set right namespaces if multisig enabled", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -260,10 +248,10 @@ describe('Provision namespace transaction module tests', function() {
         scope.$digest();
 
         // Assert
-        expect(ctrl.currentAccount).toEqual("TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X");
+        expect(ctrl.namespaceOwned).toEqual({});
     });
 
-    it("Set right current address if multisig enabled then disabled", function() {
+    it("Set right namespaces if multisig enabled then disabled", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -273,105 +261,162 @@ describe('Provision namespace transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
+        ctrl.updateCurrentAccountNS();
         scope.$digest();
+        expect(ctrl.namespaceOwned).toEqual({});
         ctrl.formData.isMultisig = false;
+        ctrl.updateCurrentAccountNS();
         scope.$digest();
 
         // Assert
-        expect(ctrl.currentAccount).toEqual(Wallet.currentAccount.address);
-    });
-
-    describe('Provision namespace transaction module delegation tests', function() {
-
-        it("Pass right parameters to prepareNamespace in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('NamespacesCtrl', {
-                $scope: scope
-            });
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareNamespace from here first and then spy is on the wrong function
+        expect(ctrl.namespaceOwned).toEqual({
+            "nano": {
+                "owner": "TAF7BPDV22HCFNRJEWOGLRKBYQF65GBOLQPI5GGO",
+                "fqn": "nano",
+                "height": 547741
             }
-            spyOn(ctrl._Transactions, 'prepareNamespace').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareNamespace).toHaveBeenCalledWith(ctrl.common, ctrl.formData);
-        });
-
-        it("Can't call prepareNamespace in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('NamespacesCtrl', {
-                $scope: scope
-            });
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareNamespace from here first and then spy is on the wrong function
-            }
-            spyOn(ctrl._Transactions, 'prepareNamespace').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareNamespace).not.toHaveBeenCalled();
-        });
-
-        it("Pass right parameters to serializeAndAnnounceTransaction in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('NamespacesCtrl', {
-                $scope: scope
-            });
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).toHaveBeenCalledWith(jasmine.any(Object), ctrl.common);
-        });
-
-        it("Can't call serializeAndAnnounceTransaction in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('NamespacesCtrl', {
-                $scope: scope
-            });
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).not.toHaveBeenCalled();
         });
     });
 
+    it("Can build correct root provision namespace transaction", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('NamespacesCtrl', {
+            $scope: scope
+        });
+        scope.$digest();
+
+        // Act
+        ctrl.formData.namespaceParent = '';
+        ctrl.formData.namespaceName = 'nano';
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 8193,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "rentalFeeSink": "TAMESPACEWH4MKFMBCVFERDPOOP4FK7MTDJEYP35",
+            "rentalFee": nem.model.fees.rootProvisionNamespaceTransaction,
+            "parent": null,
+            "newPart": "nano",
+            "fee": nem.model.fees.namespaceAndMosaicCommon
+        });
+    });
+
+    it("Can build correct multisig root provision namespace transaction", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('NamespacesCtrl', {
+            $scope: scope
+        });
+        scope.$digest();
+
+        // Act
+        ctrl.formData.isMultisig = true;
+        ctrl.updateCurrentAccountNS();
+        scope.$digest();
+        ctrl.formData.namespaceParent = '';
+        ctrl.formData.namespaceName = 'nano';
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 4100,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "fee": nem.model.fees.multisigTransaction,
+            "otherTrans": {
+                "type": 8193,
+                "version": -1744830463,
+                "signer": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
+                "timeStamp": entity.otherTrans.timeStamp,
+                "deadline": entity.otherTrans.deadline,
+                "rentalFeeSink": "TAMESPACEWH4MKFMBCVFERDPOOP4FK7MTDJEYP35",
+                "rentalFee": nem.model.fees.rootProvisionNamespaceTransaction,
+                "parent": null,
+                "newPart": "nano",
+                "fee": nem.model.fees.namespaceAndMosaicCommon
+            }
+        });
+    });
+
+    it("Can build correct sub provision namespace transaction", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('NamespacesCtrl', {
+            $scope: scope
+        });
+        scope.$digest();
+
+        // Act
+        ctrl.formData.namespaceParent = { "fqn": "nano", "height": 547741 };
+        ctrl.formData.namespaceName = 'fiat';
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 8193,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "rentalFeeSink": "TAMESPACEWH4MKFMBCVFERDPOOP4FK7MTDJEYP35",
+            "rentalFee": nem.model.fees.subProvisionNamespaceTransaction,
+            "parent": "nano",
+            "newPart": "fiat",
+            "fee": nem.model.fees.namespaceAndMosaicCommon
+        });
+    });
+
+    it("Can build correct multisig sub provision namespace transaction", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('NamespacesCtrl', {
+            $scope: scope
+        });
+        scope.$digest();
+
+        // Act
+        ctrl.formData.isMultisig = true;
+        ctrl.updateCurrentAccountNS();
+        scope.$digest();
+        ctrl.formData.namespaceParent = { "fqn": "nano", "height": 547741 };
+        ctrl.formData.namespaceName = 'fiat';
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 4100,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "fee": nem.model.fees.multisigTransaction,
+            "otherTrans": {
+                "type": 8193,
+                "version": -1744830463,
+                "signer": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
+                "timeStamp": entity.otherTrans.timeStamp,
+                "deadline": entity.otherTrans.deadline,
+                "rentalFeeSink": "TAMESPACEWH4MKFMBCVFERDPOOP4FK7MTDJEYP35",
+                "rentalFee": nem.model.fees.subProvisionNamespaceTransaction,
+                "parent": "nano",
+                "newPart": "fiat",
+                "fee": nem.model.fees.namespaceAndMosaicCommon
+            }
+        });
+    });
 });

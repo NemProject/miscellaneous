@@ -1,46 +1,41 @@
-import helpers from '../../src/app/utils/helpers';
-import Network from '../../src/app/utils/Network';
 import WalletFixture from '../data/wallet';
 import AccountDataFixture from '../data/accountData';
+import nem from 'nem-sdk';
 
 describe('Transfer transaction module tests', function() {
-    let $controller, $localStorage, AppConstants, $rootScope, Wallet, DataBridge, $httpBackend, NetworkRequests, $q;
+    let $controller, $rootScope, Wallet, DataStore, Nodes;
 
     beforeEach(angular.mock.module('app'));
 
-    beforeEach(angular.mock.inject(function( _$controller_,  _$localStorage_, _AppConstants_, _$rootScope_, _Wallet_, _DataBridge_, _$httpBackend_, _NetworkRequests_, _$q_) {
+    beforeEach(angular.mock.inject(function( _$controller_, _$rootScope_, _Wallet_, _DataStore_, _Nodes_) {
         $controller = _$controller_;
-        $localStorage = _$localStorage_;
-        AppConstants = _AppConstants_;
         $rootScope = _$rootScope_;
         Wallet = _Wallet_;
-        DataBridge = _DataBridge_;
-        $httpBackend = _$httpBackend_;
-        NetworkRequests = _NetworkRequests_;
-        $q = _$q_;
+        DataStore = _DataStore_;
+        Nodes = _Nodes_;
     }));
 
     function createDummyWalletContextTestnet(Wallet) {
-    	Wallet.setWallet(WalletFixture.testnetWallet);
-        Wallet.setDefaultNode();
+    	Wallet.use(WalletFixture.testnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.testnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.testnetNamespaceOwned;
-        DataBridge.mosaicOwned =  AccountDataFixture.testnetMosaicOwned;
-        DataBridge.mosaicDefinitionMetaDataPair = AccountDataFixture.testnetMosaicDefinitionMetaDataPair;
-        DataBridge.nisHeight = 999999999;
+        DataStore.account.metaData = AccountDataFixture.testnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.testnetNamespaceOwned;
+        DataStore.mosaic.ownedBy =  AccountDataFixture.testnetMosaicOwned;
+        DataStore.mosaic.metaData = AccountDataFixture.testnetMosaicDefinitionMetaDataPair;
+        DataStore.chain.height = 999999999;
 
     }
 
     function createDummyWalletContextMainnet(Wallet) {
-        Wallet.setWallet(WalletFixture.mainnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.mainnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.mainnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.mainnetNamespaceOwned;
-        DataBridge.mosaicOwned =  AccountDataFixture.mainnetMosaicOwned;
-        DataBridge.mosaicDefinitionMetaDataPair = AccountDataFixture.mainnetMosaicDefinitionMetaDataPair;
-        DataBridge.nisHeight = 999999999;
+        DataStore.account.metaData = AccountDataFixture.mainnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.mainnetNamespaceOwned;
+        DataStore.mosaic.ownedBy =  AccountDataFixture.mainnetMosaicOwned;
+        DataStore.mosaic.metaData = AccountDataFixture.mainnetMosaicDefinitionMetaDataPair;
+        DataStore.chain.height = 999999999;
     } 
 
     it("Default properties initialized", function() {
@@ -51,82 +46,48 @@ describe('Transfer transaction module tests', function() {
 
         // Assert
         expect(ctrl.formData).toEqual({
-            rawRecipient: '',
-            recipientPubKey: '',
-            recipient: '',
-            message: '',
-            amount: 0,
-            fee: 1 * 1000000,
-            encryptMessage: false,
-            innerFee: 0,
-            isMultisig: false,
-            multisigAccount: {
-                "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
-                "harvestedBlocks": 0,
-                "balance": 16000000,
-                "importance": 0,
-                "vestedBalance": 0,
-                "publicKey": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
-                "label": null,
-                "multisigInfo": {
-                    "cosignatoriesCount": 1,
-                    "minCosignatories": 1
-                }
-            },
-            mosaics: null,
-            isMosaicTransfer: false
-        });
-        expect(ctrl.counter).toBe(1);
-        expect(ctrl.mosaicsMetaData).toEqual(DataBridge.mosaicDefinitionMetaDataPair);
-        expect(ctrl.currentAccountMosaicNames).toEqual(["nano:points", "nem:xem"]);
-        expect(ctrl.selectedMosaic).toEqual("nem:xem");
-        expect(ctrl.invoice).toBe(false);
-        expect(ctrl.aliasAddress).toEqual('');
-        expect(ctrl.showAlias).toBe(false);
-        expect(ctrl.okPressed).toBe(false);
-        expect(ctrl.common).toEqual({
-            'password': '',
-            'privateKey': '',
-        });
-        expect(ctrl.invoiceData).toEqual({
-            "v": ctrl._Wallet.network === Network.data.Testnet.id ? 1 : 2,
-            "type": 2,
-            "data": {
-                "addr": "TAF7BPDV22HCFNRJEWOGLRKBYQF65GBOLQPI5GGO",
-                "amount": 0,
-                "msg": "",
-                "name": "NanoWallet XEM invoice"
+        "amount": 0,
+        "recipient": "",
+        "recipientPublicKey": "",
+        "isMultisig": false,
+        "multisigAccount" : {
+            "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
+            "harvestedBlocks": 0,
+            "balance": 16000000,
+            "importance": 0,
+            "vestedBalance": 0,
+            "publicKey": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
+            "label": null,
+            "multisigInfo": {
+                "cosignatoriesCount": 1,
+                "minCosignatories": 1
             }
+        },
+        "message": "",
+        "messageType" : 1,
+        "mosaics": null
         });
+        expect(ctrl.isMosaicTransfer).toBe(false);
+        expect(ctrl.currentAccountMosaicData).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._Wallet.currentAccount.address]);
+        expect(ctrl.selectedMosaic).toEqual("nem:xem");
+        expect(ctrl.okPressed).toBe(false);
+        expect(ctrl.common).toEqual(nem.model.objects.get("common"));
     });
 
-    it("Can update fee - Testnet", function() {
+    it("Can update fee", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
 
         // Act
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(1000000);
+        expect(ctrl.preparedTransaction.fee).toBe(50000);
     });
 
-    it("Can update fee - Mainnet", function() {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextMainnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-
-        // Act
-        ctrl.updateFees();
-
-        // Assert
-        expect(ctrl.formData.fee).toBe(10000000);
-    });
-
-    it("Update fee on amount change - Testnet", function() {
+    it("Update fee on amount change", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -135,32 +96,14 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.amount = 20000;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(2000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(100000);
     });
 
-    it("Update fee on amount change - Mainnet", function() {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextMainnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-
-        // Act
-        ctrl.formData.amount = 20000;
-        ctrl.updateFees();
-        scope.$digest();
-
-        // Assert
-        expect(ctrl.formData.fee).toBe(13000000);
-        expect(ctrl.formData.innerFee).toBe(0);
-    });
-
-    it("Update fee on message change - Testnet", function() {
+    it("Update fee on message change", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -169,29 +112,11 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.message = "Hello";
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(2000000);
-        expect(ctrl.formData.innerFee).toBe(0);
-    });
-
-    it("Update fee on message change - Mainnet", function() {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextMainnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-
-        // Act
-        ctrl.formData.message = "Hello";
-        ctrl.updateFees();
-        scope.$digest();
-
-        // Assert
-        expect(ctrl.formData.fee).toBe(12000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(100000);
     });
 
     it("Update fee if multisig", function() {
@@ -203,15 +128,15 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(6000000);
-        expect(ctrl.formData.innerFee).toBe(1000000);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.multisigTransaction);
+        expect(ctrl.preparedTransaction.otherTrans.fee).toBe(50000);
     });
 
-    it("Update fee if mosaic transfer - Testnet", function() {
+    it("Update fee if mosaic transfer (empty)", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -219,31 +144,15 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(1000000);
+        expect(ctrl.preparedTransaction.fee).toBe(0);
     });
 
-    it("Update fee if mosaic transfer - Mainnet", function() {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextMainnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-
-        // Act
-        ctrl.formData.isMosaicTransfer = true;
-        ctrl.setMosaicTransfer();
-        scope.$digest();
-
-        // Assert
-        expect(ctrl.formData.fee).toBe(12500000);
-    });
-
-    it("Update fee if multisig and mosaic transfer", function() {
+    it("Update fee if multisig and mosaic transfer (empty)", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -252,16 +161,16 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.innerFee).toBe(1000000);
-        expect(ctrl.formData.fee).toBe(6000000);
+        expect(ctrl.preparedTransaction.otherTrans.fee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(150000);
     });
 
-    it("Fee cap is 25 XEM - Testnet", function() {
+    it("Fee cap is 1.25 XEM", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -270,15 +179,14 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.amount = 500000;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(25000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(1250000);
     });
 
-    it("Calculate right fees for mosaics - Testnet", function() {
+    it("Calculate right fees for mosaics", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
@@ -286,32 +194,16 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
-        ctrl.formData.mosaics[0].quantity = 150000000000; // 150'000 XEM
+        // Push a mosaicAttachment with a text amount
+        ctrl.formData.mosaics.push(nem.model.objects.create("mosaicAttachment")("nem", "xem", "150000"));
         scope.$digest();
-        ctrl.updateFees();
+        // Will calculate the right amount from text
+        ctrl.prepareTransaction();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(15000000);
-    });
-
-    it("Calculate right fees for mosaics - Mainnet", function() {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextMainnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-
-        // Act
-        ctrl.formData.isMosaicTransfer = true;
-        ctrl.setMosaicTransfer();
-        ctrl.formData.mosaics[0].quantity = 150000000000; // 150'000 XEM
-        scope.$digest();
-        ctrl.updateFees();
-
-        // Assert
-        expect(ctrl.formData.fee).toBe(96250000);
+        expect(ctrl.preparedTransaction.fee).toBe(750000);
     });
 
     it("Calculate right fees for multisig mosaic transfers", function() {
@@ -323,15 +215,16 @@ describe('Transfer transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
-        ctrl.formData.mosaics[0].quantity = 150000000000; // 150'000 XEM
+        // Push a mosaicAttachment with a text amount
+        ctrl.formData.mosaics.push(nem.model.objects.create("mosaicAttachment")("nem", "xem", "150000"));
         scope.$digest();
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
 
         // Assert
-        expect(ctrl.formData.innerFee).toBe(15000000);
-        expect(ctrl.formData.fee).toBe(6000000);
+        expect(ctrl.preparedTransaction.otherTrans.fee).toBe(750000);
+        expect(ctrl.preparedTransaction.fee).toBe(150000);
     });
 
     it("Encrypt message disabled if multisig", function() {
@@ -342,14 +235,14 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.formData.encryptMessage = true;
+        ctrl.formData.messageType = 2; // Encrypted
         ctrl.formData.isMultisig = true;
         // Done directly in view when click on multisig tab, set encrypt message to false
-        ctrl.formData.encryptMessage = false;
+        ctrl.formData.messageType = 1;
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.encryptMessage).toBe(false);
+        expect(ctrl.formData.messageType).toBe(1);
     });
 
     it("Define right values for mosaics and amount if mosaic transfer enabled", function() {
@@ -360,19 +253,12 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.mosaics).toEqual([{
-            'mosaicId': {
-                'namespaceId': 'nem',
-                'name': 'xem'
-            },
-            'quantity': 0,
-            'gid': 'mos_id_0'
-        }]);
+        expect(ctrl.formData.mosaics).toEqual([]);
         expect(ctrl.formData.amount).toBe(1)
     });
 
@@ -384,7 +270,7 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.formData.isMosaicTransfer = false;
+        ctrl.isMosaicTransfer = false;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
@@ -399,12 +285,12 @@ describe('Transfer transaction module tests', function() {
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
         scope.$digest();
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
         // Act
-        ctrl.formData.isMosaicTransfer = false;
+        ctrl.isMosaicTransfer = false;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
@@ -413,36 +299,36 @@ describe('Transfer transaction module tests', function() {
         expect(ctrl.formData.amount).toBe(0)
     });
 
-    it("Can remove mosaic from mosaics array", function() {
+    /*it("Can remove mosaic from mosaics array", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
         scope.$digest();
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
+        ctrl.formData.mosaics.push(nem.model.objects.get("mosaicAttachment"))
 
         // Act
         ctrl.removeMosaic(0)
 
         // Assert
         expect(ctrl.formData.mosaics).toEqual([]);
-    });
+    });*/
 
     it("Can update current account mosaics", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        ctrl.currentAccountMosaicNames = [];
         scope.$digest();
 
         // Act
         ctrl.updateCurrentAccountMosaics();
 
         // Assert
-        expect(ctrl.currentAccountMosaicNames).toEqual(["nano:points", "nem:xem"]);
+        expect(ctrl.currentAccountMosaicData).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._Wallet.currentAccount.address]);
     });
 
     it("Can update current multisig account mosaics", function() {
@@ -450,7 +336,6 @@ describe('Transfer transaction module tests', function() {
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        ctrl.currentAccountMosaicNames = [];
         ctrl.formData.isMultisig = true;
         scope.$digest();
 
@@ -458,19 +343,19 @@ describe('Transfer transaction module tests', function() {
         ctrl.updateCurrentAccountMosaics();
 
         // Assert
-        if(!DataBridge.accountData.meta.cosignatoryOf.length) {
-            expect(ctrl.currentAccountMosaicNames).toEqual([]);
+        if(!DataStore.account.metaData.meta.cosignatoryOf.length) {
+            expect(ctrl.currentAccountMosaicData).toEqual([]);
         } else {
-            expect(ctrl.currentAccountMosaicNames).toEqual(["nem:xem"]);
+            expect(ctrl.currentAccountMosaicData).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._DataStore.account.metaData.meta.cosignatoryOf[0].address]);
         }
     });
 
-    it("Can attach a mosaic to mosaics array", function() {
+    /*it("Can attach a mosaic to mosaics array", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
 
@@ -482,27 +367,20 @@ describe('Transfer transaction module tests', function() {
         // Assert
         expect(ctrl.formData.mosaics).toEqual([{
             'mosaicId': {
-                'namespaceId': 'nem',
-                'name': 'xem'
-            },
-            'quantity': 0,
-            'gid': 'mos_id_0'
-        },{
-            'mosaicId': {
                 'namespaceId': 'nano',
                 'name': 'points'
             },
             'quantity': 0,
             'gid': 'mos_id_'+ctrl.counter
         }]);
-    });
+    });*/
 
     it("Can reset mosaics array if multisig", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        ctrl.formData.isMosaicTransfer = true;
+        ctrl.isMosaicTransfer = true;
         ctrl.setMosaicTransfer();
         scope.$digest();
         ctrl.formData.mosaics = [{
@@ -528,164 +406,243 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.mosaics).toEqual([{
-            'mosaicId': {
-                'namespaceId': 'nem',
-                'name': 'xem'
-            },
-            'quantity': 0,
-            'gid': 'mos_id_0'
-        }]);
+        expect(ctrl.formData.mosaics).toEqual([]);
     });
 
-    it("Can get recipient's public key from network and set right data using plain address", function(done) {
+
+    /*it("Can reset recipient data", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
+        ctrl.formData.recipientPublicKey = '0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6';
+        ctrl.alias = 'nw';
+        ctrl.formData.messageType = 2;
         scope.$digest();
-        let cleanAddress = 'TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S';
-        let accountData = {
-            "meta": {
-                "cosignatories": [],
-                "cosignatoryOf": [],
-                "status": "LOCKED",
-                "remoteStatus": "ACTIVE"
-            },
-            "account": {
-                "address": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
-                "harvestedBlocks": 592,
-                "balance": 231445000000,
-                "importance": 2.9038651986973836E-4,
-                "vestedBalance": 231356599161,
-                "publicKey": "0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6",
-                "label": null,
-                "multisigInfo": {}
-            }
-        }
 
         // Act
-        $httpBackend.expectGET('http://' + helpers.getHostname(Wallet.node) + ':' + AppConstants.defaultNisPort + '/account/get?address=TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S').respond(200, accountData);
-        ctrl.formData.rawRecipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
-        ctrl.processRecipientInput();
-        scope.$digest();
-        $httpBackend.flush();
-
-        // Assert
-        expect(ctrl.formData.recipientPubKey.length).toBe(64);
-        expect(ctrl.formData.recipient).toEqual(cleanAddress);
-        done();
-    });
-
-    it("Can get recipient's public key from network and set right data using @alias", function(done) {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextTestnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-        let cleanAddress = 'TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S';
-        let accountData = {
-            "meta": {
-                "cosignatories": [],
-                "cosignatoryOf": [],
-                "status": "LOCKED",
-                "remoteStatus": "INACTIVE"
-            },
-            "account": {
-                "address": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
-                "harvestedBlocks": 592,
-                "balance": 231445000000,
-                "importance": 2.9038651986973836E-4,
-                "vestedBalance": 231356599161,
-                "publicKey": "0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6",
-                "label": null,
-                "multisigInfo": {}
-            }
-        }
-        let namespaceData = {
-            "owner": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
-            "fqn": "nw",
-            "height": 440493
-        }
-
-        // Act
-        $httpBackend.expectGET('http://' + helpers.getHostname(Wallet.node) + ':' + AppConstants.defaultNisPort + '/namespace?namespace=nw').respond(200, namespaceData);
-        $httpBackend.expectGET('http://' + helpers.getHostname(Wallet.node) + ':' + AppConstants.defaultNisPort + '/account/get?address=TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S').respond(200, accountData);
-        ctrl.formData.rawRecipient = '@nw';
-        ctrl.processRecipientInput();
-        scope.$digest();
-        $httpBackend.flush();
-
-        // Assert
-        expect(ctrl.formData.recipientPubKey.length).toBe(64);
-        expect(ctrl.formData.recipient).toEqual(cleanAddress);
-        expect(ctrl.showAlias).toBe(true);
-        done()
-    });
-
-    it("Can reset recipient data", function(done) {
-        // Arrange:
-        let scope = $rootScope.$new();
-        createDummyWalletContextTestnet(Wallet)
-        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-        let cleanAddress = 'TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S';
-        let accountData = {
-            "meta": {
-                "cosignatories": [],
-                "cosignatoryOf": [],
-                "status": "LOCKED",
-                "remoteStatus": "INACTIVE"
-            },
-            "account": {
-                "address": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
-                "harvestedBlocks": 592,
-                "balance": 231445000000,
-                "importance": 2.9038651986973836E-4,
-                "vestedBalance": 231356599161,
-                "publicKey": "0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6",
-                "label": null,
-                "multisigInfo": {}
-            }
-        }
-        let namespaceData = {
-            "owner": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
-            "fqn": "nw",
-            "height": 440493
-        }
-
-        // Act
-        $httpBackend.expectGET('http://' + helpers.getHostname(Wallet.node) + ':' + AppConstants.defaultNisPort + '/namespace?namespace=nw').respond(200, namespaceData);
-        $httpBackend.expectGET('http://' + helpers.getHostname(Wallet.node) + ':' + AppConstants.defaultNisPort + '/account/get?address=TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S').respond(200, accountData);
-        ctrl.formData.rawRecipient = '@nw';
-        ctrl.processRecipientInput();
-        scope.$digest();
-        $httpBackend.flush();
         ctrl.resetRecipientData();
+        scope.$digest();
 
         // Assert
-        expect(ctrl.formData.recipientPubKey.length).toBe(0);
-        expect(ctrl.formData.recipient).toEqual('');
-        expect(ctrl.showAlias).toBe(false);
-        done()
-    });
+        expect(ctrl.formData.recipientPublicKey).toEqual('');
+        expect(ctrl.alias).toEqual('');
+        expect(ctrl.formData.messageType).toBe(1);
+    });*/
 
     it("Can reset form data", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet)
         let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
-        scope.$digest();
-        ctrl.formData.amount = 8;
-        ctrl.formData.message = 'NEM rocks !';
+        ctrl.formData.recipientPublicKey = '0257b05f601ff829fdff84956fb5e3c65470a62375a1cc285779edd5ca3b42f6';
+        ctrl.formData.recipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
+        ctrl.formData.messageType = 2;
         scope.$digest();
 
         // Act
         ctrl.resetData();
+        scope.$digest();
 
         // Assert
-        expect(ctrl.formData.amount).toBe(0);
-        expect(ctrl.formData.message).toEqual('');
+        expect(ctrl.formData).toEqual(nem.model.objects.get("transferTransaction"));
+        expect(ctrl.common).toEqual(nem.model.objects.get("common")); 
+    });
+
+    it("Can build correct v1 transfers", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
+        ctrl.formData.recipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
+        ctrl.formData.message = 'Hello';
+        ctrl.formData.amount = 150000;
+        scope.$digest();
+
+        // Act
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+        // Assert
+        expect(entity).toEqual({
+            "type": 257,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "recipient": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
+            "amount": 150000000000,
+            "fee": 800000,
+            "message": {
+                "type": 1,
+                "payload": "48656c6c6f"
+            },
+            "mosaics": null
+        });
+    });
+
+    it("Can build correct v1 multisig transfers", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
+        ctrl.formData.recipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
+        ctrl.formData.message = 'Hello';
+        ctrl.formData.amount = 150000;
+        ctrl.formData.isMultisig = true;
+        scope.$digest();
+
+        // Act
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 4100,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "fee": 150000,
+            "otherTrans": {
+                "type": 257,
+                "version": -1744830463,
+                "signer": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
+                "timeStamp": entity.otherTrans.timeStamp,
+                "deadline": entity.otherTrans.deadline,
+                "recipient": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
+                "amount": 150000000000,
+                "fee": 800000,
+                "message": {
+                    "type": 1,
+                    "payload": "48656c6c6f"
+                },
+                "mosaics": null
+            }
+        });
+    });
+
+    it("Can build correct v2 transfers", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
+        scope.$digest();
+        
+        // Act
+        ctrl.formData.recipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
+        ctrl.formData.message = 'Hello';
+        ctrl.isMosaicTransfer = true;
+        ctrl.setMosaicTransfer();
+        scope.$digest();
+        ctrl.formData.mosaics = [{
+            'mosaicId': {
+                'namespaceId': 'nem',
+                'name': 'xem'
+            },
+            'quantity': 10,
+            'gid': 'mos_id_0'
+        },{
+            'mosaicId': {
+                'namespaceId': 'nano',
+                'name': 'points'
+            },
+            'quantity': 55,
+            'gid': 'mos_id_1'
+        }];
+
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 257,
+            "version": -1744830462,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "recipient": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
+            "amount": 1000000,
+            "fee": 750000,
+            "message": {
+                "type": 1,
+                "payload": "48656c6c6f"
+            },
+            "mosaics": [{
+                "mosaicId": {
+                    "namespaceId": "nem",
+                    "name": "xem"
+                },
+                "quantity": 10000000,
+                "gid": "mos_id_0"
+            }, {
+                "mosaicId": {
+                    "namespaceId": "nano",
+                    "name": "points"
+                },
+                "quantity": 55000,
+                "gid": "mos_id_1"
+            }]
+        });
+    });
+
+    it("Can build correct v2 multisig transfers", function() {
+        // Arrange:
+        let scope = $rootScope.$new();
+        createDummyWalletContextTestnet(Wallet)
+        let ctrl = $controller('TransferTransactionCtrl', { $scope: scope });
+        scope.$digest();
+        
+        // Act
+        ctrl.formData.recipient = 'TBCI2A-67UQZA-KCR6NS-4JWAEI-CEIGEI-M72G3M-VW5S';
+        ctrl.formData.message = 'Hello';
+        ctrl.formData.isMultisig = true;
+        scope.$digest();
+        ctrl.isMosaicTransfer = true;
+        ctrl.setMosaicTransfer();
+        scope.$digest();
+        ctrl.formData.mosaics = [{
+            'mosaicId': {
+                'namespaceId': 'nem',
+                'name': 'xem'
+            },
+            'quantity': 12,
+            'gid': 'mos_id_0'
+        }];
+
+        let entity = ctrl.prepareTransaction();
+        scope.$digest();
+
+        // Assert
+        expect(entity).toEqual({
+            "type": 4100,
+            "version": -1744830463,
+            "signer": "462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce",
+            "timeStamp": entity.timeStamp,
+            "deadline": entity.deadline,
+            "fee": nem.model.fees.multisigTransaction,
+            "otherTrans": {
+                "type": 257,
+                "version": -1744830462,
+                "signer": "671ca866718ed174a21e593fc1e250837c03935bc79e2daad3bd018c444d78a7",
+                "timeStamp": entity.otherTrans.timeStamp,
+                "deadline": entity.otherTrans.deadline,
+                "recipient": "TBCI2A67UQZAKCR6NS4JWAEICEIGEIM72G3MVW5S",
+                "amount": 1000000,
+                "fee": 100000,
+                "message": {
+                    "type": 1,
+                    "payload": "48656c6c6f"
+                },
+                "mosaics": [{
+                    "mosaicId": {
+                        "namespaceId": "nem",
+                        "name": "xem"
+                    },
+                    "quantity": 12000000,
+                    "gid": "mos_id_0"
+                }]
+            }
+        });
     });
 
 });

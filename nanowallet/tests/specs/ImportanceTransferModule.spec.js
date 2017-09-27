@@ -1,24 +1,25 @@
 import WalletFixture from '../data/wallet';
 import AccountDataFixture from '../data/accountData';
-
+import nem from 'nem-sdk';
 
 describe('Importance transfer module tests', function() {
-    let $controller, $rootScope, Wallet, DataBridge, $q, $filter;
+    let $controller, $rootScope, Wallet, DataBridge, $q, $filter, Nodes;
 
     beforeEach(angular.mock.module('app'));
 
-    beforeEach(angular.mock.inject(function(_$filter_, _$controller_, _$rootScope_, _Wallet_, _DataBridge_, _$q_) {
+    beforeEach(angular.mock.inject(function(_$filter_, _$controller_, _$rootScope_, _Wallet_, _DataBridge_, _$q_, _Nodes_) {
         $controller = _$controller_;
         $rootScope = _$rootScope_;
         Wallet = _Wallet_;
         DataBridge = _DataBridge_;
         $q = _$q_;
         $filter = _$filter_;
+        Nodes = _Nodes_;
     }));
 
     function createDummyWalletContextTestnet(Wallet) {
-        Wallet.setWallet(WalletFixture.testnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.testnetWallet);
+        Nodes.setDefault();
         DataBridge.accountData = AccountDataFixture.testnetAccountData;
     }
 
@@ -35,8 +36,6 @@ describe('Importance transfer module tests', function() {
         expect(ctrl.formData).toEqual({
             remoteAccount: Wallet.currentAccount.child,
             mode: 1,
-            fee: 6000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: ''
         });
@@ -48,10 +47,13 @@ describe('Importance transfer module tests', function() {
             key: 2
         }]);
         expect(ctrl.okPressed).toBe(false);
-        expect(ctrl.common).toEqual({
-            'password': '',
-            'privateKey': '',
-        });
+        expect(ctrl.common).toEqual(nem.model.objects.get("common"));
+        expect(ctrl.isCustomNode).toBe(false);
+        expect(ctrl.customHarvestingNode).toEqual("");
+        expect(ctrl.harvestingNode).toEqual(Wallet.node);
+        expect(ctrl.noFreeSlots).toBe(true);
+        expect(ctrl.nodes[0]).toEqual(nem.model.objects.create("endpoint")("http://104.128.226.60", 7890));
+        expect(ctrl.showSupernodes).toBe(false);
     });
 
     it("Can update remote account if custom key enabled", function() {
@@ -103,8 +105,6 @@ describe('Importance transfer module tests', function() {
         expect(ctrl.formData).toEqual({
             remoteAccount: Wallet.currentAccount.child,
             mode: 2,
-            fee: 6000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: ''
         });
@@ -126,103 +126,8 @@ describe('Importance transfer module tests', function() {
         expect(ctrl.formData).toEqual({
             remoteAccount: Wallet.currentAccount.child,
             mode: 1,
-            fee: 6000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: ''
-        });
-    });
-
-    describe('Importance transfer module delegation tests', function() {
-
-        it("Pass right parameters to prepareImportanceTransfer in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('ImportanceTransferCtrl', {
-                $scope: scope
-            });
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareImportanceTransfer from here first and then spy is on the wrong function
-            }
-            spyOn(ctrl._Transactions, 'prepareImportanceTransfer').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareImportanceTransfer).toHaveBeenCalledWith(ctrl.common, ctrl.formData);
-        });
-
-        it("Can't call prepareImportanceTransfer in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('ImportanceTransferCtrl', {
-                $scope: scope
-            });
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareImportanceTransfer from here first and then spy is on the wrong function
-            }
-            spyOn(ctrl._Transactions, 'prepareImportanceTransfer').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareImportanceTransfer).not.toHaveBeenCalled();
-        });
-
-        it("Pass right parameters to serializeAndAnnounceTransaction in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('ImportanceTransferCtrl', {
-                $scope: scope
-            });
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).toHaveBeenCalledWith(jasmine.any(Object), ctrl.common);
-        });
-
-        it("Can't call serializeAndAnnounceTransaction in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('ImportanceTransferCtrl', {
-                $scope: scope
-            });
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).not.toHaveBeenCalled();
         });
     });
 

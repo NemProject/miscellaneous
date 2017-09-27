@@ -1,43 +1,40 @@
 import WalletFixture from '../data/wallet';
 import AccountDataFixture from '../data/accountData';
+import nem from 'nem-sdk';
 
 describe('Mosaic supply change transaction module tests', function() {
-    let $controller, $rootScope, Wallet, DataBridge, $q;
+    let $controller, $rootScope, Wallet, DataStore, Nodes;
 
     beforeEach(angular.mock.module('app'));
 
-    beforeEach(angular.mock.inject(function(_$controller_, _$rootScope_, _Wallet_, _DataBridge_, _$q_) {
+    beforeEach(angular.mock.inject(function(_$controller_, _$rootScope_, _Wallet_, _DataStore_, _Nodes_) {
         $controller = _$controller_;
         $rootScope = _$rootScope_;
         Wallet = _Wallet_;
-        DataBridge = _DataBridge_;
-        $q = _$q_;
+        DataStore = _DataStore_;
+        Nodes = _Nodes_;
     }));
 
     function createDummyWalletContextTestnet(Wallet) {
-        Wallet.setWallet(WalletFixture.testnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.testnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.testnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.testnetNamespaceOwned;
-        DataBridge.mosaicOwned =  AccountDataFixture.testnetMosaicOwned;
-        DataBridge.mosaicDefinitionMetaDataPair = AccountDataFixture.testnetMosaicDefinitionMetaDataPair;
-
-        DataBridge.nisHeight = 999999999;
-
+        DataStore.account.metaData = AccountDataFixture.testnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.testnetNamespaceOwned;
+        DataStore.mosaic.ownedBy =  AccountDataFixture.testnetMosaicOwned;
+        DataStore.mosaic.metaData = AccountDataFixture.testnetMosaicDefinitionMetaDataPair;
+        DataStore.chain.height = 999999999;
     }
 
     function createDummyWalletContextMainnet(Wallet) {
-        Wallet.setWallet(WalletFixture.mainnetWallet);
-        Wallet.setDefaultNode();
+        Wallet.use(WalletFixture.mainnetWallet);
+        Nodes.setDefault();
 
-        DataBridge.accountData = AccountDataFixture.mainnetAccountData;
-        DataBridge.namespaceOwned = AccountDataFixture.mainnetNamespaceOwned;
-        DataBridge.mosaicOwned = AccountDataFixture.mainnetMosaicOwned;
-        DataBridge.mosaicDefinitionMetaDataPair = AccountDataFixture.mainnetMosaicDefinitionMetaDataPair;
-
-
-        DataBridge.nisHeight = 999999999;
+        DataStore.account.metaData = AccountDataFixture.mainnetAccountData;
+        DataStore.namespace.ownedBy = AccountDataFixture.mainnetNamespaceOwned;
+        DataStore.mosaic.ownedBy = AccountDataFixture.mainnetMosaicOwned;
+        DataStore.mosaic.metaData = AccountDataFixture.mainnetMosaicDefinitionMetaDataPair;
+        DataStore.chain.height = 999999999;
     }
 
     it("Can update current account mosaics", function() {
@@ -52,7 +49,7 @@ describe('Mosaic supply change transaction module tests', function() {
         ctrl.updateCurrentAccountMosaics();
 
         // Assert
-        expect(ctrl.currentAccount).toEqual(Wallet.currentAccount.address);
+        expect(ctrl.mosaicOwned).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._Wallet.currentAccount.address]);
         expect(ctrl.currentAccountMosaicNames).toEqual(['nano:points', 'nem:xem']);
         expect(ctrl.selectedMosaic).toEqual('nem:xem');
     });
@@ -70,8 +67,6 @@ describe('Mosaic supply change transaction module tests', function() {
             mosaic: '',
             supplyType: 1,
             delta: 0,
-            fee: 20 * 1000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: {
                 "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
@@ -87,14 +82,11 @@ describe('Mosaic supply change transaction module tests', function() {
                 }
             }
         });
-        expect(ctrl.currentAccount).toEqual(Wallet.currentAccount.address);
+        expect(ctrl.mosaicOwned).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._Wallet.currentAccount.address]);
         expect(ctrl.currentAccountMosaicNames).toEqual(['nano:points', 'nem:xem']);
         expect(ctrl.selectedMosaic).toEqual('nem:xem');
         expect(ctrl.okPressed).toBe(false);
-        expect(ctrl.common).toEqual({
-            'password': '',
-            'privateKey': '',
-        });
+        expect(ctrl.common).toEqual(nem.model.objects.get("common"));
     });
 
     it("Has right fee on testnet", function() {
@@ -109,8 +101,7 @@ describe('Mosaic supply change transaction module tests', function() {
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(20000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
     it("Has right fee on mainnet", function() {
@@ -125,8 +116,7 @@ describe('Mosaic supply change transaction module tests', function() {
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(108000000);
-        expect(ctrl.formData.innerFee).toBe(0);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
     it("Can update transaction fee if multisig", function() {
@@ -139,15 +129,15 @@ describe('Mosaic supply change transaction module tests', function() {
 
         // Act
         ctrl.formData.isMultisig = true;
-        ctrl.updateFees();
+        ctrl.prepareTransaction();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData.fee).toBe(6000000);
-        expect(ctrl.formData.innerFee).toBe(20000000);
+        expect(ctrl.preparedTransaction.fee).toBe(nem.model.fees.multisigTransaction);
+        expect(ctrl.preparedTransaction.otherTrans.fee).toBe(nem.model.fees.namespaceAndMosaicCommon);
     });
 
-    it("Can set right current account address if multisig enabled", function() {
+    it("Can set right mosaics owned if multisig enabled", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet);
@@ -161,10 +151,10 @@ describe('Mosaic supply change transaction module tests', function() {
         scope.$digest();
 
         // Assert
-        expect(ctrl.currentAccount).toEqual(ctrl.formData.multisigAccount.address);
+        expect(ctrl.mosaicOwned).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl.formData.multisigAccount.address]);
     });
 
-    it("Can set right current account address if multisig enabled then disabled", function() {
+    it("Can set mosaics owned if multisig enabled then disabled", function() {
         // Arrange:
         let scope = $rootScope.$new();
         createDummyWalletContextTestnet(Wallet);
@@ -176,12 +166,13 @@ describe('Mosaic supply change transaction module tests', function() {
         ctrl.formData.isMultisig = true;
         ctrl.updateCurrentAccountMosaics();
         scope.$digest();
+        expect(ctrl.mosaicOwned).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl.formData.multisigAccount.address]);
         ctrl.formData.isMultisig = false;
         ctrl.updateCurrentAccountMosaics();
         scope.$digest();
 
         // Assert
-        expect(ctrl.currentAccount).toEqual(Wallet.currentAccount.address);
+        expect(ctrl.mosaicOwned).toEqual(ctrl._DataStore.mosaic.ownedBy[ctrl._Wallet.currentAccount.address]);
     });
 
     it("Can update multisig account mosaics if multisig enabled", function() {
@@ -260,8 +251,6 @@ describe('Mosaic supply change transaction module tests', function() {
             mosaic: '',
             supplyType: 2,
             delta: 0,
-            fee: 20000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: {
                 "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
@@ -298,8 +287,6 @@ describe('Mosaic supply change transaction module tests', function() {
             mosaic: '',
             supplyType: 1,
             delta: 0,
-            fee: 20000000,
-            innerFee: 0,
             isMultisig: false,
             multisigAccount: {
                 "address": "TBUSUKWVVPS7LZO4AF6VABQHY2FI4IIMCJGIVX3X",
@@ -314,103 +301,6 @@ describe('Mosaic supply change transaction module tests', function() {
                     "minCosignatories": 1
                 }
             }
-        });
-    });
-
-    describe('Mosaic supply change transaction module delegation tests', function() {
-
-        it("Pass right parameters to prepareMosaicSupply in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('EditMosaicCtrl', {
-                $scope: scope
-            });
-            scope.$digest();
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareMosaicDefinition from here first and then spy is on the wrong function
-            }
-            spyOn(ctrl._Transactions, 'prepareMosaicSupply').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareMosaicSupply).toHaveBeenCalledWith(ctrl.common, ctrl.formData);
-        });
-
-        it("Can't call prepareMosaicSupply in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('EditMosaicCtrl', {
-                $scope: scope
-            });
-            scope.$digest();
-            // Override
-            ctrl.updateFees = function() {
-                // Otherwise it calls prepareMosaicDefinition from here first and then spy is on the wrong function
-            }
-            spyOn(ctrl._Transactions, 'prepareMosaicSupply').and.callThrough();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.prepareMosaicSupply).not.toHaveBeenCalled();
-        });
-
-        it("Pass right parameters to serializeAndAnnounceTransaction in send() method", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('EditMosaicCtrl', {
-                $scope: scope
-            });
-            scope.$digest();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest11"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).toHaveBeenCalledWith(jasmine.any(Object), ctrl.common);
-        });
-
-        it("Can't call serializeAndAnnounceTransaction in send() method if wrong password", function() {
-            // Arrange:
-            let scope = $rootScope.$new();
-            createDummyWalletContextTestnet(Wallet)
-            let ctrl = $controller('EditMosaicCtrl', {
-                $scope: scope
-            });
-            scope.$digest();
-            spyOn(ctrl._Transactions, 'serializeAndAnnounceTransaction').and.returnValue($q.when({}));
-            ctrl.common = {
-                "privateKey": "",
-                "password": "TestTest"
-            }
-
-            // Act
-            ctrl.send();
-
-            // Assert
-            expect(ctrl._Transactions.serializeAndAnnounceTransaction).not.toHaveBeenCalled();
         });
     });
 
