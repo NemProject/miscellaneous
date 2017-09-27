@@ -1,8 +1,9 @@
+import nem from 'nem-sdk';
+
 class HomeCtrl {
-    constructor(AppConstants, NetworkRequests, $localStorage, $timeout) {
+    constructor(AppConstants, $localStorage) {
         'ngInject';
 
-        this._NetworkRequests = NetworkRequests;
         this._storage = $localStorage;
 
         this.appName = AppConstants.appName;
@@ -25,33 +26,30 @@ class HomeCtrl {
             // Get position
             navigator.geolocation.getCurrentPosition((res) => {
                 // Get the closest nodes
-                this._NetworkRequests.getNearestNodes(res.coords).then((res) => {
+                nem.com.requests.supernodes.nearest(res.coords).then((res) => {
                     // Pick a random node in the array
                     let node = res.data[Math.floor(Math.random()*res.data.length)];
                     // Set the node in local storage
-                    this._storage.selectedMainnetNode = 'http://'+node.ip+':7778';
+                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, 7778);
                 }, (err) => {
                     // If error it will use default node
-                    console.log(err)
+                    console.log(err);
                 });
             }, (err) => {
-                // If error it will use default node
                 console.log(err);
                 // Get all the active supernodes
-                this._NetworkRequests.getSupernodesBr().then((res) => {
+                nem.com.requests.supernodes.get(1).then((res) => {
                     // Pick a random node in the array
                     let node = res.data[Math.floor(Math.random()*res.data.length)];
-                    console.log(node)
                     // Set the node in local storage
-                    this._storage.selectedMainnetNode = 'http://'+node.ip+':7778';
+                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, 7778);
                 }, (err) => {
                     // If error it will use default node
-                    console.log(err)
+                    console.log(err);
                 });
             });
         }
     }
-
 }
 
 export default HomeCtrl;
