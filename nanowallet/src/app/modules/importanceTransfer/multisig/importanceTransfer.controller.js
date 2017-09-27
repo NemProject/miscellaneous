@@ -1,72 +1,51 @@
-import CryptoHelpers from '../../../utils/CryptoHelpers';
-import Address from '../../../utils/Address';
-import KeyPair from '../../../utils/KeyPair';
-import helpers from '../../../utils/helpers';
-import Network from '../../../utils/Network';
-import Nodes from '../../../utils/nodes';
+import nem from 'nem-sdk';
 
 class MultisigImportanceTransferCtrl {
-    constructor($location, Wallet, Alert, Transactions, $filter, DataBridge, NetworkRequests, $timeout, $scope, AppConstants, $localStorage) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(Wallet, Alert, $filter, DataStore, $timeout, Nodes) {
         'ngInject';
 
-        // Alert service
-        this._Alert = Alert;
-        // $location to redirect
-        this._location = $location;
-        // Wallet service
-        this._Wallet = Wallet;
-        // Transactions service
-        this._Transactions = Transactions;
-        // Filters
-        this._$filter = $filter;
-        this._DataBridge = DataBridge;
-        this._NetworkRequests = NetworkRequests;
-        this._$timeout = $timeout;
-        this._storage = $localStorage;
+        //// Module dependencies region ////
 
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
-        }
+        this._Alert = Alert;
+        this._Wallet = Wallet;
+        this._$filter = $filter;
+        this._DataStore = DataStore;
+        this._$timeout = $timeout;
+        this._Nodes = Nodes;
+
+        //// End dependencies region ////
  
-        /**
-         *  Default importance transfer transaction properties  
-         */
-        this.formData = {};
+        //// Module properties region ////
+
+        // Form is an importance transfer transaction object
+        this.formData = nem.model.objects.create("importanceTransferTransaction")("", 1);
+
         // Remote account address for view
         this.remoteAccountAddress = '',
         // Remote account public key
         this.formData.remoteAccount = '';
         // For the public key in harvesting panel
         this.remoteAccountPublicView = '';
-        this.formData.mode = 1;
-        this.formData.fee = 0;
         // Multisig data
-        this.formData.innerFee = 0;
         this.formData.isMultisig = true;
         this.formData.multisigAccount = '';
-        // Address generted from the custm public key
+        // Address generated from the custom public key
         this.customGeneratedRemote = '';
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
-        this.contacts = [];
-
-        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
-            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
-        }
-
-        // To store multisig account data 
+        // Store multisig account data 
         this.multisigData = '';
 
         // Object to contain our password & private key data.
-        this.common = {
-            'password': '',
-            'privateKey': '',
-        };
+        this.common = nem.model.objects.get("common");
 
         // Modes
         this.modes = [{
@@ -80,122 +59,87 @@ class MultisigImportanceTransferCtrl {
         // Not using custom public key by default
         this.customKey = false;
         // Not using custom node by default
-        this.customHarvestingNode = false;
-        this.harvestingNode = helpers.getHostname(this._Wallet.node);
+        this.isCustomNode = false;
+        this.customHarvestingNode = "";
+        // Get the harvesting endpoint from local storage or use default node
+        this.harvestingNode = this._Nodes.getHarvestingEndpoint();
         // Consider node has no free slots by default
-        this.noFreeSlots = true;
+        this.hasFreeSlots = false;
         // Array to contain nodes
-        this.nodes = [];
+        this.nodes = this._Nodes.get();
         // Show supernodes by default on mainnet
-        this.showSupernodes = true;
+        this.showSupernodes = this._Wallet.network !== nem.model.network.data.mainnet.id ? false : true;;
         // Used to store the remote account data
         this.delegatedData;
         //
         this.remotePrivateKey;
         this.isActivator = false;
 
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+
+        //// End properties region ////
+
+        // Check node slots
+        this.checkNode();
+
         // Update fee
-        this.updateFee();
-
-        // Show right nodes list according to network
-        if (this._Wallet.network == Network.data.Mainnet.id) {
-            // Get supernodes
-            this._NetworkRequests.getSupernodes().then((data) => {
-                    this.nodes = data.data.nodes;
-                },
-                (err) => {
-                    // Set default nodes
-                    this.nodes = Nodes.mainnetNodes;
-                    this._Alert.supernodesError();
-                })
-        } else if (this._Wallet.network == Network.data.Testnet.id) {
-            this.nodes = Nodes.testnetNodes;
-            this.showSupernodes = false;
-        } else {
-            this.nodes = Nodes.mijinNodes;
-            this.showSupernodes = false;
-        }
+        this.prepareTransaction();
 
     }
 
+    //// Module methods region ////
+
     /**
-     * checkNode() Check node slots
+     * Check node slots
      */
-    checkNode(){
-        this.noFreeSlots = true;
-            this._NetworkRequests.getUnlockedInfo(this.harvestingNode).then((data) => {
-                    if (data["max-unlocked"] === data["num-unlocked"]) {
-                        this.noFreeSlots = true;
-                    } else {
-                        this.noFreeSlots = false;
-                    }
-                },
-                (err) => {
-                    console.error(err)
-                    this._Alert.unlockedInfoError(err.data.message);
-                });
+    checkNode() {
+        this._Nodes.hasFreeSlots(this.isCustomNode ? this._Nodes.cleanEndpoint(this.customHarvestingNode) : this.harvestingNode).then((res) => {
+            this._$timeout(() => {
+                this.hasFreeSlots = res;
+            });
+        }, (err) => {
+            this._$timeout(() => {
+                this.hasFreeSlots = false;
+            });
+        });
     }
 
     /**
-     * updateDelegatedData() Update the delegated data
+     * Update the delegated data and set chosen harvesting node if unlocked
      */
     updateDelegatedData() {
-        this._NetworkRequests.getAccountData(this.harvestingNode, this.remoteAccountAddress).then((data) => {
+        if (this.isCustomNode) this.harvestingNode = this._Nodes.cleanEndpoint(this.customHarvestingNode);
+        if (!this.harvestingNode) return;
+        // Get account data
+        nem.com.requests.account.data(this.harvestingNode, this.remoteAccountAddress).then((data) => {
+            this._$timeout(() => {
                 this.delegatedData = data
                 if (data.meta.status === "UNLOCKED") {
-                    this.setNodeInLocalStorage();
+                    // Set harvesting node in local storage
+                    this._Nodes.saveHarvestingEndpoint(this.harvestingNode);
                 }
-            },
-            (err) => {
+            });
+        },
+        (err) => {
+            this._$timeout(() => {
                 this._Alert.getAccountDataError(err.data.message);
                 return;
             });
+        });
     }
 
     /**
-     * getNodeInLocalStorage() Get node from local storage if it exists
+     * Prepare the transaction
      */
-    getNodeInLocalStorage() {
-        if(this._Wallet.network === Network.data.Mainnet.id) {
-            if (this._storage["multisigHarvestingMainnetNode-"+this.formData.multisigAccount.address]) {
-                this.harvestingNode = this._storage["multisigHarvestingMainnetNode-"+this.formData.multisigAccount.address]
-            }
-        } else if (this._Wallet.network === Network.data.Testnet.id) {
-            if (this._storage["multisigHarvestingTestnetNode-"+this.formData.multisigAccount.address]) {
-                this.harvestingNode = this._storage["multisigHarvestingTestnetNode-"+this.formData.multisigAccount.address]
-            }
-        } else {
-            if (this._storage["multisigHarvestingMijinNode-"+this.formData.multisigAccount.address]) {
-                this.harvestingNode = this._storage["multisigHarvestingMijinode-"+this.formData.multisigAccount.address]
-            }
-        }
+    prepareTransaction() {
+        let entity = nem.model.transactions.prepare("importanceTransferTransaction")(this.common, this.formData, this._Wallet.network);
+        this.preparedTransaction = entity;
+        return entity;
     }
 
     /**
-     * setNodeInLocalStorage() Set the node in local storage
-     */
-    setNodeInLocalStorage() {
-        if(this._Wallet.network === Network.data.Mainnet.id) {
-            this._storage["multisigHarvestingMainnetNode-"+this.formData.multisigAccount.address] = this.harvestingNode;
-        } else if (this._Wallet.network === Network.data.Testnet.id) {
-            this._storage["multisigHarvestingTestnetNode-"+this.formData.multisigAccount.address] = this.harvestingNode;
-        } else {
-            this._storage["multisigHarvestingMijinode-"+this.formData.multisigAccount.address] = this.harvestingNode;
-        }
-    }
-
-    /**
-     * updateFee() Update transaction fee
-     */
-    updateFee() {
-        let entity = this._Transactions.prepareImportanceTransfer(this.common, this.formData);
-        this.formData.fee = entity.fee;
-        this.formData.innerFee = entity.otherTrans.fee;
-
-    }
-
-    /**
-     * updateRemoteAccount() Update the remote account public key
+     * Update the remote account public key
      */
     updateRemoteAccount() {
         if (this.customKey) {
@@ -211,48 +155,34 @@ class MultisigImportanceTransferCtrl {
      */
     generateAddress() {
         if(this.formData.remoteAccount.length === 64) {
-           this.customGeneratedRemote = Address.toAddress(this.formData.remoteAccount, this._Wallet.network);
+           this.customGeneratedRemote = nem.model.address.toAddress(this.formData.remoteAccount, this._Wallet.network);
         } else {
             this.customGeneratedRemote = '';
         }
     }
 
     /**
-     * generateData() Generate data for selected multisig account
+     * Generate data for selected multisig account
      */
     generateData() {
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
-            this._Alert.invalidPassword();
-            // Reset data
-            this.reset();
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Reset data
-            this.reset();
-            return;
-        }
+        // Get account private key for preparation or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
 
-        if (!this.formData.multisigAccount) {
-            // Reset data
-            this.reset();
-            return;
-        }
+        if (!this.formData.multisigAccount) return this.reset();
 
-        let kp = KeyPair.create(helpers.fixPrivateKey(this.common.privateKey));
+        let kp = nem.crypto.keyPair.create(nem.utils.helpers.fixPrivateKey(this.common.privateKey));
         // Create remote account from signed sha256 hash of the multisig account address
-        this.remotePrivateKey = helpers.fixPrivateKey(kp.sign(CryptoJS.SHA256(this.formData.multisigAccount.address).toString(CryptoJS.enc.Hex)).toString());
-        let remoteKp = KeyPair.create(this.remotePrivateKey);
-        this.remoteAccountAddress = Address.toAddress(remoteKp.publicKey.toString(), this._Wallet.network);
+        this.remotePrivateKey = nem.utils.helpers.fixPrivateKey(kp.sign(nem.crypto.js.SHA256(this.formData.multisigAccount.address).toString(nem.crypto.js.enc.Hex)).toString());
+        let remoteKp = nem.crypto.keyPair.create(this.remotePrivateKey);
+        this.remoteAccountAddress = nem.model.address.toAddress(remoteKp.publicKey.toString(), this._Wallet.network);
         this.formData.remoteAccount = remoteKp.publicKey.toString();
         this.remoteAccountPublicView = remoteKp.publicKey.toString();
 
         // Update fee
-        this.updateFee();
+        this.prepareTransaction();
 
         // Get multisig account data
-        this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), this.formData.multisigAccount.address).then((data) => {
+        nem.com.requests.account.data(this._Wallet.node, this.formData.multisigAccount.address).then((data) => {
                 this._$timeout(() => {
                     this.multisigData = data;
                 });
@@ -263,16 +193,13 @@ class MultisigImportanceTransferCtrl {
                     this._Alert.getAccountDataError(err.data.message);
                 });
             });
-
-        this.getNodeInLocalStorage();
-        this.checkNode();
         this.updateDelegatedData()
         this.checkRemoteAccount();
 
     }
 
     /**
-    * reset() Reset generated data
+    * Reset generated data
     */
     reset() {
         this.remoteAccountAddress = '';
@@ -286,121 +213,118 @@ class MultisigImportanceTransferCtrl {
     }
 
     /**
-     * startDelegatedHarvesting() Start delegated harvesting
+     * Start delegated harvesting, set chosen node in wallet service and local storage
      */
     startDelegatedHarvesting() {
-            // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
-            this._Alert.invalidPassword();
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            return;
-        }
-            this._NetworkRequests.unlockAccount(this.harvestingNode, this.remotePrivateKey).then((data) => {
-                if (data.status == 200) {
-                    // Update delegated data
-                    this.updateDelegatedData();
-                    }
-            },
-            (err) => {
-                console.error(err)
+        // Get account private key or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+
+        // Start harvesting
+        nem.com.requests.account.harvesting.start(this.harvestingNode, this.remotePrivateKey).then((data) => {
+            this._$timeout(() => {
+                // Update delegated data
+                this.updateDelegatedData();
+                // Clean data
+                this.common = nem.model.objects.get("common");
+            });
+        },
+        (err) => {
+            this._$timeout(() => {
                 this._Alert.unlockError(err.data.message);
                 return;
-            })
+            });
+        });
     }
 
     /**
-     * stopDelegatedHarvesting() Stop delegated harvesting
+     * Stop delegated harvesting
      */
     stopDelegatedHarvesting() {
-            // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
-            this._Alert.invalidPassword();
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            return;
-        }
-            this._NetworkRequests.lockAccount(this.harvestingNode, this.remotePrivateKey).then((data) => {
-                if (data.status == 200) {
-                    // Check node slots
-                    this.checkNode();
-                    // Update delegated data
-                    this.updateDelegatedData();
-                }
-            },
-            (err) => {
-                console.error(err)
-                this._Alert.unlockError(err.data.message);
+        // Get account private key or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+
+        // Stop harvesting
+        nem.com.requests.account.harvesting.stop(this.harvestingNode, this.remotePrivateKey).then((data) => {
+            this._$timeout(() => {
+                // Check node slots
+                this.checkNode();
+                // Update delegated data
+                this.updateDelegatedData();
+                // Clean data
+                this.common = nem.model.objects.get("common");
+            });
+        },
+        (err) => {
+            this._$timeout(() => {
+                this._Alert.lockError(err.data.message);
                 return;
-            })
+            });
+        });
     }
 
     checkRemoteAccount() {
         // Get multisig account data
-        return this._NetworkRequests.getForwarded(helpers.getHostname(this._Wallet.node), this.remoteAccountAddress).then((data) => {
-                this._$timeout(() => {
-                    if(data.account.address !== this.formData.multisigAccount.address) {
-                        this.isActivator = false;
-                    } else {
-                        this.isActivator = true;
-                    }
-                });
-            },
-            (err) => {
-                this._$timeout(() => {
-                    console.log(err.data.message);
-                });
+        nem.com.requests.account.forwarded(this._Wallet.node, this.remoteAccountAddress).then((data) => {
+            this._$timeout(() => {
+                if(data.account.address !== this.formData.multisigAccount.address) {
+                    this.isActivator = false;
+                } else {
+                    this.isActivator = true;
+                }
             });
+        },
+        (err) => {
+            this._$timeout(() => {
+                console.log(err.data.message);
+            });
+        });
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Reset data
+     */
+    resetData() {
+        //this.formData = nem.model.objects.create("importanceTransferTransaction")("", 1);
+        //this.formData.isMultisig = true;
+        this.common = nem.model.objects.get("common");
+        this.preparedTransaction = {};
+        this.prepareTransaction();
+    }
+
+    /**
+     * Prepare and broadcast the transaction to the network
      */
     send() {
-        // Disable send button;
+        // Disable send button
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, false)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        }
+        // Get account private key for preparation or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
 
         // Build the entity to serialize
-        let entity = this._Transactions.prepareImportanceTransfer(this.common, this.formData);
-        // Construct transaction byte array, sign and broadcast it to the network
-        return this._Transactions.serializeAndAnnounceTransaction(entity, this.common).then((res) => {
-                // Check status
-                if (res.status === 200) {
-                    // If code >= 2, it's an error
-                    if (res.data.code >= 2) {
-                        this._Alert.transactionError(res.data.message);
-                    } else {
-                        this._Alert.transactionSuccess();
-                    }
-                }
+        let entity = this.prepareTransaction();
+
+        // Use wallet service to serialize and send
+        this._Wallet.transact(this.common, entity).then(() => {
+            this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Delete private key in common
-                this.common.privateKey = '';
-            },
-            (err) => {
-                // Delete private key in common
-                this.common.privateKey = '';
-                // Enable send button
-                this.okPressed = false;
-                this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+                // Reset form data
+                this.resetData();
+                return;
             });
+        }, () => {
+            this._$timeout(() => {
+                // Delete private key in common
+                this.common.privateKey = '';
+                // Enable send button
+                this.okPressed = false;
+                return;
+            });
+        });
     }
+
+    //// End methods region ////
 
 }
 
