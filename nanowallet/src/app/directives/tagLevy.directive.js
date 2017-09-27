@@ -1,4 +1,4 @@
-import helpers from '../utils/helpers';
+import nem from 'nem-sdk';
 
 function TagLevy(AppConstants) {
     'ngInject';
@@ -16,7 +16,7 @@ function TagLevy(AppConstants) {
 
                 function getLevy(d) {
                     if (!scope.mosaics) return undefined;
-                    let mosaicName = helpers.mosaicIdToName(d.mosaicId);
+                    let mosaicName = nem.utils.format.mosaicIdToName(d.mosaicId);
                     if (!(mosaicName in scope.mosaics)) {
                         return undefined;
                     }
