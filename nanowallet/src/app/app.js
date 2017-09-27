@@ -7,7 +7,7 @@ import appConfig from './config/app.config';
 import appRun from './config/app.run';
 
 // Import Angular modules
-import 'angular-ui-router';
+import '@uirouter/angularjs';
 import 'angular-animate';
 import 'angular-sanitize';
 import 'ng-toast';
@@ -23,6 +23,7 @@ import './config/app.templates';
 
 // Import our app functionalities
 import './layout';
+import './directives';
 import './components';
 import './filters';
 import './services';
@@ -35,23 +36,21 @@ import './modules/login';
 import './modules/languages';
 import './modules/transferTransaction';
 import './modules/portal';
-import './modules/apostille';
 import './modules/account';
 import './modules/multisignature';
 import './modules/namespaces';
 import './modules/mosaics';
-import './modules/explorer';
-import './modules/importanceTransfer';
 import './modules/changelly';
 import './modules/addressBook';
+import './modules/importanceTransfer';
 import './modules/faq';
-import './modules/voting';
 
 // Create and bootstrap application
 const requires = [
     'ui.router',
     'templates',
     'app.layout',
+    'app.directives',
     'app.components',
     'app.filters',
     'app.home',
@@ -65,23 +64,10 @@ const requires = [
     'app.createMosaic',
     'app.editMosaic',
     'app.portal',
-    'app.explorerHome',
-    'app.explorerApostilles',
-    'app.explorerNamespacesMosaics',
-    'app.accountsExplorer',
     'app.signup',
     'app.login',
     'app.services',
-    'app.faq',
     'app.account',
-    'app.createApostille',
-    'app.auditApostille',
-    'app.apostilleHistory',
-    'app.apostilleMessage',
-    'app.transferApostille',
-    'app.updateApostille',
-    'app.importanceTransfer',
-    'app.multisigImportanceTransfer',
     'ngAnimate',
     'ngSanitize',
     'ngToast',
@@ -91,8 +77,9 @@ const requires = [
     'app.lang',
     'app.changelly',
     'app.addressBook',
-    'app.votingCreatePoll',
-    'app.votingPolls'
+    'app.importanceTransfer',
+    'app.multisigImportanceTransfer',
+    'app.faq'
 ];
 
 window.$ = window.jQuery = $;
