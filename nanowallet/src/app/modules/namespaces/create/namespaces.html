@@ -1,5 +1,6 @@
 <div class="namespace-provision-page">
   <div class="container-fluid main">
+
     <div class="row">
       <div class="col-sm-11">
         <h2>{{ 'NAMESPACE_PROVISION_TITLE' | translate }}</h2>
@@ -8,6 +9,7 @@
 
     <div class="row">
       <div class="col-md-9 col-lg-7">
+
         <div class="panel-heading">
           <div class="tabDescription">
             <span ng-show="!$ctrl.formData.isMultisig">{{ 'NAMESPACE_PROVISION_NAME' | translate }}</span>
@@ -15,45 +17,27 @@
           </div>
           <ul class="nav nav-tabs">
             <li ng-class="$ctrl.formData.isMultisig ? '' : 'active'"><a ng-click="$ctrl.formData.isMultisig = false;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
-            <li ng-show="$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
+            <li ng-show="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length" ng-class="$ctrl.formData.isMultisig ? 'active' : ''"><a ng-click="$ctrl.formData.isMultisig = true;$ctrl.updateCurrentAccountNS();">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
           </ul>
         </div>
+
         <div class="panel-body">
-          <fieldset>
-            <!-- MULTISIG ACCOUNT ADDRESS -->
-            <fieldset class="form-group" ng-show="$ctrl.formData.isMultisig">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'GENERAL_MULTISIG_ACCOUNT' | translate }}: </label>
-                </span>
-                <select class="form-control" ng-options="(acc.address | fmtContact:$ctrl.contacts) for acc in $ctrl._DataBridge.accountData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.formData.multisigAccount" ng-change="$ctrl.updateCurrentAccountNS();">
-                </select>
-              </div>
-            </fieldset>
-            <!-- MULTISIG ACCOUNT BALANCE -->
-            <fieldset class="form-group" ng-show="$ctrl.formData.multisigAccount && $ctrl.formData.isMultisig">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}</label>
-                </span>
-                <div class="form-control formFloat" readOnly>
-                  <input class="readOnly" type="text" value="{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[0] }}.{{ ($ctrl.formData.multisigAccount.balance | fmtNemValue)[1] }}" readOnly/>
-                  <label class="floatRight"><small>XEM</small></label>
-                </div>
-              </div>
-            </fieldset>
-            <!-- PARENT NAMESPACE -->
+             <!-- Multisig select -->
+            <multisig-select ng-show="$ctrl.formData.isMultisig" multisig-account="$ctrl.formData.multisigAccount" update-ctrl="$ctrl.updateCurrentAccountNS();"></multisig-select>
+
+            <!-- Parent namespace -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label for="namespaceParent">{{ 'NAMESPACE_PROVISION_PARENT' | translate }}: </label>
                 </span>
-                <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl._DataBridge.namespaceOwned[$ctrl.currentAccount] | objValues | filter:$ctrl.isNotNamespaceLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.updateFees()">
+                <select class="form-control" ng-options="namespace.fqn for namespace in $ctrl.namespaceOwned | objValues | filter:$ctrl.isNotLevel3 " ng-model="$ctrl.formData.namespaceParent" ng-change="$ctrl.prepareTransaction()">
                   <option value=""> . ({{ 'NAMESPACE_PROVISION_NEW_ROOT' | translate }}) </option>
                 </select>
               </div>
             </fieldset>
-            <!-- NAMESPACE NAME -->
+
+            <!-- Namespace name -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
@@ -62,7 +46,8 @@
                <input autofocus="autofocus" type="text" class="form-control" ng-model="$ctrl.formData.namespaceName" placeholder="{{ 'NAMESPACE_PROVISION_NS_NAME' | translate }}" maxlength="64" ng-change="$ctrl.processNamespaceName()">
              </div>
             </fieldset>
-            <!-- NAMESPACE SINK ADDRESS -->
+
+            <!-- Namespace sink address -->
             <fieldset class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
@@ -71,25 +56,14 @@
                 <input type="text" class="form-control" ng-model="$ctrl.formData.rentalFeeSink" readOnly>
               </div>
             </fieldset>
-            <!-- TRANSACTION FEE -->
+
+            <!-- Transaction and rental fee -->
             <div class="row" class="dualFees">
               <div class="col-sm-6">
-                <fieldset class="form-group">
-                  <div class="input-group">
-                    <span class="input-group-btn">
-                      <label>{{ 'FORM_SIDE_BTN_TX_FEE' | translate }}: </label>
-                    </span>
-                    <div class="form-control formFloat" readOnly>
-                      <span class="feeAmount">
-                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.formData.innerFee | fmtNemValue)[0]}}.{{($ctrl.formData.innerFee | fmtNemValue)[1]}} +</span>
-                        <span>{{($ctrl.formData.fee | fmtNemValue)[0]}}.{{($ctrl.formData.fee | fmtNemValue)[1]}}</span>
-                      </span>
-                      <label class="floatRight"><small>XEM</small></label>
-                    </div>
-                  </div>
-                </fieldset>
+                <!-- Transaction fee -->
+                <fee-input tx="$ctrl.preparedTransaction" is-multisig="$ctrl.formData.isMultisig"></fee-input>
               </div>
-              <!-- RENTAL FEE-->
+              <!-- Rental fee -->
               <div class="col-sm-6">
                 <fieldset class="form-group">
                   <div class="input-group">
@@ -98,7 +72,8 @@
                     </span>
                     <div class="form-control formFloat" readOnly>
                       <span class="feeAmount">
-                        <span>{{($ctrl.formData.rentalFee | fmtNemValue)[0]}}.{{($ctrl.formData.rentalFee | fmtNemValue)[1]}}</span>
+                        <span ng-show="$ctrl.formData.isMultisig">{{($ctrl.preparedTransaction.otherTrans.rentalFee | fmtNemValue)[0]}}.{{($ctrl.preparedTransaction.otherTrans.rentalFee | fmtNemValue)[1]}}</span>
+                        <span ng-show="!$ctrl.formData.isMultisig">{{($ctrl.preparedTransaction.rentalFee | fmtNemValue)[0]}}.{{($ctrl.preparedTransaction.rentalFee | fmtNemValue)[1]}}</span>
                       </span>
                       <label class="floatRight"><small>XEM</small></label>
                     </div>
@@ -106,39 +81,33 @@
                 </fieldset>
               </div>
             </div>
-            <!-- PASSWORD FIELD -->
-            <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
-                </span>
-                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
-              </div>
-            </fieldset>
-            <!-- SEND TRANSACTION -->
+
+            <!-- Password Field -->
+            <password-input common="$ctrl.common"></password-input>
+
+            <!-- Send transaction -->
             <button class="btn btn-success pull-xs-right" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_REGISTER' | translate }}
             </button>
-          </fieldset>
         </div>
       </div>
 
+      <!-- Information panel -->
       <div class="col-md-3 col-lg-5">
-            <div class="panel-heading">
-
-              <h3>{{ 'NAMESPACE_PROVISION_RESTRICTIONS' | translate }}</h3>
-            </div>
-            <div class="panel-body row">
-              <div class="col-md-12 col-lg-12">
-          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_1' | translate }}</p>
-          <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
-          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_2' | translate }}</p>
-          <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
-          <p>{{ 'NAMESPACE_PROVISION_INFORMATION_3' | translate }}</p>
+        <div class="panel-heading">
+          <h3>{{ 'NAMESPACE_PROVISION_RESTRICTIONS' | translate }}</h3>
+        </div>
+        <div class="panel-body row">
+          <div class="col-md-12 col-lg-12">
+            <p>{{ 'NAMESPACE_PROVISION_INFORMATION_1' | translate }}</p>
+            <pre>a, b, c, ..., z, 0, 1, 2, ..., 9, _ , -</pre>
+            <p>{{ 'NAMESPACE_PROVISION_INFORMATION_2' | translate }}</p>
+            <pre>nem, user, account, org, com, biz, net, edu, mil, gov and info.</pre>
+            <p>{{ 'NAMESPACE_PROVISION_INFORMATION_3' | translate }}</p>
+          </div>
         </div>
       </div>
-      </div>
-    </div>
 
+    </div>
   </div>
 </div>

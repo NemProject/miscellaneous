@@ -1,197 +1,168 @@
-import CryptoHelpers from '../../../utils/CryptoHelpers';
-import Sinks from '../../../utils/sinks';
+import nem from 'nem-sdk';
+import Helpers from '../../../utils/helpers';
 
 class NamespacesCtrl {
-    constructor($location, Wallet, Alert, Transactions, DataBridge, $filter, $localStorage) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(Wallet, Alert, DataStore, $filter, $timeout) {
         'ngInject';
 
-        // Alert service
+        //// Module dependencies region ////
+
         this._Alert = Alert;
-        // $location to redirect
-        this._location = $location;
-        // Wallet service
         this._Wallet = Wallet;
-        // Transactions service
-        this._Transactions = Transactions;
-        // DataBridge service
-        this._DataBridge = DataBridge;
-        // Filters
+        this._DataStore = DataStore;
         this._$filter = $filter;
-        //Local storage
-        this._storage = $localStorage;
+        this._$timeout = $timeout;
 
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
-        }
+        //// End dependencies region ////
 
-        /**
-         *  Default provision namespace transaction properties  
-         */
-        this.formData = {};
-        this.formData.rentalFeeSink = Sinks.sinks.namespace[this._Wallet.network];
-        this.formData.rentalFee = 0;
-        this.formData.namespaceName = '';
-        this.formData.namespaceParent = null;
-        this.formData.fee = 0;
-        // Multisig data
-        this.formData.innerFee = 0;
-        this.formData.isMultisig = false;
-        this.formData.multisigAccount = this._DataBridge.accountData.meta.cosignatoryOf.length == 0 ? '' : this._DataBridge.accountData.meta.cosignatoryOf[0];
+        //// Module properties region ////
 
-        this.contacts = [];
+        // Form is a namespace provision transaction object 
+        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
 
-        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
-            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
-        }
+        // Sink account for view
+        this.formData.rentalFeeSink = nem.model.sinks.namespace[this._Wallet.network];
+
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
         // Object to contain our password & private key data.
-        this.common = {
-            'password': '',
-            'privateKey': '',
-        };
-        // Default current address (used in view to get namespace owned by account)
-        this.currentAccount = this._Wallet.currentAccount.address;
+        this.common = nem.model.objects.get("common");
 
+        // Default namespaces owned
+        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
+
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+
+        //// End properties region ////
+
+        // Update current account namespace
         this.updateCurrentAccountNS();
 
-        this.updateFees();
+        // Update the fee in view
+        this.prepareTransaction();
 
     }
 
+    //// Module methods region ////
+
     /**
-     * isNotNamespaceLevel3() Exclude level 3 namespace
+     * Check if a namespace id is level 3
      *
-     * @param elem: The element to check
+     * @param {object} elem - The element to check
+     *
+     * @return {boolean} - True if element is not a namespace level 3, false otherwise
      */
-    isNotNamespaceLevel3(elem) {
-        return elem.fqn.split('.').length < 3
+    isNotLevel3(elem) {
+        return elem.fqn.split('.').length < 3;
     };
 
     /**
-     * processNamespaceName() Set name to lowercase and check it
+     * Set name to lowercase and check it
      */
     processNamespaceName() {
-        // lowercase namespace name
+        // Lowercase namespace name
         this.formData.namespaceName = this._$filter('lowercase')(this.formData.namespaceName);
         // Check namespace validity
-        if (!this.namespaceIsValid(this.formData.namespaceName)) {
-            this._Alert.invalidNamespaceName();
-            return;
-        }
+        if (!this.namespaceIsValid(this.formData.namespaceName)) return this._Alert.invalidNamespaceName();
     }
 
     /**
-     * updateCurrentAccountNS() Get current account namespaces & mosaic names
+     * Get current account namespaces & mosaic names
      *
      * @note: Used in view (ng-update) on multisig changes
      */
     updateCurrentAccountNS() {
-        //Fix this.formData.multisigAccount error on logout
-        if (null === this.formData.multisigAccount) {
-            return;
-        }
-        // Update current account if multisig selected
-        if (this.formData.isMultisig) {
-            this.currentAccount = this.formData.multisigAccount.address;
+        // Get current account
+        let acct = this.formData.isMultisig ? this.formData.multisigAccount.address : this._Wallet.currentAccount.address;
+        // Set current account mosaics names if namespaceOwned is not undefined in DataStore service
+        if (undefined !== this._DataStore.namespace.ownedBy[acct]) {
+            this.namespaceOwned = this._DataStore.namespace.ownedBy[acct];
+            this.formData.namespaceParent = this.namespaceOwned[Object.keys(this.namespaceOwned)[0]];
         } else {
-            this.currentAccount = this._Wallet.currentAccount.address;
+            this.namespaceOwned = {};
+            this.formData.namespaceParent = "";
         }
-        // Set current account mosaics names if namespaceOwned is not undefined
-        if (undefined !== this._DataBridge.namespaceOwned[this.currentAccount]) {
-            let namespaceOwned = this._DataBridge.namespaceOwned[this.currentAccount];
-            this.formData.namespaceParent = namespaceOwned[Object.keys(namespaceOwned)[0]];
-        } else {
-            this.formData.namespaceParent = '';
-        }
-        this.updateFees();
+        this.prepareTransaction();
     }
 
     /**
-     * updateFees() Update transaction fee
+     * Prepare the transaction
      */
-    updateFees() {
-        let entity = this._Transactions.prepareNamespace(this.common, this.formData);
-        if (this.formData.isMultisig) {
-            this.formData.innerFee = entity.otherTrans.fee;
-            this.formData.rentalFee = entity.otherTrans.rentalFee;
-        } else {
-            this.formData.rentalFee = entity.rentalFee;
-            this.formData.innerFee = 0;
-        }
-        this.formData.fee = entity.fee;
+    prepareTransaction() {
+        let entity = nem.model.transactions.prepare("namespaceProvisionTransaction")(this.common, this.formData, this._Wallet.network);
+        // Store the prepared transaction
+        this.preparedTransaction = entity;
+        return entity;
     }
 
     /**
-     * namespaceIsValid() Check validity of namespace name
+     * Check validity of namespace name
      *
-     * @param ns: The namespace name
+     * @param {string} ns - A namespace name
+     *
+     * @return {boolean} - True if valid, false otherwise
      */
     namespaceIsValid(ns) {
-        // Test if correct length and if name starts with hyphens
-        if ((!this.formData.namespaceParent ? ns.length > 16 : ns.length > 64) || /^([_-])/.test(ns)) {
-            return false;
-        }
-        let pattern = /^[a-z0-9.\-_]*$/;
-        // Test if has special chars or space excluding hyphens
-        if (pattern.test(ns) == false) {
-            return false;
-        } else {
-            return true;
-        }
+        let isParent = this.formData.namespaceParent ? true : false;
+        return Helpers.namespaceIsValid(ns, isParent);
     }
 
     /**
-     * send() Build and broadcast the transaction to the network
+     * Reset data
+     */
+    resetData() {
+        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
+        this.common = nem.model.objects.get("common");
+        this.preparedTransaction = {};
+        this.prepareTransaction();
+        return;
+    }
+
+    /**
+     * Prepare and broadcast the transaction to the network
      */
     send() {
-        // Disable send button;
+        // Disable send button
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        }
+        // Get account private key for preparation or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
 
         // Build the entity to serialize
-        let entity = this._Transactions.prepareNamespace(this.common, this.formData);
-        // Construct transaction byte array, sign and broadcast it to the network
-        return this._Transactions.serializeAndAnnounceTransaction(entity, this.common).then((res) => {
-                // Check status
-                if (res.status === 200) {
-                    // If code >= 2, it's an error
-                    if (res.data.code >= 2) {
-                        this._Alert.transactionError(res.data.message);
-                    } else {
-                        this._Alert.transactionSuccess();
-                    }
-                }
+        let entity = this.prepareTransaction(this.common, this.formData);
+
+        // Use wallet service to serialize and send
+        this._Wallet.transact(this.common, entity).then(() => {
+            this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Delete private key in common
-                this.common.privateKey = '';
-            },
-            (err) => {
-                // Delete private key in common
-                this.common.privateKey = '';
-                // Enable send button
-                this.okPressed = false;
-                this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+                // Reset form data
+                this.resetData();
+                return;
             });
+        }, () => {
+            this._$timeout(() => {
+                // Delete private key in common
+                this.common.privateKey = '';
+                // Enable send button
+                this.okPressed = false;
+                return;
+            });
+        });
     }
+
+    //// End methods region ////
 
 }
 
