@@ -1,112 +1,30 @@
-import helpers from '../utils/helpers';
-import Address from '../utils/Address';
+import nem from 'nem-sdk';
 
 /** Service to open connection, store and process data received from websocket. */
 class DataBridge {
 
     /**
-     * Initialize services and properties
+     * Initialize dependencies and properties
      *
-     * @param {config} AppConstants - The Application constants
-     * @param {service} Alert - The Alert service
-     * @param {service} NetworkRequests - The NetworkRequests service
-     * @param {service} Wallet - The Wallet service
-     * @param {service} $timeout - The angular $timeout service
-     * @param {service} $filter - The angular $filter service
+     * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, Alert, NetworkRequests, Wallet, $timeout, $filter) {
+    constructor(Alert, Wallet, $timeout, $filter, Nodes, DataStore) {
         'ngInject';
 
-        /***
-         * Declare services
+        /**
+         * Service dependencies
          */
+
         this._Alert = Alert;
         this._$timeout = $timeout;
-        this._AppConstants = AppConstants;
         this._Wallet = Wallet;
-        this._NetworkRequests = NetworkRequests;
         this._$filter = $filter;
-
-        /***
-         * Default DataBridge properties
-         */
-
-         /**
-         * The nis height
-         *
-         * @type {number}
-         */
-        this.nisHeight = 0;
+        this._Nodes = Nodes;
+        this._DataStore = DataStore;
 
         /**
-         * The connection status
-         *
-         * @type {boolean}
+         * Service properties
          */
-        this.connectionStatus = false;
-
-        /**
-         * The account meta data pair
-         *
-         * @type {object|undefined}
-         */
-        this.accountData = undefined;
-
-        /**
-         * The recent transactions
-         *
-         * @type {array}
-         */
-        this.transactions = [];
-
-        /**
-         * The unconfirmed transactions
-         *
-         * @type {array}
-         */
-        this.unconfirmed = [];
-
-        /**
-         * The mosaic definition meta data pair
-         *
-         * @type {object}
-         */
-        this.mosaicDefinitionMetaDataPair = {};
-
-        /**
-         * The mosaic definition meta data pair size
-         *
-         * @type {number}
-         */
-        this.mosaicDefinitionMetaDataPairSize = 0;
-
-        /**
-         * The mosaics owned
-         *
-         * @type {object}
-         */
-        this.mosaicOwned = {};
-
-        /**
-         * The mosaics owned size
-         *
-         * @type {object}
-         */
-        this.mosaicOwnedSize = {};
-
-        /**
-         * The namespaces owned
-         *
-         * @type {object}
-         */
-        this.namespaceOwned = {};
-
-        /**
-         * The harvested blocks
-         *
-         * @type {array}
-         */
-        this.harvestedBlocks = [];
 
         /**
          * The connector
@@ -114,27 +32,6 @@ class DataBridge {
          * @type {object|undefined}
          */
         this.connector = undefined;
-
-        /**
-         * The delegated data
-         *
-         * @type {object|undefined}
-         */
-        this.delegatedData = undefined;
-
-        /**
-         * The market information
-         *
-         * @type {object|undefined}
-         */
-        this.marketInfo = undefined;
-
-        /**
-         * The Bitcoin price value
-         *
-         * @type {object|undefined}
-         */
-        this.btcPrice = undefined;
 
         /**
          * The network time
@@ -149,13 +46,6 @@ class DataBridge {
          * @type {setInterval}
          */
         this.timeSyncInterval = undefined;
-
-        /**
-         * Store the connection timeout
-         *
-         * @type {setInterval}
-         */
-        this.connectTimeout = undefined;
     }
 
     /**
@@ -168,17 +58,11 @@ class DataBridge {
         // Store the used connector to close it from anywhere easily
         this.connector = connector;
 
-        if(!this.connectTimeout) {
-            // Trigger alert if not connected within 5 seconds
-            this.connectTimeout = setTimeout(() => {
-                this._$timeout(() => {
-                    this._Alert.nodeSeemsOffline();
-                });
-            }, 5000);
-        }
+        // Fresh DataStore
+        this._DataStore.init();
 
         // Connect
-        connector.connect(() => {
+        connector.connect().then(() => {
 
             // Reset at new connection
             this.reset();
@@ -190,10 +74,8 @@ class DataBridge {
              * Few network requests happen on socket connection
              */
 
-             /**
-             * Fetch network time
-             */
-            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+            // Gets network time
+            nem.com.requests.chain.time(this._Wallet.node).then((res) => {
                 this._$timeout(() => {
                     this.networkTime = res.receiveTimeStamp / 1000;
                 });
@@ -204,131 +86,142 @@ class DataBridge {
             });
 
             // Gets current height
-            this._NetworkRequests.getHeight(helpers.getHostname(this._Wallet.node)).then((height) => {
-                    this._$timeout(() => {
-                        this.nisHeight = height;
-                    });
-                },
-                (err) => {
-                    this._$timeout(() => {
-                        this.nisHeight = this._$filter('translate')('GENERAL_ERROR');
-                    });
+            nem.com.requests.chain.height(this._Wallet.node).then((data) => {
+                this._$timeout(() => {
+                    this._DataStore.chain.height = data.height;
                 });
-
-            // Gets harvested blocks
-            this._NetworkRequests.getHarvestedBlocks(helpers.getHostname(this._Wallet.node), this._Wallet.currentAccount.address).then((blocks) => {
-                    this._$timeout(() => {
-                        this.harvestedBlocks = blocks.data;
-                    });
-                },
-                (err) => {
-                    // Alert error
-                    this._$timeout(() => {
-                        this.harvestedBlocks = [];
-                    });
-                });
-
-            // Gets delegated data
-            this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), Address.toAddress(this._Wallet.currentAccount.child, this._Wallet.network)).then((data) => {
-                    this._$timeout(() => {
-                        this.delegatedData = data;
-                    });
-                },
-                (err) => {
-                    this._$timeout(() => {
-                        this.delegatedData = "";
-                        this._Alert.getAccountDataError(err.data.message);
-                    });
-                });
-
-            // Gets market info
-            this._NetworkRequests.getMarketInfo().then((data) => {
-                    this._$timeout(() => {
-                        this.marketInfo = data;
-
-                    });
             },
             (err) => {
-                    this._$timeout(() => {
-                        this._Alert.errorGetMarketInfo();
-                        this.marketInfo = undefined;
-                    });
+                this._$timeout(() => {
+                    this._DataStore.chain.height = this._$filter('translate')('GENERAL_ERROR');
+                });
+            });
+
+            // Gets harvested blocks
+            nem.com.requests.account.harvesting.blocks(this._Wallet.node, this._Wallet.currentAccount.address).then((res) => {
+                this._$timeout(() => {
+                    this._DataStore.account.harvesting.blocks = res.data;
+                });
+            },
+            (err) => {
+                // Alert error
+                this._$timeout(() => {
+                    this._DataStore.account.harvesting.blocks = [];
+                });
+            });
+
+            // Gets delegated data
+            nem.com.requests.account.data(this._Wallet.node, nem.model.address.toAddress(this._Wallet.currentAccount.child, this._Wallet.network)).then((data) => {
+                this._$timeout(() => {
+                    this._DataStore.account.delegated.metaData = data;
+                });
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._DataStore.account.delegated.metaData = "";
+                    this._Alert.getAccountDataError(err.data.message);
+                });
+            });
+
+            // Gets market info
+            nem.com.requests.market.xem().then((data) => {
+                this._$timeout(() => {
+                    this._DataStore.market.xem = data["BTC_XEM"];
+                });
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.errorGetMarketInfo();
+                    this._DataStore.market.xem = undefined;
+                });
             });
 
             // Gets btc price
-            this._NetworkRequests.getBtcPrice().then((data) => {
-                    this._$timeout(() => {
-                        this.btcPrice = data;
-                    });
+            nem.com.requests.market.btc().then((data) => {
+                this._$timeout(() => {
+                    this._DataStore.market.btc = data;
+                });
             },
             (err) => {
-                    this._$timeout(() => {
-                        this._Alert.errorGetBtcPrice();
-                        this.btcPrice = undefined;
-                    });
+                this._$timeout(() => {
+                    this._Alert.errorGetBtcPrice();
+                    this._DataStore.market.btc = undefined;
+                });
             });
 
             // Set connection status
             this._$timeout(() => {
-                this.connectionStatus = true;
-            })
+                this._DataStore.connection.status = true;
+            });
 
+            // On error we show it in an alert
+           nem.com.websockets.subscribe.errors(connector, (name, d) => {
+                console.log(d);
+                this._Alert.websocketError(d.error + " " + d.message);
+            });
+
+            // New height
+            nem.com.websockets.subscribe.chain.height(connector, (blockHeight) => {
+                this._$timeout(() => {
+                    this._DataStore.chain.height = blockHeight.height;
+                }, 0);
+            });
 
             // Account data
-            connector.on('account', (d) => {
+            nem.com.websockets.subscribe.account.data(connector, (d) => {
                 this._$timeout(() => {
-                    this.accountData = d;
+                    this._DataStore.account.metaData = d;
                     // prepare callback for multisig accounts
-                    for (let i = 0; i < this.accountData.meta.cosignatoryOf.length; i++) {
-                        connector.onConfirmed(confirmedCallback, this.accountData.meta.cosignatoryOf[i].address);
-                        connector.onUnconfirmed(unconfirmedCallback, this.accountData.meta.cosignatoryOf[i].address);
-                        connector.onNamespace(namespaceCallback, this.accountData.meta.cosignatoryOf[i].address);
-                        connector.onMosaicDefinition(mosaicDefinitionCallback, this.accountData.meta.cosignatoryOf[i].address);
-                        connector.onMosaic(mosaicCallback, this.accountData.meta.cosignatoryOf[i].address);
+                    for (let i = 0; i < this._DataStore.account.metaData.meta.cosignatoryOf.length; i++) {
+                        let address = this._DataStore.account.metaData.meta.cosignatoryOf[i].address;
+                        nem.com.websockets.subscribe.account.transactions.confirmed(connector, confirmedCallback, address);
+                        nem.com.websockets.subscribe.account.transactions.unconfirmed(connector, unconfirmedCallback, address);
+                        nem.com.websockets.subscribe.account.mosaics.owned(connector, mosaicCallback, address);
+                        nem.com.websockets.subscribe.account.mosaics.definitions(connector, mosaicDefinitionCallback, address);
+                        nem.com.websockets.subscribe.account.namespaces.owned(connector, namespaceCallback, address);
 
-                        connector.subscribeToMultisig(this.accountData.meta.cosignatoryOf[i].address);
-                        connector.requestAccountNamespaces(this.accountData.meta.cosignatoryOf[i].address);
-                        connector.requestAccountMosaicDefinitions(this.accountData.meta.cosignatoryOf[i].address);
-                        connector.requestAccountMosaics(this.accountData.meta.cosignatoryOf[i].address);
+                        nem.com.websockets.requests.account.mosaics.owned(connector, address);
+                        nem.com.websockets.requests.account.mosaics.definitions(connector, address);
+                        nem.com.websockets.requests.account.namespaces.owned(connector, address);
                     }
                 }, 0);
             });
 
             // Recent transactions
-            connector.on('recenttransactions', (d) => {
+            nem.com.websockets.subscribe.account.transactions.recent(connector, (d) => {
                 d.data.reverse();
                 this._$timeout(() => {
-                    this.transactions = d.data;
+                    this._DataStore.account.transactions.confirmed = d.data;
                 });
                 console.log("recenttransactions data: ", d);
-            }, 0);
+            });
 
             // On confirmed we push the tx in transactions array and delete the tx in unconfirmed if present
-            //*** BUG: it is triggered twice.. NIS websocket issue ? ***//
+            //*** BUG: it is triggered twice.. NIS websocket issue or SOCKJS 0.3.4 ? ***//
             let confirmedCallback = (d) => {
                 this._$timeout(() => {
-                    if (!helpers.haveTx(d.meta.hash.data, this.transactions)) { // Fix duplicate bug
-                        this.transactions.push(d);
+                    if (!nem.utils.helpers.haveTx(d.meta.hash.data, this._DataStore.account.transactions.confirmed)) { // Fix duplicate bug
+                        this._DataStore.account.transactions.confirmed.push(d);
                         let audio = new Audio('vendors/ding2.ogg');
                         audio.play();
                         console.log("Confirmed data: ", d);
                         // If tx present in unconfirmed array it is removed
-                        if (helpers.haveTx(d.meta.hash.data, this.unconfirmed)) {
+                        if (nem.utils.helpers.haveTx(d.meta.hash.data, this._DataStore.account.transactions.unconfirmed)) {
                             // Get index
-                            let txIndex = helpers.getTransactionIndex(d.meta.hash.data, this.unconfirmed);
+                            let txIndex = nem.utils.helpers.getTransactionIndex(d.meta.hash.data, this._DataStore.account.transactions.unconfirmed);
                             // Remove from array
-                            this.unconfirmed.splice(txIndex, 1);
+                            this._DataStore.account.transactions.unconfirmed.splice(txIndex, 1);
                         }
                     }
                 }, 0);
-            }
+            };
 
             // On unconfirmed we push the tx in unconfirmed transactions array
             //*** BUG: same as confirmedCallback ***//
             let unconfirmedCallback = (d) => {
                 this._$timeout(() => {
-                    if (!helpers.haveTx(d.meta.hash.data, this.unconfirmed)) { //Fix duplicate bug
-                        this.unconfirmed.push(d);
+                    if (!nem.utils.helpers.haveTx(d.meta.hash.data, this._DataStore.account.transactions.unconfirmed)) { //Fix duplicate bug
+                        this._DataStore.account.transactions.unconfirmed.push(d);
                         let audio = new Audio('vendors/ding.ogg');
                         audio.play();
                         // If not sender show notification
@@ -341,79 +234,61 @@ class DataBridge {
                     if(undefined !== d.transaction.mosaics && d.transaction.mosaics.length) {
                         for (let i = 0; i < d.transaction.mosaics.length; i++) {
                             let mos = d.transaction.mosaics[i];
-                            if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)]){
+                            if(undefined === this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(mos.mosaicId)]){
                                 // Fetch definition from network
                                 getMosaicDefinitionMetaDataPair(mos);
                             }
                         }
                     }
                 }, 0);
-            }
-
-            // On error we show it in an alert
-            connector.on('errors', (name, d) => {
-                console.log(d);
-                this._Alert.websocketError(d.error + " " + d.message);
-            });
-
-            // New blocks
-            connector.on('newblocks', (blockHeight) => {
-                this._$timeout(() => {
-                    this.nisHeight = blockHeight.height;
-                }, 0);
-            });
+            };
 
             // Mosaic definition meta data pair callback
             let mosaicDefinitionCallback = (d) => {
                 this._$timeout(() => {
-                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(d.mosaicDefinition.id)] = d;
-                    this.mosaicDefinitionMetaDataPairSize = Object.keys(this.mosaicDefinitionMetaDataPair).length;
+                    this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(d.mosaicDefinition.id)] = d;
                 }, 0);
-            }
+            };
 
             // Mosaics owned callback
             let mosaicCallback = (d, address) => {
                 this._$timeout(() => {
-                    let mosaicName = helpers.mosaicIdToName(d.mosaicId);
-                    if (!(address in this.mosaicOwned)) {
-                        this.mosaicOwned[address] = {};
-                    }
-                    this.mosaicOwned[address][mosaicName] = d;
-                    this.mosaicOwnedSize[address] = Object.keys(this.mosaicOwned[address]).length;
+                    let mosaicName = nem.utils.format.mosaicIdToName(d.mosaicId);
+                    if (!(address in this._DataStore.mosaic.ownedBy)) this._DataStore.mosaic.ownedBy[address] = {};
+                    this._DataStore.mosaic.ownedBy[address][mosaicName] = d;
+                    //this._DataStore.mosaic.ownedBy[address].size = Object.keys(this._DataStore.mosaic.ownedBy[address]).length;
                 }, 0);
-            }
+            };
 
             // Namespaces owned callback
             let namespaceCallback = (d, address) => {
                 this._$timeout(() => {
                     let namespaceName = d.fqn;
-                    if (!(address in this.namespaceOwned)) {
-                        this.namespaceOwned[address] = {};
-                    }
-                    this.namespaceOwned[address][namespaceName] = d;
+                    if (!(address in this._DataStore.namespace.ownedBy)) this._DataStore.namespace.ownedBy[address] = {};
+                    this._DataStore.namespace.ownedBy[address][namespaceName] = d;
                     // Check namespace expiration date
                     // Creation height of ns + 1 year in blocks (~60 blocks per hour * 24h * 365d) - current height < 1 month in blocks (60 blocks per hour * 24h * 30d)
-                    if(d.height + 525600 - this.nisHeight <= 43200 && d.fqn.indexOf('.') === -1) {
+                    if(d.height + 525600 - this._DataStore.chain.height <= 43200 && d.fqn.indexOf('.') === -1) {
                         this._$timeout(() => {
-                            this._Alert.namespaceExpiryNotice(d.fqn, d.height + 525600 - this.nisHeight);
+                            this._Alert.namespaceExpiryNotice(d.fqn, d.height + 525600 - this._DataStore.chain.height);
                         });                  
                     }
                 }, 0);
-            }
+            };
 
             let getMosaicDefinitionMetaDataPair = (mos) => {
                 if (undefined !== mos.mosaicId) {
                     // Fetch definition from network
-                    return this._NetworkRequests.getOtherMosaic(helpers.getHostname(this._Wallet.node), mos.mosaicId.namespaceId).then((res) => {
+                    return nem.com.requests.namespace.mosaicDefinitions(this._Wallet.node, mos.mosaicId.namespaceId).then((res) => {
                         if(res.data.length) {
                             for(let i = 0; i < res.data.length; i++) {
                                 if (res.data[i].mosaic.id.namespaceId == mos.mosaicId.namespaceId && res.data[i].mosaic.id.name == mos.mosaicId.name) {
-                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)] = {};
-                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].supply = res.data[i].mosaic.properties[1].value;
-                                    this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(mos.mosaicId)].mosaicDefinition = res.data[i].mosaic;
+                                    this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(mos.mosaicId)] = {};
+                                    this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(mos.mosaicId)].supply = res.data[i].mosaic.properties[1].value;
+                                    this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(mos.mosaicId)].mosaicDefinition = res.data[i].mosaic;
 
                                     if(undefined !== res.data[i].mosaic.levy) {
-                                        if(undefined === this.mosaicDefinitionMetaDataPair[helpers.mosaicIdToName(res.data[i].mosaic.levy.mosaicId)]) {
+                                        if(undefined === this._DataStore.mosaic.metaData[nem.utils.format.mosaicIdToName(res.data[i].mosaic.levy.mosaicId)]) {
                                             // Fetch definition from network
                                             return getMosaicDefinitionMetaDataPair(res.data[i].mosaic.levy);
                                         }
@@ -423,26 +298,30 @@ class DataBridge {
                         }
                     },
                     (err) => {
-                        this._Alert.transactionError('Failed to fetch definition of ' + helpers.mosaicIdToName(mos.mosaicId));
+                        this._Alert.transactionError('Failed to fetch definition of ' + nem.utils.format.mosaicIdToName(mos.mosaicId));
                     });
                 }
-            }
+            };
 
 
             // Set websockets callbacks
-            connector.onConfirmed(confirmedCallback);
-            connector.onUnconfirmed(unconfirmedCallback);
-            connector.onMosaic(mosaicCallback);
-            connector.onMosaicDefinition(mosaicDefinitionCallback);
-            connector.onNamespace(namespaceCallback);
+            nem.com.websockets.subscribe.account.transactions.confirmed(connector, confirmedCallback);
+            nem.com.websockets.subscribe.account.transactions.unconfirmed(connector, unconfirmedCallback);
+            nem.com.websockets.subscribe.account.mosaics.owned(connector, mosaicCallback);
+            nem.com.websockets.subscribe.account.mosaics.definitions(connector, mosaicDefinitionCallback);
+            nem.com.websockets.subscribe.account.namespaces.owned(connector, namespaceCallback);
 
             // Request data
-            connector.requestAccountData();
-            connector.requestAccountTransactions();
-            connector.requestAccountMosaicDefinitions();
-            connector.requestAccountMosaics();
-            connector.requestAccountNamespaces();
+            nem.com.websockets.requests.account.data(connector);
+            nem.com.websockets.requests.account.transactions.recent(connector);
+            nem.com.websockets.requests.account.mosaics.definitions(connector);
+            nem.com.websockets.requests.account.mosaics.owned(connector);
+            nem.com.websockets.requests.account.namespaces.owned(connector);
 
+        }, (err) => {
+            console.log(err);
+            // Reconnect to another node
+            this.reconnect(connector);
         });
 
     }
@@ -451,22 +330,8 @@ class DataBridge {
      * Reset DataBridge service properties
      */
     reset() {
-        this.nisHeight = 0;
-        this.connectionStatus = false;
-        this.accountData = undefined;
-        this.transactions = [];
-        this.unconfirmed = [];
-        this.mosaicDefinitionMetaDataPair = {};
-        this.mosaicDefinitionMetaDataPairSize = 0;
-        this.mosaicOwned = {};
-        this.mosaicOwnedSize = {};
-        this.namespaceOwned = {};
-        this.harvestedBlocks = [];
-        this.delegatedData = undefined;
-        this.marketInfo = undefined;
         this.networkTime = undefined;
-        clearInterval(this.timeSyncInterval);
-        clearTimeout(this.connectTimeout);
+        clearInterval(this.timeSyncInterval)
     }
 
     /**
@@ -474,7 +339,7 @@ class DataBridge {
      */
     timeSync() {
         this.timeSyncInterval = setInterval(() => { 
-            this._NetworkRequests.getNEMTime(helpers.getHostname(this._Wallet.node)).then((res) => {
+            nem.com.requests.chain.time(this._Wallet.node).then((res) => {
                 this._$timeout(() => {
                     this.networkTime = res.receiveTimeStamp / 1000;
                 });
@@ -484,6 +349,41 @@ class DataBridge {
                 });
             });
         }, 60 * 1000);
+    }
+
+    /**
+     * Reconnect to a new node
+     *
+     * @param {object} connector - A connector object
+     */
+    reconnect(connector) {
+        // Close connector
+        connector.close();
+        // Set a random endpoint into the Wallet service
+        this._Nodes.update();
+        // Set websocket port to endpoint for connector
+        let endpoint = nem.model.objects.create("endpoint")(this._Wallet.node.host, nem.model.nodes.websocketPort);
+        // Update connector
+        connector = nem.com.websockets.connector.create(endpoint, this._Wallet.currentAccount.address);
+        // Try to open connection
+        this.openConnection(connector);
+        return;
+    }
+
+    /**
+     * Set default nodes and connect
+     */
+    connect() {
+        // Set needed nodes into the Wallet service
+        this._Nodes.setDefault();
+        this._Nodes.setUtil();
+        // Change endpoint port to websocket port
+        let endpoint = nem.model.objects.create("endpoint")(this._Wallet.node.host, nem.model.nodes.websocketPort);
+        // Create a connector
+        let connector = nem.com.websockets.connector.create(endpoint, this._Wallet.currentAccount.address);
+        // Try to open the connection 
+        this.openConnection(connector);
+        return;
     }
 
 }
