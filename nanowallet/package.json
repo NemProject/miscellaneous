@@ -36,7 +36,7 @@
     "gulp-util": "^3.0.8",
     "nw": "^0.25.0",
     "nw-builder": "^3.4.1",
-    "nem-sdk": "1.4.0",
+    "nem-sdk": "1.5.1",
     "url-parse": "1.1.9",
     "zxcvbn": "4.4.2"
   },
