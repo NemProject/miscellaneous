@@ -5,9 +5,7 @@
       <div class="col-sm-9">
         <h2>{{ 'PORTAL_TITLE' | translate }}</h2>
       </div>
-      <div class="col-sm-3 secondary">
-        <h4> {{ 'DASHBOARD_MARKET_INFO_TITLE' | translate }}</h4>
-      </div>
+      
     </div>
 
     <div class="row portalWrap">
@@ -30,7 +28,7 @@
           <div class="panelFooter">
             <button class="btn"  ui-sref="app.createMultisig">{{ 'PORTAL_MULTISIG_BTN_1' | translate }}</button>
             <br>
-            <button class="btn" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</button>
+            <button class="btn" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length" ui-sref="app.editMultisig">{{ 'PORTAL_MULTISIG_BTN_2' | translate }}</button>
             <br>
             <button class="btn"  ui-sref="app.signMultisig">{{ 'PORTAL_MULTISIG_BTN_3' | translate }}</button>
           </div>
@@ -70,7 +68,7 @@
             <div class="panelFooter">
               <button class="btn" ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
               <br>
-              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataBridge.accountData.meta.cosignatoryOf.length">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
+              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
             </div>
           </div>
         </div>
@@ -91,11 +89,11 @@
             <p>{{ 'PORTAL_APOSTILLE_TEXT' | translate }}</p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.createApostille">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
+            <!--<button class="btn" ui-sref="app.createApostille">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
             <br>
             <button class="btn" ui-sref="app.auditApostille">{{ 'PORTAL_APOSTILLE_BTN_2' | translate }}</button>
             <br>
-            <button class="btn" ui-sref="app.apostilleHistory">{{ 'GENERAL_HISTORY' | translate }}</button>
+            <button class="btn" ui-sref="app.apostilleHistory">{{ 'GENERAL_HISTORY' | translate }}</button>-->
           </div>
         </div>
         <div class="col-sm-4">
@@ -111,9 +109,9 @@
             <p>{{ 'PORTAL_MOSAIC_TEXT' | translate }}</p>
           </div>
           <div class="panelFooter" >
-            <button class="btn" ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.namespaceOwned[$ctrl._Wallet.currentAccount.address] === undefined && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.createMosaic">{{ 'PORTAL_MOSAIC_BTN_1' | translate }}</button>
+            <button class="btn" ng-disabled="($ctrl._DataStore.account.metaData.account === undefined || $ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address] === undefined && !$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length)" ui-sref="app.createMosaic">{{ 'PORTAL_MOSAIC_BTN_1' | translate }}</button>
             <br>
-            <button class="btn" ng-disabled="($ctrl._DataBridge.accountData.account === undefined || $ctrl._DataBridge.mosaicOwnedSize[$ctrl._Wallet.currentAccount.address] < 2 && !$ctrl._DataBridge.accountData.meta.cosignatoryOf.length)" ui-sref="app.editMosaic">{{ 'PORTAL_MOSAIC_BTN_2' | translate }}</button>
+            <button class="btn" ng-disabled="($ctrl._DataStore.account.metaData.account === undefined || $ctrl._Helpers.objectSize($ctrl._DataStore.mosaic.ownedBy[$ctrl._Wallet.currentAccount.address]) < 2 && !$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length)" ui-sref="app.editMosaic">{{ 'PORTAL_MOSAIC_BTN_2' | translate }}</button>
           </div>
         </div>
         <div class="col-sm-4">
@@ -151,65 +149,15 @@
             <button class="btn" ui-sref="app.addressBook">{{ 'PORTAL_ADDRESS_BOOK_BTN' | translate }}</button>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="panel-heading row">
-            <div class="col-sm-3">
-              <i class="fa fa-4x fa-pie-chart" aria-hidden="true"></i>
-            </div>
-            <div class="col-sm-9">
-              <h5>{{ 'PORTAL_VOTING_TITLE' | translate }}</h5>
-            </div>
-          </div>
-          <div class="panel-body">
-            <p>{{ 'PORTAL_VOTING_TEXT' | translate }}</p>
-          </div>
-          <div class="panelFooter">
-            <button class="btn" ui-sref="app.votingPolls">{{ 'PORTAL_VOTING_BTN1' | translate }}</button> <br />
-            <button class="btn" ui-sref="app.votingCreatePoll">{{ 'PORTAL_VOTING_BTN2' | translate }}</button>
-          </div>
-        </div>
       </div>
 
     </div>
 
+    <!-- MARKET INFO WIDGET -->
   	<div class="col-sm-12 col-lg-3">
-      <br>
-      <!-- MARKET INFO WIDGET -->
-        <div class="market-info" ng-show="$ctrl._DataBridge.marketInfo.highestBid && $ctrl._DataBridge.btcPrice.last">
-        <div class="row">
-          <div class="col-md-6 col-sm-3 header">
-            {{ 'DASHBOARD_MARKET_INFO_CAP' | translate }}:
-            <br>
-            <span><i class="fa fa-usd"></i> {{($ctrl._DataBridge.marketInfo.highestBid * 8999999999) * $ctrl._DataBridge.btcPrice.last | currencyFormat}}</span>
-          </div>
-          <div class="col-md-6 col-sm-3 header">
-            {{ 'DASHBOARD_MARKET_INFO_VOLUME' | translate }}:
-            <br>
-            <span><i class="fa fa-usd"></i> {{$ctrl._DataBridge.marketInfo.baseVolume * $ctrl._DataBridge.btcPrice.last | currencyFormat}}</span>
-          </div>
-          <div class="col-md-6 col-sm-3 header ticker">
-            {{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }} in USD:
-            <br>
-            <span><i class="fa fa-usd"></i> {{$ctrl.toFixed4($ctrl._DataBridge.marketInfo.highestBid * $ctrl._DataBridge.btcPrice.last)}}</span>
-          </div>
-          <div class="col-md-6 col-sm-3 ticker header">
-            {{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }} in Bitcoin:
-            <br>
-            <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataBridge.marketInfo.highestBid}}</span>
-          </div>
-          <div class="col-md-6 col-sm-3 ticker header">
-            {{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:
-            <br>
-            <span ng-style="$ctrl._DataBridge.marketInfo.percentChange * 100 < 0 ? { 'color': 'red'} : { 'color': 'green'}">
-              <span class="fa fa-caret-up" ng-show="$ctrl._DataBridge.marketInfo.percentChange * 100 > 0" style="color:green;"></span>
-              <span class="fa fa-caret-down" ng-show="$ctrl._DataBridge.marketInfo.percentChange * 100 < 0" style="color:red;"></span>
-              {{$ctrl._DataBridge.marketInfo.percentChange * 100 | currencyFormat}} %
-            </span>
-          </div>
-        </div>
-      </div>
-
+      <market-data></market-data>
     </div>
+
   </div>
 </div>
 </div>

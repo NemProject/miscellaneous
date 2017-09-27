@@ -1,32 +1,23 @@
+import Helpers from '../../utils/helpers';
+
 class PortalCtrl {
-    constructor(Wallet, DataBridge, $location, Alert) {
-        'ngInject';
-
-        // Wallet service
-        this._Wallet = Wallet;
-        // DataBridge service
-        this._DataBridge = DataBridge;
-        // Alert service
-        this._Alert = Alert;
-        // $location to redirect
-        this._location = $location;
-
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
-        }
-        
-    }
 
     /**
-     * Fix a value to 4 decimals
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
      */
-    toFixed4(value) {
-        return value.toFixed(4);
-    }
+    constructor(Wallet, DataStore) {
+        'ngInject';
 
+        //// Module dependencies region ////
+
+        this._Wallet = Wallet;
+        this._DataStore = DataStore;
+        this._Helpers = Helpers;
+
+        //// End dependencies region ////
+    }
 
 }
 
