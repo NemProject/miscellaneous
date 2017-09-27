@@ -1,13 +1,25 @@
-function AppRun(AppConstants, $rootScope, $timeout, Wallet) {
+function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions) {
     'ngInject';
 
-    // change page title based on state
-    $rootScope.$on('$stateChangeSuccess', (event, toState) => {
-        $rootScope.setPageTitle(toState.title);
-        // enable tooltips globally
+     // Change page title based on state
+    $transitions.onSuccess({ to: true }, (transition) => {
+        $rootScope.setPageTitle(transition.router.globals.current.title);
+        // Enable tooltips globally
         $timeout( function() {
             $('[data-toggle="tooltip"]').tooltip()
-        });
+        });     
+    });
+
+    // Check if a wallet is loaded before accessing private states
+    $transitions.onStart({ 
+        to: (state) => { 
+            return (state.name !== 'app.home') && (state.name !== 'app.login') && (state.name !== 'app.signup'); 
+        }
+    }, (transition) => {
+        if (!Wallet.current) {
+            Alert.noWalletLoaded();
+            return transition.router.stateService.target('app.home');
+        }
     });
 
     // Helper method for setting the page's title
