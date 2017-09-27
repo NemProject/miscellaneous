@@ -1,435 +1,217 @@
-import helpers from '../../utils/helpers';
-import Address from '../../utils/Address';
-import CryptoHelpers from '../../utils/CryptoHelpers';
-import Network from '../../utils/Network';
+import nem from 'nem-sdk';
+import Helpers from '../../utils/helpers';
 
 class TransferTransactionCtrl {
-    constructor($location, Wallet, Alert, Transactions, NetworkRequests, DataBridge, $state, $localStorage) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(Wallet, Alert, DataStore, $state, $timeout) {
         'ngInject';
 
-        // Alert service
+        //// Module dependencies region ////
+
         this._Alert = Alert;
-        // $location to redirect
-        this._location = $location;
-        // NetworkRequests service
-        this._NetworkRequests = NetworkRequests;
-        // Wallet service
         this._Wallet = Wallet;
-        // Transactions service
-        this._Transactions = Transactions;
-        // DataBridge service
-        this._DataBridge = DataBridge;
-        // $state
+        this._DataStore = DataStore;
         this._$state = $state;
-        //Local storage
-        this._storage = $localStorage;
-        // use helpers in view
-        this._helpers = helpers;
+        this._$timeout = $timeout;
+        this._Helpers = Helpers;
 
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
-        }
+        //// End dependencies region ////
 
-        /**
-         * Default transfer transaction properties 
-         */
-        this.formData = {};
-        // Alias or address user type in
-        this.formData.rawRecipient = this._$state.params.address.length ? this._$state.params.address : '';
-        if(this.formData.rawRecipient.length) {
-            this.processRecipientInput();
-        }
-        // Cleaned recipient from @alias or input
-        this.formData.recipient = '';
-        this.formData.recipientPubKey = '';
-        this.formData.message = '';
-        this.rawAmount = 0;
-        this.formData.amount = 0;
-        this.formData.fee = 0;
-        this.formData.encryptMessage = false;
-        this.formData.hexMessage = false;
-        // Multisig data
-        this.formData.innerFee = 0;
-        this.formData.isMultisig = false;
-        this.formData.multisigAccount = this._DataBridge.accountData.meta.cosignatoryOf.length == 0 ? '' : this._DataBridge.accountData.meta.cosignatoryOf[0];
-        // Mosaics data
-        // Counter for mosaic gid
-        this.counter = 1;
+        //// Module properties region ////
+
+        // Form is a transfer transaction object, pre-set recipient if any from state parameter
+        this.formData = nem.model.objects.create("transferTransaction")(undefined !== this._$state.params.address ? this._$state.params.address : '');
+
+        // Mosaics are null by default
         this.formData.mosaics = null;
-        this.mosaicsMetaData = this._DataBridge.mosaicDefinitionMetaDataPair;
-        this.formData.isMosaicTransfer = false;
-        this.currentAccountMosaicNames = [];
+        
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+
+        // Switch between mosaic transfer and normal transfers
+        this.isMosaicTransfer = false;
+
+        // Selected mosaic
         this.selectedMosaic = "nem:xem";
+
         // Mosaics data for current account
         this.currentAccountMosaicData = "";
 
-        // Invoice mode not active by default
-        this.invoice = false;
-        // Plain amount that'll be converted to micro XEM
-        this.rawAmountInvoice = 0;
-
-        // Alias address empty by default
-        this.aliasAddress = '';
-        // Not showing alias address input by default
-        this.showAlias = false;
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
         // Character counter
-        this.charsLeft = 1024;
+        this.charactersLeft = 1024;
 
-        // Object to contain our password & private key data.
-        this.common = {
-            'password': '',
-            'privateKey': '',
-        };
+        // Object to contain our password & private key data
+        this.common = nem.model.objects.get("common");
 
-        this.contacts = [];
+        // Store the prepared transaction
+        this.preparedTransaction = {};
 
-        if(undefined !== this._storage.contacts && undefined !== this._storage.contacts[this._Wallet.currentAccount.address] && this._storage.contacts[this._Wallet.currentAccount.address].length) {
-            this.contacts = this._storage.contacts[this._Wallet.currentAccount.address]
-        }
+        //// End properties region ////
 
-        // Contacts to address book pagination properties
-        this.currentPageAb = 0;
-        this.pageSizeAb = 5;
-        this.numberOfPagesAb = function() {
-            return Math.ceil(this.contacts.length / this.pageSizeAb);
-        }
-
-        // Invoice model for QR
-        this.invoiceData = {
-            "v": this._Wallet.network === Network.data.Testnet.id ? 1 : 2,
-            "type": 2,
-            "data": {
-                "addr": this._Wallet.currentAccount.address,
-                "amount": 0,
-                "msg": "",
-                "name": "NanoWallet XEM invoice"
-            }
-        };
-
-        // Init account mosaics
+        // Update current account mosaics
         this.updateCurrentAccountMosaics();
 
-        // Init invoice QR
-        this.updateInvoiceQR();
-
-        this.updateFees();
+        // Update the fee in view
+        this.prepareTransaction();
     }
 
-    /**
-     * Generate QR using kjua lib
-     */
-    generateQRCode(text) {
-        let qrCode = kjua({
-            size: 256,
-            text: text,
-            fill: '#000',
-            quiet: 0,
-            ratio: 2,
-        });
-        $('#invoiceQR').html(qrCode);
-    }
-
-    /**
-     * Create the QR according to invoice data
-     */
-    updateInvoiceQR() {
-        // Clean input address
-        this.invoiceData.data.addr = this.invoiceData.data.addr.toUpperCase().replace(/-/g, '');
-        // Convert user input to micro XEM
-        this.invoiceData.data.amount = this.rawAmountInvoice * 1000000;
-        this.invoiceString = JSON.stringify(this.invoiceData);
-        // Generate the QR
-        this.generateQRCode(this.invoiceString);
-    }
+    //// Module methods region ////
 
     /**
      * Set or unset data for mosaic transfer
      */
     setMosaicTransfer() {
-        if (this.formData.isMosaicTransfer) {
-            // Set the initial mosaic array
-            this.formData.mosaics = [{
-                'mosaicId': {
-                    'namespaceId': 'nem',
-                    'name': 'xem'
-                },
-                'quantity': 0,
-                'gid': 'mos_id_0'
-            }];
+        if (this.isMosaicTransfer) {
+            this.formData.mosaics = [];
             // In case of mosaic transfer amount is used as multiplier,
             // set to 1 as default
-            this.rawAmount = 1;
             this.formData.amount = 1;
         } else {
             // Reset mosaics array
             this.formData.mosaics = null;
             // Reset amount
-            this.rawAmount = 0;
             this.formData.amount = 0;
         }
-        this.updateFees();
+        this.prepareTransaction();
     }
 
     /**
-     * Process recipient input and get data from network
-     * 
-     * @note: I'm using debounce in view to get data typed with a bit of delay,
-     * it limits network requests
+     * Prepare the transaction
      */
-    processRecipientInput() {
-        // Check if value is an alias
-        let isAlias = (this.formData.rawRecipient.lastIndexOf("@", 0) === 0);
-        // Reset recipient data
-        this.resetRecipientData();
+    prepareTransaction() {
+        // Create a new object to not affect the view
+        let cleanTransferTransaction = nem.model.objects.get("transferTransaction");
 
-        // return if no value or address length < to min address length AND not an alias
-        if (!this.formData.rawRecipient || this.formData.rawRecipient.length < 40 && !isAlias) {
-            return;
-        }
+        // Clean recipient
+        cleanTransferTransaction.recipient = this.formData.recipient.toUpperCase().replace(/-/g, '');
 
-        // Get recipient data depending of address or alias used
-        if (isAlias) {
-            // Clean namespace name of the @
-            let nsForLookup = this.formData.rawRecipient.substring(1);
-            // Get namespace info and account data from network
-            this.getRecipientDataFromAlias(nsForLookup)
-        } else { // Normal address used
-            // Clean address
-            let recipientAddress = this.formData.rawRecipient.toUpperCase().replace(/-/g, '');
-            // Check if address is from network
-            if (Address.isFromNetwork(recipientAddress, this._Wallet.network)) {
-                // Get recipient account data from network
-                this.getRecipientData(recipientAddress);
-            } else {
-                // Error
-                this._Alert.invalidAddressForNetwork(recipientAddress, this._Wallet.network);
-                // Reset recipient data
-                this.resetRecipientData();
-                return;
-            }
-        }
-
-    }
-
-    /**
-     * Update transaction fee
-     */
-    updateFees() {
-        if(!helpers.isAmountValid(this.rawAmount)) {
-            this._Alert.invalidAmount();
-            return;
+        // Check entered amount
+        if(!nem.utils.helpers.isTextAmountValid(this.formData.amount)) {
+            return this._Alert.invalidAmount();
         } else {
-          this.formData.amount = helpers.cleanAmount(this.rawAmount);
-          //console.log(this.formData.amount)
+            // Set cleaned amount
+            cleanTransferTransaction.amount = nem.utils.helpers.cleanTextAmount(this.formData.amount);
         }
-        let entity = this._Transactions.prepareTransfer(this.common, this.formData, this.mosaicsMetaData);
+
+        // Set multisig, if selected
         if (this.formData.isMultisig) {
-            this.formData.innerFee = entity.otherTrans.fee;
-            // Update characters left
-            this.charsLeft = entity.otherTrans.message.payload.length ? 1024 - (entity.otherTrans.message.payload.length / 2) : 1024;
+            cleanTransferTransaction.isMultisig = true;
+            cleanTransferTransaction.multisigAccount = this.formData.multisigAccount;
+        }
+
+        // If user selected encrypted message but it is a multisig tx or the recipient has no public key, it reset to unencrypted
+        if((this.formData.isMultisig || !this.formData.recipientPublicKey) && this.formData.messageType === 2) {
+            if (this.formData.isMultisig) this._Alert.noEncryptionWithMultisig();
+            else this._Alert.recipientHasNoPublicKey();
+            this.formData.messageType = 1;
+        }
+
+        // Set recipient public key
+        cleanTransferTransaction.recipientPublicKey = this.formData.recipientPublicKey;
+
+        // Set the message
+        cleanTransferTransaction.message = this.formData.message;
+        cleanTransferTransaction.messageType = this.formData.messageType;
+
+        // Prepare transaction object according to transfer type
+        let entity;
+        if(this.isMosaicTransfer) {
+            // Set mosaics with cleaned amounts
+            cleanTransferTransaction.mosaics = Helpers.cleanMosaicAmounts(this.formData.mosaics, this._DataStore.mosaic.metaData);
+            // Prepare
+            entity = nem.model.transactions.prepare("mosaicTransferTransaction")(this.common, cleanTransferTransaction, this._DataStore.mosaic.metaData, this._Wallet.network);
         } else {
-             this.formData.innerFee = 0;
-             // Update characters left
-             this.charsLeft = entity.message.payload.length ? 1024 - (entity.message.payload.length / 2) : 1024;
+            cleanTransferTransaction.mosaics = null;
+            // Prepare
+            entity = nem.model.transactions.prepare("transferTransaction")(this.common, cleanTransferTransaction, this._Wallet.network);
         }
-        this.formData.fee = entity.fee;
-    }
 
-    /**
-     * Get recipient account data from network
-     * 
-     * @param address: The recipient address
-     */
-    getRecipientData(address) {
-        return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
-                    // Store recipient public key (needed to encrypt messages)
-                    this.formData.recipientPubKey = data.account.publicKey;
-                    //console.log(this.formData.recipientPubKey)
-                    // Set the address to send to
-                    this.formData.recipient = address;
-                },
-                (err) => {
-                    this._Alert.getAccountDataError(err.data.message);
-                    // Reset recipient data
-                    this.resetRecipientData();
-                    return;
-                });
-    }
+        // Set the entity for fees in view
+        this.preparedTransaction = entity;
 
-    /**
-     * Get recipient account data from network using @alias
-     * 
-     * @param alias: The recipient alias (namespace)
-     */
-    getRecipientDataFromAlias(alias) {
-        return this._NetworkRequests.getNamespacesById(helpers.getHostname(this._Wallet.node), alias).then((data) => {
-                        // Set the alias address
-                        this.aliasAddress = data.owner;
-                        // Show the read-only input containing alias address
-                        this.showAlias = true;
-                        // Check if address is from network
-                        if (Address.isFromNetwork(this.aliasAddress, this._Wallet.network)) {
-                            // Get recipient account data from network
-                            this.getRecipientData(this.aliasAddress);
-                        } else {
-                            // Unexpected error, this alert will not dismiss on timeout
-                            this._Alert.invalidAddressForNetwork(this.aliasAddress, this._Wallet.network);
-                            // Reset recipient data
-                            this.resetRecipientData();
-                            return;
-                        }
-                    },
-                    (err) => {
-                        this._Alert.getNamespacesByIdError(err.data.message);
-                        // Reset recipient data
-                        this.resetRecipientData();
-                        return;
-                    });
-    }
-
-    /**
-     * Get selected mosaic and push it in mosaics array
-     */
-    attachMosaic() {
-        // increment counter 
-        this.counter++;
-        // Get current account
-        let acct = this._Wallet.currentAccount.address;
-        if (this.formData.isMultisig) {
-            // Use selected multisig
-            acct = this.formData.multisigAccount.address;
-        }
-        // Get the mosaic selected
-        let mosaic = this._DataBridge.mosaicOwned[acct][this.selectedMosaic];
-        // Check if mosaic already present in mosaics array
-        let elem = $.grep(this.formData.mosaics, function(w) {
-            return helpers.mosaicIdToName(mosaic.mosaicId) === helpers.mosaicIdToName(w.mosaicId);
-        });
-        // If not present, update the array
-        if (elem.length === 0) {
-            this.formData.mosaics.push({
-                'mosaicId': mosaic['mosaicId'],
-                'quantity': 0,
-                'gid': 'mos_id_' + this.counter
-            });
-
-            this.updateFees();
-        }
-    }
-
-    /**
-     * Remove a mosaic from mosaics array
-     * 
-     * @param index: Index of mosaic object in the array 
-     */
-    removeMosaic(index) {
-        this.formData.mosaics.splice(index, 1);
-        this.updateFees();
+        // Return the clean tx in case of HW
+        if (this.common.isHW) return cleanTransferTransaction;
+        
+        // Return prepared transaction
+        return entity;
     }
 
     /**
      * Get current account mosaics names
      */
     updateCurrentAccountMosaics() {
-        //Fix this.formData.multisigAccount error on logout
-        if (null === this.formData.multisigAccount) {
-            return;
-        }
-            // Get current account
-            let acct = this._Wallet.currentAccount.address;
-            if (this.formData.isMultisig) {
-                // Use selected multisig
-                acct = this.formData.multisigAccount.address;
-            }
-            // Set current account mosaics names if mosaicOwned is not undefined
-            if (undefined !== this._DataBridge.mosaicOwned[acct]) {
-                this.currentAccountMosaicData = this._DataBridge.mosaicOwned[acct];
-                this.currentAccountMosaicNames = Object.keys(this._DataBridge.mosaicOwned[acct]).sort(); 
-            } else {
-                this.currentAccountMosaicNames = ["nem:xem"]; 
-                this.currentAccountMosaicData = "";
-            }
-            // Default selected is nem:xem
-            this.selectedMosaic = "nem:xem";
+        // Reset mosaics
+        this.setMosaicTransfer();
+        // Get current account
+        let acct = this.formData.isMultisig ? this.formData.multisigAccount.address : this._Wallet.currentAccount.address;
+        // Set current account mosaics names and data, if account owns any
+        this.currentAccountMosaicData = undefined !== this._DataStore.mosaic.ownedBy[acct] ? this._DataStore.mosaic.ownedBy[acct]: "";
+        // Default selected is nem:xem
+        this.selectedMosaic = "nem:xem";
+        return;
     }
 
     /**
-     * Reset data stored for recipient
-     */
-    resetRecipientData() {
-        // Reset public key data
-        this.formData.recipientPubKey = '';
-        // Hide alias address input field
-        this.showAlias = false;
-        // Reset cleaned recipient address
-        this.formData.recipient = '';
-        // Encrypt message set to false
-        this.formData.encryptMessage = false;
-    }
-
-    /**
-     * Reset form data
+     * Reset data
      */
     resetData() {
-        this.formData.rawRecipient = '';
-        this.formData.message = '';
-        this.rawAmount = 0;
-        this.formData.amount = 0;
-        this.formData.invoiceRecipient = this._Wallet.currentAccount.address;
+        this.formData = nem.model.objects.get("transferTransaction");
+        this.common = nem.model.objects.get("common");
+        this.preparedTransaction = {};
+        this.charactersLeft = 1024;
+        this.prepareTransaction();
+        return;
     }
 
     /**
-     * Build and broadcast the transaction to the network
+     * Prepare and broadcast the transaction to the network
      */
     send() {
-        // Disable send button;
+        // Disable send button
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
-            this._Alert.invalidPassword();
-            // Enable send button
+        // Get account private key for preparation or return
+        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+
+        // Prepare the transaction
+        let entity = this.prepareTransaction();
+
+        // Sending will be blocked if recipient is an exchange and no message set
+        if (!this._Helpers.isValidForExchanges(entity)) {
             this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
+            this._Alert.exchangeNeedsMessage();
             return;
         }
 
-        // Build the entity to serialize
-        let entity = this._Transactions.prepareTransfer(this.common, this.formData, this.mosaicsMetaData);
-        // Construct transaction byte array, sign and broadcast it to the network
-        return this._Transactions.serializeAndAnnounceTransaction(entity, this.common).then((res) => {
-                // Check status
-                if (res.status === 200) {
-                    // If code >= 2, it's an error
-                    if (res.data.code >= 2) {
-                        this._Alert.transactionError(res.data.message);
-                    } else {
-                        this._Alert.transactionSuccess();
-                    }
-                }
+        // Use wallet service to serialize and send
+        this._Wallet.transact(this.common, entity).then(() => {
+            this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Delete private key in common
-                this.common.privateKey = '';
-            },
-            (err) => {
-                // Delete private key in common
-                this.common.privateKey = '';
-                // Enable send button
-                this.okPressed = false;
-                this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
+                // Reset form data
+                this.resetData();
+                return;
             });
+        }, () => {
+            this._$timeout(() => {
+                // Delete private key in common
+                this.common.privateKey = '';
+                // Enable send button
+                this.okPressed = false;
+                return;
+            });
+        });
     }
+
+    //// End methods region ////
 
 }
 
