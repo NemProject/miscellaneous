@@ -1,351 +1,297 @@
 <div class="signup-page">
-
-  <div class="loading-overlay" ng-show="$ctrl.okPressed">
-    <div class="loader text-center">
-      <img src="images/logomark.png" class="loader-image"/>
-      <p class="loading-text">{{ 'GENERAL_PROCESSING' | translate }}</p>
-    </div>
-  </div>
-
   <div class="container">
     <div class="row text-center">
       <div class="col-md-12">
         <h1>{{'SIGNUP_TITLE' | translate}}</h1>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="panel-heading">
-          <ul class="nav nav-tabs">
-            <li ng-class="{active: $ctrl._selectedType.type == 1}">
-              <a ng-click="$ctrl.changeWalletType(1)">{{'SIGNUP_CREATE_WALLET_TITLE' | translate}}</a>
-            </li>
-            <li ng-class="{active: $ctrl._selectedType.type == 2}">
-              <a ng-click="$ctrl.changeWalletType(2)">{{'SIGNUP_BRAIN_WALLET_TITLE' | translate}}</a>
-            </li>
-            <li ng-class="{active: $ctrl._selectedType.type == 3}">
-              <a ng-click="$ctrl.changeWalletType(3)">{{'SIGNUP_PRIVATE_KEY_WALLET_TITLE' | translate}}</a>
-            </li>
-          </ul>
+    <div class="col-md-12 text-center">
+      <!-- Wallet type titles -->
+      <div class="form-group text-center">
+        <h4 ng-show="!$ctrl._selectedType">{{ 'SIGNUP_SELECT_WALLET_TYPE' | translate }}</h4>
+        <h4 ng-show="$ctrl._selectedType.type === 1 && !($ctrl.step5 || $ctrl.step6 || $ctrl.step7 || $ctrl.step8)">{{ 'SIGNUP_CREATE_WALLET_BUTTON' | translate }}</h4>
+        <h4 ng-show="$ctrl._selectedType.type === 2 && !($ctrl.step5 || $ctrl.step6 || $ctrl.step7 || $ctrl.step8)">{{ 'SIGNUP_BRAIN_WALLET_BUTTON' | translate }}</h4>
+        <h4 ng-show="$ctrl._selectedType.type === 3 && !($ctrl.step5 || $ctrl.step6 || $ctrl.step7 || $ctrl.step8)">{{'SIGNUP_PRIVATE_KEY_WALLET_BUTTON' | translate}}</h4>
+        <h4 ng-show="$ctrl._selectedType.type && ($ctrl.step5 || $ctrl.step6 || $ctrl.step7 || $ctrl.step8)">{{ 'SIGNUP_COMMON_WALLET_WARNING_TITLE' | translate }}</h4>
+        <hr>
+      </div>
+      <!-- Wallet type buttons -->
+      <div class="col-md-6 col-md-offset-3" ng-show="!$ctrl._selectedType">
+        <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(1);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 1;">
+          {{'SIGNUP_CREATE_WALLET_TITLE' | translate}}
+        </button>
+        <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(2);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 2;">
+          {{'SIGNUP_BRAIN_WALLET_TITLE' | translate}}
+        </button>
+        <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(3);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 3;">
+          {{'SIGNUP_PRIVATE_KEY_WALLET_TITLE' | translate}}
+        </button>
+      </div>
+    </div>
+    <!-- Information about selected wallet type -->
+    <div class="col-md-offset-3 col-md-6" ng-show="!$ctrl._selectedType">
+      <hr>
+      <div class="text-center" ng-show="!$ctrl.showInfo">
+        <p>{{ 'SIGNUP_SELECT_WALLET_TYPE_STAND_BY' | translate }}</p>
+      </div>
+      <div ng-show="$ctrl.showInfo === 1">
+        <p><span class="fa fa-info-circle" aria-hidden="true"></span> {{ 'SIGNUP_CREATE_WALLET_INFO' | translate }}</p>
+        <p>
+          <i class="fa fa-exclamation-triangle"></i>
+          <span ng-bind-html="'SIGNUP_CREATE_WALLET_WARNING' | translate"></span>
+        </p>
+      </div>
+      <div ng-show="$ctrl.showInfo === 2">
+        <p><span class="fa fa-info-circle" aria-hidden="true"></span> {{'SIGNUP_BRAIN_WALLET_INFO' | translate}}</p>
+        <p>
+          <i class="fa fa-exclamation-triangle"></i>
+          <span ng-bind-html="'SIGNUP_BRAIN_WALLET_WARNING' | translate"></span>
+        </p>
+      </div>
+      <div ng-show="$ctrl.showInfo === 3">
+        <p> <span class="fa fa-info-circle" aria-hidden="true"></span> {{'SIGNUP_PRIVATE_KEY_WALLET_INFO' | translate}}</p>
+        <p>
+          <i class="fa fa-exclamation-triangle"></i>
+          <span ng-bind-html="'SIGNUP_PRIVATE_KEY_WALLET_WARNING' | translate"></span>
+        </p>
+      </div>
+    </div>
+    <!-- Start the signup process -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.start">
+      <div class="form-group">
+        <p class="text-center"><span class="fa fa-exclamation-triangle" aria-hidden="true"></span> {{ 'SIGNUP_CREATE_START_WARNING' | translate }}</p>
+      </div>
+      <div class="form-group">
+        <hr style="border-color:#444;">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.start = false;$ctrl.step1 = true;">{{ 'SIGNUP_CREATE_READY_BTN' | translate }}</button>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row">
-
-      <div class="col-md-8 col-md-offset-2" ng-show="$ctrl._selectedType.type == 1">
-        <!-- SIMPLE WALLET -->
-        <form class="panel-body">
-          <!-- WALLET NAME -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label for="namespaceParent" class="control-label">{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="text"
-                placeholder="{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.walletName"/>
-            </div>
-          </fieldset>
-          <!-- SELECT NETWORK -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label for="namespaceParent" class="control-label">{{'SIGNUP_NETWORK_SELECT' | translate}}: </label>
-              </span>
-              <select class="form-control"
-                ng-model="$ctrl.network"
-                ng-change="$ctrl.changeNetwork($ctrl.network)"
-                ng-options="network.id as (network.id | toNetworkName) for network in $ctrl.networks">
-                <option value="" disabled selected>{{'SIGNUP_NETWORK_SELECT' | translate}}</option>
-              </select>
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD' | translate }}: </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.password"/>
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD CONFIRM -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD_CONFIRM' | translate }}: </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.confirmPassword"/>
-            </div>
-          </fieldset>
-          <!-- SIMPLE WALLET WARNING -->
-          <p class="bg-info">
-            <i class="fa fa-exclamation-triangle"></i>
-            <span ng-bind-html="'SIGNUP_CREATE_WALLET_WARNING' | translate"></span>
-          </p>
-          <button class="btn btn-success pull-xs-right"
-            type="submit" ng-click="$ctrl.createWallet()">
-            {{'SIGNUP_CREATE_WALLET_BUTTON' | translate}}
-          </button>
-        </form>
+    <!-- 1st step: Select a network -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step1">
+      <fieldset class="form-group">
+        <p class="text-center">{{'SIGNUP_NETWORK_SELECT' | translate}}</p>
+        <select class="form-control" ng-model="$ctrl.network" ng-change="$ctrl.changeNetwork($ctrl.network)" ng-options="network.id as (network.id | toNetworkName) for network in $ctrl.networks">
+          <option value="" disabled selected>{{'SIGNUP_NETWORK_SELECT' | translate}}</option>
+        </select>
+      </fieldset>
+      <div class="form-group text-center">
+        <p ng-show="$ctrl.network === 104"><span ng-bind-html="'SIGNUP_NETWORK_MAINNET' | translate"></span></p>
+        <p ng-show="$ctrl.network === -104"><span ng-bind-html="'SIGNUP_NETWORK_TESTNET' | translate"></span></p>
+        <p ng-show="$ctrl.network === 96"><span ng-bind-html="'SIGNUP_NETWORK_MIJIN' | translate"></span></p>
       </div>
-
-      <div class="col-md-8 col-md-offset-2" ng-show="$ctrl._selectedType.type == 2">
-        <!-- BRAIN WALLET -->
-        <form class="panel-body">
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label for="namespaceParent" class="control-label">{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="text"
-                placeholder="{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.walletName" />
-            </div>
-          </fieldset>
-          <!-- SELECT NETWORK -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label for="namespaceParent" class="control-label">{{'SIGNUP_NETWORK_SELECT' | translate}}: </label>
-              </span>
-              <select class="form-control" ng-model="$ctrl.network" ng-change="$ctrl.changeNetwork($ctrl.network)" ng-options="network.id as (network.id | toNetworkName) for network in $ctrl.networks"><option value="" disabled selected>{{'SIGNUP_NETWORK_SELECT' | translate}}</option></select>
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSPHRASE_FIELD_PLACEHOLDER' | translate }}: </label>
-              </span>
-              <input class="form-control"
-                type="{{!$ctrl.showPassword ? 'password' : 'text'}}"
-                placeholder="{{'FORM_PASSPHRASE_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.password" ng-change="$ctrl.updatePasswordStrengthInfo()"/>
-              <span class="input-group-addon" ng-click="$ctrl.showPassword ? $ctrl.showPassword = false : $ctrl.showPassword = true">
+      <div class="form-group">
+        <hr style="border-color:#444;">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step1 = false;$ctrl.step2 = true;">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 2nd step: Enter a name -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step2">
+      <fieldset class="form-group">
+        <p class="text-center">{{ 'SIGNUP_CREATE_ENTER_NAME' | translate }}</p>
+        <input class="form-control" type="text" placeholder="{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.walletName" />
+      </fieldset>
+      <div class="row form-group">
+        <div class="col-md-2 col-sm-6">
+          <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+        </div>
+        <div class="col-md-10 col-sm-6">
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step2 = false;$ctrl.step3 = true;" ng-disabled="!$ctrl.formData.walletName || $ctrl.checkWalletNamePresence()">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+    <!-- 3rd step: Enter a password / passphrase -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step3">
+      <!-- Password / passphrase field -->
+      <fieldset class="form-group">
+        <p class="text-center">{{ $ctrl._selectedType.type === 2 ? ('SIGNUP_CREATE_ENTER_PASSPHRASE' | translate) : ('SIGNUP_CREATE_ENTER_PASSWORD' | translate) }}</p>
+        <div class="input-group">
+          <input class="form-control" type="{{!$ctrl.showPassword ? 'password' : 'text'}}" placeholder="{{ $ctrl._selectedType.type === 2 ? ('FORM_PASSPHRASE_FIELD_PLACEHOLDER' | translate) : ('FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER' | translate) }}" ng-model="$ctrl.formData.password" ng-change="$ctrl._selectedType.type === 2 ? $ctrl.updatePasswordStrengthInfo(): ''" />
+          <span class="input-group-addon" ng-click="$ctrl.showPassword ? $ctrl.showPassword = false : $ctrl.showPassword = true">
                 <span ng-show="!$ctrl.showPassword"><i class="fa fa-eye"></i></span>
-                <span ng-show="$ctrl.showPassword"><i class="fa fa-eye-slash"></i></span>
-              </span>
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD CONFIRM -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSPHRASE_CONFIRM' | translate }}: </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.confirmPassword" />
-            </div>
-          </fieldset>
-          <!-- BRAIN WALLET WARNING -->
-          <p class="bg-info">
-            <i class="fa fa-exclamation-triangle"></i>
-            <span ng-bind-html="'SIGNUP_BRAIN_WALLET_WARNING' | translate"></span>
-          </p>
-          <!-- PASSWORD STRENGTH -->
-          <div class="col-md-12 bg-info" ng-show="$ctrl.formData.password.length" style="margin: 0 0 10px;">
-            <div class="col-md-4">
-              <span style="display: block;"><b><u>{{ 'SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH' | translate }}</u></b></span>
-              <br>
-              <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': ($ctrl.passwordStrengthInfo.score * 12.5) + '%' }">
-                  <span>{{$ctrl.passwordStrengthInfo.score}} / 4</span>
-                </div>
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': $ctrl.formData.password.length < 40 ? ($ctrl.formData.password.length * 1.25) + '%' : '50%' }">
-                  <span>{{$ctrl.formData.password.length}} / 40</span>
-                </div>
-              </div>
-              <div>
-                <div style="width:40%;background-color:#d9534f;display:inline-block;">{{ 'GENERAL_SCORE' | translate }}</div>
-                <div style="width:40%;background-color:#5cb85c;display:inline-block;">{{ 'GENERAL_LENGTH' | translate }}</div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <span style="display: block;"><b><u>{{ 'SIGNUP_ESTIMATED_GUESS_TIMES' | translate }}</u></b></span>
-              <br>
-              <ul style="text-align: left;">
-                <li><b>10  / second</b>: {{$ctrl.passwordStrengthInfo.crack_times_display.online_no_throttling_10_per_second}}</li>
-                <li><b>10k / second</b>: {{$ctrl.passwordStrengthInfo.crack_times_display.offline_slow_hashing_1e4_per_second}}</li>
-                <li><b>10B / second</b>: {{$ctrl.passwordStrengthInfo.crack_times_display.offline_fast_hashing_1e10_per_second}}</li>
-              </ul>
-            </div>
-            <div class="col-md-4" ng-show="$ctrl.passwordStrengthInfo.feedback.warning.length">
-              <span style="display: block;"><b><u>{{ 'GENERAL_WARNING' | translate }}</u></b></span>
-              <br>
-              <span>{{$ctrl.passwordStrengthInfo.feedback.warning}}</span>
-            </div>
-            <!--<div ng-show="$ctrl.passwordStrengthInfo.feedback.suggestions.length">
-              <span><b><u>Suggestions</u></b></span>
-              <ul ng-repeat="x in $ctrl.passwordStrengthInfo.feedback.suggestions">
-                <li> {{x}} </li>
-              </ul>
-            </div>-->
+          <span ng-show="$ctrl.showPassword"><i class="fa fa-eye-slash"></i></span>
+          </span>
+        </div>
+      </fieldset>
+      <!-- Password / passphrase confirmation field -->
+      <fieldset class="form-group">
+        <p class="text-center">{{ $ctrl._selectedType.type === 2 ? ('SIGNUP_CREATE_CONFIRM_PASSPHRASE' | translate) : ('SIGNUP_CREATE_CONFIRM_PASSWORD' | translate) }}</p>
+        <input class="form-control" type="password" placeholder="{{ $ctrl._selectedType.type === 2 ? ('FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER' | translate) : ('FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER' | translate)}}" ng-model="$ctrl.formData.confirmPassword" />
+      </fieldset>
+      <!-- Strength estimation -->
+      <fieldset class="form-group" style="background-color: #444;padding: 10px;" ng-show="$ctrl._selectedType.type === 2">
+        <span class="text-center" style="display: block;"><b><u>{{ 'SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH' | translate }}</u></b></span>
+        <br>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': ($ctrl.passwordStrengthInfo.score * 12.5) + '%' }">
+            <span>{{ 'GENERAL_SCORE' | translate }}: {{$ctrl.passwordStrengthInfo.score}} / 4</span>
           </div>
-          <!-- CONFIRM BUTTON -->
-          <button class="btn btn-success pull-xs-right"
-            type="submit" ng-click="$ctrl.createBrainWallet()">
-            {{'SIGNUP_BRAIN_WALLET_BUTTON' | translate}}
-          </button>
-        </form>
+          <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': $ctrl.formData.password.length < 40 ? ($ctrl.formData.password.length * 1.25) + '%' : '50%' }">
+            <span>{{ 'GENERAL_LENGTH' | translate }}: {{$ctrl.formData.password.length}} / 40</span>
+          </div>
+        </div>
+      </fieldset>
+      <!-- -->
+      <div class="row form-group">
+        <div class="col-md-2 col-sm-6">
+          <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+        </div>
+        <div class="col-md-10 col-sm-6" ng-show="$ctrl._selectedType.type === 1 || $ctrl._selectedType.type === 3">
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step3 = false;$ctrl.step4 = true;" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+        </div>
+        <div class="col-md-10 col-sm-6" ng-show="$ctrl._selectedType.type === 2">
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.createBrainWallet();" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword || $ctrl.okPressed">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+        </div>
       </div>
-
-      <div class="col-md-8 col-md-offset-2" ng-show="$ctrl._selectedType.type == 3">
-        <!-- PRIVATE KEY WALLET -->
-        <form class="panel-body">
-
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="text"
-                placeholder="{{'FORM_WALLET_NAME_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.walletName" />
-            </div>
-          </fieldset>
-          <!-- PRIVATE KEY OF ADDRESS TO ADD -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{'FORM_PRIVATE_KEY_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_PRIVATE_KEY_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.privateKey" ng-change="$ctrl.generateAddress();" />
-            </div>
-          </fieldset>
-          <!-- ADDRESS TO ADD -->
-          <fieldset class="form-group" ng-show="$ctrl.formData.address.length">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{'FORM_ADDRESS_FIELD_PLACEHOLDER' | translate}}: </label>
-              </span>
-              <input class="form-control"
-                type="text"
-                ng-model="$ctrl.formData.address" readOnly/>
-            </div>
-          </fieldset>
-          <!-- SELECT NETWORK -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label for="namespaceParent" class="control-label">{{'SIGNUP_NETWORK_SELECT' | translate}}: </label>
-              </span>
-              <select class="form-control"
-                ng-model="$ctrl.network"
-                ng-change="$ctrl.changeNetwork($ctrl.network);$ctrl.generateAddress();"
-                ng-options="network.id as (network.id | toNetworkName) for network in $ctrl.networks">
-                <option value="" disabled selected>{{'SIGNUP_NETWORK_SELECT' | translate}}</option>
-              </select>
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD' | translate }}: </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_SIGNUP_PASSWORD_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.password" />
-            </div>
-          </fieldset>
-          <!-- PASSWORD FIELD CONFIRM -->
-          <fieldset class="form-group">
-            <div class="input-group">
-              <span class="input-group-btn">
-                <label>{{ 'FORM_PASSWORD_CONFIRM' | translate }}:  </label>
-              </span>
-              <input class="form-control"
-                type="password"
-                placeholder="{{'FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER' | translate}}"
-                ng-model="$ctrl.formData.confirmPassword" />
-            </div>
-          </fieldset>
-          <!-- PRIVATE KEY WALLET WARNING -->
-          <p class="bg-info">
-            <i class="fa fa-exclamation-triangle"></i>
-            <span ng-bind-html="'SIGNUP_PRIVATE_KEY_WALLET_WARNING' | translate"></span>
-          </p>
-          <!-- CONFIRM BUTTON -->
-          <button class="btn btn-success pull-xs-right"
-            type="submit"
-            ng-click="$ctrl.createPrivateKeyWallet()">
-            {{'SIGNUP_PRIVATE_KEY_WALLET_BUTTON' | translate}}
-          </button>
-        </form>
-      </div>
-
     </div>
-  </div>
-  <a id="downloadWallet" target="_blank"></a>
-
-</div>
-
-<!-- Modal -->
-<div id="safetyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="width:900px;">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"> {{ 'SIGNUP_COMMON_WALLET_WARNING_TITLE' | translate }}</h4>
+    <!-- 4th step (if simple wallet): Add entropy -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step4 && $ctrl._selectedType.type === 1">
+      <div class="form-group">
+        <p class="text-center" ng-bind-html="'SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO' | translate"></p>
       </div>
-      <div class="modal-body">
+      <div class="form-group" ng-show="!$ctrl.progressBar">
+        <hr style="border-color:#444;">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.progressBar = true;$ctrl.getEntropy();"><span class="fa fa-play-circle-o" aria-hidden="true"></span> {{ 'GENERAL_START' | translate }}</button>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-show="$ctrl.progressBar">
+        <div class="progressBar">
+          <div id="pBar"></div>
+        </div>
+        <hr style="border-color:#444;">
+      </div>
+      <div class="row form-group" ng-show="$ctrl.entropyDone">
+        <div class="col-md-2 col-sm-6">
+          <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+        </div>
+        <div class="col-md-10 col-sm-6">
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.createWallet();" ng-disabled="$ctrl.okPressed">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+    <!-- 4th step (if private key wallet): Enter a private key -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step4 && $ctrl._selectedType.type === 3">
+      <!-- Private key of account to import -->
+      <fieldset class="form-group">
+        <p class="text-center">{{ 'SIGNUP_CREATE_ENTER_PRIVATE_KEY' | translate }}</p>
+        <input class="form-control" type="password" placeholder="{{'FORM_PRIVATE_KEY_FIELD_PLACEHOLDER' | translate}}" ng-model="$ctrl.formData.privateKey" ng-change="$ctrl.generateAddress();" />
+      </fieldset>
+      <!-- Address corresponding to the given private key -->
+      <fieldset class="form-group" ng-show="$ctrl.generatedAddress.length">
+        <p class="text-center">{{ 'SIGNUP_CREATE_ADDRESS_FROM_PK' | translate }}</p>
+        <div class="form-control">
+          <p style="font-size: 15px;"><b>{{ $ctrl.generatedAddress | fmtAddress }}</b></p>
+        </div>
+      </fieldset>
+      <!-- -->
+      <div class="row form-group">
+        <div class="col-md-2 col-sm-6">
+          <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+        </div>
+        <div class="col-md-10 col-sm-6">
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.createPrivateKeyWallet()" ng-disabled="$ctrl.formData.privateKey.length !== 64 && $ctrl.formData.privateKey.length !== 66 || $ctrl.okPressed">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+    <!-- 5th step: Start safety protocol -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step5">
+      <div class="form-group">
         <p><i class="fa fa-exclamation-triangle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_1' | translate "></span></p>
-          <hr style="border-color:#444;">
-          <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_2' | translate"></span></p>
-          <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_3' | translate"></span></p>
-          <div class="form-group">
-            <button type="button" class="btn btn-success" ng-click="!$ctrl.showRawWallet ? $ctrl.showRawWallet = true : $ctrl.showRawWallet = false">{{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_1' | translate }}</button>
-          </div>
-          <div ng-show="$ctrl.showRawWallet">
-            <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.rawWallet }}</code></pre>
-            <p class="bg-info"><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO' | translate"></span></p>
-            <hr style="border-color:#444;">
-         </div>
-          <p> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_4' | translate"></span></p>
-          <div class="form-group">
-           <button type="button" class="btn btn-success" ng-click="!$ctrl.showWalletPrivateKey ? $ctrl.showWalletPrivateKey = true : $ctrl.showWalletPrivateKey = false;">{{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_2' | translate }}</button>
-          </div>
-           <div ng-show="$ctrl.showWalletPrivateKey">
-            <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.walletPrivateKey }}</code></pre>
-            <p class="bg-info"><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO' | translate"></span></p>
-            <hr style="border-color:#444;">
-          </div>
-          <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_6' | translate"></span></p>
-          <hr style="border-color:#444;" ng-show="!$ctrl.showWalletPrivateKey">
-          <p><i class="fa fa-exclamation-triangle"></i> {{ 'SIGNUP_COMMON_WALLET_WARNING_5' | translate }}</p>
-          <br>
-          <fieldset class="row checkboxes text-center form-group">
-            <input type="checkbox" id="box1" ng-model="$ctrl.haveWalletFile">
-            <label class="checkbox-inline" for="box1"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1' | translate }}</b></label>
-            <input type="checkbox" id="box2" ng-model="$ctrl.havePrivateKeySaved">
-            <label class="checkbox-inline" for="box2"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2' | translate }}</b></label> 
-          </fieldset>
-          <br>
-         <p class="text-center"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate }}</b></p>  
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" ng-disabled="!$ctrl.haveWalletFile || !$ctrl.havePrivateKeySaved" ng-click="$ctrl.redirect()">{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3' | translate }}</button>
+      <div class="form-group">
+        <hr style="border-color:#444;">
+        <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step5 = false;$ctrl.step6 = true;">{{ 'SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD' | translate }}</button>
       </div>
     </div>
-
+    <!-- 6th step: Wallet information -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step6">
+      <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_2' | translate"></span></p>
+      <div class="form-group">
+        <a class="btn btn-dark" style="width: 100%;" id="downloadWallet"><span class="fa fa-download" aria-hidden="true"></span> {{ 'SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD' | translate }}</a>
+      </div>
+      <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_3' | translate"></span></p>
+      <div class="form-group">
+        <button type="button" class="btn btn-dark" style="width:100%;" ng-click="!$ctrl.showRawWallet ? $ctrl.showRawWallet = true : $ctrl.showRawWallet = false"><span class="fa fa-file-text" aria-hidden="true"></span> {{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_1' | translate }}</button>
+      </div>
+      <div ng-show="$ctrl.showRawWallet">
+        <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.rawWallet }}</code></pre>
+        <p><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO' | translate"></span></p>
+      </div>
+      <!-- -->
+      <div class="form-group">
+        <hr style="border-color:#444;">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl.step5 = true;$ctrl.step6 = false;" style="width:auto;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step6 = false;$ctrl.step7 = true;">{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 7th step: Private key information -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step7">
+      <p><i class="fa fa-exclamation-triangle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_4' | translate"></span></p>
+      <div class="form-group">
+        <button type="button" class="btn btn-dark" style="width: 100%;" ng-click="!$ctrl.showWalletPrivateKey ? $ctrl.showWalletPrivateKey = true : $ctrl.showWalletPrivateKey = false;">{{ 'SIGNUP_COMMON_WALLET_WARNING_BTN_2' | translate }}</button>
+      </div>
+      <div ng-show="$ctrl.showWalletPrivateKey">
+        <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.walletPrivateKey }}</code></pre>
+        <p><i class="fa fa-info-circle"></i><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO' | translate"></span></p>
+        <hr style="border-color:#444;">
+      </div>
+      <div class="form-group">
+        <p><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_6' | translate"></span></p>
+        <hr style="border-color:#444;">
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl.step6 = true;$ctrl.step7 = false;" style="width:auto;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step7 = false;$ctrl.step8 = true;">{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 8th step: Last warning -->
+    <div class="col-md-offset-3 col-md-6" ng-show="$ctrl.step8">
+      <div class="form-group">
+        <p><b><i class="fa fa-exclamation-triangle"></i> {{ 'SIGNUP_COMMON_WALLET_WARNING_5' | translate }}</b></p>
+        <p class="text-center"><b>{{ 'SIGNUP_COMMON_WALLET_WARNING_FOOTER' | translate }}</b></p>
+      </div>
+      <div class="form-group">
+        <hr style="border-color:#444;">
+        <div class="row">
+          <div class="col-md-2 col-sm-6">
+            <button class="btn btn-dark" ng-click="$ctrl.step7 = true;$ctrl.step8 = false;" style="width:auto;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
+          </div>
+          <div class="col-md-10 col-sm-6">
+            <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.endSignup();">{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3' | translate }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
