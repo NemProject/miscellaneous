@@ -1,4 +1,4 @@
-<table id="txTable" class="table table-bordered table-hover" title="{{ 'TRANSFER_TRANSACTION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta);">
+<table id="txTable" class="table table-bordered table-hover" title="{{ 'TRANSFER_TRANSACTION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed">
     <tbody style="outline:0;">
         <tr data-toggle="collapse" data-target="#table{{number}}" style="outline:0">
             <td class="sentTx" style="overflow:hidden;text-overflow: ellipsis;" ng-show="tx.recipient !== mainAccount && !parent"><span class="fa fa-send-o text-danger"></span> <tt>{{ getContact(tx.recipient | fmtAddress) || (tx.recipient | fmtAddress) }}</tt></td>
@@ -37,13 +37,13 @@
                          XEM
                     </span>
                 </span>
-                <div id="needsSignature-{{tx.timeStamp}}" ng-show="needsSignature">
+                <div class="row" id="needsSignature-{{tx.timeStamp}}" ng-show="needsSignature">
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>
             <td class="messageTx" ng-show="!tx.message.type"></td>
             <td class="messageTx" style="" ng-show="tx.message.type === 1">{{tx.message | fmtHexMessage}}</td>
-            <td class="messageTx" ng-show="tx.message.type === 2" id="line-{{tx.timeStamp}}">{{ 'LINE_TX_DETAILS_MESS_ENC' | translate }}
+            <td class="messageTx" ng-show="tx.message.type === 2" id="line-{{tx.timeStamp}}">{{ 'GENERAL_ENCRYPTED' | translate }}
                 <div ng-show="!requiresKey">
                     {{decoded | fmtHexMessage}}
                 </div>
@@ -101,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="!tx.mosaics.length">
                 <div class="col-sm-3"><b>{{ 'GENERAL_AMOUNT' | translate }}</b></div>
                 <div class="col-sm-9">
                     <strong>{{(tx.amount | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{(tx.amount | fmtNemValue)[1]}}</span> XEM
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-sm-9">
                     <span ng-show="tx.message.type === 1" style="white-space: pre-line;">{{tx.message | fmtHexMessage}}</span>
-                    <span ng-show="tx.message.type === 2" id="details-{{tx.timeStamp}}" style="white-space: pre-line;"> <span style="white-space: normal;"> {{ 'LINE_TX_DETAILS_MESS_ENC' | translate }} <span ng-show="!disableDecryption"> <b>--></b> <a ng-click="showDecodeMessage = ! showDecodeMessage" style="cursor:pointer">{{ 'LINE_TX_DETAILS_MESS_DEC' | translate }}</a></span></span>
+                    <span ng-show="tx.message.type === 2" id="details-{{tx.timeStamp}}" style="white-space: pre-line;"> <span style="white-space: normal;"> {{ 'GENERAL_ENCRYPTED' | translate }} <span ng-show="!disableDecryption"> <b>--></b> <a ng-click="showDecodeMessage = ! showDecodeMessage" style="cursor:pointer">{{ 'LINE_TX_DETAILS_MESS_DEC' | translate }}</a></span></span>
                     </span>
                     <div ng-show="!requiresKey">
                         {{decoded | fmtHexMessage}}

@@ -1,4 +1,4 @@
-<table id="MSTable" class="table table-bordered table-hover" title="{{ 'MOSAIC_DEFINITION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="MSTable" class="table table-bordered table-hover" title="{{ 'MOSAIC_DEFINITION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#MStable{{number}}">
             <td class="mosaicTx" style="overflow:hidden;text-overflow: ellipsis;"><span class="fa fa-th text-danger" ng-show="!parent"></span> <span class="fa fa-group text-danger" ng-show="parent"></span> <tt>{{ 'LINE_TX_DETAILS_MOS_CREATE' | translate }} "<span class="text-muted">{{tx.mosaicDefinition.id.namespaceId}}</span>:<strong>{{tx.mosaicDefinition.id.name}}</strong>"</tt></td>
@@ -9,7 +9,7 @@
                 <span ng-show="parent">
                     <span style="color:red">-</span> <strong>{{((tx.creationFee+tx.fee+parent.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.creationFee+tx.fee+parent.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
-                <div ng-show="needsSignature">
+                <div class="row" ng-show="needsSignature">
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>

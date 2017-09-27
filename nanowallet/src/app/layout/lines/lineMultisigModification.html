@@ -1,4 +1,4 @@
-<table id="MSMTable" class="table table-bordered table-hover" title="{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed" ng-click="displayTransactionDetails(parent, tx, meta)">
+<table id="MSMTable" class="table table-bordered table-hover" title="{{ 'AGGREGATE_MODIFICATION_NAME' | translate }}" style="cursor:pointer;outline:0;margin-bottom:0;table-layout:fixed">
     <tbody style="outline:0;" class="text-center">
         <tr data-toggle="collapse" data-target="#MSMtable{{number}}">
             <td class="multisigTx">
@@ -16,7 +16,7 @@
                 <span ng-show="parent">
                     <span style="color:red">-</span> <strong>{{((tx.fee+parent.fee) | fmtNemValue)[0]}}</strong>.<span class="text-muted">{{((tx.fee+parent.fee) | fmtNemValue)[1]}}</span> XEM
                 </span>
-                <div ng-show="needsSignature">
+                <div class="row" ng-show="needsSignature">
                     <span style="color:red">{{ 'LINE_TX_DETAILS_NEED_SIG_2' | translate }}</span>
                 </div>
             </td>
@@ -98,17 +98,17 @@
         <div class="row" ng-show="tx.minCosignatories">
             <div class="col-sm-3"><b>{{ 'LINE_TX_DETAILS_MULTISIG_MIN_COSIG' | translate }}</b></div>
             <div class="col-sm-9">
-                <tt>{{tx.minCosignatories.relativeChange}}</tt>
+                <tt><span ng-show="tx.minCosignatories.relativeChange > 0">+</span>{{tx.minCosignatories.relativeChange}}</tt>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="tx.modifications.length">
             <div class="col-sm-12">
                 <hr style="border-style: dashed;margin:5px;" />
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-show="tx.modifications.length">
             <div class="col-sm-12" >
                 <strong>{{ 'AGGREGATE_MODIFICATION_LIST' | translate }}: </strong>
             </div>
