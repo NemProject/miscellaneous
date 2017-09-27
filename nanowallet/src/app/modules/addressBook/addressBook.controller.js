@@ -1,38 +1,28 @@
-import helpers from '../../utils/helpers';
-import CryptoHelpers from '../../utils/CryptoHelpers';
-import Address from '../../utils/Address';
+import nem from 'nem-sdk';
+import Helpers from '../../utils/helpers';
 
 class AddressBookCtrl {
-    constructor($localStorage, DataBridge, Wallet, Alert, $location, $filter, $state) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(Wallet, Alert, $state, AddressBook) {
         'ngInject';
 
-        // DataBidge service
-        this._DataBridge = DataBridge;
-        // Wallet service
+        //// Module dependencies region ////
+
         this._Wallet = Wallet;
-        // Alert service
         this._Alert = Alert;
-        // $location to redirect
-        this._location = $location;
-        //Local storage
-        this._storage = $localStorage;
-        // Filters
-        this._$filter = $filter;
-        // Address
-        this.accountAddress = '';
-        // $state
         this._$state = $state;
+        this._AddressBook = AddressBook;
+        this._Helpers = Helpers;
 
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
-        }
+        //// End dependencies region ////
 
-        /**
-         * Default contacts properties
-         */
+        //// Module properties region ////
+
         this.formData = {};
         this.formData.label = '';
         this.formData.address = '';
@@ -45,27 +35,22 @@ class AddressBookCtrl {
         this.propertyName = 'label';
 
         // Contact list
-        this._storage.contacts = this._storage.contacts || {};
-        this.contacts = undefined !== this._storage.contacts[this._Wallet.currentAccount.address] ? this._storage.contacts[this._Wallet.currentAccount.address] : [];
+        this.contacts = this._AddressBook.getContacts(this._Wallet.current);
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
-        // Object to contain our password & private key data.
-        this.common = {
-            'password': '',
-            'privateKey': '',
-        };
-
         // Contacts to address book pagination properties
         this.currentPage = 0;
         this.pageSize = 10;
-        this.numberOfPages = function() {
-            return Math.ceil(this.contacts.length / this.pageSize);
-        }
+
+        //// End properties region ////
     }
 
+    //// Module methods region ////
+
     /**
+     * Sort contacts by label
      *
      * @param {object} propertyName - The property for filter
      */
@@ -75,9 +60,9 @@ class AddressBookCtrl {
     };
 
     /**
-     * New a contact
+     * Open modal in "add" mode
      */
-    addContact() {
+    showAddContact() {
         this.is_edit = false;
         this.cleanData();
         $('#contactModal').modal('show');
@@ -90,29 +75,12 @@ class AddressBookCtrl {
         // Disable send button;
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        }
-
         // Check address
-        if(!Address.isValid(this.formData.address) || !Address.isFromNetwork(this.formData.address, this._Wallet.network)) {
-            this._Alert.invalidAddress();
-            this.okPressed = false;
-            return;
-        }
+        if(!this.checkAddress()) return;
 
         this.contacts.push({
             "label": this.formData.label,
-            "address": this.formData.address
+            "address": nem.utils.format.address(this.formData.address)
         });
 
         // Save data to locale storage
@@ -128,11 +96,11 @@ class AddressBookCtrl {
     }
 
     /**
-     * Edit a contact
+     * Open modal in "edit" mode
      *
      * @param {object} elem - The object to edit
      */
-    editContact(elem) {
+    showEditContact(elem) {
         this.is_edit = true;
         this.editElem = elem;
         this.formData.label = elem.label;
@@ -147,29 +115,12 @@ class AddressBookCtrl {
         // Disable send button;
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        }
-
         // Check address
-        if(!Address.isValid(this.formData.address) || !Address.isFromNetwork(this.formData.address, this._Wallet.network)) {
-            this._Alert.invalidAddress();
-            this.okPressed = false;
-            return;
-        }
+        if(!this.checkAddress()) return;
 
         var indexOfElem = this.contacts.indexOf(this.editElem);
         this.contacts[indexOfElem].label = this.formData.label;
-        this.contacts[indexOfElem].address = this.formData.address;
+        this.contacts[indexOfElem].address = nem.utils.format.address(this.formData.address);
 
         // Save data to locale storage
         this.saveAddressBook();
@@ -181,6 +132,27 @@ class AddressBookCtrl {
 
         // Enable send button;
         this.okPressed = false;
+    }
+
+    /**
+     * Check if contact address is valid and not present
+     */
+    checkAddress() {
+        // Check address
+        if(this.formData.address.length !== 40 && this.formData.address.length !== 46 || !nem.model.address.isValid(this.formData.address) || !nem.model.address.isFromNetwork(this.formData.address, this._Wallet.network)) {
+            this._Alert.invalidAddress();
+            this.okPressed = false;
+            return false;
+        } else {
+            for (let i = 0; i < this.contacts.length; i++) {
+                if (nem.model.address.clean(this.contacts[i].address) === nem.model.address.clean(this.formData.address)) {
+                    // Todo add alert
+                    this.okPressed = false;
+                    return false;
+                }
+            }
+        }
+        return true; 
     }
 
     /**
@@ -200,19 +172,6 @@ class AddressBookCtrl {
         // Disable send button;
         this.okPressed = true;
 
-        // Decrypt/generate private key and check it. Returned private key is contained into this.common
-        if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this._Wallet.currentAccount, this._Wallet.algo, true)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this._Wallet.currentAccount.address)) {
-            this._Alert.invalidPassword();
-            // Enable send button
-            this.okPressed = false;
-            return;
-        }
-
         // If the deleted element is the elem 0 and length of array mod 5 gives 0 (means it is the last object of the page),
         // we return a page behind unless it is page 1.
         if (this.contacts.indexOf(this.removeElem) === 0 && this.currentPage + 1 > 1 && (this.contacts.length - 1) % 5 === 0) {
@@ -230,9 +189,11 @@ class AddressBookCtrl {
         this.okPressed = false;
     }
 
-    // Save data to locale storage
+    /**
+     * Save data to locale storage
+     */
     saveAddressBook() {
-        this._storage.contacts[this._Wallet.currentAccount.address] = this.contacts;
+        return this._AddressBook.save(this._Wallet.current, this.contacts);
     }
 
     /**
@@ -248,14 +209,7 @@ class AddressBookCtrl {
      * Export address book to .adb file
      */
     exportAddressBook() {
-        // Wallet object string to word array
-        let contacts = this.contacts;
-
-        for (var i = 0; i < contacts.length; i++) {
-            delete contacts[i].$$hashKey;
-        }
-
-        let wordArray = CryptoJS.enc.Utf8.parse(JSON.stringify(contacts));
+        let wordArray = CryptoJS.enc.Utf8.parse(angular.toJson(this.contacts));
         // Word array to base64
         let base64 = CryptoJS.enc.Base64.stringify(wordArray);
         // Set download element attributes
@@ -263,6 +217,7 @@ class AddressBookCtrl {
         $("#exportAddressBook").attr('download', this._Wallet.current.name + '.adb');
         // Simulate click to trigger download
         document.getElementById("exportAddressBook").click();
+        return;
     }
 
     /**
@@ -274,6 +229,7 @@ class AddressBookCtrl {
 
     /**
      * Import address book from .adb file
+     *
      * @param $fileContent - content file for import
      */
     importAddressBook($fileContent) {
@@ -297,13 +253,16 @@ class AddressBookCtrl {
     }
 
     /**
-     * Send XEM to select address
+     * Open transfer transaction module with selected contact as recipient
      *
      * @param address - account address
      */
     transferTransaction(address) {
         this._$state.go("app.transferTransaction", {address: address});
+        return;
     }
+
+    //// End methods region ////
 
 }
 

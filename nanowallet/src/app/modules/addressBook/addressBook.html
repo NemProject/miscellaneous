@@ -15,7 +15,7 @@
           <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
               <li>
-                <button type="button" class="btn btn-success" ng-click="$ctrl.addContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
+                <button type="button" class="btn btn-success" ng-click="$ctrl.showAddContact()">{{ 'ADDRESS_BOOK_NEW' | translate }}</button>
               </li>
               <li>
                 <button type="button" ng-disabled="!$ctrl.contacts.length" class="btn btn-success" ng-click="$ctrl.exportAddressBook()">{{ 'ADDRESS_BOOK_EXPORT_BTN' | translate }}</button>
@@ -31,8 +31,8 @@
 
       <div class="col-sm-9">
           <div class="panel-heading">
-            <h3>{{ 'ADDRESS_BOOK_LIST' | translate }}</h3>
-            <div ng-show="$ctrl.contacts.length > $ctrl.pageSize"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
+            <h3>{{ 'GENERAL_CONTACTS' | translate }}</h3>
+            <paginate data="$ctrl.contacts" current-page="$ctrl.currentPage" page-size="$ctrl.pageSize"></paginate>
           </div>
           <table  class="table table-condensed">
             <thead>
@@ -55,7 +55,7 @@
                   <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.transferTransaction(contact.address)">{{ 'GENERAL_SEND_XEM' | translate }}</button>
                 </div>
                 <div class="col-sm-4">
-                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.editContact(contact)">{{ 'GENERAL_EDIT' | translate }}</button>
+                  <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.showEditContact(contact)">{{ 'GENERAL_EDIT' | translate }}</button>
                 </div>
                 <div class="col-sm-4 inner">
                   <button type="button" class="btn btn-xs btn-success" ng-click="$ctrl.removeContact(contact)">{{ 'GENERAL_REMOVE' | translate }}</button>
@@ -110,24 +110,15 @@
                   ng-model="$ctrl.formData.address"/>
               </div>
             </fieldset>
-            <!-- PASSWORD FIELD -->
-            <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
-                </span>
-                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
-              </div>
-            </fieldset>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-success"  data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button> -->
-        <button class="btn btn-success" type="submit" ng-show="!$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.add()">
+        <button class="btn btn-success" type="submit" ng-show="!$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.add()">
           <i class="fa fa-plus"></i> {{ 'ADDRESS_BOOK_NEW_BTN' | translate }}
         </button>
-        <button class="btn btn-success" type="submit" ng-show="$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.edit()">
+        <button class="btn btn-success" type="submit" ng-show="$ctrl.is_edit" ng-disabled="$ctrl.okPressed || !$ctrl.formData.label || !$ctrl.formData.address" ng-click="$ctrl.edit()">
           <i class="fa fa-edit"></i> {{ 'ADDRESS_BOOK_EDIT_BTN' | translate }}
         </button>
       </div>
@@ -135,7 +126,7 @@
   </div>
 </div>
 
-<!-- Add new account modal -->
+<!-- Remove account modal -->
 <div id="removeContactModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm" role="document">    <!-- Modal content-->
     <div class="modal-content">
@@ -147,20 +138,12 @@
         <div class="row">
           <div class="col-sm-12">
             <h5>{{ 'ADDRESS_BOOK_CONFIRM_DELETE' | translate }}</h5>
-            <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}:</label>
-                </span>
-                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
-              </div>
-            </fieldset>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-success"  data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button> -->
-        <button class="btn btn-danger" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.remove()">
+        <button class="btn btn-danger" type="submit" ng-disabled="$ctrl.okPressed" ng-click="$ctrl.remove()">
           <i class="fa fa-remove"></i> {{ 'ADDRESS_BOOK_REMOVE_BTN' | translate }}
         </button>
       </div>
