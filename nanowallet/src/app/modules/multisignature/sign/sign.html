@@ -13,20 +13,10 @@
           <div class="col-lg-12">
             <div class="panel-heading">
               <ul class="nav nav-tabs">
-                <li>{{ 'DASHBOARD_UNCONFIRMED' | translate }}</li>
+                <li style="color: grey;letter-spacing: .8px;">{{ 'DASHBOARD_UNCONFIRMED' | translate }}</li>
+                <li style="margin-left: 15px;"><i class="fa fa-refresh" style="cursor:pointer;" ng-click="$ctrl.getUnconfirmedTransactions();"></i></li>
               </ul>
-              <ul class="nav nav-tabs arrows">
-                <li ng-show="$ctrl.unconfirmed.length > 5">
-                  <button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1">
-                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
-                  </button>
-                  <b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b>
-                  <button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1">
-                    <span class="fa fa-chevron-right" aria-hidden="true"></span>
-                  </button>
-                </li>
-                <li><i class="fa fa-refresh" style="cursor:pointer;" ng-click="$ctrl.getUnconfirmedTransactions();"></i></li>
-              </ul>
+                <paginate data="$ctrl.unconfirmed" current-page="$ctrl.currentPage" page-size="$ctrl.pageSize"></paginate> 
             </div>
             <table class="table table-condensed top">
               <thead>
@@ -41,7 +31,7 @@
             <table class="table">
               <tbody>
                   <div ng-repeat="tx in $ctrl.unconfirmed | orderBy:'-transaction.timeStamp' | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
-                    <tag-transaction d="tx" z="$ctrl._Wallet.currentAccount.address" h="$ctrl._DataBridge" tooltip-position="'left'" account-data="$ctrl._DataBridge.accountData"></tag-transaction>
+                    <tag-transaction d="tx" tooltip-position="'left'"></tag-transaction>
                   </div>
               </tbody>
             </table>
@@ -49,11 +39,8 @@
               <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
             </div>
           </div>
-          
-          
         </div>
       </div>
-     
+    </div>
   </div>
-</div>
 </div>
