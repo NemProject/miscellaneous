@@ -3,7 +3,7 @@ function LoginConfig($stateProvider) {
 
     $stateProvider
         .state('app.login', {
-            url: '/login/:slug',
+            url: '/login',
             controller: 'LoginCtrl',
             controllerAs: '$ctrl',
             templateUrl: 'modules/login/login.html',
