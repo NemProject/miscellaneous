@@ -148,7 +148,10 @@ function DutchProvider($translateProvider) {
         GENERAL_ACTIVATING: "Activeren",
         GENERAL_DEACTIVATING: "Deactiveren",
         GENERAL_REMOTE: "Extern",
-
+        GENERAL_WARNING: 'Waarschuwing',
+        GENERAL_SCORE: 'Score',
+        GENERAL_LENGTH: 'Lengte',
+        
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry, je kan Nano Wallet niet veilig gebruiken met deze browser...',
         HOME_RECOMMENDED_BROWSERS: 'Aanbevolen browsers zijn:',
@@ -257,7 +260,7 @@ function DutchProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_TITLE: 'Creëren van een mozaïek',
         MOSAIC_DEFINITION_INFORMATION: 'Wil je meer informatie over mozaïeken?',
         MOSAIC_DEFINITION_INFORMATION_1: 'De maximale lengte voor een mozaïeknaam is 32 karakters. Toegestane karakters zijn:',
-        MOSAIC_DEFINITION_INFORMATION_2: 'Het eerste karakter moet een letter zijn.',
+        MOSAIC_DEFINITION_INFORMATION_2: 'Het eerste karakter moet een letter of cijfer zijn.',
         MOSAIC_DEFINITION_INFORMATION_3: 'De omschrijving mag niet langer dan 512 karakters zijn. Er is geen beperking op de te gebruiken karakters in de omschrijving.',
         MOSAIC_DEFINITION_INFORMATION_4: 'Het gedrag van een mozaïek kan worden aangepast door middel van eigenschappen:',
         MOSAIC_DEFINITION_INFORMATION_5: 'De voorraad wordt gegeven in gehele eenheden van het mozaïek, niet in de kleinste subeenheden. De initiële voorraad moet in het bereik van 0 en 9.000.000.000 liggen.',
@@ -271,7 +274,7 @@ function DutchProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'Er zijn twee soorten heffing, constante heffing en procentuele heffing.',
         MOSAIC_DEFINITION_INFORMATION_14: 'De heffing wordt opgegeven als constante hoeveelheid en hangt dus niet af van de hoeveelheid die wordt overgedragen.',
         MOSAIC_DEFINITION_INFORMATION_15: 'De heffing wordt opgegeven als percentage van de overgedragen hoeveelheid. De heffing stijgt dus lineair met de overgedragen mozaïekhoeveelheid.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Het verzenden van mozaïeken op het NEM blockchain vereist een heffing. De exacte heffing wordt berekend afhankelijk van het totale aantal en hoeveel worden verzonden tijdens een transactie. <b>Kleinschalige mozaïeken</b> krijgen een kortingstarief van 1 XEM per mozaiek per overdracht. Dit zijn mozaïeken met een hoeveelheid van minder dan 10.000 en een verdeelbaarheid van 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Het verzenden van mozaïeken op het NEM blockchain vereist een heffing. De exacte heffing wordt berekend afhankelijk van het totale aantal en hoeveel worden verzonden tijdens een transactie. <b>Kleinschalige mozaïeken</b> krijgen een kortingstarief van 0,05 XEM per mozaiek per overdracht. Dit zijn mozaïeken met een hoeveelheid van minder dan 10.000 en een verdeelbaarheid van 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Verander mozaïekvoorraad',
@@ -296,7 +299,7 @@ function DutchProvider($translateProvider) {
         NAMESPACE_PROVISION_NS_NAME: 'Namespace naam',
         NAMESPACE_PROVISION_RESTRICTIONS: 'Namespace beperkingen',
         NAMESPACE_PROVISION_INFORMATION_1: 'Namespaces hebben bepaalde beperkingen met betrekking tot de karakters die in de delen zijn toegestaan evenals de lengte van een deel. Een root namespace kan een lengte hebben van 16 karakters terwijl sub-namespaces een lengte van 64 karakters kunnen hebben. Geldige karakters zijn:',
-        NAMESPACE_PROVISION_INFORMATION_2: 'Een deel moet beginnen met een letter van het alfabet, dus \'alice\' is een toegestaan deel voor een root namespace terwijl \'1alice\' dat niet is. Bepaalde teksten zijn gereserveerd en dus niet toegestaan als namespace-onderdelen. Onder de niet-toegelaten namespace delen zijn:',
+        NAMESPACE_PROVISION_INFORMATION_2: 'Een deel moet beginnen met een letter of cijfer, dus \'alice\' is een toegestaan deel voor een root namespace terwijl \'_alice\' dat niet is. Bepaalde teksten zijn gereserveerd en dus niet toegestaan als namespace-onderdelen. Onder de niet-toegelaten namespace delen zijn:',
         NAMESPACE_PROVISION_INFORMATION_3: 'Deze lijst is niet definitief en kan in de toekomst worden uitgebreid. Dus \'user.alice\' of \'alice.user\' zijn niet toegestaan in het NEM namespace-systeem. De namespace kan maximaal 3 delen bevatten, dus \'qm.metals.silver\' is geldig terwijl \'qm.metals.silver.coin\' dat niet is.',
 
         // RENEW NAMESPACE MODULE
@@ -306,7 +309,7 @@ function DutchProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Kosten',
         RENEW_NS_INFORMATION_TITLE_2: 'Root namespaces',
         RENEW_NS_INFORMATION_TITLE_3: 'Vernieuw periode',
-        RENEW_NS_INFORMATION_1: 'Het vernieuwen van een namespace kost hetzelfde bedrag als het registreren van een nieuwe namespace, 5000XEM.',
+        RENEW_NS_INFORMATION_1: 'Het vernieuwen van een namespace kost hetzelfde bedrag als het registreren van een nieuwe namespace, 100XEM.',
         RENEW_NS_INFORMATION_2: 'Alleen root namespaces moeten worden vernieuwd. Alle sub-namespaces worden automatisch vernieuwd bij vernieuwing van de root namespace.',
         RENEW_NS_INFORMATION_3: 'Namespace-contracten zijn huurcontracten voor een jaar. Het contract kan een maand voor of na de vervaldatum verlengd worden.',
         RENEW_NS_INFORMATION_4: 'Als ze niet op tijd worden vernieuwd, gaan alle sub-namespaces en mozaïeken die erin zijn gemaakt verloren.',
@@ -539,7 +542,7 @@ function DutchProvider($translateProvider) {
         ALERT_MOSAIC_DESCRIPTION: 'Beschrijving van mozaïek is ongeldig!',
         ALERT_GET_INCOMING_TXES_ERROR: 'Er is een fout opgetreden tijdens het ophalen van inkomende transacties, reden: ',
         ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Fout bij het ophalen van mozaïekdefinities, reden:',
-        ALERT_GET_SUB_NS_ERROR: 'Fout bij het ophalen van mozaïekdefinities, reden: ',
+        ALERT_GET_SUB_NS_ERROR: 'Fout bij het ophalen van namespace-definities, reden: ',
         ALERT_GET_MOSAICS_ERROR: 'Fout bij het ophalen van mozaïeken, reden: ',
         ALERT_GET_TRANSACTIONS_ERROR: 'Fout bij het ophalen van transacties, reden: ',
         ALERT_INVALID_ADDRESS_BOOK_FILE: 'Dit bestand is niet in .adb formaat!',
@@ -555,6 +558,10 @@ function DutchProvider($translateProvider) {
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Ongeldig aantal minimale handtekeningen',
         ALERT_INSUFFICIENT_BALANCE: 'Onvoldoende saldo voor het uitvoeren van de opdracht',
         ALERT_VOTING_ERROR: 'Ongeldige stem',
+        ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet wachtwoord moet minimaal 40 karakters lang zijn!',
+        ALERT_NODE_SEEMS_OFFLINE: 'Node lijkt offline, selecteer een andere node',
+        ALERT_WEAK_PASSPHRASE: 'Beveiligingsscore van het wachtwoord moet minimaal 3 zijn',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Je brein portemonnee is zwak! Alle brein portemonnees moeten een wachtwoord van minimaal 40 karakters hebben.<br> We adviseren je een nieuwe portemonnee aan te maken op de inlogpagina en dan je saldo naar deze protemonnee te verzenden.<br> Meer informatie <a href="https://forum.nem.io/t/2791" target="_blank"><u>hier</u></a>.',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portemonnee is succesvol aangemaakt en geladen!',
@@ -639,6 +646,8 @@ function DutchProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'Ik heb mijn portemonneebestand',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Ik heb mijn persoonlijke sleutel en wachtwoord',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Ik ga akkoord',
+        SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Geschatte wachtwoord sterkte',
+        SIGNUP_ESTIMATED_GUESS_TIMES: 'Geschat aantal keer raden',
 
         // FAQ MODULE
         FAQ_TITLE: 'Veel Gestelde Vragen',
