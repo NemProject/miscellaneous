@@ -1,301 +1,151 @@
-import Address from '../../../utils/Address';
-import helpers from '../../../utils/helpers';
-import CryptoHelpers from '../../../utils/CryptoHelpers';
-import KeyPair from '../../../utils/KeyPair';
+import nem from 'nem-sdk';
 
 class CreateMultisigCtrl {
-    constructor(Wallet, NetworkRequests, Alert, Transactions, $location) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(Wallet, Alert, Recipient, $timeout) {
         'ngInject';
 
-        // Wallet service
-        this._Wallet = Wallet;
-        // Network requests service
-        this._NetworkRequests = NetworkRequests;
-        // Alert service
-        this._Alert = Alert;
-        // Transactions service
-        this._Transactions = Transactions;
-        // $location to redirect
-        this._location = $location;
+        //// Module dependencies region ////
 
-        // If no wallet show alert and redirect to home
-        if (!this._Wallet.current) {
-            this._Alert.noWalletLoaded();
-            this._location.path('/');
-            return;
+        this._Wallet = Wallet;
+        this._Alert = Alert;
+        this._Recipient = Recipient;
+        this._$timeout = $timeout;
+
+        //// End dependencies region ////
+
+        //// Module properties region ////
+
+        // Form is a multisig agregate modification transaction object
+        this.formData = nem.model.objects.get("multisigAggregateModification");
+
+        // Default relative change is 1 for creation
+        this.formData.relativeChange = 1;
+
+        // If more than one account in wallet we show a select element in view or a private key input otherwise
+        if (Object.keys(this._Wallet.current.accounts).length > 1) {
+            this.haveMoreThanOneAccount = true;
+            this.useCustomAccount = false;
+        } else {
+            this.haveMoreThanOneAccount = false;
+            this.useCustomAccount = true;
         }
 
-        /**
-         * Default create multisig properties
-         */
-        this.haveMoreThanOneAccount = false;
-        this.cosignatoryArray = [];
-        this.formData = {};
         // Default cosignatory to add is the current account address
-        this.formData.cosignatoryToAdd = this._Wallet.currentAccount.address;
-        this.formData.accountToConvert = '';
-        this.cosignatoryPubKey = '';
-        this.formData.multisigPubKey = '';
-        this.formData.fee = 0;
-        // Alias address empty by default
-        this.aliasAddress = '';
-        // Not showing alias address input by default
-        this.showAlias = false;
-        // No address stored by default, we will store the cleaned one after input or after getting alias from network
-        this.formData.cosignatoryAddress = '';
-        // Multisig account has no public key by default
-        this.selectedWalletAccount = '';
+        this.cosignatoryToAdd = this._Wallet.currentAccount.address;
 
-        this.formData.minCosigs = 1;
-        this.useCustomAccount = true;
+        // Store cosignatory public key
+        this.cosignatoryPubKey = '';
+
+        // Account to convert empty by default
+        this.accountToConvert = undefined;
 
         // Needed to prevent user to click twice on send when already processing
         this.okPressed = false;
 
         // Store info about the multisig account to show balance
-        this.multisigInfoData = {};
+        this.multisigInfoData = undefined;
 
-        // If more than one account in wallet we show a select element in view
-        if (Object.keys(this._Wallet.current.accounts).length > 1) {
-            this.haveMoreThanOneAccount = true;
-            this.useCustomAccount = false;
-        }
+        // Object to contain our password & private key data
+        this.common = nem.model.objects.get("common");
 
         // Modifications list pagination properties
         this.currentPage = 0;
         this.pageSize = 5;
-        this.numberOfPages = function() {
-            return Math.ceil(this.cosignatoryArray.length / this.pageSize);
-        }
 
-        // Get data of default cosignatory account
-        this.processCosignatoryToAdd();
+        // Store the prepared transaction
+        this.preparedTransaction = {};
 
-        // Init fees
-        this.updateFee();
+        //// End properties region ////
+
+        // Update the fee in view
+        this.prepareTransaction();
     }
 
-    /**
-     * Set right address and get data of cosignatory to add
-     */
-    processCosignatoryToAdd() {
-        // Check if value is an alias
-        let isAlias = (this.formData.cosignatoryToAdd.lastIndexOf("@", 0) === 0);
-        // Reset cosignatory data
-        this.resetCosignatoryData();
-
-        // return if no value or lenth < to min address length AND not an alias
-        if (!this.formData.cosignatoryToAdd || this.formData.cosignatoryToAdd.length < 40 && !isAlias) {
-            return;
-        }
-
-        // Get recipient data depending of address or alias used
-        if (isAlias) {
-            // Clean namespace name
-            let nsForLookup = this.formData.cosignatoryToAdd.substring(1);
-            // Get cosignatory account data from network using @alias
-            this.getCosignatoryDataFromAlias(nsForLookup);
-        } else { // Normal address used
-            // Clean provided address
-            let cosignatoryAddress = this.formData.cosignatoryToAdd.toUpperCase().replace(/-/g, '');
-            // Check if address is from network
-            if (Address.isFromNetwork(cosignatoryAddress, this._Wallet.network)) {
-                // Get account data from network
-                this.getCosignatoryData(cosignatoryAddress);
-            } else {
-                // Unexpected error, this alert will not dismiss on timeout
-                this._Alert.invalidAddressForNetwork(cosignatoryAddress, this._Wallet.network);
-                // Reset cosignatory data
-                this.resetCosignatoryData();
-                return;
-            }
-        }
-    }
+    //// Module methods region ////
 
     /**
-     * Set right address and get data of account to convert
+     * Generate the address of the account to convert from provided private key
      */
-    processAccountToConvert() {
-        if (!this.formData.accountToConvert && !this.useCustomAccount) {
-            // Reset multisig data and properties
-            this.resetMultisigData();
-            return;
-        }
-        let address;
-        // Set address depending if custom or not
-        if (this.useCustomAccount) {
-            this.formData.accountToConvert = "";
-            if(this.common.privateKey.length === 64 || this.common.privateKey.length === 66) {
-                let pk = KeyPair.create(this.common.privateKey);
-                address = Address.toAddress(pk.publicKey.toString(), this._Wallet.network);
-                this.formData.accountToConvert = address;
-            } else {
-                // Clean the array of modifications
-                this.cosignatoryArray = [];
-                // Reset multisig data and properties
-                this.resetMultisigData();
-                return;
-            }
+    generateAccountToConvert() {
+        if (nem.utils.helpers.isHexadecimal(this.common.privateKey) && (this.common.privateKey.length === 64 || this.common.privateKey.length === 66)) {
+            this.accountToConvert = nem.model.address.toAddress(nem.crypto.keyPair.create(this.common.privateKey).publicKey.toString(), this._Wallet.network);
+            // Get account data of account to convert
+            this.processMultisigInput();
         } else {
-            address = this.formData.accountToConvert.address;
-            this.selectedWalletAccount = this.formData.accountToConvert;
+            this.accountToConvert = undefined;
         }
-        // Clean the array of modifications
-        this.cosignatoryArray = [];
-
-        this.updateFee();
-
-        // Get data of account to convert from network
-        this.getMultisigData(address);
     }
 
     /**
-     * Get data of account to convert from network
-     * 
-     * @param {string} address - An account address
+     * Process multisig account input and get data from network
      */
-    getMultisigData(address) {
-        this.okPressed = false;
-        return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
-            if (data.meta.cosignatoryOf.length > 0) {
-                // Alert
-                this._Alert.cosignatoryCannotBeMultisig();
-                // Reset multisig data and properties
-                this.resetMultisigData();
-                // Lock send button
-                this.okPressed = true;
+    processMultisigInput() {
+        if (!this.accountToConvert) return;
+        // Reset recipient data
+        this.resetMultisigData();
+        //
+        return this._Recipient.getAccount(this.useCustomAccount ? nem.model.address.clean(this.accountToConvert) : this.accountToConvert.address).then((res) => {
+            this._$timeout(() => {
+                //
+                this.setMultisigData(res);
                 return;
-            } else if (data.meta.cosignatories.length > 0) {
-                // Alert
-                this._Alert.alreadyMultisig();
-                // Reset multisig data and properties
-                this.resetMultisigData();
-                // Lock send button
-                this.okPressed = true;
-                return;
-            }
-            // Store data
-            this.multisigInfoData = data;
+            });
         },
         (err) => {
-            if(err.status === -1) {
-                this._Alert.connectionError();
-            } else {
-                this._Alert.getAccountDataError(err.data.message);
-            }
-            // Reset recipient data
-            this.resetMultisigData();
-            return;
-        });
-    }
-
-    /**
-     * Get cosignatory data from network
-     * 
-     * @param {string} address - The account address
-     */
-    getCosignatoryData(address) {
-        return this._NetworkRequests.getAccountData(helpers.getHostname(this._Wallet.node), address).then((data) => {
-            if (data.meta.cosignatories.length > 0) {
-                // Alert
-                this._Alert.multisigCannotBeCosignatory();
-                // Reset cosignatory data
-                this.resetCosignatoryData();
-                return;
-            }
-            // Store cosignatory public key
-            this.formData.cosignatoryPubKey = data.account.publicKey;
-            // Store cosignatory address
-            this.formData.cosignatoryAddress = address;
-            // It is needed to get the account public key
-            // If empty we prevent user from adding to the array and show an alert
-            if (!this.formData.cosignatoryPubKey) {
-                // Alert
-                this._Alert.cosignatoryhasNoPubKey();
-                // Reset cosignatory data
-                this.resetCosignatoryData();
-            }
-        },
-        (err) => {
-            if(err.status === -1) {
-                this._Alert.connectionError();
-            } else {
-                this._Alert.getAccountDataError(err.data.message);
-            }
-            // Reset recipient data
-            this.resetCosignatoryData();
-            return;
-        });
-    }
-
-    /**
-     * Get cosignatory account data from network using @alias
-     * 
-     * @param {string} alias - An alias (@namespace)
-     */
-    getCosignatoryDataFromAlias(alias) {
-        return this._NetworkRequests.getNamespacesById(helpers.getHostname(this._Wallet.node), alias).then((data) => {
-            // Set the alias address
-            this.aliasAddress = data.owner;
-            // Show the read-only input containing alias address
-            this.showAlias = true;
-            // Check if address is from network
-            if (Address.isFromNetwork(this.aliasAddress, this._Wallet.network)) {
-                // Get recipient account data from network
-                this.getCosignatoryData(this.aliasAddress);
-            } else {
-                // Unexpected error, this alert will not dismiss on timeout
-                this._Alert.invalidAddressForNetwork(this.aliasAddress, this._Wallet.network);
+            this._$timeout(() => {
                 // Reset recipient data
-                this.resetCosignatoryData();
+                this.resetMultisigData();
                 return;
-            }
-        },
-        (err) => {
-            if(err.status === -1) {
-                this._Alert.connectionError();
-            } else {
-                this._Alert.getNamespacesByIdError(err.data.message);
-            }
-            // Reset recipient data
-            this.resetCosignatoryData();
-            return;
+            });
         });
     }
 
     /**
-     * Update transaction fee
+     * Set data received from Recipient service
+     *
+     * @param {object} data - An [AccountInfo]{@link http://bob.nem.ninja/docs/#accountInfo} object
      */
-    updateFee() {
-        let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
-        this.formData.fee = entity.fee;
-        if(!this.formData.minCosigs) {
-            this._Alert.errorMultisigMinSignature();
-            return;
-        }
+    setMultisigData(data) {
+        if (data.meta.cosignatories.lentgh) return this._Alert.alreadyMultisig();
+        //if (!data.account.publicKey) return this._Alert.multisighasNoPubKey();
+        // Store data
+        this.multisigInfoData = data.account;
+        return;
     }
 
     /**
-     * Reset data stored and properties for cosignatory
-     */
-    resetCosignatoryData() {
-        // Reset public key data
-        this.formData.cosignatoryPubKey = '';
-        // Hide alias address input field
-        this.showAlias = false;
-        // Reset the address stored
-        this.formData.cosignatoryAddress = '';
-    }
-
-    /**
-     * Reset data stored and properties for multisig account
+     * Reset data stored for multisig
      */
     resetMultisigData() {
-        this.formData.accountToConvert = "";
-        // Reset public key data
-        this.formData.multisigPubKey = '';
-        // Reset multisig data stored
-        this.multisigInfoData = {};
+        this.multisigInfoData = undefined;
+        this.formData.modifications = [];
+    }
+
+    /**
+     * Prepare the transaction
+     */
+    prepareTransaction() {
+        let entity = nem.model.transactions.prepare("multisigAggregateModificationTransaction")(this.common, this.formData, this._Wallet.network);
+        this.preparedTransaction = entity;
+        return entity;
+    }
+
+    /**
+     * Reset data
+     */
+    resetData() {
+        this.accountToConvert = "";
+        this.formData = nem.model.objects.get("multisigAggregateModification");
+        this.common = nem.model.objects.get("common");
+        this.preparedTransaction = {};
+        this.cosignatoryPubKey = '';
+        this.prepareTransaction();
     }
 
     /**
@@ -312,22 +162,26 @@ class CreateMultisigCtrl {
         }
         array.splice(array.indexOf(elem), 1);
         // Update the fee
-        this.updateFee();
+        this.prepareTransaction();
     }
 
     /**
      * Add cosignatory to array
      */
     addCosig() {
-        if (helpers.haveCosig(this.formData.cosignatoryAddress, this.formData.cosignatoryPubKey, this.cosignatoryArray)) {
-            // Alert
+        // Arrange
+        let cleanMultisig = this.useCustomAccount ? nem.model.address.clean(this.accountToConvert) : nem.model.address.clean(this.accountToConvert.address);
+        let cleanCosignatory = nem.model.address.clean(this.cosignatoryToAdd);
+        // Cosignatory needs a public key
+        if (!this.cosignatoryPubKey) return this._Alert.cosignatoryhasNoPubKey();
+        // Multisig cannot be cosignatory
+        if(cleanMultisig === cleanCosignatory) return this._Alert.multisigCannotBeCosignatory();
+        // Check presence in modification array
+        if (nem.utils.helpers.haveCosig(this.cosignatoryPubKey, this.formData.modifications)) {
             this._Alert.cosignatoryAlreadyPresentInList();
         } else {
-            this.cosignatoryArray.push({
-                address: this.formData.cosignatoryAddress,
-                pubKey: this.formData.cosignatoryPubKey
-            });
-            this.updateFee();
+            this.formData.modifications.push(nem.model.objects.create("multisigCosignatoryModification")(1, this.cosignatoryPubKey));
+            this.prepareTransaction();
         }
     }
 
@@ -339,66 +193,43 @@ class CreateMultisigCtrl {
         this.okPressed = true;
 
         // If user use a custom account, private key is already in common no need to decrypt 
-        if (!this.useCustomAccount) {
-            // Decrypt/generate private key and check it. Returned private key is contained into this.common
-            if (!CryptoHelpers.passwordToPrivatekeyClear(this.common, this.selectedWalletAccount, this._Wallet.algo, true)) {
-                this._Alert.invalidPassword();
+        if (this.useCustomAccount) {
+            // Check if private key is correct
+            if (!(nem.utils.helpers.isHexadecimal(this.common.privateKey) && (this.common.privateKey.length === 64 || this.common.privateKey.length === 66))) {
                 // Enable send button
                 this.okPressed = false;
-                return;
-            } else if (!CryptoHelpers.checkAddress(this.common.privateKey, this._Wallet.network, this.selectedWalletAccount.address)) {
-                this._Alert.invalidPassword();
-                // Enable send button
-                this.okPressed = false;
+                this._Alert.invalidPrivateKey();
                 return;
             }
-        }
-
-        if (this.common.privateKey.length === 64 || this.common.privateKey.length === 66) {
-            // Generate the multisig account public key
-            let kp = KeyPair.create(this.common.privateKey);
-            this.formData.multisigPubKey = kp.publicKey.toString();
         } else {
-            // Enable send button
-            this.okPressed = false;
-            this._Alert.invalidPrivateKey();
-            return;
+            // Get account private key for preparation or return
+            if (!this._Wallet.decrypt(this.common, this.accountToConvert)) return this.okPressed = false;
         }
 
-        // Build the entity to serialize
-        let entity = this._Transactions._constructAggregate(this.formData, this.cosignatoryArray);
-        // Construct transaction byte array, sign and broadcast it to the network
-        return this._Transactions.serializeAndAnnounceTransaction(entity, this.common).then((res) => {
-                // Check status
-                if (res.status === 200) {
-                    // If code >= 2, it's an error
-                    if (res.data.code >= 2) {
-                        this._Alert.transactionError(res.data.message);
-                    } else {
-                        this._Alert.transactionSuccess();
-                    }
-                }
+        // Prepare the transaction
+        let entity = this.prepareTransaction();
+
+        // Use wallet service to serialize and send
+        this._Wallet.transact(this.common, entity).then(() => {
+            this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Delete private key in common
-                this.common.privateKey = '';
-                // Reset data
-                //this.resetCosignatoryData();
-                this.resetMultisigData();
-                this.cosignatoryArray = [];
-            },
-            (err) => {
-                // Delete private key in common
-                this.common.privateKey = '';
-                // Enable send button
-                this.okPressed = false;
-                if(err.status === -1) {
-                    this._Alert.connectionError();
-                } else {
-                    this._Alert.transactionError('Failed ' + err.data.error + " " + err.data.message);
-                }
+                // Reset form data
+                this.resetData();
+                return;
             });
+        }, () => {
+            this._$timeout(() => {
+                // Delete private key in common
+                this.common.privateKey = '';
+                // Enable send button
+                this.okPressed = false;
+                return;
+            });
+        });
     }
+
+    //// End methods region ////
 
 }
 
