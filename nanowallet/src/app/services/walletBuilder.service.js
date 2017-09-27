@@ -1,26 +1,28 @@
-import nacl from '../utils/nacl-fast';
-import KeyPair from '../utils/KeyPair';
-import convert from '../utils/convert';
-import Address from '../utils/Address';
 import CryptoHelpers from '../utils/CryptoHelpers';
+import nem from 'nem-sdk';
+import Helpers from '../utils/helpers';
 
 /** Service to build wallets */
 class WalletBuilder {
 
     /**
-     * Initialize services and properties
+     * Initialize dependencies and properties
      *
-     * @param {service} Alert - The Alert service
-     * @param {service} $timeout - The angular $timeout service
+     * @params {services} - Angular services to inject
      */
-    constructor(Alert, $timeout) {
+    constructor(Alert, $timeout, $localStorage) {
         'ngInject';
 
-        /***
-         * Declare services
+        /**
+         * Service dependencies
          */
+
         this._Alert = Alert;
         this._$timeout = $timeout;
+        this._storage = $localStorage;
+
+        // Get wallets from local storage or create empty array
+        this._storage.wallets = this._storage.wallets || [];
     }
 
     /**
@@ -28,35 +30,51 @@ class WalletBuilder {
      *
      * @param {string} walletName - A wallet name
      * @param {string} walletPassword - A wallet password
+     * @param {string} entropy - An entropy seed
      * @param {number} network - A network id
      *
-     * @return {object|promise} - A PRNG wallet object or promise error
+     * @return {object|promise} - A PRNG wallet object or a rejected promise
      */
-    createWallet(walletName, walletPassword, network) {
+    createWallet(walletName, walletPassword, entropy, network) {
         return new Promise((resolve, reject) => {
-            if (!walletName || !walletPassword || !network) {
-                return reject("Missing parameter");
+            // Check parameters
+            if (!walletName || !walletPassword || !entropy || !network) {
+                this._Alert.missingFormData();
+                return reject(true);
             }
-            // Create private key from random bytes
-            let r = convert.ua2hex(nacl.randomBytes(32));
-            // Create KeyPair from above key
-            let k = KeyPair.create(r);
+            // Check if wallet already loaded
+            if (Helpers.haveWallet(walletName, this._storage.wallets)) {
+                this._Alert.walletNameExists();
+                return reject(true);
+            }
+
+            // Create random bytes
+            let r = nem.utils.convert.ua2hex(nem.crypto.nacl.randomBytes(32));
+            // Create entropy seed
+            let seed = this.processEntropy(entropy, walletPassword);
+            // Hash random bytes with entropy seed
+            let hmac = nem.crypto.js.algo.HMAC.create(nem.crypto.js.algo.SHA3, seed);
+            hmac.update(r);
+            // Finalize and keep only 32 bytes
+            let hashKey = hmac.finalize().toString().slice(0, 64);
+            // Create KeyPair from hash key
+            let k = nem.crypto.keyPair.create(hashKey);
             // Create address from public key
-            let addr = Address.toAddress(k.publicKey.toString(), network);
+            let addr = nem.model.address.toAddress(k.publicKey.toString(), network);
             // Encrypt private key using password
-            let encrypted = CryptoHelpers.encodePrivKey(r, walletPassword);
+            let encrypted = nem.crypto.helpers.encodePrivKey(hashKey, walletPassword);
             // Create bip32 remote amount using generated private key
-            return resolve(CryptoHelpers.generateBIP32Data(r, walletPassword, 0, network).then((data) => {
-                    // Construct the wallet object
-                    let wallet = this.buildWallet(walletName, addr, true, "pass:bip32", encrypted, network, data.publicKey);
-                    return wallet;
-                },
-                (err) => {
-                    this._$timeout(() => {
-                        this._Alert.createWalletFailed(err);
-                        return 0;
-                    }, 0)
-                }));
+            return resolve(CryptoHelpers.generateBIP32Data(hashKey, walletPassword, 0, network).then((data) => {
+                // Construct the wallet object
+                let wallet = this.buildWallet(walletName, addr, true, "pass:bip32", encrypted, network, data.publicKey);
+                return wallet;
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.createWalletFailed(err);
+                    return false;
+                }, 0)
+            }));
         });
     }
 
@@ -67,31 +85,36 @@ class WalletBuilder {
      * @param {string} walletPassword - A wallet password
      * @param {number} network - A network id
      *
-     * @return {object|promise} - A Brain wallet object or promise error
+     * @return {object|promise} - A Brain wallet object or a rejected promise
      */
     createBrainWallet(walletName, walletPassword, network) {
         return new Promise((resolve, reject) => {
+            // Check parameters
             if (!walletName || !walletPassword || !network) {
-                return reject("Missing parameter");
+                this._Alert.missingFormData();
+                return reject(true);
+            }
+            // Check if wallet already loaded
+            if (Helpers.haveWallet(walletName, this._storage.wallets)) {
+                this._Alert.walletNameExists();
+                return reject(true);
             }
             // Derive private key from password
-            let r = CryptoHelpers.derivePassSha(walletPassword, 6000);
-            // Create KeyPair from above key
-            let k = KeyPair.create(r.priv);
-            // Create address from public key
-            let addr = Address.toAddress(k.publicKey.toString(), network);
+            let r = nem.crypto.helpers.derivePassSha(walletPassword, 6000).priv;
             // Create bip32 remote account using derived private key
-            return resolve(CryptoHelpers.generateBIP32Data(r.priv, walletPassword, 0, network).then((data) => {
-                    // Construct the wallet object
-                    let wallet = this.buildWallet(walletName, addr, true, "pass:6k", "", network, data.publicKey);
-                    return wallet;
-                },
-                (err) => {
-                    this._$timeout(() => {
-                        this._Alert.createWalletFailed(err);
-                        return 0;
-                    }, 0)
-                }));
+            return resolve(CryptoHelpers.generateBIP32Data(r, walletPassword, 0, network).then((data) => {
+                // Construct the wallet object
+                let wallet = nem.model.wallet.createBrain(walletName, walletPassword, network);
+                // Add child account to wallet
+                wallet.accounts[0].child = data.publicKey;
+                return wallet;
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.createWalletFailed(err);
+                    return false;
+                }, 0)
+            }));
         });
     }
 
@@ -100,33 +123,40 @@ class WalletBuilder {
      *
      * @param {string} walletName - A wallet name
      * @param {string} walletPassword - A wallet password
-     * @param {string} address - An account address
      * @param {string} privateKey - The account private key
      * @param {number} network - A network id
      *
-     * @return {object|promise} - A private key wallet object or promise error
+     * @return {object|promise} - A private key wallet object or a rejected promise
      */
-    createPrivateKeyWallet(walletName, walletPassword, address, privateKey, network) {
+    createPrivateKeyWallet(walletName, walletPassword, privateKey, network) {
         return new Promise((resolve, reject) => {
-            if (!walletName || !walletPassword || !address || !privateKey || !network) {
-                return reject("Missing parameter");
+            // Check parameters
+            if (!walletName || !walletPassword || !privateKey || !network) {
+                this._Alert.missingFormData();
+                return reject(true);
             }
-            // Encrypt private key using password
-            let encrypted = CryptoHelpers.encodePrivKey(privateKey, walletPassword);
-            // Clean address
-            let cleanAddr = address.toUpperCase().replace(/-/g, '');
+            // Check the private key
+            if (!nem.utils.helpers.isPrivateKeyValid(privateKey)) {
+                this._Alert.invalidPrivateKey();
+                return reject(true);
+            }
+            // Check if wallet already loaded
+            if (Helpers.haveWallet(walletName, this._storage.wallets)) {
+                this._Alert.walletNameExists();
+                return reject(true);
+            }
             // Create bip32 remote account using provided private key
             return resolve(CryptoHelpers.generateBIP32Data(privateKey, walletPassword, 0, network).then((data) => {
-                    // Construct the wallet object
-                    let wallet = this.buildWallet(walletName, cleanAddr, false, "pass:enc", encrypted, network, data.publicKey);
-                    return wallet;
-                },
-                (err) => {
-                    this._$timeout(() => {
-                        this._Alert.createWalletFailed(err);
-                        return 0;
-                    }, 0)
-                }));
+               // Construct the wallet object
+                let wallet = nem.model.wallet.importPrivateKey(walletName, walletPassword, privateKey, network);
+                wallet.accounts[0].child = data.publicKey;
+                return wallet;
+            }, (err) => {
+                this._$timeout(() => {
+                    this._Alert.createWalletFailed(err);
+                    return false;
+                }, 0);
+            }));
         });
     }
 
@@ -145,7 +175,6 @@ class WalletBuilder {
      */
     buildWallet(walletName, addr, brain, algo, encrypted, network, child) {
         let wallet = {
-            "privateKey": "",
             "name": walletName,
             "accounts": {
                 "0": {
@@ -161,6 +190,27 @@ class WalletBuilder {
             }
         };
         return wallet;
+    }
+
+    /**
+     * Create a seed from entropy data, a timestamp and a password
+     *
+     * @param {string} entropy - A string from any source of entropy
+     * @param {string} password - A password
+     *
+     * @return {string} seed - An entropy seed
+     */
+    processEntropy(entropy, password) {
+        // Derive movement entropy
+        let data = nem.crypto.helpers.derivePassSha(entropy, 1000).priv;
+        // Derive timestamp
+        let date = nem.crypto.helpers.derivePassSha(new Date().getTime(), 1000).priv;
+        // Derive password
+        let pass = nem.crypto.helpers.derivePassSha(password, 1000).priv;
+        // Derive seed
+        let seed = nem.crypto.helpers.derivePassSha(data + date + pass, 1000).priv;
+        // Return seed
+        return seed;
     }
 }
 
