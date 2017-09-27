@@ -1,6 +1,3 @@
-import KeyPair from './KeyPair';
-import Address from './Address';
-
 const NEM_MAINNET_PUBLIC = 0x68000000;
 const NEM_MAINNET_PRIVATE = 0x68000000;
 const NEM_TESTNET_PUBLIC = 0x98000000;
