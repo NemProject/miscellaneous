@@ -60,13 +60,6 @@ export default class Alert {
         });
     }
 
-    noNodeSet() {
-        this._ngToast.create({
-            content: this._$filter('translate')('ALERT_NO_NODE_SET'),
-            className: 'danger'
-        });
-    }
-
     invalidCustomNode() {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_INVALID_CUSTOM_NODE'),
@@ -374,7 +367,7 @@ export default class Alert {
             className: 'danger'
         });
     }
-
+    
     namespaceExpiryNotice(ns, blocks) {
         this._ngToast.create({
             content: this._$filter("translate")("RENEW_NS_ALERT_PART_1") + ' <b>'+ns+'</b> ' + this._$filter("translate")("RENEW_NS_ALERT_PART_2") + ' (~' + blocks + ' ' + this._$filter("translate")("GENERAL_BLOCKS") + '). ' + this._$filter("translate")("RENEW_NS_ALERT_PART_3") ,
@@ -453,23 +446,16 @@ export default class Alert {
         });
     }
 
-    errorInsufficientBalance() {
+    recipientHasNoPublicKey() {
         this._ngToast.create({
-            content: this._$filter("translate")("ALERT_INSUFFICIENT_BALANCE"),
+            content: this._$filter("translate")("ALERT_RECIPIENT_PUBLIC_KEY"),
             className: 'danger'
         });
     }
 
-    votingUnexpectedError(err) {
+    noEncryptionWithMultisig() {
         this._ngToast.create({
-            content: err,
-            className: 'danger'
-        });
-    }
-
-    votingError() {
-        this._ngToast.create({
-            content: this._$filter("translate")("ALERT_VOTING_ERROR"),
+            content: this._$filter("translate")("ALERT_ENCRYPT_MULTISIG"),
             className: 'danger'
         });
     }
@@ -486,7 +472,7 @@ export default class Alert {
             className: 'danger',
             content: this._$filter('translate')('ALERT_NODE_SEEMS_OFFLINE'),
             dismissOnTimeout: false,
-            dismissButton: true,
+            dismissButton: true
         });
     }
 
@@ -501,8 +487,17 @@ export default class Alert {
         this._ngToast.create({
             className: 'danger',
             content: this._$filter('translate')('ALERT_BRAIN_WALLET_UPGRADE'),
-            dismissOnTimeout: false,
             additionalClasses: 'toast-text-left',
+            dismissButton: true,
+            dismissOnClick: false
+        });
+    }
+
+    exchangeNeedsMessage() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_EXCHANGE_NEEDS_MESSAGE'),
+            dismissOnTimeout: false,
             dismissButton: true,
             dismissOnClick: false
         });
@@ -577,20 +572,6 @@ export default class Alert {
     addressBookFileSuccess() {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_ADDRESS_BOOK_FILE_SUCCESS'),
-            className: 'success'
-        });
-    }
-
-    pollCreationSuccess() {
-        this._ngToast.create({
-            content: this._$filter('translate')('ALERT_POLL_CREATION_SUCCESS'),
-            className: 'success'
-        });
-    }
-
-    votingSuccess() {
-        this._ngToast.create({
-            content: this._$filter('translate')('ALERT_VOTING_SUCCESS'),
             className: 'success'
         });
     }
