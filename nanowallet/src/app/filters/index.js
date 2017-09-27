@@ -26,5 +26,6 @@ filtersModule.filter('toHostname', Filters.toHostname);
 filtersModule.filter('currencyFormat', Filters.currencyFormat);
 filtersModule.filter('btcFormat', Filters.btcFormat);
 filtersModule.filter('fmtContact', Filters.fmtContact);
+filtersModule.filter('toEndpoint', Filters.toEndpoint);
 
 export default filtersModule;

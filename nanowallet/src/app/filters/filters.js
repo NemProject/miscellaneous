@@ -1,10 +1,7 @@
-import convert from '../utils/convert';
-import Address from '../utils/Address';
-import Network from '../utils/Network';
-import helpers from '../utils/helpers';
+import nem from 'nem-sdk';
 
 /**
-* fmtPubToAddress() Convert a public key to NEM address
+* Convert a public key to NEM address
 *
 * @param input: The account public key
 * @param networkId: The current network id
@@ -13,12 +10,12 @@ import helpers from '../utils/helpers';
 */
 let fmtPubToAddress = function() {
     return function fmtPubToAddress(input, networkId) {
-        return input && Address.toAddress(input, networkId);
+        return nem.utils.format.pubToAddress(input, networkId);
     };
 }
 
 /**
-* fmtAddress() Add hyphens to a clean address
+* Add hyphens to a clean address
 *
 * @param input: A NEM address
 *
@@ -26,90 +23,43 @@ let fmtPubToAddress = function() {
 */
 let fmtAddress = function() {
     return function fmtAddress(input) {
-        return input && input.toUpperCase().replace(/-/g, '').match(/.{1,6}/g).join('-');
+        return nem.utils.format.address(input);
     };
 }
 
 /**
-* fmtNemDate() Format a timestamp to NEM date
+* Format a timestamp to NEM date
 *
 * @param data: A timestamp
 *
 * @return a date string
 */
 let fmtNemDate = function() {
-    let nemesis = Date.UTC(2015, 2, 29, 0, 6, 25);
     return function fmtNemDate(data) {
-        if (data === undefined) return data;
-        let o = data;
-        let t = (new Date(nemesis + o * 1000));
-        return t.toUTCString();
+        return nem.utils.format.nemDate(data);
     };
 }
 
 let fmtSupply = function() {
     return function fmtSupply(data, mosaicId, mosaics) {
-        if (data === undefined) return data;
-        let mosaicName = helpers.mosaicIdToName(mosaicId);
-        if (!(mosaicName in mosaics)) {
-            return ['unknown mosaic divisibility', data];
-        }
-        let mosaicDefinitionMetaDataPair = mosaics[mosaicName];
-        let divisibilityProperties = $.grep(mosaicDefinitionMetaDataPair.mosaicDefinition.properties, function(w) {
-            return w.name === "divisibility";
-        });
-        let divisibility = divisibilityProperties.length === 1 ? ~~(divisibilityProperties[0].value) : 0;
-        let o = parseInt(data, 10);
-        if (!o) {
-            if (divisibility === 0) {
-                return ["0", ''];
-            } else {
-                return ["0", o.toFixed(divisibility).split('.')[1]];
-            }
-        }
-        o = o / Math.pow(10, divisibility);
-        let b = o.toFixed(divisibility).split('.');
-        let r = b[0].split(/(?=(?:...)*$)/).join(" ");
-        return [r, b[1] || ""];
+        return nem.utils.format.supply(data, mosaicId, mosaics);
     };
 }
 
 let fmtSupplyRaw = function() {
     return function fmtSupplyRaw(data, _divisibility) {
-        let divisibility = ~~_divisibility;
-        let o = parseInt(data, 10);
-        if (!o) {
-            if (divisibility === 0) {
-                return ["0", ''];
-            } else {
-                return ["0", o.toFixed(divisibility).split('.')[1]];
-            }
-        }
-        o = o / Math.pow(10, divisibility);
-        let b = o.toFixed(divisibility).split('.');
-        let r = b[0].split(/(?=(?:...)*$)/).join(" ");
-        return [r, b[1] || ""];
+        return nem.utils.format.supplyRaw(data, _divisibility);
     };
 }
 
 let fmtLevyFee = ['fmtSupplyFilter', function(fmtSupplyFilter) {
     return function fmtLevyFee(mosaic, multiplier, levy, mosaics) {
-        if (mosaic === undefined || mosaics === undefined) return mosaic;
-        if (levy === undefined || levy.type === undefined) return undefined;
-        let levyValue;
-        if (levy.type === 1) {
-            levyValue = levy.fee;
-        } else {
-            // Note, multiplier is in micro NEM
-            levyValue = (multiplier / 1000000) * mosaic.quantity * levy.fee / 10000;
-        }
-        let r = fmtSupplyFilter(levyValue, levy.mosaicId, mosaics);
-        return r[0] + "." + r[1];
+        return nem.utils.format.levyFee(mosaic, multiplier, levy, mosaics)
     }
 }];
 
 /**
-* fmtNemImportanceScore() Format a NEM importance score
+* Format a NEM importance score
 *
 * @param data: The importance score
 *
@@ -117,54 +67,34 @@ let fmtLevyFee = ['fmtSupplyFilter', function(fmtSupplyFilter) {
 */
 let fmtNemImportanceScore = function() {
     return function fmtNemImportanceScore(data) {
-        if (data === undefined) return data;
-        let o = data;
-        if (o) {
-            o *= 10000;
-            o = o.toFixed(4).split('.');
-            return [o[0], o[1]];
-        }
-        return [o, 0];
+        return nem.utils.format.nemImportanceScore(data);
     };
 }
 
 /**
-* fmtNemValue() Format a value to NEM value
+* Format a value to NEM value
 *
 * @return array with values before and after decimal point
 */
 let fmtNemValue = function() {
     return function fmtNemValue(data) {
-        if (data === undefined) return data;
-        let o = data;
-        if (!o) {
-            return ["0", '000000'];
-        } else {
-            o = o / 1000000;
-            let b = o.toFixed(6).split('.');
-            let r = b[0].split(/(?=(?:...)*$)/).join(" ");
-            return [r, b[1]];
-        }
+        return nem.utils.format.nemValue(data);
     };
 }
 
 /**
-* fmtImportanceTransferMode() Give name of an importance transfer mode
+* Give name of an importance transfer mode
 *
 * @return an importance transfer mode name
 */
 let fmtImportanceTransferMode = function() {
     return function fmtImportanceTransferMode(data) {
-        if (data === undefined) return data;
-        let o = data;
-        if (o === 1) return "Activation";
-        else if (o === 2) return "Deactivation";
-        else return "Unknown";
+        return nem.utils.format.importanceTransferMode(data);
     };
 }
 
 /**
-* fmtHexToUtf8() Convert hex to utf8
+* Convert hex to utf8
 *
 * @param data: Hex data
 *
@@ -172,38 +102,18 @@ let fmtImportanceTransferMode = function() {
 */
 let fmtHexToUtf8 = function() {
     return function fmtHexToUtf8(data) {
-        if (data === undefined) return data;
-        let o = data;
-        if (o && o.length > 2 && o[0] === 'f' && o[1] === 'e') {
-            return "HEX: " + o.slice(2);
-        }
-        let result;
-        try {
-            result = decodeURIComponent(escape(convert.hex2a(o)))
-        } catch (e) {
-            //result = "Error, message not properly encoded !";
-            result = convert.hex2a(o);
-            console.log('invalid text input: ' + data);
-        }
-        //console.log(decodeURIComponent(escape( convert.hex2a(o) )));*/
-        //result = convert.hex2a(o);
-        return result;
+        return nem.utils.format.hexToUtf8(data);
     };
 }
 
 let fmtHexMessage = ['fmtHexToUtf8Filter', function(fmtHexToUtf8Filter) {
     return function fmtHexMessage(data) {
-        if (data === undefined) return data;
-        if (data.type === 1) {
-            return fmtHexToUtf8Filter(data.payload);
-        } else {
-            return '';
-        }
+        return nem.utils.format.hexMessage(data);
     };
 }];
 
 /**
-* fmtSplitHex() Split hex string into 64 characters segments
+* Split hex string into 64 characters segments
 *
 * @param data: An hex string
 *
@@ -211,15 +121,12 @@ let fmtHexMessage = ['fmtHexToUtf8Filter', function(fmtHexToUtf8Filter) {
 */
 let fmtSplitHex = function() {
     return function fmtSplitHex(data) {
-        if (data === undefined) return data;
-        let parts = data.match(/[\s\S]{1,64}/g) || [];
-        let r = parts.join("\n");
-        return r;
+        return nem.utils.format.splitHex(data);
     };
 }
 
 /**
-* startFrom() Build array of objects from object of objects
+* Build array of objects from object of objects
 *
 * @param data: An object of objects
 *
@@ -235,7 +142,22 @@ let objValues = function() {
 }
 
 /**
-* startFrom() Helper for confirmed transactions pagination
+* Parse url to get only ip or domain
+*
+* @param uri: The uri to parse
+*
+* @return uri hostname
+*/
+let toHostname = function() {
+    return function(uri) {
+        let _uriParser = document.createElement('a');
+        _uriParser.href = uri;
+        return _uriParser.hostname;
+    }
+}
+
+/**
+* Helper for pagination
 *
 * @param input: An array
 * @param start: Index where to start showing the array
@@ -253,29 +175,7 @@ let startFrom = function() {
 }
 
 /**
-* startFromUnc() Helper for unconfirmed transactions pagination
-*
-* @param input: An array
-* @param start: Index where to start showing the array
-*
-* @return the part of the array
-*/
-let startFromUnc = function() {
-    return function(input, start) {
-        let input2tab = [];
-        for (let hash in input) {
-            input2tab.push(input[hash]);
-        }
-        start = +start; //parse to int
-        if (!input || !Object.keys(input).length) {
-            return;
-        }
-        return input2tab.slice(start);
-    }
-}
-
-/**
-* reverse() Reverse order of an array
+* Reverse order of an array
 *
 * @param items: An array
 *
@@ -299,7 +199,7 @@ let htmlSafe = function($sce) {
 }
 
 /**
-* toNetworkName() Get network name from id
+* Get network name from id
 *
 * @param id: The network id
 *
@@ -307,9 +207,9 @@ let htmlSafe = function($sce) {
 */
 let toNetworkName = function() {
     return function(id) {
-        if (id === Network.data.Testnet.id) {
+        if (id === nem.model.network.data.testnet.id) {
             return 'Testnet';
-        } else if (id === Network.data.Mainnet.id) {
+        } else if (id === nem.model.network.data.mainnet.id) {
             return 'Mainnet';
         } else {
             return 'Mijin';
@@ -318,22 +218,7 @@ let toNetworkName = function() {
 }
 
 /**
-* toHostname() Parse url to get only ip or domain
-*
-* @param uri: The uri to parse
-*
-* @return uri hostname
-*/
-let toHostname = function() {
-    return function(uri) {
-        let _uriParser = document.createElement('a');
-        _uriParser.href = uri;
-        return _uriParser.hostname;
-    }
-}
-
-/**
-* currencyFormat() Set a value to common currency format
+* Set a value to common currency format
 *
 * @param number: The number to format
 *
@@ -350,7 +235,7 @@ let currencyFormat = function() {
 }
 
 /**
-* btcFormat() Set a value to btc format
+* Set a value to btc format
 *
 * @param number: The number to format
 *
@@ -366,18 +251,19 @@ let btcFormat = function() {
     }
 }
 
+
 /**
-* Change an address to contact label if exists in address book
+* Get a contact label by address
 *
 * @param {string} address - An address
-* @param {array} contacts - An array of contacts
+* @param {object} wallet - A wallet object
 *
 * @return {string} - The contact label or address if not found
 */
-let fmtContact = function() {
-    return function(address, contacts) {
-        if(undefined !== contacts && undefined !== address) {
-            let contact = helpers.getContact(contacts, address);
+let fmtContact = ["AddressBook", function(AddressBook) {
+    return function(address, wallet) {
+        if(undefined !== wallet && undefined !== address) {
+            let contact = AddressBook.getContact(wallet, address);
             if(!contact) {
                 return address;
             } else {
@@ -387,15 +273,47 @@ let fmtContact = function() {
             return address;
         }
     }
+}];
+
+
+/**
+* Convert nodes array into an array of endpoints
+*
+* @param {array} data - An array of nodes
+*
+* @return {array} - An array of endpoints
+*/
+let toEndpoint = function() {
+    return function toEndpoint(data, network) {
+        if (data === undefined) return data;
+        let array = [];
+        for (let i = 0; i < data.length; i++) {
+            let host;
+            let port;
+            if (undefined !== data[i].uri) {
+                host = data[i].uri;
+                port = network === nem.model.network.data.mijin.id ? nem.model.nodes.mijinPort : nem.model.nodes.defaultPort;
+            } else if (undefined !== data[i].ip) {
+                host = "http://" + data[i].ip;
+                port = data[i].nisPort;
+            } else if (undefined !== data[i].host) {
+                host = data[i].host;
+                port = data[i].port;
+            }
+
+            array.push(nem.model.objects.create("endpoint")(host, port));
+        }
+        return array;
+    }
 }
 
 module.exports = {
     toNetworkName,
     htmlSafe,
     reverse,
-    startFromUnc,
     startFrom,
     objValues,
+    toHostname,
     fmtSplitHex,
     fmtHexMessage,
     fmtHexToUtf8,
@@ -408,8 +326,8 @@ module.exports = {
     fmtNemDate,
     fmtPubToAddress,
     fmtAddress,
-    toHostname,
     currencyFormat,
     btcFormat,
-    fmtContact
+    fmtContact,
+    toEndpoint
 }
