@@ -8,14 +8,13 @@
     </div>
 
     <div class="row">
-
       <div class="col-md-6">
+
         <div class="panel-heading">
            <h3>{{ 'ACCOUNT_ACCOUNT_INFORMATION' | translate }}</h3>
         </div>
         <div class="panel-body">
-
-          <fieldset class="form-group" ng-show="$ctrl.moreThanOneAccount">
+          <fieldset class="form-group" ng-show="$ctrl.showAccounts">
             <div class="input-group">
               <span class="input-group-btn">
                 <label>{{ 'ACCOUNT_ACCOUNT_SELECT_LABEL' | translate }}: </label>
@@ -25,15 +24,17 @@
               </select>
             </div>
           </fieldset>
+
           <!-- ACCOUNT ADDRESS -->
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-btn">
                 <label data-toggle="tooltip" title="{{ 'LOGIN_IMPORT_BUTTON' | translate }}">{{ 'GENERAL_ADDRESS' | translate }}: </label>
               </span>
-              <span type="text" class="form-control" show-account-data="address" readOnly></span>
+              <span type="text" class="form-control"> {{ $ctrl._DataStore.account.metaData.account.address | fmtAddress }}</span>
             </div>
           </fieldset>
+
           <!-- ACCOUNT PUBLIC KEY -->
           <fieldset class="form-group">
             <div class="input-group">
@@ -41,7 +42,7 @@
                 <label>{{ 'GENERAL_PUBLIC_KEY' | translate }}: </label>
               </span>
               <span class="block">
-                <span type="text" class="form-control" show-account-data="publicKey" readOnly></span>
+                <span type="text" class="form-control"> {{ $ctrl._DataStore.account.metaData.account.publicKey || 'ACCOUNT_NO_PUBLIC_KEY' | translate }}</span>
               </span>
             </div>
           </fieldset>
@@ -51,7 +52,7 @@
               <span class="input-group-btn">
                 <label>{{ 'ACCOUNT_IMPORTANCE_SCORE' | translate }}: </label>
               </span>
-              <span class="form-control" show-account-data="importance" readOnly></span>
+              <span class="form-control">{{ ($ctrl._DataStore.account.metaData.account.importance | fmtNemImportanceScore)[0] }}.{{ ($ctrl._DataStore.account.metaData.account.importance | fmtNemImportanceScore)[1] }} * 10<sup>(-4)</sup></span>
             </div>
           </fieldset>
 
@@ -60,9 +61,10 @@
               <span class="input-group-btn">
                 <label>{{ 'ACCOUNT_VESTED_BALANCE' | translate }}: </label>
               </span>
-              <span class="form-control" show-account-data="vestedBalance" readOnly></span>
+              <span class="form-control">{{ ($ctrl._DataStore.account.metaData.account.vestedBalance | fmtNemValue)[0] }}.{{ ($ctrl._DataStore.account.metaData.account.vestedBalance | fmtNemValue)[1] }} <b>XEM</b></span>
             </div>
           </fieldset>
+
           <fieldset class="form-group">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAccountModal">
             <i class="fa fa-plus"></i> {{ 'ACCOUNT_ADD_NEW_ACCOUNT_BTN' | translate }}
@@ -81,22 +83,23 @@
             <p class="bg-info"><span ng-bind-html="'ACCOUNT_PRIVATE_KEY_NOTE' | translate"></span></p>
             <div class="input-group">
               <span class="input-group-btn short">
-                <label ng-show="!$ctrl.showPrivateKeyField">{{ 'FORM_PASSWORD' | translate }}:</label>
-                <label ng-show="$ctrl.showPrivateKeyField">{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
+                <label ng-show="!$ctrl.commonPK.privateKey">{{ 'FORM_PASSWORD' | translate }}:</label>
+                <label ng-show="$ctrl.commonPK.privateKey">{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
               </span>
-              <input class="form-control" type="password" ng-model="$ctrl.common.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-show="!$ctrl.showPrivateKeyField"/>
-              <input class="form-control" ng-show="$ctrl.showPrivateKeyField" ng-model="$ctrl.common.privateKey" readOnly></input>
+              <input class="form-control" type="password" ng-model="$ctrl.commonPK.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-show="!$ctrl.commonPK.privateKey"/>
+              <input class="form-control" ng-show="$ctrl.commonPK.privateKey" ng-model="$ctrl.commonPK.privateKey" readOnly></input>
               <span class="input-group-btn showHide">
-                <button class="btn btn-primary" type="button"  ng-show="!$ctrl.showPrivateKeyField" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
+                <button class="btn btn-primary" type="button"  ng-show="!$ctrl.commonPK.privateKey" ng-disabled="!$ctrl.commonPK.password" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
                   <i class="fa fa-plus"></i>
                 </button>
-                <button class="btn btn-danger" type="button" ng-show="$ctrl.showPrivateKeyField" ng-click="$ctrl.clearSensitiveData()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
+                <button class="btn btn-danger" type="button" ng-show="$ctrl.commonPK.privateKey" ng-click="$ctrl.reset()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
                   <i class="fa fa-minus"></i>
                 </button>
               </span>
             </div>
           </div>
         </div>
+
         <div class="panel-heading">
           <h3>{{'ACCOUNT_EXPORT_MOBILE' | translate }}</h3>
         </div>
@@ -105,9 +108,6 @@
             <div class="row">
               <div class="col-sm-6">
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
-              </div>
-              <div class="col-sm-4" style="display: none">
-                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModal">{{'ACCOUNT_WALLET_QR_BTN' | translate }}</button>
               </div>
               <div class="col-sm-6">
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
@@ -131,12 +131,11 @@
                 <option value="" disabled selected>{{ 'LOGIN_SELECT_WALLET' | translate }}</option>
               </select>
               <span class="input-group-btn dLoad">
-                <button class="btn btn-primary" type="button" ng-show="$ctrl.selectedWallet" ng-click="$ctrl.download($ctrl.selectedWallet)" title="{{'ACCOUNT_BACKUP_WALLET_DOWNLOAD' | translate}}"><i class="fa fa-download"></i></button>
+                <button class="btn btn-primary" type="button" ng-show="$ctrl.selectedWallet" ng-click="$ctrl.downloadWallet()" title="{{'ACCOUNT_BACKUP_WALLET_DOWNLOAD' | translate}}"><i class="fa fa-download"></i></button>
               </span>
             <a id="downloadWallet" target="_blank"></a>
           </div>
         </fieldset>
-
       </div>
 
     </div>
@@ -187,12 +186,12 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.showMobileQRPass = true;">&times;</button>
           <h4 class="modal-title">{{ 'ACCOUNT_WALLET_QR_ANDROID_IOS_TITLE' | translate }}</h4>
         </div>
         <div class="modal-body">
-          <div class="text-center" id="mobileWalletQR"></div>
-          <div id="mobileWalletForm">
+          <div class="text-center" id="mobileWalletQR" ng-show="!$ctrl.showMobileQRPass"></div>
+          <div ng-show="$ctrl.showMobileQRPass">
             <!-- Password Field -->
             <fieldset class="form-group">
               <div class="input-group">
@@ -209,7 +208,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.showMobileQRPass = true;">{{ 'GENERAL_CLOSE' | translate }}</button>
         </div>
       </div>
     </div>
