@@ -151,7 +151,7 @@ function DutchProvider($translateProvider) {
         GENERAL_WARNING: 'Waarschuwing',
         GENERAL_SCORE: 'Score',
         GENERAL_LENGTH: 'Lengte',
-        
+
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry, je kan Nano Wallet niet veilig gebruiken met deze browser...',
         HOME_RECOMMENDED_BROWSERS: 'Aanbevolen browsers zijn:',
@@ -274,7 +274,7 @@ function DutchProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_13: 'Er zijn twee soorten heffing, constante heffing en procentuele heffing.',
         MOSAIC_DEFINITION_INFORMATION_14: 'De heffing wordt opgegeven als constante hoeveelheid en hangt dus niet af van de hoeveelheid die wordt overgedragen.',
         MOSAIC_DEFINITION_INFORMATION_15: 'De heffing wordt opgegeven als percentage van de overgedragen hoeveelheid. De heffing stijgt dus lineair met de overgedragen mozaïekhoeveelheid.',
-        MOSAIC_DEFINITION_INFORMATION_16: 'Het verzenden van mozaïeken op het NEM blockchain vereist een heffing. De exacte heffing wordt berekend afhankelijk van het totale aantal en hoeveel worden verzonden tijdens een transactie. <b>Kleinschalige mozaïeken</b> krijgen een kortingstarief van 0,05 XEM per mozaiek per overdracht. Dit zijn mozaïeken met een hoeveelheid van minder dan 10.000 en een verdeelbaarheid van 0.',
+        MOSAIC_DEFINITION_INFORMATION_16: 'Het verzenden van mozaïeken op het NEM blockchain vereist een heffing. De exacte heffing wordt berekend afhankelijk van het totale aantal en hoeveel worden verzonden tijdens een transactie. <b>Kleinschalige mozaïeken</b> krijgen een kortingstarief van 0.05 XEM per mozaiek per overdracht. Dit zijn mozaïeken met een hoeveelheid van minder dan 10.000 en een verdeelbaarheid van 0.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Verander mozaïekvoorraad',
@@ -309,7 +309,7 @@ function DutchProvider($translateProvider) {
         RENEW_NS_INFORMATION_TITLE_1: 'Kosten',
         RENEW_NS_INFORMATION_TITLE_2: 'Root namespaces',
         RENEW_NS_INFORMATION_TITLE_3: 'Vernieuw periode',
-        RENEW_NS_INFORMATION_1: 'Het vernieuwen van een namespace kost hetzelfde bedrag als het registreren van een nieuwe namespace, 100XEM.',
+        RENEW_NS_INFORMATION_1: 'Het vernieuwen van een namespace kost hetzelfde bedrag als het registreren van een nieuwe namespace, 100 XEM.',
         RENEW_NS_INFORMATION_2: 'Alleen root namespaces moeten worden vernieuwd. Alle sub-namespaces worden automatisch vernieuwd bij vernieuwing van de root namespace.',
         RENEW_NS_INFORMATION_3: 'Namespace-contracten zijn huurcontracten voor een jaar. Het contract kan een maand voor of na de vervaldatum verlengd worden.',
         RENEW_NS_INFORMATION_4: 'Als ze niet op tijd worden vernieuwd, gaan alle sub-namespaces en mozaïeken die erin zijn gemaakt verloren.',

@@ -145,16 +145,26 @@ function JapaneseProvider($translateProvider) {
       GENERAL_SEND_XEM: 'XEMの送金',
       GENERAL_ACTIVE: '有効',
       GENERAL_INACTIVE: '無効',
-      GENERAL_ACTIVATING: "有効化中",
-      GENERAL_DEACTIVATING: "無効化中",
-      GENERAL_REMOTE: "リモート",
+      GENERAL_ACTIVATING: '有効化中',
+      GENERAL_DEACTIVATING: '無効化中',
+      GENERAL_REMOTE: 'リモート',
       GENERAL_WARNING: '警告',
       GENERAL_SCORE: 'スコア',
       GENERAL_LENGTH: '長さ',
+      GENERAL_GO_BACK: 'Go back',
+      GENERAL_NEXT: 'Next',
+      GENERAL_START: 'Start',
+      GENERAL_ALIAS: 'Alias',
+      GENERAL_CONTACTS: 'Contacts',
+      GENERAL_ENCRYPTED: 'Encrypted',
+      GENERAL_UNENCRYPTED: 'Unencrypted',
+      GENERAL_HEXADECIMAL: 'Hexadecimal',
         
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全に NanoWallet を使用する事ができません。',
       HOME_RECOMMENDED_BROWSERS: '推奨ブラウザ：',
+      HOME_FEATURE_STAND_BY: 'Place the cursor on a feature to show information.',
+      HOME_FEATURE_1: 'Send and receive XEM easily and almost instantly, only 1 minute block time !',
 
       // TRANSFER TRANSACTION MODULE
       TRANSFER_TRANSACTION_TITLE: "送金と請求",
@@ -167,9 +177,10 @@ function JapaneseProvider($translateProvider) {
       TRANSFER_TRANSACTION_ATTACH: "添付",
       TRANSFER_TRANSACTION_MOSAICS_ATTACHED: "添付するモザイク",
       TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: "メッセージを暗号化",
-      TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex メッセージ',
+      TRANSFER_TRANSACTION_MESSAGE_TYPE: 'Message type',
+      /*TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex メッセージ',
       TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'ネットワーク上に受信者の公開鍵がありません',
-      TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: "マルチシグアカウントを介した暗号化メッセージはありません",
+      TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: "マルチシグアカウントを介した暗号化メッセージはありません",*/
 
       // TRANSACTION LINES
       LINE_TX_DETAILS_FROM: "送り主（From）",
@@ -177,7 +188,7 @@ function JapaneseProvider($translateProvider) {
       LINE_TX_DETAILS_WAITING: "認証中のトランザクション",
       LINE_TX_DETAILS_NEED_SIG: "複数署名を要求",
       LINE_TX_DETAILS_NEED_SIG_2: "このトランザクションはあなたの署名を必要としています。",
-      LINE_TX_DETAILS_MESS_ENC: "暗号化されている",
+      //LINE_TX_DETAILS_MESS_ENC: "暗号化されている",
       LINE_TX_DETAILS_MESS_DEC: "復号する",
       LINE_TX_DETAILS_HASH: "ハッシュ",
       LINE_TX_DETAILS_DEC_MESS: "メッセージを復号",
@@ -223,13 +234,13 @@ function JapaneseProvider($translateProvider) {
       IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: "委任収穫を開始するためにはリモートステータスがアクティブになるまで待つ必要があります。",
       IMPORTANCE_TRANSFER_REMOTE_INACTIVE: "リモートアカウントをアクティブにするために左パネルからインポータンストランスファートランザクションを送信する必要があります。",
       IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: "あなたは、インポータンストランスファートランザクションを開始した連署者ではありません。従って委任収穫を開始または停止することができません。収穫操作権限を取り戻す方法をタブから確認してください。",
-      IMPORTANCE_TRANSFER_MULTISIG_SELECT: "マルチシグアカウントを選択",
-      IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: "ステータスを表示するマルチシグアカウントを選択してください。",
       IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: '委任秘密鍵の参照',
       IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'デリゲートアカウントキー',
       IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'ハーベスティング',
       IMPORTANCE_TRANSFER_START_HARVESTING: 'デリゲートハーベスティングの開始',
       IMPORTANCE_TRANSFER_STOP_HARVESTING: 'デリゲートハーベスティングの停止',
+      IMPORTANCE_TRANSFER_ACTIVATE_DEACTIVATE_REMOTE: 'Activate / Deactivate the delegated account',
+      IMPORTANCE_TRANSFER_SHOW_DELEGATED_KEYS: 'Show delegated account keys',
 
       // CREATE MOSAIC MODULE
       MOSAIC_DEFINITION_TITLE: "モザイクを作成",
@@ -562,6 +573,9 @@ function JapaneseProvider($translateProvider) {
       ALERT_NODE_SEEMS_OFFLINE: 'ノードがオフラインになっています。別のノードを選択してください。',
       ALERT_WEAK_PASSPHRASE: 'パスフレーズのセキュリティースコアは少なくとも3でなければなりません。',
       ALERT_BRAIN_WALLET_UPGRADE: 'ブレインウォレットのパスフレーズが弱すぎます! 全てのブレインウォレットは、少なくとも40文字以上のパスフレーズを使用する必要があります。<br>アカウント作成ページから新しいウォレットを作成し、それに資金を移すことをお勧めします。<br>詳しくは<a href="https://forum.nem.io/t/2791" target="_blank"><u>こちら</u></a>をご覧ください。',
+      ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
+      ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
+      ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -618,19 +632,38 @@ function JapaneseProvider($translateProvider) {
       LOGIN_SELECT_WALLET_YOURS: 'ウォレットの選択',
       LOGIN_SELECT_WALLET: "ローカルストレージからウォレットを選択してください。",
       LOGIN_LOGIN_BUTTON: "サインイン",
+      LOGIN_NOTE: 'No wallet? Import one or <a href="#!/signup">signup</a>.',
 
       // SIGNUP MODULE
       SIGNUP_TITLE: "NEM を始めますか?",
+      SIGNUP_SELECT_WALLET_TYPE: 'Select a type of wallet to create',
+      SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Place the cursor on a wallet type to show information.',
       SIGNUP_CREATE_WALLET_TITLE: "シンプルウォレット",
+      SIGNUP_CREATE_WALLET_INFO: 'Simple wallets contains a primary private key that is generated randomly.',
       SIGNUP_PRIVATE_KEY_WALLET_TITLE: "プライベートキーウォレット",
+      SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Private key wallets contains a primary private key that you want to import.',
       SIGNUP_BRAIN_WALLET_TITLE: "ブレインウォレット",
+      SIGNUP_BRAIN_WALLET_INFO: 'Brain wallets contains a primary private key that is generated from a passphrase. This allow to retrieve the wallet only by knowing that exact passphrase.',
       SIGNUP_CREATE_WALLET_BUTTON: "シンプルウォレットを作成",
       SIGNUP_PRIVATE_KEY_WALLET_BUTTON: "プライベートキーウォレットを作成",
       SIGNUP_BRAIN_WALLET_BUTTON: "ブレインウォレットを作成",
       SIGNUP_CREATE_WALLET_WARNING: "クライアント側で生成された鍵の<a href=\"https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface\" rel=\"nofollow\" target=\"_blank\">危険性</a>についてお読みください。鍵生成の偏りなどが原因で損失が発生しても保証できません。損失が発生する可能性は極めて低いですが、NEM クライアントから生成された秘密鍵を使用することをお勧めします。",
       SIGNUP_NETWORK_SELECT: "ネットワークを選択してください。",
+      SIGNUP_NETWORK_MAINNET: 'Mainnet is the <b><u>real</u></b> NEM network. Addresses start with \'N\'.',
+      SIGNUP_NETWORK_TESTNET: 'Testnet is the <b><u>test</u></b> network. Addresses start with \'T\'.',
+      SIGNUP_NETWORK_MIJIN: 'Mijin is the private version of NEM. Addresses start with \'M\'.',
       SIGNUP_BRAIN_WALLET_WARNING: "ブレインウォレットの<a href=\"https://en.bitcoin.it/wiki/Brainwallet\" rel=\"nofollow\" target=\"_blank\">危険性</a>について留意してください。ブレインウォレットはハッシュ化されたパスフレーズのみを利用し何度も使用されます。したがって、少なくとも40文字以上の「安全な」パスフレーズを選んでください。<a href=\"https://xkcd.com/936/\" rel=\"nofollow\" target=\"_blank\">XKCD #936</a>",
       SIGNUP_PRIVATE_KEY_WALLET_WARNING: "プライベートキーウォレットは、インポートされた秘密鍵を暗号化するためにパスワードのみを使用します。したがって、「安全な」パスワードを利用する事が重要です。 ",
+      SIGNUP_CREATE_START_WARNING: 'Please, follow each step carefully!',
+      SIGNUP_CREATE_READY_BTN: 'Ready',
+      SIGNUP_CREATE_ENTER_NAME: 'Enter a wallet name',
+      SIGNUP_CREATE_ENTER_PASSWORD: 'Enter a password',
+      SIGNUP_CREATE_ENTER_PASSPHRASE: 'Enter a passphrase',
+      SIGNUP_CREATE_CONFIRM_PASSWORD: 'Confirm above password',
+      SIGNUP_CREATE_CONFIRM_PASSPHRASE: 'Confirm above passphrase',
+      SIGNUP_CREATE_ENTER_PRIVATE_KEY: 'Enter a private key',
+      SIGNUP_CREATE_ADDRESS_FROM_PK: 'Address corresponding to above key',
+      SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO: 'We are now going to generate your primary private key. <b>Please click on start and move your cursor around to add more entropy.</b>',
       //SIGNUP_COMMON_WALLET_WARNING: 'ウォレットは、<a><b>一時的に</b></a>ブラウザ内のローカルストレージに保存されます。ウォレット作成後に自動的にダウンロードされる .wlt ファイルはバックアップとして利用します。ブラウザのローカルストレージが削除された場合は、このファイルからインポート可能です。バックアップとして、.wlt ファイルを保存していない場合は、アカウントにログインして、秘密鍵をコピーし安全な場所にバックアップして下さい。バックアップされている事を確認してから、自己の責任に於いてアカウントに資金を送金してください。',
       //SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記の警告を読み、理解したことに同意したことになります。',
       SIGNUP_COMMON_WALLET_WARNING_TITLE: 'アカウントを安全に使用する為に',
@@ -648,6 +681,8 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
+      SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD: 'Understood',
+      SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download wallet',
       SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: '推定パスフレーズ強度',
       SIGNUP_ESTIMATED_GUESS_TIMES: '推定解析時間',
 
@@ -706,7 +741,8 @@ function JapaneseProvider($translateProvider) {
       FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
       FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
       FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
-      FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
+      FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
+      FORM_SELECT_MULTISIG: 'Select a multisignature account'
     });
 
 }

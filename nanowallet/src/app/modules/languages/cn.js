@@ -145,16 +145,26 @@ function ChineseProvider($translateProvider) {
         GENERAL_SEND_XEM: 'Send XEM',
         GENERAL_ACTIVE: 'Active',
         GENERAL_INACTIVE: 'Inactive',
-        GENERAL_ACTIVATING: "Activating",
-        GENERAL_DEACTIVATING: "Deactivating",
-        GENERAL_REMOTE: "Remote",
+        GENERAL_ACTIVATING: 'Activating',
+        GENERAL_DEACTIVATING: 'Deactivating',
+        GENERAL_REMOTE: 'Remote',
         GENERAL_WARNING: 'Warning',
         GENERAL_SCORE: 'Score',
         GENERAL_LENGTH: 'Length',
+        GENERAL_GO_BACK: 'Go back',
+        GENERAL_NEXT: 'Next',
+        GENERAL_START: 'Start',
+        GENERAL_ALIAS: 'Alias',
+        GENERAL_CONTACTS: 'Contacts',
+        GENERAL_ENCRYPTED: 'Encrypted',
+        GENERAL_UNENCRYPTED: 'Unencrypted',
+        GENERAL_HEXADECIMAL: 'Hexadecimal',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
         HOME_RECOMMENDED_BROWSERS: 'Recommended browsers are:',
+        HOME_FEATURE_STAND_BY: 'Place the cursor on a feature to show information.',
+        HOME_FEATURE_1: 'Send and receive XEM easily and almost instantly, only 1 minute block time !',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: '发送和接收',
@@ -167,9 +177,7 @@ function ChineseProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: '附加',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: '马赛克加入完成',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: '加密消息',
-        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
-        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Recipient has no public key visible to the network',
-        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'No encrypted messages via multisig accounts',
+        TRANSFER_TRANSACTION_MESSAGE_TYPE: 'Message type',
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: '来自',
@@ -177,7 +185,7 @@ function ChineseProvider($translateProvider) {
         LINE_TX_DETAILS_WAITING: '交互正在等待成立',
         LINE_TX_DETAILS_NEED_SIG: '需要共签人签名',
         LINE_TX_DETAILS_NEED_SIG_2: '这个交互需要您的签名',
-        LINE_TX_DETAILS_MESS_ENC: '加密',
+        //LINE_TX_DETAILS_MESS_ENC: '加密',
         LINE_TX_DETAILS_MESS_DEC: '揭秘',
         LINE_TX_DETAILS_HASH: 'Hash',
         LINE_TX_DETAILS_DEC_MESS: '解密消息',
@@ -223,13 +231,13 @@ function ChineseProvider($translateProvider) {
         IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'You must wait until your remote status is active to start delegated harvesting',
         IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'You must send an importance transfer from the right panel to activate your remote account',
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
-        IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Select a multisignature account',
-        IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Please select a multisig account to show status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Keys',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
         IMPORTANCE_TRANSFER_START_HARVESTING: 'Start delegated harvesting',
         IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Stop delegated harvesting',
+        IMPORTANCE_TRANSFER_ACTIVATE_DEACTIVATE_REMOTE: 'Activate / Deactivate the delegated account',
+        IMPORTANCE_TRANSFER_SHOW_DELEGATED_KEYS: 'Show delegated account keys',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: '创建马赛克',
@@ -568,6 +576,9 @@ function ChineseProvider($translateProvider) {
         ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
         ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
         ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
+        ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
+        ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
+        ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: '钱包成功创建和加载！',
@@ -623,22 +634,41 @@ function ChineseProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: 'Select Wallet',
         LOGIN_SELECT_WALLET: '从本地存储选择钱包',
         LOGIN_LOGIN_BUTTON: '登录',
+        LOGIN_NOTE: 'No wallet? Import one or <a href="#!/signup">signup</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: 'NEM新手？',
+        SIGNUP_SELECT_WALLET_TYPE: 'Select a type of wallet to create',
+        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Place the cursor on a wallet type to show information.',
         SIGNUP_CREATE_WALLET_TITLE: '简单钱包',
+        SIGNUP_CREATE_WALLET_INFO: 'Simple wallets contains a primary private key that is generated randomly.',
         SIGNUP_PRIVATE_KEY_WALLET_TITLE: '私钥钱包',
+        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Private key wallets contains a primary private key that you want to import.',
         SIGNUP_BRAIN_WALLET_TITLE: '脑钱包',
+        SIGNUP_BRAIN_WALLET_INFO: 'Brain wallets contains a primary private key that is generated from a passphrase. This allow to retrieve the wallet only by knowing that exact passphrase.',
         SIGNUP_CREATE_WALLET_BUTTON: '创建简单钱包',
         SIGNUP_PRIVATE_KEY_WALLET_BUTTON: '创建私钥钱包',
         SIGNUP_BRAIN_WALLET_BUTTON: '创建脑钱包',
         SIGNUP_CREATE_WALLET_WARNING: '请参阅获知客户端生成密钥的<a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank">风险</a>，推荐从NCC生成或获取私钥。',
         SIGNUP_NETWORK_SELECT: 'Select a network', //
+        SIGNUP_NETWORK_MAINNET: 'Mainnet is the <b><u>real</u></b> NEM network. Addresses start with \'N\'.',
+        SIGNUP_NETWORK_TESTNET: 'Testnet is the <b><u>test</u></b> network. Addresses start with \'T\'.',
+        SIGNUP_NETWORK_MIJIN: 'Mijin is the private version of NEM. Addresses start with \'M\'.',
         SIGNUP_BRAIN_WALLET_WARNING: '请阅读脑钱包的<a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">风险</a>。脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。 请遵从<a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>国际密码安全标准。',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: '脑钱包只使用hash处理的单一密码作为私钥，长期或不当使用会导致失窃。使用中选择一个安全的密码至关重要。',
-        SIGNUP_COMMON_WALLET_WARNING_TITLE: 'Account safety warning',
+        SIGNUP_CREATE_START_WARNING: 'Please, follow each step carefully!',
+        SIGNUP_CREATE_READY_BTN: 'Ready',
+        SIGNUP_CREATE_ENTER_NAME: 'Enter a wallet name',
+        SIGNUP_CREATE_ENTER_PASSWORD: 'Enter a password',
+        SIGNUP_CREATE_ENTER_PASSPHRASE: 'Enter a passphrase',
+        SIGNUP_CREATE_CONFIRM_PASSWORD: 'Confirm above password',
+        SIGNUP_CREATE_CONFIRM_PASSPHRASE: 'Confirm above passphrase',
+        SIGNUP_CREATE_ENTER_PRIVATE_KEY: 'Enter a private key',
+        SIGNUP_CREATE_ADDRESS_FROM_PK: 'Address corresponding to above key',
+        SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO: 'We are now going to generate your primary private key. <b>Please click on start and move your cursor around to add more entropy.</b>',
+        SIGNUP_COMMON_WALLET_WARNING_TITLE: 'Account safety protocol',
         SIGNUP_COMMON_WALLET_WARNING_1: 'Wallets are stored <b><u>temporarily</u></b> in the browser local storage! Browsers can be configured (e.g. by add-ons) to clear the local storage at times. This will lead to the loss of the data and it can\'t be undone easily. In our case your wallets would be gone so it is very important to make sure you have all needed informations to restore your accounts.',
-        SIGNUP_COMMON_WALLET_WARNING_2: 'You should have triggered a download after creating the wallet. It is the <b><i>.wlt</i></b> file used as a backup and to import back if your browser’s local storage is erased.',
+        SIGNUP_COMMON_WALLET_WARNING_2: 'Please click below to download your wallet. It is the <b><i>.wlt</i></b> file used as a backup and to import back if your browser’s local storage is erased.',
         SIGNUP_COMMON_WALLET_WARNING_3: 'If you don\'t get a backup <b><i>.wlt</i></b> file, click on button below to reveal the raw wallet data and create the file manually:',
         SIGNUP_COMMON_WALLET_WARNING_4: 'Even if you have a wallet file it is <b><u>mandatory</u></b> to backup your account\'s private key, click on button below to reveal it:',
         SIGNUP_COMMON_WALLET_WARNING_5: 'It is your responsibility to always make sure you have your private key backed up before sending any funds to your account.',
@@ -651,6 +681,8 @@ function ChineseProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'I agree',
+        SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD: 'Understood',
+        SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download wallet',
         SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
@@ -709,7 +741,8 @@ function ChineseProvider($translateProvider) {
         FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
-        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
+        FORM_SELECT_MULTISIG: 'Select a multisignature account'
     });
 
 }

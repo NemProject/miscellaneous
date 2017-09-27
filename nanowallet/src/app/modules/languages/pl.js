@@ -151,10 +151,20 @@ function PolishProvider($translateProvider) {
         GENERAL_WARNING: 'Warning',
         GENERAL_SCORE: 'Score',
         GENERAL_LENGTH: 'Length',
+        GENERAL_GO_BACK: 'Go back',
+        GENERAL_NEXT: 'Next',
+        GENERAL_START: 'Start',
+        GENERAL_ALIAS: 'Alias',
+        GENERAL_CONTACTS: 'Contacts',
+        GENERAL_ENCRYPTED: 'Encrypted',
+        GENERAL_UNENCRYPTED: 'Unencrypted',
+        GENERAL_HEXADECIMAL: 'Hexadecimal',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Przykro nam, ale nie możesz bezpiecznie użyć Nano Wallet\'a za pomocą tej przeglądarki...',
         HOME_RECOMMENDED_BROWSERS: 'Lista rekomendowanych przeglądarek:',
+        HOME_FEATURE_STAND_BY: 'Place the cursor on a feature to show information.',
+        HOME_FEATURE_1: 'Send and receive XEM easily and almost instantly, only 1 minute block time !',
 
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Wyślij / Odbierz',
@@ -167,9 +177,10 @@ function PolishProvider($translateProvider) {
         TRANSFER_TRANSACTION_ATTACH: 'Załącz',
         TRANSFER_TRANSACTION_MOSAICS_ATTACHED: 'Załączone mozaiki',
         TRANSFER_TRANSACTION_ENCRYPT_MESSAGE: 'Szyfruj wiadomość',
-        TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
+        TRANSFER_TRANSACTION_MESSAGE_TYPE: 'Message type',
+        /*TRANSFER_TRANSACTION_HEX_MESSAGE: 'Hex message',
         TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP: 'Odbiorca nie ma klucza publicznego widocznego w sieci.',
-        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'Brak zaszyfrowanych wiadomości przez konta z multipodpisem.',
+        TRANSFER_TRANSACTION_ENCRYPT_TOOLTIP_MULTISIG: 'Brak zaszyfrowanych wiadomości przez konta z multipodpisem.',*/
 
         // TRANSACTION LINES
         LINE_TX_DETAILS_FROM: 'Od',
@@ -177,7 +188,7 @@ function PolishProvider($translateProvider) {
         LINE_TX_DETAILS_WAITING: 'Transakcja czeka na włączenie do bloku',
         LINE_TX_DETAILS_NEED_SIG: 'Potrzeba podpisów sygnatariuszy',
         LINE_TX_DETAILS_NEED_SIG_2: 'Ta transakcja wymaga twojego podpisu',
-        LINE_TX_DETAILS_MESS_ENC: 'Zaszyfrowane',
+        //LINE_TX_DETAILS_MESS_ENC: 'Zaszyfrowane',
         LINE_TX_DETAILS_MESS_DEC: 'Odszyfruj',
         LINE_TX_DETAILS_HASH: 'Hasz',
         LINE_TX_DETAILS_DEC_MESS: 'Odszyfruj wiadomość',
@@ -223,13 +234,13 @@ function PolishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'Musisz zaczekać, aż zdalny status będzie aktywny, aby rozpocząć delegowane zbieranie.',
         IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'Musisz wysłać transakcję transferu znaczenia z lewego panelu, aby aktywować swoje zdalne konto',
         IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'Nie jesteś sygnatariuszem, który zainicjował transfer przeniesienia znaczenia, dlatego nie możesz uruchomić lub zatrzymać delegowanego zbierania bloków. Proszę przeczytaj powyżej jak przejąć spowrotem kontrolę nad zbieraniem.',
-        IMPORTANCE_TRANSFER_MULTISIG_SELECT: 'Wybierz konto z multipodpisem',
-        IMPORTANCE_TRANSFER_MULTISIG_SELECT_MESSAGE: 'Wybierz konto z multipodpisem aby zobaczyć status',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Odsłoń delegowany klucz prywatny.',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Klucze konta delegowanego.',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Status zbierania',
         IMPORTANCE_TRANSFER_START_HARVESTING: 'Zacznij delegowane zbieranie.',
         IMPORTANCE_TRANSFER_STOP_HARVESTING: 'Zakończ delegowane zbieranie.',
+        IMPORTANCE_TRANSFER_ACTIVATE_DEACTIVATE_REMOTE: 'Activate / Deactivate the delegated account',
+        IMPORTANCE_TRANSFER_SHOW_DELEGATED_KEYS: 'Show delegated account keys',
 
         // CREATE MOSAIC MODULE
         MOSAIC_DEFINITION_TITLE: 'Utwórz mozaikę',
@@ -566,6 +577,9 @@ function PolishProvider($translateProvider) {
         ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
         ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
         ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak ! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
+        ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
+        ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
+        ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -621,19 +635,38 @@ function PolishProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: 'Wybierz Portfel',
         LOGIN_SELECT_WALLET: 'Wybierz portfel w lokalnej pamięci',
         LOGIN_LOGIN_BUTTON: 'Zaloguj',
+        LOGIN_NOTE: 'No wallet? Import one or <a href="#!/signup">signup</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: 'Nowy w NEM ?',
+        SIGNUP_SELECT_WALLET_TYPE: 'Select a type of wallet to create',
+        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Place the cursor on a wallet type to show information.',
         SIGNUP_CREATE_WALLET_TITLE: 'Prosty portfel',
+        SIGNUP_CREATE_WALLET_INFO: 'Simple wallets contains a primary private key that is generated randomly.',
         SIGNUP_PRIVATE_KEY_WALLET_TITLE: 'Portfel z klucza prywatnego',
+        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Private key wallets contains a primary private key that you want to import.',
         SIGNUP_BRAIN_WALLET_TITLE: 'Brain wallet',
+        SIGNUP_BRAIN_WALLET_INFO: 'Brain wallets contains a primary private key that is generated from a passphrase. This allow to retrieve the wallet only by knowing that exact passphrase.',
         SIGNUP_CREATE_WALLET_BUTTON: 'Utwórz prosty portfel',
         SIGNUP_PRIVATE_KEY_WALLET_BUTTON: 'Utwórz portfel z klucza prywatnego',
         SIGNUP_BRAIN_WALLET_BUTTON: 'Utwórz brain wallet',
         SIGNUP_CREATE_WALLET_WARNING: 'Proszę, przeczytaj o <a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank">niebezpieczeństwach</a> związanych z własnoręcznie generowanymi kluczami, nie jesteśmy odpowiedzialni za ewentualne straty, które mogłyby być spowodowane entropią generowania kluczy. Mimo, że szansa na to jest bardzo mała, zaleca się użycie klucza prywatnego generowanego przez klienta NEM.',
-        SIGNUP_NETWORK_SELECT: 'Wybierz sieć', //
+        SIGNUP_NETWORK_SELECT: 'Wybierz sieć',
+        SIGNUP_NETWORK_MAINNET: 'Mainnet is the <b><u>real</u></b> NEM network. Addresses start with \'N\'.',
+        SIGNUP_NETWORK_TESTNET: 'Testnet is the <b><u>test</u></b> network. Addresses start with \'T\'.',
+        SIGNUP_NETWORK_MIJIN: 'Mijin is the private version of NEM. Addresses start with \'M\'.',
         SIGNUP_BRAIN_WALLET_WARNING: 'Proszę, przeczytaj o <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank">niebezpieczeństwach</a> związanych z używaniem brain wallet. Brain wallet używa tylko zakodowanego wielokrotnie hasła, dlatego istotne jest, aby wybrać BEZPIECZNE hasło. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank">XKCD #936</a>',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Portfel z klucza prywatnego używa TYLKO wielokrotnie zakodowanego hasła, dlatego istotne jest, aby wybrać BEZPIECZNE hasło.',
+        SIGNUP_CREATE_START_WARNING: 'Please, follow each step carefully!',
+        SIGNUP_CREATE_READY_BTN: 'Ready',
+        SIGNUP_CREATE_ENTER_NAME: 'Enter a wallet name',
+        SIGNUP_CREATE_ENTER_PASSWORD: 'Enter a password',
+        SIGNUP_CREATE_ENTER_PASSPHRASE: 'Enter a passphrase',
+        SIGNUP_CREATE_CONFIRM_PASSWORD: 'Confirm above password',
+        SIGNUP_CREATE_CONFIRM_PASSPHRASE: 'Confirm above passphrase',
+        SIGNUP_CREATE_ENTER_PRIVATE_KEY: 'Enter a private key',
+        SIGNUP_CREATE_ADDRESS_FROM_PK: 'Address corresponding to above key',
+        SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO: 'We are now going to generate your primary private key. <b>Please click on start and move your cursor around to add more entropy.</b>',
         SIGNUP_COMMON_WALLET_WARNING_TITLE: 'Ostrzeżenie o bezpieczeństwie konta',
         SIGNUP_COMMON_WALLET_WARNING_1: 'Portfele są przechowywane <b><u>tymczasowo</u></b> W lokalnej pamięci przeglądarki! Przeglądarki mogą zostać skonfigurowane (np. przez wtyczki) do regularnego czyszczenia pamięci lokalnej. Może to prowadzić do bezpowrotnej utraty danych. W danym przypadku portfele zostaną stracone dlatego bardzo ważne jest posiadanie wszystkich informacji wymaganych do odtworzenia portfeli.',
         SIGNUP_COMMON_WALLET_WARNING_2: 'Po stworzeniu portfela powinno się pobrać plik. Ten <b><i>.wlt</i></b> plik służy jako kopia zapasowa i można zaimportować z niego portfel w razie gdy pamięć lokalna przeglądarki zostanie wyczyszczona.',
@@ -649,6 +682,8 @@ function PolishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'Posiadam plik portfela',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Posiadam klucz prywatny',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Zgadzam się',
+        SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD: 'Understood',
+        SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download wallet',
         SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
 
@@ -715,7 +750,8 @@ function PolishProvider($translateProvider) {
         FORM_TITLE_FIELD_PLACEHOLDER: 'Title',
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
-        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address'
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
+        FORM_SELECT_MULTISIG: 'Select a multisignature account'
     });
 
 }
