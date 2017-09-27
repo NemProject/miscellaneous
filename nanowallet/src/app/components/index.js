@@ -3,50 +3,32 @@ import angular from 'angular';
 // Create the module where our functionality can attach to
 let componentsModule = angular.module('app.components', []);
 
-// Set read-wallet-files directive
-import ReadWalletFiles from './readWalletFiles.directive';
-componentsModule.directive('readWalletFiles', ReadWalletFiles);
+// Set market-data component
+import MarketData from './marketData.component';
+componentsModule.component('marketData', MarketData);
 
-// Set show-authed directive
-import ShowAuthed from './show-authed.directive';
-componentsModule.directive('showAuthed', ShowAuthed);
+// Set balance component
+import Balance from './balance.component';
+componentsModule.component('balance', Balance);
 
-// Set show-network-status directive
-import ShowNetworkStatus from './showNetworkStatus.directive';
-componentsModule.directive('showNetworkStatus', ShowNetworkStatus);
+// Set node component
+import Node from './node.component';
+componentsModule.component('node', Node);
 
-// Set show-block-height directive
-import ShowBlockHeight from './showBlockHeight.directive';
-componentsModule.directive('showBlockHeight', ShowBlockHeight);
+// Set account-input component
+import AccountInput from './accountInput.component';
+componentsModule.component('accountInput', AccountInput);
 
-// Set show-account-data-directive
-import ShowAccountData from './showAccountData.directive';
-componentsModule.directive('showAccountData', ShowAccountData);
+// Set message-area component
+import MessageArea from './messageArea.component';
+componentsModule.component('messageArea', MessageArea);
 
-// Set tag-transaction directive
-import TagTransaction from './tagTransaction.directive';
-componentsModule.directive('tagTransaction', TagTransaction);
+// Set attach-mosaic component
+import AttachMosaic from './attachMosaic.component';
+componentsModule.component('attachMosaic', AttachMosaic);
 
-// Set app-background directive
-import AppBackground from './appBackground.directive';
-componentsModule.directive('appBackground', AppBackground);
-
-// Set tag-levy directive
-import TagLevy from './tagLevy.directive';
-componentsModule.directive('tagLevy', TagLevy);
-
-// Set read-wallet-files directive
-import ImportApostilleFiles from './importApostilleFiles.directive';
-componentsModule.directive('importApostilleFiles', ImportApostilleFiles);
-
-// Set import-nty-file directive
-import ImportNtyFile from './importNtyFile.directive';
-componentsModule.directive('importNtyFile', ImportNtyFile);
-
-// Set import-address-book-file directive
-import ImportAddressBookFile from './importAddressBookFile.directive';
-componentsModule.directive('importAddressBookFile', ImportAddressBookFile);
-
-
+// Set multisig-select component
+import MultisigSelect from './multisigSelect.component';
+componentsModule.component('multisigSelect', MultisigSelect);
 
 export default componentsModule;
