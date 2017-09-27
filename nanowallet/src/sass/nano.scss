@@ -29,9 +29,9 @@
 }
 
 /*** GLOBAL VARIABLES ***/
-$blue: #69b2e5;
-$blueLite: rgba(105, 178, 229, 0.6);
-$blueXLite: rgba(105, 178, 229, 0.1);
+$blue: #0d5295; /*#69b2e5;**/
+$blueLite: rgba(015, 122, 225, 0.6);
+$blueXLite: rgba(015, 122, 225, 0.1);
 $blueDark: darken( $blue, 10% );
 $pad: 20px;
 $grayLite: rgba(0 ,0 ,0 ,0.1);

@@ -251,6 +251,16 @@ label {
     color: black;
   }
 }
+.btn-dark {
+  background-color: #444;
+  border-color: #444;
+  color: #fff;
+  border-radius: 0;
+  width: 100%;
+}
+.btn-dark:hover, .btn-dark:active, .btn-dark:focus {
+  color: #fff;
+}
 .btn-success {
   background-color: $blue;
   border-color: $blue;
@@ -337,9 +347,10 @@ fieldset .form-control.has-error {
 /*** ARROWS ***/
 .arrows {
   float: right;
-  z-index: 9;
+  z-index: 11;
   text-align: right;
   margin-top: -$pad;
+  position: relative;
   .buttonStyle {
     border: none;
     box-shadow: none;
@@ -369,7 +380,7 @@ fieldset .form-control.has-error {
 .nav-tabs {
   position: relative;
   border-bottom: none;
-  z-index: 10;
+  /*z-index: 10;*/
   li a {
   	color: grey;
     outline: 0;
@@ -405,15 +416,6 @@ fieldset .form-control.has-error {
 }
 
 /*** DROPBOX GLOBAL STYLES ***/
-.toast-text-left {
-  text-align: left !important;
-}
-.alert > button.close {
-  opacity: 1;
-}
-.alert a {
-  color: white;
-}
 .drop {
   border: 1px dashed rgb(0, 166, 90);
   min-height: 35px;
@@ -442,7 +444,7 @@ fieldset .form-control.has-error {
 .tooltip-inner {
 	color: $white;
 	border: 1px solid $blue;
-	background: $blue;
+	background: #444;
 }
 .tooltip.top .tooltip-arrow {
   border-top-color: $blue;
@@ -455,9 +457,6 @@ fieldset .form-control.has-error {
 }
 .tooltip.bottom .tooltip-arrow {
   border-bottom-color: $blue;
-}
-.black-tooltip + .tooltip > .tooltip-inner {
-background-color: #444;
 }
 i.fa-question-circle-o, i.fa-question {
 	font-size: 16px;
@@ -565,6 +564,9 @@ input[type=checkbox]:checked + label:before {
     font-weight: 700;
   }
 }
+.brand-name-2 {
+  color: #177245;
+}
 .navbar {
 	border:none;
 	border-radius:0px;
@@ -670,18 +672,37 @@ footer {
   .row.text-center {
     margin-bottom: $pad * 2;
   }
+  .btn-primary {
+    /*-webkit-animation: hue 300s infinite linear;*/
+    border-radius: 0;
+  }
 }
 
 /*** HOME PAGE ***/
 .home-page {
-  color: white;
   text-align: center;
   h1 {
+    color: #333;
     font-weight: 300;
-    font-size: 4em;
+    font-size: 6em;
   }
   p{
+    color: #7b8993;
     font-size: 1.3em;
+  }
+  hr {
+    border: none;
+    margin-top: 20px;
+    height: 1px;
+    width: 50%;
+    background-color: #c0c8c9;
+    background-image: -webkit-linear-gradient(0deg, #fff, #c0c8c9, #fff);
+  }
+  .fa {
+    color: black;
+  }
+  .container {
+    margin-top: 100px;
   }
 }
 
@@ -703,6 +724,33 @@ footer {
       padding-left: 0;
     }
   }
+  h1 {
+    color: #333;
+    font-weight: 300;
+    font-size: 6em;
+  }
+  label {
+    color: #444;
+  }
+  hr {
+    border: none;
+    margin-top: 20px;
+    height: 1px;
+    width: 50%;
+    background-color: #c0c8c9;
+    background-image: -webkit-linear-gradient(0deg, #fff, #c0c8c9, #fff);
+  }
+  p{
+    color: #7b8993;
+    font-size: 1.3em;
+  }
+  .input-group-btn {
+    font-size: inherit;
+  }
+  h4 {
+    color: #7b8993;
+    padding: 0;
+  }
 }
 
 /*** SIGNUP PAGE ***/
@@ -721,12 +769,58 @@ footer {
   .bg-info {
     color: white;
     border: $blueLite;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
     a {
       color: red;
     }
   }
+  h1 {
+    color: #333;
+    font-weight: 300;
+    font-size: 6em;
+  }
+  p{
+    color: #7b8993;
+    font-size: 1.3em;
+  }
+  hr {
+    border: none;
+    margin-top: 20px;
+    height: 1px;
+    width: 50%;
+    background-color: #c0c8c9;
+    background-image: -webkit-linear-gradient(0deg, #fff, #c0c8c9, #fff);
+  }
+  h4 {
+    color: #7b8993;
+    padding: 0;
+  }
+  label {
+    color: #444;
+  }
+  .progressBar {
+    width: 100%;
+    background-color: #ddd;
+  }
+  #pBar {
+    width: 0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+  }
 }
+
+.seedpoint {
+    width: 6px;
+    height: 6px;
+    display: block;
+    border-radius: 3px;
+    background-color: transparent; /*#009900;*/
+    position: fixed; /*absolute;*/
+    z-index: 10;
+  }
 
 /*** DASHBOARD PAGE ***/
 .dashboard-page {
@@ -1278,36 +1372,33 @@ textarea {
   }
 }
 
-// Voting
-.pre-scrollable {
-    max-height: 600px;
-    overflow-x: hidden;
-}
-.pre-scrollable > div {
-    overflow-wrap: break-word;
-}
-.poll-select {
-    width:100%;
-    white-space: normal;
-    font-weight:normal;
-}
-.poll-list-element {
-    border-bottom: 1px lightgrey solid;
-}
-.loading-div {
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 100px;
+/*** COLOR ANIMATION ***/
+/*@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
 }
 
-.ongoing-warning {
-    padding: 10px;
+.hue {
+  -webkit-animation: hue 60s infinite linear;
+}*/
+
+/*** FIX SLOW NG-ANIMATE ***/
+.ng-hide.ng-hide-animate{
+     display: none !important;
 }
 
-.is-empty {
-    background-color: #e4b9b9;
+/*** ALERTS ***/
+.toast-text-left {
+  text-align: left !important;
 }
-
-.poll-description-textarea {
-    resize: vertical;
+.alert > button.close {
+  opacity: 1;
+}
+.alert a {
+  color: white;
 }
