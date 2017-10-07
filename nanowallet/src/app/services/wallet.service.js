@@ -320,6 +320,15 @@ class Wallet {
     _deriveRemote(common, account, algo, network) {
         // Get private key
         if (!this.decrypt(common, account, algo, network)) return Promise.reject(true);
+
+        if (common.isHW) {
+            if (algo == "trezor") {
+                return this._Trezor.deriveRemote(account, network);
+            } else {
+                return Promise.reject(true);
+            }
+        }
+
         // Generate remote account using bip32
         return CryptoHelpers.generateBIP32Data(common.privateKey, common.password, 0, network);
     }
