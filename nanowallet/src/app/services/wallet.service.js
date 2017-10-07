@@ -317,6 +317,13 @@ class Wallet {
         return false;
     }
 
+    _deriveRemote(common, account, algo, network) {
+        // Get private key
+        if (!this.decrypt(common, account, algo, network)) return Promise.reject(true);
+        // Generate remote account using bip32
+        return CryptoHelpers.generateBIP32Data(common.privateKey, common.password, 0, network);
+    }
+
     /**
      * Derive a remote for a given account using BIP32
      *
@@ -331,10 +338,7 @@ class Wallet {
         let _account = account || this.currentAccount;
         let algo = _account.algo || this.algo;
         let network = _account.network || this.network;
-        // Get private key
-        if (!this.decrypt(common, _account, algo, network)) return Promise.reject(true);
-        // Generate remote account using bip32
-        return CryptoHelpers.generateBIP32Data(common.privateKey, common.password, 0, network).then((data) => {
+        return this._deriveRemote(common, _account, algo, network).then((data) => {
             // Add generated child to account
             _account.child = data.publicKey;
             return Promise.resolve(data);
