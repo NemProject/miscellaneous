@@ -65,6 +65,12 @@
             </div>
           </fieldset>
 
+          <fieldset class="form-group" ng-show="$ctrl._Wallet.algo == 'trezor'" ng-click="$ctrl._Trezor.showAccount($ctrl._Wallet.currentAccount)">
+          <button type="button" class="btn btn-success">
+            <i class="fa fa-eye"></i> {{ 'ACCOUNT_SHOW_ON_TREZOR_BTN' | translate }}
+          </button>
+          </fieldset>
+
           <fieldset class="form-group">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAccountModal">
             <i class="fa fa-plus"></i> {{ 'ACCOUNT_ADD_NEW_ACCOUNT_BTN' | translate }}

@@ -7,16 +7,15 @@ class LoginCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($localStorage, $location, Wallet, $timeout, DataBridge) {
+    constructor($localStorage, Wallet, Login, $timeout) {
         'ngInject';
 
         //// Module dependencies region ////
 
         this._storage = $localStorage;
-        this._location = $location;
         this._Wallet = Wallet;
+        this._Login = Login;
         this._$timeout = $timeout;
-        this._DataBridge = DataBridge;
 
         //// End dependencies region ////
 
@@ -58,15 +57,10 @@ class LoginCtrl {
             this.needsUpgrade = true;
             return;
         }
-        // Set wallet to use and connect
-        if (this._Wallet.login(this.common, wallet)) {
+
+        if (this._Login.login(this.common, wallet)) {
             // Clean common object
             this.common = nem.model.objects.get("common");
-            // Connect to node
-            this._DataBridge.connect();
-            // Redirect to dashboard
-            this._location.path('/dashboard');
-            return;
         }
     }
 

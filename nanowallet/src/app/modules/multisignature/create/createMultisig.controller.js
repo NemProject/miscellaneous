@@ -210,7 +210,7 @@ class CreateMultisigCtrl {
         let entity = this.prepareTransaction();
 
         // Use wallet service to serialize and send
-        this._Wallet.transact(this.common, entity).then(() => {
+        this._Wallet.transact(this.common, entity, this.accountToConvert).then(() => {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;

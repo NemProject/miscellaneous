@@ -44,6 +44,7 @@ import './modules/changelly';
 import './modules/addressBook';
 import './modules/importanceTransfer';
 import './modules/faq';
+import './modules/trezor';
 
 // Create and bootstrap application
 const requires = [
@@ -79,7 +80,8 @@ const requires = [
     'app.addressBook',
     'app.importanceTransfer',
     'app.multisigImportanceTransfer',
-    'app.faq'
+    'app.faq',
+    'app.trezor'
 ];
 
 window.$ = window.jQuery = $;

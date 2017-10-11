@@ -362,6 +362,7 @@ function EnglishProvider($translateProvider) {
         ACCOUNT_NODE_FROM_LIST: 'Use node from list',
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Delegated private key',
         ACCOUNT_NO_PUBLIC_KEY: 'You need to make a transaction to get a public key',
+        ACCOUNT_SHOW_ON_TREZOR_BTN: 'Show on TREZOR',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Services',
@@ -738,7 +739,12 @@ function EnglishProvider($translateProvider) {
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
-        FORM_SELECT_MULTISIG: 'Select a multisignature account'
+        FORM_SELECT_MULTISIG: 'Select a multisignature account',
+
+        // TREZOR RELATED
+        TREZOR_TITLE: 'TREZOR',
+        TREZOR_TEXT: 'The TREZOR hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        TREZOR_BUTTON: 'Login with TREZOR'
     });
 
 }

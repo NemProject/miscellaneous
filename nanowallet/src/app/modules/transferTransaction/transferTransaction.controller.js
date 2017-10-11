@@ -137,9 +137,6 @@ class TransferTransactionCtrl {
         // Set the entity for fees in view
         this.preparedTransaction = entity;
 
-        // Return the clean tx in case of HW
-        if (this.common.isHW) return cleanTransferTransaction;
-        
         // Return prepared transaction
         return entity;
     }
