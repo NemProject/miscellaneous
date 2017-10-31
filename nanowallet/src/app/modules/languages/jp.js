@@ -480,6 +480,8 @@ function JapaneseProvider($translateProvider) {
       //APOSTILLE_AUDIT_NON_SIGNED: "署名なしの例:",
       //APOSTILLE_AUDIT_SIGNED: "署名の例:",
       APOSTILLE_AUDIT_FILES: "監査ファイル",
+      APOSTILLE_AUDIT_FORMAT_EXAMPLE: "アポスティーユ形式の例",
+      APOSTILLE_AUDIT_REMOVE_RECORDS: "ローカルの検証結果を削除",
 
       // APOSTILLE MESSAGE MODULE
       APOSTILLE_MESSAGE_TITLE: '公証アカウントにメッセージを送信する',

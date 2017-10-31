@@ -44,7 +44,7 @@
       </div>
       <div class="col-sm-4">
         <div class="panel-heading">
-          <h4>Apostille Format Example</h4>
+          <h4>{{ 'APOSTILLE_AUDIT_FORMAT_EXAMPLE' | translate }}</h4>
         </div>
         <div class="panel-body">
           <p><span ng-bind-html="'APOSTILLE_AUDIT_INFORMATION_1' | translate"></span><br> {{ 'APOSTILLE_AUDIT_INFORMATION_2' | translate }}</p>
@@ -59,7 +59,7 @@
         <div class="panel-heading">
           <h4>{{ 'GENERAL_RESULTS' | translate }}</h4>
           <div class="trash" title="{{ 'GENERAL_CLEAR_ALL' | translate }}" style="cursor:pointer;" ng-click="$ctrl.clearAll()">
-            <i class="fa fa-trash"></i> Remove Records Locally
+            <i class="fa fa-trash"></i> {{ 'APOSTILLE_AUDIT_REMOVE_RECORDS' | translate }}
           </div>
           <div style="float: right; position: relative; display: block;" ng-show="$ctrl.auditResults.length > 5"><button class="buttonStyle" ng-disabled="$ctrl.currentPage == 0" ng-click="$ctrl.currentPage = $ctrl.currentPage-1" style="background-color: transparent; border: medium none;"><span class="fa fa-chevron-left" aria-hidden="true"></span></button><b>{{$ctrl.currentPage+1}}/{{$ctrl.numberOfPages()}}</b><button class="buttonStyle" ng-disabled="$ctrl.currentPage+1 >= $ctrl.numberOfPages()" ng-click="$ctrl.currentPage = $ctrl.currentPage+1" style="background-color: transparent; border: medium none;"> <span class="fa fa-chevron-right" aria-hidden="true"></span></button></div>
         </div>

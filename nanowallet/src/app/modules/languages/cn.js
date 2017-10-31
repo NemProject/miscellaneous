@@ -485,6 +485,8 @@ function ChineseProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: '未签名范例:',
         //APOSTILLE_AUDIT_SIGNED: '已签名范例:',
         APOSTILLE_AUDIT_FILES: '审核文件',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille Format Example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove Records Locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',

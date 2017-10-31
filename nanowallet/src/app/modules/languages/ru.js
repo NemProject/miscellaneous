@@ -480,6 +480,8 @@ function RussianProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Non signed exemple:',
         //APOSTILLE_AUDIT_SIGNED: 'Signed exemple:',
         APOSTILLE_AUDIT_FILES: 'Аудит файлов',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille Format Example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove Records Locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Отправить сообщение на счёт нотариального заверения',

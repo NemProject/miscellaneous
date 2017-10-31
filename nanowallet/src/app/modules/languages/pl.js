@@ -483,6 +483,8 @@ function PolishProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Niepodpisany przykład:',
         //APOSTILLE_AUDIT_SIGNED: 'Podpisany przykład:',
         APOSTILLE_AUDIT_FILES: 'Audytuj pliki',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille Format Example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove Records Locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Wyślij wiadomość do konta notaryzującego.',
