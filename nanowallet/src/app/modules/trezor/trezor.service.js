@@ -41,7 +41,7 @@ class Trezor {
         return new Promise((resolve, reject) => {
             const hdKeypath = this.bip44(network, index);
 
-            TrezorConnect.nemGetAddress(hdKeypath, network, false, (result) => {
+            TrezorConnect.nemGetAddress(hdKeypath, network, (result) => {
                 if (result.success) {
                     resolve({
                         "brain": false,
@@ -104,7 +104,7 @@ class Trezor {
 
     showAccount(account) {
         return new Promise((resolve, reject) => {
-            TrezorConnect.nemGetAddress(account.hdKeypath, account.network, true, (result) => {
+            TrezorConnect.nemGetAddress(account.hdKeypath, account.network, (result) => {
                 if (result.success) {
                     resolve(result.address);
                 } else {
