@@ -123,6 +123,9 @@ function TagTransaction(Alert, Wallet, $filter, $timeout, $state, AddressBook, R
                 // Prepare the signature transaction
                 let entity = nem.model.transactions.prepare("signatureTransaction")(scope.walletScope.common, txCosignData, Wallet.network);
 
+                // HW wallet
+                entity.otherTrans = parentTx.otherTrans;
+
                 // Use wallet service to serialize and send
                 Wallet.transact(scope.walletScope.common, entity).then(() => {
                     $timeout(() => {
