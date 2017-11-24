@@ -82,6 +82,25 @@ class ImportanceTransferCtrl {
         // Update delegated data
         this.updateDelegatedData();
 
+        if (this._Wallet.algo == "trezor" && !this._Wallet.currentAccount.child) {
+            // Disable send button
+            this.okPressed = true;
+
+            this._Wallet.deriveRemote(this.common).then((res) => {
+                this._$timeout(() => {
+                    // Enable send button
+                    this.okPressed = false;
+                    // Reset form data
+                    this.resetData();
+                }, 0)
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.bip32GenerationFailed(err);
+                     return;
+                }, 0);
+            });
+        }
     }
 
     //// Module methods region ////
