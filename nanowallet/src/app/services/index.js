@@ -39,4 +39,8 @@ servicesModule.service('Recipient', RecipientService);
 import DataStoreService from './dataStore.service';
 servicesModule.service('DataStore', DataStoreService);
 
+// Set Login service
+import LoginService from './login.service';
+servicesModule.service('Login', LoginService);
+
 export default servicesModule;
