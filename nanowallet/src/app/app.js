@@ -41,11 +41,13 @@ import './modules/account';
 import './modules/multisignature';
 import './modules/namespaces';
 import './modules/mosaics';
-import './modules/changelly';
 import './modules/addressBook';
 import './modules/importanceTransfer';
 import './modules/faq';
 import './modules/trezor';
+import './modules/apostille';
+import './modules/exchanges';
+import './modules/explorer';
 
 // Create and bootstrap application
 const requires = [
@@ -82,7 +84,12 @@ const requires = [
     'app.importanceTransfer',
     'app.multisigImportanceTransfer',
     'app.faq',
-    'app.trezor'
+    'app.trezor',
+    'app.createApostille',
+    'app.auditApostille',
+    'app.apostilleHistory',
+    'app.shapeshift',
+    'app.explorerHome'
 ];
 
 window.$ = window.jQuery = $;
