@@ -10,24 +10,21 @@ class Wallet {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, $localStorage, Alert, $timeout, $q, AddressBook, Trezor) {
+    constructor(AppConstants, $localStorage, Alert, $timeout, AddressBook, Trezor) {
         'ngInject';
 
-        // Service dependencies region //
+        //// Service dependencies region ////
 
         this._AppConstants = AppConstants;
         this._storage = $localStorage;
         this._Alert = Alert;
         this._$timeout = $timeout;
-        this._$q = $q;
         this._AddressBook = AddressBook;
-
-        // Trezor service
         this._Trezor = Trezor;
 
-        // End dependencies region //
+        //// End dependencies region ////
 
-        // Service properties region //
+        //// Service properties region ////
 
         /**
          * The current wallet used
@@ -106,10 +103,10 @@ class Wallet {
          */
         this.contacts = undefined;
 
-        // End properties region //
+        //// End properties region ////
     }
 
-    // Service methods region //
+    //// Service methods region ////
 
     /**
      * Load a wallet and store in local storage
@@ -264,7 +261,7 @@ class Wallet {
     _transact(common, transaction, account) {
         // HW wallet
         if (common.isHW) {
-            // Serialize, sign and use nem.com.requests.transaction.announce(endpoint, serialized) to broadcast
+            // Serialize, sign and broadcast
             if (this.algo == "trezor") {
                 return this._Trezor.serialize(transaction, account).then((serialized) => {
                     return nem.com.requests.transaction.announce(this.node, JSON.stringify(serialized));
@@ -288,10 +285,10 @@ class Wallet {
             // If res code >= 2, it's an error
             if (res.code >= 2) {
                 this._Alert.transactionError(res.message);
-                return Promise.reject(true);
+                return Promise.reject(res.message);
             } else {
                 this._Alert.transactionSuccess();
-                return Promise.resolve(true);
+                return Promise.resolve(res);
             }
         },
         (err) => {
@@ -300,7 +297,7 @@ class Wallet {
             }  else {
                 this._Alert.transactionError('Failed: '+ err.data.message);
             }
-            return Promise.reject(true);
+            return Promise.reject('Failed: '+ err.data.message);
         });
     }
 
@@ -371,10 +368,9 @@ class Wallet {
         return new Promise((resolve, reject) => {
             // Decrypt / generate and check primary
             if (!this.decrypt(common, wallet.accounts[0], wallet.accounts[0].algo, wallet.accounts[0].network)) return reject(true);
-            //
-            let chain = this._$q.when();
-            for (let i = 0; i < Object.keys(wallet.accounts).length; i++) {
-                chain = chain.then(() => {
+            // Chain of promises
+            let chain = (i) => {
+                if (i < Object.keys(wallet.accounts).length) {
                     this.deriveRemote(common, wallet.accounts[i]).then((res)=> {
                         if(i === Object.keys(wallet.accounts).length - 1) {
                             this._Alert.upgradeSuccess();
@@ -383,9 +379,11 @@ class Wallet {
                     }, 
                     (err) => {
                         return reject(true);
-                    }); 
-                });
+                    }).then(chain.bind(null, i+1)); 
+                }
             }
+            // Start promises chain
+            chain(0);
         });
     }
 
@@ -558,7 +556,7 @@ class Wallet {
         return true;
     }
 
-    // End methods region //
+    //// End methods region ////
 
 }
 
