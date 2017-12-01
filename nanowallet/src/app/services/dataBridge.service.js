@@ -11,9 +11,7 @@ class DataBridge {
     constructor(Alert, Wallet, $timeout, $filter, Nodes, DataStore) {
         'ngInject';
 
-        /**
-         * Service dependencies
-         */
+        //// Service dependencies region ////
 
         this._Alert = Alert;
         this._$timeout = $timeout;
@@ -22,9 +20,9 @@ class DataBridge {
         this._Nodes = Nodes;
         this._DataStore = DataStore;
 
-        /**
-         * Service properties
-         */
+        //// End dependencies region ////
+
+        //// Service properties region ////
 
         /**
          * The connector
@@ -46,7 +44,18 @@ class DataBridge {
          * @type {setInterval}
          */
         this.timeSyncInterval = undefined;
+
+        /**
+         * Prevent renewal alerts to show after every confirmed transactions
+         *
+         * @type {object}
+         */
+        this.renewalAlertTriggeredFor = {};
+
+        //// End properties region ////
     }
+
+    //// Service methods region ////
 
     /**
      * Open websocket connection
@@ -58,7 +67,7 @@ class DataBridge {
         // Store the used connector to close it from anywhere easily
         this.connector = connector;
 
-        // Fresh DataStore
+        // Init DataStore
         this._DataStore.init();
 
         // Connect
@@ -155,9 +164,15 @@ class DataBridge {
             });
 
             // On error we show it in an alert
-           nem.com.websockets.subscribe.errors(connector, (name, d) => {
-                console.log(d);
-                this._Alert.websocketError(d.error + " " + d.message);
+            nem.com.websockets.subscribe.errors(connector, (name, d) => {
+                this._$timeout(() => {
+                    console.log("Error:");
+                    console.log(name);
+                    if (d) {
+                        console.log(d);
+                        this._Alert.websocketError(d.error + " " + d.message);
+                    }
+                });
             });
 
             // New height
@@ -171,7 +186,7 @@ class DataBridge {
             nem.com.websockets.subscribe.account.data(connector, (d) => {
                 this._$timeout(() => {
                     this._DataStore.account.metaData = d;
-                    // prepare callback for multisig accounts
+                    // Websocket for multisig accounts
                     for (let i = 0; i < this._DataStore.account.metaData.meta.cosignatoryOf.length; i++) {
                         let address = this._DataStore.account.metaData.meta.cosignatoryOf[i].address;
                         nem.com.websockets.subscribe.account.transactions.confirmed(connector, confirmedCallback, address);
@@ -268,8 +283,9 @@ class DataBridge {
                     this._DataStore.namespace.ownedBy[address][namespaceName] = d;
                     // Check namespace expiration date
                     // Creation height of ns + 1 year in blocks (~60 blocks per hour * 24h * 365d) - current height < 1 month in blocks (60 blocks per hour * 24h * 30d)
-                    if(d.height + 525600 - this._DataStore.chain.height <= 43200 && d.fqn.indexOf('.') === -1) {
+                    if(d.height + 525600 - this._DataStore.chain.height <= 43200 && d.fqn.indexOf('.') === -1 && undefined === this.renewalAlertTriggeredFor[d.fqn]) {
                         this._$timeout(() => {
+                            this.renewalAlertTriggeredFor[d.fqn] = true;
                             this._Alert.namespaceExpiryNotice(d.fqn, d.height + 525600 - this._DataStore.chain.height);
                         });                  
                     }
@@ -386,6 +402,7 @@ class DataBridge {
         return;
     }
 
+    //// End methods region ////
 }
 
 export default DataBridge;
