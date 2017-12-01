@@ -20,57 +20,47 @@ class createMosaicCtrl {
 
         //// End dependencies region ////
 
-        //// Module properties region ////
-
-        // Form is a namespace provision transaction object 
-        this.formData = nem.model.objects.get("mosaicDefinitionTransaction");
-
-        // Sink account for view
-        this.formData.mosaicFeeSink = nem.model.sinks.mosaic[this._Wallet.network];
-
-        // Current address as default levy recipient
-        this.formData.levy.address = this._Wallet.currentAccount.address;
-
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Has no levy by default
-        this.hasLevy = false;
-
-        // Mosaics owned names for current account
-        this.currentAccountMosaicNames = '';
-
-        // Selected mosaic from view
-        this.selectedMosaic = '';
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Character counter
-        this.charsLeft = 512;
-
-        // Object to contain our password & private key data.
-        this.common = nem.model.objects.get("common");
-
-        // Default namespaces owned
-        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
-
-        // Default mosaics used
-        this.mosaicOwned = this._DataStore.mosaic.ownedBy[this._Wallet.currentAccount.address];
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Get mosaics and namespaces for current account
-        this.updateCurrentAccountNSM();
-
-        // Update the fee in view
-        this.prepareTransaction();
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a namespace provision transaction object 
+        this.formData = nem.model.objects.get("mosaicDefinitionTransaction");
+        // Sink account for view
+        this.formData.mosaicFeeSink = nem.model.sinks.mosaic[this._Wallet.network];
+        // Current address as default levy recipient
+        this.formData.levy.address = this._Wallet.currentAccount.address;
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Has no levy by default
+        this.hasLevy = false;
+        // Mosaics owned names for current account
+        this.currentAccountMosaicNames = '';
+        // Selected mosaic from view
+        this.selectedMosaic = '';
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Character counter
+        this.charsLeft = 512;
+        // Object to contain our password & private key data.
+        this.common = nem.model.objects.get("common");
+        // Default namespaces owned
+        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
+        // Default mosaics owned
+        this.mosaicOwned = this._DataStore.mosaic.ownedBy[this._Wallet.currentAccount.address];
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Init mosaics and namespaces for current account
+        this.updateCurrentAccountNSM();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
     /**
      * Set name to lowercase and check it
@@ -87,11 +77,23 @@ class createMosaicCtrl {
     }
 
     /**
-     * Check description
+     * Calculate characters left and check length of description
      */
     processMosaicDescription() {
+        let raw = nem.utils.convert.utf8ToHex(this.formData.mosaicDescription);
+        this.charsLeft = raw.length ? 512 - (raw.length / 2) : 512;
         if (!this.mosaicDescriptionIsValid(this.formData.mosaicDescription)) return this._Alert.invalidMosaicDescription();
         this.prepareTransaction();
+    }
+
+    /**
+     * Prevent supply above limit
+     */
+    validateSupply() {
+        if(this.formData.properties.initialSupply > 9000000000) {
+            this.formData.properties.initialSupply = 9000000000;
+            this._Alert.maxMosaicSupply();
+        }
     }
 
     /**
@@ -163,8 +165,8 @@ class createMosaicCtrl {
      * Check validity of mosaic description
      */
     mosaicDescriptionIsValid(m) {
-        // Test if correct length
-        if (m.length > 512) return false;
+        let raw = nem.utils.convert.utf8ToHex(m);
+        if (raw.length > 1024) return false;
         return true;
     }
 
@@ -173,25 +175,9 @@ class createMosaicCtrl {
      */
     prepareTransaction() {
         let entity = nem.model.transactions.prepare("mosaicDefinitionTransaction")(this.common, this.formData, this._Wallet.network);
-        // Update characters left
-        if (this.formData.isMultisig) {
-            this.charsLeft = entity.otherTrans.mosaicDefinition.description.length ? 512 - entity.otherTrans.mosaicDefinition.description.length : 512;
-        } else {
-            this.charsLeft = entity.mosaicDefinition.description.length ? 512 - entity.mosaicDefinition.description.length : 512;
-        }
         // Store the prepared transaction
         this.preparedTransaction = entity;
         return entity;
-    }
-
-    /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("mosaicDefinitionTransaction");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.prepareTransaction();
     }
 
     /**
@@ -212,8 +198,8 @@ class createMosaicCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {

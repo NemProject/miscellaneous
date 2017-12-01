@@ -6,7 +6,7 @@
         <h2>{{ 'MOSAIC_DEFINITION_TITLE' | translate }}</h2>
       </div>
       <div class="col-sm-4 helper">
-        <h5 data-toggle="modal" data-target="#mosaicHelp">{{ 'MOSAIC_DEFINITION_INFORMATION' | translate }}</h5>
+        <h5 data-toggle="modal" data-target="#mosaicHelp"><i class="fa fa-question-circle"></i> <b>{{ 'MOSAIC_DEFINITION_INFORMATION' | translate }}</b></h5>
       </div>
     </div>
 
@@ -56,7 +56,7 @@
                 <span class="input-group-btn message">
                   <label>{{'MOSAIC_DEFINITION_DESCRPITION' | translate}}:</label>
                 </span>
-                <textarea class="form-control" style="white-space: pre-wrap;" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();" ng-class="$ctrl.charsLeft < 0 ? 'has-error' : ''"></textarea>
+                <textarea class="form-control" style="white-space: pre-wrap;" ng-model="$ctrl.formData.mosaicDescription" rows="5" placeholder="{{ 'MOSAIC_DEFINITION_DESCRPITION' | translate }}" maxlength="512" ng-change="$ctrl.processMosaicDescription();" ng-class="!$ctrl.mosaicDescriptionIsValid($ctrl.formData.mosaicDescription) ? 'has-error' : ''"></textarea>
                 <p style="text-align:right;border-bottom:1px solid rgba(15, 122, 225, 0.6);background-color: #eee;"><span style="margin-right: 5px;"><b>{{ 'GENERAL_CHARACTERS_LEFT' | translate }}</b>: {{ $ctrl.charsLeft }}</span></p>
               </div>
             </fieldset>
@@ -121,7 +121,7 @@
                     <span class="input-group-btn">
                       <label style="cursor:default;opacity:1;">{{ 'MOSAIC_DEFINITION_INITIAL_SUPPLY' | translate }}:</label>
                     </span>
-                    <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" max="9000000000">
+                    <input type="number" class="form-control" ng-model="$ctrl.formData.properties.initialSupply" placeholder="" min="0" ng-change="$ctrl.validateSupply();">
                   </div>
                 </fieldset>
               </div>
@@ -219,8 +219,8 @@
                         <label>{{ 'FORM_SIDE_BTN_LEVY_FEE' | translate }}: </label>
                       </span>
                       <div class="form-control formFloat">
-                        <input class="levy" type="number" ng-model="$ctrl.formData.levy.fee" min="0" max="900000000">
-                        <label class="floatRight">{{ $ctrl.selectedMosaic }}</label>
+                        <input class="levy" type="number" ng-model="$ctrl.formData.levy.fee" min="0" max="9000000000">
+                        <label class="floatRight">{{ $ctrl.selectedMosaic }} (μ)</label>
                       </div>
                     </div>
                   </fieldset>
@@ -305,7 +305,7 @@
         <p>{{ 'MOSAIC_DEFINITION_INFORMATION_9' | translate }}</p>
            <ul>
               <li>
-                 <b>{{ 'GENERAL_MOSAIC' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_10' | translate }}
+                 <b>{{ 'GENERAL_MOSAIC' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_10' | translate }} ({{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }})
               </li>
               <li>
                  <b>{{ 'GENERAL_ADDRESS' | translate }}:</b> {{ 'MOSAIC_DEFINITION_INFORMATION_11' | translate }}
@@ -327,8 +327,7 @@
            </ul>
            <p ng-bind-html="'MOSAIC_DEFINITION_INFORMATION_16' | translate"></p>
 
-           <p class="bg-danger text-center">{{ 'MOSAIC_DEFINITION_LEVY_LIMITATION' | translate }}</p>
-
+           <p><b>{{ 'MOSAIC_DEFINITION_INFORMATION_17' | translate }}</b></p>
         </div>
       </div>
       <div class="modal-footer">
