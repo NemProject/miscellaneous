@@ -20,41 +20,36 @@ class NamespacesCtrl {
         this._$timeout = $timeout;
 
         //// End dependencies region ////
-
-        //// Module properties region ////
-
-        // Form is a namespace provision transaction object 
-        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
-
-        // Sink account for view
-        this.formData.rentalFeeSink = nem.model.sinks.namespace[this._Wallet.network];
-
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Object to contain our password & private key data.
-        this.common = nem.model.objects.get("common");
-
-        // Default namespaces owned
-        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Update current account namespace
-        this.updateCurrentAccountNS();
-
-        // Update the fee in view
-        this.prepareTransaction();
-
+        
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a namespace provision transaction object 
+        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
+        // Sink account for view
+        this.formData.rentalFeeSink = nem.model.sinks.namespace[this._Wallet.network];
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Object to contain our password & private key data.
+        this.common = nem.model.objects.get("common");
+        // Default namespaces owned
+        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Update current account namespace
+        this.updateCurrentAccountNS();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
     /**
      * Check if a namespace id is level 3
@@ -119,17 +114,6 @@ class NamespacesCtrl {
     }
 
     /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.prepareTransaction();
-        return;
-    }
-
-    /**
      * Prepare and broadcast the transaction to the network
      */
     send() {
@@ -147,8 +131,8 @@ class NamespacesCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {
