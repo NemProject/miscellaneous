@@ -18,43 +18,38 @@ class editMosaicCtrl {
         this._$timeout = $timeout;
 
         //// End dependencies region ////
- 
-        //// Module properties region ////
 
-        // Form is a mosaic supply change transaction object
-        this.formData = nem.model.objects.get("mosaicSupplyChangeTransaction");
-        
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Default current account address (used in view to get mosaic owned by account)
-        this.mosaicOwned = this._DataStore.mosaic.ownedBy[this._Wallet.currentAccount.address];
-
-        // Mosaics owned names for current account
-        this.currentAccountMosaicNames = '';
-
-        // Selected mosaic from view
-        this.selectedMosaic = '';
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Object to contain our password & private key data.
-        this.common = nem.model.objects.get("common");
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Get mosaics for current account
-        this.updateCurrentAccountMosaics();
-
-        // Update the fee in view
-        this.prepareTransaction();
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a mosaic supply change transaction object
+        this.formData = nem.model.objects.get("mosaicSupplyChangeTransaction");
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Default mosaics owned
+        this.mosaicOwned = this._DataStore.mosaic.ownedBy[this._Wallet.currentAccount.address];
+        // Mosaics owned names for current account
+        this.currentAccountMosaicNames = '';
+        // Selected mosaic
+        this.selectedMosaic = '';
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Object to contain our password & private key data.
+        this.common = nem.model.objects.get("common");
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Init mosaics for current account
+        this.updateCurrentAccountMosaics();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
     /**
      * Update mosaic data for selected mosaic
@@ -96,16 +91,6 @@ class editMosaicCtrl {
     }
 
     /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("mosaicSupplyChangeTransaction");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.prepareTransaction();
-    }
-
-    /**
      * Prepare and broadcast the transaction to the network
      */
     send() {
@@ -123,8 +108,8 @@ class editMosaicCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {
