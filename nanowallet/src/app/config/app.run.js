@@ -13,7 +13,7 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
     // Check if a wallet is loaded before accessing private states
     $transitions.onStart({ 
         to: (state) => { 
-            return (state.name !== 'app.home') && (state.name !== 'app.login') && (state.name !== 'app.signup') && (state.name !== 'app.trezor');
+            return (state.name !== 'app.home') && (state.name !== 'app.login') && (state.name !== 'app.signup') && (state.name !== 'app.faq') && (state.name !== 'app.trezor');
         }
     }, (transition) => {
         if (!Wallet.current) {
