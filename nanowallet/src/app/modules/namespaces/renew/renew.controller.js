@@ -20,43 +20,37 @@ class RenewNamespacesCtrl {
 
         //// End dependencies region ////
 
-        //// Module properties region ////
-
-        // Form is a namespace provision transaction object 
-        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
-
-        // Set the sink account for view
-        this.formData.rentalFeeSink = nem.model.sinks.namespace[this._Wallet.network];
-
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Show / hide ns dropdown
-        this.needRenew = false;
-
-        // Object to contain our password & private key data.
-        this.common = nem.model.objects.get("common");
-        
-        // Default namespaces owned
-        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Update current account namespace
-        this.updateCurrentAccountNS();
-
-        // Update the fee in view
-        this.prepareTransaction();
-
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a namespace provision transaction object 
+        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
+        // Set the sink account for view
+        this.formData.rentalFeeSink = nem.model.sinks.namespace[this._Wallet.network];
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Show / hide ns dropdown
+        this.needRenew = false;
+        // Object to contain our password & private key data.
+        this.common = nem.model.objects.get("common");
+        // Default namespaces owned
+        this.namespaceOwned = this._DataStore.namespace.ownedBy[this._Wallet.currentAccount.address];
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Update current account namespace
+        this.updateCurrentAccountNS();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
     /**
      * Get current account namespaces & mosaic names
@@ -120,7 +114,6 @@ class RenewNamespacesCtrl {
         let entity = nem.model.transactions.prepare("namespaceProvisionTransaction")(this.common, this.formData, this._Wallet.network);
         // Store the prepared transaction
         this.preparedTransaction = entity;
-        //
         return entity;
     }
 
@@ -134,17 +127,6 @@ class RenewNamespacesCtrl {
     namespaceIsValid(ns) {
         let isParent = this.formData.namespaceParent ? true : false;
         return Helpers.namespaceIsValid(ns, isParent);
-    }
-
-    /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("namespaceProvisionTransaction");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.prepareTransaction();
-        return;
     }
 
     /**
@@ -165,8 +147,8 @@ class RenewNamespacesCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {

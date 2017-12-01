@@ -33,6 +33,7 @@
                   <label>{{ 'GENERAL_NAMESPACES' | translate }}: </label>
                 </span>
                 <select class="form-control" ng-options="namespace.fqn as namespace.fqn for namespace in $ctrl.getExpiringNamespaces($ctrl.namespaceOwned)" ng-model="$ctrl.formData.namespaceName" ng-change="$ctrl.prepareTransaction()">
+                  <option value="" selected disabled>{{ 'FORM_SELECT_NAMESPACE' | translate }}</option>
                 </select>
               </div>
             </fieldset>
