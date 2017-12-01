@@ -50,7 +50,7 @@
             <hr>
             <div class="row">
               <button class="btn btn-success" style="margin-bottom: 5px;width: auto;" ng-click="$ctrl.showStartStop = false;$ctrl.showDelegatedKeys = false;$ctrl.showImportanceTransfer = true;">{{ 'IMPORTANCE_TRANSFER_ACTIVATE_DEACTIVATE_REMOTE' | translate }}</button>
-              <button class="btn btn-success" style="margin-bottom: 5px;width: auto;" ng-disabled="$ctrl.multisigData.meta.remoteStatus !== 'ACTIVE'" ng-click="$ctrl.showImportanceTransfer = false;$ctrl.showDelegatedKeys = false;$ctrl.showStartStop = true;">{{ 'ACCOUNT_START_STOP_HARVESTING' | translate }}</button>
+              <button class="btn btn-success" style="margin-bottom: 5px;width: auto;" ng-disabled="$ctrl.multisigData.meta.remoteStatus === 'DEACTIVATING'" ng-click="$ctrl.showImportanceTransfer = false;$ctrl.showDelegatedKeys = false;$ctrl.showStartStop = true;">{{ 'ACCOUNT_START_STOP_HARVESTING' | translate }}</button>
               <button class="btn btn-success" style="margin-bottom: 5px;width: auto;" ng-click="$ctrl.showImportanceTransfer = false;$ctrl.showStartStop = false;$ctrl.showDelegatedKeys = true;">{{ 'IMPORTANCE_TRANSFER_SHOW_DELEGATED_KEYS' | translate }}</button>
             </div>
           </div>

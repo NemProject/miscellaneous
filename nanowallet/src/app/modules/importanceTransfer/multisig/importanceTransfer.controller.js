@@ -38,7 +38,7 @@ class MultisigImportanceTransferCtrl {
         // Address generated from the custom public key
         this.customGeneratedRemote = '';
 
-        // Needed to prevent user to click twice on send when already processing
+        // Prevent user to click twice on send when already processing
         this.okPressed = false;
 
         // Store multisig account data 
@@ -166,7 +166,10 @@ class MultisigImportanceTransferCtrl {
      */
     generateData() {
         // Get account private key for preparation or return
-        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+        if (!this._Wallet.decrypt(this.common)) { 
+            this.formData.multisigAccount = "";
+            return; 
+        }
 
         if (!this.formData.multisigAccount) return this.reset();
 
@@ -217,7 +220,7 @@ class MultisigImportanceTransferCtrl {
      */
     startDelegatedHarvesting() {
         // Get account private key or return
-        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+        if (!this._Wallet.decrypt(this.common)) return;
 
         // Start harvesting
         nem.com.requests.account.harvesting.start(this.harvestingNode, this.remotePrivateKey).then((data) => {
@@ -241,7 +244,7 @@ class MultisigImportanceTransferCtrl {
      */
     stopDelegatedHarvesting() {
         // Get account private key or return
-        if (!this._Wallet.decrypt(this.common)) return this.okPressed = false;
+        if (!this._Wallet.decrypt(this.common)) return;
 
         // Stop harvesting
         nem.com.requests.account.harvesting.stop(this.harvestingNode, this.remotePrivateKey).then((data) => {
@@ -262,8 +265,10 @@ class MultisigImportanceTransferCtrl {
         });
     }
 
+    /**
+     * Check if the generated remote account is the remote account of the multisig
+     */
     checkRemoteAccount() {
-        // Get multisig account data
         nem.com.requests.account.forwarded(this._Wallet.node, this.remoteAccountAddress).then((data) => {
             this._$timeout(() => {
                 if(data.account.address !== this.formData.multisigAccount.address) {
@@ -275,7 +280,7 @@ class MultisigImportanceTransferCtrl {
         },
         (err) => {
             this._$timeout(() => {
-                console.log(err.data.message);
+                this._Alert.getAccountDataError(err.data.message);
             });
         });
     }
