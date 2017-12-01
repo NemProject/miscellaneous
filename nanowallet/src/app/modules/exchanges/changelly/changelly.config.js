@@ -6,7 +6,7 @@ function ChangellyConfig($stateProvider) {
             url: '/changelly-buy-xem',
             controller: 'ChangellyCtrl',
             controllerAs: '$ctrl',
-            templateUrl: 'modules/changelly/changelly.html',
+            templateUrl: 'modules/exchanges/changelly/changelly.html',
             title: 'Convert to XEM'
         });
 
