@@ -503,6 +503,30 @@ export default class Alert {
         });
     }
 
+    exchangeNeedsMessage() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_EXCHANGE_NEEDS_MESSAGE'),
+            dismissOnTimeout: false,
+            dismissButton: true,
+            dismissOnClick: false
+        });
+    }
+
+    contactAlreadyInAddressBook() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK')
+        });
+    }
+
+    maxMosaicSupply() {
+        this._ngToast.create({
+            className: 'danger',
+            content: this._$filter('translate')('ALERT_MAX_MOSAIC_SUPPLY')
+        });
+    }
+
     /***
      * Success alerts
      */
