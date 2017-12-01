@@ -27,17 +27,6 @@ describe('Transfer transaction module tests', function() {
 
     }
 
-    function createDummyWalletContextMainnet(Wallet) {
-        Wallet.use(WalletFixture.mainnetWallet);
-        Nodes.setDefault();
-
-        DataStore.account.metaData = AccountDataFixture.mainnetAccountData;
-        DataStore.namespace.ownedBy = AccountDataFixture.mainnetNamespaceOwned;
-        DataStore.mosaic.ownedBy =  AccountDataFixture.mainnetMosaicOwned;
-        DataStore.mosaic.metaData = AccountDataFixture.mainnetMosaicDefinitionMetaDataPair;
-        DataStore.chain.height = 999999999;
-    } 
-
     it("Default properties initialized", function() {
         // Arrange:
         let scope = $rootScope.$new();
