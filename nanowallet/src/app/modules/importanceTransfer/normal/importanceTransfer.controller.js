@@ -22,18 +22,24 @@ class ImportanceTransferCtrl {
         this._Nodes = Nodes;
 
         //// End dependencies region ////
- 
-        //// Module properties region ////
 
+        // Initialization
+        this.init();
+    }
+
+    //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
         // Form is an importance transfer transaction object
         this.formData = nem.model.objects.create("importanceTransferTransaction")(this._Wallet.currentAccount.child, 1);
-
         // Not using custom node by default
         this.isCustomNode = false;
         this.customHarvestingNode = "";
         // Get the harvesting endpoint from local storage or use default node
         this.harvestingNode = this._Nodes.getHarvestingEndpoint();
-
         // No node slots by default
         this.hasFreeSlots = false;
         // Get the right nodes according to Wallet network
@@ -42,20 +48,15 @@ class ImportanceTransferCtrl {
         this.showSupernodes = this._Wallet.network !== nem.model.network.data.mainnet.id ? false : true;
         // Initial delegated account data
         this.delegatedData = this._DataStore.account.delegated.metaData;
-
-        // Needed to prevent user to click twice on send when already processing
+        // Prevent user to click twice on send when already processing
         this.okPressed = false;
-
         // Object to contain our password & private key data for importance transfer.
         this.common = nem.model.objects.get("common");
-
         // Object to contain our password & private key data to reveal delegated private key.
         this.commonDelegated =  nem.model.objects.get("common");
         this.commonDelegated.delegatedPrivateKey = "";
-
         // Object to contain our password & private key data to start/stop harvesting.
         this.commonHarvesting = nem.model.objects.get("common");
-
         // Modes
         this.modes = [{
             name: this._$filter('translate')('IMPORTANCE_TRANSFER_MODE_1'),
@@ -64,24 +65,24 @@ class ImportanceTransferCtrl {
             name: this._$filter('translate')('IMPORTANCE_TRANSFER_MODE_2'),
             key: 2
         }];
-
         // Not using custom public key by default
         this.customKey = false;
-
         // Store the prepared transaction
         this.preparedTransaction = {};
-
-        //// End properties region ////
-
         // Update fee
         this.prepareTransaction();
-
         // Check node slots
         this.checkNode();
-
         // Update delegated data
         this.updateDelegatedData();
+        // Arrange for hardware wallets
+        this.arrangeHW();
+    }
 
+    /**
+     * Create the remote for current account, if using hardware wallet
+     */
+    arrangeHW() {
         if (this._Wallet.algo == "trezor" && !this._Wallet.currentAccount.child) {
             // Disable send button
             this.okPressed = true;
@@ -90,8 +91,8 @@ class ImportanceTransferCtrl {
                 this._$timeout(() => {
                     // Enable send button
                     this.okPressed = false;
-                    // Reset form data
-                    this.resetData();
+                    this.formData.remoteAccount = this._Wallet.currentAccount.child;
+                    this.prepareTransaction();
                 }, 0)
             },
             (err) => {
@@ -102,8 +103,6 @@ class ImportanceTransferCtrl {
             });
         }
     }
-
-    //// Module methods region ////
 
     /**
      * Check node slots
@@ -159,7 +158,7 @@ class ImportanceTransferCtrl {
     }
 
     /**
-     * Start delegated harvesting, set chosen node in wallet service and local storage
+     * Start delegated harvesting
      */
     startDelegatedHarvesting() {
         // Get account private key or return
@@ -246,16 +245,6 @@ class ImportanceTransferCtrl {
     }
 
     /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.create("importanceTransferTransaction")(this._Wallet.currentAccount.child, 1);
-        this.preparedTransaction = {};
-        this.clearSensitiveData();
-        this.prepareTransaction();
-    }
-
-    /**
      * Prepare and broadcast the transaction to the network
      */
     send() {
@@ -273,8 +262,8 @@ class ImportanceTransferCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {
