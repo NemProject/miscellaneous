@@ -7,10 +7,10 @@ class AccountInputCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($timeout, Wallet, Recipient, $state) {
+    constructor($timeout, Wallet, Recipient, $state, $scope) {
         'ngInject';
 
-        // Initialise when component is ready
+        // Initialize when component is ready
         this.$onInit = () => {
 
             //// Component dependencies region ////
@@ -34,8 +34,16 @@ class AccountInputCtrl {
 
             //// End properties region ////
 
-            // If a recipient is set we get it's data
-            if (this.account) this.processRecipientInput();
+            // If an account is pre-set, we get it's data
+            if (this.account) this.processInput(false);
+
+            // Watch account binding
+            $scope.$watch(() => this.account, (val) => {
+                if (!val) {
+                    this.resetData();
+                    this.accountView = "";
+                }
+            }, true);
         }
 
     }
@@ -43,80 +51,58 @@ class AccountInputCtrl {
     //// Component methods region ////
 
     /**
-     * Process recipient input and get data from network
+     * Process input and get account data from network
+     *
+     * @param {boolean} isAlias - True is is alias, false otherwise
      */
-    processRecipientInput() {
-        // Reset recipient data
-        this.resetRecipientData();
-        //
-        return this._Recipient.getAccount(this.accountView).then((res) => {
+    processInput(isAlias) {
+        this.resetData();
+        // Get alias data
+        if (isAlias) return this._Recipient.getAlias(this.accountView).then((res) => {
             this._$timeout(() => {
-                //
-                this.setRecipientData(res);
-                return;
+                return this.setData(res);
             });
-        },
-        (err) => {
+        }, (err) => {
+            this._$timeout(() => { 
+                return this.resetData();
+            });
+        });
+        // Get account data if address length is okay
+        if (this.accountView.length === 40 || this.accountView.length === 46) return this._Recipient.getAccount(this.accountView).then((res) => {
             this._$timeout(() => {
-                // Reset recipient data
-                this.resetRecipientData();
-                return;
+                return this.setData(res);
+            });
+        }, (err) => { 
+            this._$timeout(() => {
+                return this.resetData();
             });
         });
     }
 
     /**
-     * Process @alias input and get owner data from network
-     */
-    processAliasInput() {
-        // Check if alias
-        if (this.accountView.lastIndexOf("@", 0) !== 0) return;
-        // Reset recipient data
-        this.resetRecipientData();
-        //
-        return this._Recipient.getAlias(this.accountView).then((res) => {
-            this._$timeout(() => {
-                //
-                this.setRecipientData(res);
-                return;
-            });
-        },
-        (err) => {
-            this._$timeout(() => {
-                // Reset recipient data
-                this.resetRecipientData();
-                return;
-            });
-        });
-    }
-
-    /**
-     * Set data received from Recipient service to the form
+     * Set data received from Recipient service
      *
      * @param {object} - An [AccountInfo]{@link http://bob.nem.ninja/docs/#accountInfo} object
      */
-    setRecipientData(data) {
+    setData(data) {
         // Arrange for alias
-        if (this.accountView.lastIndexOf("@", 0) === 0) {
+        if (this.isAlias(this.accountView)) {
             this.alias = this.accountView.substring(1);
-            this.accountView = nem.utils.format.address(data.account.address);
         }
-        // Store recipient public key
+        this.accountView = data.account.address;
+        // Store account public key
         this.publicKey = data.account.publicKey;
-        // Set clean the address
+        // Store clean address
         this.account = data.account.address;
         return;
     }
 
     /**
-     * Reset data stored for recipient
+     * Reset data stored for account
      */
-    resetRecipientData() {
-        // Hide alias address input field
+    resetData() {
         this.alias = "";
-        // Reset public key data
         this.publicKey = "";
-        // Reset the account
         this.account = "";
         return;
     }
@@ -127,14 +113,38 @@ class AccountInputCtrl {
     showHideAddressBook() {
         this.showContacts = this.showContacts ? this.showContacts = false : this.showContacts = true;
         this.accountView = undefined;
-        this.resetRecipientData();
+        this.resetData();
+    }
+
+    /**
+     * Check if an input is an alias
+     *
+     * @param {string} input - A text string to check
+     *
+     * @return {boolean} - True if alias, false otherwise
+     */
+    isAlias(input) {
+        if (!input) return false;
+        return input.lastIndexOf("@", 0) === 0;
+    }
+
+    /**
+     * Validate account input
+     */
+    isValid(input) {
+        if (!input) return true;
+        if (this.isAlias(input)) return true;
+        if (input.length !== 40 && input.length !== 46) return false;
+        if (!nem.model.address.isValid(input)) return false;
+        if (!nem.model.address.isFromNetwork(input, this._Wallet.network)) return false;
+        return true;
     }
 
     //// End methods region ////
 
 }
 
-// Header config
+// AccountInput config
 let AccountInput = {
     controller: AccountInputCtrl,
     templateUrl: 'layout/partials/accountInput.html',
