@@ -30,13 +30,13 @@ class Nodes {
      */
     setUtil() {
         if (this._Wallet.network === nem.model.network.data.testnet.id) {
-            this._Wallet.searchNode = nem.model.nodes.searchOnTestnet[0];
+            this._Wallet.searchNode = nem.model.objects.create("endpoint")(nem.model.nodes.searchOnTestnet[0].uri, nem.model.nodes.defaultPort);
             this._Wallet.chainLink = nem.model.nodes.testnetExplorer;
         } else if (this._Wallet.network === nem.model.network.data.mainnet.id) {
-            this._Wallet.searchNode = nem.model.nodes.searchOnMainnet[0];
+            this._Wallet.searchNode = nem.model.objects.create("endpoint")(nem.model.nodes.searchOnMainnet[0].uri, nem.model.nodes.defaultPort);
             this._Wallet.chainLink = nem.model.nodes.mainnetExplorer;
         } else {
-            this._Wallet.searchNode = nem.model.nodes.searchOnMijin[0];
+            this._Wallet.searchNode = nem.model.objects.create("endpoint")(nem.model.nodes.searchOnMijin[0].uri, nem.model.nodes.mijinPort);
             this._Wallet.chainLink = nem.model.nodes.mijinExplorer;
         }
         return;
@@ -146,13 +146,16 @@ class Nodes {
      * Return nodes according to a network
      *
      * @param {number} network - A network id (optional)
+     * @param {boolean} searchEnabled - True if getting nodes with search enabled, false otherwise (optional)
      *
      * @return {array} - An array of endpoint objects
      */
-    get(network) {
+    get(network, searchEnabled) {
         let _network = network || this._Wallet.network;
+        let _searchEnabled = searchEnabled || false;
         // Show right nodes list according to network
         if (_network == nem.model.network.data.mainnet.id) {
+            if (_searchEnabled) return this._$filter('toEndpoint')(nem.model.nodes.searchOnMainnet);
             // Get supernodes
             nem.com.requests.supernodes.all().then((data) => {
                     return this._$filter('toEndpoint')(data.nodes);
@@ -163,8 +166,10 @@ class Nodes {
                     return this._$filter('toEndpoint')(nem.model.nodes.mainnet);
                 });
         } else if (_network == nem.model.network.data.testnet.id) {
+            if (_searchEnabled) return this._$filter('toEndpoint')(nem.model.nodes.searchOnTestnet);
             return this._$filter('toEndpoint')(nem.model.nodes.testnet);
         } else {
+            if (_searchEnabled) return this._$filter('toEndpoint')(nem.model.nodes.searchOnMijin);
             return this._$filter('toEndpoint')(nem.model.nodes.mijin);
         }
     }
