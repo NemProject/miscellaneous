@@ -13,17 +13,23 @@ class WalletBuilder {
     constructor(Alert, $timeout, $localStorage) {
         'ngInject';
 
-        /**
-         * Service dependencies
-         */
+        //// Service dependencies region ////
 
         this._Alert = Alert;
         this._$timeout = $timeout;
         this._storage = $localStorage;
 
+        //// End dependencies region ////
+
+        //// Service properties region ////
+
         // Get wallets from local storage or create empty array
         this._storage.wallets = this._storage.wallets || [];
+
+        //// End properties region ////
     }
+
+    //// Service methods region ////
 
     /**
      * Create a PRNG wallet object
@@ -212,6 +218,8 @@ class WalletBuilder {
         // Return seed
         return seed;
     }
+
+    //// End methods region ////
 }
 
 export default WalletBuilder;
