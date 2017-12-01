@@ -44,6 +44,9 @@ class BalanceCtrl {
 
     //// Component methods region ////
 
+    /**
+     * Calculate balance according to selected market
+     */
     computeBalance() {
         if (undefined === this._DataStore.account.metaData) return;
         if (this._DataStore.market.selected === 'XEM') {
@@ -55,12 +58,20 @@ class BalanceCtrl {
         }
     }
 
+    /**
+     * Arrange the array of market keys
+     */
     arrangeMarkets() {
         this.markets = Object.keys(this._DataStore.market.btc) || [];
         this.markets.unshift('BTC');
         this.markets.unshift('XEM');
     }
 
+    /**
+     * Update balance value according to a market key
+     *
+     * @param {string} marketKey - A market key
+     */
     updateBalance(marketKey) {
         if (!marketKey) marketKey = this._DataStore.market.selected;
         this._$timeout(() => {
@@ -75,7 +86,7 @@ class BalanceCtrl {
 
 }
 
-// Header config
+// Balance config
 let Balance = {
     controller: BalanceCtrl,
     templateUrl: 'layout/partials/balance.html'

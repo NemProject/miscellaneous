@@ -11,7 +11,7 @@ class AttachMosaicCtrl {
     constructor($filter, $timeout, Wallet, DataStore) {
         'ngInject';
 
-        // Initialise when component is ready
+        // Initialize when component is ready
         this.$onInit = () => {
 
             //// Component dependencies region ////
@@ -78,6 +78,13 @@ class AttachMosaicCtrl {
         return;
     }
 
+    /**
+     * Return an array of sorted keys
+     * 
+     * @param {object} obj - An object of objects with a key
+     *
+     * @return {array} keys - An array of sorted keys or default array
+     */
     toSortedKeys(obj) {
         let keys = Object.keys(obj).sort(); 
         if (!keys.length) return ["nem:xem"];
@@ -88,7 +95,7 @@ class AttachMosaicCtrl {
 
 }
 
-// Header config
+// AttachMosaic config
 let AttachMosaic = {
     controller: AttachMosaicCtrl,
     templateUrl: 'layout/partials/attachMosaic.html',

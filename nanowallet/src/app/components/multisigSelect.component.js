@@ -10,7 +10,7 @@ class MultisigSelectCtrl {
     constructor($timeout, Wallet, DataStore) {
         'ngInject';
 
-        // Initialise when component is ready
+        // Initialize when component is ready
         this.$onInit = () => {
 
             //// Component dependencies region ////
@@ -27,6 +27,9 @@ class MultisigSelectCtrl {
 
     //// Component methods region ////
 
+    /**
+     * Update the controller
+     */
     update() {
         this._$timeout(() => {
             this.updateCtrl();
@@ -37,7 +40,7 @@ class MultisigSelectCtrl {
 
 }
 
-// Header config
+// MultisigSelect config
 let MultisigSelect = {
     controller: MultisigSelectCtrl,
     templateUrl: 'layout/partials/multisigSelect.html',

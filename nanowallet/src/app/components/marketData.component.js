@@ -68,7 +68,7 @@ class MarketDataCtrl {
 
 }
 
-// Header config
+// MarketData config
 let MarketData = {
     controller: MarketDataCtrl,
     templateUrl: 'layout/partials/marketData.html'

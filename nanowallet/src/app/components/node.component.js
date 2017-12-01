@@ -87,7 +87,7 @@ class NodeCtrl {
 
 }
 
-// Header config
+// Node config
 let Node = {
     controller: NodeCtrl,
     templateUrl: 'layout/partials/node.html'

@@ -11,7 +11,7 @@ class MessageAreaCtrl {
     constructor($filter, $timeout) {
         'ngInject';
 
-        // Initialise when component is ready
+        // Initialize when component is ready
         this.$onInit = () => {
 
             //// Component dependencies region ////
@@ -74,7 +74,7 @@ class MessageAreaCtrl {
 
 }
 
-// Header config
+// MessageArea config
 let MessageArea = {
     controller: MessageAreaCtrl,
     templateUrl: 'layout/partials/messageArea.html',
