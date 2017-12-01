@@ -286,6 +286,7 @@ function RussianProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_14: 'Плата определяется фиксированной и, таким образом, не зависит от количества, которе передается.',
         MOSAIC_DEFINITION_INFORMATION_15: 'Плата определяется в процентах и, таким образом, линейно возрастает, в зависимости от количество передаваемых мозайк.',
         MOSAIC_DEFINITION_INFORMATION_16: 'Отправка мозайки в блокчейне NEM требует комиссию. Точная комиссия расчитывается в зависимости от их общего количества и сколько будет отправлено в течении транзакции. За передачу любой <b>мозайки малого бизнеса</b> комиссия составляет 0.05 XEM. Это мозайки с делимостью 0 и количеством ≤ 10000.',
+        MOSAIC_DEFINITION_INFORMATION_17: 'If you own 100% of the supply, you can overwrite all the mosaic properties by sending a creation transaction again with the same "namespace:mosaic" name.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Изменить объём поставки мозайки',
@@ -491,6 +492,8 @@ function RussianProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Non signed exemple:',
         //APOSTILLE_AUDIT_SIGNED: 'Signed exemple:',
         APOSTILLE_AUDIT_FILES: 'Аудит файлов',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille format example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove records locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Отправить сообщение на счёт нотариального заверения',
@@ -576,6 +579,8 @@ function RussianProvider($translateProvider) {
         ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
         ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
         ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
+        ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
+        ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Кошелёк успешно создан и загружен!',
@@ -618,6 +623,8 @@ function RussianProvider($translateProvider) {
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Номера подписей для добавления (n) или удаления (-n) - автоматическое удаление',
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Информакция о выбранном аккаунте',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Использовать текущий аккаунт кошелька',
+        AGGREGATE_ADD_COSIG: 'Add cosignatory',
+        AGGREGATE_REMOVE_COSIG: 'Remove cosignatory',
 
         // SIGN MULTISIGNATURE TRANSACTIONS
         SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
@@ -731,6 +738,9 @@ function RussianProvider($translateProvider) {
         FORM_MESSAGE_PLACEHOLDER: 'Сообщение',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Имя мозайки',
         FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Адрес аккаунта или @псевдоним',
+        FORM_BTN_GET_ALIAS: 'Get alias address',
+        FORM_BTN_OPEN_ADB: 'Open address book',
+        FORM_SELECT_NAMESPACE: 'Select a namespace',
 
         // VOTING MODULE
         PORTAL_VOTING_TITLE: 'Voting',
@@ -741,7 +751,8 @@ function RussianProvider($translateProvider) {
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
-        FORM_SELECT_MULTISIG: 'Select a multisignature account'
+        FORM_SELECT_MULTISIG: 'Select a multisignature account',
+        FORM_SELECT_CONTACT: 'Select a contact'
     });
 
 }

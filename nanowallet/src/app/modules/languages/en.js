@@ -26,7 +26,7 @@ function EnglishProvider($translateProvider) {
         HEADER_NODE_CUSTOM_INFO: 'Node ip or domain',
         HEADER_NODE_CUSTOM_TOOLTIP: 'Enter your own NIS node here',
         HEADER_PURGE: 'Purge',
-        HEADER_PURGE_MESSAGE: 'Please confirm the purge of local storage. By clicking "OK" all wallets in local storage will be deleted and will not be recoverable. You agree that all wallets have been backed up and funds are secured.',
+        HEADER_PURGE_MESSAGE: 'Please confirm the purge of local storage. By clicking "Purge" all wallets in your browser local storage will be deleted and will not be recoverable. You agree that all wallets have been backed up and funds are secured.',
 
         // FOOTER COMPONENT
         FOOTER_POWERED_BY_1: 'Powered by',
@@ -227,9 +227,9 @@ function EnglishProvider($translateProvider) {
         IMPORTANCE_TRANSFER_INFO_PART_MULTISIG: 'For multisignature accounts only the cosignatory that initiated the importance transfer transaction can start and stop harvesting. If any other cosignatory want to take back power on harvesting, he just need to deactivate and reactivate the remote status.',
         IMPORTANCE_TRANSFER_NO_BLOCKS_HARVESTED: 'No blocks harvested',
         IMPORTANCE_TRANSFER_HARVESTING_PANEL: 'Harvesting panel',
-        IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'You must wait until your remote status is active to start delegated harvesting',
+        IMPORTANCE_TRANSFER_REMOTE_ACTIVATING: 'You must wait until your remote status is active to start delegated harvesting (6 hours)',
         IMPORTANCE_TRANSFER_REMOTE_INACTIVE: 'You must send an importance transfer from the left panel to activate your remote account',
-        IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to start or stop delegated harvesting. Please, consult above information tab to know how to take back control on harvesting.',
+        IMPORTANCE_TRANSFER_MULTISIG_NOT_INITIATOR: 'You are not the cosignatory that initiated the importance transfer, therefore it is not possible for you to see, start or stop the delegated harvesting status directly. Please, contact the cosignatory managing the remote account. You can kick a manager and take back the control of harvesting by deactivating and reactivating with your remote.',
         IMPORTANCE_TRANSFER_PRIVATE_KEY_PLACEHOLDER: 'Reveal delegated private key',
         IMPORTANCE_TRANSFER_DELEGATED_KEYS: 'Delegated account Key',
         IMPORTANCE_TRANSFER_HARVESTING_STATUS: 'Harvesting status',
@@ -282,6 +282,7 @@ function EnglishProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_14: 'The fee is specified as absolute quantity and thus does not depend on the quantity that is transferred.',
         MOSAIC_DEFINITION_INFORMATION_15: 'The fee is specified as multiple of the percentile of the quantity that is transferred. The fee is thus linearly increasing with the transferred mosaic quantity.',
         MOSAIC_DEFINITION_INFORMATION_16: 'Sending mosaics on the NEM blockchain requires a fee. The exact fee is calculated depending on their total number and how many are being sent during a transaction. <b>Small business mosaics</b> are given a discounted flat rate of 0.05 XEM per mosaic per transfer.  These are mosaics with a quantity of less than 10,000 and a divisibility of 0.',
+        MOSAIC_DEFINITION_INFORMATION_17: 'If you own 100% of the supply, you can overwrite all the mosaic properties by sending a creation transaction again with the same "namespace:mosaic" name.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Change mosaic supply',
@@ -373,9 +374,9 @@ function EnglishProvider($translateProvider) {
         PORTAL_MULTISIG_BTN_3: 'Sign multisig transactions',
         PORTAL_HARVESTING_TITLE: 'Delegated Harvesting',
         PORTAL_HARVESTING_TEXT: 'Delegated harvesting is the feature that allows "mining" even while your account is closed.',
-        PORTAL_CHANGELLY_TITLE: 'Changelly Instant Exchange',
-        PORTAL_CHANGELLY_TEXT: 'Use the Changelly widget to buy XEM at the best rates!',
-        PORTAL_CHANGELLY_BTN: 'Buy XEM',
+        PORTAL_EXCHANGE_TITLE: 'Instant Exchanges',
+        PORTAL_EXCHANGE_TEXT: 'Use Changelly and ShapeShift widgets to buy XEM at the best rates!',
+        PORTAL_EXCHANGE_BTN: 'Buy XEM',
         PORTAL_NS_TITLE: 'Namespaces & Subdomains',
         PORTAL_NS_TEXT: 'Namespaces are domain names. Each namespace is unique and authenticates mosaics (assets) issued on it or on its subdomains.',
         PORTAL_NS_BTN: 'Create namespace',
@@ -488,6 +489,8 @@ function EnglishProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Non signed exemple:',
         //APOSTILLE_AUDIT_SIGNED: 'Signed exemple:',
         APOSTILLE_AUDIT_FILES: 'Audit files',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille format example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove records locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Send message to notarization account',
@@ -547,7 +550,7 @@ function EnglishProvider($translateProvider) {
         ALERT_EMPTY_DECODED_MSG: 'An error occured, no decoded message!',
         ALERT_INVALID_NS_NAME: 'Name of namespace is invalid!',
         ALERT_INVALID_MOSAIC_NAME: 'Name of mosaic is invalid!',
-        ALERT_MOSAIC_DESCRIPTION: 'Description of mosaic is invalid!',
+        ALERT_MOSAIC_DESCRIPTION: 'Description of mosaic is too long!',
         ALERT_GET_INCOMING_TXES_ERROR: 'An error occured while trying to fetch incoming transactions, reason: ',
         ALERT_GET_MOSAICS_DEFINITIONS_ERROR: 'Error at fetching mosaics definitions, reason: ',
         ALERT_GET_SUB_NS_ERROR: 'Error at fetching namespaces definitions, reason: ',
@@ -573,6 +576,8 @@ function EnglishProvider($translateProvider) {
         ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
         ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
         ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
+        ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
+        ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded!',
@@ -605,7 +610,6 @@ function EnglishProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimum signatures needed to validate a transaction',
         AGGREGATE_MODIFICATION_LIST: 'Modifications list',
         AGGREGATE_COSIG_LIST: 'Cosignatory Address List',
-
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Edit a multisignature contract',
         AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account to edit',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Select an account to edit',
@@ -616,6 +620,8 @@ function EnglishProvider($translateProvider) {
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Selected account information',
         AGGREGATE_MIN_SIGNATURES: 'Min signatures',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Use wallet account',
+        AGGREGATE_ADD_COSIG: 'Add cosignatory',
+        AGGREGATE_REMOVE_COSIG: 'Remove cosignatory',
 
         // SIGN MULTISIGNATURE TRANSACTIONS
         SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Sign multisignature transactions',
@@ -684,13 +690,13 @@ function EnglishProvider($translateProvider) {
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',
         FAQ_QUESTION_1: 'How Nano Wallet works?',
-        FAQ_ANSWER_1: 'Nano Wallet is built using the latest crypto libraries with ES6 and AngularJS. It is a full client-side application that never sends any sensitive data through the wire; everything happens in your browser from creating private keys to the signing of transactions.',
+        FAQ_ANSWER_1: 'Nano Wallet is built with AngularJS and ES6. It is a full client-side application that never sends any sensitive data through the wire; everything happens in your browser from creating private keys to the signing of transactions.',
         FAQ_QUESTION_2: 'Is it free to use?',
         FAQ_ANSWER_2: 'Absolutely all operations are client-side, only you have control of your coins, no third parties, and no extra fees.',
         FAQ_QUESTION_3: 'Why do I already have one mosaic?',
         FAQ_ANSWER_3: 'Because XEM is the default currency of the NEM blockchain, every user already has it registered to their wallet, even if their balance is 0. Its namespace is NEM and the mosaic name is XEM',
         FAQ_QUESTION_4: 'Roadmap?',
-        FAQ_ANSWER_4: 'The current roadmap includes integration of all NEM client features and completion of community funded projects to work across this wallet.',
+        FAQ_ANSWER_4: 'The current roadmap includes integration of all features from NanoWallet v1.x.x and completion of community funded projects to work across this wallet.',
         FAQ_QUESTION_5: 'Can I get free XEM?',
         FAQ_ANSWER_5: 'The NEM faucet is currently down, but you can consult the NEM forum to know about the available bounties.',
         FAQ_QUESTION_6: 'Where to find more information about NEM?',
@@ -698,7 +704,7 @@ function EnglishProvider($translateProvider) {
         FAQ_ANSWER_6_WEBSITE: 'Official website',
         FAQ_ANSWER_6_BTT: 'Official BitcoinTalk thread',
         FAQ_QUESTION_7: 'How to support the project?',
-        FAQ_ANSWER_7: 'Nano Wallet is maintained by Quantum_Mechanics based on Gimre\'s lightwallet',
+        FAQ_ANSWER_7: 'Nano Wallet is a community project created and maintained by Quantum_Mechanics, based on Gimre\'s lightwallet',
         FAQ_ANSWER_7_2: 'Apostille is a service working across <a href="http://apostille.nem.io">apostille.nem.io</a> website in collaboration with Jabo38 for the <a href="https://forum.nem.io/t/nem-apostille-a-nem-notary-system-community-fund-proposal/2001" target="_blank">Apostille project</a>.',
         FAQ_ANSWER_7_3: 'If you are willing to help feel free to pick an address below, thanks :)',
         FAQ_ANSWER_7_4: 'NanoWallet project funds:',
@@ -729,6 +735,7 @@ function EnglishProvider($translateProvider) {
         FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
         FORM_BTN_GET_ALIAS: 'Get alias address',
         FORM_BTN_OPEN_ADB: 'Open address book',
+        FORM_SELECT_NAMESPACE: 'Select a namespace',
 
         // VOTING MODULE
         PORTAL_VOTING_TITLE: 'Voting',
@@ -740,6 +747,7 @@ function EnglishProvider($translateProvider) {
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
         FORM_SELECT_MULTISIG: 'Select a multisignature account',
+        FORM_SELECT_CONTACT: 'Select a contact',
 
         // TREZOR RELATED
         TREZOR_TITLE: 'TREZOR',

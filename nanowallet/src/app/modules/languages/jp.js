@@ -286,6 +286,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_14: "固定徴収方式の場合、徴収額は転送される量に依存しません。",
       MOSAIC_DEFINITION_INFORMATION_15: "パーセンタイル徴収方式の場合、徴収額は送信するモザイクの量に従って変化します。",
       MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり0.05 XEMが定額手数料となります。",
+      MOSAIC_DEFINITION_INFORMATION_17: 'If you own 100% of the supply, you can overwrite all the mosaic properties by sending a creation transaction again with the same "namespace:mosaic" name.',
 
       // EDIT MOSAIC MODULE
       MOSAIC_SUPPLY_CHANGE_TITLE: "モザイク供給量を変更",
@@ -491,6 +492,8 @@ function JapaneseProvider($translateProvider) {
       //APOSTILLE_AUDIT_NON_SIGNED: "署名なしの例:",
       //APOSTILLE_AUDIT_SIGNED: "署名の例:",
       APOSTILLE_AUDIT_FILES: "監査ファイル",
+      APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille format example',
+      APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove records locally',
 
       // APOSTILLE MESSAGE MODULE
       APOSTILLE_MESSAGE_TITLE: '公証アカウントにメッセージを送信する',
@@ -576,6 +579,8 @@ function JapaneseProvider($translateProvider) {
       ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
       ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
       ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
+      ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
+      ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",
@@ -619,6 +624,8 @@ function JapaneseProvider($translateProvider) {
       AGGREGATE_SELECTED_ACCOUNT_INFO: "選択されたアカウントの情報",
       AGGREGATE_MIN_SIGNATURES: '最小署名者数',
       AGGREGATE_SELECT_WALLET_ACCOUNT: "使用するウォレットアカウント",
+      AGGREGATE_ADD_COSIG: 'Add cosignatory',
+      AGGREGATE_REMOVE_COSIG: 'Remove cosignatory',
 
       // SIGN MULTISIGNATURE TRANSACTIONS
       SIGN_MULTISIG_TRANSACTIONS_TITLE: 'マルチシグトランザクションの署名',
@@ -732,6 +739,9 @@ function JapaneseProvider($translateProvider) {
       FORM_MESSAGE_PLACEHOLDER: "メッセージ",
       FORM_MOSAIC_NAME_PLACEHOLDER: "モザイク名",
       FORM_ADDRESS_ALIAS_PLACEHOLDER: 'アカウントアドレス 又は @エイリアス名',
+      FORM_BTN_GET_ALIAS: 'Get alias address',
+      FORM_BTN_OPEN_ADB: 'Open address book',
+      FORM_SELECT_NAMESPACE: 'Select a namespace',
 
       // VOTING MODULE
       PORTAL_VOTING_TITLE: 'Voting',
@@ -742,7 +752,8 @@ function JapaneseProvider($translateProvider) {
       FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
       FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
       FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
-      FORM_SELECT_MULTISIG: 'Select a multisignature account'
+      FORM_SELECT_MULTISIG: 'Select a multisignature account',
+      FORM_SELECT_CONTACT: 'Select a contact'
     });
 
 }

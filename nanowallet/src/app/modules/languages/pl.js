@@ -286,6 +286,7 @@ function PolishProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_14: 'Opłata jest określona jako stała, a więc nie jest uzależniona od ilości mozaiki, która jest przekazywana.',
         MOSAIC_DEFINITION_INFORMATION_15: 'Opłata jest określona jako iloczn oprocentowania i transferowanej ilości. Wobc tego opłata wzrasta liniowo wraz z ilością transferowanej mozaiki.',
         MOSAIC_DEFINITION_INFORMATION_16: 'Wysyłanie mozaiki na blockchainie NEM wymaga opłaty. Dokładna wartość opłaty jest obliczana w zależności od ich łącznej liczby i ilości wysyłanej podczas transakcji. <b>Mozaiki małych firm</b> otrzymują tańszą, stałą stawkę 0.05 XEM za transfer mozaiki. To mozaiki z ilością mniejszą niż 10 000 i podzielnością 0.',
+        MOSAIC_DEFINITION_INFORMATION_17: 'If you own 100% of the supply, you can overwrite all the mosaic properties by sending a creation transaction again with the same "namespace:mosaic" name.',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Zmień ilość mozaiki',
@@ -494,6 +495,8 @@ function PolishProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Niepodpisany przykład:',
         //APOSTILLE_AUDIT_SIGNED: 'Podpisany przykład:',
         APOSTILLE_AUDIT_FILES: 'Audytuj pliki',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille format example',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove records locally',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Wyślij wiadomość do konta notaryzującego.',
@@ -580,6 +583,8 @@ function PolishProvider($translateProvider) {
         ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
         ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
         ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
+        ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
+        ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portfel utworzony i załadowany !',
@@ -622,6 +627,8 @@ function PolishProvider($translateProvider) {
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Informacja o wybranym koncie',
         AGGREGATE_MIN_SIGNATURES: 'Minimum sygnatur',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Użyj portfela konta',
+        AGGREGATE_ADD_COSIG: 'Add cosignatory',
+        AGGREGATE_REMOVE_COSIG: 'Remove cosignatory',
 
         // SIGN MULTISIGNATURE TRANSACTIONS
         SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Zatwierdź transakcję z multipodpisem',
@@ -733,6 +740,9 @@ function PolishProvider($translateProvider) {
         FORM_MESSAGE_PLACEHOLDER: 'Wiadomość',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Nazwa mozaiki',
         FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Adres konta lub @alias',
+        FORM_BTN_GET_ALIAS: 'Get alias address',
+        FORM_BTN_OPEN_ADB: 'Open address book',
+        FORM_SELECT_NAMESPACE: 'Select a namespace',
 
         RENEW_NS_TITLE: 'Odnów namespace',
         RENEW_NS_NONE: 'Brak namespace do odnowienia',
@@ -751,7 +761,8 @@ function PolishProvider($translateProvider) {
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Write your description here',
         FORM_OPTION_FIELD_PLACEHOLDER: 'write option',
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account address',
-        FORM_SELECT_MULTISIG: 'Select a multisignature account'
+        FORM_SELECT_MULTISIG: 'Select a multisignature account',
+        FORM_SELECT_CONTACT: 'Select a contact'
     });
 
 }
