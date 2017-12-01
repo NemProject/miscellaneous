@@ -20,53 +20,44 @@ class EditMultisigCtrl {
 
         //// End dependencies region ////
 
-        //// Module properties region ////
-
-        // Form is a multisig agregate modification transaction object
-        this.formData = nem.model.objects.get("multisigAggregateModification");
-
-        // Modification is always multisig
-        this.formData.isMultisig = true;
-
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Default cosignatory to add is the current account address
-        this.cosignatoryToAdd = this._Wallet.currentAccount.address;
-
-        // Store cosignatory public key
-        this.cosignatoryPubKey = '';
-
-        // No min cosignatory modification by default
-        this.formData.relativeChange = null;
-
-        // Store info about the multisig account to show balance, cosigs and min signatures
-        this.multisigInfoData = undefined;
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Modifications list pagination properties
-        this.currentPage = 0;
-        this.pageSize = 5;
-
-        // Object to contain our password & private key data
-        this.common = nem.model.objects.get("common");
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Get data of default multisig account
-        this.processMultisigInput();
-
-        // Init fees
-        this.prepareTransaction();
-
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a multisig agregate modification transaction object
+        this.formData = nem.model.objects.get("multisigAggregateModification");
+        // Modification is always multisig
+        this.formData.isMultisig = true;
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Cosignatory to add
+        this.cosignatoryToAdd = '';
+        // Cosignatory public key
+        this.cosignatoryPubKey = '';
+        // No min cosignatory modification by default
+        this.formData.relativeChange = null;
+        // Store info about the multisig account to show balance, cosigs and min signatures
+        this.multisigInfoData = undefined;
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Modifications list pagination properties
+        this.currentPage = 0;
+        this.pageSize = 5;
+        // Object to contain our password & private key data
+        this.common = nem.model.objects.get("common");
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Get data of default multisig account
+        this.processMultisigInput();
+        // Init fees
+        this.prepareTransaction();
+    }
 
     /**
      * Calculate the minimum signature change needed
@@ -150,7 +141,7 @@ class EditMultisigCtrl {
      * Reset data stored and properties for multisig account
      */
     resetMultisigData() {
-         this.multisigInfoData = undefined;
+        this.multisigInfoData = undefined;
         // Reset modifications array
         this.formData.modifications = [];
         // Reset relativeChange
@@ -228,17 +219,6 @@ class EditMultisigCtrl {
         }
     }
 
-     /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("multisigAggregateModification");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.cosignatoryPubKey = '';
-        this.prepareTransaction();
-    }
-
     /**
      * Build and broadcast the transaction to the network
      */
@@ -255,10 +235,8 @@ class EditMultisigCtrl {
         // Use wallet service to serialize and send
         this._Wallet.transact(this.common, entity).then(() => {
             this._$timeout(() => {
-                // Enable send button
-                this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {
