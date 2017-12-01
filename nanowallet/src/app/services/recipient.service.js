@@ -8,11 +8,12 @@ class Recipient {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(Wallet, Alert) {
+    constructor($timeout, Wallet, Alert) {
         'ngInject';
 
         // Service dependencies region //
 
+        this._$timeout = $timeout;
         this._Wallet = Wallet;
         this._Alert = Alert;
 
@@ -31,8 +32,12 @@ class Recipient {
     getAlias(input) {
         // Check if input is an alias
         let isAlias = (input.lastIndexOf("@", 0) === 0);
+        if (!isAlias) {
+            console.log("Alias must start with @!");
+            return Promise.reject(true);
+        }
         // Check if correct input
-        if (isAlias && input.length > 1) {
+        if (input.length > 1) {
             // Clean namespace name of the @
             let nsForLookup = input.substring(1);
             return nem.com.requests.namespace.info(this._Wallet.node, nsForLookup).then((data) => {
@@ -40,19 +45,24 @@ class Recipient {
                 if (nem.model.address.isFromNetwork(data.owner, this._Wallet.network)) {
                     return this.getAccount(data.owner);
                 } else {
-                    this._Alert.invalidAddressForNetwork(data.owner, this._Wallet.network);
+                    this._$timeout(() => {
+                        this._Alert.invalidAddressForNetwork(data.owner, this._Wallet.network);
+                    });
                     return Promise.reject(true);
                 }
             },
             (err) => {
-                if(err.code < 0) {
-                    this._Alert.connectionError();
-                }  else {
-                    this._Alert.getNamespacesByIdError(err.data.message);
-                }
+                this._$timeout(() => {
+                    if(err.code < 0) {
+                        this._Alert.connectionError();
+                    }  else {
+                        this._Alert.getNamespacesByIdError(err.data.message);
+                    }
+                });
                 return Promise.reject(true);
             });
         } else {
+            console.log("Alias must have at least one character!")
             return Promise.reject(true);
         }
     }
@@ -68,17 +78,27 @@ class Recipient {
         // Check if input is an alias
         let isAlias = (input.lastIndexOf("@", 0) === 0);
         // Return if input incorrect
-        if (isAlias || !nem.model.address.isValid(input)) return Promise.reject(true);
+        if (isAlias) return Promise.reject(true);
+        if (!nem.model.address.isValid(input)) {
+            console.log("Provided address is not valid!");
+            return Promise.reject(true);
+        }
+        if (!nem.model.address.isFromNetwork(input, this._Wallet.network)) {
+            console.log("Provided address does not correspond to the current network!");
+            return Promise.reject(true);
+        }
         // Get account data
         return nem.com.requests.account.data(this._Wallet.node, input.toUpperCase().replace(/-/g, '')).then((data) => {
             return data;
         },
         (err) => {
-            if(err.code < 0) {
-                this._Alert.connectionError();
-            }  else {
-                this._Alert.getAccountDataError(err.data.message);
-            }
+            this._$timeout(() => {
+                if(err.code < 0) {
+                    this._Alert.connectionError();
+                }  else {
+                    this._Alert.getAccountDataError(err.data.message);
+                }
+            });
             return Promise.reject(true);
         });
     }
