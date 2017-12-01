@@ -601,6 +601,12 @@ input[type=checkbox]:checked + label:before {
 			width: 200px;
 		}
   }
+  .address {
+    border-right: 1px solid rgba(0,0,0,0.05);
+    @media only screen and (max-width : $lg) {
+        display: none;
+    }
+  }
   .login {
     text-transform: uppercase;
     border-left: 1px solid rgba(0,0,0,0.05);
@@ -858,7 +864,7 @@ footer {
   }
   .arrows {
     &.harvested {
-      margin-top: 0px;
+      margin-top: 25px;
     }
   }
 }
