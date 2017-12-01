@@ -1,13 +1,42 @@
 import nem from 'nem-sdk';
 
 class HomeCtrl {
-    constructor(AppConstants, $localStorage) {
+
+    /**
+     * Initialize dependencies and properties
+     *
+     * @params {services} - Angular services to inject
+     */
+    constructor(AppConstants, $localStorage, $http) {
         'ngInject';
 
+        //// Module dependencies region ////
+
         this._storage = $localStorage;
+        this._$http = $http;
+        this._AppConstants = AppConstants;
+
+        //// End dependencies region ////
+
+        //// Module properties region ////
 
         this.appName = AppConstants.appName;
+        this.newUpdate = false;
+        this.updateInfo = {};
 
+        //// End properties region ////
+
+        this.checkBrowser();
+        this.getGeolocation();
+        this.checkLatestVersion();
+    }
+
+    //// Module methods region ////
+
+    /**
+     * Check if browser is supported or show an un-dismassable modal
+     */
+    checkBrowser() {
         // Detect recommended browsers
         let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
         let isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
@@ -15,13 +44,18 @@ class HomeCtrl {
 
         // If no recommended browser used, open modal
         if(!isChrome && !isSafari && !isFirefox) {
-        	$('#noSupportModal').modal({
-			  backdrop: 'static',
-			  keyboard: false
-			}); 
+            $('#noSupportModal').modal({
+              backdrop: 'static',
+              keyboard: false
+            }); 
         }
+    }
 
-        // Get position and closest nodes if no mainnet node in local storage
+    /**
+     * Get closest node from geolocation, if user agrees
+     */
+    getGeolocation() {
+        // If no mainnet node in local storage
         if (navigator.geolocation && !this._storage.selectedMainnetNode) {
             // Get position
             navigator.geolocation.getCurrentPosition((res) => {
@@ -50,6 +84,20 @@ class HomeCtrl {
             });
         }
     }
+
+    /**
+     * Check if a new version is available on Github
+     */
+    checkLatestVersion() {
+        this._$http.get("https://api.github.com/repos/NemProject/NanoWallet/releases/latest").then((res) => {
+            if (res.data.name !== this._AppConstants.version) {
+                this.newUpdate = true;
+                this.updateInfo = res.data;
+            }
+        });
+    }
+
+    //// End methods region ////
 }
 
 export default HomeCtrl;

@@ -1,3 +1,6 @@
+<div class="alert alert-info text-center" style="margin-top: -20px;padding: 5px;" role="alert" ng-show="$ctrl.newUpdate">
+   <b>New version available!</b> <a href="{{$ctrl.updateInfo.html_url}}" target="_blank" style="color:#337ab7;">Download {{$ctrl.updateInfo.name}}</a>
+</div>
 <div class="home-page">
    <div class="banner">
       <div class="container">
@@ -33,7 +36,7 @@
             <i class="fa fa-4x">&#xf2bb; </i>
          </div>
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 8">
-            <img src="images/changellyRocket.png" style="width:100%;"/>
+            <i class="fa fa-exchange fa-4x"></i>
          </div>
          <div class="col-md-1">
          </div>
@@ -67,7 +70,7 @@
             <p>{{ 'PORTAL_ADDRESS_BOOK_TEXT' | translate }}</p>
          </div>
          <div ng-show="$ctrl.showInfo === 8">
-            <p>{{ 'PORTAL_CHANGELLY_TEXT' | translate }}</p>
+            <p>{{ 'PORTAL_EXCHANGE_TEXT' | translate }}</p>
          </div>
       </div>
    </div>
