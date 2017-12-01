@@ -44,6 +44,7 @@ import './modules/mosaics';
 import './modules/explorer';
 import './modules/importanceTransfer';
 import './modules/changelly';
+import './modules/shapeshift';
 import './modules/addressBook';
 import './modules/faq';
 import './modules/voting';
@@ -91,6 +92,7 @@ const requires = [
     'pascalprecht.translate',
     'app.lang',
     'app.changelly',
+    'app.shapeshift',
     'app.addressBook',
     'app.votingCreatePoll',
     'app.votingPolls'
