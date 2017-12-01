@@ -32,12 +32,17 @@
             <i class="fa fa-wrench"></i> {{ 'HEADER_SERVICES' | translate }}
           </a>
         </li>
-        <!--<li>
+        <li>
           <a style="outline:0;" ui-sref-active="active" ui-sref="app.explorerHome" show-authed="true">
             <i class="fa fa-globe"></i> {{ 'HEADER_EXPLORER' | translate }}
           </a>
-        </li>-->
+        </li>
         <balance class="nav navbar-nav"></balance>
+        <li class="address" style="border-left:none;">
+          <a style="outline:0;font-size:85%;cursor:pointer;" show-authed="true" ui-sref-active="active" ui-sref="app.account" >
+            <b>{{ $ctrl._Wallet.currentAccount.address | fmtAddress }}</b>
+          </a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -76,7 +81,7 @@
             </li>
           </ul>
         </li>
-        <!-- <li><a style="outline:0;border-left:medium none;" ui-sref-active="active" ui-sref="app.faq"><i class="fa fa-question-circle"></i></a></li> -->
+        <li><a style="outline:0;border-left:medium none;" ui-sref-active="active" ui-sref="app.faq"><i class="fa fa-question-circle"></i></a></li>
         <li>
           <a style="outline:0;cursor:pointer;border-right:none;" show-authed="true" ng-click="$ctrl.logout()">
             <i class="fa fa-sign-out"></i> <small><b>{{$ctrl._Wallet.current.name}}</small></b>
