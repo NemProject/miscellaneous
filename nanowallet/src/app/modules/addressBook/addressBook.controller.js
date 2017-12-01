@@ -77,6 +77,8 @@ class AddressBookCtrl {
 
         // Check address
         if(!this.checkAddress()) return;
+        // Check presence
+        if(this.checkPresence()) return;
 
         this.contacts.push({
             "label": this.formData.label,
@@ -135,24 +137,30 @@ class AddressBookCtrl {
     }
 
     /**
-     * Check if contact address is valid and not present
+     * Check if contact address is valid
      */
     checkAddress() {
         // Check address
-        if(this.formData.address.length !== 40 && this.formData.address.length !== 46 || !nem.model.address.isValid(this.formData.address) || !nem.model.address.isFromNetwork(this.formData.address, this._Wallet.network)) {
+        if(nem.model.address.clean(this.formData.address).length !== 40 || !nem.model.address.isValid(this.formData.address) || !nem.model.address.isFromNetwork(this.formData.address, this._Wallet.network)) {
             this._Alert.invalidAddress();
             this.okPressed = false;
             return false;
-        } else {
-            for (let i = 0; i < this.contacts.length; i++) {
-                if (nem.model.address.clean(this.contacts[i].address) === nem.model.address.clean(this.formData.address)) {
-                    // Todo add alert
-                    this.okPressed = false;
-                    return false;
-                }
-            }
         }
         return true; 
+    }
+
+    /**
+     * Check if contact address and label already exists
+     */
+    checkPresence() {
+        for (let i = 0; i < this.contacts.length; i++) {
+            if (nem.model.address.clean(this.contacts[i].address) === nem.model.address.clean(this.formData.address) || this.contacts[i].label === this.formData.label) {
+                this._Alert.contactAlreadyInAddressBook();
+                this.okPressed = false;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -209,9 +217,9 @@ class AddressBookCtrl {
      * Export address book to .adb file
      */
     exportAddressBook() {
-        let wordArray = CryptoJS.enc.Utf8.parse(angular.toJson(this.contacts));
+        let wordArray = nem.crypto.js.enc.Utf8.parse(angular.toJson(this.contacts));
         // Word array to base64
-        let base64 = CryptoJS.enc.Base64.stringify(wordArray);
+        let base64 = nem.crypto.js.enc.Base64.stringify(wordArray);
         // Set download element attributes
         $("#exportAddressBook").attr('href', 'data:application/octet-stream,' + base64);
         $("#exportAddressBook").attr('download', this._Wallet.current.name + '.adb');
@@ -233,7 +241,7 @@ class AddressBookCtrl {
      * @param $fileContent - content file for import
      */
     importAddressBook($fileContent) {
-        let contacts = JSON.parse(CryptoJS.enc.Utf8.stringify(CryptoJS.enc.Base64.parse($fileContent)));
+        let contacts = JSON.parse(nem.crypto.js.enc.Utf8.stringify(nem.crypto.js.enc.Base64.parse($fileContent)));
 
         if (contacts.length) {
             for (var i = 0; i < contacts.length; i++) {
