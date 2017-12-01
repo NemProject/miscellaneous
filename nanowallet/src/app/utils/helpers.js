@@ -157,8 +157,29 @@ let isValidForExchanges = function(entity) {
  * @return {number} - The object size
  */
 let objectSize = function(obj) {
+    if (!obj) return;
     return Object.keys(obj).length;
 }
+
+/**
+ * Date object to YYYY-MM-DD format
+ *
+ * @param {object} date - A date object
+ *
+ * @return {string} - A short date
+ */
+let toShortDate = function(date) {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    return yyyy + '-' + mm + '-' + dd;
+};
 
 module.exports = {
     haveWallet,
@@ -171,5 +192,6 @@ module.exports = {
     isHexadecimal,
     isTextAmountValid,
     isValidForExchanges,
-    objectSize
+    objectSize,
+    toShortDate
 }
