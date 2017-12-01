@@ -40,32 +40,33 @@ class AddressBook {
      * @return {boolean} - True if valid, false otherwise
      */
     addAccount(primary, account) {
-        if(undefined === this._storage.contacts[primary]) {
+        let cleanPrimary = nem.model.address.clean(primary);
+        if(undefined === this._storage.contacts[cleanPrimary]) {
             // If not existing, create address book with primary account
-            this._storage.contacts[primary] = [{
+            this._storage.contacts[cleanPrimary] = [{
                 "label": "Primary",
-                "address": primary
+                "address": nem.utils.format.address(primary)
             }];
             if(undefined !== account) {
                 // Push child account into address book
-                this._storage.contacts[primary].push({
+                this._storage.contacts[cleanPrimary].push({
                     "label": account.label,
-                    "address": account.address
+                    "address": nem.utils.format.address(account.address)
                 });
             }
             return true;
         } else {
             if (undefined === account) return false;
             // Check if address already present
-            for (let i = 0; i < this._storage.contacts[primary].length; i++) {
-                if (account.address.toUpperCase().replace(/-/g, '') === this._storage.contacts[primary][i].address) {
+            for (let i = 0; i < this._storage.contacts[cleanPrimary].length; i++) {
+                if (account.address.toUpperCase().replace(/-/g, '') === nem.model.address.clean(this._storage.contacts[cleanPrimary][i].address)) {
                     return false;
                 }
             }
             // Push child account into address book
-            this._storage.contacts[primary].push({
+            this._storage.contacts[cleanPrimary].push({
                 "label": account.label,
-                "address": account.address
+                "address": nem.utils.format.address(account.address)
             });
             return true;
         }
