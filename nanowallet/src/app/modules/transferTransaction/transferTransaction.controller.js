@@ -22,48 +22,41 @@ class TransferTransactionCtrl {
 
         //// End dependencies region ////
 
-        //// Module properties region ////
-
-        // Form is a transfer transaction object, pre-set recipient if any from state parameter
-        this.formData = nem.model.objects.create("transferTransaction")(undefined !== this._$state.params.address ? this._$state.params.address : '');
-
-        // Mosaics are null by default
-        this.formData.mosaics = null;
-        
-        // Set first multisig account if any
-        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
-
-        // Switch between mosaic transfer and normal transfers
-        this.isMosaicTransfer = false;
-
-        // Selected mosaic
-        this.selectedMosaic = "nem:xem";
-
-        // Mosaics data for current account
-        this.currentAccountMosaicData = "";
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Character counter
-        this.charactersLeft = 1024;
-
-        // Object to contain our password & private key data
-        this.common = nem.model.objects.get("common");
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Update current account mosaics
-        this.updateCurrentAccountMosaics();
-
-        // Update the fee in view
-        this.prepareTransaction();
+        // Initialization
+        this.init();
     }
 
     //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
+        // Form is a transfer transaction object, pre-set recipient if any from state parameter
+        this.formData = nem.model.objects.create("transferTransaction")(undefined !== this._$state.params.address ? this._$state.params.address : '');
+        // Mosaics are null by default
+        this.formData.mosaics = null;
+        // Set first multisig account if any
+        this.formData.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf.length == 0 ? '' : this._DataStore.account.metaData.meta.cosignatoryOf[0];
+        // Switch between mosaic transfer and normal transfers
+        this.isMosaicTransfer = false;
+        // Selected mosaic
+        this.selectedMosaic = "nem:xem";
+        // Mosaics data for current account
+        this.currentAccountMosaicData = "";
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Character counter
+        this.charactersLeft = 1024;
+        // Object to contain our password & private key data
+        this.common = nem.model.objects.get("common");
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Update current account mosaics
+        this.updateCurrentAccountMosaics();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
     /**
      * Set or unset data for mosaic transfer
@@ -157,18 +150,6 @@ class TransferTransactionCtrl {
     }
 
     /**
-     * Reset data
-     */
-    resetData() {
-        this.formData = nem.model.objects.get("transferTransaction");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.charactersLeft = 1024;
-        this.prepareTransaction();
-        return;
-    }
-
-    /**
      * Prepare and broadcast the transaction to the network
      */
     send() {
@@ -193,8 +174,8 @@ class TransferTransactionCtrl {
             this._$timeout(() => {
                 // Enable send button
                 this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {
