@@ -19,15 +19,47 @@ class CreateMultisigCtrl {
 
         //// End dependencies region ////
 
-        //// Module properties region ////
+        // Initialization
+        this.init();
+    }
 
+    //// Module methods region ////
+
+    /**
+     * Initialize module properties
+     */
+    init() {
         // Form is a multisig agregate modification transaction object
         this.formData = nem.model.objects.get("multisigAggregateModification");
-
         // Default relative change is 1 for creation
         this.formData.relativeChange = 1;
+        // Cosignatory to add
+        this.cosignatoryToAdd = '';
+        // Cosignatory public key
+        this.cosignatoryPubKey = '';
+        // Account to convert empty by default
+        this.accountToConvert = undefined;
+        // Prevent user to click twice on send when already processing
+        this.okPressed = false;
+        // Store info about the multisig account to show balance
+        this.multisigInfoData = undefined;
+        // Object to contain our password & private key data
+        this.common = nem.model.objects.get("common");
+        // Modifications list pagination properties
+        this.currentPage = 0;
+        this.pageSize = 5;
+        // Store the prepared transaction
+        this.preparedTransaction = {};
+        // Check number of accounts and arrange
+        this.checkAccounts();
+        // Update the fee in view
+        this.prepareTransaction();
+    }
 
-        // If more than one account in wallet we show a select element in view or a private key input otherwise
+    /**
+     * If more than one account in wallet, we show a select element in view or a private key input otherwise
+     */
+    checkAccounts() {
         if (Object.keys(this._Wallet.current.accounts).length > 1) {
             this.haveMoreThanOneAccount = true;
             this.useCustomAccount = false;
@@ -35,39 +67,7 @@ class CreateMultisigCtrl {
             this.haveMoreThanOneAccount = false;
             this.useCustomAccount = true;
         }
-
-        // Default cosignatory to add is the current account address
-        this.cosignatoryToAdd = this._Wallet.currentAccount.address;
-
-        // Store cosignatory public key
-        this.cosignatoryPubKey = '';
-
-        // Account to convert empty by default
-        this.accountToConvert = undefined;
-
-        // Needed to prevent user to click twice on send when already processing
-        this.okPressed = false;
-
-        // Store info about the multisig account to show balance
-        this.multisigInfoData = undefined;
-
-        // Object to contain our password & private key data
-        this.common = nem.model.objects.get("common");
-
-        // Modifications list pagination properties
-        this.currentPage = 0;
-        this.pageSize = 5;
-
-        // Store the prepared transaction
-        this.preparedTransaction = {};
-
-        //// End properties region ////
-
-        // Update the fee in view
-        this.prepareTransaction();
     }
-
-    //// Module methods region ////
 
     /**
      * Generate the address of the account to convert from provided private key
@@ -112,8 +112,7 @@ class CreateMultisigCtrl {
      * @param {object} data - An [AccountInfo]{@link http://bob.nem.ninja/docs/#accountInfo} object
      */
     setMultisigData(data) {
-        if (data.meta.cosignatories.lentgh) return this._Alert.alreadyMultisig();
-        //if (!data.account.publicKey) return this._Alert.multisighasNoPubKey();
+        if (data.meta.cosignatories.length) return this._Alert.alreadyMultisig();
         // Store data
         this.multisigInfoData = data.account;
         return;
@@ -134,18 +133,6 @@ class CreateMultisigCtrl {
         let entity = nem.model.transactions.prepare("multisigAggregateModificationTransaction")(this.common, this.formData, this._Wallet.network);
         this.preparedTransaction = entity;
         return entity;
-    }
-
-    /**
-     * Reset data
-     */
-    resetData() {
-        this.accountToConvert = "";
-        this.formData = nem.model.objects.get("multisigAggregateModification");
-        this.common = nem.model.objects.get("common");
-        this.preparedTransaction = {};
-        this.cosignatoryPubKey = '';
-        this.prepareTransaction();
     }
 
     /**
@@ -212,10 +199,8 @@ class CreateMultisigCtrl {
         // Use wallet service to serialize and send
         this._Wallet.transact(this.common, entity, this.accountToConvert).then(() => {
             this._$timeout(() => {
-                // Enable send button
-                this.okPressed = false;
-                // Reset form data
-                this.resetData();
+                // Reset all
+                this.init();
                 return;
             });
         }, () => {

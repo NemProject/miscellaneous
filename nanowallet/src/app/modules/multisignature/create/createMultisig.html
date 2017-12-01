@@ -46,7 +46,7 @@
             </fieldset>
 
             <!-- Show address of account if private key provided -->
-            <fieldset class="form-group" ng-show="$ctrl.useCustomAccount && $ctrl.accountToConvert.length">
+            <fieldset class="form-group" ng-if="$ctrl.useCustomAccount && $ctrl.accountToConvert.length">
               <div class="input-group">
                 <span class="input-group-btn">
                   <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
@@ -75,10 +75,10 @@
 
             <!-- Add cosignatory button -->
             <fieldset class="form-group">
-              <div class="col-md-2"></div>
-              <div class="col-md-10">
-              <button style="border-radius: 0px;width: 100%" type="button" class="btn btn-warning" ng-click="$ctrl.addCosig()" ng-disabled="!$ctrl.cosignatoryPubKey || !$ctrl.cosignatoryToAdd || !$ctrl.accountToConvert" title="{{ 'AGGREGATE_ADD_BTN_TITLE' | translate }}">
-                <i class="fa fa-plus"></i> Add cosignatory*
+              <div class="col-md-3"></div>
+              <div class="col-md-9 row">
+              <button style="border-radius: 0px;width: 100%" type="button" class="btn btn-warning" ng-click="$ctrl.addCosig()" ng-disabled="!$ctrl.cosignatoryPubKey || !$ctrl.cosignatoryToAdd || !$ctrl.accountToConvert">
+                <i class="fa fa-plus"></i> {{ 'AGGREGATE_ADD_COSIG' | translate }}
               </button>
               </div>
             </fieldset>
@@ -134,7 +134,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="panel-body bg-info" ng-show="!$ctrl.formData.modifications.length">
+        <div class="panel-body" ng-show="!$ctrl.formData.modifications.length">
           <p>{{ 'GENERAL_NO_RESULTS' | translate }}</p>
         </div>
       </div>
