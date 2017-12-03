@@ -93,7 +93,7 @@ class CreateApostilleCtrl {
         //
         let rawFileContent = nem.crypto.js.enc.Base64.parse($fileContent.split(/,(.+)?/)[1]);
         // Create the apostille
-        let apostille = nem.model.apostille.create(this.common, $fileData.name, rawFileContent, this.formData.tags, this.formData.selectedHashing, this.formData.isMultisig, this.formData.isPrivate, this._Wallet.network);
+        let apostille = nem.model.apostille.create(this.common, $fileData.name, rawFileContent, this.formData.tags, this.formData.selectedHashing, this.formData.isMultisig, this.formData.multisigAccount, this.formData.isPrivate, this._Wallet.network);
         this.apostilles.push(apostille);
     }
 
