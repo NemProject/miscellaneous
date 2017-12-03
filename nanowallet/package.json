@@ -31,7 +31,7 @@
     "jquery": "3.0.0",
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
-    "nem-sdk": "1.5.1",
+    "nem-sdk": "1.6.0",
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
     "nw": "^0.25.4",
