@@ -54,13 +54,14 @@
 
             <!-- START PRIMARY PANEL -->
             <div class="panel panel-default" style="border-radius:0px;margin-bottom:0">
-                <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#8" style="cursor:pointer;">
-                    <b class="ng-binding" style="text-transform: uppercase;"><small>Nothing is shown on my dashboard</small></b>
+                <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#7" style="cursor:pointer;">
+                    <b class="ng-binding" style="text-transform: uppercase;"><small>{{ 'FAQ_QUESTION_7' | translate }}</small></b>
                 </div>
-                <div style="height: 0px;" aria-expanded="false" class="collapse" id="8">
+                <div style="height: 0px;" aria-expanded="false" class="collapse" id="7">
                     <div class="panel-body">
                         <p class="ng-binding" style="font-size:15px;">
-                            Please be sure to check the node circle in the top navigation bar. <br> Red circle means that connection to the node failed. <br> Click on "Node" and select another one from the dropdown list or use a custom node. <br> <a href="https://supernodes.nem.io" target="_blank">Supernodes.nem.io</a> has a lot of nodes that you can use.</a></p>
+                            <span ng-bind-html="'FAQ_ANSWER_7' | translate"></span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -68,13 +69,14 @@
 
             <!-- START PRIMARY PANEL -->
             <div class="panel panel-default" style="border-radius:0px;margin-bottom:0">
-                <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#9" style="cursor:pointer;">
-                    <b class="ng-binding" style="text-transform: uppercase;"><small>Cosignatories cannot see the transaction to sign</small></b>
+                <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#8" style="cursor:pointer;">
+                    <b class="ng-binding" style="text-transform: uppercase;"><small>{{ 'FAQ_QUESTION_8' | translate }}</small></b>
                 </div>
-                <div style="height: 0px;" aria-expanded="false" class="collapse" id="9">
+                <div style="height: 0px;" aria-expanded="false" class="collapse" id="8">
                     <div class="panel-body">
                         <p class="ng-binding" style="font-size:15px;">
-                            In this case go to "Services", look for "Multisignature and Multi-User Accounts" and click on "Sign multisig transactions".</p>
+                            {{ 'FAQ_ANSWER_8' | translate }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -83,13 +85,14 @@
             <div class="col-md-6">
                 <!-- START PRIMARY PANEL -->
                 <div class="panel panel-default" style="border-radius:0px;margin-bottom:0">
-                    <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#10" style="cursor:pointer;">
-                        <b class="ng-binding" style="text-transform: uppercase;"><small>What are the best security practices ?</small></b>
+                    <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#9" style="cursor:pointer;">
+                        <b class="ng-binding" style="text-transform: uppercase;"><small>{{ 'FAQ_QUESTION_9' | translate }}</small></b>
                     </div>
-                    <div style="height: 0px;" aria-expanded="false" class="collapse" id="10">
+                    <div style="height: 0px;" aria-expanded="false" class="collapse" id="9">
                         <div class="panel-body">
                             <p class="ng-binding" style="font-size:15px;">
-                                It is hightly recommended to always store private keys on paper.<br> You can print them and archive them somewhere safe. <br><br> Regarding wallet files you should always keep multiple copies on different cold locations, like usb sticks. <br> Passwords must always be unique and complex, for this reason, always write it down first. <br><br> When you want to check your wallet or realise operations:<br> - Plug the usb stick <br> - Import the wallet in Nano<br> - Unplug the usb stick.<br><br> A copy of your wallet is stored in the browser local storage for all the time you need.<br> Once you are done, logout and purge the wallets in local storage using the purge button on the right side of the footer.</p>
+                                <span ng-bind-html="'FAQ_ANSWER_9' | translate"></span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -133,21 +136,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- END PRIMARY PANEL -->
-
-                <!-- START PRIMARY PANEL -->
-                <!--<div class="panel panel-default" style="border-radius:0px;margin-bottom:0">
-                    <div aria-expanded="false" class="panel-heading collapsed" data-toggle="collapse" data-target="#7" style="cursor:pointer;">
-                        <b class="ng-binding" style="text-transform: uppercase;"><small>{{ 'FAQ_QUESTION_7' | translate }}</small></b>
-                    </div>
-                    <div style="height: 0px;" aria-expanded="false" class="collapse" id="7">
-                        <div class="panel-body">
-                            <p class="ng-binding" style="font-size:15px;">
-                                {{ 'FAQ_ANSWER_7' | translate }} <a href="https://github.com/NewEconomyMovement/nem-lightwallet" target="_blank"><i class="fa fa-github"></i></a>.<br><span ng-bind-html="'FAQ_ANSWER_7_2' | translate"></span><br><br> {{ 'FAQ_ANSWER_7_3' | translate }}<br>- {{ 'FAQ_ANSWER_7_4' | translate }}<br>- {{ 'FAQ_ANSWER_7_5' | translate }}
-                            </p>
-                        </div>
-                    </div>
-                </div>-->
                 <!-- END PRIMARY PANEL -->
             </div>
         </div>
