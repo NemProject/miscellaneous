@@ -17,7 +17,7 @@
           <h4>{{ 'EXPLORER_HOME_NS' | translate }}</h4>
         </div>
         <div class="panel-body">
-          <ul class="list-group" ng-repeat="namespace in $ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address]" ng-show="$ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address]">
+          <ul class="list-group" ng-repeat="namespace in $ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address] | objValues | orderBy:'fqn'" ng-show="$ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address]">
             <li class="list-group-item">{{namespace.fqn}}</li>
           </ul>
           <p class="nothing" ng-show="!$ctrl._DataStore.namespace.ownedBy[$ctrl._Wallet.currentAccount.address]">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
@@ -30,7 +30,7 @@
             <h4>{{ 'EXPLORER_HOME_NS_MULTISIG' | translate }}</h4>
           </div>
           <div class="panel-body">
-              <ul class="list-group" ng-repeat="namespace in $ctrl.multisigNamespaces">
+              <ul class="list-group" ng-repeat="namespace in $ctrl.multisigNamespaces | orderBy">
                 <li class="list-group-item">{{namespace}}</li>
               </ul>
               <p  class="nothing" ng-show="!$ctrl.multisigNamespaces.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
@@ -57,7 +57,7 @@
         </table>
         <table class="table" ng-show="$ctrl._DataStore.mosaic.ownedBy[$ctrl._Wallet.currentAccount.address]">
           <tbody>
-            <tr ng-repeat="mos in $ctrl._DataStore.mosaic.ownedBy[$ctrl._Wallet.currentAccount.address]">
+            <tr ng-repeat="mos in $ctrl._DataStore.mosaic.ownedBy[$ctrl._Wallet.currentAccount.address] | objValues | orderBy:'mosaicId.namespaceId'">
               <td title="{{mos.mosaicId.namespaceId}}:{{mos.mosaicId.name}}"><b>{{mos.mosaicId.namespaceId}}</b>:{{mos.mosaicId.name}}</td>
               <td>{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl._DataStore.mosaic.metaData)[0]}}<span class="text-muted">.{{(mos.quantity | fmtSupply:mos.mosaicId:$ctrl._DataStore.mosaic.metaData)[1]}}</span></td>
               <td>
