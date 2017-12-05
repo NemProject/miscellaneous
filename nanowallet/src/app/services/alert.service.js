@@ -600,6 +600,14 @@ export default class Alert {
         });
     }
 
+    getMosaicSupplyError(message) {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_GET_MOSAIC_SUPPLY_ERROR') + message,
+            className: 'danger'
+        });
+    }
+
+
     /***
      * Transaction notifications
      */
