@@ -10,13 +10,14 @@ function TagTransaction(Alert, Wallet, $filter, $timeout, $state, AddressBook, R
         restrict: 'E',
         scope: {
             d: '=',
+            a: '=',
             tooltipPosition: '='
         },
         template: '<ng-include src="templateUri"/>',
         link: (scope) => {
                 scope.number = txId++;
                 scope.walletScope = DataStore;
-                scope.mainAccount = Wallet.currentAccount.address;
+                scope.mainAccount = scope.a || Wallet.currentAccount.address;
                 scope.meta = scope.d.meta;
 
             if (scope.d.transaction.type == 4100) {
