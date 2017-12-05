@@ -89,7 +89,10 @@ const requires = [
     'app.auditApostille',
     'app.apostilleHistory',
     'app.shapeshift',
-    'app.explorerHome'
+    'app.explorerHome',
+    'app.explorerApostilles',
+    'app.accountsExplorer',
+    'app.explorerNamespacesMosaics'
 ];
 
 window.$ = window.jQuery = $;
