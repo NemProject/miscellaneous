@@ -140,10 +140,10 @@
         <input class="form-control" type="password" placeholder="{{ $ctrl._selectedType.type === 2 ? ('FORM_CONFIRM_PASSPHRASE_FIELD_PLACEHOLDER' | translate) : ('FORM_CONFIRM_PASSWORD_FIELD_PLACEHOLDER' | translate)}}" ng-model="$ctrl.formData.confirmPassword" />
       </fieldset>
       <!-- Strength estimation -->
-      <fieldset class="form-group" style="background-color: #444;padding: 10px;" ng-show="$ctrl._selectedType.type === 2">
-        <span class="text-center" style="display: block;"><b><u>{{ 'SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH' | translate }}</u></b></span>
+      <fieldset class="form-group" ng-show="$ctrl._selectedType.type === 2">
+        <p class="text-center">{{ 'SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH' | translate }}</p>
         <br>
-        <div class="progress">
+        <div class="progress" style="border-radius:0;">
           <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': ($ctrl.passwordStrengthInfo.score * 12.5) + '%' }">
             <span>{{ 'GENERAL_SCORE' | translate }}: {{$ctrl.passwordStrengthInfo.score}} / 4</span>
           </div>
@@ -158,10 +158,10 @@
           <button class="btn btn-dark" ng-click="$ctrl._selectedType = undefined;$ctrl.hideAllSteps();$ctrl.exitEntropy();" style="width:auto;" ng-show="!$ctrl.step5 && !$ctrl.step6 && !$ctrl.step7 && !$ctrl.step8"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
         </div>
         <div class="col-md-10 col-sm-6" ng-show="$ctrl._selectedType.type === 1 || $ctrl._selectedType.type === 3">
-          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step3 = false;$ctrl.step4 = true;" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.step3 = false;$ctrl.step4 = true;" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword || $ctrl.okPressed">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
         </div>
         <div class="col-md-10 col-sm-6" ng-show="$ctrl._selectedType.type === 2">
-          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.createBrainWallet();" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword || $ctrl.okPressed">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+          <button class="btn btn-primary" style="width:100%;" ng-click="$ctrl.createBrainWallet();" ng-disabled="!$ctrl.formData.password || !$ctrl.formData.confirmPassword || $ctrl.formData.password !== $ctrl.formData.confirmPassword || $ctrl.okPressed || $ctrl.formData.password.length < 40 || $ctrl.passwordStrengthInfo.score < 4">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
         </div>
       </div>
     </div>
@@ -265,7 +265,7 @@
       </div>
       <div ng-show="$ctrl.showWalletPrivateKey">
         <pre style="color: white;background-color: #444;font-weight: bold;"><code>{{ $ctrl.walletPrivateKey }}</code></pre>
-        <p><i class="fa fa-info-circle"></i><span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO' | translate"></span></p>
+        <p><i class="fa fa-info-circle"></i> <span ng-bind-html="'SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO' | translate"></span></p>
         <hr style="border-color:#444;">
       </div>
       <div class="form-group">
