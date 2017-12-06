@@ -34,7 +34,7 @@
     "nem-sdk": "1.6.1",
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
-    "nw": "^0.25.4",
+    "nw": "^0.26.6",
     "nw-builder": "^3.4.1",
     "url-parse": "1.1.9",
     "vinyl-source-stream": "^1.1.0",
