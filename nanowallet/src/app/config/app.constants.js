@@ -5,7 +5,7 @@ const AppConstants = {
     version: '2.0.0',
 
     //Network
-    defaultNetwork: 104,
+    defaultNetwork: -104,
 
     // Ports
     defaultNisPort: 7890,
