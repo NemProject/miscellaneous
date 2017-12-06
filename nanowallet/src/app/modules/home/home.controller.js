@@ -90,7 +90,9 @@ class HomeCtrl {
      */
     checkLatestVersion() {
         this._$http.get("https://api.github.com/repos/NemProject/NanoWallet/releases/latest").then((res) => {
-            if (res.data.name !== this._AppConstants.version) {
+            let version = res.data.name;
+            let isVersion2 = parseInt(version.substr(0, version.indexOf('.'))) > 1;
+            if (isVersion2 && version !== this._AppConstants.version) {
                 this.newUpdate = true;
                 this.updateInfo = res.data;
             }
