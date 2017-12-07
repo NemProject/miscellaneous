@@ -109,7 +109,7 @@
 
             <!-- SEND FIELD -->
             <button class="btn btn-success pull-xs-right"
-              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
+              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
             </button>
         </div>
