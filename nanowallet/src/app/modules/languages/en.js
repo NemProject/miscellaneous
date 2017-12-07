@@ -734,7 +734,7 @@ function EnglishProvider($translateProvider) {
         FORM_MESSAGE_PLACEHOLDER: 'Message',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Mosaic name',
         FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Account address or @alias',
-        FORM_BTN_GET_ALIAS: 'Get alias address',
+        FORM_BTN_GET_ALIAS: 'Get namespace address',
         FORM_BTN_OPEN_ADB: 'Open address book',
         FORM_SELECT_NAMESPACE: 'Select a namespace',
 
