@@ -1,6 +1,6 @@
 import nem from "nem-sdk";
 
-function PasswordInput() {
+function PasswordInput(Wallet) {
     'ngInject';
 
     return {
@@ -10,6 +10,7 @@ function PasswordInput() {
         },
         template: '<ng-include src="templatePasswordInput"/>',
         link: (scope) => {
+            scope.Wallet = Wallet;
         	scope.templatePasswordInput = 'layout/partials/passwordInput.html';
         }
 
