@@ -68,7 +68,7 @@
             <div class="panelFooter">
               <button class="btn" ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
               <br>
-              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
+              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length || $ctrl._Wallet.algo === 'trezor'">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
             <p>{{ 'PORTAL_APOSTILLE_TEXT' | translate }}</p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.createApostille">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
+            <button class="btn" ui-sref="app.createApostille" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
             <br>
             <button class="btn" ui-sref="app.auditApostille">{{ 'PORTAL_APOSTILLE_BTN_2' | translate }}</button>
             <br>
