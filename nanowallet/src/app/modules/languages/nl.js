@@ -200,7 +200,7 @@ function DutchProvider($translateProvider) {
         LINE_TX_DETAILS_MULTISIG_CREATE: 'Creëer multi-handtekening account',
         LINE_TX_DETAILS_MULTISIG_EDIT: 'Bewerk multi-handtekening account',
         LINE_TX_DETAILS_MULTISIG_MOD: 'Modificaties',
-        LINE_TX_DETAILS_MULTISIG_MIN_COSIG: 'Min Mede-ondertekenaars',
+        LINE_TX_DETAILS_MULTISIG_MIN_COSIG: 'Min. Mede-ondertekenaars',
         LINE_TX_DETAILS_MULTISIG_AFFECTED: 'Account beïnvloed',
 
         // IMPORTANCE MODULE
@@ -275,7 +275,7 @@ function DutchProvider($translateProvider) {
         MOSAIC_DEFINITION_INFORMATION_14: 'De heffing wordt opgegeven als constante hoeveelheid en hangt dus niet af van de hoeveelheid die wordt overgedragen.',
         MOSAIC_DEFINITION_INFORMATION_15: 'De heffing wordt opgegeven als percentage van de overgedragen hoeveelheid. De heffing stijgt dus lineair met de overgedragen mozaïekhoeveelheid.',
         MOSAIC_DEFINITION_INFORMATION_16: 'Het verzenden van mozaïeken op het NEM blockchain vereist een heffing. De exacte heffing wordt berekend afhankelijk van het totale aantal en hoeveel worden verzonden tijdens een transactie. <b>Kleinschalige mozaïeken</b> krijgen een kortingstarief van 0.05 XEM per mozaiek per overdracht. Dit zijn mozaïeken met een hoeveelheid van minder dan 10.000 en een verdeelbaarheid van 0.',
-        MOSAIC_DEFINITION_INFORMATION_17: 'If you own 100% of the supply, you can overwrite all the mosaic properties by sending a creation transaction again with the same "namespace:mosaic" name.',
+        MOSAIC_DEFINITION_INFORMATION_17: 'Wanneer je 100% van de voorraad bezit, dan kun je alle mozaïek eigenschappen overschrijven door opnieuw een transactie te creëeren en te verzenden met dezelfde naam: "namespace:mosaic".',
 
         // EDIT MOSAIC MODULE
         MOSAIC_SUPPLY_CHANGE_TITLE: 'Verander mozaïekvoorraad',
@@ -481,8 +481,8 @@ function DutchProvider($translateProvider) {
         //APOSTILLE_AUDIT_NON_SIGNED: 'Non signed example:',
         //APOSTILLE_AUDIT_SIGNED: 'Signed example:',
         APOSTILLE_AUDIT_FILES: 'Verificatie-bestanden',
-        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille format example',
-        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Remove records locally',
+        APOSTILLE_AUDIT_FORMAT_EXAMPLE: 'Apostille voorbeeldformaat',
+        APOSTILLE_AUDIT_REMOVE_RECORDS: 'Verwijder records lokaal',
 
         // APOSTILLE MESSAGE MODULE
         APOSTILLE_MESSAGE_TITLE: 'Zend een bericht naar een notaris account',
@@ -557,7 +557,7 @@ function DutchProvider($translateProvider) {
         ALERT_FETCH_TIME_SYNC_ERROR: 'Er is een fout opgetreden bij het ophalen van netwerktijd!',
         ALERT_MULTISIG_MIN_SIGNATURE: 'Multi-handtekening account heeft ten minste een minimale handtekening nodig',
         ALERT_BTC_MARKET_ERROR: 'Fout bij het proberen om de Bitcoin-prijs op te halen',
-        ALERT_COSIG_REMOVAL_LIMIT: 'Slechts één medeondertekenaar kan op het moment worden verwijderd',
+        ALERT_COSIG_REMOVAL_LIMIT: 'Slechts één mede-ondertekenaar kan op het moment worden verwijderd',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Ongeldig aantal minimale handtekeningen',
         ALERT_INSUFFICIENT_BALANCE: 'Onvoldoende saldo voor het uitvoeren van de opdracht',
         ALERT_VOTING_ERROR: 'Ongeldige stem',
@@ -565,12 +565,12 @@ function DutchProvider($translateProvider) {
         ALERT_NODE_SEEMS_OFFLINE: 'Node lijkt offline, selecteer een andere node',
         ALERT_WEAK_PASSPHRASE: 'Beveiligingsscore van het wachtwoord moet minimaal 3 zijn',
         ALERT_BRAIN_WALLET_UPGRADE: 'Je brein portemonnee is zwak! Alle brein portemonnees moeten een wachtwoord van minimaal 40 karakters hebben.<br> We adviseren je een nieuwe portemonnee aan te maken op de inlogpagina en dan je saldo naar deze protemonnee te verzenden.<br> Meer informatie <a href="https://forum.nem.io/t/2791" target="_blank"><u>hier</u></a>.',
-        ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
-        ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
-        ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
-        ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
-        ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
-        ALERT_GET_MOSAIC_SUPPLY_ERROR: 'Error at fetching mosaic supply, reason: ',
+        ALERT_RECIPIENT_PUBLIC_KEY: 'Ontvanger heeft geen openbare sleutel zichtbaar voor het netwerk',
+        ALERT_ENCRYPT_MULTISIG: 'Kan geen versleutelde berichten via multi-handtekening accounts verzenden',
+        ALERT_EXCHANGE_NEEDS_MESSAGE: 'De ontvanger is een Exchange en daarom moet er een bericht worden meegestuurd, lees zorgvuldig de instructies van de desbetreffende Exchange!',
+        ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Het contact bestaat al in het adressenboek!',
+        ALERT_MAX_MOSAIC_SUPPLY: 'Maximale mozaïekvoorraad is 9.000.000.000',
+        ALERT_GET_MOSAIC_SUPPLY_ERROR: 'Fout tijdens ophalen van mozaïekvoorraad, reden: ',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portemonnee is succesvol aangemaakt en geladen!',
@@ -612,10 +612,9 @@ function DutchProvider($translateProvider) {
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE: 'Wijzig handtekeningen benodigd',
         AGGREGATE_MODIFICATION_RELATIVE_CHANGE_PLACEHOLDER: 'Aantal handtekeningen om (n) toe te voegen of verwijderen (-n) - Geautomatiseerde verwijderingen',
         AGGREGATE_SELECTED_ACCOUNT_INFO: 'Geselecteerde account informatie',
-        AGGREGATE_MIN_SIGNATURES: 'Min handtekeningen',
         AGGREGATE_SELECT_WALLET_ACCOUNT: 'Gebruik portemonnee account',
-        AGGREGATE_ADD_COSIG: 'Add cosignatory',
-        AGGREGATE_REMOVE_COSIG: 'Remove cosignatory',
+        AGGREGATE_ADD_COSIG: 'Mede-ondertekenaar toevoegen',
+        AGGREGATE_REMOVE_COSIG: 'Mede-ondertekenaar verwijderen',
 
         // SIGN MULTISIGNATURE TRANSACTIONS
         SIGN_MULTISIG_TRANSACTIONS_TITLE: 'Teken multi-handtekening transacties',
@@ -648,7 +647,7 @@ function DutchProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_3: 'Als je het bestand <b><i>.wlt</i></b> niet krijgt, klik je op onderstaande knop om de ruwe portemonneegegevens te openen en het bestand handmatig te maken:',
         SIGNUP_COMMON_WALLET_WARNING_4: 'Zelfs als je een portemonnee hebt, is het <b><u>verplicht</u></b> om de persoonlijke sleutel van je account te maken, klik op onderstaande knop om het te onthullen:',
         SIGNUP_COMMON_WALLET_WARNING_5: 'Het is je eigen verantwoordelijkheid om er altijd voor te zorgen dat je van je persoonlijke sleutel een back-up hebt voordat je geld naar je account verzendt.',
-        SIGNUP_COMMON_WALLET_WARNING_6: 'Elke portemonnee heeft een <b><u>primaire private sleutel</u></b> (hierboven wordt weergegeven) die gebruikt wordt om deterministische secundaire accounts te maken (BIP32). Deze functie vereist het gebruik van het <b><u>zelfde wachtwoord</u></b> of het zal verschillende secundaire accounts genereren voor dezelfde primaire persoonlijke sleutel. Wanneer je je gegevens reserveert, vergeet niet je <b><u>wachtwoord op te slaan</u></b>.',
+        SIGNUP_COMMON_WALLET_WARNING_6: 'Elke portemonnee heeft een <b><u>primaire persoonlijke sleutel</u></b> (hierboven wordt weergegeven) die gebruikt wordt om deterministische secundaire accounts te maken (BIP32). Deze functie vereist het gebruik van het <b><u>zelfde wachtwoord</u></b> of het zal verschillende secundaire accounts genereren voor dezelfde primaire persoonlijke sleutel. Wanneer je je gegevens reserveert, vergeet niet je <b><u>wachtwoord op te slaan</u></b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Toon ruw portemonnee bestand',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'Om een portemonneebestand te maken, maak een leeg tekstbestand en zet de bovenstaande BASE64-sleutel erin. Sla het bestand op als <b><i>JePortemonneeNaam.wlt</i></b> en het kan nu geïmporteerd worden.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Toon persoonlijke sleutel',
@@ -675,13 +674,13 @@ function DutchProvider($translateProvider) {
         FAQ_QUESTION_6: 'Waar vindt je meer informatie over NEM?',
         FAQ_ANSWER_6_FORUM: 'Officieel forum',
         FAQ_ANSWER_6_WEBSITE: 'Officiële website',
-        FAQ_ANSWER_6_BTT: 'Official BitcoinTalk thread',
-        FAQ_QUESTION_7: 'Nothing is shown on the dashboard',
-        FAQ_ANSWER_7: 'Please be sure to check the node circle in the top navigation bar. <br> Red circle means that connection to the node failed. <br> Click on "Node" and select another one from the dropdown list or use a custom node. <br> <a href="https://supernodes.nem.io" target="_blank">Supernodes.nem.io</a> has a lot of nodes that you can use.</a>',
-        FAQ_QUESTION_8: 'Cosignatories cannot see the transaction to sign',
-        FAQ_ANSWER_8: 'In this case go to "Services", look for "Multisignature and Multi-User Accounts" and click on "Sign multisig transactions".',
-        FAQ_QUESTION_9: 'What are the best security practices ?',
-        FAQ_ANSWER_9: 'It is hightly recommended to always store private keys on paper.<br> You can print them and archive them somewhere safe. <br><br> Regarding wallet files you should always keep multiple copies on different cold locations, like usb sticks. <br> Passwords must always be unique and complex, for this reason, always write it down first. <br><br> When you want to check your wallet or realise operations:<br> - Plug the usb stick <br> - Import the wallet in Nano<br> - Unplug the usb stick.<br><br> A copy of your wallet is stored in the browser local storage for all the time you need.<br> Once you are done, logout and purge the wallets in local storage using the purge button on the right side of the footer.',
+        FAQ_ANSWER_6_BTT: 'Officiële BitcoinTalk thread',
+        FAQ_QUESTION_7: 'Er is niets weergegeven op het dashboard',
+        FAQ_ANSWER_7: 'Controleer de node-circel in de navigatiebar. <br> Rood betekent dat de connectie met de node is mislukt. <br> Klik op "Node" en selcteer een andere van de lijst of gebruik een aangepaste node. <br> <a href="https://supernodes.nem.io" target="_blank">Supernodes.nem.io</a> bevat een lijst met nodes die je kunt gebruiken.</a>',
+        FAQ_QUESTION_8: 'Mede-ondertekenaars kunnen de transactie die getekend moet worden niet zien',
+        FAQ_ANSWER_8: 'Ga in dit geval naar "Diensten", ga naar "Multi-handtekening en multi-gebruiker accounts" en klik op "Teken een multi-handtekening transactie".',
+        FAQ_QUESTION_9: 'Wat zijn de beste veiligheidsoverwegingen?',
+        FAQ_ANSWER_9: 'Het is ten strengste aan te bevelen om je persoonlijke sleutel op papier op te slaan.<br> Je kan hem printen en hem dan ergens veilig opslaan.<br><br>Met betrekking tot de portemonnee bestanden, hiervan altijd meerdere kopieën opslaan op verschillende locaties, zoals USB sitcks.<br>Wachtwoord moet uniek en complex zijn, schrijf hem daarom altijd eerst op.<br><br>Wanneer je je portemonnee wilt controleren of bewerkingen wilt uitvoeren:<br> - Sluit de USB-stick aan - Importeer de portemonnee in Nano<br> - Koppel de USB-stick los.<br><br>Een kopie van uw portemonnee wordt opgeslagen in de lokale cache van de browser. <br> Als je klaar bent, log je uit en verwijder je de portemonnee uit de lokale cache via de knop voor opschonen aan de rechterkant van de footer.',
 
         // FORM RELATED
         FORM_PASSWORD_FIELD_PLACEHOLDER: 'Voer je wachtwoord of wachtwoordzin in',
@@ -706,9 +705,9 @@ function DutchProvider($translateProvider) {
         FORM_MESSAGE_PLACEHOLDER: 'Bericht',
         FORM_MOSAIC_NAME_PLACEHOLDER: 'Mozaïeknaam',
         FORM_ADDRESS_ALIAS_PLACEHOLDER: 'Accountadres of @alias',
-        FORM_BTN_GET_ALIAS: 'Get alias address',
-        FORM_BTN_OPEN_ADB: 'Open address book',
-        FORM_SELECT_NAMESPACE: 'Select a namespace',
+        FORM_BTN_GET_ALIAS: 'Haal aliasadres op',
+        FORM_BTN_OPEN_ADB: 'Open adressenboek',
+        FORM_SELECT_NAMESPACE: 'Selecteer een namespace',
 
         // VOTING MODULE
         PORTAL_VOTING_TITLE: 'Stemmen',
@@ -718,9 +717,9 @@ function DutchProvider($translateProvider) {
         FORM_TITLE_FIELD_PLACEHOLDER: 'Titel',
         FORM_DESCRIPTION_FIELD_PLACEHOLDER: 'Schrijf je omschrijving hier',
         FORM_OPTION_FIELD_PLACEHOLDER: 'schrijf optie',
-        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account addres',
-        FORM_SELECT_MULTISIG: 'Select a multisignature account',
-        FORM_SELECT_CONTACT: 'Select a contact'
+        FORM_WHITELIST_FIELD_PLACEHOLDER: 'account adres',
+        FORM_SELECT_MULTISIG: 'Selecteer een multi-handtekening account',
+        FORM_SELECT_CONTACT: 'Selecteer een contact'
     });
 
 }
