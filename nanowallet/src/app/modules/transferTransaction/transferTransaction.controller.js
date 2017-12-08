@@ -127,6 +127,15 @@ class TransferTransactionCtrl {
             entity = nem.model.transactions.prepare("transferTransaction")(this.common, cleanTransferTransaction, this._Wallet.network);
         }
 
+        // Arrange message type if encrypted
+        if(this.formData.messageType === 2) {
+            if(this.formData.isMultisig) {
+                entity.otherTrans.message.type = this.formData.messageType;
+            } else {
+                entity.message.type = this.formData.messageType;
+            }
+        }
+
         // Set the entity for fees in view
         this.preparedTransaction = entity;
 
