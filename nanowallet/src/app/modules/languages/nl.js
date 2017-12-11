@@ -572,7 +572,7 @@ function DutchProvider($translateProvider) {
         ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet wachtwoord moet minimaal 40 karakters lang zijn!',
         ALERT_NODE_SEEMS_OFFLINE: 'Node lijkt offline, selecteer een andere node',
         ALERT_WEAK_PASSPHRASE: 'Beveiligingsscore van het wachtwoord moet minimaal 3 zijn',
-        ALERT_BRAIN_WALLET_UPGRADE: 'Je brein portemonnee is zwak! Alle brein portemonnees moeten een wachtwoord van minimaal 40 karakters hebben.<br> We adviseren je een nieuwe portemonnee aan te maken op de inlogpagina en dan je saldo naar deze protemonnee te verzenden.<br> Meer informatie <a href="https://forum.nem.io/t/2791" target="_blank"><u>hier</u></a>.',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Je brein portemonnee is zwak! Alle brein portemonnees moeten een wachtwoord van minimaal 40 karakters hebben.<br> We adviseren je een nieuwe portemonnee aan te maken op de inlogpagina en dan je saldo naar deze portemonnee te verzenden.<br> Meer informatie <a href="https://forum.nem.io/t/2791" target="_blank"><u>hier</u></a>.',
         ALERT_RECIPIENT_PUBLIC_KEY: 'Ontvanger heeft geen openbare sleutel zichtbaar voor het netwerk',
         ALERT_ENCRYPT_MULTISIG: 'Kan geen versleutelde berichten via multi-handtekening accounts verzenden',
         ALERT_EXCHANGE_NEEDS_MESSAGE: 'De ontvanger is een Exchange en daarom moet er een bericht worden meegestuurd, lees zorgvuldig de instructies van de desbetreffende Exchange!',
@@ -636,7 +636,7 @@ function DutchProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: 'Selecteer portemonnee',
         LOGIN_SELECT_WALLET: 'Selecteer een portemonnee...',
         LOGIN_LOGIN_BUTTON: 'Inloggen',
-        LOGIN_NOTE: 'Geen protemonnee? Importeer er één of <a href="#!/signup">Meld je aan</a>.',
+        LOGIN_NOTE: 'Geen portemonnee? Importeer er één of <a href="#!/signup">Meld je aan</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: 'Nieuw bij NEM?',
@@ -752,7 +752,7 @@ function DutchProvider($translateProvider) {
         
         // TREZOR RELATED
         TREZOR_TITLE: 'TREZOR',
-        TREZOR_TEXT: 'De TREZOR hardware protemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
+        TREZOR_TEXT: 'De TREZOR hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
         TREZOR_BUTTON: 'Aanmelden met TREZOR'        
     });
 
