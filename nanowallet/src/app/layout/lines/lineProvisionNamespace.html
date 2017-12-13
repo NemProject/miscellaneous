@@ -161,13 +161,6 @@
 
     </div>
 
-    <div style="padding: 5px 30px;background-color: rgb(65, 191, 118);" ng-show="needsSignature">
-        <div class="input-group">
-            <input type="password" class="form-control ng-valid ng-touched ng-dirty ng-valid-parse" ng-model="walletScope.common.password" id="passwordDecoding" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" aria-invalid="false">
-            <span class="input-group-btn">
-                <button class="btn btn-default" style="color: white; border-radius: 0px; border-color:#444;" type="button" ng-click="walletScope.cosign(parent, tx, meta)">{{ 'LINE_TX_DETAILS_COSIGN' | translate }}</button>
-            </span>
-        </div>
-    </div>
+    <sign-transaction tx="tx" parent-tx="parent" meta="meta" needs-signature="needsSignature"></sign-transaction>
 
 </div>

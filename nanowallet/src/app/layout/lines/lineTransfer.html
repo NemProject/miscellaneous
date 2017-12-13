@@ -48,12 +48,8 @@
                 </div>
             </td>
             <td class="messageTx" ng-show="!tx.message.type"></td>
-            <td class="messageTx" style="" ng-show="tx.message.type === 1">{{tx.message | fmtHexMessage}}</td>
-            <td class="messageTx" ng-show="tx.message.type === 2" id="line-{{tx.timeStamp}}">{{ 'GENERAL_ENCRYPTED' | translate }}
-                <div ng-show="!requiresKey">
-                    {{decoded | fmtHexMessage}}
-                </div>
-            </td>
+            <td class="messageTx" style="" ng-show="tx.message.type === 1"><span ng-bind="tx.message | fmtHexMessage"></span></td>
+            <td class="messageTx" ng-show="tx.message.type === 2" id="line-{{tx.timeStamp}}">{{ 'GENERAL_ENCRYPTED' | translate }}</td>
             <td class="timestampTx">{{tx.timeStamp | fmtNemDate}}</td>
         </tr>
     </tbody>
@@ -177,12 +173,9 @@
                     <b>{{ 'GENERAL_MESSAGE' | translate }}</b>
                 </div>
                 <div class="col-sm-9">
-                    <span ng-show="tx.message.type === 1" style="white-space: pre-line;">{{tx.message | fmtHexMessage}}</span>
+                    <span ng-show="tx.message.type === 1" style="white-space: pre-line;"><span ng-bind="tx.message | fmtHexMessage"></span></span>
                     <span ng-show="tx.message.type === 2" id="details-{{tx.timeStamp}}" style="white-space: pre-line;"> <span style="white-space: normal;"> {{ 'GENERAL_ENCRYPTED' | translate }} <span ng-show="!disableDecryption"> <b>--></b> <a ng-click="showDecodeMessage = ! showDecodeMessage" style="cursor:pointer">{{ 'LINE_TX_DETAILS_MESS_DEC' | translate }}</a></span></span>
                     </span>
-                    <div ng-show="!requiresKey">
-                        {{decoded | fmtHexMessage}}
-                    </div>
                 </div>
             </div>
 
@@ -210,7 +203,7 @@
                 </div>
             </div>
 
-        <div class="row">
+            <div class="row">
                 <div class="col-sm-12">
                     <hr style="border-style: dashed;margin:5px;" />
                 </div>
@@ -244,23 +237,8 @@
 
     </div>
 
-    <div id="needsSignature2-{{tx.timeStamp}}" style="padding: 5px 30px;background-color: rgb(65, 191, 118);" ng-show="needsSignature">
-        <div class="input-group">
-            <input type="password" class="form-control ng-valid ng-touched ng-dirty ng-valid-parse" ng-model="walletScope.common.password" id="passwordDecoding" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" aria-invalid="false">
-            <span class="input-group-btn">
-                <button class="btn btn-default" style="color: white; border-radius: 0px; border-color:#444;" type="button" ng-click="walletScope.cosign(parent, tx, meta)">{{ 'LINE_TX_DETAILS_COSIGN' | translate }}</button>
-            </span>
-        </div>
-    </div>
+    <sign-transaction tx="tx" parent-tx="parent" meta="meta" needs-signature="needsSignature"></sign-transaction>
 
-    <div id="decodeTxMessage-{{tx.timeStamp}}" ng-show="tx.message.type === 2 && showDecodeMessage && !disableDecryption" style="padding: 5px 30px;background-color: rgb(65, 191, 118);">
-        <div class="input-group">
-            <input type="password" class="form-control ng-valid ng-touched ng-dirty ng-valid-parse" ng-model="walletScope.common.password" id="passwordDecoding" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" aria-invalid="false">
-            <span class="input-group-btn">
-                <button class="btn btn-default" style="color: white; border-radius: 0px; border-color:#444;" type="button" ng-click="decode(tx)">{{ 'LINE_TX_DETAILS_DEC_MESS' | translate }}</button>
-            </span>
-        </div>
-
-</div>
+    <decode-message tx="tx" show-decode-message="showDecodeMessage" disable-decryption="disableDecryption"></decode-message>
 
 </div>
