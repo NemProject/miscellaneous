@@ -43,4 +43,12 @@ directivesModule.directive('feeInput', FeeInput);
 import PasswordInput from './passwordInput.directive';
 directivesModule.directive('passwordInput', PasswordInput);
 
+// Set decode-message directive
+import DecodeMessage from './decodeMessage.directive';
+directivesModule.directive('decodeMessage', DecodeMessage);
+
+// Set sign-transaction directive
+import SignTransaction from './signTransaction.directive';
+directivesModule.directive('signTransaction', SignTransaction);
+
 export default directivesModule;
