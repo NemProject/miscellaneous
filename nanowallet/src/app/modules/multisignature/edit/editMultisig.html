@@ -47,8 +47,8 @@
             <fieldset class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-10">
-                <button type="button" class="btn btn-warning col-md-6" style="border-radius: 0px;" ng-click="$ctrl.addCosig(1)" ng-disabled="!$ctrl.cosignatoryPubKey || !$ctrl.cosignatoryToAdd || $ctrl.cosignatoryToAdd === $ctrl.formData.multisigAccount.address || !$ctrl.formData.multisigAccount"><i class="fa fa-plus"></i> {{ 'AGGREGATE_ADD_COSIG' | translate }}</button>
-                <button type="button" class="btn btn-danger col-md-6" style="border-radius: 0px;" ng-click="$ctrl.addCosig(2)" ng-disabled="!$ctrl.cosignatoryPubKey || !$ctrl.cosignatoryToAdd || $ctrl.cosignatoryToAdd === $ctrl.formData.multisigAccount.address || !$ctrl.formData.multisigAccount"><i class="fa fa-minus"></i> {{ 'AGGREGATE_REMOVE_COSIG' | translate }}</button>
+                <button type="button" class="btn btn-warning col-md-6" style="border-radius: 0px;" ng-click="$ctrl.addCosig(1)" ng-disabled="!$ctrl.cosignatoryToAdd || $ctrl.cosignatoryToAdd === $ctrl.formData.multisigAccount.address || !$ctrl.formData.multisigAccount"><i class="fa fa-plus"></i> {{ 'AGGREGATE_ADD_COSIG' | translate }}</button>
+                <button type="button" class="btn btn-danger col-md-6" style="border-radius: 0px;" ng-click="$ctrl.addCosig(2)" ng-disabled="!$ctrl.cosignatoryToAdd || $ctrl.cosignatoryToAdd === $ctrl.formData.multisigAccount.address || !$ctrl.formData.multisigAccount"><i class="fa fa-minus"></i> {{ 'AGGREGATE_REMOVE_COSIG' | translate }}</button>
               </div>
             </fieldset>
 
