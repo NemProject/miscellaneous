@@ -74,7 +74,7 @@
           <h4>{{ $ctrl.selectedMosaicName }}</h4>
         </div>
         <div class="panel-body" ng-show="$ctrl.selectedMosaic" >
-          <p class="bg-info">{{ $ctrl.selectedMosaic.description }}</p>
+          <p class="bg-info"><span ng-bind="$ctrl.selectedMosaic.description"></span></p>
           <table class="table table-hover">
             <thead>
               <tr>
