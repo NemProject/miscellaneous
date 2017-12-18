@@ -165,7 +165,7 @@ function DutchProvider($translateProvider) {
         HOME_RECOMMENDED_BROWSERS: 'Aanbevolen browsers zijn:',
         HOME_FEATURE_STAND_BY: 'Plaats de cursor op een functie om informatie weer te geven.',
         HOME_FEATURE_1: 'Verzend en ontvang XEM eenvoudig en bijna onmiddellijk, slechts 1 minuut bloktijd!',
-        
+
         // TRANSFER TRANSACTION MODULE
         TRANSFER_TRANSACTION_TITLE: 'Verzend & Ontvang',
         TRANSFER_TRANSACTION_NAME: 'Transactie overdragen',
@@ -611,6 +611,7 @@ function DutchProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimale handtekeningen nodig om een transactie te valideren',
         AGGREGATE_MODIFICATION_LIST: 'Wijzigingslijst',
         AGGREGATE_COSIG_LIST: ' Mede-ondertekenaar adreslijst',
+
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Bewerk een multi-handtekening contract',
         AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account om te bewerken',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Selecteer een account om te bewerken',
@@ -641,11 +642,11 @@ function DutchProvider($translateProvider) {
         // SIGNUP MODULE
         SIGNUP_TITLE: 'Nieuw bij NEM?',
         SIGNUP_SELECT_WALLET_TYPE: 'Selecteer een type portemonnee die je wilt creëren',
-        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Plaats de cursor op een type portemonnee om informatie te tonen.',        
+        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Plaats de cursor op een type portemonnee om informatie te tonen.',  
         SIGNUP_CREATE_WALLET_TITLE: 'Eenvoudige portemonnee',
         SIGNUP_CREATE_WALLET_INFO: 'Eenvoudige portemonnees bevatten een primaire privésleutel die willekeurig wordt gegenereerd.',
         SIGNUP_PRIVATE_KEY_WALLET_TITLE: 'Persoonlijke sleutel portemonnee',
-        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Persoonlijke sleutel portemonnees bevatten een primaire persoonlijke sleutel die je wilt importeren.',
+        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Persoonlijke sleutel portemonnees bevatten een primaire persoonlijke sleutel die je wilt importeren.', 
         SIGNUP_BRAIN_WALLET_TITLE: 'Brein portemonnee',
         SIGNUP_BRAIN_WALLET_INFO: 'Brein portemonnees bevatten een primaire persoonlijke sleutel die is gegenereerd op basis van een wachtwoordzin. Hiermee kun je de portemonnee alleen ophalen door die exacte wachtwoordzin te kennen.',
         SIGNUP_CREATE_WALLET_BUTTON: 'Maak een eenvoudige portemonnee',
@@ -655,7 +656,7 @@ function DutchProvider($translateProvider) {
         SIGNUP_NETWORK_SELECT: 'Selecteer een netwerk',
         SIGNUP_NETWORK_MAINNET: 'Mainnet is het <b><u>echte</u></b> NEM netwerk. Adressen beginnen met \'N\'.',
         SIGNUP_NETWORK_TESTNET: 'Testnet is het <b><u>test</u></b> netwerk. Adressen beginnen met \'T\'.',
-        SIGNUP_NETWORK_MIJIN: 'Mijin is de privé versie van NEM. Adressen beginnen met \'M\'.',        
+        SIGNUP_NETWORK_MIJIN: 'Mijin is de privé versie van NEM. Adressen beginnen met \'M\'.',
         SIGNUP_BRAIN_WALLET_WARNING: 'Lees over <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank"> gevaren </a> die brein portemonnee vormen. Brein portemonnees gebruikt ALLEEN de wachtwoordzin-hash meerdere keren. Daarom is het van cruciaal belang een VEILIGE wachtwoordzin te selecteren met minstens 40 karakters. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank"> XKCD #936 </a>',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Persoonlijke sleutel portemonnees gebruiken ALLEEN een wachtwoord om de geïmporteerde persoonlijke sleutel te coderen. Daarom is het van cruciaal belang om een veilig wachtwoord te selecteren.',
         SIGNUP_CREATE_START_WARNING: 'Volg alstublieft elke stap zorgvuldig!',
@@ -684,7 +685,7 @@ function DutchProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'Ik heb mijn persoonlijke sleutel en wachtwoord',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: 'Ik ga akkoord',
         SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD: 'Begrepen',
-        SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download portemonnee',        
+        SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download portemonnee',
         SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Geschatte wachtwoord sterkte',
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Geschat aantal keer raden',
 
@@ -749,11 +750,11 @@ function DutchProvider($translateProvider) {
         FORM_WHITELIST_FIELD_PLACEHOLDER: 'account adres',
         FORM_SELECT_MULTISIG: 'Selecteer een multi-handtekening account',
         FORM_SELECT_CONTACT: 'Selecteer een contact',
-        
+
         // TREZOR RELATED
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'De TREZOR hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
-        TREZOR_BUTTON: 'Aanmelden met TREZOR'        
+        TREZOR_BUTTON: 'Aanmelden met TREZOR'
     });
 
 }
