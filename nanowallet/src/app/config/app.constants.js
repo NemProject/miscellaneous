@@ -2,10 +2,10 @@ const AppConstants = {
     //Application name
     appName: 'Nano Wallet',
 
-    version: '2.0.2',
+    version: '2.0.10',
 
     //Network
-    defaultNetwork: -104,
+    defaultNetwork: 104,
 
     // Ports
     defaultNisPort: 7890,
@@ -13,7 +13,7 @@ const AppConstants = {
     defaultWebsocketPort: 7778,
 
     // Activate/Deactivate mainnet
-    mainnetDisabled: true,
+    mainnetDisabled: false,
 
     // Activate/Deactivate mijin
     mijinDisabled: true
