@@ -58,19 +58,16 @@ class WalletBuilder {
             let r = nem.utils.convert.ua2hex(nem.crypto.nacl.randomBytes(32));
             // Create entropy seed
             let seed = this.processEntropy(entropy, walletPassword);
-            // Hash random bytes with entropy seed
-            let hmac = nem.crypto.js.algo.HMAC.create(nem.crypto.js.algo.SHA3, seed);
-            hmac.update(r);
-            // Finalize and keep only 32 bytes
-            let hashKey = hmac.finalize().toString().slice(0, 64);
-            // Create KeyPair from hash key
-            let k = nem.crypto.keyPair.create(hashKey);
+            // Derive private key from random bytes + entropy seed
+            let privateKey = nem.crypto.helpers.derivePassSha(r + seed, 1000).priv;
+            // Create KeyPair
+            let k = nem.crypto.keyPair.create(privateKey);
             // Create address from public key
             let addr = nem.model.address.toAddress(k.publicKey.toString(), network);
             // Encrypt private key using password
-            let encrypted = nem.crypto.helpers.encodePrivKey(hashKey, walletPassword);
+            let encrypted = nem.crypto.helpers.encodePrivKey(privateKey, walletPassword);
             // Create bip32 remote amount using generated private key
-            return resolve(CryptoHelpers.generateBIP32Data(hashKey, walletPassword, 0, network).then((data) => {
+            return resolve(CryptoHelpers.generateBIP32Data(privateKey, walletPassword, 0, network).then((data) => {
                 // Construct the wallet object
                 let wallet = this.buildWallet(walletName, addr, true, "pass:bip32", encrypted, network, data.publicKey);
                 return wallet;
@@ -204,19 +201,17 @@ class WalletBuilder {
      * @param {string} entropy - A string from any source of entropy
      * @param {string} password - A password
      *
-     * @return {string} seed - An entropy seed
+     * @return {string} seed - An 16 bytes entropy seed
      */
     processEntropy(entropy, password) {
         // Derive movement entropy
         let data = nem.crypto.helpers.derivePassSha(entropy, 1000).priv;
-        // Derive timestamp
-        let date = nem.crypto.helpers.derivePassSha(new Date().getTime(), 1000).priv;
         // Derive password
         let pass = nem.crypto.helpers.derivePassSha(password, 1000).priv;
         // Derive seed
-        let seed = nem.crypto.helpers.derivePassSha(data + date + pass, 1000).priv;
-        // Return seed
-        return seed;
+        let seed = nem.crypto.helpers.derivePassSha(data + pass, 1000).priv;
+        // Return 16 bytes seed
+        return seed.substring(seed.length - 32);
     }
 
     //// End methods region ////
