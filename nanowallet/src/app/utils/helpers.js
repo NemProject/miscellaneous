@@ -87,7 +87,7 @@ let cleanMosaicAmounts = function(elem, mosaicDefinitions) {
         } else {
             let divisibility = mosaicDefinitions[nem.utils.format.mosaicIdToName(copy[i].mosaicId)].mosaicDefinition.properties[0].value;
             // Get quantity from inputed amount
-            copy[i].quantity = Math.floor(nem.utils.helpers.cleanTextAmount(copy[i].quantity) * Math.pow(10, divisibility));
+            copy[i].quantity = Math.round(nem.utils.helpers.cleanTextAmount(copy[i].quantity) * Math.pow(10, divisibility));
         }
     }
     return copy;
