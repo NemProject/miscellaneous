@@ -33,6 +33,8 @@
           </ul>
         </div>
         <div class="panel-body">
+          <!-- Password Field -->
+          <password-input common="$ctrl.common"></password-input>
           <!-- Multisig select -->
           <multisig-select ng-show="$ctrl.formData.isMultisig" multisig-account="$ctrl.formData.multisigAccount"></multisig-select>
           <!-- TAGS SECTION -->
@@ -64,8 +66,6 @@
               </select>
             </div>
           </fieldset>
-          <!-- Password Field -->
-          <password-input common="$ctrl.common"></password-input>
           <!-- SEND TRANSACTION -->
           <button class="btn btn-success" type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length || !$ctrl.apostilles.length" ng-click="$ctrl.send()">
             <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
