@@ -20,19 +20,19 @@
         <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(1);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 1;">
           {{'SIGNUP_CREATE_WALLET_TITLE' | translate}}
         </button>
-        <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(2);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 2;">
+        <!--<button class="btn btn-primary" ng-click="$ctrl.changeWalletType(2);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 2;">
           {{'SIGNUP_BRAIN_WALLET_TITLE' | translate}}
-        </button>
+        </button>-->
         <button class="btn btn-primary" ng-click="$ctrl.changeWalletType(3);$ctrl.start = true;" ng-mouseover="$ctrl.showInfo = 3;">
           {{'SIGNUP_PRIVATE_KEY_WALLET_TITLE' | translate}}
         </button>
       </div>
-      <div class="col-md-4 col-md-offset-4 col-sm-6" ng-show="!$ctrl._selectedType">
+      <!--<div class="col-md-4 col-md-offset-4 col-sm-6" ng-show="!$ctrl._selectedType">
         <hr>
         <button class="btn btn-lg btn-success btn-block" ui-sref="app.trezor">
               {{ 'TREZOR_BUTTON' | translate }}
         </button>
-      </div>
+      </div>-->
 
     </div>
 

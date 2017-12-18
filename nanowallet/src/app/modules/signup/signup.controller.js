@@ -176,7 +176,7 @@ class SignupCtrl {
     /**
      * Create a new brain wallet
      */
-    createBrainWallet() {
+    /*createBrainWallet() {
         // Check if passwords match
         if (!this.checkPasswordsMatch()) return;
 
@@ -216,7 +216,7 @@ class SignupCtrl {
             this.okPressed = false;
             return;
         });
-    }
+    }*/
 
     /**
      * Create a new private key wallet
