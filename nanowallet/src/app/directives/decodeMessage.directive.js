@@ -65,17 +65,9 @@ function DecodeMessage(Wallet, Recipient, Alert, $timeout, $filter, $sanitize) {
                 let decoded = nem.crypto.helpers.decode(scope.common.privateKey, publicKey, tx.message.payload);
                 if (!decoded) return Alert.emptyDecodedMessage();
                             
-                // Set decrypted message in the right template,
-                // use the tx timeStamp to identify each element in the array of templates generated with 
-                // ng-repeat and tag-transaction directive.                                  
-                // There is two parts in the template, the line and the details
-                let parts = ["line", "details"];
-                for (let i = 0; i < parts.length; i++) {
-                    $("#"+parts[i]+"-" + tx.timeStamp).html($sanitize($filter('fmtHexMessage')({
-                        "type": 1,
-                        "payload": decoded
-                    })));
-                }
+                // Replace transaction message with decoded message
+                tx.message.type = 1;
+                tx.message.payload = decoded;
                 // Reset common
                 scope.common = nem.model.objects.get("common");
                 // Remove the the decode part of the template
