@@ -43,6 +43,9 @@ class AccountCtrl {
         // Common object to contain our password & private key data for reveal
         this.commonPK = nem.model.objects.get("common");
 
+        // Common object to contain our password & private key data for QR wallet
+        this.commonQR = nem.model.objects.get("common");
+
         // Prevent users to click twice on button when already processing
         this.okPressed = false;
 
@@ -79,7 +82,7 @@ class AccountCtrl {
      * Generate the mobile wallet QR
      */
     generateWalletQR() {
-        let QR = this._Wallet.generateQR(this.common);
+        let QR = this._Wallet.generateQR(this.commonQR);
         if(QR) {
             $('#mobileWalletQR').html("");
             $('#mobileWalletQR').append(QR);
@@ -188,6 +191,7 @@ class AccountCtrl {
     reset() {
         this.common = nem.model.objects.get("common");
         this.commonPK = nem.model.objects.get("common");
+        this.commonQR = nem.model.objects.get("common");
         this.newAccountLabel = "";
         return;
     }

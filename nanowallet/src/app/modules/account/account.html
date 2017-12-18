@@ -84,27 +84,28 @@
       </div>
 
       <div class="col-md-6">
-        <div class="panel-heading">
-          <h3>{{ 'GENERAL_PRIVATE_KEY' | translate }}</h3>
-        </div>
-        <div class="panel-body">
-          <div class="form-group">
-            <p class="bg-info"><span ng-bind-html="'ACCOUNT_PRIVATE_KEY_NOTE' | translate"></span></p>
-            <div class="input-group">
-              <span class="input-group-btn short">
-                <label ng-show="!$ctrl.commonPK.privateKey">{{ 'FORM_PASSWORD' | translate }}:</label>
-                <label ng-show="$ctrl.commonPK.privateKey">{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
-              </span>
-              <input class="form-control" type="password" ng-model="$ctrl.commonPK.password" placeholder="{{'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-show="!$ctrl.commonPK.privateKey"/>
-              <input class="form-control" ng-show="$ctrl.commonPK.privateKey" ng-model="$ctrl.commonPK.privateKey" readOnly></input>
-              <span class="input-group-btn showHide">
-                <button class="btn btn-primary" type="button" ng-show="!$ctrl.commonPK.privateKey" ng-disabled="!$ctrl.commonPK.password" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}">
-                  <i class="fa fa-plus"></i>
-                </button>
-                <button class="btn btn-danger" type="button" ng-show="$ctrl.commonPK.privateKey" ng-click="$ctrl.reset()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
-                  <i class="fa fa-minus"></i>
-                </button>
-              </span>
+        <div ng-show="$ctrl._Wallet.algo !== 'trezor'">
+          <div class="panel-heading">
+            <h3>{{ 'GENERAL_PRIVATE_KEY' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <p class="bg-info"><span ng-bind-html="'ACCOUNT_PRIVATE_KEY_NOTE' | translate"></span></p>
+              <div class="input-group">
+                <span class="input-group-btn short" ng-show="$ctrl.commonPK.privateKey">
+                  <label>{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
+                </span>
+                <password-input common="$ctrl.commonPK" ng-show="$ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonPK.privateKey"></password-input>
+                <input class="form-control" ng-model="$ctrl.commonPK.privateKey" ng-show="$ctrl.commonPK.privateKey" readOnly></input>
+                <span class="input-group-btn showHide">
+                  <button class="btn btn-primary" type="button" ng-show="!$ctrl.commonPK.privateKey" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonPK.password" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}" style="margin-bottom: 15px;" ng-style="$ctrl._Wallet.algo === 'trezor' ? {'width': '100%'} : {}">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <button class="btn btn-danger" type="button" ng-show="$ctrl.commonPK.privateKey" ng-click="$ctrl.reset()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
+                    <i class="fa fa-minus"></i>
+                  </button>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -119,7 +120,7 @@
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
               </div>
               <div class="col-sm-6">
-                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
               </div>
             </div>
           </div>
@@ -202,16 +203,9 @@
           <div class="text-center" id="mobileWalletQR" ng-show="!$ctrl.showMobileQRPass"></div>
           <div ng-show="$ctrl.showMobileQRPass">
             <!-- Password Field -->
-            <fieldset class="form-group">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <label>{{ 'FORM_PASSWORD' | translate }}: </label>
-                </span>
-                <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" />
-              </div>
-            </fieldset>
+            <password-input common="$ctrl.commonQR"></password-input>
             <button class="btn btn-success"
-              type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.generateWalletQR()">
+              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonQR.password.length" ng-click="$ctrl.generateWalletQR()">
               {{'GENERAL_REVEAL' | translate }}
             </button>
           </div>
@@ -234,20 +228,21 @@
         </div>
         <p class="bg-danger"><i class="fa fa-exclamation-triangle "></i> <span ng-bind-html="'ACCOUNT_ADD_NEW_ACCOUNT_WARNING' | translate"></span></p>
         <div class="modal-body">
+          <!-- Password Field -->
+          <password-input common="$ctrl.common"></password-input>
           <fieldset class="form-group">
-            <input class="form-control form-control-lg"
-              type="password"
-              placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}"
-              ng-model="$ctrl.common.password"/>
-          </fieldset>
-          <fieldset class="form-group">
-            <input class="form-control form-control-lg"
-              type="text"
-              placeholder="{{ 'GENERAL_ACCOUNT_LABEL' | translate }} {{ 'GENERAL_OPTIONAL' | translate }}"
+            <div class="input-group">
+              <span class="input-group-btn">
+                <label>{{ 'GENERAL_ACCOUNT_LABEL' | translate }}:</label>
+              </span>
+              <input class="form-control form-control-lg"
+                type="text"
+                placeholder="{{ 'GENERAL_ACCOUNT_LABEL' | translate }} {{ 'GENERAL_OPTIONAL' | translate }}"
               ng-model="$ctrl.newAccountLabel"/>
+            </div>
           </fieldset>
           <button class="btn btn-success"
-            type="submit" ng-disabled="$ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.addNewAccount()">
+            type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length" ng-click="$ctrl.addNewAccount()">
             {{ 'ACCOUNT_ADD_NEW_ACCOUNT' | translate }}
           </button>
         </div>
