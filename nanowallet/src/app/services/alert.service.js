@@ -488,15 +488,6 @@ export default class Alert {
             className: 'danger',
             content: this._$filter('translate')('ALERT_BRAIN_WALLET_UPGRADE'),
             additionalClasses: 'toast-text-left',
-            dismissButton: true,
-            dismissOnClick: false
-        });
-    }
-
-    exchangeNeedsMessage() {
-        this._ngToast.create({
-            className: 'danger',
-            content: this._$filter('translate')('ALERT_EXCHANGE_NEEDS_MESSAGE'),
             dismissOnTimeout: false,
             dismissButton: true,
             dismissOnClick: false

@@ -167,12 +167,12 @@ class Wallet {
             this._Alert.mijinDisabled();
             return false;
         }
-        // If brain wallet pass is weak
-        if(wallet.accounts[0].network === nem.model.network.data.mainnet.id && wallet.accounts[0].algo === 'pass:6k' && this.common.password.length < 40) {
-            this._Alert.brainWalletUpgrade();
-        }
         // Decrypt / generate and check primary 
         if (!this.decrypt(common, wallet.accounts[0], wallet.accounts[0].algo, wallet.accounts[0].network)) return false;
+        // Check if brain wallet pass seems weak
+        if(wallet.accounts[0].network === nem.model.network.data.mainnet.id && wallet.accounts[0].algo === 'pass:6k' && common.password.length < 40) {
+            this._Alert.brainWalletUpgrade();
+        }
         // Set the wallet object in Wallet service
         this.use(wallet);
         return true;

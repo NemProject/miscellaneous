@@ -572,7 +572,7 @@ function EnglishProvider($translateProvider) {
         ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
         ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
         ALERT_WEAK_PASSPHRASE: 'Security score of the passphrase must be at least 3',
-        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
+        ALERT_BRAIN_WALLET_UPGRADE: 'Your brain wallet seems weak! All brain wallets must use a passphrase with at least 40 characters.<br> We advise you to create a new simple wallet from the signup page and move your funds into it.<br> More info <a href="https://forum.nem.io/t/2791" target="_blank"><u>here</u></a>.',
         ALERT_RECIPIENT_PUBLIC_KEY: 'Recipient has no public key visible to the network',
         ALERT_ENCRYPT_MULTISIG: 'Can\'t send encrypted messages via multisig accounts',
         ALERT_EXCHANGE_NEEDS_MESSAGE: 'Recipient is an exchange wallet and thus it requires a message for your account to be correctly credited, please read carefully the exchange deposit instructions!',
