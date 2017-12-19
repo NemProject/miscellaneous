@@ -155,7 +155,7 @@ function JapaneseProvider($translateProvider) {
       GENERAL_NEXT: '次へ',
       GENERAL_START: 'スタート',
       GENERAL_ALIAS: 'エイリアス',
-      GENERAL_CONTACTS: ' コンタクト',
+      GENERAL_CONTACTS: 'コンタクト',
       GENERAL_ENCRYPTED: '暗号化',
       GENERAL_UNENCRYPTED: '平文',
       GENERAL_HEXADECIMAL: '16進数',
@@ -286,7 +286,7 @@ function JapaneseProvider($translateProvider) {
       MOSAIC_DEFINITION_INFORMATION_14: "固定徴収方式の場合、徴収額は転送される量に依存しません。",
       MOSAIC_DEFINITION_INFORMATION_15: "パーセンタイル徴収方式の場合、徴収額は送信するモザイクの量に従って変化します。",
       MOSAIC_DEFINITION_INFORMATION_16: "モザイクを NEM ブロックチェーンに送信するには手数料がかかります。実際の手数料はそのモザイクの総量と送信量に依存します。<b>スモールビジネスモザイク</b>は割引が適用され、一回の送信あたり0.05 XEMが定額手数料となります。",
-      MOSAIC_DEFINITION_INFORMATION_17: 'あなたが100%保有している場合、同名の"namespace:mosaic"にて、モザイク作成トランザクションを再度送信することで、全てのモザイクプロパティを上書きすることができます。',
+      MOSAIC_DEFINITION_INFORMATION_17: 'あなたが供給量の100%を保有している場合、同名の"namespace:mosaic"にて、モザイク作成トランザクションを再度送信することで、全てのモザイクプロパティを上書きすることができます。',
 
       // EDIT MOSAIC MODULE
       MOSAIC_SUPPLY_CHANGE_TITLE: "モザイク供給量を変更",
