@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 2.0.14
+    
+    - Fix brain wallet login
+
+## Version 2.0.13
+    
+    - Hide Trezor login button in Chrome builds
+
+## Version 2.0.12
+    
+    - Fix harvesting on mainnet
+    - Fix new update notification
+
 ## Version 2.0.10
     
     - Fix Trezor support
