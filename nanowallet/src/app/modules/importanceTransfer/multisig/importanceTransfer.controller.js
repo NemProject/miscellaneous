@@ -65,8 +65,8 @@ class MultisigImportanceTransferCtrl {
         this.harvestingNode = this._Nodes.getHarvestingEndpoint();
         // Consider node has no free slots by default
         this.hasFreeSlots = false;
-        // Array to contain nodes
-        this.nodes = this._Nodes.get();
+        // Set the right nodes according to Wallet network
+        this.setNodes();
         // Show supernodes by default on mainnet
         this.showSupernodes = this._Wallet.network !== nem.model.network.data.mainnet.id ? false : true;;
         // Used to store the remote account data
@@ -89,6 +89,30 @@ class MultisigImportanceTransferCtrl {
     }
 
     //// Module methods region ////
+
+    /**
+     * Set available nodes according to network
+     */
+    setNodes() {
+        if(this._Wallet.network !== nem.model.network.data.mainnet.id) {
+            this.nodes = this._Nodes.get();
+        } else {
+            this.nodes = [];
+            // Get supernodes
+            nem.com.requests.supernodes.all().then((data) => {
+                this._$timeout(() => {
+                    this.nodes = this._$filter('toEndpoint')(data.nodes);
+                });
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.supernodesError();
+                    // Return default nodes
+                    this.nodes = this._$filter('toEndpoint')(nem.model.nodes.mainnet);
+                });
+            });
+        }
+    }
 
     /**
      * Check node slots

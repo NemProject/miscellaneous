@@ -156,15 +156,7 @@ class Nodes {
         // Show right nodes list according to network
         if (_network == nem.model.network.data.mainnet.id) {
             if (_searchEnabled) return this._$filter('toEndpoint')(nem.model.nodes.searchOnMainnet);
-            // Get supernodes
-            nem.com.requests.supernodes.all().then((data) => {
-                    return this._$filter('toEndpoint')(data.nodes);
-                },
-                (err) => {
-                    this._Alert.supernodesError();
-                    // Return default nodes
-                    return this._$filter('toEndpoint')(nem.model.nodes.mainnet);
-                });
+            return this._$filter('toEndpoint')(nem.model.nodes.mainnet);
         } else if (_network == nem.model.network.data.testnet.id) {
             if (_searchEnabled) return this._$filter('toEndpoint')(nem.model.nodes.searchOnTestnet);
             return this._$filter('toEndpoint')(nem.model.nodes.testnet);

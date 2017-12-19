@@ -42,8 +42,8 @@ class ImportanceTransferCtrl {
         this.harvestingNode = this._Nodes.getHarvestingEndpoint();
         // No node slots by default
         this.hasFreeSlots = false;
-        // Get the right nodes according to Wallet network
-        this.nodes = this._Nodes.get();
+        // Set the right nodes according to Wallet network
+        this.setNodes();
         // Show supernodes by default on mainnet or hide <select>
         this.showSupernodes = this._Wallet.network !== nem.model.network.data.mainnet.id ? false : true;
         // Initial delegated account data
@@ -77,6 +77,30 @@ class ImportanceTransferCtrl {
         this.updateDelegatedData();
         // Arrange for hardware wallets
         this.arrangeHW();
+    }
+
+    /**
+     * Set available nodes according to network
+     */
+    setNodes() {
+        if(this._Wallet.network !== nem.model.network.data.mainnet.id) {
+            this.nodes = this._Nodes.get();
+        } else {
+            this.nodes = [];
+            // Get supernodes
+            nem.com.requests.supernodes.all().then((data) => {
+                this._$timeout(() => {
+                    this.nodes = this._$filter('toEndpoint')(data.nodes);
+                });
+            },
+            (err) => {
+                this._$timeout(() => {
+                    this._Alert.supernodesError();
+                    // Return default nodes
+                    this.nodes = this._$filter('toEndpoint')(nem.model.nodes.mainnet);
+                });
+            });
+        }
     }
 
     /**
