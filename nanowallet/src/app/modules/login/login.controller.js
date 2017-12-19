@@ -31,6 +31,9 @@ class LoginCtrl {
         this.common = nem.model.objects.get("common");
 
         //// End properties region ////
+
+        // Hide trezor button if using chrome builds
+        if (typeof nw !== 'undefined') this.hideTrezor = true;
     }
 
     //// Module methods region ////
