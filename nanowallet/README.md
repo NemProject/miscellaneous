@@ -1,7 +1,5 @@
 # Nano Wallet #
 
-/!\ Work on the branch 2.0 is still in progress, therefore it must not be used on mainnet !
-
 ### How to use Nano Wallet ? ###
 
 After downloading the latest version here https://forum.nem.io/t/nano-wallet-beta-1-1-11-5-000-xem-bug-bounty/2791, extract the NanoWallet folder from the archive, then you can simply click on start.html to open the app in your default browser. No installation or local server needed.
