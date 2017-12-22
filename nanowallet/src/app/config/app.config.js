@@ -24,6 +24,9 @@ function AppConfig($stateProvider, $localStorageProvider, $locationProvider, $ur
     // Define prefered language, english by default
     $translateProvider.preferredLanguage($localStorageProvider.get('lang') || 'en');
 
+    // Languages sanitization strategy
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+
 }
 
 export default AppConfig;
