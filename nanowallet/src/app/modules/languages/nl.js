@@ -27,6 +27,8 @@ function DutchProvider($translateProvider) {
         HEADER_NODE_CUSTOM_TOOLTIP: 'Vul hier je eigen NIS node in',
         HEADER_PURGE: 'Opschonen',
         HEADER_PURGE_MESSAGE: 'Bevestig het opschonen van de lokale opslag. Door op "OK" te klikken worden alle portemonnees in de lokale opslag verwijderd en kunnen niet worden hersteld. U gaat akkoord dat alle portemonnees zijn gebackupped en uw geld veilig is opgeslagen.',
+        HEADER_OFFLINE_TX: 'Prepare an offline transaction',
+        HEADER_RELEASE_TX: 'Release a transaction',
 
         // FOOTER COMPONENT
         FOOTER_POWERED_BY_1: 'Powered by',
@@ -594,6 +596,7 @@ function DutchProvider($translateProvider) {
         ALERT_ADDRESS_BOOK_FILE_SUCCESS: 'Adresboek succesvol geïmporteerd!',
         ALERT_VOTING_SUCCESS: 'Stem succesvol verzonden',
         ALERT_POLL_CREATION_SUCCESS: 'Poll succesvol aangemaakt',
+        ALERT_COPY_SIGNED_TX_SUCCESS: 'Signed transaction copied!',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Een account converteren naar multi-handtekening',
@@ -660,6 +663,7 @@ function DutchProvider($translateProvider) {
         SIGNUP_BRAIN_WALLET_WARNING: 'Lees over <a href="https://en.bitcoin.it/wiki/Brainwallet" rel="nofollow" target="_blank"> gevaren </a> die brein portemonnee vormen. Brein portemonnees gebruikt ALLEEN de wachtwoordzin-hash meerdere keren. Daarom is het van cruciaal belang een VEILIGE wachtwoordzin te selecteren met minstens 40 karakters. <a href="https://xkcd.com/936/" rel="nofollow" target="_blank"> XKCD #936 </a>',
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'Persoonlijke sleutel portemonnees gebruiken ALLEEN een wachtwoord om de geïmporteerde persoonlijke sleutel te coderen. Daarom is het van cruciaal belang om een veilig wachtwoord te selecteren.',
         SIGNUP_CREATE_START_WARNING: 'Volg alstublieft elke stap zorgvuldig!',
+        SIGNUP_CREATE_START_CONNECTION_WARNING: 'It is recommended to disconnect from internet while creating your wallet and backing up your data.',
         SIGNUP_CREATE_READY_BTN: 'Klaar',
         SIGNUP_CREATE_ENTER_NAME: 'Vul een portemonneenaam in',
         SIGNUP_CREATE_ENTER_PASSWORD: 'Vul een wachtwoord in',
@@ -711,6 +715,18 @@ function DutchProvider($translateProvider) {
         FAQ_ANSWER_8: 'Ga in dit geval naar "Diensten", ga naar "Multi-handtekening en multi-gebruiker accounts" en klik op "Teken een multi-handtekening transactie".',
         FAQ_QUESTION_9: 'Wat zijn de beste veiligheidsoverwegingen?',
         FAQ_ANSWER_9: 'Het is ten strengste aan te bevelen om je persoonlijke sleutel op papier op te slaan.<br> Je kan hem printen en hem dan ergens veilig opslaan.<br><br>Met betrekking tot de portemonnee bestanden, hiervan altijd meerdere kopieën opslaan op verschillende locaties, zoals USB sitcks.<br>Wachtwoord moet uniek en complex zijn, schrijf hem daarom altijd eerst op.<br><br>Wanneer je je portemonnee wilt controleren of bewerkingen wilt uitvoeren:<br> - Sluit de USB-stick aan - Importeer de portemonnee in Nano<br> - Koppel de USB-stick los.<br><br>Een kopie van uw portemonnee wordt opgeslagen in de lokale cache van de browser. <br> Als je klaar bent, log je uit en verwijder je de portemonnee uit de lokale cache via de knop voor opschonen aan de rechterkant van de footer.',
+        FAQ_QUESTION_10: 'Where to find information about my account (address, etc) ?',
+        FAQ_ANSWER_10: 'If you look at the top navigation bar, you will see an <b><i>"Account"</b></i> button between <b><i>"Node"</b></i> and <b><i>"Language"</b></i>. There you can find your address, public key, vested balance and other important data.',
+        FAQ_QUESTION_11: 'I have deposited XEM to an exchange but nothing has been credited ?',
+        FAQ_ANSWER_11_1: 'First you must check that the hash of your transaction is pointing to an existing transaction on the <a target="_blank" href="http://chain.nem.ninja">explorer</a> (please, note that the explorer is a few blocks behind).',
+        FAQ_ANSWER_11_2: 'Most exchanges are asking for an identification message to credit your deposit. Make sure that you have followed carefully the exchange instructions and added a message that is NOT encrypted. ',
+        FAQ_ANSWER_11_3: 'Even if you have added a message, it can happen that exchanges may not process your deposit, because of issues on their side.',
+        FAQ_ANSWER_11_4: 'You must contact the exchange support, explain the situation and provide them the hash of the transaction.',
+        FAQ_QUESTION_12: 'How to check if I am on a fork ?',
+        FAQ_ANSWER_12_1: 'Click on <b><i>"Node"</b></i>, in the top navigation bar, to open the node panel.',
+        FAQ_ANSWER_12_2: 'Look at the chain height and compare it to the height shown <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">here</a>.',
+        FAQ_ANSWER_12_3: 'If different of more than 5 blocks then you are probably on a fork.',
+        FAQ_ANSWER_12_4: 'To fix, just choose another node from the dropdown in the node panel, it will restore your account at it\'s latest state on the real network.',
 
         // FORM RELATED
         FORM_PASSWORD_FIELD_PLACEHOLDER: 'Voer je wachtwoord of wachtwoordzin in',
@@ -754,7 +770,25 @@ function DutchProvider($translateProvider) {
         // TREZOR RELATED
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'De TREZOR hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
-        TREZOR_BUTTON: 'Aanmelden met TREZOR'
+        TREZOR_BUTTON: 'Aanmelden met TREZOR',
+
+        // CREATE OFFLINE TRANSACTION MODULE
+        OFFLINE_TX_TITLE: 'Create an offline transaction',
+        OFFLINE_TX_NO_WALLET: 'Please import a wallet from login module to see the form.',
+        OFFLINE_TX_INFO_1: 'Make sure to be disconnected of internet when importing your wallet and creating the transaction!',
+        OFFLINE_TX_INFO_2: 'Only simple transactions can be created because a connection is needed to fetch mosaics and multisig information from NEM nodes.',
+        OFFLINE_TX_INFO_3: 'After clicking the "create" button in the left panel, you will find the signed transaction below.',
+        OFFLINE_TX_INFO_4: 'A signed transaction is immutable and will be effective only if released to the network before the default deadline of 24 hours.',
+        OFFLINE_TX_SIGNED: 'Signed transaction',
+        OFFLINE_TX_RELEASE: 'Open in release module',
+
+        // RELEASE OFFLINE TRANSACTION MODULE
+        RELEASE_OFFLINE_TX_TITLE: 'Release a transaction to the network',
+        RELEASE_OFFLINE_TX_PARAMETERS: 'Transaction parameters',
+        RELEASE_OFFLINE_TX_INFO_1: 'To release a transaction you must be connected to internet.',
+        RELEASE_OFFLINE_TX_INFO_2: 'Make sure that you have selected the right network and a working node or it will be rejected.',
+        RELEASE_OFFLINE_TX_INFO_3: 'It is not possible to send a signed transaction twice. One signed transaction will always generate the same hash and two transactions cannot have the same hash.',
+        RELEASE_OFFLINE_TX_INFO_4: 'You can release a signed transaction from any computer safely.'
     });
 
 }
