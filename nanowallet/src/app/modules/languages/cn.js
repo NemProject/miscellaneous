@@ -161,6 +161,8 @@ function ChineseProvider($translateProvider) {
         GENERAL_ENCRYPTED: 'Encrypted',
         GENERAL_UNENCRYPTED: 'Unencrypted',
         GENERAL_HEXADECIMAL: 'Hexadecimal',
+        GENERAL_SELECT_ACCOUNT: 'Select account',
+        GENERAL_INVOICE: 'Invoice',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -396,6 +398,7 @@ function ChineseProvider($translateProvider) {
         PORTAL_APOSTILLE_BTN_2: '审计',
         PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to address\' to easily keep track of your contacts.',
         PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
+        PORTAL_INVOICE_TEXT: 'Create an invoice to share via QR code',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -789,7 +792,10 @@ function ChineseProvider($translateProvider) {
         RELEASE_OFFLINE_TX_INFO_1: 'To release a transaction you must be connected to internet.',
         RELEASE_OFFLINE_TX_INFO_2: 'Make sure that you have selected the right network and a working node or it will be rejected.',
         RELEASE_OFFLINE_TX_INFO_3: 'It is not possible to send a signed transaction twice. One signed transaction will always generate the same hash and two transactions cannot have the same hash.',
-        RELEASE_OFFLINE_TX_INFO_4: 'You can release a signed transaction from any computer safely.'
+        RELEASE_OFFLINE_TX_INFO_4: 'You can release a signed transaction from any computer safely.',
+
+        // INVOICE MODULE
+        CREATE_INVOICE_TITLE: 'Create an invoice'
     });
 
 }
