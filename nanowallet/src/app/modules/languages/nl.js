@@ -581,6 +581,7 @@ function DutchProvider($translateProvider) {
         ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Het contact bestaat al in het adressenboek!',
         ALERT_MAX_MOSAIC_SUPPLY: 'Maximale mozaïekvoorraad is 9.000.000.000',
         ALERT_GET_MOSAIC_SUPPLY_ERROR: 'Fout tijdens ophalen van mozaïekvoorraad, reden: ',
+        ALERT_ENCRYPTED_MSG_OFFLINE: 'Encrypted messaging is not enabled in offline transactions',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Portemonnee is succesvol aangemaakt en geladen!',

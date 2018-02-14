@@ -584,6 +584,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'コンタクトは既にアドレスブックに登録されています！',
       ALERT_MAX_MOSAIC_SUPPLY: 'モザイク最大供給量は 9\'000\'000\'000 です。',
       ALERT_GET_MOSAIC_SUPPLY_ERROR: 'モザイクの供給量取得エラーです。理由: ',
+      ALERT_ENCRYPTED_MSG_OFFLINE: 'Encrypted messaging is not enabled in offline transactions',
 
       // SUCCESS ALERTS
       ALERT_CREATE_WALLET_SUCCESS: "ウォレットが正常に作成され、ロードされました。",

@@ -582,6 +582,7 @@ function EnglishProvider($translateProvider) {
         ALERT_ACCOUNT_ALREADY_IN_ADDRESS_BOOK: 'Contact already present in address book!',
         ALERT_MAX_MOSAIC_SUPPLY: 'Maximum mosaic supply is 9\'000\'000\'000',
         ALERT_GET_MOSAIC_SUPPLY_ERROR: 'Error at fetching mosaic supply, reason: ',
+        ALERT_ENCRYPTED_MSG_OFFLINE: 'Encrypted messaging is not enabled in offline transactions',
 
         // SUCCESS ALERTS
         ALERT_CREATE_WALLET_SUCCESS: 'Wallet successfully created and loaded!',
