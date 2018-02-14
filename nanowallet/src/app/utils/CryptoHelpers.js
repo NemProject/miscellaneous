@@ -37,6 +37,11 @@ let createBIP32Data = function (childKey, network) {
  */
 let generateBIP32Data = function (privateKey, password, index, network) {
     return new Promise((resolve, reject) => {
+        if (!privateKey) return reject("No private key");
+        if (!nem.utils.helpers.isPrivateKeyValid(privateKey)) return reject("Private key is invalid");
+        if (!password) return reject("No password");
+        if (!network) return reject("No network");
+
         let childKey = CryptoHelpersLegacy.generateBIP32Data(privateKey, password, index);
 
         let data = createBIP32Data(childKey, network);
