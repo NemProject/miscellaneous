@@ -44,6 +44,18 @@
           </a>
         </li>-->
       </ul>
+      <ul class="nav navbar-nav" show-authed="false">
+        <li>
+          <a style="outline:0;" ui-sref-active="active" ui-sref="app.offlineTransactionCreate">
+            <i class="fa fa-lock"></i> {{ 'HEADER_OFFLINE_TX' | translate }}
+          </a>
+        </li>
+        <li>
+          <a style="outline:0;" ui-sref-active="active" ui-sref="app.offlineTransactionSend">
+            <i class="fa fa-globe"></i> {{ 'HEADER_RELEASE_TX' | translate }}
+          </a>
+        </li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
           <a class="login" ui-sref-active="active" ui-sref="app.login" show-authed="false">
