@@ -1,6 +1,7 @@
 /** @module utils/helpers */
 
 import nem from 'nem-sdk';
+import Exchanges from './exchanges';
 
 /**
  * Check if wallet already present in an array
@@ -139,12 +140,14 @@ let isTextAmountValid = nem.utils.helpers.isTextAmountValid;
  * @return {boolean} - True if valid, false otherwise
  */
 let isValidForExchanges = function(entity) {
-    const exchanges = ["ND2JRPQIWXHKAA26INVGA7SREEUMX5QAI6VU7HNR", "NBZMQO7ZPBYNBDUR7F75MAKA2S3DHDCIFG775N3D"];
+    const exchanges = Exchanges.data;
     let tx = entity.type === nem.model.transactionTypes.multisigTransaction ? entity.otherTrans : entity;
     for (let i = 0; i < exchanges.length; i++) {
-        if (exchanges[i] === tx.recipient && !tx.message.payload.length) {
-            return false;
-        }
+        let isExchange = exchanges[i].address === tx.recipient;
+        let hasMessage = tx.message.payload.length > 0;
+        let isPlain = tx.message.type === 1;
+        // Deposits to exchanges must have a plain message
+        if ((isExchange && !hasMessage) || (isExchange && hasMessage && !isPlain)) return false;
     }
     return true;
 }
