@@ -174,9 +174,9 @@ class OfflineTransactionCreateCtrl {
 }
 
     /**
-     * Prepare and broadcast the transaction to the network
+     * Create the signed transaction
      */
-    send() {
+    create() {
         // Disable send button
         this.okPressed = true;
 
