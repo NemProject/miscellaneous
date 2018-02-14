@@ -48,6 +48,9 @@ import './modules/trezor';
 import './modules/apostille';
 import './modules/exchanges';
 import './modules/explorer';
+import './modules/offlineTransaction';
+import './modules/voting';
+import './modules/invoice';
 
 // Create and bootstrap application
 const requires = [
@@ -92,7 +95,13 @@ const requires = [
     'app.explorerHome',
     'app.explorerApostilles',
     'app.accountsExplorer',
-    'app.explorerNamespacesMosaics'
+    'app.explorerNamespacesMosaics',
+    'app.offlineTransactionCreate',
+    'app.offlineTransactionSend',
+    'app.votingPolls',
+    'app.votingCreatePoll',
+    'app.apostilleMessage',
+    'app.invoice'
 ];
 
 window.$ = window.jQuery = $;
