@@ -786,7 +786,7 @@ function PolishProvider($translateProvider) {
         FORM_SELECT_CONTACT: 'Select a contact',
 
         // CREATE OFFLINE TRANSACTION MODULE
-        OFFLINE_TX_TITLE: 'Create an offline transaction',
+        OFFLINE_TX_TITLE: 'Prepare an offline transaction',
         OFFLINE_TX_NO_WALLET: 'Please import a wallet from login module to see the form.',
         OFFLINE_TX_INFO_1: 'Make sure to be disconnected of internet when importing your wallet and creating the transaction!',
         OFFLINE_TX_INFO_2: 'Only simple transactions can be created because a connection is needed to fetch mosaics and multisig information from NEM nodes.',
