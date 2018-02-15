@@ -1,6 +1,6 @@
 {
   "name": "NanoWallet",
-  "version": "2.0.14",
+  "version": "2.1.2",
   "description": "Cross-platform lite wallet for NEM",
   "author": "https://github.com/QuantumMechanics",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "jquery": "3.0.0",
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
-    "nem-sdk": "1.6.2",
+    "nem-sdk": "1.6.4",
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
     "nw": "^0.26.6",
