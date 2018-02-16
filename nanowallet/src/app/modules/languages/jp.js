@@ -171,7 +171,7 @@ function JapaneseProvider($translateProvider) {
       HOME_FEATURE_1: 'XEMの送受信は早くて簡単、ブロックタイムは1分です！',
 
       // TRANSFER TRANSACTION MODULE
-      TRANSFER_TRANSACTION_TITLE: "送金と請求",
+      TRANSFER_TRANSACTION_TITLE: "送信",
       TRANSFER_TRANSACTION_NAME: "トランスファートランザクション", //画面崩れ防止の為短く変更："トランスファートランザクション（通常トランザクション）"
       TRANSFER_TRANSACTION_MULTISIG_NAME: "マルチシグトランスファートランザクション", //画面崩れ防止の為短く変更："マルチシグトランスファートランザクション（通常トランザクション）"
       TRANSFER_TRANSACTION_INVOICE: "請求書を作成",
