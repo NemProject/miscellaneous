@@ -787,7 +787,7 @@ function DutchProvider($translateProvider) {
         OFFLINE_TX_RELEASE: 'Open in vrijgave module',
 
         // RELEASE OFFLINE TRANSACTION MODULE
-        RELEASE_OFFLINE_TX_TITLE: 'Offline transactie vrijgeven',
+        RELEASE_OFFLINE_TX_TITLE: 'Offline transactie vrijgeven naar het netwerk',
         RELEASE_OFFLINE_TX_PARAMETERS: 'Transactie parameters',
         RELEASE_OFFLINE_TX_INFO_1: 'Om een transactie vrij te geven moet je met internet zijn verbonden.',
         RELEASE_OFFLINE_TX_INFO_2: 'Zorg ervoor dat je het juiste netwerk en een werkende node hebt geselecteerd, anders wordt de transactie geweigerd.',
