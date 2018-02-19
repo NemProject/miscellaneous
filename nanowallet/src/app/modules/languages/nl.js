@@ -171,11 +171,11 @@ function DutchProvider($translateProvider) {
         HOME_FEATURE_1: 'Verzend en ontvang XEM eenvoudig en bijna onmiddellijk, slechts 1 minuut bloktijd!',
 
         // TRANSFER TRANSACTION MODULE
-        TRANSFER_TRANSACTION_TITLE: 'Verzend & Ontvang',
+        TRANSFER_TRANSACTION_TITLE: 'Verzend een transactie',
         TRANSFER_TRANSACTION_NAME: 'Transactie overdragen',
         TRANSFER_TRANSACTION_MULTISIG_NAME: 'Multi-handtekening transactie overdragen',
         TRANSFER_TRANSACTION_INVOICE: 'Maak een factuur',
-        TRANSFER_TRANSACTION_TAB_INVOICE: 'Ontvang',
+        TRANSFER_TRANSACTION_TAB_INVOICE: 'Factuur',
         TRANSFER_TRANSACTION_MOSAIC_TRANSFER: 'Mozaïek overdragen',
         TRANSFER_TRANSACTION_ATTACH_MOSAIC: 'Mozaïek bijvoegen',
         TRANSFER_TRANSACTION_ATTACH: 'Bijvoegen',
