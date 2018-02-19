@@ -698,7 +698,7 @@ function DutchProvider($translateProvider) {
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Geschat aantal keer raden',
 
         // FAQ MODULE
-        FAQ_TITLE: 'Veel Gestelde Vragen',
+        FAQ_TITLE: 'Vaak gestelde vragen',
         FAQ_QUESTION_1: 'Hoe werkt Nano Wallet?',
         FAQ_ANSWER_1: 'Nano Wallet is gebouwd met behulp van de nieuwste cryptobibliotheken met ES6 en AngularJS. Het is een volledige client-applicatie die nooit gevoelige gegevens verzendt; Alles gebeurt in je browser m.b.t. het creëren van persoonlijke sleutels voor het ondertekenen van transacties.',
         FAQ_QUESTION_2: 'Is het vrij om te gebruiken?',
