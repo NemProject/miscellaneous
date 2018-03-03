@@ -10,7 +10,10 @@ let data =  [{
 }, {
     name: "Polish",
     key: "pl"
-},{
+}, {
+    name: "Português (Brasil)",
+    key: "ptbr"
+}, {
     name: "German",
     key: "de"
 }, {
