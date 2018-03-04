@@ -695,7 +695,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: '秘密鍵をバックアップするには、テキストファイルに保存して印刷するか、安全な場所に書き込んでください。 秘密鍵はオフラインで保存することをお勧めします。',
       SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記全ての警告を読み理解し同意したことになります。',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
-      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードバックアップしました',
+      SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3: '私は全ての内容を理解し同意しました',  //このあたりは、英文より厳しく書いてます。
       SIGNUP_COMMON_WALLET_WARNING_UNDERSTOOD: '理解し同意しました',
       SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'ウォレットをダウンロードする',
