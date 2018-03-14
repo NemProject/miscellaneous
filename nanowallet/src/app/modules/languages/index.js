@@ -25,9 +25,6 @@ app.config(RussianProvider);
 import DutchProvider from './nl';
 app.config(DutchProvider);
 
-import SpanishProvider from './es';
-app.config(SpanishProvider);
-
 // Comment this while developing to see untranslated strings
 app.config(['$translateProvider', function($translateProvider) {
     $translateProvider.fallbackLanguage('en');
