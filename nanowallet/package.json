@@ -34,7 +34,7 @@
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
     "nem-sdk": "1.6.4",
-    "nem-voting": "^1.1.15",
+    "nem-voting": "^1.1.16",
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
     "nw": "^0.26.6",
