@@ -163,6 +163,8 @@ function EnglishProvider($translateProvider) {
         GENERAL_HEXADECIMAL: 'Hexadecimal',
         GENERAL_SELECT_ACCOUNT: 'Select account',
         GENERAL_INVOICE: 'Invoice',
+        GENERAL_SIGNATURE: 'Signature',
+        GENERAL_VERIFY: 'Verify',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry but you cannot use Nano Wallet safely with this browser...',
@@ -395,6 +397,7 @@ function EnglishProvider($translateProvider) {
         PORTAL_ADDRESS_BOOK_TEXT: 'Assign labels to addresses to easily keep track of your contacts.',
         PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
         PORTAL_INVOICE_TEXT: 'Create an invoice to share via QR code',
+        PORTAL_SIGNED_MSG_TEXT: 'Create and verify signed messages to authenticate account ownership without transacting.',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -695,6 +698,7 @@ function EnglishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download wallet',
         SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Estimated passphrase strength',
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Estimated guess times',
+        SIGNUP_CONGRATS_MSG: '<b>Congratulations!</b> Your NEM address is',
 
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',
@@ -778,12 +782,13 @@ function EnglishProvider($translateProvider) {
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Prepare an offline transaction',
         OFFLINE_TX_NO_WALLET: 'Please import a wallet from login module to see the form.',
-        OFFLINE_TX_INFO_1: 'Make sure to be disconnected of internet when importing your wallet and creating the transaction!',
+        OFFLINE_TX_INFO_1: 'To be completely safe, make sure to use a computer that is <b>NEVER</b> connected to internet.',
         OFFLINE_TX_INFO_2: 'Only simple transactions can be created because a connection is needed to fetch mosaics and multisig information from NEM nodes.',
         OFFLINE_TX_INFO_3: 'After clicking the "create" button in the left panel, you will find the signed transaction below.',
         OFFLINE_TX_INFO_4: 'A signed transaction is immutable and will be effective only if released to the network before the default deadline of 24 hours.',
         OFFLINE_TX_SIGNED: 'Signed transaction',
         OFFLINE_TX_RELEASE: 'Open in release module',
+        OFFLINE_TX_MODAL_ALERT: 'This computer seems connected to internet, please note that creating offline transactions is safe <b>ONLY</b> on a computer that is <b>NEVER</b> connected to internet.',
 
         // RELEASE OFFLINE TRANSACTION MODULE
         RELEASE_OFFLINE_TX_TITLE: 'Release a transaction to the network',
@@ -794,7 +799,18 @@ function EnglishProvider($translateProvider) {
         RELEASE_OFFLINE_TX_INFO_4: 'You can release a signed transaction from any computer safely.',
 
         // INVOICE MODULE
-        CREATE_INVOICE_TITLE: 'Create an invoice'
+        CREATE_INVOICE_TITLE: 'Create an invoice',
+
+        // CREATE SIGNED MESSAGE MODULE
+        CREATE_SIGNED_MSG_TITLE: "Create a signed message",
+        CREATE_SIGNED_MSG_NAME: 'Signed message',
+        CREATE_SIGNED_MSG_SIGN: 'Sign message',
+
+        // VERIFY SIGNED MESSAGE MODULE
+        VERIFY_SIGNED_MSG_TITLE: "Verify a signed message",
+        VERIFY_SIGNED_MSG_IS_VALID: 'Signature is valid',
+        VERIFY_SIGNED_MSG_IS_NOT_VALID: 'Signature is <b>NOT</b> valid'
+
     });
 
 }
