@@ -186,6 +186,27 @@
           </div>
         </div>
       </div>
+      <!-- FOURTH ROW STARTS -->
+      <div class="row row4">
+        <div class="col-sm-4">
+          <div class="panel-heading row">
+            <div class="col-sm-3">
+              <i class="fa fa-envelope fa-4x" aria-hidden="true"></i>
+            </div>
+            <div class="col-sm-9">
+              <h5>{{'CREATE_SIGNED_MSG_NAME' | translate}}</h5>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p>{{'PORTAL_SIGNED_MSG_TEXT' | translate}}</p>
+          </div>
+          <div class="panelFooter">
+            <button class="btn" ui-sref="app.signedMessageCreation">{{'CREATE_SIGNED_MSG_TITLE' | translate}}</button>
+            <br>
+            <button class="btn" ui-sref="app.signedMessageVerification">{{ 'VERIFY_SIGNED_MSG_TITLE' | translate }}</button>
+          </div>
+        </div>
+      </div>
 
     </div>
 
