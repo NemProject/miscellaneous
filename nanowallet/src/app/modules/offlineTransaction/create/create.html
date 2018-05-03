@@ -93,7 +93,7 @@
             <h3>{{ 'GENERAL_INFORMATION' |  translate }}</h3>
         </div>
         <div class="panel-body">
-          <p>{{ 'OFFLINE_TX_INFO_1' | translate }}</p>
+          <p ng-bind-html=" 'OFFLINE_TX_INFO_1' | translate"></p>
           <p>{{ 'OFFLINE_TX_INFO_2' | translate }}</p>
           <p>{{ 'OFFLINE_TX_INFO_3' | translate }}</p>
           <p>{{ 'OFFLINE_TX_INFO_4' | translate }}</p>
@@ -115,5 +115,27 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="connectionWarning" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center" style="color:#444">
+        <img src="images/logomark.png" style="width: 125px;" />
+        <hr>
+        <p class="bg-danger"><i class="fa fa-exclamation-triangle"></i> <span ng-bind-html="'OFFLINE_TX_MODAL_ALERT' | translate"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'GENERAL_CLOSE' | translate }}</button>
+      </div>
+    </div>
+
   </div>
 </div>

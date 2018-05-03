@@ -34,9 +34,8 @@ class OfflineTransactionCreateCtrl {
      * Initialize module properties
      */
     init() {
-        /*if (navigator.onLine) {
-            console.log("Alert, creating on offline transaction must be done offline !");
-        }*/
+        // Show warning if connection detected
+        if (navigator.onLine) $('#connectionWarning').modal('show');
         // Get wallets from local storage or set an empty array
         this._storage.wallets = this._storage.wallets || [];
         if (this._storage.wallets.length) {
