@@ -808,8 +808,9 @@ function EnglishProvider($translateProvider) {
 
         // VERIFY SIGNED MESSAGE MODULE
         VERIFY_SIGNED_MSG_TITLE: "Verify a signed message",
-        VERIFY_SIGNED_MSG_IS_VALID: 'Signature is valid',
-        VERIFY_SIGNED_MSG_IS_NOT_VALID: 'Signature is <b>NOT</b> valid'
+        VERIFY_SIGNED_MSG_SIG_VALID: 'Signature is valid',
+        VERIFY_SIGNED_MSG_SIG_NOT_VALID: 'Signature is <b>NOT</b> valid',
+        VERIFY_SIGNED_MSG_NOT_VALID: 'Signed message is not valid!'
 
     });
 
