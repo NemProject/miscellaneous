@@ -240,6 +240,29 @@ let versionCompare = function(v1, v2, options) {
     return 0;
 }
 
+
+/**
+ * Fix "FAILURE_TIMESTAMP_TOO_FAR_IN_FUTURE"
+ *
+ * @param {object} transaction - A prepared transaction to fix
+ * @param {number} chainTime - Time returned by the NIS node
+ * @param {number} network - A network
+ */
+let fixTimestamp = function(transaction, chainTime, network) {
+    let d = new Date();
+    let timeStamp = Math.floor(chainTime) + Math.floor(d.getSeconds() / 10);
+    let due = network === nem.model.network.data.testnet.id ? 60 : 24 * 60;
+    let deadline = timeStamp + due * 60
+    if (transaction.type === nem.model.transactionTypes.multisigTransaction) {
+        transaction.otherTrans.timeStamp = timeStamp;
+        transaction.otherTrans.deadline = deadline;
+    } else {
+        transaction.timeStamp = timeStamp;
+        transaction.deadline = deadline;
+    }
+    return transaction;
+}
+
 module.exports = {
     haveWallet,
     getFileName,
@@ -253,5 +276,6 @@ module.exports = {
     isValidForExchanges,
     objectSize,
     toShortDate,
-    versionCompare
+    versionCompare,
+    fixTimestamp
 }
