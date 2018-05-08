@@ -95,6 +95,7 @@ const requires = [
     'app.shapeshift',
     'app.explorerHome',
     'app.explorerApostilles',
+    'app.explorerTransactions',
     'app.accountsExplorer',
     'app.explorerNamespacesMosaics',
     'app.offlineTransactionCreate',
