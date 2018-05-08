@@ -59,6 +59,7 @@ function EnglishProvider($translateProvider) {
         DASHBOARD_NOTICE_3: 'The NEM Team suggests primarily testing on the testnet to familiarize yourself with NanoWallet first before using the mainnet. A simple guide can be found <a href="https://blog.nem.io/nanowallet-tutorial/" target="_blank">here</a>. Users are responsible for their funds and having their private keys backed up. The NEM team is not responsible for any loss of funds due to using this app on the mainnet.',
         DASHBOARD_NOTICE_4: 'We suggest writing down private keys on paper and storing it in a safe place. Additionally, you can import your accounts into the Android and iOS apps as a backup.',
         DASHBOARD_NOTICE_5: 'Thanks for your participation!',
+        DASHBOARD_MORE_TXES: 'See more transactions',
 
         // GENERAL
         GENERAL_BLOCK: 'Block',
@@ -442,6 +443,11 @@ function EnglishProvider($translateProvider) {
         ACCOUNTS_EXPLORER_TITLE: 'Explorer - Accounts',
         ACCOUNTS_EXPLORER_SEARCH: 'Search',
 
+        // TRANSACTIONS EXPLORER
+        EXPLORER_TRANSACTIONS_TITLE: 'Your transactions history',
+        EXPLORER_TRANSACTIONS_LOAD_MORE: 'Load more',
+
+
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille history',
         APOSTILLE_HISTORY_BTN_TRANSFER: 'Transfer / Split ownership',
@@ -604,6 +610,7 @@ function EnglishProvider($translateProvider) {
         ALERT_VOTING_SUCCESS: 'Vote Sent Successfully',
         ALERT_POLL_CREATION_SUCCESS: 'Poll Created Successfully',
         ALERT_COPY_SIGNED_TX_SUCCESS: 'Signed transaction copied!',
+        ALERT_COPY_SIGNED_MSG_SUCCESS: 'Signed message copied!',
 
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Convert an account to multisig',
