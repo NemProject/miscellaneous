@@ -639,6 +639,12 @@ export default class Alert {
             className: 'success'
         });
     }
+    signedMsgCopySuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_COPY_SIGNED_MSG_SUCCESS'),
+            className: 'success'
+        });
+    }
 
 
     /***

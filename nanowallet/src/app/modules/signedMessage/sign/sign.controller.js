@@ -36,7 +36,7 @@ class SignedMessageCreationCtrl {
     }
 
     /**
-     * Copy the signed transaction to clipboard
+     * Copy the signed message to clipboard
      */
     copyMessage() {
         if(!this.signedMessage) return;
@@ -47,14 +47,14 @@ class SignedMessageCreationCtrl {
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        this._Alert.signedTxCopySuccess();
+        this._Alert.signedMsgCopySuccess();
     }
 
     /**
-     * Create the signed transaction
+     * Create the signed message
      */
     sign() {
-        // Disable send button
+        // Disable verify button
         this.okPressed = true;
 
         if (!this.message) return this.okPressed = false;
@@ -67,7 +67,7 @@ class SignedMessageCreationCtrl {
         // Create a key pair object from private key
         let kp = nem.crypto.keyPair.create(nem.utils.helpers.fixPrivateKey(this.common.privateKey));
 
-        // Sign the serialized transaction with keypair object
+        // Sign the message with keypair object
         let signature = kp.sign(message);
 
         this.signedMessage = JSON.stringify({
