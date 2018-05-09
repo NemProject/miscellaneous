@@ -2,6 +2,9 @@
  * Exchanges requiring a message for deposits
  */
 let data =  [{
+    name: "Binance",
+    address: "NC64UFOWRO6AVMWFV2BFX2NT6W2GURK2EOX6FFMZ"
+}, {
     name: "Poloniex",
     address: "NBZMQO7ZPBYNBDUR7F75MAKA2S3DHDCIFG775N3D"
 }, {
