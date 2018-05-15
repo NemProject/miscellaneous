@@ -696,7 +696,7 @@ function EnglishProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'Show raw wallet file',
         SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'To make a wallet file, create an empty text file and put the above base 64 key into it. Save the file as <b><i>yourWalletName.wlt</i></b>.',
         SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'Show private key',
-        SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'To backup a private key, print it or save it in a text file. It is highly recommend to store the private key in a safe and offline location.',
+        SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: 'Your private key holds all the power of your account and therefore it must be kept secret. <b>Never share it with anyone</b>. It is <b>highly recommend</b> to store the private key in a safe and offline location.',
         SIGNUP_COMMON_WALLET_WARNING_FOOTER: 'By clicking below, you agree that you have your private key, password and wallet file backed up.',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'I have my wallet file',
         SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: 'I have my private key and password',
