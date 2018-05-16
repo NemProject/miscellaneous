@@ -59,7 +59,8 @@ function JapaneseProvider($translateProvider) {
       DASHBOARD_NOTICE_3: 'NEM チームは、メインネットを利用する前に、最初にテストネットにて NanoWallet の操作を行い、利用方法を習得する事をお勧めします。英文のガイドブックは<a href="https://blog.nem.io/nanowallet-tutorial/" target="_blank">こちら</a>にあります。利用者は自身の資金を管理し、秘密鍵をバックアップしてください。NEM チームは、メインネット上でこのアプリケーションを利用することに起因する、資金の消失について責任を負いません。',
       DASHBOARD_NOTICE_4: '紙に秘密鍵を書き留めて、安全な場所に保存することをお勧めします。また、あなたのアカウントをAndroid 及び iOS アプリにインポートして、バックアップする事もできます。',
       DASHBOARD_NOTICE_5: 'Thanks for your participation!', //すまねぇ、ここどう訳すか迷ってそのままｗ
-      
+      DASHBOARD_MORE_TXES: 'もっとトランザクションを見る',
+
       // GENERAL
       GENERAL_BLOCK: "ブロック",
       GENERAL_BLOCKS: 'ブロック',
@@ -163,6 +164,8 @@ function JapaneseProvider($translateProvider) {
       GENERAL_HEXADECIMAL: '16進数',
       GENERAL_SELECT_ACCOUNT: 'アカウントの選択',
       GENERAL_INVOICE: '請求書',
+      GENERAL_SIGNATURE: '署名',
+      GENERAL_VERIFY: '検証',
 
       // HOME MODULE
       HOME_UNSUPPORTED_BROWSER: '申し訳ありません。このブラウザでは安全に NanoWallet を使用する事ができません。',
@@ -370,6 +373,8 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_CUSTOM_NODE: "カスタムノードを使う",
       ACCOUNT_NODE_FROM_LIST: "一覧からノードを使う",
       ACCOUNT_DELEGATED_PRIVATE_KEY: "委任秘密鍵",
+      ACCOUNT_NO_PUBLIC_KEY: '公開鍵を取得するためにはトランザクションを発行してください。',
+      ACCOUNT_SHOW_ON_TREZOR_BTN: 'TREZORで見る',
 
       // PORTAL MODULE
       PORTAL_TITLE: "各種機能",
@@ -380,9 +385,9 @@ function JapaneseProvider($translateProvider) {
       PORTAL_MULTISIG_BTN_3: 'マルチシグトランザクションの署名',
       PORTAL_HARVESTING_TITLE: "デリゲートハーベスティング（委任）",
       PORTAL_HARVESTING_TEXT: "デリゲートハーベスティングは、アカウントが起動していない時間でもリモート・ノードを介して「マイニング（ハーベスト）」を可能にする機能です。",
-      PORTAL_CHANGELLY_TITLE: "Changelly （XEM 等の両替サイト）",
-      PORTAL_CHANGELLY_TEXT: "最適なレートで XEM を交換できる Changelly ウィジェットを使用できます。",
-      PORTAL_CHANGELLY_BTN: "XEM を購入",
+      PORTAL_EXCHANGE_TITLE: 'インスタントエクスチェンジ',
+      PORTAL_EXCHANGE_TEXT: 'ChangellyやShapeShiftウィジェットを使って、最適レートでXEMを購入しましょう！',
+      PORTAL_EXCHANGE_BTN: 'XEMを購入',
       PORTAL_NS_TITLE: "ネームスペースとサブドメイン",
       PORTAL_NS_TEXT: "ネームスペースはドメイン名のようなものです。ネームスペース名はユニーク(他に同一の名称無し)であり、その配下にサブネームスペースやモザイク （アセット） を発行する事ができます。",
       PORTAL_NS_BTN: "ネームスペースを作成",
@@ -396,7 +401,8 @@ function JapaneseProvider($translateProvider) {
       PORTAL_APOSTILLE_BTN_2: "監査（公証の確認）",
       PORTAL_ADDRESS_BOOK_TEXT: 'アドレスにラベルを付けることによって、 連絡先を簡単に管理する事ができます。',
       PORTAL_ADDRESS_BOOK_BTN: 'アドレス帳の管理',
-      PORTAL_INVOICE_TEXT: 'Create an invoice to share via QR code',
+      PORTAL_INVOICE_TEXT: '共有するためのQRコード請求書を作成します',
+      PORTAL_SIGNED_MSG_TEXT: 'トランザクションなしにアカウントの所有認証をするための署名済みメッセージの作成と検証を行います。',
 
       // ADDRESS BOOK MODULE
       ADDRESS_BOOK_TITLE: 'アドレス帳',
@@ -441,6 +447,11 @@ function JapaneseProvider($translateProvider) {
       // ACCOUNT EXPLORER
       ACCOUNTS_EXPLORER_TITLE: 'エクスプローラ - アカウント',
       ACCOUNTS_EXPLORER_SEARCH: '検索',
+
+      // TRANSACTIONS EXPLORER
+      EXPLORER_TRANSACTIONS_TITLE: 'あなたのトランザクション履歴',
+      EXPLORER_TRANSACTIONS_LOAD_MORE: 'もっと読み込む',
+
 
       // APOSTILLE HISTORY MODULE
       APOSTILLE_HISTORY_TITLE: "アポスティーユの履歴",
@@ -604,6 +615,7 @@ function JapaneseProvider($translateProvider) {
       ALERT_VOTING_SUCCESS: '投票の送信に成功しました。',
       ALERT_POLL_CREATION_SUCCESS: '投票の作成に成功しました。',
       ALERT_COPY_SIGNED_TX_SUCCESS: '署名済みトランザクションをコピーしました！',
+      ALERT_COPY_SIGNED_MSG_SUCCESS: '署名済みメッセージをコピーしました！',
 
       // CONVERT ACCOUNT TO MULTISIG
       AGGREGATE_MODIFICATION_TITLE: "マルチシグアカウントへ変換",
@@ -692,7 +704,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_BTN_1: 'ウォレットファイルの表示',
       SIGNUP_COMMON_WALLET_WARNING_BTN_1_INFO: 'ウォレットファイルを作成するには、空のテキストファイルを作成し、上記のBase64で作成されたキーを記入します。ファイルを<b><i>yourWalletName.wlt</i></b>という名前で保存し、インポートすることができます。',
       SIGNUP_COMMON_WALLET_WARNING_BTN_2: 'プライベートキーの表示',
-      SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: '秘密鍵をバックアップするには、テキストファイルに保存して印刷するか、安全な場所に書き込んでください。 秘密鍵はオフラインで保存することをお勧めします。',
+      SIGNUP_COMMON_WALLET_WARNING_BTN_2_INFO: '秘密鍵はアカウントの全ての権限を持つので必ず秘密にしてください。<b>絶対に誰にも教えてはいけません</b>。秘密鍵は安全でオフラインな場所に保管することを<b>強く推奨します</b>。',
       SIGNUP_COMMON_WALLET_WARNING_FOOTER: '以下をクリックすると、上記全ての警告を読み理解し同意したことになります。',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_1: 'ウォレットファイルをバックアップしました',
       SIGNUP_COMMON_WALLET_WARNING_CONFIRM_2: '秘密鍵とパスワードをバックアップしました',
@@ -701,6 +713,7 @@ function JapaneseProvider($translateProvider) {
       SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'ウォレットをダウンロードする',
       SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: '推定パスフレーズ強度',
       SIGNUP_ESTIMATED_GUESS_TIMES: '推定解析時間',
+      SIGNUP_CONGRATS_MSG: '<b>おめでとう！</b> あなたの NEM アドレスは',
 
       // FAQ MODULE
       FAQ_TITLE: "よくある質問",
@@ -784,12 +797,13 @@ function JapaneseProvider($translateProvider) {
       // CREATE OFFLINE TRANSACTION MODULE
       OFFLINE_TX_TITLE: 'オフライントランザクションの準備',
       OFFLINE_TX_NO_WALLET: 'フォームを表示するためにログイン画面からウォレットをインポートしてください。',
-      OFFLINE_TX_INFO_1: 'ウォレットのインポートとトランザクションを作成するときは、インターネットから切断していることを確認してください！',
+      OFFLINE_TX_INFO_1: '安全性を確保するため、コンピュータがインターネットに<b>接続していない</b>ことを確認してください。',
       OFFLINE_TX_INFO_2: 'NEMノードからモザイクやマルチシグ情報を取得するにインターネット接続が必要なので、単純なトランザクションだけ作成できます。',
       OFFLINE_TX_INFO_3: '左側のパネルの"作成"ボタンをクリックすると、下部に署名済みトランザクションが表示されます。',
       OFFLINE_TX_INFO_4: '署名済みトランザクションは変更不可であり、デフォルト期限の24時間以内にリリースされた場合にだけ有効になります。',
       OFFLINE_TX_SIGNED: '署名済みトランザクション',
       OFFLINE_TX_RELEASE: 'リリースモジュールで開く',
+      OFFLINE_TX_MODAL_ALERT: 'このコンピュータはインターネットに接続されているようです。安全にオフライントランザクションを作るために<b>インターネットに接続されていないコンピュータ上だけ</b>で行ってください。',
 
       // RELEASE OFFLINE TRANSACTION MODULE
       RELEASE_OFFLINE_TX_TITLE: 'トランザクションをネットワークにリリース',
@@ -800,7 +814,19 @@ function JapaneseProvider($translateProvider) {
       RELEASE_OFFLINE_TX_INFO_4: '署名済みトランザクションはいかなるコンピュータからでも安全にリリースできます。',
 
       // INVOICE MODULE
-      CREATE_INVOICE_TITLE: '請求書を作成'
+      CREATE_INVOICE_TITLE: '請求書を作成',
+
+      // CREATE SIGNED MESSAGE MODULE
+      CREATE_SIGNED_MSG_TITLE: "署名済みメッセージの作成",
+      CREATE_SIGNED_MSG_NAME: '署名済みメッセージ',
+      CREATE_SIGNED_MSG_SIGN: 'メッセージに署名',
+
+      // VERIFY SIGNED MESSAGE MODULE
+      VERIFY_SIGNED_MSG_TITLE: "署名済みメッセージの検証",
+      VERIFY_SIGNED_MSG_SIG_VALID: '署名は有効です',
+      VERIFY_SIGNED_MSG_SIG_NOT_VALID: '署名は<b>不正</b>です',
+      VERIFY_SIGNED_MSG_NOT_VALID: '署名済みメッセージが不正です！'
+
     });
 
 }
