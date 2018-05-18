@@ -20,8 +20,21 @@ class Voting {
             nem.NEMLibrary.bootstrap(nem.NetworkTypes.MAIN_NET);
         }
     }
-
+    
     // Voting Functions
+    
+    init() {
+        if ((this._Wallet.network < 0 && nem.NEMLibrary.getNetworkType() !== nem.NetworkTypes.TEST_NET) ||
+            (this._Wallet.network > 0 && nem.NEMLibrary.getNetworkType() !== nem.NetworkTypes.MAIN_NET)) {
+                nem.NEMLibrary.reset();
+                if(this._Wallet.network < 0){
+                    nem.NEMLibrary.bootstrap(nem.NetworkTypes.TEST_NET);
+                }
+                else{
+                    nem.NEMLibrary.bootstrap(nem.NetworkTypes.MAIN_NET);
+                }
+            }
+    }
 
     /**
      * getPolls(pollIndexAddress) returns a list with the poll headers from all the polls that are on the given index
@@ -31,6 +44,7 @@ class Voting {
      * @return {promise} - a list of all the poll header objects on the index account
      */
     getPolls(pollIndexAddress) {
+        this.init();
         const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress))
             .map((index) => {
                 console.log(index);
@@ -57,6 +71,7 @@ class Voting {
      * @return {promise} - the generated poll Address
      */
     createPoll(details, pollIndex, common) {
+        this.init();
         const formData = {
             title: details.formData.title,
             doe: details.formData.doe,
@@ -87,6 +102,7 @@ class Voting {
      * @return {promise} - returns a promise that resolves when the vote has been sent
      */
     vote(poll, option, common, multisigAccount) {
+        this.init();
         return voting.BroadcastedPoll.fromAddress(new nem.Address(poll))
             .switchMap((poll) => {
                 const account = nem.Account.createWithPrivateKey(common.privateKey);
@@ -107,6 +123,7 @@ class Voting {
      * @return {promise} - a promise that returns the details object of the poll
      */
     pollDetails(pollAddress) {
+        this.init();
         return voting.BroadcastedPoll.fromAddress(new nem.Address(pollAddress))
             .map((poll) => {
                 const data = {
@@ -133,6 +150,7 @@ class Voting {
      * @return {promise} - A promise that returns the result object of the poll
      */
     getResults(pollAddress) {
+        this.init();
         return voting.BroadcastedPoll.fromAddress(new nem.Address(pollAddress))
             .switchMap((poll) => {
                 return poll.getResults();
@@ -152,6 +170,7 @@ class Voting {
      *                          2 if there is a confirmed vote
      */
     hasVoted(address, pollDetails) {
+        this.init();
         var orderedAddresses = [];
         if(pollDetails.options.link){
             orderedAddresses = pollDetails.options.strings.map((option)=>{
