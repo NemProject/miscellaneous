@@ -546,6 +546,13 @@ export default class Alert {
         });
     }
 
+    insufficientBalance() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ALERT_INSUFFICIENT_BALANCE"),
+            className: 'danger'
+        });
+    }
+
     /***
      * Success alerts
      */

@@ -581,7 +581,7 @@ function EnglishProvider($translateProvider) {
         ALERT_BTC_MARKET_ERROR: 'Error while trying to fetch Bitcoin price',
         ALERT_COSIG_REMOVAL_LIMIT: 'Only one cosignatory at a time can be removed',
         ALERT_MULTISIG_MIN_SIGNATURE_INVALID: 'Invalid number of minimum signatures',
-        ALERT_INSUFFICIENT_BALANCE: 'Insufficient Balance for performing the operation',
+        ALERT_INSUFFICIENT_BALANCE: 'Insufficient balance for performing the operation',
         ALERT_VOTING_ERROR: 'Invalid Vote',
         ALERT_BRAIN_PASSWORD_TOO_SHORT: 'Brain wallet passphrase must be at least 40 characters!',
         ALERT_NODE_SEEMS_OFFLINE: 'Node seems offline, please select another one',
