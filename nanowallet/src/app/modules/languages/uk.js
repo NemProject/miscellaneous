@@ -1,7 +1,7 @@
 function UkrainianProvider($translateProvider) {
     'ngInject'
 
-    $translateProvider.translations('ukr', {
+    $translateProvider.translations('uk', {
 
         // HEADER COMPONENT
         WALLET_NAME_1: 'nano',
