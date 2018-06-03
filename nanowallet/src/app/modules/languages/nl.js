@@ -59,7 +59,6 @@ function DutchProvider($translateProvider) {
         DASHBOARD_NOTICE_3: 'Het NEM-team adviseert je om eerst op het Testnet vertrouwd te raken met NanoWallet voordat je het Mainnet gaat gebruiken. Een eenvoudige gids vindt je <a href="https://blog.nem.io/nanowallet-tutorial/" target="_blank"> hier</a>. Gebruikers zijn zelf verantwoordelijk voor hun geld en moeten zelf van de persoonlijke sleutels een back-up maken. Het NEM-team is niet verantwoordelijk voor het verlies van geld door deze applicatie op het Mainnet te gebruiken.',
         DASHBOARD_NOTICE_4: 'Wij raden je aan om persoonlijke sleutels op papier te zetten en op een veilige plaats op te slaan. Daarnaast kun je je accounts importeren in de Android- en iOS-apps als back-up.',
         DASHBOARD_NOTICE_5: 'Bedankt voor het gebruik!',
-		DASHBOARD_MORE_TXES: 'Bekijk meer transacties',
 
         // GENERAL
         GENERAL_BLOCK: 'Blok',
@@ -164,8 +163,6 @@ function DutchProvider($translateProvider) {
         GENERAL_HEXADECIMAL: 'Hexadecimaal',
         GENERAL_SELECT_ACCOUNT: 'Selecteer account',
         GENERAL_INVOICE: 'Factuur',
-        GENERAL_SIGNATURE: 'Handtekening',
-        GENERAL_VERIFY: 'Verifieer',
 
         // HOME MODULE
         HOME_UNSUPPORTED_BROWSER: 'Sorry, je kan Nano Wallet niet veilig gebruiken met deze browser...',
@@ -442,10 +439,6 @@ function DutchProvider($translateProvider) {
         ACCOUNTS_EXPLORER_TITLE: 'Verkenner - Accounts',
         ACCOUNTS_EXPLORER_SEARCH: 'Zoeken',
 
-        // TRANSACTIONS EXPLORER
-        EXPLORER_TRANSACTIONS_TITLE: 'Je transactie geschiedenis',
-        EXPLORER_TRANSACTIONS_LOAD_MORE: 'Laad meer',
-
         // APOSTILLE HISTORY MODULE
         APOSTILLE_HISTORY_TITLE: 'Apostille historie',
         APOSTILLE_HISTORY_BTN_TRANSFER: 'Overdragen / splitsen eigenaarsschap',
@@ -608,8 +601,7 @@ function DutchProvider($translateProvider) {
         ALERT_VOTING_SUCCESS: 'Stem succesvol verzonden',
         ALERT_POLL_CREATION_SUCCESS: 'Poll succesvol aangemaakt',
         ALERT_COPY_SIGNED_TX_SUCCESS: 'Ondertekende transactie gekopieerd!',
-        ALERT_COPY_SIGNED_MSG_SUCCESS: 'Ondertekend bericht gekopieerd!',
-		
+
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Een account converteren naar multi-handtekening',
         AGGREGATE_MODIFICATION_NAME: 'Samengevoegde modificatie transactie',
@@ -626,6 +618,7 @@ function DutchProvider($translateProvider) {
         AGGREGATE_MIN_SIGNATURES_PLACEHOLDER: 'Minimale handtekeningen nodig om een transactie te valideren',
         AGGREGATE_MODIFICATION_LIST: 'Wijzigingslijst',
         AGGREGATE_COSIG_LIST: ' Mede-ondertekenaar adreslijst',
+
         AGGREGATE_MODIFICATION_EDIT_TITLE: 'Bewerk een multi-handtekening contract',
         AGGREGATE_MODIFICATION_EDIT_SELECT_TITLE: 'Account om te bewerken',
         AGGREGATE_MODIFICATION_EDIT_SELECT: 'Selecteer een account om te bewerken',
@@ -703,7 +696,6 @@ function DutchProvider($translateProvider) {
         SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD: 'Download portemonnee',
         SIGNUP_ESTIMATED_PASSPHRASE_STRENGTH: 'Geschatte wachtwoord sterkte',
         SIGNUP_ESTIMATED_GUESS_TIMES: 'Geschat aantal keer raden',
-        SIGNUP_CONGRATS_MSG: '<b>Gefeliciteerd!</b> Je NEM adres is',
 
         // FAQ MODULE
         FAQ_TITLE: 'Vaak gestelde vragen',
@@ -793,7 +785,6 @@ function DutchProvider($translateProvider) {
         OFFLINE_TX_INFO_4: 'Een ondertekende transactie is onveranderbaar en zal alleen van kracht zijn als deze vóór het verstrijken van de standaardtermijn van 24 uur op het netwerk wordt vrijgegeven.',
         OFFLINE_TX_SIGNED: 'Ondertekende transactie',
         OFFLINE_TX_RELEASE: 'Open in vrijgave module',
-        OFFLINE_TX_MODAL_ALERT: 'Deze computer lijkt verbonden met internet, houd er rekening mee dat het maken van offline transacties <b>ALLEEN</b> veilig is op een computer die <b>NOOIT</b> is verbonden met internet.',
 
         // RELEASE OFFLINE TRANSACTION MODULE
         RELEASE_OFFLINE_TX_TITLE: 'Offline transactie vrijgeven naar het netwerk',
@@ -804,19 +795,7 @@ function DutchProvider($translateProvider) {
         RELEASE_OFFLINE_TX_INFO_4: 'Je kunt een ondertekende transactie veilig vrijgeven vanaf elke computer.',
 
         // INVOICE MODULE
-        CREATE_INVOICE_TITLE: 'Creëer een factuur',
-
-        // CREATE SIGNED MESSAGE MODULE
-        CREATE_SIGNED_MSG_TITLE: 'Creëer een ondertekend bericht',
-        CREATE_SIGNED_MSG_NAME: 'Ondertekend bericht',
-        CREATE_SIGNED_MSG_SIGN: 'Onderteken een bericht',
-
-        // VERIFY SIGNED MESSAGE MODULE
-        VERIFY_SIGNED_MSG_TITLE: 'Verifieer een ondertekend bericht',
-        VERIFY_SIGNED_MSG_SIG_VALID: 'Handtekening is geldig',
-        VERIFY_SIGNED_MSG_SIG_NOT_VALID: 'Handtekening is <b>NIET</b> geldig',
-        VERIFY_SIGNED_MSG_NOT_VALID: 'Ondertekend bericht is niet geldig!'
-
+        CREATE_INVOICE_TITLE: 'Creëer een factuur'
     });
 
 }
