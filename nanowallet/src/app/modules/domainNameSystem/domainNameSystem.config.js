@@ -7,7 +7,7 @@ function domainNameSystemConfig($stateProvider) {
             controller: 'domainNameSystemCtrl',
             controllerAs: '$ctrl',
             templateUrl: 'modules/domainNameSystem/domainNameSystem.html',
-            title: 'My Nano Wallet Module'
+            title: 'Configure DNS'
         });
 
 };
