@@ -4,7 +4,7 @@ function ChineseProvider($translateProvider) {
     $translateProvider.translations('cn', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'nano',
+        WALLET_NAME_1: 'Nano',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: '安全界面正在连接NEM平台',
         HEADER_LOGIN_BUTTON: '登录',
@@ -12,7 +12,7 @@ function ChineseProvider($translateProvider) {
         HEADER_DASHBOARD: '仪表板',
         HEADER_WALLET: '钱包',
         HEADER_SERVICES: '服务',
-        HEADER_EXPLORER: '探险者',
+        HEADER_EXPLORER: '浏览器',
         HEADER_NODE: '节点',
         HEADER_ACCOUNT: '帐户',
         HEADER_LANG_TITLE: '语言',
@@ -31,8 +31,8 @@ function ChineseProvider($translateProvider) {
         HEADER_RELEASE_TX: '发布交易',
 
         // FOOTER COMPONENT
-        FOOTER_POWERED_BY_1: '供电由',
-        FOOTER_POWERED_BY_2: 'NEM技术.',
+        FOOTER_POWERED_BY_1: '基于',
+        FOOTER_POWERED_BY_2: 'NEM技术实现.',
         FOOTER_VERSION: '版本',
 
         // DASHBOARD MODULE
@@ -377,7 +377,7 @@ function ChineseProvider($translateProvider) {
         PORTAL_MULTISIG_TEXT: '多重签名账户中提供可编辑的链上协议，是存储资金，实现共有账户的最佳实现方式',
         PORTAL_MULTISIG_BTN_1: '转换账户为多重签名',
         PORTAL_MULTISIG_BTN_2: '编辑已有协议',
-        PORTAL_MULTISIG_BTN_3: '签署多级交易',
+        PORTAL_MULTISIG_BTN_3: '签署多重签名事务',
         PORTAL_HARVESTING_TITLE: '委托收获',
         PORTAL_HARVESTING_TEXT: '委托收获是可以实现远程在线“挖矿”而不必保持原账号开启的途径',
         PORTAL_HARVESTING_BTN_1: '管理远程账户',
@@ -649,7 +649,7 @@ function ChineseProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: '选择钱包',
         LOGIN_SELECT_WALLET: '从本地存储选择钱包',
         LOGIN_LOGIN_BUTTON: '登录',
-        LOGIN_NOTE: '没有钱包？ 导入一个或 <a href="#!/signup">signup</a>.',
+        LOGIN_NOTE: '没有钱包？ 导入一个或 <a href="#!/signup">注册</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: '创建一个新的钱包',
@@ -664,7 +664,7 @@ function ChineseProvider($translateProvider) {
         SIGNUP_CREATE_WALLET_BUTTON: '创建简单钱包',
         SIGNUP_PRIVATE_KEY_WALLET_BUTTON: '创建私钥钱包',
         SIGNUP_BRAIN_WALLET_BUTTON: '创建脑钱包',
-        SIGNUP_CREATE_WALLET_WARNING: '请参阅获知客户端生成密钥的<a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank">风险</a>，推荐从NCC生成或获取私钥。',
+        SIGNUP_CREATE_WALLET_WARNING: '请参阅获知客户端生成密钥的<a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank">风险</a>。',
         SIGNUP_NETWORK_SELECT: '选择网络', //
         SIGNUP_NETWORK_MAINNET: 'Mainnet 是 <b> <u>真正的</ u> </ b> NEM网络. 地址以\'N \'开头.',
         SIGNUP_NETWORK_TESTNET: 'Testnet 是 <b><u>实验</u></b> 网络. 地址以 \'T\'开头.',
@@ -727,11 +727,11 @@ function ChineseProvider($translateProvider) {
         FAQ_QUESTION_10: '在哪里可以找到关于我的账户信息（地址等） ?',
         FAQ_ANSWER_10: '如果您查看顶部导航栏，您会看到<b> <i>“帐号”</ b> </ i>之间<b> </ i>Node</ b> </ i>和 <B> <I>“语言”</ b> </ I>. 在那里你可以找到你的地址，公钥，余额和其他重要数据.',
         FAQ_QUESTION_11: '我已将XEM存入交易所，但没有任何记入 ?',
-        FAQ_ANSWER_11_1: '首先，您必须检查您的交易的哈希是否指向现有的交易，在 <a target="_blank" href="http://chain.nem.ninja">explorer</a> (请注意，探险者落后几个街区).',
+        FAQ_ANSWER_11_1: '首先，您必须检查您的交易的哈希是否指向现有的交易，在 <a target="_blank" href="http://chain.nem.ninja">explorer</a> (请注意，浏览器落后几个块).',
         FAQ_ANSWER_11_2: '大多数交易所都要求提供身份证明信息以记入您的存款. 确保您已仔细遵守交换指示并添加了未加密的消息. ',
         FAQ_ANSWER_11_3: '即使您添加了一条消息，也可能发生交换可能无法处理您的存款，因为对面存在问题.',
         FAQ_ANSWER_11_4: '您必须联系交易所支持人员，说明情况并向他们提供交易的哈希.',
-        FAQ_QUESTION_12: '如何检查我是否在叉子上 ?',
+        FAQ_QUESTION_12: '如何检查我是否在分叉上 ?',
         FAQ_ANSWER_12_1: '点击 <b><i>"Node"</b></i>, 顶部导航栏中的，打开节点面板.',
         FAQ_ANSWER_12_2: '查看链条高度并将其与所示高度进行比较 <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">here</a>.',
         FAQ_ANSWER_12_3: '如果超过5个区块不同，那么你很可能在分叉.',
