@@ -133,7 +133,7 @@ function ItalianProvider($translateProvider) {
         GENERAL_CONNECTION_ERROR: 'Si è verificato un errore, il tuo nodo potrebbe riscontrare un problema o la tua connessione è offline.',
         GENERAL_HISTORY: "Storia",
         GENERAL_REVEAL: 'Rivelazione',
-        GENERAL_QR: "QR code"
+        GENERAL_QR: "QR code",
         GENERAL_UPDATE: 'Aggiorna',
         GENERAL_UNKNOWN: 'Sconosciuto',
         GENERAL_IMPORTANCE: 'importanza',
@@ -333,7 +333,7 @@ function ItalianProvider($translateProvider) {
         ACCOUNT_TITLE: "Account",
         ACCOUNT_ACCOUNT_INFORMATION: "Informazioni sull'account",
         ACCOUNT_IMPORTANCE_SCORE: "Punteggio di importanza",
-        ACCOUNT_VESTED_BALANCE: "Bilancio di libero passaggio"
+        ACCOUNT_VESTED_BALANCE: "Bilancio di libero passaggio",
         ACCOUNT_HARVESTING: 'Vendemmia',
         ACCOUNT_REMOTE_STATUS: "Stato Remoto",
         ACCOUNT_DELEGATED_PUBLIC: "Chiave pubblica delegata",
@@ -397,7 +397,7 @@ function ItalianProvider($translateProvider) {
         PORTAL_INVOICE_TEXT: 'Crea una fattura da condividere con il codice QR',
 
         // ADDRESS BOOK MODULE
-        ADDRESS_BOOK_TITLE: "Rubrica"
+        ADDRESS_BOOK_TITLE: "Rubrica",
         ADDRESS_BOOK_NAVIGATION: 'Navigazione',
         ADDRESS_BOOK_NEW: "Nuovo contatto",
         ADDRESS_BOOK_EDIT: "Modifica contatto",
@@ -405,8 +405,8 @@ function ItalianProvider($translateProvider) {
         ADDRESS_BOOK_NEW_BTN: 'Aggiungi',
         ADDRESS_BOOK_EDIT_BTN: "Salva",
         ADDRESS_BOOK_REMOVE_BTN: 'Rimuovi',
-        ADDRESS_BOOK_EXPORT_BTN: "Esporta rubrica"
-        ADDRESS_BOOK_IMPORT_BTN: "Importa rubrica"
+        ADDRESS_BOOK_EXPORT_BTN: "Esporta rubrica",
+        ADDRESS_BOOK_IMPORT_BTN: "Importa rubrica",
         ADDRESS_BOOK_CONTACT_LABEL: "Tag",
         ADDRESS_BOOK_ACCOUNT_ADDRESS: "Indirizzo dell'account",
         ADDRESS_BOOK_ACTIONS: "Azioni",
@@ -450,7 +450,7 @@ function ItalianProvider($translateProvider) {
         APOSTILLE_CREATE_HELP: "Vuoi ulteriori informazioni su Apostille?",
         APOSTILLE_TRANSACTION_NAME: "Transazione Apostile",
         APOSTILLE_TRANSACTION_MULTISIG_NAME: "Transazione di apostille su più lati",
-        APOSTILLE_KEEP_PRIVATE: "Privato, scaricabile e modificabile"
+        APOSTILLE_KEEP_PRIVATE: "Privato, scaricabile e modificabile",
         APOSTILLE_USE_DEDICATED: 'Usa account dedicato',
         APOSTILLE_FILES_TO_NOTARIZE: "File da autenticare",
         APOSTILLE_REJECTED: "Rifiutato",
@@ -525,7 +525,7 @@ function ItalianProvider($translateProvider) {
         ALERT_MIJIN_DISABLED: 'La rete Mijin è disabilitata, scegli un"altra rete!',
         ALERT_GET_NS_BY_ID_ERROR: 'Errore durante il recupero delle informazioni di registrazione del nome, per motivo:',
         ALERT_GET_ACCOUNT_DATA_ERROR: 'Errore nel recupero dei dati dell"account, per motivo:',
-        ALERT_ERROR_OCCURRED: 'Si è verificato un errore!'
+        ALERT_ERROR_OCCURRED: 'Si è verificato un errore!',
         ALERT_INVALID_ADDR_FOR_NETWORK: 'non corrisponde alla rete',
         ALERT_INVALID_PASSWORD: 'La password fornita non è valida!',
         ALERT_COSIG_ALREADY_IN_LIST: 'destinatario è già presente nell"elenco delle modifiche!',
@@ -655,9 +655,9 @@ function ItalianProvider($translateProvider) {
         SIGNUP_PRIVATE_KEY_WALLET_INFO: "I portafogli con chiave privata contengono una chiave privata che desideri importare.",
         SIGNUP_BRAIN_WALLET_TITLE: 'Mental Wallet',
         SIGNUP_BRAIN_WALLET_INFO: 'I portafogli mentali contengono una chiave privata generata da una password. Ciò rende possibile il recupero del portafoglio solo utilizzando esattamente la stessa password.',
-        SIGNUP_CREATE_WALLET_BUTTON: "Crea portafoglio semplice"
+        SIGNUP_CREATE_WALLET_BUTTON: "Crea portafoglio semplice",
         SIGNUP_PRIVATE_KEY_WALLET_BUTTON: "Crea portafoglio a chiave privata",
-        SIGNUP_BRAIN_WALLET_BUTTON: "Crea portfolio mentale"
+        SIGNUP_BRAIN_WALLET_BUTTON: "Crea portfolio mentale",
         SIGNUP_CREATE_WALLET_WARNING: 'Si prega di saperne di più <a href="https://www.w3.org/TR/2014/WD-WebCryptoAPI-20140325/#RandomSource-interface" rel="nofollow" target="_blank"><b>pericoli</b></a> che le chiavi generate sul lato client possono contenere; non siamo responsabili per eventuali perdite che possono verificarsi a causa di problemi relativi all"entropia nella generazione delle chiavi. Anche se è molto difficile da fare, si consiglia di utilizzare una chiave privata generata da una fonte con una forte entropia.',
         SIGNUP_NETWORK_SELECT: 'Seleziona una rete',
         SIGNUP_NETWORK_MAINNET: 'Mainnet è la rete principale <b><u>reale</u></b>di NEM. Gli indirizzi iniziano con \'N\'.',
@@ -667,7 +667,7 @@ function ItalianProvider($translateProvider) {
         SIGNUP_PRIVATE_KEY_WALLET_WARNING: 'I wallet delle chiavi private utilizzano SOLO una password per crittografare la chiave privata importata. Pertanto è fondamentale selezionare una password SAFE.',
         SIGNUP_CREATE_START_WARNING: 'Por favor, siga cada passo com muita atenção!',
         SIGNUP_CREATE_START_CONNECTION_WARNING: 'Si consiglia di disconnettersi da Internet mentre si sta creando il portafoglio e il backup dei dati.',
-        SIGNUP_CREATE_READY_BTN: "Pronto"
+        SIGNUP_CREATE_READY_BTN: "Pronto",
         SIGNUP_CREATE_ENTER_NAME: "Inserisci il nome del portafoglio",
         SIGNUP_CREATE_ENTER_PASSWORD: 'Inserisci una password',
         SIGNUP_CREATE_ENTER_PASSPHRASE: 'Inserisci una pass password',
@@ -746,7 +746,7 @@ function ItalianProvider($translateProvider) {
         FORM_SIDE_BTN_BALANCE: 'Balance',
         FORM_SIDE_BTN_PAY_TO: 'Paga per',
         FORM_SIDE_BTN_TX_FEE: 'Tariffa di transazione',
-        FORM_SIDE_BTN_RENTAL_FEE: 'Tasso di noleggio'
+        FORM_SIDE_BTN_RENTAL_FEE: 'Tasso di noleggio',
         FORM_SIDE_BTN_LEVY_FEE: 'Aliquota fiscale',
         FORM_RECIPIENT_PLACEHOLDER: 'Indirizzo destinatario o @apelid',
         FORM_INVOICE_RECIPIENT_PLACEHOLDER: 'Indirizzo destinatario',
