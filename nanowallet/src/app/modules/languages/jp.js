@@ -827,6 +827,37 @@ function JapaneseProvider($translateProvider) {
       VERIFY_SIGNED_MSG_SIG_NOT_VALID: '署名は<b>不正</b>です',
       VERIFY_SIGNED_MSG_NOT_VALID: '署名済みメッセージが不正です！'
 
+      // DNS MODULE
+      DNS_SHORT_DESC: "Decentralized Domain Name System (DNS) service for namespace.nem domains",
+      DNS_CONFIGURE: "Configure DNS",
+      DNS_SEARCH_DNS: "Search DNS",
+      DNS_GO_SEARCH: "GO!",
+      DNS_GET_INFO: "Get info",
+      DNS_SEARCH_HEADLINE: "Search DNS",
+      DNS_SEARCH_HELP: "DNS help",
+      DNS_SEARCH: "Search",
+      DNS_SEARCH_HELP_INFO: "Type a namespace.nem to lookup associated DNS information or go directly to website. ",
+      //DNS CONFIGURE
+      DNS_SELECT_NAMESPACE:"select namespace",
+      DNS_POINTER_ADDRESS:"Pointer address",
+      DNS_IP_ADDRESS:"ip address",
+      DNS_ORGA:"Organization",
+      DNS_COUNTRY:"Country",
+      DNS_ADDRESS:"Address",
+      DNS_PHONE:"Phone",
+      DNS_EMAIL:"Email",
+      DNS_OTHERINFO:"Other info",
+      DNS_JSONMSG:"Json message",
+      DNS_CHAR_LEFT:"Characters Left",
+      DNS_HELP1:"The owner of a NEM namespace can use the NEM DNS in a few easy steps. The DNS is built around the namespace platform in the NEM ecosystem and an associated pointer address (PA). The namespace owner needs to send a transaction to the namespace pointer address including a non-encrypted message in json format with information related to the namespace. The message can include relevant information such as IP address, ownership info, physical address, contact info and much more.",
+      DNS_HELP2:"This is how you do it:",
+      DNS_HELP3:"1. select namespace",
+      DNS_HELP4:"2. write relevant or update DNS information",
+      DNS_HELP5:"3. send transaction to pointer address",
+      //DNS ALERTS
+      ALERT_DNS_SUCCESS: "Information found",
+      ALERT_DNS_NO_INFO_FOUND: "No DNS info found"
+
     });
 
 }
