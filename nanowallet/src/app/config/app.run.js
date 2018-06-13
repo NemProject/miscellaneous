@@ -9,7 +9,8 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
         "app.trezor",
         "app.offlineTransactionHome",
         "app.offlineTransactionCreate",
-        "app.offlineTransactionSend"
+        "app.offlineTransactionSend",
+        "app.importWalletBankupQrcode"
     ];
 
      // Change page title based on state

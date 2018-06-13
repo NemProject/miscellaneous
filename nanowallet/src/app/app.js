@@ -52,6 +52,7 @@ import './modules/offlineTransaction';
 import './modules/voting';
 import './modules/invoice';
 import './modules/signedMessage';
+import './modules/importWalletBankupQrcode';
 
 // Create and bootstrap application
 const requires = [
@@ -105,7 +106,8 @@ const requires = [
     'app.apostilleMessage',
     'app.invoice',
     'app.signedMessageCreation',
-    'app.signedMessageVerification'
+    'app.signedMessageVerification',
+    'app.importWalletBankupQrcode'
 ];
 
 window.$ = window.jQuery = $;
