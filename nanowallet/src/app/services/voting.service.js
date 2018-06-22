@@ -1,3 +1,5 @@
+import {Observable} from 'rxjs';
+import {TrezorAccount} from 'nem-trezor';
 const nem = require('nem-library');
 const voting = require('nem-voting');
 
@@ -20,9 +22,9 @@ class Voting {
             nem.NEMLibrary.bootstrap(nem.NetworkTypes.MAIN_NET);
         }
     }
-    
+
     // Voting Functions
-    
+
     init() {
         if ((this._Wallet.network < 0 && nem.NEMLibrary.getNetworkType() !== nem.NetworkTypes.TEST_NET) ||
             (this._Wallet.network > 0 && nem.NEMLibrary.getNetworkType() !== nem.NetworkTypes.MAIN_NET)) {
@@ -47,7 +49,6 @@ class Voting {
         this.init();
         const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress))
             .map((index) => {
-                console.log(index);
                 return index.headers.map((header) => {
                     return {
                         title: header.title,
@@ -83,12 +84,46 @@ class Voting {
         const whitelist = details.whitelist;
 
         const poll = new voting.UnbroadcastedPoll(formData, description, options, whitelist);
-        const account = nem.Account.createWithPrivateKey(common.privateKey);
 
-        return poll.broadcast(account)
-            .map((broadcastedPoll) => {
-                return broadcastedPoll.address.plain();
-            }).first().toPromise();
+        let account;
+        if (common.isHW) {
+            account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+        } else {
+            account = nem.Account.createWithPrivateKey(common.privateKey);
+        }
+
+        const broadcastData = poll.broadcast(account.publicKey);
+        const transactionHttp = new nem.TransactionHttp();
+        const signTransaction = (i) => {
+            let p;
+            if (common.isHW) {
+                p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
+            } else {
+                p = Promise.resolve(account.signTransaction(broadcastData.transactions[i]));
+            }
+            return p.then((signed) => {
+                if (broadcastData.transactions.length - 1 === i) {
+                    return [signed];
+                }
+                return signTransaction(i + 1).then((next) => {
+                    return [signed].concat(next);
+                });
+            }).catch(err => {
+                throw err;
+            });
+        }
+
+        return signTransaction(0).then((signedTransactions) => {
+            return Observable.merge(...(signedTransactions.map((t) => {
+                return transactionHttp.announceTransaction(t);
+            })))
+                .map(() => {
+                    return broadcastData.broadcastedPoll.address.plain();
+                }).last().toPromise();
+        }).catch(err => {
+            throw err;
+        });
+
     }
 
     /**
@@ -105,13 +140,30 @@ class Voting {
         this.init();
         return voting.BroadcastedPoll.fromAddress(new nem.Address(poll))
             .switchMap((poll) => {
-                const account = nem.Account.createWithPrivateKey(common.privateKey);
+                let account;
+                if (common.isHW) {
+                    account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+                } else {
+                    account = nem.Account.createWithPrivateKey(common.privateKey);
+                }
+
+                let voteTransaction;
                 if (multisigAccount) {
                     const multisigAcc = nem.PublicAccount.createWithPublicKey(multisigAccount.publicKey);
-                    return poll.voteMultisig(account, multisigAcc, option);
+                    voteTransaction = poll.voteMultisig(multisigAcc, option);
                 } else {
-                    return poll.vote(account, option);
+                    voteTransaction = poll.vote(option);
                 }
+                let signedPromise;
+                if (common.isHW) {
+                    signedPromise = account.signTransaction(voteTransaction);
+                } else {
+                    signedPromise = Observable.fromPromise(Promise.resolve(account.signTransaction(voteTransaction)));
+                }
+                return signedPromise;
+            }).switchMap((signed) => {
+                const transactionHttp = new nem.TransactionHttp();
+                return transactionHttp.announceTransaction(signed);
             }).first().toPromise();
     }
 
