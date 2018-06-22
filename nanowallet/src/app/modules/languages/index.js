@@ -10,6 +10,9 @@ app.config(EnglishProvider);
 import ChineseProvider from './cn';
 app.config(ChineseProvider);
 
+import ItalianProvider from './it';
+app.config(ItalianProvider);
+
 import PolishProvider from './pl';
 app.config(PolishProvider);
 
