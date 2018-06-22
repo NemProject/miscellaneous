@@ -99,7 +99,7 @@ class Voting {
             if (common.isHW) {
                 p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
             } else {
-                p = Promise.resolve(account.signTransaction(t));
+                p = Promise.resolve(account.signTransaction(broadcastData.transactions[i]));
             }
             return p.then((signed) => {
                 if (broadcastData.transactions.length - 1 === i) {
