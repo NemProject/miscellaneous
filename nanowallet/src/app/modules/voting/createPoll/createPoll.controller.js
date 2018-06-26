@@ -13,9 +13,6 @@ class createPollCtrl {
         this._Wallet = Wallet;
         this._DataStore = DataStore;
 
-        // Scroll to top of the page
-        window.scrollTo(0, 0);
-
         // Constants
         this.MOCK_ADDRESS = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 

@@ -15,6 +15,8 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
 
      // Change page title based on state
     $transitions.onSuccess({ to: true }, (transition) => {
+        // Scroll to top of the page
+        window.scrollTo(0, 0);
         $rootScope.setPageTitle(transition.router.globals.current.title);
         // Enable tooltips globally
         $timeout( function() {
