@@ -11,7 +11,7 @@ class importWalletBankupQrcodeCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(Alert, Wallet, $timeout, $localStorage, WalletBuilder, $state) {
+    constructor(Alert, Wallet, $timeout, $localStorage, WalletBuilder, $state, $scope) {
         'ngInject';
 
         //// Module dependencies region ////
@@ -25,12 +25,28 @@ class importWalletBankupQrcodeCtrl {
         this.qrcodeWallet = {};
         this.common = nem.model.objects.get("common");
         this.walletName = '';
+        this.scanStarted = false;
 
         this.init();
+
+        // Will stop scan if user change page
+        $scope.$on("$destroy", () => {
+            this.stopScan();
+        });
     }
 
     init() {
         this.adduploadQrcodeListener()
+    }
+
+    stopScan() {
+      if (this.scanStarted) {
+        this.scanStarted = false;
+        clearInterval(this.continueDetectInterval); //clear interval
+        this.openedVideoStream.getTracks()[0].stop(); //stop stream
+        this.video.pause(); // video pause;
+        $("#scanQrcode").html(""); //delete #camera content
+      }
     }
 
     /**
@@ -53,10 +69,7 @@ class importWalletBankupQrcodeCtrl {
 
               if(wallet && wallet.data && wallet.data.name){
                   
-                  clearInterval(self.continueDetectInterval); //clear interval
-                  self.openedVideoStream.getTracks()[0].stop(); //stop stream
-                  self.video.pause(); // video pause;
-                  $("#scanQrcode").html(""); //delete #camera content
+                  this.stopScan();
 
                   $("#importWalletName").text(wallet.data.name);
                   self.qrcodeWallet = wallet;
@@ -86,6 +99,7 @@ class importWalletBankupQrcodeCtrl {
      * scan qrcode image
      */
     scan() {
+        this.scanStarted = true;
         let self = this;
         let cvsElement = document.createElement('canvas');
         cvsElement.id = "scanQrcodeCvs";
@@ -212,38 +226,7 @@ class importWalletBankupQrcodeCtrl {
           this._Alert.passwordsNotMatching();
         }
     }
-    /**
-     * Copy the signed transaction to clipboard
-     */
-    copyTransaction() {
-        if(!this.resultSafeTransaction) return;
-        let dummy = document.createElement("input");
-        document.body.appendChild(dummy);
-        dummy.setAttribute("id", "dummy_id");
-        dummy.setAttribute('value', this.resultSafeTransaction);
-        dummy.select();
-        document.execCommand("copy");
-        document.body.removeChild(dummy);
-        this._Alert.signedTxCopySuccess();
-    }
 
-    /**
-     * Generate a transaction QR
-     */
-    generateTransactionQR() {
-        // Account info model for QR
-        let code = kjua({
-            size: 300,
-            text: this.resultSafeTransaction,
-            fill: '#000',
-            quiet: 0,
-            ratio: 2,
-            ecLevel: 'L'
-        });
-        $('#signedTransactionQR').html("");
-        $('#signedTransactionQR').append(code);
-        return;
-}
 
     //// End methods region ////
 

@@ -2,49 +2,44 @@
   <div class="container-fluid main">
     <div class="row">
       <div class="col-sm-8">
-        <h2>Import Wallet Bankup</h2>
+        <h2>{{ 'IMPORT_BANKUP_QRCODE_TITLE' |  translate }}</h2>
       </div>
     </div>
     <div class="row">
-      <div id="importWallet" class="col-md-3 col-md-offset-3 col-sm-6">
-        <div id="scanQrcode"></div>
-        <div id="uploadQrcode">
-          <canvas id="uploadQrcodeCvs" hidden></canvas>
-        </div>
-      </div>      
-    </div>
-    <div class="row">
-      <div>
+      <div class="col-lg-6 col-md-12">
         <div class="panel-heading">
-            <h3>Load Wallet Bankup Qrcode</h3>
+            <h3>{{ 'IMPORT_BANKUP_QRCODE_LOAD' |  translate }}</h3>
         </div>
         <div class="panel-body">
+          <div id="importWallet">
+                <div id="scanQrcode"></div>
+                <div id="uploadQrcode">
+                  <canvas id="uploadQrcodeCvs" hidden></canvas>
+                </div>
+              </div>
           <div class="input-group">
-            <span class="input-group-btn">
-                <!--label>Type: </label-->
-            </span>
             <div class="">
               <div class="col-md-6 col-sm-6">
-                <button class="btn btn-lg btn-success" type="submit" ng-click="$ctrl.scan()">
-                    Scan
+                <button class="btn btn-success" type="submit" ng-click="$ctrl.scan()" ng-show="!$ctrl.scanStarted">
+                    {{ 'IMPORT_BANKUP_QRCODE_SCAN' | translate }}
+                </button>
+                <button class="btn btn-success" type="submit" ng-click="$ctrl.stopScan()" ng-show="$ctrl.scanStarted">
+                    {{ 'IMPORT_BANKUP_QRCODE_STOP_SCAN' | translate }}
                 </button>
               </div>
               <div class="col-md-6 col-sm-6">
-                  <input class="btn btn-lg btn-success" style="font-size: unset;" type="file" id="uploadQrcodeInput" accept="image/*"/>
+                  <input class="btn btn-success" style="font-size: unset;width: auto;" type="file" id="uploadQrcodeInput" accept="image/*"/>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div>
+      <div class="col-lg-6 col-md-12">
         <div class="panel-heading">
             <h3>{{ 'GENERAL_INFORMATION' |  translate }}</h3>
         </div>
         <div class="panel-body">
-          <p>1. Support Qrcode Bankup Wallet Type: NEM wechat wallet, ios, android.</p>
-          <p>1. 支持导入钱包类型: NEM微信钱包, 苹果钱包, 安卓钱包．</p>
+          <p>{{ 'IMPORT_BANKUP_QRCODE_INFORMATION' |  translate }}</p>
         </div>      
       </div>
     </div>
@@ -58,7 +53,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Import Wallet Bankup Qrcode</h3>
+        <h3 class="modal-title">{{ 'IMPORT_BANKUP_QRCODE_TITLE' |  translate }}</h3>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -78,7 +73,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-lg btn-success" type="submit" ng-click="$ctrl.importQrcodeWallet()">
+        <button class="btn btn-success" type="submit" ng-click="$ctrl.importQrcodeWallet()">
             <i class="fa fa-plus"></i> {{ 'LOGIN_IMPORT_BUTTON' | translate }}
           </button>
       </div>

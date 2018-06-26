@@ -848,7 +848,14 @@ function EnglishProvider($translateProvider) {
         DNS_HELP5:"3. send transaction to pointer address",
         //DNS ALERTS
         ALERT_DNS_SUCCESS: "Information found",
-        ALERT_DNS_NO_INFO_FOUND: "No DNS info found"
+        ALERT_DNS_NO_INFO_FOUND: "No DNS info found",
+
+        // IMPORT BANKUP QRCODE
+        IMPORT_BANKUP_QRCODE_TITLE: 'Import Wallet Bankup Qrcode',
+        IMPORT_BANKUP_QRCODE_INFORMATION: 'Support Qrcode Bankup Wallet Type: NEM wechat wallet, ios, android.',
+        IMPORT_BANKUP_QRCODE_LOAD: 'Load Wallet Bankup Qrcode',
+        IMPORT_BANKUP_QRCODE_SCAN: 'Scan',
+        IMPORT_BANKUP_QRCODE_STOP_SCAN: 'Stop scan'
 
     });
 
