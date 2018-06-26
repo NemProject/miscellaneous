@@ -394,11 +394,12 @@ function DutchProvider($translateProvider) {
         PORTAL_APOSTILLE_TITLE: 'Apostille',
         PORTAL_APOSTILLE_TEXT: 'Gebruik de NEM Apostille-dienst om blockchain gebaseerde notariële aktes te maken met een tijdstempel en het volgen en controleren van de bestandsechtheid.',
         PORTAL_APOSTILLE_BTN_1: 'Creëer',
-        PORTAL_APOSTILLE_BTN_2: 'Verifieer',
+	PORTAL_APOSTILLE_BTN_2: 'Verifieer',
         PORTAL_ADDRESS_BOOK_TEXT: 'Ken labels toe aan adressen om je contacten gemakkelijk bij te houden.',
         PORTAL_ADDRESS_BOOK_BTN: 'Beheer adressenboek',
         PORTAL_INVOICE_TEXT: 'Creëer een factuur om via QR code te delen',
-
+ 	PORTAL_SIGNED_MSG_TEXT: 'Creëer en verifieer een ondertekend bericht om het accounteigendom te verifiëren zonder transacties uit te voeren.',
+	    
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Adressenboek',
         ADDRESS_BOOK_NAVIGATION: 'Navigatie',
@@ -441,7 +442,7 @@ function DutchProvider($translateProvider) {
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Verkenner - Accounts',
         ACCOUNTS_EXPLORER_SEARCH: 'Zoeken',
-
+	    
         // TRANSACTIONS EXPLORER
         EXPLORER_TRANSACTIONS_TITLE: 'Je transactie geschiedenis',
         EXPLORER_TRANSACTIONS_LOAD_MORE: 'Laad meer',

@@ -52,6 +52,7 @@ import './modules/offlineTransaction';
 import './modules/voting';
 import './modules/invoice';
 import './modules/signedMessage';
+import './modules/domainNameSystem';
 import './modules/importWalletBankupQrcode';
 
 // Create and bootstrap application
@@ -107,6 +108,8 @@ const requires = [
     'app.invoice',
     'app.signedMessageCreation',
     'app.signedMessageVerification',
+    'app.domainNameSystem',
+    'app.dnsSearch',
     'app.importWalletBankupQrcode'
 ];
 
