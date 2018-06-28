@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 2.3.0
+
+    - Domain Name System module
+    - Import Wallet Bankup QRcode module
+    - Support voting with Trezor
+    - Minor fixes and improvements
+
 ## Version 2.2.0
 
     - Create and verify signed messages modules
