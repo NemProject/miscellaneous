@@ -850,12 +850,12 @@ function EnglishProvider($translateProvider) {
         ALERT_DNS_SUCCESS: "Information found",
         ALERT_DNS_NO_INFO_FOUND: "No DNS info found",
 
-        // IMPORT BANKUP QRCODE
-        IMPORT_BANKUP_QRCODE_TITLE: 'Import Wallet Bankup Qrcode',
-        IMPORT_BANKUP_QRCODE_INFORMATION: 'Support Qrcode Bankup Wallet Type: NEM wechat wallet, ios, android.',
-        IMPORT_BANKUP_QRCODE_LOAD: 'Load Wallet Bankup Qrcode',
-        IMPORT_BANKUP_QRCODE_SCAN: 'Scan',
-        IMPORT_BANKUP_QRCODE_STOP_SCAN: 'Stop scan'
+        // IMPORT WALLET QRCODE
+        IMPORT_WALLET_QRCODE_TITLE: 'Import wallet QR code',
+        IMPORT_WALLET_QRCODE_INFORMATION: 'Support wallet QR code: NEM wechat wallet, ios, android.',
+        IMPORT_WALLET_QRCODE_LOAD: 'Load wallet QR code',
+        IMPORT_WALLET_QRCODE_SCAN: 'Scan',
+        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scan'
 
     });
 

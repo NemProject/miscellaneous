@@ -797,12 +797,12 @@ function ChineseProvider($translateProvider) {
         // INVOICE MODULE
         CREATE_INVOICE_TITLE: '创建账单',
 
-        // IMPORT BANKUP QRCODE
-        IMPORT_BANKUP_QRCODE_TITLE: 'Import Wallet Bankup Qrcode',
-        IMPORT_BANKUP_QRCODE_INFORMATION: '支持导入钱包类型: NEM微信钱包, 苹果钱包, 安卓钱包．',
-        IMPORT_BANKUP_QRCODE_LOAD: 'Load Wallet Bankup Qrcode',
-        IMPORT_BANKUP_QRCODE_SCAN: 'Scan',
-        IMPORT_BANKUP_QRCODE_STOP_SCAN: 'Stop scan'
+        // IMPORT WALLET QRCODE
+        IMPORT_WALLET_QRCODE_TITLE: 'Import wallet QR code',
+        IMPORT_WALLET_QRCODE_INFORMATION: '支持导入钱包类型: NEM微信钱包, 苹果钱包, 安卓钱包．',
+        IMPORT_WALLET_QRCODE_LOAD: 'Load wallet QR code',
+        IMPORT_WALLET_QRCODE_SCAN: 'Scan',
+        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scan'
     });
 
 }

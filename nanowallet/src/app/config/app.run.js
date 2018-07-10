@@ -10,7 +10,7 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
         "app.offlineTransactionHome",
         "app.offlineTransactionCreate",
         "app.offlineTransactionSend",
-        "app.importWalletBankupQrcode"
+        "app.importWalletQrCode"
     ];
 
      // Change page title based on state

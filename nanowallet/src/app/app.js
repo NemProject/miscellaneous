@@ -53,7 +53,7 @@ import './modules/voting';
 import './modules/invoice';
 import './modules/signedMessage';
 import './modules/domainNameSystem';
-import './modules/importWalletBankupQrcode';
+import './modules/importWalletQrCode';
 
 // Create and bootstrap application
 const requires = [
@@ -110,7 +110,7 @@ const requires = [
     'app.signedMessageVerification',
     'app.domainNameSystem',
     'app.dnsSearch',
-    'app.importWalletBankupQrcode'
+    'app.importWalletQrCode'
 ];
 
 window.$ = window.jQuery = $;

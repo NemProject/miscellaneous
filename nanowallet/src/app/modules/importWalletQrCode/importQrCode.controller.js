@@ -1,10 +1,8 @@
 import nem from 'nem-sdk';
 import Helpers from '../../utils/helpers';
-
-
 import jsQR from "jsqr";
 
-class importWalletBankupQrcodeCtrl {
+class importWalletQrCodeCtrl {
 
     /**
      * Initialize dependencies and properties
@@ -65,7 +63,7 @@ class importWalletBankupQrcodeCtrl {
           if (code) {
             try {
               let wallet = JSON.parse(code.data)
-              console.log('success detect bankup QR, close camera!');
+              console.log('success detect QR, close camera!');
 
               if(wallet && wallet.data && wallet.data.name){
                   
@@ -75,7 +73,7 @@ class importWalletBankupQrcodeCtrl {
                   self.qrcodeWallet = wallet;
                   $('#importQrcodeModal').modal('show');
               }else{
-                console.log('Detect qr, but not bankup qr. continue ...')
+                console.log('Detect qr, but not NEM qr. continue ...')
               }
             } catch (err) {
               console.log('continue to detect Qrcode...')
@@ -151,7 +149,7 @@ class importWalletBankupQrcodeCtrl {
                       $("#importWalletName").text(wallet.data.name);
                       $('#importQrcodeModal').modal('show');
                   }else{
-                    console.log('->Detect qr, but not bankup qr. continue ...')
+                    console.log('->Detect qr, but not NEM qr. continue ...')
                   }
                 } catch (err) {
                   console.log('non json qr...')
@@ -183,7 +181,7 @@ class importWalletBankupQrcodeCtrl {
         let truePassword = this.common.password
         if(this.qrcodeWallet.wxwallet && this.qrcodeWallet.wxwallet == "1") {
             truePassword = nem.crypto.helpers.derivePassSha(this.common.password, 6000).priv;
-            console.log('found nem wechat wallet bankup qrcode')
+            console.log('found nem wechat wallet qrcode')
         }
 
         let encrypted = this.qrcodeWallet.data.priv_key;
@@ -232,4 +230,4 @@ class importWalletBankupQrcodeCtrl {
 
 }
 
-export default importWalletBankupQrcodeCtrl;
+export default importWalletQrCodeCtrl;
