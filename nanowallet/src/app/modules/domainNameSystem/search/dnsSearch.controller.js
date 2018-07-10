@@ -1,5 +1,6 @@
 import nem from 'nem-sdk';
 import Helpers from '../../../utils/helpers';
+import UrlParser from 'url-parse';
 
 class dnsSearchCtrl {
     // Set services as constructor parameter
@@ -149,8 +150,13 @@ class dnsSearchCtrl {
             this.objDnsResults = objDnsResults;
 
             if (this.searchType == 1) { //redirect to web
+                let url = objDnsResults['ip1'];
+                // Parse the url
+                let parsed = new UrlParser(url);
+                // Check if protocol is set or set default
+                if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') url = 'http://' + url;
                 //window.location ='http://'+objDnsResults['ip1'];
-                var href = 'http://'+ objDnsResults['ip1'];
+                var href = url;
                 //window.open(href);
 
                 var win = window.open(href, '_blank');
