@@ -856,7 +856,14 @@ function JapaneseProvider($translateProvider) {
       DNS_HELP5:"3. ポインタアドレスへトランザクションを送る",
       //DNS ALERTS
       ALERT_DNS_SUCCESS: "情報が見つかりました",
-      ALERT_DNS_NO_INFO_FOUND: "DNS情報が見つかりませんでした"
+      ALERT_DNS_NO_INFO_FOUND: "DNS情報が見つかりませんでした",
+
+      // IMPORT WALLET QRCODE
+      IMPORT_WALLET_QRCODE_TITLE: 'ウォレットQRコードのインポート',
+      IMPORT_WALLET_QRCODE_INFORMATION: 'サポートしているウォレットQRコード: NEM wechat wallet, ios, android.',
+      IMPORT_WALLET_QRCODE_LOAD: 'ウォレットQRコードを読み込む',
+      IMPORT_WALLET_QRCODE_SCAN: 'スキャン',
+      IMPORT_WALLET_QRCODE_STOP_SCAN: 'スキャン停止'
 
     });
 
