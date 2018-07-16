@@ -1,9 +1,15 @@
 # Changelog
 
+## Version 2.3.2
+
+    - Fix DNS search
+    - Update languages
+    - Minor improvements
+
 ## Version 2.3.0
 
     - Domain Name System module
-    - Import Wallet Bankup QRcode module
+    - Import Wallet QR code module
     - Support voting with Trezor
     - Minor fixes and improvements
 
