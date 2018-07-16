@@ -653,7 +653,7 @@ function EnglishProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: 'Select wallet',
         LOGIN_SELECT_WALLET: 'Select a wallet in local storage',
         LOGIN_LOGIN_BUTTON: 'Sign In',
-        LOGIN_NOTE: 'No wallet? Import one or <a href="#!/signup">signup</a>.',
+        LOGIN_NOTE: 'No wallet? <a href="#!/import-wallet-qr-code">Import one</a> or <a href="#!/signup">sign up</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: 'New to NEM?',
