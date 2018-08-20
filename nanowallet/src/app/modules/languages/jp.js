@@ -825,7 +825,45 @@ function JapaneseProvider($translateProvider) {
       VERIFY_SIGNED_MSG_TITLE: "署名済みメッセージの検証",
       VERIFY_SIGNED_MSG_SIG_VALID: '署名は有効です',
       VERIFY_SIGNED_MSG_SIG_NOT_VALID: '署名は<b>不正</b>です',
-      VERIFY_SIGNED_MSG_NOT_VALID: '署名済みメッセージが不正です！'
+      VERIFY_SIGNED_MSG_NOT_VALID: '署名済みメッセージが不正です！',
+
+      // DNS MODULE
+      DNS_SHORT_DESC: "namespace.nemドメイン用の分散ドメインネームシステム(DNS)サービス",
+      DNS_CONFIGURE: "DNSの設定",
+      DNS_SEARCH_DNS: "DNSの検索",
+      DNS_GO_SEARCH: "検索",
+      DNS_GET_INFO: "情報取得",
+      DNS_SEARCH_HEADLINE: "DNSの検索",
+      DNS_SEARCH_HELP: "DNSのヘルプ",
+      DNS_SEARCH: "検索",
+      DNS_SEARCH_HELP_INFO: "namespace.nemを入力して関連するDNS情報を参照するか、直接ウェブサイトに移動します。",
+      //DNS CONFIGURE
+      DNS_SELECT_NAMESPACE:"ネームスペースの選択",
+      DNS_POINTER_ADDRESS:"ポインタアドレス",
+      DNS_IP_ADDRESS:"IPアドレス",
+      DNS_ORGA:"組織",
+      DNS_COUNTRY:"国籍",
+      DNS_ADDRESS:"住所",
+      DNS_PHONE:"電話番号",
+      DNS_EMAIL:"Eメール",
+      DNS_OTHERINFO:"その他",
+      DNS_JSONMSG:"JSONメッセージ",
+      DNS_CHAR_LEFT:"残り文字数",
+      DNS_HELP1:"NEMネームスペースの所有者はNEM DNSが簡単な数ステップで使用できます。DNSはNEMエコシステムの名前空間プラットフォームと、関連付けられたポインターアドレス(PA)を中心に構築されています。ネームスペースの所有者は、ネームスペースに関連する情報を使用して、JSON形式の暗号化されていないメッセージを含む、ネームスペースポインタアドレスにトランザクションを送信する必要があります。メッセージには、IPアドレス、所有権情報、物理アドレス、連絡先情報などの関連情報を含めることができます。",
+      DNS_HELP2:"このように使います:",
+      DNS_HELP3:"1. ネームスペースを選ぶ",
+      DNS_HELP4:"2. 関連を書き込むかDNS情報を更新する",
+      DNS_HELP5:"3. ポインタアドレスへトランザクションを送る",
+      //DNS ALERTS
+      ALERT_DNS_SUCCESS: "情報が見つかりました",
+      ALERT_DNS_NO_INFO_FOUND: "DNS情報が見つかりませんでした",
+
+      // IMPORT WALLET QRCODE
+      IMPORT_WALLET_QRCODE_TITLE: 'ウォレットQRコードのインポート',
+      IMPORT_WALLET_QRCODE_INFORMATION: 'サポートしているウォレットQRコード: NEM wechat wallet, ios, android.',
+      IMPORT_WALLET_QRCODE_LOAD: 'ウォレットQRコードを読み込む',
+      IMPORT_WALLET_QRCODE_SCAN: 'スキャン',
+      IMPORT_WALLET_QRCODE_STOP_SCAN: 'スキャン停止'
 
     });
 

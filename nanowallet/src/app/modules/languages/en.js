@@ -653,7 +653,7 @@ function EnglishProvider($translateProvider) {
         LOGIN_SELECT_WALLET_YOURS: 'Select wallet',
         LOGIN_SELECT_WALLET: 'Select a wallet in local storage',
         LOGIN_LOGIN_BUTTON: 'Sign In',
-        LOGIN_NOTE: 'No wallet? Import one or <a href="#!/signup">signup</a>.',
+        LOGIN_NOTE: 'No wallet? <a href="#!/import-wallet-qr-code">Import one</a> or <a href="#!/signup">sign up</a>.',
 
         // SIGNUP MODULE
         SIGNUP_TITLE: 'New to NEM?',
@@ -848,7 +848,14 @@ function EnglishProvider($translateProvider) {
         DNS_HELP5:"3. send transaction to pointer address",
         //DNS ALERTS
         ALERT_DNS_SUCCESS: "Information found",
-        ALERT_DNS_NO_INFO_FOUND: "No DNS info found"
+        ALERT_DNS_NO_INFO_FOUND: "No DNS info found",
+
+        // IMPORT WALLET QRCODE
+        IMPORT_WALLET_QRCODE_TITLE: 'Import wallet QR code',
+        IMPORT_WALLET_QRCODE_INFORMATION: 'Support wallet QR code: NEM wechat wallet, ios, android.',
+        IMPORT_WALLET_QRCODE_LOAD: 'Load wallet QR code',
+        IMPORT_WALLET_QRCODE_SCAN: 'Scan',
+        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scan'
 
     });
 
