@@ -38,9 +38,9 @@
               <li ng-class="{ active: $ctrl.isTabSet(3) }">
                 <a ng-click="$ctrl.setTab(3)">Ended</a>
               </li>
-              <li ng-class="{ active: $ctrl.isTabSet (4) }">
+              <!-- <li ng-class="{ active: $ctrl.isTabSet (4) }">
                 <a ng-click="$ctrl.setTab(4)">Options</a>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div class="panel-body">
@@ -182,6 +182,9 @@
                     <div ng-hide="$ctrl.alreadyVoted || $ctrl.pollFinished">
                       <p><b><i class="fa fa-exclamation-triangle"></i> Voting has a fee of {{($ctrl.votingFee | fmtNemValue)[0]}}.{{($ctrl.votingFee | fmtNemValue)[1]}} XEM per option</b></p>
                       <button class="btn btn-success pull-xs-left" type="submit" style="width:90%" ng-click="$ctrl.vote()" ng-disabled="$ctrl.voting || $ctrl.invalidVote || $ctrl.alreadyVoted > 0">Vote</button>
+                    </div>
+                    <div ng-show="$ctrl.notInWhitelist">
+                      <p class=text-danger>You are not on the whitelist</p>
                     </div>
                     <div ng-show="$ctrl.alreadyVoted === 2">
                       <p class="text-success">You have successfully Voted on this Poll</p>

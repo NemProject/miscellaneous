@@ -74,13 +74,14 @@ class pollsCtrl {
         this.createIndex = false;
 
         this.tab = 1;  //selected tab
-        this.onlyVotable = true;  //if true only votable polls appear in index
+        this.onlyVotable = false;  //if true only votable polls appear in index
 
         // Issues for not being able to vote
         this.issues = [];
         this.invalidVote = true;
         this.alreadyVoted = 0;
         this.pollFinished = false;
+        this.notInWhitelist = false;
 
         // To lock our send button if a transaction is not finished processing
         this.voting = false;
@@ -123,6 +124,7 @@ class pollsCtrl {
             this.voting = false;
             return;
         }
+        console.log("vote is valid");
 
         // Get account private key or return
         if (!this._Wallet.decrypt(this.common)) return this.voting = false;
@@ -175,12 +177,15 @@ class pollsCtrl {
                 }));
             }
         }
+        console.log("going to vote");
         Promise.all(votes).then((d) => {
+            console.log("voting failed");
             this._$timeout(() => {
                 this._Alert.votingSuccess();
                 this.common.password = '';
             });
         }, (e)=>{
+            console.log("error", e);
             this._$timeout(() => {
                 this.voting = false;
                 this.common.password = '';
@@ -297,7 +302,12 @@ class pollsCtrl {
         if (this.selectedPoll.formData.type === 1) {
             if (!this.isVotable(this.selectedPoll)) {
                 issueList.push("You are not on the Whitelist");
+                this.notInWhitelist = true;
+            } else {
+                this.notInWhitelist = false;
             }
+        } else {
+            this.notInWhitelist = false;
         }
         //mosaic
         if (this.selectedPoll.formData.type === 2) {
@@ -331,6 +341,7 @@ class pollsCtrl {
 
     // Gets the details and results of a poll by address
     getPoll(address){
+        console.log("loading poll", address);
         this.loadingPoll = true;
         this.loadingResults = true;
 
@@ -505,7 +516,7 @@ class pollsCtrl {
         }
         let address = this._Wallet.currentAccount.address;
         if (type === 1) {
-            return (header.whitelist.indexOf(address) > -1);
+            return this._Voting.isInWhitelist(address, header.whitelist);
         } else if (type === 2) {
             let namespace = header.mosaic.split(':')[0];
             let mosaic = header.mosaic.split(':')[1];
@@ -528,12 +539,12 @@ class pollsCtrl {
             });
         }
 
-        if (this.onlyVotable) {
-            this.pollsList = this.pollsList.filter(this.isVotable.bind(this));
-        }
+        // if (this.onlyVotable) {
+        //     this.pollsList = this.pollsList.filter(this.isVotable.bind(this));
+        // }
     }
 
-    // gets al the poll headers on the poll index
+    // gets all the poll headers on the poll index
     getPolls() {
         //get all polls
         this.loadingPolls = true;
