@@ -75,7 +75,9 @@ class Voting {
      */
     createPoll(details, pollIndex, common) {
         this.init();
+        let d = new Date();
         let chainTime = this._DataStore.chain.time;
+        console.log("chain time:", chainTime);
         let timeStamp = Math.floor(chainTime) + Math.floor(d.getSeconds() / 10);
         let due = (this._Wallet.network === nemsdk.model.network.data.testnet.id) ? 60 : 24 * 60;
         let deadline = timeStamp + due * 60;
@@ -99,7 +101,6 @@ class Voting {
         }
 
         const broadcastData = poll.broadcast(account.publicKey);
-        let d = new Date();
         broadcastData.transactions = broadcastData.transactions.map((t) => {
             t.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
             return t;
@@ -164,33 +165,18 @@ class Voting {
         let due = (this._Wallet.network === nemsdk.model.network.data.testnet.id) ? 60 : 24 * 60;
         let deadline = timeStamp + due * 60;
         return voting.BroadcastedPoll.fromAddress(new nem.Address(poll))
-            .switchMap((poll) => {
-                let account;
-                if (common.isHW) {
-                    account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
-                } else {
-                    account = nem.Account.createWithPrivateKey(common.privateKey);
-                }
-
+            .map((poll) => {
                 let voteTransaction;
                 if (multisigAccount) {
                     const multisigAcc = nem.PublicAccount.createWithPublicKey(multisigAccount.publicKey);
                     voteTransaction = poll.voteMultisig(multisigAcc, option);
+                    voteTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
                     voteTransaction.otherTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
                 } else {
                     voteTransaction = poll.vote(option);
                     voteTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
                 }
-                let signedPromise;
-                if (common.isHW) {
-                    signedPromise = account.signTransaction(voteTransaction);
-                } else {
-                    signedPromise = Observable.fromPromise(Promise.resolve(account.signTransaction(voteTransaction)));
-                }
-                return signedPromise;
-            }).switchMap((signed) => {
-                const transactionHttp = new nem.TransactionHttp();
-                return transactionHttp.announceTransaction(signed);
+                return voteTransaction;
             }).first().toPromise();
     }
 
@@ -298,6 +284,42 @@ class Voting {
         const poll = new voting.UnbroadcastedPoll(formData, description, options, whitelist);
 
         return poll.getBroadcastFee();
+    }
+
+    broadcastVotes(votes, common) {
+        let account;
+        if (common.isHW) {
+            account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+        } else {
+            account = nem.Account.createWithPrivateKey(common.privateKey);
+        }
+        // sign
+        let signedTransactionsPromise;
+        if (common.isHW) {
+            signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+        } else {
+            const signed = votes.map(v => {
+                return account.signTransaction(v);
+            });
+            signedTransactionsPromise = Promise.resolve(signed);
+        }
+        // broadcast
+        return signedTransactionsPromise.then(signedTransactions => {
+            const nodeSplit = this._Wallet.node.host.split("://");
+            const node = {
+                protocol: nodeSplit[0],
+                domain: nodeSplit[1],
+                port: this._Wallet.node.port,
+            }
+            const transactionHttp = new nem.TransactionHttp([
+                node,
+            ]);
+            return Promise.all(signedTransactions.map(t => {
+                return transactionHttp.announceTransaction(t).first().toPromise();
+            }));
+        }).catch(e => {
+            throw e;
+        });
     }
 }
 

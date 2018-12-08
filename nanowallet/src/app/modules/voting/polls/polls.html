@@ -141,7 +141,7 @@
                 <ul class="list-group">
                   <div ng-repeat="option in $ctrl.selectedPoll.options.strings track by $index">
                     <li class="list-group-item">
-                      <input id="{{option}}" type="checkbox" ng-click="$ctrl.toggleSelection($index); $ctrl.checkValidVote()"><label for="{{option}}" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted > 0">{{option}}</label>
+                      <input id="{{option}}" type="checkbox" ng-checked="$ctrl.isSelected($index)" ng-click="$ctrl.toggleSelection($index); $ctrl.checkValidVote()"><label for="{{option}}" ng-disabled="$ctrl.voting || $ctrl.alreadyVoted > 0">{{option}}</label>
                     </li>
                   </div>
                   <br>

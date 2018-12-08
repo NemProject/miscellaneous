@@ -162,27 +162,21 @@ class pollsCtrl {
         let votes = [];
         for (var i = 0; i < optionAddresses.length; i++) {
             if (this.multisigVote) {
-                votes.push(this._Voting.vote(this.currentPollAddress, optionStrings[i], this.common, this.multisigAccount).then((data) => {
-                    this._$timeout(() => {
-                        this.alreadyVoted = 1;
-                        this.voting = false;
-                    });
-                }));
+                votes.push(this._Voting.vote(this.currentPollAddress, optionStrings[i], this.common, this.multisigAccount));
             } else {
-                votes.push(this._Voting.vote(this.currentPollAddress, optionStrings[i], this.common).then((data) => {
-                    this._$timeout(() => {
-                        this.alreadyVoted = 1;
-                        this.voting = false;
-                    });
-                }));
+                votes.push(this._Voting.vote(this.currentPollAddress, optionStrings[i], this.common));
             }
         }
-        console.log("going to vote");
-        Promise.all(votes).then((d) => {
-            console.log("voting failed");
+        Promise.all(votes).then(transactions => {
+            return this._Voting.broadcastVotes(transactions, this.common);
+        }).then((d) => {
             this._$timeout(() => {
+                this.voting = false;
+                this.alreadyVoted = 1;
                 this._Alert.votingSuccess();
                 this.common.password = '';
+                this.selectedOption = "";  // for single choice
+                this.selectedOptions = [];  // for multiple choice
             });
         }, (e)=>{
             console.log("error", e);
@@ -339,6 +333,13 @@ class pollsCtrl {
         }
     }
 
+    // For option selection
+    isSelected(index) {
+        var idx = this.selectedOptions.indexOf(index);
+        // Is currently selected
+        return (idx > -1);
+    }
+
     // Gets the details and results of a poll by address
     getPoll(address){
         console.log("loading poll", address);
@@ -405,6 +406,8 @@ class pollsCtrl {
         this.getPoll(this.pollsList[index].address).then(()=>{
             this._$timeout(() => {
                 this.loadingAddressError = false;
+                this.selectedOption = "";  // for single choice
+                this.selectedOptions = [];  // for multiple choice
             });
         }).catch((e)=>{
             this._$timeout(() => {
