@@ -855,7 +855,14 @@ function EnglishProvider($translateProvider) {
         IMPORT_WALLET_QRCODE_INFORMATION: 'Support wallet QR code: NEM wechat wallet, ios, android.',
         IMPORT_WALLET_QRCODE_LOAD: 'Load wallet QR code',
         IMPORT_WALLET_QRCODE_SCAN: 'Scan',
-        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scan'
+        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scan',
+        
+        //NEMonster
+        NEMONSTER_SHORT_DESC: "Welcome to NEMonsters, a witty little collection game based on the NEM blockchain.",
+        NEMONSTER_CATCH: "Catch",
+        NEMONSTER_GET: "Get some monsters",
+        NEMONSTER_DESC: "Welcome to NEMonsters, a witty little collection game based on the NEM blockchain. You can catch and collect over 110,000,000 different combinations of generated monsters; spanning from different colors, names and other spicy characteristics.  You catch a new monster by sending a fixed transaction; the monster is summoned when the transaction is confirmed. The characteristics of your new (evil) monster is based on the transaction hash – how cool is that. See if you can catch some of the monsters from the NEM foundation."
+    
 
     });
 

@@ -854,9 +854,14 @@ function DutchProvider($translateProvider) {
         IMPORT_WALLET_QRCODE_INFORMATION: 'Ondersteuning voor portemonnee QR Code: NEM WeChat Wallet, iOS, Android.',
         IMPORT_WALLET_QRCODE_LOAD: 'Laad portemonnee QR Code',
         IMPORT_WALLET_QRCODE_SCAN: 'Scan',
-        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scannen'
+        IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scannen',
+	    
+        //NEMonster
+        NEMONSTER_SHORT_DESC: "Welkom bij NEMonsters, een grappig klein verzamelspel gebaseerd op de NEM-blockchain.",
+        NEMONSTER_CATCH: "Vang",
+        NEMONSTER_GET: "Vang wat monsters",
+        NEMONSTER_DESC: "Welkom bij NEMonsters, een grappig klein verzamelspel gebaseerd op de NEM-blockchain. Je kunt meer dan 110.000.000 verschillende combinaties van gegenereerde monsters verzamelen met verschillende kleuren, namen en andere pittige kenmerken. Je vang een nieuw monster door een vaste transactie te sturen, het monster wordt opgeroepen wanneer de transactie wordt bevestigd. De kenmerken van je nieuwe (kwaadaardige) monster zijn gebaseerd op de transactiehash - hoe gaaf is dat. Kijk of je een aantal van de monsters kunt vangen van de NEM Foundation."
     });
-
 }
 
 export default DutchProvider;
