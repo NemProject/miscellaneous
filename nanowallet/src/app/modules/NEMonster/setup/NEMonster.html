@@ -1,54 +1,47 @@
 <div class="NEMonster-page">
-
-  <div class="banner-left" style="padding: 0px 15px 15px;">
-    <div class="container">
-      <h2>
-        </i> NEMonster</h2>
+  <div class="container-fluid main">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2>NEMonster</h2>
+      </div>
     </div>
-  </div>
 
-  <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
     <div class="col-md-9 col-lg-7">
 
+      <!-- 2 row box -->
+      <div class="panel-heading">
+        <h3>Collection <i class="fa fa-refresh" style="cursor:pointer;margin-left:10px;" ng-click="$ctrl.init();"></i></h3> 
+        <paginate ng-show="$ctrl.itemElement.length > 4" data="$ctrl.itemElement" current-page="$ctrl.currentPage" page-size="$ctrl.pageSize"></paginate>
+      </div>
 
       <!-- 2 row box -->
-      <!-- 2 row box -->
-      <div class="col-sm-6" ng-repeat="(key, value) in $ctrl.itemElement">
+      <div class="col-sm-6" ng-repeat="value in $ctrl.itemElement | startFrom:$ctrl.currentPage*$ctrl.pageSize | limitTo:$ctrl.pageSize">
         <br><br>
         <div style="padding-left:100px"><b>{{ value['nam1']}} {{ value['nam2']}}</b> </div>
         <br>
 
-                    <div class="MonsterContainer">
-                        <div class="{{ value['monster']}} {{ value['grad']}}" style="background-color:{{ value['color'] }}"></div>
-                       
-                        <div class="{{ value['hair']}}" style="background:{{ value['color'] }}"></div>
-                        <div class="face">
-                          <div class="{{ value['eyes']}}">
-                            <div class="{{ value['iris']}}" style="background-color:{{ value['grad2'] }}">
-                              <div></div>
-                              <div></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="{{ value['mouth']}}"></div>
-                      
-                        <div class="{{ value['teeth']}}">
-                          <div></div>
-                          <div></div>
-                        </div>
-                        
-                       
-                        
-                        <div class="Monstertext"></div>
-                    </div>
-                  
+        <div class="MonsterContainer">
+          <div class="{{ value['monster']}} {{ value['grad']}}" style="background-color:{{ value['color'] }}"></div>   
+          <div class="{{ value['hair']}}" style="background:{{ value['color'] }}"></div>
+          <div class="face">
+            <div class="{{ value['eyes']}}">
+              <div class="{{ value['iris']}}" style="background-color:{{ value['grad2'] }}">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+          <div class="{{ value['mouth']}}"></div>   
+          <div class="{{ value['teeth']}}">
+            <div></div>
+            <div></div>
+          </div>
+          <div class="Monstertext"></div>
+        </div>           
       </div>
-        <!-- end 2 row box-->
-
+      <!-- end 2 row box-->
 
     </div>
-
-
 
     <!-- Information panel -->
     <div class="col-md-3 col-lg-5">
@@ -60,36 +53,20 @@
       <div class="panel-body row">
         <div class="col-md-12 col-lg-12">
           <p>{{'NEMONSTER_DESC' | translate}} </p>
-
-
-
         </div>
       </div>
 
       <br>
-
-      <fieldset class="form-group">
-        <div class="input-group">
-          <span class="input-group-btn">
-            <label>{{'GENERAL_AMOUNT' | translate}}</label>
-          </span>
-          <input type="text" class="form-control"  ng-model="$ctrl.formData.amount" maxlength="17" ng-change="$ctrl.prepareTransaction();" readonly>
-        </div>
-      </fieldset>
-
        
-       <fee-input tx="$ctrl.preparedTransaction" is-multisig="$ctrl.formData.isMultisig"></fee-input><!-- end -->
+      <fee-input tx="$ctrl.preparedTransaction" is-multisig="$ctrl.formData.isMultisig"></fee-input>
 
       <!-- Password Field -->
       <password-input common="$ctrl.common"></password-input>
       <!-- Send button is disabled if already pressed or no password or no clean recipient address or message is supposed to be encrypted but no recipient public key or is a mosaic transfer and no mosaics in array or if amount is invalid or if characters left are negative or if hex message is not hex only -->
-      <button class="btn btn-success" type="submit" ng-disabled=" $ctrl.okPressed || $ctrl.formData.amount<0.01 " ng-click="$ctrl.send()">
+      <button class="btn btn-success" type="submit" ng-disabled=" $ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.send()">
         <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }} / (Hunt NEMonsters)
       </button>
-
-
-    </div><!-- end -->
+    </div>
 
   </div>
-
 </div>
