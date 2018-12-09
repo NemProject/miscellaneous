@@ -4,7 +4,7 @@ function DutchProvider($translateProvider) {
     $translateProvider.translations('nl', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'nano',
+        WALLET_NAME_1: 'NEM',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'De veilige interface naar het NEM platform',
         HEADER_LOGIN_BUTTON: 'Inloggen',
@@ -855,7 +855,7 @@ function DutchProvider($translateProvider) {
         IMPORT_WALLET_QRCODE_LOAD: 'Laad portemonnee QR Code',
         IMPORT_WALLET_QRCODE_SCAN: 'Scan',
         IMPORT_WALLET_QRCODE_STOP_SCAN: 'Stop scannen',
-	    
+
         //NEMonster
         NEMONSTER_SHORT_DESC: "Welkom bij NEMonsters, een grappig klein verzamelspel gebaseerd op de NEM-blockchain.",
         NEMONSTER_CATCH: "Vang",

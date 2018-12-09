@@ -4,7 +4,7 @@ function ChineseProvider($translateProvider) {
     $translateProvider.translations('cn', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'Nano',
+        WALLET_NAME_1: 'NEM',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: '安全界面正在连接NEM平台',
         HEADER_LOGIN_BUTTON: '登录',

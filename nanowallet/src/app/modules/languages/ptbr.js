@@ -4,7 +4,7 @@ function PortugueseBRProvider($translateProvider) {
     $translateProvider.translations('ptbr', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'nano',
+        WALLET_NAME_1: 'NEM',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'A interface de carteiras mais segura para sua conexão com a plataforma NEM',
         HEADER_LOGIN_BUTTON: 'Entrar',
