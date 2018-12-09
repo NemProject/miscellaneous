@@ -1,10 +1,11 @@
 import {Observable} from 'rxjs';
 import {TrezorAccount} from 'nem-trezor';
+import nemsdk from 'nem-sdk';
 const nem = require('nem-library');
 const voting = require('nem-voting');
 
 class Voting {
-    constructor($filter, $timeout, Alert, Wallet, VotingUtils) {
+    constructor($filter, $timeout, Alert, Wallet, VotingUtils, DataStore) {
         'ngInject';
 
         /***
@@ -14,6 +15,7 @@ class Voting {
         this._$filter = $filter;
         this._Alert = Alert;
         this._Wallet = Wallet;
+        this._DataStore = DataStore;
         this._VotingUtils = VotingUtils;
         if(this._Wallet.network < 0){
             nem.NEMLibrary.bootstrap(nem.NetworkTypes.TEST_NET);
@@ -73,6 +75,12 @@ class Voting {
      */
     createPoll(details, pollIndex, common) {
         this.init();
+        let d = new Date();
+        let chainTime = this._DataStore.chain.time;
+        console.log("chain time:", chainTime);
+        let timeStamp = Math.floor(chainTime) + Math.floor(d.getSeconds() / 10);
+        let due = (this._Wallet.network === nemsdk.model.network.data.testnet.id) ? 60 : 24 * 60;
+        let deadline = timeStamp + due * 60;
         const formData = {
             title: details.formData.title,
             doe: details.formData.doe,
@@ -81,7 +89,7 @@ class Voting {
         };
         const description = details.description;
         const options = details.options;
-        const whitelist = details.whitelist;
+        const whitelist = (details.formData.type === 1) ? details.whitelist.map(a => new nem.Address(a)) : undefined;
 
         const poll = new voting.UnbroadcastedPoll(formData, description, options, whitelist);
 
@@ -93,7 +101,20 @@ class Voting {
         }
 
         const broadcastData = poll.broadcast(account.publicKey);
-        const transactionHttp = new nem.TransactionHttp();
+        broadcastData.transactions = broadcastData.transactions.map((t) => {
+            t.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
+            return t;
+        });
+        const nodeSplit = this._Wallet.node.host.split("://");
+        const node = {
+            protocol: nodeSplit[0],
+            domain: nodeSplit[1],
+            port: this._Wallet.node.port,
+        }
+        console.log("node", node);
+        const transactionHttp = new nem.TransactionHttp([
+            node,
+        ]);
         const signTransaction = (i) => {
             let p;
             if (common.isHW) {
@@ -138,32 +159,24 @@ class Voting {
      */
     vote(poll, option, common, multisigAccount) {
         this.init();
+        let d = new Date();
+        let chainTime = this._DataStore.chain.time;
+        let timeStamp = Math.floor(chainTime) + Math.floor(d.getSeconds() / 10);
+        let due = (this._Wallet.network === nemsdk.model.network.data.testnet.id) ? 60 : 24 * 60;
+        let deadline = timeStamp + due * 60;
         return voting.BroadcastedPoll.fromAddress(new nem.Address(poll))
-            .switchMap((poll) => {
-                let account;
-                if (common.isHW) {
-                    account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
-                } else {
-                    account = nem.Account.createWithPrivateKey(common.privateKey);
-                }
-
+            .map((poll) => {
                 let voteTransaction;
                 if (multisigAccount) {
                     const multisigAcc = nem.PublicAccount.createWithPublicKey(multisigAccount.publicKey);
                     voteTransaction = poll.voteMultisig(multisigAcc, option);
+                    voteTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
+                    voteTransaction.otherTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
                 } else {
                     voteTransaction = poll.vote(option);
+                    voteTransaction.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
                 }
-                let signedPromise;
-                if (common.isHW) {
-                    signedPromise = account.signTransaction(voteTransaction);
-                } else {
-                    signedPromise = Observable.fromPromise(Promise.resolve(account.signTransaction(voteTransaction)));
-                }
-                return signedPromise;
-            }).switchMap((signed) => {
-                const transactionHttp = new nem.TransactionHttp();
-                return transactionHttp.announceTransaction(signed);
+                return voteTransaction;
             }).first().toPromise();
     }
 
@@ -237,6 +250,75 @@ class Voting {
         });
         return Promise.all(confirmedPromises).then((data) => {
             return Math.max.apply(null, data);
+        });
+    }
+
+    isInWhitelist(address, whitelist) {
+        console.log("addr", address);
+        console.log("whitelist", whitelist);
+        address = new nem.Address(address);
+        const findI = whitelist.findIndex(a => a.plain() === address.plain());
+        return findI >= 0;
+    }
+
+    getBroadcastFee(details) {
+        this.init();
+        const formData = {
+            title: details.formData.title,
+            doe: details.formData.doe,
+            type: details.formData.type,
+            multiple: details.formData.multiple,
+        };
+        const description = details.description;
+        const options = details.options;
+        let whitelist;
+        if (details.formData.type === 1) {
+            console.log("wl", details.whitelist);
+            try {
+                whitelist = details.whitelist.map(a => new nem.Address(a));
+            } catch (err) {
+                return 0;
+            }
+        }
+
+        const poll = new voting.UnbroadcastedPoll(formData, description, options, whitelist);
+
+        return poll.getBroadcastFee();
+    }
+
+    broadcastVotes(votes, common) {
+        let account;
+        if (common.isHW) {
+            account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+        } else {
+            account = nem.Account.createWithPrivateKey(common.privateKey);
+        }
+        // sign
+        let signedTransactionsPromise;
+        if (common.isHW) {
+            signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+        } else {
+            const signed = votes.map(v => {
+                return account.signTransaction(v);
+            });
+            signedTransactionsPromise = Promise.resolve(signed);
+        }
+        // broadcast
+        return signedTransactionsPromise.then(signedTransactions => {
+            const nodeSplit = this._Wallet.node.host.split("://");
+            const node = {
+                protocol: nodeSplit[0],
+                domain: nodeSplit[1],
+                port: this._Wallet.node.port,
+            }
+            const transactionHttp = new nem.TransactionHttp([
+                node,
+            ]);
+            return Promise.all(signedTransactions.map(t => {
+                return transactionHttp.announceTransaction(t).first().toPromise();
+            }));
+        }).catch(e => {
+            throw e;
         });
     }
 }
