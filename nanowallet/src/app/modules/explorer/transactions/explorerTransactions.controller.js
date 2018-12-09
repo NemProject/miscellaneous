@@ -8,7 +8,7 @@ class ExplorerTransactionsCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(Wallet, Alert, $timeout, $http, $scope) {
+    constructor(Wallet, Alert, $timeout, $http) {
         'ngInject';
 
         //// Module dependencies region ////
@@ -35,15 +35,6 @@ class ExplorerTransactionsCtrl {
 
         // Get transactions
         this.getTransactions(false);
-
-        // Watch node change
-        $scope.$watch(() => this._Wallet.node, (val) => {
-            if (!val) return;
-            this.transactions = [];
-            this.noMoreTxes = false;
-            this.currentPage = 0;
-            this.getTransactions(false);
-        }, true);
     }
 
     //// Module methods region ////
