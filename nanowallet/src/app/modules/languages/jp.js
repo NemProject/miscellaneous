@@ -386,7 +386,7 @@ function JapaneseProvider($translateProvider) {
       PORTAL_HARVESTING_TITLE: "デリゲートハーベスティング（委任）",
       PORTAL_HARVESTING_TEXT: "デリゲートハーベスティングは、アカウントが起動していない時間でもリモート・ノードを介して「マイニング（ハーベスト）」を可能にする機能です。",
       PORTAL_EXCHANGE_TITLE: 'インスタントエクスチェンジ',
-      PORTAL_EXCHANGE_TEXT: 'ChangellyやShapeShiftウィジェットを使って、最適レートでXEMを購入しましょう！',
+      PORTAL_EXCHANGE_TEXT: 'Changellyウィジェットを使って、最適レートでXEMを購入しましょう！',
       PORTAL_EXCHANGE_BTN: 'XEMを購入',
       PORTAL_NS_TITLE: "ネームスペースとサブドメイン",
       PORTAL_NS_TEXT: "ネームスペースはドメイン名のようなものです。ネームスペース名はユニーク(他に同一の名称無し)であり、その配下にサブネームスペースやモザイク （アセット） を発行する事ができます。",
