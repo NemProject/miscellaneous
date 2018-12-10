@@ -38,15 +38,15 @@
               <li ng-class="{ active: $ctrl.isTabSet(3) }">
                 <a ng-click="$ctrl.setTab(3)">Ended</a>
               </li>
-              <!-- <li ng-class="{ active: $ctrl.isTabSet (4) }">
-                <a ng-click="$ctrl.setTab(4)">Options</a>
-              </li> -->
+              <li ng-class="{ active: $ctrl.isTabSet (4) }" ng-show="$ctrl.isMainnet">
+                <a ng-click="$ctrl.setTab(4)">Official</a>
+              </li>
             </ul>
           </div>
           <div class="panel-body">
             <br>
             <!-- LIST -->
-            <div ng-hide="$ctrl.isTabSet(4)">
+            <div ng-hide="$ctrl.isTabSet(5)">
               <div class="pre-scrollable">
                 <div ng-repeat="poll in $ctrl.pollsList track by $index">
                   <div class="poll-list-element">
@@ -58,7 +58,7 @@
               <button type="submit" class="btn btn-success pull-xs-left" ng-click="$ctrl.getPolls();" ng-disabled="$ctrl.loadingPolls"><i ng-class="$ctrl.loadingPolls ? 'fa fa-refresh fa-spin' : 'fa fa-refresh'" aria-hidden="true"></i> <span ng-show="$ctrl.loadingPolls">Loading</span> <span ng-show="!$ctrl.loadingPolls">Refresh</span></button>
             </div>
             <!-- OPTIONS TAB -->
-            <div ng-show="$ctrl.isTabSet(4)">
+            <div ng-show="$ctrl.isTabSet(5)">
               <!-- only votable -->
               <input id="box1" type="checkbox" ng-model="$ctrl.onlyVotable" ng-click="$ctrl.updateList()"><label for="box1">Show only polls you can vote on</label>
               <!-- Index / Poll Address Input -->

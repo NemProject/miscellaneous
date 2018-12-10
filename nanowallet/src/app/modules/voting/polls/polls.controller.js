@@ -44,6 +44,8 @@ class pollsCtrl {
             this.defaultIndexAccount = "NAZN26HYB7C5HVYVJ4SL3KBTDT773NZBAOMGRFZB";
         }
 
+        this.isMainnet = this._Wallet.network > 0;
+
         this.pollIndexAccount = this.defaultIndexAccount;
 
         this.pollIndexPrivate = false;
@@ -447,11 +449,7 @@ class pollsCtrl {
         this.createIndex = false;
         this.showDetails = false;
         this.tab = tab;
-        if(tab === 4){ //options tab
-        }
-        else{
-            this.updateList();
-        }
+        this.updateList();
     }
 
     // for setting (VOTE/MULTISIG/RESULTS tabs)
@@ -544,6 +542,10 @@ class pollsCtrl {
         } else if (this.tab === 3) {
             this.pollsList = this.allPolls.filter((poll) => {
                 return (poll.doe <= now);
+            });
+        } else if (this.tab === 4) {
+            this.pollsList = this.allPolls.filter((poll) => {
+                return (poll.creator === "NCXFX5P56EXXWDRUWAWXDWYJHEFV26WVC5VJ6GY2");
             });
         }
 

@@ -57,6 +57,7 @@ class Voting {
                         type: header.type,
                         doe: header.doe,
                         address: header.address.plain(),
+                        creator: header.creator.plain(),
                         whitelist: header.whitelist,
                     }
                 });
