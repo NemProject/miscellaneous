@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 2.4.2
+
+    - Updated Voting module
+    - Added NEMonster collection game (by @aenima86)
+    - Fixed Changelly widget
+    - Renamed to NEM Wallet
+    - Minor fixes and improvements
+
 ## Version 2.3.2
 
     - Fix DNS search
