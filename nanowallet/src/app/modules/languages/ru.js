@@ -4,7 +4,7 @@ function RussianProvider($translateProvider) {
     $translateProvider.translations('ru', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'nano',
+        WALLET_NAME_1: 'NEM',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'Интерфейс безопасного подключения к платформе NEM',
         HEADER_LOGIN_BUTTON: 'Вход',

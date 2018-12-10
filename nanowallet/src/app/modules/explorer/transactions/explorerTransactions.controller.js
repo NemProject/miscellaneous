@@ -42,22 +42,18 @@ class ExplorerTransactionsCtrl {
     /**
      * Get transactions of the account
      */
-    getTransactions(isUpdate, txHash) {
-        let endpoint;
-        if (this._Wallet.network === nem.model.network.data.mainnet.id) {
-            endpoint = nem.model.objects.create("endpoint")("http://hugealice.nem.ninja", 7890);
-        } else {
-            endpoint = this._Wallet.node;
-        }
-       let obj = {
+    getTransactions(isUpdate, txId) {
+        let obj = {
             'params': {
                 'address': this._Wallet.currentAccount.address,
-                'hash': txHash ? txHash : '',
                 'pageSize': isUpdate ? 100 : 50
             }
         };
-        return this._$http.get(endpoint.host + ':' + endpoint.port + '/account/transfers/all', obj).then((res) => {
-            if(isUpdate) {
+        if (isUpdate) {
+            obj['params']['id'] = txId;
+        }
+        return this._$http.get(this._Wallet.node.host + ':' + this._Wallet.node.port + '/account/transfers/all', obj).then((res) => {
+            if (isUpdate) {
                 // Check if txes left to load
                 if (!res.data.data.length || res.data.data.length < 100) this.noMoreTxes = true;
                 //

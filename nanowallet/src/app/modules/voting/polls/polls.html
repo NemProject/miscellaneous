@@ -166,7 +166,7 @@
                 </ul>
               </div>
               <!-- Password and buttons -->
-              <div class="col-md-6" ng-hide="$ctrl.alreadyVoted > 0 || $ctrl.loadingVote || $ctrl.pollFinished || $ctrl._Wallet.algo === 'trezor'">
+              <div class="col-md-6" ng-hide="$ctrl.alreadyVoted > 0 || $ctrl.loadingVote || $ctrl.pollFinished || $ctrl._Wallet.algo === 'trezor' || $ctrl.notInWhitelist">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">
@@ -179,21 +179,21 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-7" ng-hide="$ctrl.loadingVote">
-                    <div ng-hide="$ctrl.alreadyVoted || $ctrl.pollFinished">
+                    <div ng-hide="$ctrl.alreadyVoted || $ctrl.pollFinished || $ctrl.notInWhitelist">
                       <p><b><i class="fa fa-exclamation-triangle"></i> Voting has a fee of {{($ctrl.votingFee | fmtNemValue)[0]}}.{{($ctrl.votingFee | fmtNemValue)[1]}} XEM per option</b></p>
                       <button class="btn btn-success pull-xs-left" type="submit" style="width:90%" ng-click="$ctrl.vote()" ng-disabled="$ctrl.voting || $ctrl.invalidVote || $ctrl.alreadyVoted > 0">Vote</button>
                     </div>
                     <div ng-show="$ctrl.notInWhitelist">
-                      <p class=text-danger>You are not on the whitelist</p>
+                      <p class="bg-danger">You are not on the whitelist</p>
                     </div>
                     <div ng-show="$ctrl.alreadyVoted === 2">
-                      <p class="text-success">You have successfully Voted on this Poll</p>
+                      <p class="bg-success">You have successfully Voted on this Poll</p>
                     </div>
                     <div ng-show="$ctrl.alreadyVoted === 1">
-                      <p class="text-warning">You have an unconfirmed Vote on this Poll</p>
+                      <p class="bg-warning">You have an unconfirmed Vote on this Poll</p>
                     </div>
                     <div ng-show="$ctrl.pollFinished">
-                      <p class="text-danger">This poll has ended</p>
+                      <p class="bg-danger">This poll has ended</p>
                     </div>
                   </div>
                 </div>

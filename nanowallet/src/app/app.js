@@ -54,6 +54,7 @@ import './modules/invoice';
 import './modules/signedMessage';
 import './modules/domainNameSystem';
 import './modules/importWalletQrCode';
+import './modules/NEMonster';
 
 // Create and bootstrap application
 const requires = [
@@ -110,6 +111,7 @@ const requires = [
     'app.signedMessageVerification',
     'app.domainNameSystem',
     'app.dnsSearch',
+    'app.NEMonster',
     'app.importWalletQrCode'
 ];
 

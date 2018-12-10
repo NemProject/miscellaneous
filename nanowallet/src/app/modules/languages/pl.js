@@ -4,7 +4,7 @@ function PolishProvider($translateProvider) {
     $translateProvider.translations('pl', {
 
         // HEADER COMPONENT
-        WALLET_NAME_1: 'nano',
+        WALLET_NAME_1: 'NEM',
         WALLET_NAME_2: 'Wallet',
         APP_NAME_SUB: 'Bezpieczny interfejs łączący z platformą NEM',
         HEADER_LOGIN_BUTTON: 'Logowanie',
