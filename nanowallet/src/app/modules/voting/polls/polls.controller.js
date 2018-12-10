@@ -124,7 +124,6 @@ class pollsCtrl {
             this.voting = false;
             return;
         }
-        console.log("vote is valid");
 
         // Get account private key or return
         if (!this._Wallet.decrypt(this.common)) return this.voting = false;
@@ -461,10 +460,12 @@ class pollsCtrl {
         if (tab === 1) {
             this.showVote = true;
             this.multisigVote = false;
+            this.checkValidVote();
         } else if (tab === 2) {
             this.multisigAccount = this._DataStore.account.metaData.meta.cosignatoryOf[0];
             this.showVote = true;
             this.multisigVote = true;
+            this.checkValidVote();
         } else if (tab === 3) {
             this.showVote = false;
             this.multisigVote = false;
@@ -518,7 +519,11 @@ class pollsCtrl {
             return true;
         }
         let address = this._Wallet.currentAccount.address;
+        if (this.multisigVote) {
+            address = this.multisigAccount.address;
+        }
         if (type === 1) {
+            console.log("check address", address);
             return this._Voting.isInWhitelist(address, header.whitelist);
         } else if (type === 2) {
             let namespace = header.mosaic.split(':')[0];

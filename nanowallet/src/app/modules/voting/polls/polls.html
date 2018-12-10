@@ -127,7 +127,7 @@
                 <span class="input-group-btn">
                   <label for="namespaceParent" class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
                 </span>
-                <select class="form-control" ng-options="acc.address for acc in $ctrl._DataStore.account.metaData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.multisigAccount" ng-change="$ctrl.checkHasVoted()"></select>
+                <select class="form-control" ng-options="acc.address for acc in $ctrl._DataStore.account.metaData.meta.cosignatoryOf track by acc.address" ng-model="$ctrl.multisigAccount" ng-change="$ctrl.checkHasVoted(); $ctrl.checkValidVote()"></select>
               </div>
             </fieldset>
             <!-- VOTE -->

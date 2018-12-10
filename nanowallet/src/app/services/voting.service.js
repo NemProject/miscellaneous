@@ -254,8 +254,6 @@ class Voting {
     }
 
     isInWhitelist(address, whitelist) {
-        console.log("addr", address);
-        console.log("whitelist", whitelist);
         address = new nem.Address(address);
         const findI = whitelist.findIndex(a => a.plain() === address.plain());
         return findI >= 0;
