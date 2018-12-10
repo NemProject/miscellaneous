@@ -866,9 +866,9 @@ function JapaneseProvider($translateProvider) {
       IMPORT_WALLET_QRCODE_STOP_SCAN: 'スキャン停止',
 
       //NEMonster
-      NEMONSTER_SHORT_DESC: "Welcome to NEMonsters, a witty little collection game based on the NEM blockchain.",
-      NEMONSTER_CATCH: "Catch",
-      NEMONSTER_GET: "Get some monsters",
+      NEMONSTER_SHORT_DESC: "NEMonsters へようこそ！, a witty little collection game based on the NEM blockchain.",
+      NEMONSTER_CATCH: "捕まえる",
+      NEMONSTER_GET: "モンスターをゲットする",
       NEMONSTER_DESC: "Welcome to NEMonsters, a witty little collection game based on the NEM blockchain. You can catch and collect over 110,000,000 different combinations of generated monsters; spanning from different colors, names and other spicy characteristics.  You catch a new monster by sending a fixed transaction; the monster is summoned when the transaction is confirmed. The characteristics of your new (evil) monster is based on the transaction hash – how cool is that. See if you can catch some of the monsters from the NEM foundation."
     });
 
