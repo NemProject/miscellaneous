@@ -1,6 +1,6 @@
 {
-  "name": "NanoWallet",
-  "version": "2.3.2",
+  "name": "NEM Wallet",
+  "version": "2.4.2",
   "description": "Cross-platform lite wallet for NEM",
   "author": "https://github.com/QuantumMechanics",
   "license": "MIT",
