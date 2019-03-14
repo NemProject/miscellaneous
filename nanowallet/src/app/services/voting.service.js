@@ -44,14 +44,15 @@ class Voting {
      * getPolls(pollIndexAddress) returns a list with the poll headers from all the polls that are on the given index
      *
      * @param {string} pollIndexAddress - NEM address for the poll index account
+     * @param {string} lastId - the id of the last transaction fetched for pagination
      *
      * @return {promise} - a list of all the poll header objects on the index account
      */
-    getPolls(pollIndexAddress) {
+    getPolls(pollIndexAddress, lastId) {
         this.init();
-        const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress))
+        const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress), lastId)
             .map((index) => {
-                return index.headers.map((header) => {
+                const headers = index.headers.map((header) => {
                     return {
                         title: header.title,
                         type: header.type,
@@ -61,6 +62,10 @@ class Voting {
                         whitelist: header.whitelist,
                     }
                 });
+                return {
+                    polls: headers,
+                    lastId: index.lastId,
+                }
             });
         return obs.first().toPromise();
     }

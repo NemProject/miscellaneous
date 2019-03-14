@@ -53,6 +53,9 @@
                     <button ng-click="$ctrl.pollSelect($index)" class="btn btn-default poll-select"><span  ng-class="$ctrl.getClass($index)">{{$ctrl.types[$ctrl.pollsList[$index].type]}}</span> {{$ctrl.pollsList[$index].title}}</button>
                   </div>
                 </div>
+                <div class="poll-list-element">
+                  <button ng-click="$ctrl.nextPage()" class="btn btn-success">Fetch More Polls...</button>
+                </div>
               </div>
               <br>
               <button type="submit" class="btn btn-success pull-xs-left" ng-click="$ctrl.getPolls();" ng-disabled="$ctrl.loadingPolls"><i ng-class="$ctrl.loadingPolls ? 'fa fa-refresh fa-spin' : 'fa fa-refresh'" aria-hidden="true"></i> <span ng-show="$ctrl.loadingPolls">Loading</span> <span ng-show="!$ctrl.loadingPolls">Refresh</span></button>

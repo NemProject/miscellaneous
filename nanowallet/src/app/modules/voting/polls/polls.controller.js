@@ -48,6 +48,9 @@ class pollsCtrl {
 
         this.pollIndexAccount = this.defaultIndexAccount;
 
+        // the id of the last poll fetched
+        this.lastId = undefined;
+
         this.pollIndexPrivate = false;
 
         this.votingFee = this._VotingUtils.getMessageFee("");
@@ -198,38 +201,6 @@ class pollsCtrl {
         });
     }
 
-    // Returns all addresses of the poll Indexes created by the user
-    getCreatedIndexes(){
-        let options = {
-            fromAddress: this._Wallet.currentAccount.address,
-            start: 0
-        }
-        return this._VotingUtils.getTransactionsWithString(this._Wallet.currentAccount.address, "createdPollIndex:", options).then((creationTrans)=>{
-            return creationTrans.map((trans)=>{
-                return trans.transaction.message.replace('createdPollIndex:', '');
-            });
-        });
-    }
-
-    // Creates a new poll index (private can be true or false)
-    createNewIndex(){
-
-        // Get account private key or return
-        if (!this._Wallet.decrypt(this.common)) return this.voting = false;
-
-        this._VotingUtils.createNewAccount().then((account)=>{
-            this._VotingUtils.sendMessage(this._Wallet.currentAccount.address, 'createdPollIndex:'+account.address, this.common);
-            let obj = {
-                private: this.createPrivateIndex
-            };
-            if(this.createPrivateIndex){
-                obj.creator = this._Wallet.currentAccount.address
-            }
-            let message = "pollIndex:" + JSON.stringify(obj);
-            this._VotingUtils.sendMessage(account.address, message, this.common);
-        });
-    }
-
     // toggles between vote / details views
     toggleView() {
         this.showVote = !this.showVote;
@@ -251,36 +222,6 @@ class pollsCtrl {
         this.getPoll(this.inputAccount).then(()=>{
             this._$timeout(() => {
                 this.searching = false;
-            });
-        }).catch((e)=>{
-            this._$timeout(() => {
-                this.searching = false;
-                this.loadingAddressError = true;
-            });
-        });
-    }
-
-    // manages inputted Index address on the options tab
-    pollIndexInput(){
-        this.searching = true;
-        this.inputAddressValid = true;
-        this.loadingAddressError = false;
-        //check if it is a valid address
-        this.inputAccount = this.inputAccount.toUpperCase().replace(/-/g, '');
-        this.inputAddressValid = this._VotingUtils.isValidAddress(this.inputAccount);
-        if(!this.inputAddressValid){
-            this.inputAddressValid = false;
-            this.searching = false;
-            return;
-        }
-        this._VotingUtils.getFirstMessageWithString(this.inputAccount, 'pollIndex:').then((message)=>{
-            this.pollIndexAccount = this.inputAccount;
-            let indexInfo = JSON.parse(message.replace('pollIndex:', ''));
-            this.pollIndexPrivate = indexInfo.private;
-            this.getPolls().then(()=>{
-                this.searching = false;
-            }).catch((e)=>{
-                throw e;
             });
         }).catch((e)=>{
             this._$timeout(() => {
@@ -554,13 +495,34 @@ class pollsCtrl {
         // }
     }
 
-    // gets all the poll headers on the poll index
+    // gets the first page of polls
     getPolls() {
         //get all polls
         this.loadingPolls = true;
-        return this._Voting.getPolls(this.pollIndexAccount).then((data) => {
+        this.lastId = undefined;
+        return this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
             this._$timeout(() => {
-                this.allPolls = data;
+                this.allPolls = data.polls;
+                this.lastId = data.lastId;
+                this.loadingPolls = false;
+                this.setTab(1);
+                // apply filters
+                this.updateList();
+            });
+        }).catch((e)=>{
+            this._$timeout(() => {
+                this.loadingPolls = false;
+                throw e;
+            });
+        });
+    }
+
+    nextPage() {
+        // get 100 more polls
+        return this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
+            this._$timeout(() => {
+                this.allPolls = this.allPolls.concat(data.polls);
+                this.lastId = data.lastId;
                 this.loadingPolls = false;
                 this.setTab(1);
                 // apply filters
