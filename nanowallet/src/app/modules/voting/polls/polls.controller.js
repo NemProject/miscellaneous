@@ -65,6 +65,7 @@ class pollsCtrl {
         // Poll list
         this.allPolls = [];  // Has all the poll headers on the poll Index (unfiltered)
         this.pollsList = [];  // Filtered poll headers
+        this.officialPolls = []; // all the official polls
         this.selectedPoll = null;  // Details object for the selected poll
         this.currentPollAddress = '';  // The poll Address of the currently selected poll
 
@@ -336,10 +337,8 @@ class pollsCtrl {
         }).then(()=>{
             this._$timeout(() => {});
         }).catch((e)=>{
-            this._$timeout(() => {
-                this.loadingPoll = false;
-                throw e;
-            });
+            this.loadingPoll = false;
+            throw e;
         });
     }
 
@@ -350,12 +349,32 @@ class pollsCtrl {
                 this.loadingAddressError = false;
                 this.selectedOption = "";  // for single choice
                 this.selectedOptions = [];  // for multiple choice
+                this.inputAddressValid = true;
+                this.inputAccount = "";
             });
         }).catch((e)=>{
             this._$timeout(() => {
                 this.loadingAddressError = true;
             });
         });
+    }
+
+    // selects a poll by the index on the polls list
+    searchPoll() {
+        console.log("account", this.inputAccount);
+        if (!this._VotingUtils.isValidAddress(this.inputAccount)) {
+            this.inputAddressValid = false;
+        } else {
+            this.getPoll(this.inputAccount).then(()=>{
+                this.loadingAddressError = false;
+                this.selectedOption = "";  // for single choice
+                this.selectedOptions = [];  // for multiple choice
+            }).catch((e)=>{
+                this._$timeout(() => {
+                    this.loadingAddressError = true;
+                });
+            });
+        }
     }
 
     // checks if the currently selected account has voted on the selected poll
@@ -390,6 +409,8 @@ class pollsCtrl {
         this.createIndex = false;
         this.showDetails = false;
         this.tab = tab;
+        this.inputAddressValid = true;
+        this.inputAccount = "";
         this.updateList();
     }
 
@@ -485,9 +506,7 @@ class pollsCtrl {
                 return (poll.doe <= now);
             });
         } else if (this.tab === 4) {
-            this.pollsList = this.allPolls.filter((poll) => {
-                return (poll.creator === "NCXFX5P56EXXWDRUWAWXDWYJHEFV26WVC5VJ6GY2");
-            });
+            this.pollsList = this.officialPolls;
         }
 
         // if (this.onlyVotable) {
@@ -500,7 +519,19 @@ class pollsCtrl {
         //get all polls
         this.loadingPolls = true;
         this.lastId = undefined;
-        return this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
+        // load official polls
+        this._Voting.getOfficialPolls().then((polls) => {
+            this._$timeout(() => {
+                this.officialPolls = polls;
+            });
+        }).catch((e)=>{
+            this._$timeout(() => {
+                this.loadingPolls = false;
+                throw e;
+            });
+        });
+
+        const commonPolls = this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
             this._$timeout(() => {
                 this.allPolls = data.polls;
                 this.lastId = data.lastId;
@@ -524,7 +555,7 @@ class pollsCtrl {
                 this.allPolls = this.allPolls.concat(data.polls);
                 this.lastId = data.lastId;
                 this.loadingPolls = false;
-                this.setTab(1);
+                // this.setTab(1);
                 // apply filters
                 this.updateList();
             });

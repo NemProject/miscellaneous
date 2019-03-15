@@ -45,6 +45,16 @@
           </div>
           <div class="panel-body">
             <br>
+            <!-- Poll Search -->
+            <input type="text" ng-model="$ctrl.inputAccount" style="width:70%"/>
+            <button type="submit" style="width:10%" class="btn btn-success pull-xs-left" ng-click="$ctrl.searchPoll();"> Search Poll </button>
+            <!-- Poll Error -->
+            <div ng-show="$ctrl.loadingAddressError" class="loading-div">
+              <h3>There was an error fetching the poll. The poll does not exist, or was not created properly.</h3>
+            </div>
+            <div ng-hide="$ctrl.inputAddressValid"><p class="text-danger">Not a valid Address</p></div>
+            <div ng-show="$ctrl.inputAddressValid"></div>
+            <br>
             <!-- LIST -->
             <div ng-hide="$ctrl.isTabSet(5)">
               <div class="pre-scrollable">
@@ -53,7 +63,7 @@
                     <button ng-click="$ctrl.pollSelect($index)" class="btn btn-default poll-select"><span  ng-class="$ctrl.getClass($index)">{{$ctrl.types[$ctrl.pollsList[$index].type]}}</span> {{$ctrl.pollsList[$index].title}}</button>
                   </div>
                 </div>
-                <div class="poll-list-element">
+                <div class="poll-list-element" ng-show="!$ctrl.isTabSet(4)">
                   <button ng-click="$ctrl.nextPage()" class="btn btn-success">Fetch More Polls...</button>
                 </div>
               </div>
@@ -245,47 +255,6 @@
               <i class="fa fa-4x fa-spinner fa-spin"></i>
             </div>
 
-          </div>
-
-          <!-- Poll Index Creation -->
-          <div class="col-md-6">
-            <div class="panel-body" ng-show="$ctrl.createIndex">
-              <h2>Create a poll Index</h2>
-              <br>
-              <br>
-              <p>
-                This action will create a new poll Index. When you create a new Poll you can choose the index it is submitted to, and on the voting module you can change the index you view polls from.</p>
-              <p>When you create a new Index a new NEM account is generated and a message containing the created Index will be sent to your address. Write down the address to create and see polls stored on it.</p>
-              <p>
-                For private Indexes only the creator of the index will be able to send polls. But everybody will be able to see and vote on its polls if they have importance or are on the whitelist for simple polls.
-              </p>
-              <br>
-              <input id="box2" type="checkbox" ng-model="$ctrl.createPrivateIndex"><label for="box2">Create private Index</label>
-              <br><br>
-              <fieldset class="form-group">
-                <div class="input-group">
-                  <span class="input-group-btn">
-                    <label>{{'GENERAL_FEE' | translate}} </label>
-                  </span>
-                  <div class="form-control formFloat" readOnly>
-                    <span class="feeAmount">
-                      <span>{{$ctrl.indexCreationFee}}</span>
-                    </span>
-                    <label class="floatRight"><small>XEM</small></label>
-                  </div>
-                </div>
-              </fieldset>
-              <span class="input-group-btn">
-                <label ng-class="!$ctrl.common.password.length ? 'has-error' : ''">{{ 'FORM_PASSWORD' | translate }}:</label>
-              </span>
-              <input class="form-control" type="password" placeholder="{{ 'FORM_PASSWORD_FIELD_PLACEHOLDER' | translate }}" ng-model="$ctrl.common.password" ng-class="!$ctrl.common.password.length ? 'has-error' : ''"/>
-              <br>
-              <button class="btn btn-success pull-xs-left" style="width:100%" ng-click="$ctrl.createNewIndex()">Create a poll Index</button>
-            </div>
-          </div>
-          <!-- Poll Error -->
-          <div ng-show="$ctrl.loadingAddressError" class="loading-div">
-            <h3>There was an error fetching the poll. The poll does not exist, or was not created properly.</h3>
           </div>
         </div>
       </div>

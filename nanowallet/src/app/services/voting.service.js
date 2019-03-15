@@ -71,6 +71,29 @@ class Voting {
     }
 
     /**
+     * getOfficialPolls(pollIndexAddress) returns a list with the poll headers for all the official polls
+     *
+     * @return {promise} - a list of all the poll header objects on the index account
+     */
+    getOfficialPolls() {
+        this.init();
+        const obs = voting.getAllOfficialPolls()
+            .map((polls) => {
+                return polls.map((header) => {
+                    return {
+                        title: header.title,
+                        type: header.type,
+                        doe: header.doe,
+                        address: header.address.plain(),
+                        creator: header.creator.plain(),
+                        whitelist: header.whitelist,
+                    }
+                });
+            });
+        return obs.first().toPromise();
+    }
+
+    /**
      * createPoll(details, pollIndex, common) creates a poll with the given details on the given pollIndex
      *
      * @param {object} details - poll details, without the option addresses
