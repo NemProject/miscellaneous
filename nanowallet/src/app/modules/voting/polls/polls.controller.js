@@ -50,6 +50,7 @@ class pollsCtrl {
 
         // the id of the last poll fetched
         this.lastId = undefined;
+        this.reachedEnd = false;
 
         this.pollIndexPrivate = false;
 
@@ -105,13 +106,6 @@ class pollsCtrl {
 
         // List of poll indexes created by the user
         this.createdIndexes = [];
-
-        // Below code commented because it sends too many requests if the account has a lot of transactions
-        /*this.getCreatedIndexes().then((indexes)=>{
-            this._$timeout(() => {
-                this.createdIndexes = indexes;
-            });
-        });*/
 
         // for creating indexes
         this.createPrivateIndex = false;
@@ -366,9 +360,11 @@ class pollsCtrl {
             this.inputAddressValid = false;
         } else {
             this.getPoll(this.inputAccount).then(()=>{
-                this.loadingAddressError = false;
-                this.selectedOption = "";  // for single choice
-                this.selectedOptions = [];  // for multiple choice
+                this._$timeout(() => {
+                    this.loadingAddressError = false;
+                    this.selectedOption = "";  // for single choice
+                    this.selectedOptions = [];  // for multiple choice
+                });
             }).catch((e)=>{
                 this._$timeout(() => {
                     this.loadingAddressError = true;
@@ -520,18 +516,20 @@ class pollsCtrl {
         this.loadingPolls = true;
         this.lastId = undefined;
         // load official polls
-        this._Voting.getOfficialPolls().then((polls) => {
-            this._$timeout(() => {
-                this.officialPolls = polls;
+        if (this.isMainnet) {
+            this._Voting.getOfficialPolls().then((polls) => {
+                this._$timeout(() => {
+                    this.officialPolls = polls;
+                });
+            }).catch((e)=>{
+                this._$timeout(() => {
+                    this.loadingPolls = false;
+                    throw e;
+                });
             });
-        }).catch((e)=>{
-            this._$timeout(() => {
-                this.loadingPolls = false;
-                throw e;
-            });
-        });
+        }
 
-        const commonPolls = this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
+        this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
             this._$timeout(() => {
                 this.allPolls = data.polls;
                 this.lastId = data.lastId;
@@ -552,6 +550,9 @@ class pollsCtrl {
         // get 100 more polls
         return this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
             this._$timeout(() => {
+                if (data.polls.length === 0) {
+                    this.reachedEnd = true;
+                }
                 this.allPolls = this.allPolls.concat(data.polls);
                 this.lastId = data.lastId;
                 this.loadingPolls = false;

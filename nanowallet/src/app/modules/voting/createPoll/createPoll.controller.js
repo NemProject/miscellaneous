@@ -24,6 +24,7 @@ class createPollCtrl {
         else{
             this.pollIndexAccount = "NAZN26HYB7C5HVYVJ4SL3KBTDT773NZBAOMGRFZB";
         }
+        this.creatorAddress = this._Wallet.currentAccount.address;
 
         // names of types
         this.pollTypes = ['POI', 'White List'];
@@ -81,6 +82,9 @@ class createPollCtrl {
 
         // To lock our send button if a transaction is not finished processing
         this.creating = false;
+
+        // if the poll is private then it won't be sent to the public index, instead the header will be sent to the creator's account
+        this.private = false;
 
         this.checkFormData();
         //this.updateCurrentAccountMosaics();
@@ -332,10 +336,16 @@ class createPollCtrl {
         details.description = this.description;
         details.whitelist = this.whitelist;
 
-        this._Voting.createPoll(details, this.pollIndexAccount, this.common).then(d => {
-            this.creating = false;
-            this._Alert.pollCreationSuccess();
-            this.clearForm();
+        const indexAddress = (this.private) ? this.creatorAddress : this.pollIndexAccount;
+
+        console.log("index address: ", indexAddress);
+
+        this._Voting.createPoll(details, indexAddress, this.common).then(d => {
+            this._$timeout(() => {
+                this.creating = false;
+                this._Alert.pollCreationSuccess();
+                this.clearForm();
+            });
         }).catch(err => {
             this._$timeout(() => {
                 this.creating = false;
@@ -347,6 +357,14 @@ class createPollCtrl {
                 this.clearForm();
             });
         });
+    }
+
+    isPrivate() {
+        return this.private;
+    }
+
+    togglePrivate() {
+        this.private = !this.private;
     }
 
 }

@@ -27,7 +27,9 @@
               <br>
               <!-- POLL INDEX -->
               <label ng-class="$ctrl.issues.invalidIndexAccount ? 'has-error' : ''" >Poll Index Account</label>
-              <p class="bg-info">The poll account where the poll will be saved. By default a public one is set.</p>
+              <p class="bg-info">If you uncheck this box the poll will not be sent to the public poll index but it will be findable when searching for its address.</p>
+              <input id="privateCheckbox" type="checkbox" ng-checked="!$ctrl.isPrivate()" ng-click="$ctrl.togglePrivate()"><label for="privateCheckbox">Send to public poll index</label>
+              <p>Public poll index address:</p>
               <input type="text" class="form-control" ng-model="$ctrl.pollIndexAccount" ng-class="$ctrl.issues.invalidIndexAccount ? 'has-error is-empty' : ''" ng-change="$ctrl.checkFormData()" readOnly/>
               <br>
               <!-- DOE -->

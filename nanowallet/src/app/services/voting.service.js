@@ -129,7 +129,9 @@ class Voting {
             account = nem.Account.createWithPrivateKey(common.privateKey);
         }
 
-        const broadcastData = poll.broadcast(account.publicKey);
+        const index = new voting.PollIndex(new nem.Address(pollIndex), false, []);
+
+        const broadcastData = poll.broadcast(account.publicKey, index);
         broadcastData.transactions = broadcastData.transactions.map((t) => {
             t.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
             return t;

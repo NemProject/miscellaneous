@@ -64,7 +64,7 @@
                   </div>
                 </div>
                 <div class="poll-list-element" ng-show="!$ctrl.isTabSet(4)">
-                  <button ng-click="$ctrl.nextPage()" class="btn btn-success">Fetch More Polls...</button>
+                  <button ng-hide="$ctrl.reachedEnd" ng-click="$ctrl.nextPage()" class="btn btn-success">Fetch More Polls...</button>
                 </div>
               </div>
               <br>
@@ -74,36 +74,6 @@
             <div ng-show="$ctrl.isTabSet(5)">
               <!-- only votable -->
               <input id="box1" type="checkbox" ng-model="$ctrl.onlyVotable" ng-click="$ctrl.updateList()"><label for="box1">Show only polls you can vote on</label>
-              <!-- Index / Poll Address Input -->
-              <!--<form>
-                <p>Search for a poll or a poll Index:</p>
-                <input type="text" ng-model="$ctrl.inputAccount" style="width:60%"/>
-                <p class="text-muted small">You can find a specific poll or index by typing the address for the poll account or the poll index account in the bar and clicking on the appropriate search button.</p>
-                <button type="submit" class="btn btn-success pull-xs-left" style="width:30%" ng-click="$ctrl.pollAddressInput();">Find Poll</button>
-                <button type="submit" class="btn btn-success pull-xs-left" style="width:30%" ng-click="$ctrl.pollIndexInput();">Find Index</button>
-                <div ng-show="$ctrl.searching"><i class="fa fa-spinner fa-spin"></i></div>
-                <div ng-hide="$ctrl.inputAddressValid"><p class="text-danger">Not a valid Address</p></div>
-                <div ng-show="$ctrl.loadingAddressError"><p class="text-danger">There was an error. Make sure the address is correct</p></div>
-              </form>
-              <br>-->
-              <!-- INDEX CREATION -->
-              <!--<br>
-              <br>
-              <button class="btn btn-success pull-xs-left" style="width:25%" ng-click="$ctrl.createIndex = true;">Create a poll Index</button>
-              <br>
-              <br>-->
-              <!-- Created indexes -->
-              <!--<div>
-                <label>Default index:</label>
-                <a ng-click="$ctrl.inputAccount = $ctrl.defaultIndexAccount; $ctrl.pollIndexInput()">{{$ctrl.defaultIndexAccount}}</a>
-              </div>-->
-              <!-- Created indexes -->
-              <!--<div ng-hide="$ctrl.createdIndexes.length === 0">
-                <label>Created Indexes:</label>
-                <div ng-repeat="indexAddress in $ctrl.createdIndexes track by $index">
-                  <a ng-click="$ctrl.inputAccount = indexAddress; $ctrl.pollIndexInput()">{{indexAddress}}</a>
-                </div>
-              </div>-->
             </div>
 
           </div>
