@@ -44,14 +44,42 @@ class Voting {
      * getPolls(pollIndexAddress) returns a list with the poll headers from all the polls that are on the given index
      *
      * @param {string} pollIndexAddress - NEM address for the poll index account
+     * @param {string} lastId - the id of the last transaction fetched for pagination
      *
      * @return {promise} - a list of all the poll header objects on the index account
      */
-    getPolls(pollIndexAddress) {
+    getPolls(pollIndexAddress, lastId) {
         this.init();
-        const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress))
+        const obs = voting.PollIndex.fromAddress(new nem.Address(pollIndexAddress), lastId)
             .map((index) => {
-                return index.headers.map((header) => {
+                const headers = index.headers.map((header) => {
+                    return {
+                        title: header.title,
+                        type: header.type,
+                        doe: header.doe,
+                        address: header.address.plain(),
+                        creator: header.creator.plain(),
+                        whitelist: header.whitelist,
+                    }
+                });
+                return {
+                    polls: headers,
+                    lastId: index.lastId,
+                }
+            });
+        return obs.first().toPromise();
+    }
+
+    /**
+     * getOfficialPolls(pollIndexAddress) returns a list with the poll headers for all the official polls
+     *
+     * @return {promise} - a list of all the poll header objects on the index account
+     */
+    getOfficialPolls() {
+        this.init();
+        const obs = voting.getAllOfficialPolls()
+            .map((polls) => {
+                return polls.map((header) => {
                     return {
                         title: header.title,
                         type: header.type,
@@ -101,7 +129,9 @@ class Voting {
             account = nem.Account.createWithPrivateKey(common.privateKey);
         }
 
-        const broadcastData = poll.broadcast(account.publicKey);
+        const index = new voting.PollIndex(new nem.Address(pollIndex), false, []);
+
+        const broadcastData = poll.broadcast(account.publicKey, index);
         broadcastData.transactions = broadcastData.transactions.map((t) => {
             t.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
             return t;

@@ -48,6 +48,10 @@ class pollsCtrl {
 
         this.pollIndexAccount = this.defaultIndexAccount;
 
+        // the id of the last poll fetched
+        this.lastId = undefined;
+        this.reachedEnd = false;
+
         this.pollIndexPrivate = false;
 
         this.votingFee = this._VotingUtils.getMessageFee("");
@@ -62,6 +66,7 @@ class pollsCtrl {
         // Poll list
         this.allPolls = [];  // Has all the poll headers on the poll Index (unfiltered)
         this.pollsList = [];  // Filtered poll headers
+        this.officialPolls = []; // all the official polls
         this.selectedPoll = null;  // Details object for the selected poll
         this.currentPollAddress = '';  // The poll Address of the currently selected poll
 
@@ -101,13 +106,6 @@ class pollsCtrl {
 
         // List of poll indexes created by the user
         this.createdIndexes = [];
-
-        // Below code commented because it sends too many requests if the account has a lot of transactions
-        /*this.getCreatedIndexes().then((indexes)=>{
-            this._$timeout(() => {
-                this.createdIndexes = indexes;
-            });
-        });*/
 
         // for creating indexes
         this.createPrivateIndex = false;
@@ -198,38 +196,6 @@ class pollsCtrl {
         });
     }
 
-    // Returns all addresses of the poll Indexes created by the user
-    getCreatedIndexes(){
-        let options = {
-            fromAddress: this._Wallet.currentAccount.address,
-            start: 0
-        }
-        return this._VotingUtils.getTransactionsWithString(this._Wallet.currentAccount.address, "createdPollIndex:", options).then((creationTrans)=>{
-            return creationTrans.map((trans)=>{
-                return trans.transaction.message.replace('createdPollIndex:', '');
-            });
-        });
-    }
-
-    // Creates a new poll index (private can be true or false)
-    createNewIndex(){
-
-        // Get account private key or return
-        if (!this._Wallet.decrypt(this.common)) return this.voting = false;
-
-        this._VotingUtils.createNewAccount().then((account)=>{
-            this._VotingUtils.sendMessage(this._Wallet.currentAccount.address, 'createdPollIndex:'+account.address, this.common);
-            let obj = {
-                private: this.createPrivateIndex
-            };
-            if(this.createPrivateIndex){
-                obj.creator = this._Wallet.currentAccount.address
-            }
-            let message = "pollIndex:" + JSON.stringify(obj);
-            this._VotingUtils.sendMessage(account.address, message, this.common);
-        });
-    }
-
     // toggles between vote / details views
     toggleView() {
         this.showVote = !this.showVote;
@@ -251,36 +217,6 @@ class pollsCtrl {
         this.getPoll(this.inputAccount).then(()=>{
             this._$timeout(() => {
                 this.searching = false;
-            });
-        }).catch((e)=>{
-            this._$timeout(() => {
-                this.searching = false;
-                this.loadingAddressError = true;
-            });
-        });
-    }
-
-    // manages inputted Index address on the options tab
-    pollIndexInput(){
-        this.searching = true;
-        this.inputAddressValid = true;
-        this.loadingAddressError = false;
-        //check if it is a valid address
-        this.inputAccount = this.inputAccount.toUpperCase().replace(/-/g, '');
-        this.inputAddressValid = this._VotingUtils.isValidAddress(this.inputAccount);
-        if(!this.inputAddressValid){
-            this.inputAddressValid = false;
-            this.searching = false;
-            return;
-        }
-        this._VotingUtils.getFirstMessageWithString(this.inputAccount, 'pollIndex:').then((message)=>{
-            this.pollIndexAccount = this.inputAccount;
-            let indexInfo = JSON.parse(message.replace('pollIndex:', ''));
-            this.pollIndexPrivate = indexInfo.private;
-            this.getPolls().then(()=>{
-                this.searching = false;
-            }).catch((e)=>{
-                throw e;
             });
         }).catch((e)=>{
             this._$timeout(() => {
@@ -395,10 +331,8 @@ class pollsCtrl {
         }).then(()=>{
             this._$timeout(() => {});
         }).catch((e)=>{
-            this._$timeout(() => {
-                this.loadingPoll = false;
-                throw e;
-            });
+            this.loadingPoll = false;
+            throw e;
         });
     }
 
@@ -409,12 +343,34 @@ class pollsCtrl {
                 this.loadingAddressError = false;
                 this.selectedOption = "";  // for single choice
                 this.selectedOptions = [];  // for multiple choice
+                this.inputAddressValid = true;
+                this.inputAccount = "";
             });
         }).catch((e)=>{
             this._$timeout(() => {
                 this.loadingAddressError = true;
             });
         });
+    }
+
+    // selects a poll by the index on the polls list
+    searchPoll() {
+        console.log("account", this.inputAccount);
+        if (!this._VotingUtils.isValidAddress(this.inputAccount)) {
+            this.inputAddressValid = false;
+        } else {
+            this.getPoll(this.inputAccount).then(()=>{
+                this._$timeout(() => {
+                    this.loadingAddressError = false;
+                    this.selectedOption = "";  // for single choice
+                    this.selectedOptions = [];  // for multiple choice
+                });
+            }).catch((e)=>{
+                this._$timeout(() => {
+                    this.loadingAddressError = true;
+                });
+            });
+        }
     }
 
     // checks if the currently selected account has voted on the selected poll
@@ -449,6 +405,8 @@ class pollsCtrl {
         this.createIndex = false;
         this.showDetails = false;
         this.tab = tab;
+        this.inputAddressValid = true;
+        this.inputAccount = "";
         this.updateList();
     }
 
@@ -544,9 +502,7 @@ class pollsCtrl {
                 return (poll.doe <= now);
             });
         } else if (this.tab === 4) {
-            this.pollsList = this.allPolls.filter((poll) => {
-                return (poll.creator === "NCXFX5P56EXXWDRUWAWXDWYJHEFV26WVC5VJ6GY2");
-            });
+            this.pollsList = this.officialPolls;
         }
 
         // if (this.onlyVotable) {
@@ -554,15 +510,53 @@ class pollsCtrl {
         // }
     }
 
-    // gets all the poll headers on the poll index
+    // gets the first page of polls
     getPolls() {
         //get all polls
         this.loadingPolls = true;
-        return this._Voting.getPolls(this.pollIndexAccount).then((data) => {
+        this.lastId = undefined;
+        // load official polls
+        if (this.isMainnet) {
+            this._Voting.getOfficialPolls().then((polls) => {
+                this._$timeout(() => {
+                    this.officialPolls = polls;
+                });
+            }).catch((e)=>{
+                this._$timeout(() => {
+                    this.loadingPolls = false;
+                    throw e;
+                });
+            });
+        }
+
+        this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
             this._$timeout(() => {
-                this.allPolls = data;
+                this.allPolls = data.polls;
+                this.lastId = data.lastId;
                 this.loadingPolls = false;
                 this.setTab(1);
+                // apply filters
+                this.updateList();
+            });
+        }).catch((e)=>{
+            this._$timeout(() => {
+                this.loadingPolls = false;
+                throw e;
+            });
+        });
+    }
+
+    nextPage() {
+        // get 100 more polls
+        return this._Voting.getPolls(this.pollIndexAccount, this.lastId).then((data) => {
+            this._$timeout(() => {
+                if (data.polls.length === 0) {
+                    this.reachedEnd = true;
+                }
+                this.allPolls = this.allPolls.concat(data.polls);
+                this.lastId = data.lastId;
+                this.loadingPolls = false;
+                // this.setTab(1);
                 // apply filters
                 this.updateList();
             });
