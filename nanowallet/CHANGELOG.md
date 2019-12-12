@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.4.5
+
+    - Fixed Changelly widget
+    - Fix voting
+
+## Version 2.4.4
+
+    - Updated voting module
+    - Fix default testnet node
+
 ## Version 2.4.2
 
     - Updated Voting module
