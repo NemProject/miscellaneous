@@ -20,6 +20,16 @@ class Nodes {
         this._$filter = $filter;
         this._$timeout = $timeout;
 
+        nem.model.nodes.testnet = [{
+            uri: 'http://hugetestalice.nem.ninja'
+        }, {
+            uri: 'http://hugetestalice2.nem.ninja'
+        }, {
+            uri: 'http://medalice2.nem.ninja'
+        }, {
+            uri: 'http://localhost'
+        }];
+
         //// End dependencies region ////
     }
 
