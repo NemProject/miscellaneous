@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.4.7
+
+    - Fix testnet nodes
+
 ## Version 2.4.6
 
     - Fix Changelly widget
