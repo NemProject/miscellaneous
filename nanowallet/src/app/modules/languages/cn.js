@@ -733,7 +733,7 @@ function ChineseProvider($translateProvider) {
         FAQ_ANSWER_11_4: '您必须联系交易所支持人员，说明情况并向他们提供交易的哈希.',
         FAQ_QUESTION_12: '如何检查我是否在分叉上 ?',
         FAQ_ANSWER_12_1: '点击 <b><i>"Node"</b></i>, 顶部导航栏中的，打开节点面板.',
-        FAQ_ANSWER_12_2: '查看链条高度并将其与所示高度进行比较 <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">here</a>.',
+        FAQ_ANSWER_12_2: '查看链条高度并将其与所示高度进行比较 <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">here</a>.',
         FAQ_ANSWER_12_3: '如果超过5个区块不同，那么你很可能在分叉.',
         FAQ_ANSWER_12_4: '要解决这个问题，只需从节点面板的下拉菜单中选择另一个节点，它就会将您的帐户恢复到真实网络上的最新状态.',
 

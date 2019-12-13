@@ -737,7 +737,7 @@ function DutchProvider($translateProvider) {
         FAQ_ANSWER_11_4: 'U moet contact opnemen met de helpdesk van de Exchange, de situatie uitleggen en hun de hash van de transactie verstrekken.',
         FAQ_QUESTION_12: 'Hoe controleer ik of ik verbonden ben met een "Fork"?',
         FAQ_ANSWER_12_1: 'Klik op <b><i>"Node"</b></i> in de bovenste navigatiebalk om het node-scherm te openen.',
-        FAQ_ANSWER_12_2: 'Kijk naar de blokhoogte en controleer het met de hoogte zoals <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">hier</a> weergegeven.',
+        FAQ_ANSWER_12_2: 'Kijk naar de blokhoogte en controleer het met de hoogte zoals <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">hier</a> weergegeven.',
         FAQ_ANSWER_12_3: 'Als er een verschil is van 5 blokken, dan ben je waarschijnlijk verbonden met een "Fork".',
         FAQ_ANSWER_12_4: 'Als je dit wilt herstellen, kiest u gewoon een andere node in de keuzelijst in het node-scherm. Het haalt de laatste status op vanaf het echter netwerk.',
 

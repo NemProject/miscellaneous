@@ -734,7 +734,7 @@ function PolishProvider($translateProvider) {
         FAQ_ANSWER_11_4: 'You must contact the exchange support, explain the situation and provide them the hash of the transaction.',
         FAQ_QUESTION_12: 'How to check if I am on a fork ?',
         FAQ_ANSWER_12_1: 'Click on <b><i>"Node"</b></i>, in the top navigation bar, to open the node panel.',
-        FAQ_ANSWER_12_2: 'Look at the chain height and compare it to the height shown <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">here</a>.',
+        FAQ_ANSWER_12_2: 'Look at the chain height and compare it to the height shown <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">here</a>.',
         FAQ_ANSWER_12_3: 'If different of more than 5 blocks then you are probably on a fork.',
         FAQ_ANSWER_12_4: 'To fix, just choose another node from the dropdown in the node panel, it will restore your account at it\'s latest state on the real network.',
 

@@ -727,7 +727,7 @@ function SpanishProvider($translateProvider) {
         FAQ_ANSWER_11_4: 'Debes ponerte en contacto con el soporte de la casa de intercambio, explicar la situación y proporcionarles el hasg de la transacción.',
         FAQ_QUESTION_12: '¿Cómo comprobar si estoy en un fork?',
         FAQ_ANSWER_12_1: 'Haz clic en <b><i>"Nodo"</b></i>, en la barra de navegación superior, para abrir el panel de nodos.',
-        FAQ_ANSWER_12_2: 'Mira el tamaño de la cadena y compárala con el tamaño que se muestra <a target = "_ blank" href="http://bigalice3.nem.ninja:7890/chain/height">aquí</a>.',
+        FAQ_ANSWER_12_2: 'Mira el tamaño de la cadena y compárala con el tamaño que se muestra <a target = "_ blank" href="http://hugealice.nem.ninja:7890/chain/height">aquí</a>.',
         FAQ_ANSWER_12_3: 'Si es diferente de más de 5 bloques, entonces probablemente estas en un fork.',
         FAQ_ANSWER_12_4: 'Para solucionarlo, simplemente elige otro nodo del menú desplegable en el panel de nodo, restaurará su cuenta en el estado más reciente de la red de producción.',
 

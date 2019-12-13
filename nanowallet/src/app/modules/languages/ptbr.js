@@ -727,7 +727,7 @@ function PortugueseBRProvider($translateProvider) {
         FAQ_ANSWER_11_4: 'Você deve contatar o suporte da corretora, e explicar a situação enviando-os o hash da sua transação.',
         FAQ_QUESTION_12: 'Como verificar se eu estou em um fork?',
         FAQ_ANSWER_12_1: 'Clique em <b><i>"Nodo"</b></i>, na barra de navegação do topo, para abrir o painel do nodo.',
-        FAQ_ANSWER_12_2: 'Verifique o número do bloco e compare com o número exibido <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">aqui</a>.',
+        FAQ_ANSWER_12_2: 'Verifique o número do bloco e compare com o número exibido <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">aqui</a>.',
         FAQ_ANSWER_12_3: 'Se for diferente em mais de 5 blocos, então, provavelmente você está em um fork.',
         FAQ_ANSWER_12_4: 'Para consertar, apenas escolha outro nodo da lista no painel de nodos, isso restaurará sua conta para o seu estado atual na rede real.',
 

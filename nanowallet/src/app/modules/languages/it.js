@@ -727,7 +727,7 @@ function ItalianProvider($translateProvider) {
         FAQ_ANSWER_11_4: 'È necessario contattare l"assistenza di brokeraggio e spiegare la situazione inviando loro l"hash della transazione.',
         FAQ_QUESTION_12: 'Come verificare se sono su una forcella?',
         FAQ_ANSWER_12_1: 'Clicca su<b><i>"Nodo"</b></i>, nella barra di navigazione in alto, per aprire il pannello del nodo.',
-        FAQ_ANSWER_12_2: 'Controllare il numero del blocco e confrontarlo con il numero visualizzato <a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">qui</a>.',
+        FAQ_ANSWER_12_2: 'Controllare il numero del blocco e confrontarlo con il numero visualizzato <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">qui</a>.',
         FAQ_ANSWER_12_3: 'Se è diverso in più di 5 blocchi, probabilmente sei su una biforcazione.',
         FAQ_ANSWER_12_4: 'Per correggere, basta scegliere un altro nodo dall"elenco nel pannello dei nodi, questo ripristinerà il tuo account allo stato corrente nella rete reale.',
 

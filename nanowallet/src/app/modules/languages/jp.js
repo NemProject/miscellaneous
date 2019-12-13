@@ -746,7 +746,7 @@ function JapaneseProvider($translateProvider) {
       FAQ_ANSWER_11_4: '交換所のサポートへトランザクションのハッシュを提供して状態を説明してください。',
       FAQ_QUESTION_12: 'フォーク上にいるかを確認するためには？',
       FAQ_ANSWER_12_1: '上部のナビゲーションバーから<b><i>"ノード"</b></i>をクリックし、ノードパネルを開きます。',
-      FAQ_ANSWER_12_2: 'ブロック高について<a target="_blank" href="http://bigalice3.nem.ninja:7890/chain/height">ここ</a>で表示できる高さと比較してみてください。',
+      FAQ_ANSWER_12_2: 'ブロック高について<a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">ここ</a>で表示できる高さと比較してみてください。',
       FAQ_ANSWER_12_3: 'もし5ブロック以上差がある場合はフォークしているかもしれません。',
       FAQ_ANSWER_12_4: '補正するためにはノードパネルのドロップダウンリストから他のノードを選択してください。ネットワーク上の最新の情報でアカウントが再読込されます。',
 
