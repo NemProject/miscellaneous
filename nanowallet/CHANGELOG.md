@@ -1,9 +1,10 @@
 # Changelog
 
-## Version 2.4.5
+## Version 2.4.6
 
-    - Fixed Changelly widget
+    - Fix Changelly widget
     - Fix voting
+    - Fix broken node link in faq
 
 ## Version 2.4.4
 
