@@ -123,6 +123,13 @@
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
               </div>
             </div>
+            <div class="row" style="margin-top: 15px;">
+              <div class="col-sm-6">
+              </div>
+              <div class="col-sm-6">
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{'ACCOUNT_QR_BTN_2' | translate }}</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -212,6 +219,34 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.showMobileQRPass = true;">{{ 'GENERAL_CLOSE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Wallet qr Modal for ios and android -->
+  <div id="accountModalMobileApps" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.showMobileAccountQRPass = true;">&times;</button>
+          <h4 class="modal-title">{{ 'ACCOUNT_QR_ANDROID_IOS_TITLE' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="text-center" id="mobileAccountQR" ng-show="!$ctrl.showMobileAccountQRPass"></div>
+          <div ng-show="$ctrl.showMobileAccountQRPass">
+            <!-- Password Field -->
+            <password-input common="$ctrl.commonAccountQR"></password-input>
+            <button class="btn btn-success"
+              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonAccountQR.password.length" ng-click="$ctrl.generateAccountQR()">
+              {{'GENERAL_REVEAL' | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.showMobileAccountQRPass = true;">{{ 'GENERAL_CLOSE' | translate }}</button>
         </div>
       </div>
     </div>

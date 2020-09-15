@@ -5,7 +5,7 @@
       <div class="col-sm-9">
         <h2>{{ 'PORTAL_TITLE' | translate }}</h2>
       </div>
-      
+
     </div>
 
     <div class="row portalWrap">
@@ -73,12 +73,12 @@
           </div>
         </div>
       </div>
-       
+
       <!-- SECOND ROW STARTS -->
       <div class="row row2">
         <div class="col-sm-4">
           <div class="panel-heading row">
-            <div class="col-sm-3"> 
+            <div class="col-sm-3">
               <img src="images/apostille.png"/>
             </div>
             <div class="col-sm-9">
@@ -117,19 +117,18 @@
         <div class="col-sm-4">
           <div class="panel-heading row">
             <div class="col-sm-3">
-              <i class="fa fa-exchange fa-4x"></i>
+              <img src="images/symbol.jpg"/>
             </div>
             <div class="col-sm-9">
-              <h5> {{ 'PORTAL_EXCHANGE_TITLE' | translate }}</h5>
+              <h5>{{ 'PORTAL_CATAPULTOPTIN_TITLE' | translate }}</h5>
             </div>
           </div>
           <div class="panel-body">
-            <p>{{ 'PORTAL_EXCHANGE_TEXT' | translate }}</p>
+            <p>{{ 'PORTAL_CATAPULTOPTIN_TEXT' | translate }} <a href="https://nemplatform.com/symbol-migration" target="_blank" style="color: rgba(0, 0, 0, 0.4); text-decoration: underline;">{{ 'PORTAL_CATAPULTOPTIN_TEXT_LINK' | translate }}</a></p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.changelly">{{ 'PORTAL_EXCHANGE_BTN' | translate }} on Changelly</button>
-            <!--<br>
-            <button class="btn" ui-sref="app.shapeshift">{{ 'PORTAL_EXCHANGE_BTN' | translate }} on ShapeShift</button>-->
+            <p ng-hide="!$ctrl._DataStore.account.metaData.meta.cosignatories.length" class="text-danger">{{ 'PORTAL_CATAPULTOPTIN_MULTISIG_TEXT' | translate }}</p>
+            <button class="btn" ui-sref="app.catapultOptin" ng-hide="$ctrl._DataStore.account.metaData.meta.cosignatories.length">{{ 'PORTAL_CATAPULTOPTIN_BTN_1' | translate }}</button>
           </div>
         </div>
       </div>
@@ -211,7 +210,7 @@
             <div class="panel-heading row">
               <div class="col-sm-3">
                   <img src="images\DNSlogo.png" />
-                
+
               </div>
               <div class="col-sm-9">
                 <h5>DNS</h5>
@@ -224,7 +223,7 @@
                 <button class="btn" ui-sref="app.dnsSearch">{{'DNS_SEARCH_DNS' | translate}}</button>
                 <br>
                 <button class="btn" ui-sref="app.domainNameSystem">{{'DNS_CONFIGURE' | translate}}</button>
-                
+
             </div>
           </div>
 
@@ -243,9 +242,34 @@
             </div>
             <div class="panelFooter">
                 <button class="btn" ui-sref="app.NEMonster">{{'NEMONSTER_CATCH' | translate}}</button>
-                <br>  
+                <br>
             </div>
           </div>
+
+      </div>
+
+       <!-- FIFTH ROW STARTS -->
+      <div class="row row4">
+
+        <!-- CHANGELY -->
+        <div class="col-sm-4">
+          <div class="panel-heading row">
+            <div class="col-sm-3">
+              <img src="images/changellyRocket.png"/>
+            </div>
+            <div class="col-sm-9">
+              <h5> {{ 'PORTAL_EXCHANGE_TITLE' | translate }}</h5>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p>{{ 'PORTAL_EXCHANGE_TEXT' | translate }}</p>
+          </div>
+          <div class="panelFooter">
+            <button class="btn" ui-sref="app.changelly">{{ 'PORTAL_EXCHANGE_BTN' | translate }} on Changelly</button>
+            <!--<br>
+            <button class="btn" ui-sref="app.shapeshift">{{ 'PORTAL_EXCHANGE_BTN' | translate }} on ShapeShift</button>-->
+          </div>
+        </div>
 
       </div>
 

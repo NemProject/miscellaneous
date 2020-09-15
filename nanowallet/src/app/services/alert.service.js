@@ -367,7 +367,7 @@ export default class Alert {
             className: 'danger'
         });
     }
-    
+
     namespaceExpiryNotice(ns, blocks) {
         this._ngToast.create({
             content: this._$filter("translate")("RENEW_NS_ALERT_PART_1") + ' <b>'+ns+'</b> ' + this._$filter("translate")("RENEW_NS_ALERT_PART_2") + ' (~' + blocks + ' ' + this._$filter("translate")("GENERAL_BLOCKS") + '). ' + this._$filter("translate")("RENEW_NS_ALERT_PART_3") ,
@@ -666,6 +666,21 @@ export default class Alert {
             className: 'success'
         });
     }
+
+    copySuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('OPTIN_COPY_SUCCESS'),
+            className: 'success'
+        });
+    }
+
+    optinSignSuccess() {
+        this._ngToast.create({
+            content: this._$filter('translate')('CATAPULT_OPT_IN_SUCCESS_SIGNING'),
+            className: 'success'
+        });
+    }
+
 
 
     /***

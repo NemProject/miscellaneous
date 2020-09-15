@@ -100,7 +100,7 @@ class Wallet {
         /**
          * The wallet contacts
          *
-         * @type {$localStorage~array} 
+         * @type {$localStorage~array}
          */
         this.contacts = undefined;
 
@@ -168,7 +168,7 @@ class Wallet {
             this._Alert.mijinDisabled();
             return false;
         }
-        // Decrypt / generate and check primary 
+        // Decrypt / generate and check primary
         if (!this.decrypt(common, wallet.accounts[0], wallet.accounts[0].algo, wallet.accounts[0].network)) return false;
         // Check if brain wallet pass seems weak
         if(wallet.accounts[0].network === nem.model.network.data.mainnet.id && wallet.accounts[0].algo === 'pass:6k' && common.password.length < 40) {
@@ -228,7 +228,7 @@ class Wallet {
     }
 
     /**
-     * Decrypt/generate the private key of a wallet account and check it. 
+     * Decrypt/generate the private key of a wallet account and check it.
      * Returned private key is contained into the passed common object or true is set to isHW
      *
      * @param {object} common - A common object
@@ -380,10 +380,10 @@ class Wallet {
                             this._Alert.upgradeSuccess();
                             return resolve(true);
                         }
-                    }, 
+                    },
                     (err) => {
                         return reject(true);
-                    }).then(chain.bind(null, i+1)); 
+                    }).then(chain.bind(null, i+1));
                 }
             }
             // Start promises chain
@@ -477,11 +477,35 @@ class Wallet {
      * @param {object} common - A common object
      * @param {object} wallet - A wallet object
      *
-     * @return {HTMLelement} - An HTML element to append in the view 
+     * @return {HTMLelement} - An HTML element to append in the view
      */
     generateQR(common, wallet) {
         let wlt  = wallet || this.current;
         if (!this.decrypt(common, wlt.accounts[0], wlt.accounts[0].algo, wlt.accounts[0].network)) return false;
+        // Encrypt private key for mobile apps
+        let mobileKeys = nem.crypto.helpers.toMobileKey(common.password, common.privateKey);
+        // Create model
+        let QR = nem.model.objects.create("walletQR")(this.network === nem.model.network.data.testnet.id ? 1 : 2, 3, this.current.name, mobileKeys.encrypted, mobileKeys.salt);
+        let code = kjua({
+            size: 256,
+            text: JSON.stringify(QR),
+            fill: '#000',
+            quiet: 0,
+            ratio: 2,
+        });
+        return code;
+    }
+
+    /**
+     * Encrypt key for mobile and crete a QR element
+     *
+     * @param {object} common - A common object
+     * @param {object} wallet - A wallet object
+     *
+     * @return {HTMLelement} - An HTML element to append in the view
+     */
+    generateCurrentAccountQR(common) {
+        if (!this.decrypt(common, this.currentAccount, this.currentAccount.algo, this.currentAccount.network)) return false;
         // Encrypt private key for mobile apps
         let mobileKeys = nem.crypto.helpers.toMobileKey(common.password, common.privateKey);
         // Create model
@@ -524,7 +548,7 @@ class Wallet {
      */
     base64Encode(wallet) {
         // Wallet object string to word array
-        let wordArray = nem.crypto.js.enc.Utf8.parse(angular.toJson(wallet)); 
+        let wordArray = nem.crypto.js.enc.Utf8.parse(angular.toJson(wallet));
         // Word array to base64
         return nem.crypto.js.enc.Base64.stringify(wordArray);
     }

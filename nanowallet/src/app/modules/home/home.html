@@ -9,11 +9,7 @@
       </div>
    </div>
    <div class="container">
-      <div class="row">
-         <div class="col-md-1">
-         </div>
-         <div class="col-md-1">
-         </div>
+      <div class="row row-center">
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 1">
             <i class="fa fa-send fa-4x"></i>
          </div>
@@ -27,20 +23,19 @@
             <i class="fa fa-th fa-4x"></i>
          </div>
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 5">
-            <i class="fa fa-chain fa-4x"></i>
+            <img src="images/symbol.jpg" style="width: 4em;"></i>
          </div>
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 6">
-            <img src="images/apostille.png"/>
+            <i class="fa fa-chain fa-4x"></i>
          </div>
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 7">
-            <i class="fa fa-4x">&#xf2bb; </i>
+            <img src="images/apostille.png"/>
          </div>
          <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 8">
+            <i class="fa fa-4x">&#xf2bb; </i>
+         </div>
+         <div class="col-md-1" ng-mouseover="$ctrl.showInfo = 9">
             <i class="fa fa-exchange fa-4x"></i>
-         </div>
-         <div class="col-md-1">
-         </div>
-         <div class="col-md-1">
          </div>
       </div>
       <hr>
@@ -58,10 +53,10 @@
             <p>{{ 'PORTAL_NS_TEXT' | translate }}</p>
          </div>
          <div ng-show="$ctrl.showInfo === 4">
-            <p>{{ 'PORTAL_MOSAIC_TEXT' | translate }}</p>
+            <p>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</p>
          </div>
          <div ng-show="$ctrl.showInfo === 5">
-            <p>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</p>
+            <p>{{ 'PORTAL_CATAPULTOPTIN_TEXT' | translate }}</p>
          </div>
          <div ng-show="$ctrl.showInfo === 6">
             <p>{{ 'PORTAL_APOSTILLE_TEXT' | translate }}</p>
@@ -70,6 +65,9 @@
             <p>{{ 'PORTAL_ADDRESS_BOOK_TEXT' | translate }}</p>
          </div>
          <div ng-show="$ctrl.showInfo === 8">
+            <p>{{ 'PORTAL_EXCHANGE_TEXT' | translate }}</p>
+         </div>
+         <div ng-show="$ctrl.showInfo === 9">
             <p>{{ 'PORTAL_EXCHANGE_TEXT' | translate }}</p>
          </div>
       </div>

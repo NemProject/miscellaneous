@@ -30,12 +30,15 @@ class AccountCtrl {
 
          // Show / Hide account selection depending of number of accounts
         this.showAccounts = false;
-        
+
         // Store the label for new account
         this.newAccountLabel = "";
 
         // Show the password input for mobile wallet QR
         this.showMobileQRPass = true;
+
+        // Show the password input for mobile account QR
+        this.showMobileAccountQRPass = true;
 
         // Common object to contain our password & private key data for adding account
         this.common = nem.model.objects.get("common");
@@ -45,6 +48,9 @@ class AccountCtrl {
 
         // Common object to contain our password & private key data for QR wallet
         this.commonQR = nem.model.objects.get("common");
+
+        // Common object to contain our password & private key data for QR account
+        this.commonAccountQR = nem.model.objects.get("common");
 
         // Prevent users to click twice on button when already processing
         this.okPressed = false;
@@ -88,6 +94,21 @@ class AccountCtrl {
             $('#mobileWalletQR').append(QR);
             // Hide the password input for export to mobile qr
             this.showMobileQRPass = false;
+        }
+        this.reset();
+        return;
+    }
+
+    /**
+     * Generate the mobile account QR
+     */
+    generateAccountQR() {
+        let QR = this._Wallet.generateCurrentAccountQR(this.commonAccountQR);
+        if(QR) {
+            $('#mobileAccountQR').html("");
+            $('#mobileAccountQR').append(QR);
+            // Hide the password input for export to mobile qr
+            this.showMobileAccountQRPass = false;
         }
         this.reset();
         return;
@@ -150,7 +171,7 @@ class AccountCtrl {
                 this.reset();
                 return;
             });
-        }, 
+        },
         (err) => {
             this._$timeout(() => {
                 this.okPressed = false;
@@ -192,6 +213,7 @@ class AccountCtrl {
         this.common = nem.model.objects.get("common");
         this.commonPK = nem.model.objects.get("common");
         this.commonQR = nem.model.objects.get("common");
+        this.commonAccountQR = nem.model.objects.get("common");
         this.newAccountLabel = "";
         return;
     }

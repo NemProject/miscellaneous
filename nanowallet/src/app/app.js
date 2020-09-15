@@ -55,6 +55,7 @@ import './modules/signedMessage';
 import './modules/domainNameSystem';
 import './modules/importWalletQrCode';
 import './modules/NEMonster';
+import './modules/catapultOptin';
 
 // Create and bootstrap application
 const requires = [
@@ -112,7 +113,9 @@ const requires = [
     'app.domainNameSystem',
     'app.dnsSearch',
     'app.NEMonster',
-    'app.importWalletQrCode'
+    'app.importWalletQrCode',
+    'app.catapultOptin',
+    'app.multisigOptin'
 ];
 
 window.$ = window.jQuery = $;

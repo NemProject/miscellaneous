@@ -51,4 +51,8 @@ servicesModule.service('VotingUtils', VotingUtilsService);
 import VotingService from './voting.service';
 servicesModule.service('Voting', VotingService);
 
+// Set Catapult Optin service
+import CatapultOptinService from './catapultOptin.service'
+servicesModule.service('CatapultOptin', CatapultOptinService);
+
 export default servicesModule;
