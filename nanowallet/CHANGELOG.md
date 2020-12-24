@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.4.8
+
+    - Fix voting service
+    - Updated company details in terms and condition
+
+## Version 2.4.7-OptIn
+
+    - Added Symbol opt in modeule
+
 ## Version 2.4.7
 
     - Fix testnet nodes
