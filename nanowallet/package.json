@@ -21,7 +21,7 @@
     "browserify-ngannotate": "^2.0.0",
     "bufferutil": "^4.0.1",
     "catapult-optin-module": "git+https://github.com/nemgrouplimited/symbol-optin-module.git",
-    "symbol-paper-wallets": "git+https://github.com/Peersyst/symbol-paper-wallets.git",
+    "symbol-paper-wallets": "git+https://github.com/Peersyst/symbol-paper-wallets.git#bdc90f5",
     "chart.js": "2.1.6",
     "crypto-js": "^3.1.9-1",
     "glob": "7.0.5",
