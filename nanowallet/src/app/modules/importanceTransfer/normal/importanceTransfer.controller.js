@@ -107,7 +107,7 @@ class ImportanceTransferCtrl {
      * Create the remote for current account, if using hardware wallet
      */
     arrangeHW() {
-        if (this._Wallet.algo == "trezor" && !this._Wallet.currentAccount.child) {
+        if ((this._Wallet.algo == "trezor" || this._Wallet.algo == "ledger") && !this._Wallet.currentAccount.child) {
             // Disable send button
             this.okPressed = true;
 

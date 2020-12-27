@@ -55,6 +55,14 @@
           </button>
         </div>
       </div>
+
+      <div class="row loginButtons ledger" ng-show="!$ctrl.hideLedger">
+        <div class="col-md-4 col-md-offset-4 col-sm-6">
+          <button class="btn btn-lg btn-success btn-block" ui-sref="app.ledger">
+                {{ 'NANO_LEDGER_BUTTON' | translate }}
+          </button>
+        </div>
+      </div>
     </div>
 
     <div ng-show="$ctrl.needsUpgrade">

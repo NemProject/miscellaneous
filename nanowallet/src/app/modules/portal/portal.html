@@ -66,9 +66,9 @@
               <p>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</p>
             </div>
             <div class="panelFooter">
-              <button class="btn" ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
+              <button class="btn" ui-sref="app.importanceTransfer" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
               <br>
-              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length || $ctrl._Wallet.algo === 'trezor'">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
+              <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length || $ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
             <p>{{ 'PORTAL_APOSTILLE_TEXT' | translate }}</p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.createApostille" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
+            <button class="btn" ui-sref="app.createApostille" ng-disabled="$ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{ 'PORTAL_APOSTILLE_BTN_1' | translate }}</button>
             <br>
             <button class="btn" ui-sref="app.auditApostille">{{ 'PORTAL_APOSTILLE_BTN_2' | translate }}</button>
             <br>
@@ -163,9 +163,9 @@
             <p>{{ 'PORTAL_VOTING_TEXT' | translate }}</p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.votingPolls">{{ 'PORTAL_VOTING_BTN1' | translate }}</button>
+            <button class="btn" ui-sref="app.votingPolls" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{ 'PORTAL_VOTING_BTN1' | translate }}</button>
             <br>
-            <button class="btn" ui-sref="app.votingCreatePoll">{{ 'PORTAL_VOTING_BTN2' | translate }}</button>
+            <button class="btn" ui-sref="app.votingCreatePoll" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{ 'PORTAL_VOTING_BTN2' | translate }}</button>
           </div>
         </div>
         <div class="col-sm-4">
@@ -200,9 +200,9 @@
             <p>{{'PORTAL_SIGNED_MSG_TEXT' | translate}}</p>
           </div>
           <div class="panelFooter">
-            <button class="btn" ui-sref="app.signedMessageCreation">{{'CREATE_SIGNED_MSG_TITLE' | translate}}</button>
+            <button class="btn" ui-sref="app.signedMessageCreation" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{'CREATE_SIGNED_MSG_TITLE' | translate}}</button>
             <br>
-            <button class="btn" ui-sref="app.signedMessageVerification">{{ 'VERIFY_SIGNED_MSG_TITLE' | translate }}</button>
+            <button class="btn" ui-sref="app.signedMessageVerification" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{ 'VERIFY_SIGNED_MSG_TITLE' | translate }}</button>
           </div>
         </div>
 

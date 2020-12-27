@@ -45,6 +45,7 @@ import './modules/addressBook';
 import './modules/importanceTransfer';
 import './modules/faq';
 import './modules/trezor';
+import './modules/ledger';
 import './modules/apostille';
 import './modules/exchanges';
 import './modules/explorer';
@@ -93,6 +94,7 @@ const requires = [
     'app.multisigImportanceTransfer',
     'app.faq',
     'app.trezor',
+    'app.ledger',
     'app.createApostille',
     'app.auditApostille',
     'app.apostilleHistory',
@@ -122,6 +124,8 @@ window.$ = window.jQuery = $;
 
 // Load twitter bootstrap with require or jQuery is not defined
 require('bootstrap');
+require("babel-polyfill");
+require('babel-runtime/regenerator');
 
 // Apply nw.js config if using Chrome
 if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {

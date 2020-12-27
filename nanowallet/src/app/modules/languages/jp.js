@@ -375,6 +375,7 @@ function JapaneseProvider($translateProvider) {
       ACCOUNT_DELEGATED_PRIVATE_KEY: "委任秘密鍵",
       ACCOUNT_NO_PUBLIC_KEY: '公開鍵を取得するためにはトランザクションを発行してください。',
       ACCOUNT_SHOW_ON_TREZOR_BTN: 'TREZORで見る',
+      ACCOUNT_SHOW_ON_LEDGER_BTN: 'LEDGERで見る',
 
       // PORTAL MODULE
       PORTAL_TITLE: "各種機能",
@@ -793,6 +794,11 @@ function JapaneseProvider($translateProvider) {
       TREZOR_TITLE: 'TREZOR',
       TREZOR_TEXT: 'ハードウェアウォレットのTREZORはXEM、モザイク、マルチシグアカウントを保護できます。',
       TREZOR_BUTTON: 'TREZORでログイン',
+
+      // NANO LEDGER RELATED
+      NANO_LEDGER_TITLE: 'NANO LEDGER',
+      NANO_LEDGER_TEXT: 'ハードウェアウォレットのNANO LEDGERはXEM、モザイク、マルチシグアカウントを保護できます。',
+      NANO_LEDGER_BUTTON: 'NANO LEDGERでログイン',
 
       // CREATE OFFLINE TRANSACTION MODULE
       OFFLINE_TX_TITLE: 'オフライントランザクションの準備',

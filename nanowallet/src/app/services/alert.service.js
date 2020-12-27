@@ -560,6 +560,82 @@ export default class Alert {
         });
     }
 
+    ledgerDeviceNotFound() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_NO_DEVICE'),
+            className: 'danger'
+        });
+    }
+
+    ledgerBridgeNotRunning() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_BRIDGE_NOT_RUNNING'),
+            className: 'danger'
+        });
+    }
+
+    ledgerNotUsingNemApp() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_NOT_USING_NEM_APP'),
+            className: 'danger'
+        });
+    }
+
+    ledgerNotSupportApp() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_NOT_SUPPORTED_APP'),
+            className: 'danger'
+        });
+    }
+
+    ledgerNotOpenApp() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_NOT_OPENED_APP'),
+            className: 'danger'
+        });
+    }
+
+    ledgerDeviceLocked() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_DEVICE_LOCKED'),
+            className: 'danger'
+        });
+    }
+
+    ledgerLoginCancelByUser() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_USER_REJECT_LOGIN'),
+            className: 'danger'
+        });
+    }
+
+    ledgerFollowInstruction() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_FOLLOW_INSTRUCTION'),
+            className: 'info'
+        });
+    }
+
+    ledgerTransactionTooBig() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_TOO_BIG'),
+            className: 'danger'
+        });
+    }
+
+    ledgerTransactionCancelByUser() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_USER_CANCEL'),
+            className: 'danger'
+        });
+    }
+
+    ledgerFailedToSignTransaction(message) {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_FAILED') + message,
+            className: 'danger'
+        });
+    }
 
     /***
      * Success alerts

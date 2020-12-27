@@ -7,6 +7,7 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
         "app.signup",
         "app.faq",
         "app.trezor",
+        "app.ledger",
         "app.offlineTransactionHome",
         "app.offlineTransactionCreate",
         "app.offlineTransactionSend",

@@ -65,7 +65,7 @@ class HomeCtrl {
                     // Pick a random node in the array
                     let node = res.data[Math.floor(Math.random()*res.data.length)];
                     // Set the node in local storage
-                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, 7890);
+                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, typeof carlo !== 'undefined' ? 7891 : 7890);
                 }, (err) => {
                     // If error it will use default node
                     console.log(err);
@@ -77,7 +77,7 @@ class HomeCtrl {
                     // Pick a random node in the array
                     let node = res.data[Math.floor(Math.random()*res.data.length)];
                     // Set the node in local storage
-                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, 7890);
+                    this._storage.selectedMainnetNode = nem.model.objects.create("endpoint")("http://"+node.ip, typeof carlo !== 'undefined' ? 7891 : 7890);
                 }, (err) => {
                     // If error it will use default node
                     console.log(err);

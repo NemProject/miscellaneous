@@ -368,6 +368,7 @@ function ItalianProvider($translateProvider) {
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Chiave privata delegata',
         ACCOUNT_NO_PUBLIC_KEY: 'È necessario effettuare una transazione per generare automaticamente una chiave pubblica',
         ACCOUNT_SHOW_ON_TREZOR_BTN: 'Mostra su TREZOR',
+        ACCOUNT_SHOW_ON_LEDGER_BTN: 'Mostra su LEDGER',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Acquista casa chester',
@@ -774,6 +775,11 @@ function ItalianProvider($translateProvider) {
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'Il portafoglio hardware TREZOR ti consente di conservare le tue XEM, bollette a più conti con mosaico',
         TREZOR_BUTTON: 'Accedi con TREZOR',
+
+        // NANO LEDGER RELATED
+        NANO_LEDGER_TITLE: 'NANO LEDGER',
+        NANO_LEDGER_TEXT: 'Il portafoglio hardware NANO LEDGER ti consente di conservare le tue XEM, bollette a più conti con mosaico',
+        NANO_LEDGER_BUTTON: 'Accedi con NANO LEDGER',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Preparare una transazione offline',

@@ -368,6 +368,7 @@ function PortugueseBRProvider($translateProvider) {
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Chave privada delegada',
         ACCOUNT_NO_PUBLIC_KEY: 'Você deve fazer uma transação para gerar uma chave pública automaticamente',
         ACCOUNT_SHOW_ON_TREZOR_BTN: 'Exibir na TREZOR',
+        ACCOUNT_SHOW_ON_LEDGER_BTN: 'Exibir na LEDGER',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Serviços',
@@ -774,6 +775,11 @@ function PortugueseBRProvider($translateProvider) {
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'A carteira em hardware TREZOR permite que você segure suas XEM, mosaicos contas multiassinatura',
         TREZOR_BUTTON: 'Entrar com TREZOR',
+
+        // NANO LEDGER RELATED
+        NANO_LEDGER_TITLE: 'NANO LEDGER',
+        NANO_LEDGER_TEXT: 'A carteira em hardware NANO LEDGER permite que você segure suas XEM, mosaicos contas multiassinatura',
+        NANO_LEDGER_BUTTON: 'Entrar com NANO LEDGER',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Preparar uma transação offline',

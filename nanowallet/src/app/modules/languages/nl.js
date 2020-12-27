@@ -371,6 +371,7 @@ function DutchProvider($translateProvider) {
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Gedelegeerde persoonlijke sleutel',
         ACCOUNT_NO_PUBLIC_KEY: 'Je moet een transactie maken om een publieke sleutel te krijgen',
         ACCOUNT_SHOW_ON_TREZOR_BTN: 'Weergeven op TREZOR',
+        ACCOUNT_SHOW_ON_LEDGER_BTN: 'Weergeven op LEDGER',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Diensten',
@@ -399,7 +400,7 @@ function DutchProvider($translateProvider) {
         PORTAL_ADDRESS_BOOK_BTN: 'Beheer adressenboek',
         PORTAL_INVOICE_TEXT: 'Creëer een factuur om via QR code te delen',
  	PORTAL_SIGNED_MSG_TEXT: 'Creëer en verifieer een ondertekend bericht om het accounteigendom te verifiëren zonder transacties uit te voeren.',
-	    
+
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Adressenboek',
         ADDRESS_BOOK_NAVIGATION: 'Navigatie',
@@ -442,7 +443,7 @@ function DutchProvider($translateProvider) {
         // ACCOUNT EXPLORER
         ACCOUNTS_EXPLORER_TITLE: 'Verkenner - Accounts',
         ACCOUNTS_EXPLORER_SEARCH: 'Zoeken',
-	    
+
         // TRANSACTIONS EXPLORER
         EXPLORER_TRANSACTIONS_TITLE: 'Je transactie geschiedenis',
         EXPLORER_TRANSACTIONS_LOAD_MORE: 'Laad meer',
@@ -610,7 +611,7 @@ function DutchProvider($translateProvider) {
         ALERT_POLL_CREATION_SUCCESS: 'Poll succesvol aangemaakt',
         ALERT_COPY_SIGNED_TX_SUCCESS: 'Ondertekende transactie gekopieerd!',
         ALERT_COPY_SIGNED_MSG_SUCCESS: 'Ondertekend bericht gekopieerd!',
-		
+
         // CONVERT ACCOUNT TO MULTISIG
         AGGREGATE_MODIFICATION_TITLE: 'Een account converteren naar multi-handtekening',
         AGGREGATE_MODIFICATION_NAME: 'Samengevoegde modificatie transactie',
@@ -657,11 +658,11 @@ function DutchProvider($translateProvider) {
         // SIGNUP MODULE
         SIGNUP_TITLE: 'Nieuw bij NEM?',
         SIGNUP_SELECT_WALLET_TYPE: 'Selecteer een type portemonnee die je wilt creëren',
-        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Plaats de cursor op een type portemonnee om informatie te tonen.',  
+        SIGNUP_SELECT_WALLET_TYPE_STAND_BY: 'Plaats de cursor op een type portemonnee om informatie te tonen.',
         SIGNUP_CREATE_WALLET_TITLE: 'Eenvoudige portemonnee',
         SIGNUP_CREATE_WALLET_INFO: 'Eenvoudige portemonnees bevatten een primaire privésleutel die willekeurig wordt gegenereerd.',
         SIGNUP_PRIVATE_KEY_WALLET_TITLE: 'Persoonlijke sleutel portemonnee',
-        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Persoonlijke sleutel portemonnees bevatten een primaire persoonlijke sleutel die je wilt importeren.', 
+        SIGNUP_PRIVATE_KEY_WALLET_INFO: 'Persoonlijke sleutel portemonnees bevatten een primaire persoonlijke sleutel die je wilt importeren.',
         SIGNUP_BRAIN_WALLET_TITLE: 'Brein portemonnee',
         SIGNUP_BRAIN_WALLET_INFO: 'Brein portemonnees bevatten een primaire persoonlijke sleutel die is gegenereerd op basis van een wachtwoordzin. Hiermee kun je de portemonnee alleen ophalen door die exacte wachtwoordzin te kennen.',
         SIGNUP_CREATE_WALLET_BUTTON: 'Maak een eenvoudige portemonnee',
@@ -784,6 +785,11 @@ function DutchProvider($translateProvider) {
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'De TREZOR hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
         TREZOR_BUTTON: 'Aanmelden met TREZOR',
+
+        // NANO LEDGER RELATED
+        NANO_LEDGER_TITLE: 'NANO LEDGER',
+        NANO_LEDGER_TEXT: 'De NANO LEDGER hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
+        NANO_LEDGER_BUTTON: 'Aanmelden met NANO LEDGER',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Bereid een offline transactie voor',

@@ -60,7 +60,7 @@
               <td>{{ap.timeStamp}}</td>
               <td class="row buttans">
                 <div class="col-md-6">
-                  <button class="btn btn-success" type="button" ui-sref="app.createApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey, tags: ap.tags, isUpdate: true})" ng-show="ap.dedicatedAccount !== $ctrl.sink" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{ 'GENERAL_UPDATE' | translate }}</button>
+                  <button class="btn btn-success" type="button" ui-sref="app.createApostille({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey, tags: ap.tags, isUpdate: true})" ng-show="ap.dedicatedAccount !== $ctrl.sink" ng-disabled="$ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{ 'GENERAL_UPDATE' | translate }}</button>
                 </div>
                 <div class="col-md-6">
                   <button class="btn btn-success" type="button" ui-sref="app.apostilleMessage({address: ap.dedicatedAccount, privateKey: ap.dedicatedPrivateKey})" ng-show="ap.dedicatedAccount !== $ctrl.sink">{{ 'GENERAL_MESSAGE' | translate }}</button>
