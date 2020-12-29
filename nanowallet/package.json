@@ -2,12 +2,19 @@
   "name": "NEM-Wallet",
   "version": "2.4.8",
   "description": "Cross-platform lite wallet for NEM",
-  "author": "https://github.com/QuantumMechanics",
+  "author": "https://github.com/QuantumMechanics <quantum@mail.com>",
   "license": "MIT",
   "dependencies": {
+    "@ledgerhq/hw-transport-node-hid": "^5.31.1"
+  },
+  "devDependencies": {
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-notarize": "^0.3.0",
+    "electron-packager": "^14.2.1",
+    "electron-rebuild": "^2.3.2",
+    "electron-updater": "^4.2.5",
     "@babel/runtime": "^7.4.2",
-    "@ledgerhq/hw-transport-http": "^4.48.0",
-    "@ledgerhq/hw-transport-webusb": "^4.48.0",
     "@uirouter/angularjs": "1.0.6",
     "angular": "1.6.2",
     "angular-animate": "1.6.2",
@@ -62,14 +69,72 @@
     "vinyl-source-stream": "^1.1.0",
     "zxcvbn": "4.4.2"
   },
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "gulp tests browserifyTests",
     "devApp": "nw build/",
-    "compile": "gulp && cp -rf run.js build",
-    "build": "./nem-build.sh"
+    "compile": "gulp",
+    "start": "electron .",
+    "build": "npm run compile && npm run electron:rebuild",
+    "release": "npm run build && npm run release:all",
+    "release:all": "npm run release:mac && npm run release:win && npm run release:lin",
+    "release:mac": "electron-builder --mac",
+    "release:win": "electron-builder --win",
+    "release:lin": "electron-builder --linux deb snap tar.gz",
+    "electron:rebuild:nodehid": "electron-rebuild -o @ledgerhq/hw-transport-node-hid -v 8.2.0",
+    "electron:rebuild": "./node_modules/.bin/electron-rebuild"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  },
+  "main": "./build.js",
+  "build": {
+    "appId": "io.nem.nano.desktop-wallet",
+    "extends": null,
+    "copyright": "Copyright © 2019-2020 NEM",
+    "productName": "Nem Wallet",
+    "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
+    "icon": "./build/images/NanoWallet.icns",
+    "files": [
+      "build/**/*",
+      "package.json",
+      "./build.js"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  },
+  "mac": {
+    "category": "public.app-category.finance",
+    "target": "tar.gz",
+    "icon": "./images/NanoWallet.icns",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "entitlements": "electron/entitlements.mac.plist",
+    "extendInfo": {
+      "NSCameraUsageDescription": "This app requires camera access to scan qrcodes."
+    }
+  },
+  "dmg": {
+    "window": {
+      "x": 100,
+      "y": 100,
+      "width": 500,
+      "height": 400
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "./images/logomark.ico"
+  },
+  "linux": {
+    "category": "Finance",
+    "icon": "./images/NanoWallet.icns"
   },
   "repository": {
     "type": "git",

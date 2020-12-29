@@ -1,5 +1,6 @@
 import nem from 'nem-sdk';
-var request = require('request');
+const TransportNodeHid = window['TransportNodeHid'] && window['TransportNodeHid'].default;
+import NemH from "../../modules/ledger/hw-app-nem";
 const SUPPORT_VERSION = {
     LEDGER_MAJOR_VERSION: 0,
     LEDGER_MINOR_VERSION: 0,
@@ -105,41 +106,39 @@ class LedgerCtrl {
     /**
      * Get NEM Ledger app version
      */
-    getAppVersion() {
-        return new Promise(async (resolve) => {
-            var JSONObject = {
-                "requestType": "getAppVersion",
-            };
-            var option = {
-                url: "http://localhost:21335",
-                method: "POST",
-                json: true,
-                body: JSONObject
-            }
-            request(option, function (error, response, body) {
-                try {
-                    let appVersion = body;
-                    if (appVersion.majorVersion == null && appVersion.minorVersion == null && appVersion.patchVersion == null) {
-                        if (body.statusCode != null) resolve(body.statusCode);
-                        else resolve(body.id);
+    async getAppVersion() {
+        try {
+            const transport = await TransportNodeHid.open("");
+            const nemH = new NemH(transport);
+            try {
+                const result = await nemH.getAppVersion();
+                transport.close();
+                let appVersion = result;
+                if (appVersion.majorVersion == null && appVersion.minorVersion == null && appVersion.patchVersion == null) {
+                    if (result.statusCode != null) return Promise.resolve(result.statusCode);
+                    else return Promise.resolve(result.id);
+                } else {
+                    let statusCode;
+                    if (appVersion.majorVersion < SUPPORT_VERSION.LEDGER_MAJOR_VERSION) {
+                        statusCode = 2;
+                    } else if (appVersion.minorVersion < SUPPORT_VERSION.LEDGER_MINOR_VERSION) {
+                        statusCode = 2;
+                    } else if (appVersion.patchVersion < SUPPORT_VERSION.LEDGER_PATCH_VERSION) {
+                        statusCode = 2;
                     } else {
-                        let statusCode;
-                        if (appVersion.majorVersion < SUPPORT_VERSION.LEDGER_MAJOR_VERSION) {
-                            statusCode = 2;
-                        } else if (appVersion.minorVersion < SUPPORT_VERSION.LEDGER_MINOR_VERSION) {
-                            statusCode = 2;
-                        } else if (appVersion.patchVersion < SUPPORT_VERSION.LEDGER_PATCH_VERSION) {
-                            statusCode = 2;
-                        } else {
-                            statusCode = 1;
-                        }
-                        resolve(statusCode);
+                        statusCode = 1;
                     }
-                } catch (error) {
-                    resolve('bridge_problem');
+                    return Promise.resolve(statusCode);
                 }
-            })
-        })
+            } catch (err) {
+                transport.close();
+                throw err
+            }
+        } catch (err) {
+            if (err.statusCode != null) return Promise.resolve(err.statusCode);
+            else if (err.id != null) return Promise.resolve(err.id);
+            else return Promise.resolve(err);
+        }
     }
 
     /**

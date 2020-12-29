@@ -1,5 +1,6 @@
 import nem from "nem-sdk";
-var request = require('request');
+const TransportNodeHid = window['TransportNodeHid'] && window['TransportNodeHid'].default;
+import NemH from "./hw-app-nem";
 const SUPPORT_VERSION = {
     LEDGER_MAJOR_VERSION: 0,
     LEDGER_MINOR_VERSION: 0,
@@ -73,31 +74,35 @@ class Ledger {
     }
 
     async getAccount(hdKeypath, network, label) {
-        return new Promise((resolve, reject) => {
-            var JSONObject = {
-                "requestType": "getAddress",
-                "hdKeypath": hdKeypath, "label": label, "network": network
-            };
-            let option = {
-                url: "http://localhost:21335",
-                method: "POST",
-                json: true,
-                body: JSONObject
-            }
-            request(option, function (error, response, body) {
-                try {
-                    if (body.statusCode != null) {
-                        //Exporting the wallet was denied
-                        reject(body.statusCode);
-                    } else {
-                        // Successfully exporting the wallet
-                        resolve(body);
+        try {
+            const transport = await TransportNodeHid.open("");
+            const nemH = new NemH(transport);
+            try {
+                const result = await nemH.getAddress(hdKeypath)
+                transport.close();
+                return Promise.resolve(
+                    {
+                        "brain": false,
+                        "algo": "ledger",
+                        "encrypted": "",
+                        "iv": "",
+                        "address": result.address,
+                        "label": label,
+                        "network": network,
+                        "child": "",
+                        "hdKeypath": hdKeypath,
+                        "publicKey": result.publicKey
                     }
-                } catch (error) {
-                    reject('bridge_problem');
-                }
-            })
-        })
+                );
+            } catch (err) {
+                transport.close();
+                throw err
+            }
+        } catch (err) {
+            if (err.statusCode != null) return Promise.reject(err.statusCode);
+            else if (err.id != null) return Promise.resolve(err.id);
+            else return Promise.resolve(err);
+        }
     }
 
     serialize(transaction, account, symbolOptin) {
@@ -149,37 +154,32 @@ class Ledger {
         });
     }
 
-    signTransaction(account, serializedTx) {
-        return new Promise(async (resolve) => {
-            var JSONObject = {
-                "requestType": "signTransaction",
-                "serializedTx": serializedTx,
-                "hdKeypath": account.hdKeypath
-            };
-            var option = {
-                url: "http://localhost:21335",
-                method: "POST",
-                json: true,
-                body: JSONObject
-            }
-            request(option, function (error, response, body) {
-                try {
-                    if (body.statusCode) {
-                        resolve(body)
-                    } else if (body.name == "TransportError") {
-                        this._Alert.ledgerFailedToSignTransaction(body.message);
-                    } else {
-                        let payload = {
-                            data: serializedTx,
-                            signature: body
-                        }
-                        resolve(payload);
-                    }
-                } catch (error) {
-                    resolve(error);
+    async signTransaction(account, serializedTx) {
+        try {
+            const transport = await TransportNodeHid.open("");
+            const nemH = new NemH(transport);
+            try {
+                const sig = await nemH.signTransaction(account.hdKeypath, serializedTx)
+                transport.close();
+                let payload = {
+                    data: serializedTx,
+                    signature: sig.signature
                 }
-            })
-        })
+                return Promise.resolve(payload);
+            }
+            catch (err) {
+                transport.close();
+                throw err
+            }
+        } catch (err) {
+            if (err.statusCode != null) return Promise.resolve(err);
+            else if (err.id != null) return Promise.resolve(err.id);
+            else if (err.name == "TransportError") {
+                this._Alert.ledgerFailedToSignTransaction(err.message);
+                return;
+            }
+            else return Promise.resolve(err);
+        }
     }
 }
 

@@ -1,3 +1,0 @@
-[submodule "external-modules/nem-ledger-bridge"]
-	path = external-modules/nem-ledger-bridge
-	url = https://github.com/FDS-Ledger/nem-ledger-bridge
