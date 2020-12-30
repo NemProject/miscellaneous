@@ -66,7 +66,7 @@
               <p>{{ 'PORTAL_HARVESTING_TEXT' | translate }}</p>
             </div>
             <div class="panelFooter">
-              <button class="btn" ui-sref="app.importanceTransfer" ng-disabled="$ctrl._Wallet.algo === 'ledger'">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
+              <button class="btn" ui-sref="app.importanceTransfer">{{ 'IMPORTANCE_TRANSFER_TITLE' | translate }}</button>
               <br>
               <button class="btn" ui-sref="app.multisigImportanceTransfer" ng-disabled="!$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length || $ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{ 'IMPORTANCE_TRANSFER_MULTISIGNATURE_TITLE' | translate }}</button>
             </div>

@@ -23,7 +23,7 @@ export default class Nem {
     constructor(transport, scrambleKey = "NEM") {
         this.transport = transport;
         transport.decorateAppAPIMethods(this,
-            ["getAppVersion", "getAddress", "signTransaction"],
+            ["getAppVersion", "getAddress", "getRemoteAccount", "signTransaction"],
             scrambleKey);
     }
 
@@ -69,10 +69,10 @@ export default class Nem {
      * @param display optionally enable or not the display
      * @param chainCode optionally enable or not the chainCode request
      * @param ed25519
-     * @return an object with a publicKey, address and (optionally) chainCode
+     * @return an object with a publicKey, address chainCode
      * @example
      * const result = await nem.getAddress(bip32path);
-     * const { publicKey, address } = result;
+     * const { address, publicKey, chainCode } = result;
      */
     async getAddress(path) {
         const GET_ADDRESS_INS_FIELD = 0x02
@@ -105,6 +105,51 @@ export default class Nem {
         const publicKeyLength = response[1 + addressLength];
         result.address = response.slice(1, 1 + addressLength).toString("ascii");
         result.publicKey = response.slice(1 + addressLength + 1, 1 + addressLength + 1 + publicKeyLength).toString("hex");
+        result.path = path;
+        return result;
+    }
+
+    /**
+     * get NEM remote account for a given BIP 32 path.
+     *
+     * @param path a path in BIP 32 format
+     * @param display optionally enable or not the display
+     * @param chainCode optionally enable or not the chainCode request
+     * @param ed25519
+     * @return an object with a remote account and chainCode
+     * @example
+     * const result = await nem.getAddress(bip32path);
+     * const { remoteAccount, path } = result;
+     */
+    async getRemoteAccount(path) {
+        const GET_REMOTE_ACCOUNT_INS_FIELD = 0x05
+        const display = true;
+        const chainCode = false;
+        const ed25519 = true;
+
+        const bipPath = BIPPath.fromString(path).toPathArray();
+        const curveMask = ed25519 ? 0x80 : 0x40;
+
+        // APDU fields configuration
+        const apdu = {
+            cla: CLA_FIELD,
+            ins: GET_REMOTE_ACCOUNT_INS_FIELD,
+            p1: display ? 0x01 : 0x00,
+            p2: curveMask | (chainCode ? 0x01 : 0x00),
+            data: Buffer.alloc(1 + bipPath.length * 4),
+        };
+
+        apdu.data.writeInt8(bipPath.length, 0);
+        bipPath.forEach((segment, index) => {
+            apdu.data.writeUInt32BE(segment, 1 + index * 4);
+        });
+
+        // Response from Ledger
+        const response = await this.transport.send(apdu.cla, apdu.ins, apdu.p1, apdu.p2, apdu.data);
+
+        const result = {};
+        const remoteAccountLength = response[0];
+        result.remoteAccount = response.slice(1, 1 + remoteAccountLength).toString("hex");
         result.path = path;
         return result;
     }

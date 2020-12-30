@@ -246,7 +246,7 @@
             <!-- Password Field -->
             <password-input common="$ctrl.commonAccountQR"></password-input>
             <button class="btn btn-success"
-              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonAccountQR.password.length" ng-click="$ctrl.generateAccountQR()">
+              type="submit" ng-disabled="$ctrl.okPressed || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.commonAccountQR.password.length" ng-click="$ctrl.generateAccountQR()">
               {{'GENERAL_REVEAL' | translate }}
             </button>
           </div>

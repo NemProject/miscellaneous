@@ -105,6 +105,50 @@ class Ledger {
         }
     }
 
+    async getRemoteAccount(hdKeypath) {
+        try {
+            const transport = await TransportNodeHid.open("");
+            const nemH = new NemH(transport);
+            try {
+                const result = await nemH.getRemoteAccount(hdKeypath)
+                transport.close();
+                return Promise.resolve(
+                    {
+                        "hdKeypath": hdKeypath,
+                        "remoteAccount": result.remoteAccount
+                    }
+                );
+            } catch (err) {
+                transport.close();
+                throw err
+            }
+        } catch (err) {
+            if (err.statusCode != null) return Promise.reject(err.statusCode);
+            else if (err.id != null) return Promise.resolve(err.id);
+            else return Promise.resolve(err);
+        }
+    }
+
+    deriveRemote(account, network) {
+        this._$timeout(() => {
+            this._Alert.ledgerFollowInstruction();
+        });
+        return new Promise((resolve, reject) => {
+            this.getRemoteAccount(account.hdKeypath).then((result) => {
+                const privateKey = result.remoteAccount;
+                const keyPair = nem.crypto.keyPair.create(privateKey);
+                const publicKey = keyPair.publicKey.toString();
+                const address = nem.model.address.toAddress(publicKey, network);
+
+                resolve({
+                    address,
+                    privateKey,
+                    publicKey
+                });
+            });
+        });
+    }
+
     serialize(transaction, account, symbolOptin) {
         this._$timeout(() => {
             this._Alert.ledgerFollowInstruction();
