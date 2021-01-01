@@ -10,7 +10,7 @@ import {
 import { Wallet, Network, MnemonicPassPhrase, ExtendedKey } from "symbol-hd-wallets";
 import { MnemonicQR } from 'symbol-qr-library';
 import { StatusCode } from "catapult-optin-module";
-import { SymbolPaperWallet } from "symbol-paper-wallets";
+import { generatePaperWallet } from "symbol-paper-wallets";
 
 const DEFAULT_ACCOUNT_PATH = "m/44'/4343'/0'/0'/0'";
 const VRF_ACCOUNT_PATH = "m/44'/4343'/0'/1'/0'";
@@ -184,31 +184,21 @@ class NormalOptInCtrl {
         this.formData.optinPrivateKey = account.privateKey;
         this.formData.optinVrfPrivateKey = vrfAccount.privateKey;
 
-        const hdRootAccount = {
-            mnemonic: mnemonic.plain,
-            rootAccountAddress: account.publicAccount.address.pretty(),
-            rootAccountPublicKey: account.publicAccount.publicKey
-        };
+        generatePaperWallet(mnemonic, this.catapultNetwork).then(bytes => {
+            const Uint8ToString = (u8a) => {
+                var CHUNK_SZ = 0x8000;
+                var c = [];
+                for (var i = 0; i < u8a.length; i += CHUNK_SZ) {
+                    c.push(String.fromCharCode.apply(null, u8a.subarray(i, i + CHUNK_SZ)));
+                }
+                return c.join("");
+            };
 
-        const paperWallet = new SymbolPaperWallet(hdRootAccount, [], this.catapultNetwork);
-        const uint8Array = await paperWallet.toPdf();
-
-        var u8 = new Uint8Array(uint8Array);
-        var b64encoded = btoa(this.Uint8ToString(u8));
-        $("#downloadWallet").attr('href', 'data:application/pdf;base64,' + b64encoded);
-        $("#downloadWallet").attr('download', 'symbol-wallet-' + account.address.pretty().substr(0, 6) + '.pdf');
-
+            const b64encoded = btoa(Uint8ToString(bytes));
+            $("#downloadWallet").attr('href', 'data:application/pdf;base64,' + b64encoded);
+            $("#downloadWallet").attr('download', 'symbol-wallet-' + account.address.pretty().substr(0, 6) + '.pdf');
+        });
     }
-
-    Uint8ToString(u8a) {
-        var CHUNK_SZ = 0x8000;
-        var c = [];
-        for (var i = 0; i < u8a.length; i += CHUNK_SZ) {
-            c.push(String.fromCharCode.apply(null, u8a.subarray(i, i + CHUNK_SZ)));
-        }
-        return c.join("");
-    }
-
 
     /**
      * Arrange namespaces into an array
