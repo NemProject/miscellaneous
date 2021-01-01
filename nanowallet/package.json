@@ -34,7 +34,6 @@
     "browserify": "^13.0.0",
     "browserify-ngannotate": "^2.0.0",
     "bufferutil": "^4.0.1",
-    "carlo": "^0.9.45",
     "catapult-optin-module": "git+https://github.com/nemgrouplimited/symbol-optin-module.git",
     "symbol-paper-wallets": "1.0.2-optin",
     "chart.js": "2.1.6",
