@@ -100,8 +100,8 @@ class Ledger {
             }
         } catch (err) {
             if (err.statusCode != null) return Promise.reject(err.statusCode);
-            else if (err.id != null) return Promise.resolve(err.id);
-            else return Promise.resolve(err);
+            else if (err.id != null) return Promise.reject(err.id);
+            else return Promise.reject(err);
         }
     }
 
@@ -124,8 +124,8 @@ class Ledger {
             }
         } catch (err) {
             if (err.statusCode != null) return Promise.reject(err.statusCode);
-            else if (err.id != null) return Promise.resolve(err.id);
-            else return Promise.resolve(err);
+            else if (err.id != null) return Promise.reject(err.id);
+            else return Promise.reject(err);
         }
     }
 
@@ -145,7 +145,26 @@ class Ledger {
                     privateKey,
                     publicKey
                 });
-            });
+            }).catch((errorCode) => {
+                console.log(errorCode)
+                switch (errorCode) {
+                    case 26628:
+                        this._Alert.ledgerDeviceLocked();
+                        break;
+                    case 27904:
+                        this._Alert.ledgerNotOpenApp();
+                        break;
+                    case 27264:
+                        this._Alert.ledgerNotUsingNemApp();
+                        break;
+                    case 27013:
+                        this._Alert.ledgerLoginCancelByUser();
+                        break;
+                    default:
+                        this._Alert.transactionError(errorCode);
+
+                }
+            })
         });
     }
 
@@ -175,7 +194,7 @@ class Ledger {
                 if (transaction.otherTrans.type == 0x0101 && transaction.otherTrans.message.type == undefined) {
                     otherTrans += "00000000"
                 }
-                let otherTransLength = ("00000000" + (otherTrans.length/2).toString(16)).substr(-8);
+                let otherTransLength = ("00000000" + (otherTrans.length / 2).toString(16)).substr(-8);
                 let otherTransLengthReverse = otherTransLength.match(/[a-fA-F0-9]{2}/g).reverse().join('');
                 serializedTx = serializedTx + otherTransLengthReverse + otherTrans;
             }

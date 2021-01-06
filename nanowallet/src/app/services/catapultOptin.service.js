@@ -186,7 +186,15 @@ class CatapultOptin {
                             resolve([JSON.stringify(serialized)].concat(next));
                         }).catch(err => resolve([null])), 500));
                     }).catch(err => {
-                        const message = err.statusCode == 27013 ? 'Signing Symbol Opt-in cancelled by user': err.message;
+                        let message;
+                        switch (err.statusCode) {
+                            case 27013:
+                                message = 'Signing Symbol Opt-in cancelled by user';
+                            case 26368:
+                                message = 'The transaction is too big to sign on your Ledger device';
+                            default:
+                                message = err.message;
+                        }
                         reject(message);
                     });
                 };
@@ -262,9 +270,9 @@ class CatapultOptin {
         return new Promise((resolve, reject) => {
             nem.com.requests.account.data(this._Wallet.node, originAddress).then(origin => {
                 buildStartMultisigOptInDTOs(origin, cosigner, destination, namespaces, config).then( dtos => {
-                    if (this.algo == "trezor") {
+                    if (this._Wallet.algo == "trezor") {
                         this._sendTrezorDTOs(common, dtos).then(resolve).catch(reject);
-                    } else if (this.algo == "ledger") {
+                    } else if (this._Wallet.algo == "ledger") {
                         this._sendLedgerDTOs(common, dtos).then(resolve).catch(reject);
                     } else {
                         const sendPromises = dtos.map(dto => broadcastDTO(common.privateKey, dto, config));
