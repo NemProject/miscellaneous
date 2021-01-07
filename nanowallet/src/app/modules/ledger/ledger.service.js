@@ -4,7 +4,7 @@ import NemH from "./hw-app-nem";
 const SUPPORT_VERSION = {
     LEDGER_MAJOR_VERSION: 0,
     LEDGER_MINOR_VERSION: 0,
-    LEDGER_PATCH_VERSION: 2
+    LEDGER_PATCH_VERSION: 4
 }
 let message;
 
