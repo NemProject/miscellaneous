@@ -428,7 +428,7 @@ class Wallet {
             if (primary.algo == "trezor") {
                 return this._Trezor.createAccount(primary.network, newAccountIndex, label);
             } else if (primary.algo == "ledger") {
-                return this._Ledger.createAccount(primary.network, newAccountIndex, label);
+                return this._Ledger.addAccount(primary.network, newAccountIndex, label);
             } else {
                 return Promise.reject(true);
             }
@@ -476,7 +476,9 @@ class Wallet {
             return Promise.resolve(true);
         },
         (err) => {
-            this._Alert.bip32GenerationFailed(err);
+            if (!(common.isHW && this.algo == "ledger")) {
+                this._Alert.bip32GenerationFailed(err);
+            }
             return Promise.reject(true);
         });
     }

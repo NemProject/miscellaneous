@@ -349,10 +349,12 @@ class createPollCtrl {
         }).catch(err => {
             this._$timeout(() => {
                 this.creating = false;
-                if (err.message) {
-                    this._Alert.votingUnexpectedError(err.message);
-                } else {
-                    this._Alert.votingUnexpectedError(err.data.message);
+                if (err) { 
+                    if (err.message) {
+                        this._Alert.votingUnexpectedError(err.message);
+                    } else {
+                        this._Alert.votingUnexpectedError(err.data.message);
+                    }
                 }
                 this.clearForm();
             });

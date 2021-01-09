@@ -34,6 +34,38 @@ class Ledger {
 
     // Service methods region //
 
+    /**
+     * Pop-up alert handler
+     */
+    alertHandler(inputErrorCode, isTxSigning, txStatusText) {
+        switch (inputErrorCode) {
+            case 'NoDevice':
+                this._Alert.ledgerDeviceNotFound();
+                break;
+            case 26628:
+                this._Alert.ledgerDeviceLocked();
+                break;
+            case 27904:
+                this._Alert.ledgerNotOpenApp();
+                break;
+            case 27264:
+                this._Alert.ledgerNotUsingNemApp();
+                break;
+            case 27013:
+                isTxSigning ? this._Alert.ledgerTransactionCancelByUser() : this._Alert.ledgerRequestCancelByUser();
+                break;
+            case 26368:
+                this._Alert.ledgerTransactionTooBig();
+                break;
+            case 2:
+                this._Alert.ledgerNotSupportApp();
+                break;
+            default:
+                isTxSigning ? this._Alert.transactionError(txStatusText) : this._Alert.requestFailed(inputErrorCode);
+                break;
+        }
+    }
+
     async createWallet(network) {
         return this.createAccount(network, 0, "Primary")
             .then((account) => ({
@@ -58,6 +90,35 @@ class Ledger {
     createAccount(network, index, label) {
         const hdKeypath = this.bip44(network, index);
         return this.getAccount(hdKeypath, network, label);
+    }
+
+    addAccount(network, index, label) {
+        const hdKeypath = this.bip44(network, index);
+        return new Promise((resolve, reject) => {
+            this.getAppVersion().then(checkVersion => {
+                if (checkVersion == 1) {
+                    alert("Please check your Ledger device!");
+                    this._$timeout(() => {
+                        this._Alert.ledgerFollowInstruction();
+                    });
+
+                    this.getAccount(hdKeypath, network, label).then((result) => {
+                        resolve(result)
+                    }).catch((errorCode) => {
+                        this._$timeout(() => {
+                            this.alertHandler(errorCode);
+                        });
+                        reject(true);
+                    });
+
+                } else {
+                    this._$timeout(() => {
+                        this.alertHandler(checkVersion);
+                    });
+                    reject(true);
+                }
+            });
+        });
     }
 
     showAccount(account) {
@@ -131,93 +192,91 @@ class Ledger {
     }
 
     deriveRemote(account, network) {
-        alert("Please check your Ledger device!");
-        this._$timeout(() => {
-            this._Alert.ledgerFollowInstruction();
-        });
         return new Promise((resolve, reject) => {
-            this.getRemoteAccount(account.hdKeypath).then((result) => {
-                const privateKey = result.remoteAccount;
-                const keyPair = nem.crypto.keyPair.create(privateKey);
-                const publicKey = keyPair.publicKey.toString();
-                const address = nem.model.address.toAddress(publicKey, network);
+            this.getAppVersion().then(checkVersion => {
+                if (checkVersion == 1) {
+                    alert("Please check your Ledger device!");
+                    this._$timeout(() => {
+                        this._Alert.ledgerFollowInstruction();
+                    });
 
-                resolve({
-                    address,
-                    privateKey,
-                    publicKey
-                });
-            }).catch((errorCode) => {
-                switch (errorCode) {
-                    case 26628:
-                        this._Alert.ledgerDeviceLocked();
-                        break;
-                    case 27904:
-                        this._Alert.ledgerNotOpenApp();
-                        break;
-                    case 27264:
-                        this._Alert.ledgerNotUsingNemApp();
-                        break;
-                    case 27013:
-                        this._Alert.ledgerLoginCancelByUser();
-                        break;
-                    default:
-                        this._Alert.transactionError(errorCode);
-
+                    this.getRemoteAccount(account.hdKeypath).then((result) => {
+                        const privateKey = result.remoteAccount;
+                        const keyPair = nem.crypto.keyPair.create(privateKey);
+                        const publicKey = keyPair.publicKey.toString();
+                        const address = nem.model.address.toAddress(publicKey, network);
+                        resolve({
+                            address,
+                            privateKey,
+                            publicKey
+                        });
+                    }).catch((errorCode) => {
+                        this._$timeout(() => {
+                            this.alertHandler(errorCode);
+                        });
+                    });
+                } else {
+                    this._$timeout(() => {
+                        this.alertHandler(checkVersion);
+                    });
                 }
-            })
+            });
         });
     }
 
     serialize(transaction, account, symbolOptin) {
-        alert("Please check your Ledger device!");
-        this._$timeout(() => {
-            this._Alert.ledgerFollowInstruction();
-        });
         return new Promise(async (resolve, reject) => {
-            //Transaction with testnet and mainnet
-            //Correct the signer
-            transaction.signer = account.publicKey;
+            this.getAppVersion().then(async checkVersion => {
+                if (checkVersion == 1) {
+                    alert("Please check your Ledger device!");
+                    this._$timeout(() => {
+                        this._Alert.ledgerFollowInstruction();
+                    });
+                    //Transaction with testnet and mainnet
+                    //Correct the signer
+                    transaction.signer = account.publicKey;
 
-            //If it is a MosaicDefinition Creation Transaction, then correct the creator
-            if (transaction.type == 0x4001) {
-                transaction.mosaicDefinition.creator = account.publicKey;
-            }
-
-            //Serialize the transaction
-            let serializedTx = nem.utils.convert.ua2hex(nem.utils.serialization.serializeTransaction(transaction));
-            // If it is a Multisig Signature Transaction, then add more transaction payload to the serialized transaction
-            if (transaction.type == 0x1002) {
-                // If the inner transaction is mosaic creation and there's no levy field in it
-                if (transaction.otherTrans.type == 0x4001 && transaction.otherTrans.mosaicDefinition.levy != null && transaction.otherTrans.mosaicDefinition.levy.type == undefined) {
-                    transaction.otherTrans.mosaicDefinition.levy = null;
-                }
-                // If the inner transaction is transfer and there's no message field in it
-                if (transaction.otherTrans.type == 0x0101 && transaction.otherTrans.message.type == undefined) {
-                    transaction.otherTrans.message.type = 1;
-                    transaction.otherTrans.message.payload = "";
-                }
-                let otherTrans = nem.utils.convert.ua2hex(nem.utils.serialization.serializeTransaction(transaction.otherTrans));
-                let otherTransLength = ("00000000" + (otherTrans.length / 2).toString(16)).substr(-8);
-                let otherTransLengthReverse = otherTransLength.match(/[a-fA-F0-9]{2}/g).reverse().join('');
-                serializedTx = serializedTx + otherTransLengthReverse + otherTrans;
-            }
-            let payload = await this.signTransaction(account, serializedTx);
-            if (payload.signature) {
-                resolve(payload);
-            } else {
-                if (!symbolOptin) {
-                    if (payload.statusCode == '26368') {
-                        this._Alert.ledgerTransactionTooBig();
-                    } else if (payload.statusCode == '27013') {
-                        this._Alert.ledgerTransactionCancelByUser();
-                    } else {
-                        this._Alert.transactionError(payload.statusText);
+                    //If it is a MosaicDefinition Creation Transaction, then correct the creator
+                    if (transaction.type == 0x4001) {
+                        transaction.mosaicDefinition.creator = account.publicKey;
                     }
-                }
-                reject(payload);
-            }
 
+                    //Serialize the transaction
+                    let serializedTx = nem.utils.convert.ua2hex(nem.utils.serialization.serializeTransaction(transaction));
+                    // If it is a Multisig Signature Transaction, then add more transaction payload to the serialized transaction
+                    if (transaction.type == 0x1002) {
+                        // If the inner transaction is mosaic creation and there's no levy field in it
+                        if (transaction.otherTrans.type == 0x4001 && transaction.otherTrans.mosaicDefinition.levy != null && transaction.otherTrans.mosaicDefinition.levy.type == undefined) {
+                            transaction.otherTrans.mosaicDefinition.levy = null;
+                        }
+                        // If the inner transaction is transfer and there's no message field in it
+                        if (transaction.otherTrans.type == 0x0101 && transaction.otherTrans.message.type == undefined) {
+                            transaction.otherTrans.message.type = 1;
+                            transaction.otherTrans.message.payload = "";
+                        }
+                        let otherTrans = nem.utils.convert.ua2hex(nem.utils.serialization.serializeTransaction(transaction.otherTrans));
+                        let otherTransLength = ("00000000" + (otherTrans.length / 2).toString(16)).substr(-8);
+                        let otherTransLengthReverse = otherTransLength.match(/[a-fA-F0-9]{2}/g).reverse().join('');
+                        serializedTx = serializedTx + otherTransLengthReverse + otherTrans;
+                    }
+                    let payload = await this.signTransaction(account, serializedTx);
+                    if (payload.signature) {
+                        resolve(payload);
+                    } else {
+                        if (!symbolOptin) {
+                            this._$timeout(() => {
+                                this.alertHandler(payload.statusCode, true, payload.statusText);
+                            });
+                        }
+                        reject(payload);
+                    }
+                } else {
+                    this._$timeout(() => {
+                        this.alertHandler(checkVersion, true);
+                    });
+                    reject(true);
+                }
+            });
         });
     }
 
@@ -248,6 +307,45 @@ class Ledger {
             else return Promise.resolve(err);
         }
     }
+
+    /**
+     * Get NEM Ledger app version
+     */
+    async getAppVersion() {
+        try {
+            const transport = await TransportNodeHid.open("");
+            const nemH = new NemH(transport);
+            try {
+                const result = await nemH.getAppVersion();
+                transport.close();
+                let appVersion = result;
+                if (appVersion.majorVersion == null && appVersion.minorVersion == null && appVersion.patchVersion == null) {
+                    if (result.statusCode != null) return Promise.resolve(result.statusCode);
+                    else return Promise.resolve(result.id);
+                } else {
+                    let statusCode;
+                    if (appVersion.majorVersion < SUPPORT_VERSION.LEDGER_MAJOR_VERSION) {
+                        statusCode = 2;
+                    } else if (appVersion.minorVersion < SUPPORT_VERSION.LEDGER_MINOR_VERSION) {
+                        statusCode = 2;
+                    } else if (appVersion.patchVersion < SUPPORT_VERSION.LEDGER_PATCH_VERSION) {
+                        statusCode = 2;
+                    } else {
+                        statusCode = 1;
+                    }
+                    return Promise.resolve(statusCode);
+                }
+            } catch (err) {
+                transport.close();
+                throw err
+            }
+        } catch (err) {
+            if (err.statusCode != null) return Promise.resolve(err.statusCode);
+            else if (err.id != null) return Promise.resolve(err.id);
+            else return Promise.resolve(err);
+        }
+    }
+
 }
 
 // End methods region //

@@ -79,9 +79,6 @@ class LedgerCtrl {
             case 'NoDevice':
                 this._Alert.ledgerDeviceNotFound();
                 break;
-            case 'bridge_problem':
-                this._Alert.ledgerBridgeNotRunning();
-                break;
             case 26628:
                 this._Alert.ledgerDeviceLocked();
                 break;
@@ -104,49 +101,11 @@ class LedgerCtrl {
     }
 
     /**
-     * Get NEM Ledger app version
-     */
-    async getAppVersion() {
-        try {
-            const transport = await TransportNodeHid.open("");
-            const nemH = new NemH(transport);
-            try {
-                const result = await nemH.getAppVersion();
-                transport.close();
-                let appVersion = result;
-                if (appVersion.majorVersion == null && appVersion.minorVersion == null && appVersion.patchVersion == null) {
-                    if (result.statusCode != null) return Promise.resolve(result.statusCode);
-                    else return Promise.resolve(result.id);
-                } else {
-                    let statusCode;
-                    if (appVersion.majorVersion < SUPPORT_VERSION.LEDGER_MAJOR_VERSION) {
-                        statusCode = 2;
-                    } else if (appVersion.minorVersion < SUPPORT_VERSION.LEDGER_MINOR_VERSION) {
-                        statusCode = 2;
-                    } else if (appVersion.patchVersion < SUPPORT_VERSION.LEDGER_PATCH_VERSION) {
-                        statusCode = 2;
-                    } else {
-                        statusCode = 1;
-                    }
-                    return Promise.resolve(statusCode);
-                }
-            } catch (err) {
-                transport.close();
-                throw err
-            }
-        } catch (err) {
-            if (err.statusCode != null) return Promise.resolve(err.statusCode);
-            else if (err.id != null) return Promise.resolve(err.id);
-            else return Promise.resolve(err);
-        }
-    }
-
-    /**
      * Login with LEDGER
      */
     async login() {
         this.okPressed = true;
-        let checkVersion = await this.getAppVersion();
+        let checkVersion = await this._Ledger.getAppVersion();
         if (checkVersion == 1) {
             alert("Please check your Ledger device!");
             this._$timeout(() => {

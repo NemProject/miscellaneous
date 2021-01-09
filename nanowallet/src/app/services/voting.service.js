@@ -174,7 +174,7 @@ class Voting {
                     return [signed].concat(next);
                 });
             }).catch(err => {
-                throw err;
+                throw undefined;
             });
         }
 
@@ -359,7 +359,7 @@ class Voting {
                             return [signed].concat(next);
                         });
                     }).catch(err => {
-                        throw err;
+                        throw undefined;
                     });
                 }
                 signedTransactionsPromise = signTransaction(0);

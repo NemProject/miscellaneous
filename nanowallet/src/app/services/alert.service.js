@@ -200,6 +200,13 @@ export default class Alert {
         });
     }
 
+    requestFailed(err) {
+        this._ngToast.create({
+            content: this._$filter('translate')('ALERT_REQUEST_FAILED') + err,
+            className: 'danger'
+        });
+    }
+
     derivationFromSeedFailed(err) {
         this._ngToast.create({
             content: this._$filter('translate')('ALERT_DERIVATION_FROM_SEED_FAILED') + err,
@@ -605,6 +612,13 @@ export default class Alert {
     ledgerLoginCancelByUser() {
         this._ngToast.create({
             content: this._$filter('translate')('NANO_LEDGER_USER_REJECT_LOGIN'),
+            className: 'danger'
+        });
+    }
+
+    ledgerRequestCancelByUser() {
+        this._ngToast.create({
+            content: this._$filter('translate')('NANO_LEDGER_USER_REJECT_REQUEST'),
             className: 'danger'
         });
     }
