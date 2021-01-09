@@ -175,7 +175,7 @@ class createPollCtrl {
         if (this.issues.invalidAddresses.some(a => a) || this.issues.blankOptions.some(a => a)){
             invalid = true;
         }
-        if (this.common.password === "" && this._Wallet.algo !== 'trezor') {
+        if (this.common.password === "" && this._Wallet.algo !== 'trezor' && this._Wallet.algo !== 'ledger') {
             this.issues.noPassword = true;
             invalid = true;
         } else {

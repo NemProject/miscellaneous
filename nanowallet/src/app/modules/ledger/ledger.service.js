@@ -148,7 +148,6 @@ class Ledger {
                     publicKey
                 });
             }).catch((errorCode) => {
-                console.log(errorCode)
                 switch (errorCode) {
                     case 26628:
                         this._Alert.ledgerDeviceLocked();
