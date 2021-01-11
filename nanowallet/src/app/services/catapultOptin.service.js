@@ -190,8 +190,10 @@ class CatapultOptin {
                         switch (err.statusCode) {
                             case 27013:
                                 message = 'Signing Symbol Opt-in cancelled by user';
+                                break;
                             case 26368:
                                 message = 'The transaction is too big to sign on your Ledger device';
+                                break;
                             default:
                                 message = err.message;
                         }
