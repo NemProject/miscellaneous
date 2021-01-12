@@ -182,7 +182,7 @@ class pollsCtrl {
             this._$timeout(() => {
                 this.voting = false;
                 this.common.password = '';
-                if (e || this._Wallet.algo !== 'ledger') {
+                if (e !== 'handledLedgerErrorSignal') {
                     if (e.data) {
                         this._Alert.votingUnexpectedError(e.data.message);
                     } else {

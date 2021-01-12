@@ -264,9 +264,11 @@ class NormalOptInCtrl {
                             this.checkOptinStatus();
                         });
                     }).catch((e) => {
-                        this._$timeout(() => {
-                            this._Alert.votingUnexpectedError(e);
-                        });
+                        if (e !== 'handledLedgerErrorSignal') {
+                            this._$timeout(() => {
+                                this._Alert.votingUnexpectedError(e);
+                            });
+                        }
                     });
                 });
             }

@@ -362,8 +362,12 @@ class Wallet {
             return Promise.resolve(data);
         },
         (err) => {
-            this._Alert.bip32GenerationFailed(err);
-            return Promise.reject(true);
+            if (err === 'handledLedgerErrorSignal') {
+                return Promise.reject('handledLedgerErrorSignal');
+            } else {
+                this._Alert.bip32GenerationFailed(err);
+                return Promise.reject(true);
+            }
         });
     }
 

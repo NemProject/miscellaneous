@@ -349,7 +349,7 @@ class createPollCtrl {
         }).catch(err => {
             this._$timeout(() => {
                 this.creating = false;
-                if (err) { 
+                if (err !== 'handledLedgerErrorSignal') { 
                     if (err.message) {
                         this._Alert.votingUnexpectedError(err.message);
                     } else {

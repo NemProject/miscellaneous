@@ -307,13 +307,6 @@ function initialize() {
   app.on('window-all-closed', function () {
     app.quit()
   })
-  // app.on('web-contents-created', (e, webContents) => {
-  //   webContents.on('new-window', (event, url,) => {
-  //     event.preventDefault()
-  //     shell.openExternal(url)
-  //   })
-
-  // })
 }
 
 initialize()

@@ -205,11 +205,6 @@ export default class Nem {
         for (let apdu of apdus) {
             response = await this.transport.send(apdu.cla, apdu.ins, apdu.p1, apdu.p2, apdu.data);
         }
-        // if (response.toString() != CONTINUE_SENDING) {
-        //     console.log("handle ok")
-        //     h = response.toString("hex");
-        // }
-
 
         // the last 2 bytes are status code from the hardware
         //return response.slice(0, response.length - 2).toString("hex");

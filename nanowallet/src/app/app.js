@@ -127,11 +127,6 @@ require('bootstrap');
 require("babel-polyfill");
 require('babel-runtime/regenerator');
 
-// // Apply nw.js config if using Chrome
-// if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
-//     nwConfig();
-// }
-
 // Mount on window
 window.app = angular.module('app', requires);
 

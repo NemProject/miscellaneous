@@ -795,7 +795,7 @@ function EnglishProvider($translateProvider) {
         NANO_LEDGER_TITLE: 'NANO LEDGER',
         NANO_LEDGER_TEXT: 'The NANO LEDGER hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
         NANO_LEDGER_BUTTON: 'Login with NANO LEDGER',
-        NANO_LEDGER_NO_DEVICE: 'Not found Ledger device',
+        NANO_LEDGER_NO_DEVICE: 'Ledger device not found',
         NANO_LEDGER_BRIDGE_NOT_RUNNING: 'There is a problem with the ledger-bridge. Please install and check the ledger-bridge',
         NANO_LEDGER_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
         NANO_LEDGER_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',

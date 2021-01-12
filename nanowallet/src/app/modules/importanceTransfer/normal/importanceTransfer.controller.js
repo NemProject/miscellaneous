@@ -120,10 +120,14 @@ class ImportanceTransferCtrl {
                 }, 0)
             },
             (err) => {
-                this._$timeout(() => {
-                    this._Alert.bip32GenerationFailed(err);
-                     return;
-                }, 0);
+                if (err === 'handledLedgerErrorSignal') {
+                    return;
+                } else {
+                    this._$timeout(() => {
+                        this._Alert.bip32GenerationFailed(err);
+                         return;
+                    }, 0);
+                }
             });
         }
     }
@@ -174,10 +178,14 @@ class ImportanceTransferCtrl {
             }, 0)
         },
         (err) => {
-            this._$timeout(() => {
-                this._Alert.bip32GenerationFailed(err);
-                 return;
-            }, 0);
+            if (err === 'handledLedgerErrorSignal') {
+                return;
+            } else {
+                this._$timeout(() => {
+                    this._Alert.bip32GenerationFailed(err);
+                    return;
+                }, 0);
+            }
         });
     }
 
@@ -198,10 +206,14 @@ class ImportanceTransferCtrl {
                 });
             },
             (err) => {
-                this._$timeout(() => {
-                    this._Alert.unlockError(err.data.message);
+                if (err === 'handledLedgerErrorSignal') {
                     return;
-                });
+                } else {
+                    this._$timeout(() => {
+                        this._Alert.unlockError(err.data.message);
+                        return;
+                    });
+                }
             });
         });
     }
@@ -226,10 +238,14 @@ class ImportanceTransferCtrl {
                 });
             },
             (err) => {
-                this._$timeout(() => {
-                    this._Alert.lockError(err.data.message);
+                if (err === 'handledLedgerErrorSignal') {
                     return;
-                });
+                } else {
+                    this._$timeout(() => {
+                        this._Alert.lockError(err.data.message);
+                        return;
+                    });
+                }
             });
         });
     }

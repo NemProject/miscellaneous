@@ -178,26 +178,15 @@ class CatapultOptin {
         return new Promise((resolve, reject) => {
             Promise.all( dtos.map( dto => this.createTransactionFromDTO(dto, common))).then( transactions => {
                 const signTransaction = (i) => {
-                    return this._Ledger.serialize(transactions[i], this._Wallet.currentAccount, true).then( serialized => {
+                    return this._Ledger.serialize(transactions[i], this._Wallet.currentAccount).then( serialized => {
                         if (transactions.length - 1 === i) {
                             return [JSON.stringify(serialized)];
                         }
-                        return new Promise(resolve => setTimeout( () => signTransaction(i + 1).then((next) => {
+                        return new Promise(resolve => signTransaction(i + 1).then((next) => {
                             resolve([JSON.stringify(serialized)].concat(next));
-                        }).catch(err => resolve([null])), 500));
-                    }).catch(err => {
-                        let message;
-                        switch (err.statusCode) {
-                            case 27013:
-                                message = 'Signing Symbol Opt-in cancelled by user';
-                                break;
-                            case 26368:
-                                message = 'The transaction is too big to sign on your Ledger device';
-                                break;
-                            default:
-                                message = err.message;
-                        }
-                        reject(message);
+                        }).catch(err => resolve([null])));
+                    }).catch(_ => {
+                        reject('handledLedgerErrorSignal');
                     });
                 };
                 signTransaction(0).then((signedTransactions) => {

@@ -82,7 +82,7 @@ class Ledger {
     bip44(network, index) {
         // recognize networkId by bip32Path;
         // "44'/43'/networkId'/walletIndex'/accountIndex'"
-        const networkId = network == -104 ? 152 : 104;
+        const networkId = network < 0 ? 256 + network : network;
         return (`44'/43'/${networkId}'/${index}'/0'`);
     }
 
@@ -96,7 +96,7 @@ class Ledger {
         const hdKeypath = this.bip44(network, index);
         return new Promise((resolve, reject) => {
             this.getAppVersion().then(checkVersion => {
-                if (checkVersion == 1) {
+                if (checkVersion === 1) {
                     alert("Please check your Ledger device!");
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
@@ -140,8 +140,7 @@ class Ledger {
             const transport = await TransportNodeHid.open("");
             const nemH = new NemH(transport);
             try {
-                const result = await nemH.getAddress(hdKeypath)
-                transport.close();
+                const result = await nemH.getAddress(hdKeypath);
                 return Promise.resolve(
                     {
                         "brain": false,
@@ -157,13 +156,18 @@ class Ledger {
                     }
                 );
             } catch (err) {
-                transport.close();
                 throw err
+            } finally {
+                transport.close();
             }
         } catch (err) {
-            if (err.statusCode != null) return Promise.reject(err.statusCode);
-            else if (err.id != null) return Promise.reject(err.id);
-            else return Promise.reject(err);
+            if (err.statusCode != null) {
+                return Promise.reject(err.statusCode);
+            } else if (err.id != null) {
+                return Promise.reject(err.id);
+            } else {
+                return Promise.reject(err);
+            }
         }
     }
 
@@ -173,7 +177,6 @@ class Ledger {
             const nemH = new NemH(transport);
             try {
                 const result = await nemH.getRemoteAccount(hdKeypath)
-                transport.close();
                 return Promise.resolve(
                     {
                         "hdKeypath": hdKeypath,
@@ -181,13 +184,18 @@ class Ledger {
                     }
                 );
             } catch (err) {
-                transport.close();
                 throw err
+            } finally {
+                transport.close();
             }
         } catch (err) {
-            if (err.statusCode != null) return Promise.reject(err.statusCode);
-            else if (err.id != null) return Promise.reject(err.id);
-            else return Promise.reject(err);
+            if (err.statusCode != null) {
+                return Promise.reject(err.statusCode);
+            } else if (err.id != null) {
+                return Promise.reject(err.id);
+            } else {
+                return Promise.reject(err);
+            }
         }
     }
 
@@ -214,6 +222,7 @@ class Ledger {
                         this._$timeout(() => {
                             this.alertHandler(errorCode);
                         });
+                        reject('handledLedgerErrorSignal');
                     });
                 } else {
                     this._$timeout(() => {
@@ -224,10 +233,10 @@ class Ledger {
         });
     }
 
-    serialize(transaction, account, symbolOptin) {
+    serialize(transaction, account) {
         return new Promise(async (resolve, reject) => {
             this.getAppVersion().then(async checkVersion => {
-                if (checkVersion == 1) {
+                if (checkVersion === 1) {
                     alert("Please check your Ledger device!");
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
@@ -235,7 +244,6 @@ class Ledger {
                     //Transaction with testnet and mainnet
                     //Correct the signer
                     transaction.signer = account.publicKey;
-
                     //If it is a MosaicDefinition Creation Transaction, then correct the creator
                     if (transaction.type == 0x4001) {
                         transaction.mosaicDefinition.creator = account.publicKey;
@@ -263,11 +271,9 @@ class Ledger {
                     if (payload.signature) {
                         resolve(payload);
                     } else {
-                        if (!symbolOptin) {
-                            this._$timeout(() => {
-                                this.alertHandler(payload.statusCode, true, payload.statusText);
-                            });
-                        }
+                        this._$timeout(() => {
+                            this.alertHandler(payload.statusCode, true, payload.statusText);
+                        });
                         reject(payload);
                     }
                 } else {
@@ -285,8 +291,7 @@ class Ledger {
             const transport = await TransportNodeHid.open("");
             const nemH = new NemH(transport);
             try {
-                const sig = await nemH.signTransaction(account.hdKeypath, serializedTx)
-                transport.close();
+                const sig = await nemH.signTransaction(account.hdKeypath, serializedTx);
                 let payload = {
                     data: serializedTx,
                     signature: sig.signature
@@ -294,17 +299,21 @@ class Ledger {
                 return Promise.resolve(payload);
             }
             catch (err) {
-                transport.close();
                 throw err
+            } finally {
+                transport.close();
             }
         } catch (err) {
-            if (err.statusCode != null) return Promise.resolve(err);
-            else if (err.id != null) return Promise.resolve(err.id);
-            else if (err.name == "TransportError") {
+            if (err.statusCode != null) {
+                return Promise.resolve(err);
+            } else if (err.id != null) {
+                return Promise.resolve(err.id);
+            } else if (err.name == "TransportError") {
                 this._Alert.ledgerFailedToSignTransaction(err.message);
                 return;
+            } else {
+                return Promise.resolve(err);
             }
-            else return Promise.resolve(err);
         }
     }
 
@@ -317,11 +326,13 @@ class Ledger {
             const nemH = new NemH(transport);
             try {
                 const result = await nemH.getAppVersion();
-                transport.close();
                 let appVersion = result;
                 if (appVersion.majorVersion == null && appVersion.minorVersion == null && appVersion.patchVersion == null) {
-                    if (result.statusCode != null) return Promise.resolve(result.statusCode);
-                    else return Promise.resolve(result.id);
+                    if (result.statusCode != null) {
+                        return Promise.reject(result.statusCode);
+                    } else {
+                        return Promise.reject(result.id);
+                    }
                 } else {
                     let statusCode;
                     if (appVersion.majorVersion < SUPPORT_VERSION.LEDGER_MAJOR_VERSION) {
@@ -336,13 +347,18 @@ class Ledger {
                     return Promise.resolve(statusCode);
                 }
             } catch (err) {
-                transport.close();
                 throw err
+            } finally {
+                transport.close();
             }
         } catch (err) {
-            if (err.statusCode != null) return Promise.resolve(err.statusCode);
-            else if (err.id != null) return Promise.resolve(err.id);
-            else return Promise.resolve(err);
+            if (err.statusCode != null) {
+                return Promise.reject(err.statusCode);
+            } else if (err.id != null) {
+                return Promise.reject(err.id);
+            } else {
+                return Promise.reject(err);
+            }
         }
     }
 

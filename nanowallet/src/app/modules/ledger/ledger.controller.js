@@ -4,7 +4,7 @@ import NemH from "../../modules/ledger/hw-app-nem";
 const SUPPORT_VERSION = {
     LEDGER_MAJOR_VERSION: 0,
     LEDGER_MINOR_VERSION: 0,
-    LEDGER_PATCH_VERSION: 2
+    LEDGER_PATCH_VERSION: 4
 }
 class LedgerCtrl {
 
@@ -103,31 +103,38 @@ class LedgerCtrl {
     /**
      * Login with LEDGER
      */
-    async login() {
+    login() {
         this.okPressed = true;
-        let checkVersion = await this._Ledger.getAppVersion();
-        if (checkVersion == 1) {
-            alert("Please check your Ledger device!");
-            this._$timeout(() => {
-                this._Alert.ledgerFollowInstruction();
-            });
-            this._Ledger.createWallet(this.network)
-                .then(wallet => {
-                    this._Login.login({}, wallet);
-                    this.okPressed = false;
-                })
-                .catch(error => {
-                    this._$timeout(() => {
-                        this.alertHandler(error);
-                    });
-                    this.okPressed = false;
+        this._Ledger.getAppVersion().then(checkVersion => {
+            if (checkVersion === 1) {
+                alert("Please check your Ledger device!");
+                this._$timeout(() => {
+                    this._Alert.ledgerFollowInstruction();
                 });
-        } else {
+                this._Ledger.createWallet(this.network)
+                    .then(wallet => {
+                        this._Login.login({}, wallet);
+                        this.okPressed = false;
+                    })
+                    .catch(error => {
+                        this._$timeout(() => {
+                            this.alertHandler(error);
+                        });
+                        this.okPressed = false;
+                    });
+            } else {
+                this._$timeout(() => {
+                    this.alertHandler(checkVersion);
+                });
+                this.okPressed = false;
+            }
+        })
+        .catch(error => {
             this._$timeout(() => {
-                this.alertHandler(checkVersion);
+                this.alertHandler(error);
             });
             this.okPressed = false;
-        }
+        });
     }
     //// End methods region ////
 }
