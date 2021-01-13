@@ -97,7 +97,8 @@
     "files": [
       "build/**/*",
       "package.json",
-      "./build.js"
+      "./build.js",
+      "./preload.js"
     ],
     "directories": {
       "buildResources": "assets",
