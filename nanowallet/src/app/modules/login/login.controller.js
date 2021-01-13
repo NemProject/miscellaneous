@@ -37,6 +37,9 @@ class LoginCtrl {
             this.hideTrezor = true;
             this.hideLedger = true;
         }
+        if (!window['TransportNodeHid']) {
+            this.hideLedger = true;
+        }
     }
 
     //// Module methods region ////
