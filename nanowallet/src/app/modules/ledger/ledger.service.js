@@ -104,9 +104,9 @@ class Ledger {
 
                     this.getAccount(hdKeypath, network, label).then((result) => {
                         resolve(result)
-                    }).catch((errorCode) => {
+                    }).catch((error) => {
                         this._$timeout(() => {
-                            this.alertHandler(errorCode);
+                            this.alertHandler(error);
                         });
                         reject(true);
                     });
@@ -117,6 +117,11 @@ class Ledger {
                     });
                     reject(true);
                 }
+            }).catch(error => {
+                this._$timeout(() => {
+                    this.alertHandler(error);
+                });
+                reject(true);
             });
         });
     }
@@ -218,9 +223,9 @@ class Ledger {
                             privateKey,
                             publicKey
                         });
-                    }).catch((errorCode) => {
+                    }).catch((error) => {
                         this._$timeout(() => {
-                            this.alertHandler(errorCode);
+                            this.alertHandler(error);
                         });
                         reject('handledLedgerErrorSignal');
                     });
@@ -228,7 +233,13 @@ class Ledger {
                     this._$timeout(() => {
                         this.alertHandler(checkVersion);
                     });
+                    reject('handledLedgerErrorSignal');
                 }
+            }).catch(error => {
+                this._$timeout(() => {
+                    this.alertHandler(error);
+                });
+                reject('handledLedgerErrorSignal');
             });
         });
     }
@@ -282,6 +293,11 @@ class Ledger {
                     });
                     reject(true);
                 }
+            }).catch(error => {
+                this._$timeout(() => {
+                    this.alertHandler(error);
+                });
+                reject(true);
             });
         });
     }
