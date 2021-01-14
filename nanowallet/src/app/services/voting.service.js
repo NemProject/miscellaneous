@@ -5,7 +5,7 @@ const nem = require('nem-library');
 const voting = require('nem-voting');
 
 class Voting {
-    constructor($filter, $timeout, Alert, Wallet, Ledger, VotingUtils, DataStore) {
+    constructor($filter, $timeout, Alert, Wallet, Ledger, Trezor, VotingUtils, DataStore) {
         'ngInject';
 
         /***
@@ -16,6 +16,7 @@ class Voting {
         this._Alert = Alert;
         this._Wallet = Wallet;
         this._Ledger = Ledger;
+        this._Trezor = Trezor;
         this._DataStore = DataStore;
         this._VotingUtils = VotingUtils;
         if(this._Wallet.network < 0){
@@ -153,7 +154,15 @@ class Voting {
             let p;
             if (common.isHW) {
                 if (this._Wallet.algo == "trezor") {
-                    p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
+                    if (window['isElectronEnvironment']) {
+                        const transaction = broadcastData.transactions[i];
+                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                        transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                        const dto = transaction.toDTO();
+                        p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
+                    } else {
+                        p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
+                    }
                 } else if (this._Wallet.algo == "ledger") {
                     const transaction = broadcastData.transactions[i];
                     transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
@@ -168,11 +177,21 @@ class Voting {
                 if (broadcastData.transactions.length - 1 === i) {
                     return [signed];
                 }
-                return signTransaction(i + 1).then((next) => {
-                    return [signed].concat(next);
-                });
+                if (common.isHW && this._Wallet.algo == "trezor" && window['isElectronEnvironment']) {
+                    return new Promise(resolve => setTimeout(() => signTransaction(i + 1).then((next) => {
+                        resolve([signed].concat(next));
+                    }).catch(err => resolve([null])), 500));
+                } else {
+                    return signTransaction(i + 1).then((next) => {
+                        return [signed].concat(next);
+                    });
+                }
             }).catch(err => {
-                throw 'handledLedgerErrorSignal';
+                if (common.isHW && this._Wallet.algo == "ledger") {
+                    throw 'handledLedgerErrorSignal';
+                } else {
+                    throw err;
+                }
             });
         }
 
@@ -339,7 +358,28 @@ class Voting {
         let signedTransactionsPromise;
         if (common.isHW) {
             if (this._Wallet.algo == "trezor") {
-                signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+                if (window['isElectronEnvironment']) {
+                    const signTransaction = (i) => {
+                        const transaction = votes[i];
+                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                        transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                        const dto = transaction.toDTO();
+                        const p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
+                        return p.then((signed) => {
+                            if (votes.length - 1 === i) {
+                                return [signed];
+                            }
+                            return new Promise(resolve => setTimeout(() => signTransaction(i + 1).then((next) => {
+                                resolve([signed].concat(next));
+                            }).catch(err => resolve([null])), 500));
+                        }).catch(err => {
+                            throw err;
+                        });
+                    }
+                    signedTransactionsPromise = signTransaction(0);
+                } else {
+                    signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+                }
             } else if (this._Wallet.algo == "ledger") {
                 const signTransaction = (i) => {
                     const transaction = votes[i];

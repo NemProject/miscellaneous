@@ -1,1 +1,4 @@
-try { window.TransportNodeHid = require('@ledgerhq/hw-transport-node-hid') } catch (e) { }
+try {
+  window.TransportNodeHid = require("@ledgerhq/hw-transport-node-hid");
+  window.isElectronEnvironment = true;
+} catch (e) {}
