@@ -159,14 +159,7 @@ class dnsSearchCtrl {
                 var href = url;
                 //window.open(href);
 
-                var win = window.open(href, '_blank');
-                if (win) {
-                    //Browser has allowed it to be opened
-                    win.focus();
-                } else {
-                    //Browser has blocked it
-                    alert('Please allow popups');
-                }
+                var win = window.open(href, '_blank', 'noopener,noreferrer');
             }
 
         } else {
