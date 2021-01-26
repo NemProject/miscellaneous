@@ -7,6 +7,7 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
         "app.signup",
         "app.faq",
         "app.trezor",
+        "app.ledger",
         "app.offlineTransactionHome",
         "app.offlineTransactionCreate",
         "app.offlineTransactionSend",
@@ -21,12 +22,12 @@ function AppRun(AppConstants, $rootScope, $timeout, Wallet, Alert, $transitions)
         // Enable tooltips globally
         $timeout( function() {
             $('[data-toggle="tooltip"]').tooltip()
-        });     
+        });
     });
 
     // Check if a wallet is loaded before accessing private states
-    $transitions.onStart({ 
-        to: (state) => { 
+    $transitions.onStart({
+        to: (state) => {
             for (let i = 0; i < publicStates.length; i++) {
                 if (publicStates[i] === state.name) return false;
             }

@@ -325,7 +325,7 @@ background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100
                 </div>
                 <div class="mt-4">
                     <!-- Password sign -->
-                    <fieldset ng-show="$ctrl._Wallet.algo !== 'trezor'">
+                    <fieldset ng-show="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger'">
                         <p>{{'OPTIN_ENTER_PASSWORD'| translate }}</p>
                         <input class="form-control optin-input" type="password" ng-model="$ctrl.common.password"/>
                     </fieldset>
@@ -336,7 +336,7 @@ background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100
                             <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.step = 4; $ctrl.common.password = ''; $ctrl.formData.backupConfirm = false; $ctrl.formData.understandConfirm = false; $ctrl.formData.acceptTerms = false;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.send()" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && $ctrl.common.password.length == 0">{{ 'OPTIN_CONFIRM_OPTIN' | translate }}</button>
+                            <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.send()" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && $ctrl.common.password.length == 0">{{ 'OPTIN_CONFIRM_OPTIN' | translate }}</button>
                         </div>
                     </div>
                 </div>

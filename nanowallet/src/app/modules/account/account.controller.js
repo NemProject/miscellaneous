@@ -7,7 +7,7 @@ class AccountCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($localStorage, $location, Alert, Wallet, DataStore, $timeout, DataBridge, Trezor) {
+    constructor($localStorage, $location, Alert, Wallet, DataStore, $timeout, DataBridge, Trezor, Ledger) {
         'ngInject';
 
         //// Module dependencies region ////
@@ -20,6 +20,7 @@ class AccountCtrl {
         this._$timeout = $timeout;
         this._DataBridge = DataBridge;
         this._Trezor = Trezor;
+        this._Ledger = Ledger;
 
         //// End dependencies region ////
 

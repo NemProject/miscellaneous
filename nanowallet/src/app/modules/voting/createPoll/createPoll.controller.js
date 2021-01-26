@@ -175,7 +175,7 @@ class createPollCtrl {
         if (this.issues.invalidAddresses.some(a => a) || this.issues.blankOptions.some(a => a)){
             invalid = true;
         }
-        if (this.common.password === "" && this._Wallet.algo !== 'trezor') {
+        if (this.common.password === "" && this._Wallet.algo !== 'trezor' && this._Wallet.algo !== 'ledger') {
             this.issues.noPassword = true;
             invalid = true;
         } else {
@@ -349,10 +349,12 @@ class createPollCtrl {
         }).catch(err => {
             this._$timeout(() => {
                 this.creating = false;
-                if (err.message) {
-                    this._Alert.votingUnexpectedError(err.message);
-                } else {
-                    this._Alert.votingUnexpectedError(err.data.message);
+                if (err !== 'handledLedgerErrorSignal') { 
+                    if (err.message) {
+                        this._Alert.votingUnexpectedError(err.message);
+                    } else {
+                        this._Alert.votingUnexpectedError(err.data.message);
+                    }
                 }
                 this.clearForm();
             });

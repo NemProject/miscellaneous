@@ -73,7 +73,7 @@
 
             <!-- Send transaction -->
             <button class="btn btn-success pull-xs-right"
-              type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length || !$ctrl.formData.modifications.length && !$ctrl.formData.relativeChange || !$ctrl.isMinSignaturesValid(true)" ng-click="$ctrl.send()">
+              type="submit" style="width:100%;" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && !$ctrl.common.password.length || !$ctrl.formData.modifications.length && !$ctrl.formData.relativeChange || !$ctrl.isMinSignaturesValid(true)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{'GENERAL_SEND' | translate}}
             </button>
         </div>

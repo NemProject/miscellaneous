@@ -86,7 +86,7 @@
             <password-input common="$ctrl.common"></password-input>
 
             <!-- Send transaction -->
-            <button class="btn btn-success pull-xs-right" type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
+            <button class="btn btn-success pull-xs-right" type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_REGISTER' | translate }}
             </button>
         </div>

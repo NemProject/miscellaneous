@@ -8,7 +8,7 @@ class MessageAreaCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($filter, $timeout) {
+    constructor(Wallet, $filter, $timeout) {
         'ngInject';
 
         // Initialize when component is ready
@@ -16,6 +16,7 @@ class MessageAreaCtrl {
 
             //// Component dependencies region ////
 
+            this._Wallet = Wallet;
             this._$filter = $filter;
             this._Helpers = Helpers;
             this._$timeout = $timeout;
@@ -67,6 +68,9 @@ class MessageAreaCtrl {
         array[2].name = this._$filter("translate")("GENERAL_ENCRYPTED");
         array[1].name = this._$filter("translate")("GENERAL_UNENCRYPTED");
         array[0].name = this._$filter("translate")("GENERAL_HEXADECIMAL");
+        if (this._Wallet.algo == 'ledger') {
+            array.splice(2, 1);
+        }
         return array;
     }
 
