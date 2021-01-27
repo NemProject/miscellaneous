@@ -102,6 +102,9 @@ export default class Nem {
         const result = {};
         const addressLength = response[0];
         const publicKeyLength = response[1 + addressLength];
+        if (addressLength !== 40 || publicKeyLength !== 32) {
+            throw { statusCode: 27264 }
+        }
         result.address = response.slice(1, 1 + addressLength).toString("ascii");
         result.publicKey = response.slice(1 + addressLength + 1, 1 + addressLength + 1 + publicKeyLength).toString("hex");
         result.path = path;

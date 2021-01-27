@@ -569,84 +569,77 @@ export default class Alert {
 
     ledgerDeviceNotFound() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_NO_DEVICE'),
+            content: this._$filter('translate')('LEDGER_NANO_NO_DEVICE'),
             className: 'danger'
         });
     }
 
-    ledgerBridgeNotRunning() {
+    ledgerNotUsingCorrectApp(isSymbolOptin) {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_BRIDGE_NOT_RUNNING'),
-            className: 'danger'
-        });
-    }
-
-    ledgerNotUsingNemApp() {
-        this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_NOT_USING_NEM_APP'),
+            content: this._$filter('translate')(isSymbolOptin ? 'LEDGER_NANO_NOT_USING_XYM_APP': 'LEDGER_NANO_NOT_USING_NEM_APP'),
             className: 'danger'
         });
     }
 
     ledgerNotSupportApp() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_NOT_SUPPORTED_APP'),
+            content: this._$filter('translate')('LEDGER_NANO_NOT_SUPPORTED_APP'),
             className: 'danger'
         });
     }
 
-    ledgerNotOpenApp() {
+    ledgerNotOpenApp(isSymbolOptin) {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_NOT_OPENED_APP'),
+            content: this._$filter('translate')(isSymbolOptin ? 'LEDGER_NANO_NOT_OPENED_XYM_APP': 'LEDGER_NANO_NOT_OPENED_NEM_APP'),
             className: 'danger'
         });
     }
 
     ledgerDeviceLocked() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_DEVICE_LOCKED'),
+            content: this._$filter('translate')('LEDGER_NANO_DEVICE_LOCKED'),
             className: 'danger'
         });
     }
 
     ledgerLoginCancelByUser() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_USER_REJECT_LOGIN'),
+            content: this._$filter('translate')('LEDGER_NANO_USER_REJECT_LOGIN'),
             className: 'danger'
         });
     }
 
     ledgerRequestCancelByUser() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_USER_REJECT_REQUEST'),
+            content: this._$filter('translate')('LEDGER_NANO_USER_REJECT_REQUEST'),
             className: 'danger'
         });
     }
 
     ledgerFollowInstruction() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_FOLLOW_INSTRUCTION'),
+            content: this._$filter('translate')('LEDGER_NANO_FOLLOW_INSTRUCTION'),
             className: 'info'
         });
     }
 
     ledgerTransactionTooBig() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_TOO_BIG'),
+            content: this._$filter('translate')('LEDGER_NANO_TRANSACTION_TOO_BIG'),
             className: 'danger'
         });
     }
 
     ledgerTransactionCancelByUser() {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_USER_CANCEL'),
+            content: this._$filter('translate')('LEDGER_NANO_TRANSACTION_USER_CANCEL'),
             className: 'danger'
         });
     }
 
     ledgerFailedToSignTransaction(message) {
         this._ngToast.create({
-            content: this._$filter('translate')('NANO_LEDGER_TRANSACTION_FAILED') + message,
+            content: this._$filter('translate')('LEDGER_NANO_TRANSACTION_FAILED') + message,
             className: 'danger'
         });
     }

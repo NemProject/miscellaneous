@@ -86,10 +86,13 @@ class LedgerCtrl {
                 this._Alert.ledgerNotOpenApp();
                 break;
             case 27264:
-                this._Alert.ledgerNotUsingNemApp();
+                this._Alert.ledgerNotUsingCorrectApp();
                 break;
             case 27013:
                 this._Alert.ledgerLoginCancelByUser();
+                break;
+            case 26368:
+                this._Alert.ledgerNotOpenApp(false);
                 break;
             case 2:
                 this._Alert.ledgerNotSupportApp();

@@ -548,6 +548,7 @@ function DutchProvider($translateProvider) {
         ALERT_SUPERNODES_ERROR: 'Er is een fout opgetreden bij het ophalen van supernodes data!',
         ALERT_INVALID_NTY_FILE: 'Het verstrekte bestand is geen nty bestand!',
         ALERT_CREATE_WALLET_FAILED: 'Kon geen portemonnee maken, reden: ',
+        ALERT_REQUEST_FAILED: 'Request failed, reason: ',
         ALERT_DERIVATION_FROM_SEED_FAILED: 'Mislukt om rekening te ontlenen van zaad, reden: ',
         ALERT_BIP32_GENERATION_FAILED: 'Mislukt om bip32-gegevens te genereren, reden: ',
         ALERT_NO_WALLET_DATA: 'Fout, lege portemonnee gegevens!',
@@ -786,10 +787,26 @@ function DutchProvider($translateProvider) {
         TREZOR_TEXT: 'De TREZOR hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
         TREZOR_BUTTON: 'Aanmelden met TREZOR',
 
-        // NANO LEDGER RELATED
-        NANO_LEDGER_TITLE: 'NANO LEDGER',
-        NANO_LEDGER_TEXT: 'De NANO LEDGER hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
-        NANO_LEDGER_BUTTON: 'Aanmelden met NANO LEDGER',
+        // LEDGER NANO RELATED
+        LEDGER_NANO_TITLE: 'LEDGER NANO',
+        LEDGER_NANO_TEXT: 'De LEDGER NANO hardware portemonnee maakt veilig werken met XEM, Mozaïeken en Multi-handtekening accounts mogelijk',
+        LEDGER_NANO_BUTTON: 'Aanmelden met LEDGER NANO',
+        LEDGER_NANO_NO_DEVICE: 'Ledger device not found',
+        LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
+        LEDGER_NANO_USER_REJECT_LOGIN: 'Login cancelled by user',
+        LEDGER_NANO_USER_REJECT_REQUEST: 'Request cancelled by user',
+        LEDGER_NANO_FOLLOW_INSTRUCTION: 'Follow instructions on your Ledger device',
+        LEDGER_NANO_TRANSACTION_TOO_BIG: 'The transaction is too big to sign on your Ledger device',
+        LEDGER_NANO_TRANSACTION_USER_CANCEL: 'Signing cancelled by user',
+        LEDGER_NANO_TRANSACTION_FAILED: 'Failed to sign transaction, reason: ',
+        LEDGER_NANO_OPTIN_INFO_1: 'You can use Symbol Ledger app to get account for Symbol Opt-in.',
+        LEDGER_NANO_OPTIN_INFO_2: 'Please open Symbol Ledger app on your device and click on Import Symbol account.',
+        LEDGER_NANO_IMPORT_SYMBOL: 'Import Symbol account',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Bereid een offline transactie voor',

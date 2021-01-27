@@ -540,6 +540,7 @@ function SpanishProvider($translateProvider) {
         ALERT_SUPERNODES_ERROR: '¡Ha ocurrido un error al obtener los datos de los supernodos!',
         ALERT_INVALID_NTY_FILE: '¡El archivo proporcionado no es un archivo nty!',
         ALERT_CREATE_WALLET_FAILED: 'Error al crear la cartera, razón:',
+        ALERT_REQUEST_FAILED: 'Request failed, reason: ',
         ALERT_DERIVATION_FROM_SEED_FAILED: 'Error al derivar la cuenta desde la semilla, razón:',
         ALERT_BIP32_GENERATION_FAILED: 'Error al generar datos 32 bip, razón: ',
         ALERT_NO_WALLET_DATA: '¡Error, información de la cartera vacía!',
@@ -776,10 +777,26 @@ function SpanishProvider($translateProvider) {
         TREZOR_TEXT: 'La cartera de TREZOR te permite asegurar tu XEM, mosaicos y cuentas multifirma',
         TREZOR_BUTTON: 'Ingresar con TREZOR',
 
-        // NANO LEDGER RELATED
-        NANO_LEDGER_TITLE: 'NANO LEDGER',
-        NANO_LEDGER_TEXT: 'La cartera de NANO LEDGER te permite asegurar tu XEM, mosaicos y cuentas multifirma',
-        NANO_LEDGER_BUTTON: 'Ingresar con NANO LEDGER',
+        // LEDGER NANO RELATED
+        LEDGER_NANO_TITLE: 'LEDGER NANO',
+        LEDGER_NANO_TEXT: 'La cartera de LEDGER NANO te permite asegurar tu XEM, mosaicos y cuentas multifirma',
+        LEDGER_NANO_BUTTON: 'Ingresar con LEDGER NANO',
+        LEDGER_NANO_NO_DEVICE: 'Ledger device not found',
+        LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
+        LEDGER_NANO_USER_REJECT_LOGIN: 'Login cancelled by user',
+        LEDGER_NANO_USER_REJECT_REQUEST: 'Request cancelled by user',
+        LEDGER_NANO_FOLLOW_INSTRUCTION: 'Follow instructions on your Ledger device',
+        LEDGER_NANO_TRANSACTION_TOO_BIG: 'The transaction is too big to sign on your Ledger device',
+        LEDGER_NANO_TRANSACTION_USER_CANCEL: 'Signing cancelled by user',
+        LEDGER_NANO_TRANSACTION_FAILED: 'Failed to sign transaction, reason: ',
+        LEDGER_NANO_OPTIN_INFO_1: 'You can use Symbol Ledger app to get account for Symbol Opt-in.',
+        LEDGER_NANO_OPTIN_INFO_2: 'Please open Symbol Ledger app on your device and click on Import Symbol account.',
+        LEDGER_NANO_IMPORT_SYMBOL: 'Import Symbol account',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Preparar una transacción fuera de línea',

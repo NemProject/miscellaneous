@@ -75,30 +75,41 @@
 
                     <br>
                     <!-- ENTER MNEMONIC -->
-                    <div ng-show="$ctrl.step === 2">
-                        <!-- Catapult Account Information -->
+                    <div ng-show="$ctrl.step === 2 && $ctrl._Wallet.algo !== 'ledger'">
+                        <!-- Choose Symbol Account Opt-in Type -->
                         <div class="panel-heading margin-form">
-                            <h3>{{ 'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate }}</h3>
+                            <h3>{{ 'SYMBOL_WALLET_CREATING_TYPE_INFO' | translate }}</h3>
                         </div>
 
-                        <!-- Mnemonic of account to convert -->
-                        <fieldset class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <label ng-class="!$ctrl.formData.origin.account ? 'has-error': ''">{{ 'MNEMONIC' | translate }}</label>
-                                </span>
-                                <textarea class="form-control" wrap="hard"
-                                          style="overflow: auto; white-space: normal; min-height: 80px; max-height: 80px;"
-                                          placeholder="{{ 'CATAPULTOPTIN_ACCOUNT_UNLOCK_PLACEHOLDER' | translate }}"
-                                          ng-model="$ctrl.formData.origin.mnemonic"
-                                          ng-class="!$ctrl.formData.origin.account ? 'has-error': ''"
-                                          ng-change="$ctrl.buildOriginAccount();">
-                                    </textarea>
-                            </div>
-                        </fieldset>
+                        <select class="form-control" ng-show="$ctrl._Wallet.algo === 'trezor'" ng-options="type.key as type.name for type in $ctrl.types" ng-model="$ctrl.optinSymbolLedger"></select>
+                        <br>
+                        <div ng-show="!$ctrl.optinSymbolLedger">
+                            <!-- Mnemonic of account to convert -->
+                            <fieldset class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <label ng-class="!$ctrl.formData.origin.account ? 'has-error': ''">{{ 'MNEMONIC' | translate }}</label>
+                                    </span>
+                                    <textarea class="form-control" wrap="hard"
+                                            style="overflow: auto; white-space: normal; min-height: 80px; max-height: 80px;"
+                                            placeholder="{{ 'CATAPULTOPTIN_ACCOUNT_UNLOCK_PLACEHOLDER' | translate }}"
+                                            ng-model="$ctrl.formData.origin.mnemonic"
+                                            ng-class="!$ctrl.formData.origin.account ? 'has-error': ''"
+                                            ng-change="$ctrl.buildOriginAccount();">
+                                        </textarea>
+                                </div>
+                            </fieldset>
 
-                        <button class="btn btn-success margin-form" type="submit"
-                                ng-disabled=" (!$ctrl.formData.origin.mnemonic)" ng-click="$ctrl.onMnemonicClick()">
+                            <button class="btn btn-success margin-form" type="submit"
+                                    ng-disabled=" (!$ctrl.formData.origin.mnemonic)" ng-click="$ctrl.onMnemonicClick()">
+                                <i class="fa fa-unlock"></i> {{ 'CATAPULTOPTIN_UNLOCK' | translate }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- IMPORT LEDGER ACCOUNT -->
+                    <div ng-show="$ctrl.step === 2 && $ctrl.optinSymbolLedger">
+                        <button class="btn btn-success margin-form" type="submit" ng-click="$ctrl.onLedgerUnlockClick()">
                             <i class="fa fa-unlock"></i> {{ 'CATAPULTOPTIN_UNLOCK' | translate }}
                         </button>
                     </div>
@@ -406,4 +417,3 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
