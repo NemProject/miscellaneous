@@ -66,15 +66,13 @@ export default class Nem {
      * get NEM address for a given BIP 32 path.
      *
      * @param path a path in BIP 32 format
-     * @param display optionally enable or not the display
-     * @param chainCode optionally enable or not the chainCode request
-     * @param ed25519
-     * @return an object with a publicKey, address chainCode
+     * @param networkType network type of NEM
+     * @return an object with a publicKey, address and chainCode
      * @example
-     * const result = await nem.getAddress(bip32path);
+     * const result = await nem.getAddress(bip32path, networkType);
      * const { address, publicKey, chainCode } = result;
      */
-    async getAddress(path) {
+    async getAddress(path, networkType) {
         const GET_ADDRESS_INS_FIELD = 0x02
         const display = true;
         const chainCode = false;
@@ -89,13 +87,14 @@ export default class Nem {
             ins: GET_ADDRESS_INS_FIELD,
             p1: display ? 0x01 : 0x00,
             p2: curveMask | (chainCode ? 0x01 : 0x00),
-            data: Buffer.alloc(1 + bipPath.length * 4),
+            data: Buffer.alloc(1 + bipPath.length * 4 + 1),
         };
 
         apdu.data.writeInt8(bipPath.length, 0);
         bipPath.forEach((segment, index) => {
             apdu.data.writeUInt32BE(segment, 1 + index * 4);
         });
+        apdu.data.writeUInt8(networkType, 1 + bipPath.length * 4);
 
         // Response from Ledger
         const response = await this.transport.send(apdu.cla, apdu.ins, apdu.p1, apdu.p2, apdu.data);
@@ -113,12 +112,9 @@ export default class Nem {
      * get NEM remote account for a given BIP 32 path.
      *
      * @param path a path in BIP 32 format
-     * @param display optionally enable or not the display
-     * @param chainCode optionally enable or not the chainCode request
-     * @param ed25519
      * @return an object with a remote account and chainCode
      * @example
-     * const result = await nem.getAddress(bip32path);
+     * const result = await nem.getRemoteAccount(bip32path);
      * const { remoteAccount, path } = result;
      */
     async getRemoteAccount(path) {

@@ -80,11 +80,9 @@ class Ledger {
     }
 
     bip44(network, index) {
-        // recognize networkId by bip32Path;
-        // "44'/43'/networkId'/walletIndex'/accountIndex'"
-        const networkId = network < 0 ? 256 + network : network;
-        return (`44'/43'/${networkId}'/${index}'/0'`);
-    }
+        const coinType = network == 104 ? 43 : 1;
+        return `m/44'/${coinType}'/${index}'/0'/0'`;
+      }
 
 
     createAccount(network, index, label) {
@@ -145,7 +143,8 @@ class Ledger {
             const transport = await TransportNodeHid.open("");
             const nemH = new NemH(transport);
             try {
-                const result = await nemH.getAddress(hdKeypath);
+                const networkType = network < 0 ? 256 + network : network;
+                const result = await nemH.getAddress(hdKeypath, networkType);
                 return Promise.resolve(
                     {
                         "brain": false,
