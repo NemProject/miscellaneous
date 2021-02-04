@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.5.0
+
+    - Fix optin minRemoval calculation
+
 ## Version 2.4.8
 
     - Fix voting service

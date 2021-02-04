@@ -1,8 +1,8 @@
 {
   "name": "NEM-Wallet",
-  "version": "2.4.8",
+  "version": "2.5.0",
   "description": "Cross-platform lite wallet for NEM",
-  "author": "https://github.com/QuantumMechanics <quantum@mail.com>",
+  "author": "https://github.com/QuantumMechanics",
   "license": "MIT",
   "dependencies": {
     "@ledgerhq/hw-transport-node-hid": "^5.31.1"
@@ -28,7 +28,8 @@
     "browserify": "^13.0.0",
     "browserify-ngannotate": "^2.0.0",
     "bufferutil": "^4.0.1",
-    "catapult-optin-module": "git+https://github.com/nemgrouplimited/symbol-optin-module.git",
+    "catapult-optin-module": "git+https://github.com/nemgrouplimited/symbol-optin-module.git#min_removal_fix",
+    "symbol-paper-wallets": "1.0.2-optin",
     "chart.js": "2.1.6",
     "crypto-js": "^3.1.9-1",
     "electron": "^8.2.0",
