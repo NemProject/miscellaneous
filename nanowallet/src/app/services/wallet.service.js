@@ -10,7 +10,7 @@ class Wallet {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, $localStorage, Alert, $timeout, AddressBook, Trezor, DataStore) {
+    constructor(AppConstants, $localStorage, Alert, $timeout, AddressBook, Trezor, Ledger, DataStore) {
         'ngInject';
 
         //// Service dependencies region ////
@@ -21,6 +21,7 @@ class Wallet {
         this._$timeout = $timeout;
         this._AddressBook = AddressBook;
         this._Trezor = Trezor;
+        this._Ledger = Ledger;
         this._DataStore = DataStore;
 
         //// End dependencies region ////
@@ -268,6 +269,11 @@ class Wallet {
                     return nem.com.requests.transaction.announce(this.node, JSON.stringify(serialized));
                 });
             }
+            else if (this.algo == "ledger") {
+                return this._Ledger.serialize(transaction, account).then((serialized) => {
+                    return nem.com.requests.transaction.announce(this.node, JSON.stringify(serialized));
+                });
+            }
         }
         // Normal wallet
         return nem.model.transactions.send(common, transaction, this.node);
@@ -325,6 +331,8 @@ class Wallet {
         if (common.isHW) {
             if (algo == "trezor") {
                 return this._Trezor.deriveRemote(account, network);
+            } else if (algo == "ledger") {
+                return this._Ledger.deriveRemote(account, network);
             } else {
                 return Promise.reject(true);
             }
@@ -354,8 +362,12 @@ class Wallet {
             return Promise.resolve(data);
         },
         (err) => {
-            this._Alert.bip32GenerationFailed(err);
-            return Promise.reject(true);
+            if (err === 'handledLedgerErrorSignal') {
+                return Promise.reject('handledLedgerErrorSignal');
+            } else {
+                this._Alert.bip32GenerationFailed(err);
+                return Promise.reject(true);
+            }
         });
     }
 
@@ -419,6 +431,8 @@ class Wallet {
         if (common.isHW) {
             if (primary.algo == "trezor") {
                 return this._Trezor.createAccount(primary.network, newAccountIndex, label);
+            } else if (primary.algo == "ledger") {
+                return this._Ledger.addAccount(primary.network, newAccountIndex, label);
             } else {
                 return Promise.reject(true);
             }
@@ -466,7 +480,9 @@ class Wallet {
             return Promise.resolve(true);
         },
         (err) => {
-            this._Alert.bip32GenerationFailed(err);
+            if (!(common.isHW && this.algo == "ledger")) {
+                this._Alert.bip32GenerationFailed(err);
+            }
             return Promise.reject(true);
         });
     }

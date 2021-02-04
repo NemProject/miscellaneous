@@ -74,6 +74,12 @@
           </button>
           </fieldset>
 
+          <fieldset class="form-group" ng-show="$ctrl._Wallet.algo == 'ledger'" ng-click="$ctrl._Ledger.showAccount($ctrl._Wallet.currentAccount)">
+          <button type="button" class="btn btn-success">
+            <i class="fa fa-eye"></i> {{ 'ACCOUNT_SHOW_ON_LEDGER_BTN' | translate }}
+          </button>
+          </fieldset>
+
           <fieldset class="form-group">
           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAccountModal">
             <i class="fa fa-plus"></i> {{ 'ACCOUNT_ADD_NEW_ACCOUNT_BTN' | translate }}
@@ -84,7 +90,7 @@
       </div>
 
       <div class="col-md-6">
-        <div ng-show="$ctrl._Wallet.algo !== 'trezor'">
+        <div ng-show="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger'">
           <div class="panel-heading">
             <h3>{{ 'GENERAL_PRIVATE_KEY' | translate }}</h3>
           </div>
@@ -95,10 +101,10 @@
                 <span class="input-group-btn short" ng-show="$ctrl.commonPK.privateKey">
                   <label>{{ 'GENERAL_PRIVATE_KEY' | translate }}:</label>
                 </span>
-                <password-input common="$ctrl.commonPK" ng-show="$ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonPK.privateKey"></password-input>
+                <password-input common="$ctrl.commonPK" ng-show="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && !$ctrl.commonPK.privateKey"></password-input>
                 <input class="form-control" ng-model="$ctrl.commonPK.privateKey" ng-show="$ctrl.commonPK.privateKey" readOnly></input>
                 <span class="input-group-btn showHide">
-                  <button class="btn btn-primary" type="button" ng-show="!$ctrl.commonPK.privateKey" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonPK.password" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}" style="margin-bottom: 15px;" ng-style="$ctrl._Wallet.algo === 'trezor' ? {'width': '100%'} : {}">
+                  <button class="btn btn-primary" type="button" ng-show="!$ctrl.commonPK.privateKey" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && !$ctrl.commonPK.password" ng-click="$ctrl.showPrivateKey()" title="{{ 'ACCOUNT_PRIVATE_KEY_SHOW' | translate }}" style="margin-bottom: 15px;" ng-style="$ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger' ? {'width': '100%'} : {}">
                     <i class="fa fa-plus"></i>
                   </button>
                   <button class="btn btn-danger" type="button" ng-show="$ctrl.commonPK.privateKey" ng-click="$ctrl.reset()" title="{{ 'GENERAL_CLEAR_ALL' | translate }}">
@@ -120,14 +126,14 @@
                 <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountInfoModal">{{'ACCOUNT_INFO_QR_BTN' | translate }}</button>
               </div>
               <div class="col-sm-6">
-                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#walletModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{'ACCOUNT_WALLET_QR_BTN_2' | translate }}</button>
               </div>
             </div>
             <div class="row" style="margin-top: 15px;">
               <div class="col-sm-6">
               </div>
               <div class="col-sm-6">
-                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor'">{{'ACCOUNT_QR_BTN_2' | translate }}</button>
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#accountModalMobileApps" ng-disabled="$ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger'">{{'ACCOUNT_QR_BTN_2' | translate }}</button>
               </div>
             </div>
           </div>
@@ -212,7 +218,7 @@
             <!-- Password Field -->
             <password-input common="$ctrl.commonQR"></password-input>
             <button class="btn btn-success"
-              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonQR.password.length" ng-click="$ctrl.generateWalletQR()">
+              type="submit" ng-disabled="$ctrl.okPressed || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.commonQR.password.length" ng-click="$ctrl.generateWalletQR()">
               {{'GENERAL_REVEAL' | translate }}
             </button>
           </div>
@@ -240,7 +246,7 @@
             <!-- Password Field -->
             <password-input common="$ctrl.commonAccountQR"></password-input>
             <button class="btn btn-success"
-              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonAccountQR.password.length" ng-click="$ctrl.generateAccountQR()">
+              type="submit" ng-disabled="$ctrl.okPressed || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.commonAccountQR.password.length" ng-click="$ctrl.generateAccountQR()">
               {{'GENERAL_REVEAL' | translate }}
             </button>
           </div>
@@ -277,7 +283,7 @@
             </div>
           </fieldset>
           <button class="btn btn-success"
-            type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length" ng-click="$ctrl.addNewAccount()">
+            type="submit" ng-disabled="$ctrl.okPressed || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.common.password.length" ng-click="$ctrl.addNewAccount()">
             {{ 'ACCOUNT_ADD_NEW_ACCOUNT' | translate }}
           </button>
         </div>

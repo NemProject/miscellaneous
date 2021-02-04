@@ -109,7 +109,7 @@
 
             <!-- SEND FIELD -->
             <button class="btn btn-success pull-xs-right"
-              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
+              type="submit" ng-disabled="$ctrl.okPressed || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.common.password.length || $ctrl.formData.remoteAccount.length !== 64" ng-click="$ctrl.send()">
               <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }}
             </button>
         </div>
@@ -150,7 +150,7 @@
             </fieldset>
           </div>
         </div>
-          
+
         <div ng-show="$ctrl.showStartStop">
         <!-- START/STOP HARVESTING -->
         <div class="panel-heading">
@@ -177,8 +177,8 @@
               <button ng-class="$ctrl.isCustomNode ? 'active' : ''" class="btn btn-primary" type="button" ng-click="$ctrl.isCustomNode = true;" title="{{'ACCOUNT_CUSTOM_NODE' | translate}}"><i class="fa fa-edit"></i></button>
             </span>
           </div>
-          <button class="btn btn-success" type="button" ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" ng-disabled="!$ctrl.hasFreeSlots || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonHarvesting.password.length" ng-click="$ctrl.startDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_START' | translate}}" style="margin-top: 10px;width: 100%;"><i class="fa fa-play-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_START_HARVESTING' | translate }}</button>
-          <button class="btn btn-danger" type="button" ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-click="$ctrl.stopDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_STOP' | translate}}" ng-disabled="$ctrl._Wallet.algo !== 'trezor' && !$ctrl.commonHarvesting.password.length" style="margin-top: 10px;width: 100%;"><i class="fa fa-stop-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_STOP_HARVESTING' | translate }}</button>
+          <button class="btn btn-success" type="button" ng-show="$ctrl.delegatedData.meta.status === 'LOCKED'" ng-disabled="!$ctrl.hasFreeSlots || ($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.commonHarvesting.password.length" ng-click="$ctrl.startDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_START' | translate}}" style="margin-top: 10px;width: 100%;"><i class="fa fa-play-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_START_HARVESTING' | translate }}</button>
+          <button class="btn btn-danger" type="button" ng-show="$ctrl.delegatedData.meta.status === 'UNLOCKED'" ng-click="$ctrl.stopDelegatedHarvesting()" title="{{'ACCOUNT_HARVESTING_STOP' | translate}}" ng-disabled="($ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger') && !$ctrl.commonHarvesting.password.length" style="margin-top: 10px;width: 100%;"><i class="fa fa-stop-circle-o"></i> {{ 'IMPORTANCE_TRANSFER_STOP_HARVESTING' | translate }}</button>
         </div>
 
         <p class="bg-info text-center" ng-show="!$ctrl.hasFreeSlots && $ctrl.delegatedData.meta.status === 'LOCKED' && $ctrl._DataStore.account.metaData.account.vestedBalance / 1000000 > 10000"><i class="fa fa-exclamation-triangle "></i> {{ 'ACCOUNT_HARVESTING_NO_SLOTS' | translate }}</p>

@@ -63,7 +63,7 @@
       <!-- Password Field -->
       <password-input common="$ctrl.common"></password-input>
       <!-- Send button is disabled if already pressed or no password or no clean recipient address or message is supposed to be encrypted but no recipient public key or is a mosaic transfer and no mosaics in array or if amount is invalid or if characters left are negative or if hex message is not hex only -->
-      <button class="btn btn-success" type="submit" ng-disabled=" $ctrl.okPressed || !$ctrl.common.password.length" ng-click="$ctrl.send()">
+      <button class="btn btn-success" type="submit" ng-disabled=" $ctrl.okPressed || !$ctrl.common.password.length && $ctrl._Wallet.algo !== 'ledger'" ng-click="$ctrl.send()">
         <i class="fa fa-send"></i> {{ 'GENERAL_SEND' | translate }} / (Hunt NEMonsters)
       </button>
     </div>

@@ -88,7 +88,7 @@
 
             <!-- Send transaction -->
             <button class="btn btn-success pull-xs-right"
-              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
+              type="submit" ng-disabled="$ctrl.okPressed || $ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger' && !$ctrl.common.password.length || !$ctrl.formData.namespaceName.length || !$ctrl.namespaceIsValid($ctrl.formData.namespaceName)" ng-click="$ctrl.send()">
               <i class="fa fa-angle-double-right"></i> {{ 'GENERAL_RENEW' | translate }}
             </button>
         </div>

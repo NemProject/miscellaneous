@@ -5,6 +5,10 @@
   "author": "https://github.com/QuantumMechanics",
   "license": "MIT",
   "dependencies": {
+    "@ledgerhq/hw-transport-node-hid": "^5.31.1"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.4.2",
     "@uirouter/angularjs": "1.0.6",
     "angular": "1.6.2",
     "angular-animate": "1.6.2",
@@ -12,8 +16,12 @@
     "angular-mocks": "1.6.2",
     "angular-sanitize": "1.6.2",
     "angular-translate": "2.11.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
+    "bip32-path": "^0.4.2",
     "bitcoinjs-lib": "^3.3.1",
     "bootstrap": "3.3.7",
     "browser-sync": "^2.11.1",
@@ -24,6 +32,12 @@
     "symbol-paper-wallets": "1.0.2-optin",
     "chart.js": "2.1.6",
     "crypto-js": "^3.1.9-1",
+    "electron": "^8.2.0",
+    "electron-builder": "^22.4.1",
+    "electron-notarize": "^0.3.0",
+    "electron-packager": "^14.2.1",
+    "electron-rebuild": "^2.3.2",
+    "electron-updater": "^4.2.5",
     "glob": "7.0.5",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^1.8.0",
@@ -38,27 +52,91 @@
     "marked": "^0.3.5",
     "merge-stream": "^1.0.0",
     "nem-library": "1.0.5",
-    "nem-sdk": "1.6.7",
+    "nem-sdk": "^1.6.8",
     "nem-trezor": "1.1.0",
     "nem-voting": "^2.2.9",
-    "symbol-hd-wallets": "0.12.0",
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
     "nw": "^0.26.6",
     "nw-builder": "^3.4.1",
+    "rxjs": "5.5.12",
+    "symbol-hd-wallets": "0.12.0",
+    "symbol-paper-wallets": "1.0.2-optin",
     "symbol-qr-library": "^0.9.0",
     "symbol-sdk": "0.20.7-alpha-202007211137",
+    "testnpm-testledger": "^1.0.3",
     "url-parse": "1.1.9",
     "utf-8-validate": "^5.0.2",
     "vinyl-source-stream": "^1.1.0",
     "zxcvbn": "4.4.2"
   },
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "gulp tests browserifyTests",
-    "devApp": "nw build/"
+    "devApp": "nw build/",
+    "compile": "gulp",
+    "start": "electron .",
+    "build": "npm run compile && npm run electron:rebuild",
+    "release": "npm run build && npm run release:all",
+    "release:all": "npm run release:mac && npm run release:win && npm run release:lin",
+    "release:mac": "electron-builder --mac",
+    "release:win": "electron-builder --win",
+    "release:lin": "electron-builder --linux deb snap tar.gz",
+    "electron:rebuild:nodehid": "electron-rebuild -o @ledgerhq/hw-transport-node-hid -v 8.2.0",
+    "electron:rebuild": "./node_modules/.bin/electron-rebuild"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.5.5"
+  },
+  "main": "./build.js",
+  "build": {
+    "appId": "io.nem.nano.desktop-wallet",
+    "extends": null,
+    "copyright": "Copyright © 2019-2020 NEM",
+    "productName": "Nem Wallet",
+    "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
+    "icon": "./build/images/NanoWallet.icns",
+    "files": [
+      "build/**/*",
+      "package.json",
+      "./build.js",
+      "./preload.js"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  },
+  "mac": {
+    "category": "public.app-category.finance",
+    "target": "tar.gz",
+    "icon": "./images/NanoWallet.icns",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "entitlements": "electron/entitlements.mac.plist",
+    "extendInfo": {
+      "NSCameraUsageDescription": "This app requires camera access to scan qrcodes."
+    }
+  },
+  "dmg": {
+    "window": {
+      "x": 100,
+      "y": 100,
+      "width": 500,
+      "height": 400
+    }
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "installerIcon": "./images/logomark.ico"
+  },
+  "linux": {
+    "category": "Finance",
+    "icon": "./images/NanoWallet.icns"
   },
   "repository": {
     "type": "git",

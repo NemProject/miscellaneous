@@ -152,7 +152,7 @@
                 </ul>
               </div>
               <!-- Password and buttons -->
-              <div class="col-md-6" ng-hide="$ctrl.alreadyVoted > 0 || $ctrl.loadingVote || $ctrl.pollFinished || $ctrl._Wallet.algo === 'trezor' || $ctrl.notInWhitelist">
+              <div class="col-md-6" ng-hide="$ctrl.alreadyVoted > 0 || $ctrl.loadingVote || $ctrl.pollFinished || $ctrl._Wallet.algo === 'trezor' || $ctrl._Wallet.algo === 'ledger' || $ctrl.notInWhitelist">
                 <fieldset class="form-group">
                   <div class="input-group">
                     <span class="input-group-btn">

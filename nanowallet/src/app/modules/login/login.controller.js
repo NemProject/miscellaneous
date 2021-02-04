@@ -32,8 +32,16 @@ class LoginCtrl {
 
         //// End properties region ////
 
-        // Hide trezor button if using chrome builds
-        if (typeof nw !== 'undefined') this.hideTrezor = true;
+        // Hide trezor & ledger button if using chrome builds
+        if (typeof nw !== 'undefined') {
+            this.hideTrezor = true;
+            this.hideLedger = true;
+        }
+
+        // Hide ledger button if not running on Electron environment
+        if (!window['isElectronEnvironment']) {
+            this.hideLedger = true;
+        }
     }
 
     //// Module methods region ////

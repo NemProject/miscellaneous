@@ -5,7 +5,7 @@ const nem = require('nem-library');
 const voting = require('nem-voting');
 
 class Voting {
-    constructor($filter, $timeout, Alert, Wallet, VotingUtils, DataStore) {
+    constructor($filter, $timeout, Alert, Wallet, Ledger, Trezor, VotingUtils, DataStore) {
         'ngInject';
 
         /***
@@ -15,6 +15,8 @@ class Voting {
         this._$filter = $filter;
         this._Alert = Alert;
         this._Wallet = Wallet;
+        this._Ledger = Ledger;
+        this._Trezor = Trezor;
         this._DataStore = DataStore;
         this._VotingUtils = VotingUtils;
         if(this._Wallet.network < 0){
@@ -122,9 +124,11 @@ class Voting {
 
         const poll = new voting.UnbroadcastedPoll(formData, description, options, whitelist);
 
-        let account;
+        let account = {};
         if (common.isHW) {
-            account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+            if (this._Wallet.algo == "trezor") {
+                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+            }
         } else {
             account = nem.Account.createWithPrivateKey(common.privateKey);
         }
@@ -149,7 +153,23 @@ class Voting {
         const signTransaction = (i) => {
             let p;
             if (common.isHW) {
-                p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
+                if (this._Wallet.algo == "trezor") {
+                    if (window['isElectronEnvironment']) {
+                        const transaction = broadcastData.transactions[i];
+                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                        transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                        const dto = transaction.toDTO();
+                        p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
+                    } else {
+                        p = account.signTransaction(broadcastData.transactions[i]).first().toPromise();
+                    }
+                } else if (this._Wallet.algo == "ledger") {
+                    const transaction = broadcastData.transactions[i];
+                    transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                    transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                    const dto = transaction.toDTO();
+                    p = this._Ledger.serialize(dto, this._Wallet.currentAccount);
+                }
             } else {
                 p = Promise.resolve(account.signTransaction(broadcastData.transactions[i]));
             }
@@ -157,11 +177,21 @@ class Voting {
                 if (broadcastData.transactions.length - 1 === i) {
                     return [signed];
                 }
-                return signTransaction(i + 1).then((next) => {
-                    return [signed].concat(next);
-                });
+                if (common.isHW && this._Wallet.algo == "trezor" && window['isElectronEnvironment']) {
+                    return new Promise(resolve => setTimeout(() => signTransaction(i + 1).then((next) => {
+                        resolve([signed].concat(next));
+                    }).catch(err => resolve([null])), 500));
+                } else {
+                    return signTransaction(i + 1).then((next) => {
+                        return [signed].concat(next);
+                    });
+                }
             }).catch(err => {
-                throw err;
+                if (common.isHW && this._Wallet.algo == "ledger") {
+                    throw 'handledLedgerErrorSignal';
+                } else {
+                    throw err;
+                }
             });
         }
 
@@ -318,14 +348,58 @@ class Voting {
     broadcastVotes(votes, common) {
         let account;
         if (common.isHW) {
-            account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+            if (this._Wallet.algo == "trezor") {
+                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+            }
         } else {
             account = nem.Account.createWithPrivateKey(common.privateKey);
         }
         // sign
         let signedTransactionsPromise;
         if (common.isHW) {
-            signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+            if (this._Wallet.algo == "trezor") {
+                if (window['isElectronEnvironment']) {
+                    const signTransaction = (i) => {
+                        const transaction = votes[i];
+                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                        transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                        const dto = transaction.toDTO();
+                        const p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
+                        return p.then((signed) => {
+                            if (votes.length - 1 === i) {
+                                return [signed];
+                            }
+                            return new Promise(resolve => setTimeout(() => signTransaction(i + 1).then((next) => {
+                                resolve([signed].concat(next));
+                            }).catch(err => resolve([null])), 500));
+                        }).catch(err => {
+                            throw err;
+                        });
+                    }
+                    signedTransactionsPromise = signTransaction(0);
+                } else {
+                    signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+                }
+            } else if (this._Wallet.algo == "ledger") {
+                const signTransaction = (i) => {
+                    const transaction = votes[i];
+                    transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
+                    transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
+                    const dto = transaction.toDTO();
+                    const p = this._Ledger.serialize(dto, this._Wallet.currentAccount);
+                    return p.then((signed) => {
+                        if (votes.length - 1 === i) {
+                            return [signed];
+                        }
+                        return signTransaction(i + 1).then((next) => {
+                            return [signed].concat(next);
+                        });
+                    }).catch(err => {
+                        throw 'handledLedgerErrorSignal';
+                    });
+                }
+                signedTransactionsPromise = signTransaction(0);
+            }
         } else {
             const signed = votes.map(v => {
                 return account.signTransaction(v);

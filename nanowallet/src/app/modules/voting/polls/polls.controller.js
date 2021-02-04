@@ -182,10 +182,12 @@ class pollsCtrl {
             this._$timeout(() => {
                 this.voting = false;
                 this.common.password = '';
-                if (e.data) {
-                    this._Alert.votingUnexpectedError(e.data.message);
-                } else {
-                    this._Alert.votingError();
+                if (e !== 'handledLedgerErrorSignal') {
+                    if (e.data) {
+                        this._Alert.votingUnexpectedError(e.data.message);
+                    } else {
+                        this._Alert.votingError();
+                    }
                 }
             });
         }).catch((e)=>{
@@ -251,7 +253,7 @@ class pollsCtrl {
             issueList.push("No option selected");
         }
         //no passwd
-        if (this.common.password === "" && this._Wallet.algo !== 'trezor') {
+        if (this.common.password === "" && this._Wallet.algo !== 'trezor' && this._Wallet.algo !== 'ledger') {
             issueList.push("No password");
         }
         this.invalidVote = (issueList.length > 0);

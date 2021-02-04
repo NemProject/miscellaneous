@@ -7,10 +7,10 @@ import {
     PublicAccount,
     TransactionMapping, VrfKeyLinkTransaction
 } from "symbol-sdk";
-import {Wallet, Network, MnemonicPassPhrase, ExtendedKey} from "symbol-hd-wallets";
-import {MnemonicQR} from 'symbol-qr-library';
-import {StatusCode} from "catapult-optin-module";
-import {generatePaperWallet} from "symbol-paper-wallets";
+import { Wallet, Network, MnemonicPassPhrase, ExtendedKey } from "symbol-hd-wallets";
+import { MnemonicQR } from 'symbol-qr-library';
+import { StatusCode } from "catapult-optin-module";
+import { generatePaperWallet } from "symbol-paper-wallets";
 
 const DEFAULT_ACCOUNT_PATH = "m/44'/4343'/0'/0'/0'";
 const VRF_ACCOUNT_PATH = "m/44'/4343'/0'/1'/0'";
@@ -64,7 +64,7 @@ class NormalOptInCtrl {
             this.catapultNetwork = NetworkType.MIJIN_TEST;
         }
         //Optin step
-       // this.step = 0;
+        // this.step = 0;
         //Confirm modal step
         this.confirmStep = 0;
         //Optin status
@@ -105,14 +105,14 @@ class NormalOptInCtrl {
     /**
      * Get Opt In Status
      */
-    checkOptinStatus(){
+    checkOptinStatus() {
         this.step = 0;
-        this._CatapultOptin.checkIfOptinHasStopped().then( hasStopped => {
+        this._CatapultOptin.checkIfOptinHasStopped().then(hasStopped => {
             this._$timeout(() => {
                 this.optinStopped = hasStopped;
             });
             if (!hasStopped) {
-                this._CatapultOptin.getStatus(this._DataStore.account.metaData.account.address).then( status => {
+                this._CatapultOptin.getStatus(this._DataStore.account.metaData.account.address).then(status => {
                     this._$timeout(() => {
                         this.optinStatus = status;
                         this.statusLoading = false;
@@ -131,7 +131,7 @@ class NormalOptInCtrl {
                                         return 'Unavailable';
                                     });
                                     const vrfTx = TransactionMapping.createFromPayload(cache.vrfDTO.payload);
-                                    if (vrfTx instanceof VrfKeyLinkTransaction){
+                                    if (vrfTx instanceof VrfKeyLinkTransaction) {
                                         this.formData.finalSymbolVrfPublicKey = vrfTx.linkedPublicKey;
                                     }
                                 });
@@ -165,11 +165,11 @@ class NormalOptInCtrl {
     /**
      * Generate random account
      */
-    generateRandomAccount() {
+    async generateRandomAccount() {
         const enc = new TextEncoder();
         const entropyBytes = enc.encode(this.formData.entropy);
         entropyBytes.sort(() => Math.random() - 0.5);
-        const entropySliced = entropyBytes.slice(0,32);
+        const entropySliced = entropyBytes.slice(0, 32);
         let mnemonic = MnemonicPassPhrase.createFromEntropy(entropySliced);
         this.formData.optinMnemonic = mnemonic.plain;
         const account = this.mnemonicToAccount(mnemonic, DEFAULT_ACCOUNT_PATH);
@@ -188,15 +188,15 @@ class NormalOptInCtrl {
             const Uint8ToString = (u8a) => {
                 var CHUNK_SZ = 0x8000;
                 var c = [];
-                for (var i=0; i < u8a.length; i+=CHUNK_SZ) {
-                    c.push(String.fromCharCode.apply(null, u8a.subarray(i, i+CHUNK_SZ)));
+                for (var i = 0; i < u8a.length; i += CHUNK_SZ) {
+                    c.push(String.fromCharCode.apply(null, u8a.subarray(i, i + CHUNK_SZ)));
                 }
                 return c.join("");
             };
 
             const b64encoded = btoa(Uint8ToString(bytes));
             $("#downloadWallet").attr('href', 'data:application/pdf;base64,' + b64encoded);
-            $("#downloadWallet").attr('download','symbol-wallet-'+ account.address.pretty().substr(0,6) + '.pdf');
+            $("#downloadWallet").attr('download', 'symbol-wallet-' + account.address.pretty().substr(0, 6) + '.pdf');
         });
     }
 
@@ -257,16 +257,18 @@ class NormalOptInCtrl {
                         this.common,
                         this.formData.optinAccount,
                         namespaces,
-                        this.includeVrf ? this.formData.optinVrfAccount: null
+                        this.includeVrf ? this.formData.optinVrfAccount : null
                     ).then(_ => {
                         this._$timeout(() => {
                             this.common.password = '';
                             this.checkOptinStatus();
                         });
                     }).catch((e) => {
-                        this._$timeout(() => {
-                            this._Alert.votingUnexpectedError(e);
-                        });
+                        if (e !== 'handledLedgerErrorSignal') {
+                            this._$timeout(() => {
+                                this._Alert.votingUnexpectedError(e);
+                            });
+                        }
                     });
                 });
             }
@@ -286,7 +288,7 @@ class NormalOptInCtrl {
             if (this.includedNamespaces[namespace]) namespaces.push(namespace)
         }
         this._$timeout(() => {
-            this.fee = (200000 + (namespaces.length * 850000) + (this.includeVrf ? 850000: 0)) / Math.pow(10, 6);
+            this.fee = (200000 + (namespaces.length * 850000) + (this.includeVrf ? 850000 : 0)) / Math.pow(10, 6);
         });
     }
 
@@ -296,7 +298,7 @@ class NormalOptInCtrl {
         let elem = document.getElementById("pBarOptIn");
         this.entropyDone = false;
         elem.style.width = this.formData.entropyWidth + '%';
-        elem.innerHTML = Math.round(this.formData.entropyWidth)  + '%';
+        elem.innerHTML = Math.round(this.formData.entropyWidth) + '%';
         this.getEntropy();
     }
 
@@ -321,7 +323,7 @@ class NormalOptInCtrl {
                 this.formData.entropy += e.pageX + "" + e.pageY;
                 this.formData.entropyWidth += 0.15;
                 elem.style.width = this.formData.entropyWidth + '%';
-                elem.innerHTML = Math.round(this.formData.entropyWidth)  + '%';
+                elem.innerHTML = Math.round(this.formData.entropyWidth) + '%';
             }
         });
     }

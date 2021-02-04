@@ -414,7 +414,9 @@ class MultisigOptInCtrl {
                 }).catch((e) => {
                     this._$timeout(() => {
                         this.step = prevStep;
-                        this._Alert.votingUnexpectedError(e)
+                        if (e !== 'handledLedgerErrorSignal') {
+                            this._Alert.votingUnexpectedError(e)
+                        }
                     });
                 });
             }

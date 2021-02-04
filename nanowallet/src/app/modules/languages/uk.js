@@ -371,6 +371,7 @@ function UkrainianProvider($translateProvider) {
         ACCOUNT_DELEGATED_PRIVATE_KEY: 'Приватний ключ делегованого облікового запису',
         ACCOUNT_NO_PUBLIC_KEY: 'Для отримання публічного ключа Вам необхідно провести транзакцію',
         ACCOUNT_SHOW_ON_TREZOR_BTN: 'Показати у гаманці TREZOR',
+        ACCOUNT_SHOW_ON_LEDGER_BTN: 'Показати у гаманці LEDGER',
 
         // PORTAL MODULE
         PORTAL_TITLE: 'Сервіси',
@@ -785,6 +786,11 @@ function UkrainianProvider($translateProvider) {
         TREZOR_TITLE: 'TREZOR',
         TREZOR_TEXT: 'Апаратний гаманець TREZOR дозволяє захистити Ваші XEM, мозаїки та мультипідписні облікові записи',
         TREZOR_BUTTON: 'Здійснити вхід за допомогою апаратного гаманця TREZOR',
+
+        // NANO LEDGER RELATED
+        NANO_LEDGER_TITLE: 'NANO LEDGER',
+        NANO_LEDGER_TEXT: 'Апаратний гаманець NANO LEDGER дозволяє захистити Ваші XEM, мозаїки та мультипідписні облікові записи',
+        NANO_LEDGER_BUTTON: 'Здійснити вхід за допомогою апаратного гаманця NANO LEDGER',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Підготувати offline транзакцію',
