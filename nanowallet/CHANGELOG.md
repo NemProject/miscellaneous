@@ -2,7 +2,9 @@
 
 ## Version 2.5.0
 
-    - Fix optin minRemoval calculation
+    - Added Electron builds
+    - Added Ledger support
+    - Fixed optin minRemoval calculation
 
 ## Version 2.4.8
 
@@ -11,7 +13,7 @@
 
 ## Version 2.4.7-OptIn
 
-    - Added Symbol opt in modeule
+    - Added Symbol opt in module
 
 ## Version 2.4.7
 
