@@ -799,6 +799,7 @@ function EnglishProvider($translateProvider) {
         LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
         LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
         LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+      LEDGER_NANO_CONNECTED_OTHER_APP: 'Your Ledger device is connecting to Ledger Live. Please close it then continue',
         LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
         LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
         LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
@@ -965,7 +966,7 @@ function EnglishProvider($translateProvider) {
         OPTIN_NEW_PASSWORD: 'New Password',
         SYMBOL_PASSWORD_REQUIREMENT: "Password must be at least 8 characters",
         SYMBOL_WALLET_CREATING_TYPE_INFO: 'Please choose the way to create your Symbol account',
-        SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO: 'Generate your primary private key',
+        SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO: 'Generate random account',
         SYMBOL_WALLET_CREATING_BY_LEDGER_IMPORT_TYPE_INFO: 'Import Symbol account from Ledger',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_1: 'We are now going to generate your primary private key.',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_2: 'Please click on start and move your cursor around to add more entropy.',
@@ -999,6 +1000,7 @@ function EnglishProvider($translateProvider) {
         CREATE_SYMBOL_ACCOUNT: 'Create your Symbol account',
         OPTIN_SYMBOL_READY: 'Your Symbol account is ready',
         OPTIN_COPY_SUCCESS: 'Copied!',
+        OPTIN_TYPE_SELECT: 'Select the way you opted in this wallet',
         CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories'
 
     });

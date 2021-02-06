@@ -588,6 +588,13 @@ export default class Alert {
         });
     }
 
+    ledgerConnectedOtherApp() {
+        this._ngToast.create({
+            content: this._$filter('translate')('LEDGER_NANO_CONNECTED_OTHER_APP'),
+            className: 'danger'
+        });
+    }
+
     ledgerNotOpenApp(isSymbolOptin) {
         this._ngToast.create({
             content: this._$filter('translate')(isSymbolOptin ? 'LEDGER_NANO_NOT_OPENED_XYM_APP': 'LEDGER_NANO_NOT_OPENED_NEM_APP'),

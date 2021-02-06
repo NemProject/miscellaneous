@@ -75,13 +75,14 @@ class LedgerCtrl {
      * Pop-up alert handler
      */
     alertHandler(inputErrorCode) {
+        if (inputErrorCode.message && inputErrorCode.message.includes("cannot open device with path")) {
+            inputErrorCode = 3;
+        }
         switch (inputErrorCode) {
             case 'NoDevice':
                 this._Alert.ledgerDeviceNotFound();
                 break;
             case 26628:
-                this._Alert.ledgerDeviceLocked();
-                break;
             case 27904:
                 this._Alert.ledgerNotOpenApp();
                 break;
@@ -96,6 +97,9 @@ class LedgerCtrl {
                 break;
             case 2:
                 this._Alert.ledgerNotSupportApp();
+                break;
+            case 3:
+                this._Alert.ledgerConnectedOtherApp();
                 break;
             default:
                 this._Alert.createWalletFailed(inputErrorCode);

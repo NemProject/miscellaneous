@@ -81,7 +81,9 @@
                             <h3>{{ 'SYMBOL_WALLET_CREATING_TYPE_INFO' | translate }}</h3>
                         </div>
 
-                        <select class="form-control" ng-show="$ctrl._Wallet.algo === 'trezor'" ng-options="type.key as type.name for type in $ctrl.types" ng-model="$ctrl.optinSymbolLedger"></select>
+                        <select class="form-control" ng-show="$ctrl._Wallet.algo === 'trezor'" ng-options="type.key as type.name for type in $ctrl.types" ng-model="$ctrl.optinSymbolLedger">
+                            <option value="" selected disabled>{{'OPTIN_TYPE_SELECT' | translate}}</option>
+                        </select>
                         <br>
                         <div ng-show="!$ctrl.optinSymbolLedger">
                             <!-- Mnemonic of account to convert -->
