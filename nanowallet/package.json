@@ -90,7 +90,7 @@
   "build": {
     "appId": "io.nem.nano.desktop-wallet",
     "extends": null,
-    "copyright": "Copyright © 2019-2020 NEM",
+    "copyright": "Copyright © 2019-2021 NEM",
     "productName": "Nem Wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "icon": "./build/images/NanoWallet.icns",
