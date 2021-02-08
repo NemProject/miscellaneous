@@ -7,8 +7,8 @@ const name = electron.app.getName()
 // Set the path of the folder where the persisted data is stored
 electron.app.setPath('userData', path.join(electron.app.getPath('home'), '.nem-wallet'))
 
-const iconUrlPath =
-  process.platform === 'darwin' ? './build/images/logomark.ico' : `file://${__dirname}/build/images/logomark.ico`
+const iconUrlPath = process.platform === 'darwin' ? './build/images/logomark.ico' : process.platform === 'linux' ? electron.nativeImage.createFromPath(__dirname + "/build/images/logomark-small.png") : `file://${__dirname}/build/images/logomark.ico`;
+
 const loadUrlPath = process.platform === 'darwin' ? './build/start.html' : `file://${__dirname}/build/start.html`
 
 let mainWindow = null
