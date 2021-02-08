@@ -17,7 +17,7 @@ const VRF_ACCOUNT_PATH = "m/44'/4343'/0'/1'/0'";
 
 class NormalOptInCtrl {
     // Set services as constructor parameter
-    constructor(Wallet, Alert, $scope, $timeout, DataStore, $location, Recipient, CatapultOptin) {
+    constructor(Wallet, Alert, $scope, $timeout, DataStore, $location, Recipient, CatapultOptin, Ledger) {
         'ngInject';
 
         // Declaring services
@@ -29,6 +29,7 @@ class NormalOptInCtrl {
         this._Recipient = Recipient;
         this._$timeout = $timeout;
         this._CatapultOptin = CatapultOptin;
+        this._Ledger = Ledger;
 
 
         // If no wallet show alert and redirect to home
@@ -79,6 +80,14 @@ class NormalOptInCtrl {
         this.skipNamespaces = false;
         this.arrangeNamespaces();
 
+        // Optin to Symbol Ledger wallet
+        this.optinSymbolLedger = this._Wallet.algo == "ledger";
+
+        // Symbol account paths
+        this.defaultAccountPath = '';
+        this.vrfAccountPath = '';
+        this.setAccountPaths();
+
         //Get Opt In Status
         this.checkOptinStatus();
         //Final optin address
@@ -100,6 +109,51 @@ class NormalOptInCtrl {
         this.statusLoading = true;
         this.isOptedIn = false;
         this.optinStopped = false;
+    }
+
+    /**
+     * Set the Optin method for current Trezor NEM account
+     */
+    optinMethod(usingLedger) {
+        this.optinSymbolLedger = usingLedger;
+        this.setAccountPaths();
+        if (!this.optinSymbolLedger) {
+            this.resetEntropy();
+        }
+        this.step = 10;
+    }
+
+    /**
+     * Reset imported Symbol account
+     */
+    resetImport() {
+        this.includeVrf = false;
+        this.optinSymbolLedger = false;
+        if (this._Wallet.algo == "trezor") {
+            this.step = 100;
+        } else {
+            if (this._Wallet.algo == "ledger") {
+                this.optinSymbolLedger = true;
+            } else {
+                this.resetEntropy();
+            }
+            this.step = 10;
+        }
+    }
+
+    /**
+     * Set the account paths for Symbol wallets
+     */
+    setAccountPaths() {
+        if (this.optinSymbolLedger) {
+            // Get the account index of the wallet
+            const currentHDKeyPath = this._Wallet.currentAccount.hdKeypath;
+            const index = parseInt(currentHDKeyPath.split("'/")[2]);
+            this.defaultAccountPath = `m/44'/4343'/${index}'/0'/0'`;
+        } else {
+            this.defaultAccountPath = DEFAULT_ACCOUNT_PATH;
+            this.vrfAccountPath = VRF_ACCOUNT_PATH;
+        }
     }
 
     /**
@@ -201,6 +255,21 @@ class NormalOptInCtrl {
     }
 
     /**
+     * Get Ledger account from hardware device
+     */
+    async getLedgerSymbolAccount() {
+        alert("Please open Symbol BOLOS app");
+        const defaultPublicKey = await this._Ledger.getSymbolAccount(this.defaultAccountPath, this.catapultNetwork, true);
+        const defaultAccount = PublicAccount.createFromPublicKey(defaultPublicKey, this.catapultNetwork);
+        this._$timeout(() => {
+            this.formData.optinAccount = { publicAccount: defaultAccount };
+            this.formData.optinAddress = defaultAccount.address.pretty();
+            this.formData.optinPublicKey = defaultAccount.publicKey;
+            this.step = 11;
+        });
+    }
+
+    /**
      * Arrange namespaces into an array
      */
     arrangeNamespaces() {
@@ -232,7 +301,9 @@ class NormalOptInCtrl {
         this.formData.optinVrfPublicKey = '';
         this.formData.optinPrivateKey = '';
         this.formData.optinVrfPrivateKey = '';
-        this.resetEntropy();
+        if (this._Wallet.algo !== 'ledger' && (this._Wallet.algo !== 'trezor' || this.isTrezorOptinLedger)) {
+            this.resetEntropy();
+        }
     }
 
     /**
@@ -246,8 +317,6 @@ class NormalOptInCtrl {
                 });
             }
             else {
-                this.step = 0;
-                this.statusLoading = true;
                 this._$timeout(() => {
                     const namespaces = [];
                     for (let namespace of Object.keys(this.includedNamespaces)) {
@@ -256,10 +325,14 @@ class NormalOptInCtrl {
                     this._CatapultOptin.sendSimpleOptin(
                         this.common,
                         this.formData.optinAccount,
+                        this.defaultAccountPath,
                         namespaces,
-                        this.includeVrf ? this.formData.optinVrfAccount : null
+                        this.includeVrf ? this.formData.optinVrfAccount : null,
+                        this.optinSymbolLedger
                     ).then(_ => {
                         this._$timeout(() => {
+                            this.step = 0;
+                            this.statusLoading = true;
                             this.common.password = '';
                             this.checkOptinStatus();
                         });
@@ -291,7 +364,6 @@ class NormalOptInCtrl {
             this.fee = (200000 + (namespaces.length * 850000) + (this.includeVrf ? 850000 : 0)) / Math.pow(10, 6);
         });
     }
-
 
     //NEW METHODS FOR REFACTOR
     resetEntropy() {

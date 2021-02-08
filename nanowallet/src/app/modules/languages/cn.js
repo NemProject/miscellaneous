@@ -776,6 +776,33 @@ function ChineseProvider($translateProvider) {
         FORM_SELECT_MULTISIG: '选择一个多重签名帐户',
         FORM_SELECT_CONTACT: '选择一个联系人',
 
+        // TREZOR RELATED
+        TREZOR_TITLE: 'TREZOR',
+        TREZOR_TEXT: 'The TREZOR hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        TREZOR_BUTTON: 'Login with TREZOR',
+
+        // LEDGER NANO RELATED
+        LEDGER_NANO_TITLE: 'LEDGER NANO',
+        LEDGER_NANO_TEXT: 'The LEDGER NANO hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        LEDGER_NANO_BUTTON: 'Login with LEDGER NANO',
+        LEDGER_NANO_NO_DEVICE: 'Ledger device not found',
+        LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+      LEDGER_NANO_CONNECTED_OTHER_APP: 'Your Ledger device is connecting to Ledger Live. Please close it then continue',
+        LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
+        LEDGER_NANO_USER_REJECT_LOGIN: 'Login cancelled by user',
+        LEDGER_NANO_USER_REJECT_REQUEST: 'Request cancelled by user',
+        LEDGER_NANO_FOLLOW_INSTRUCTION: 'Follow instructions on your Ledger device',
+        LEDGER_NANO_TRANSACTION_TOO_BIG: 'The transaction is too big to sign on your Ledger device',
+        LEDGER_NANO_TRANSACTION_USER_CANCEL: 'Signing cancelled by user',
+        LEDGER_NANO_TRANSACTION_FAILED: 'Failed to sign transaction, reason: ',
+        LEDGER_NANO_OPTIN_INFO_1: 'You can use Symbol Ledger app to get account for Symbol Opt-in.',
+        LEDGER_NANO_OPTIN_INFO_2: 'Please open Symbol Ledger app on your device and click on Import Symbol account.',
+        LEDGER_NANO_IMPORT_SYMBOL: 'Import Symbol account',
+
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: '准备离线交易',
         OFFLINE_TX_NO_WALLET: '请从登录模块导入钱包以查看表单.',
@@ -879,6 +906,9 @@ function ChineseProvider($translateProvider) {
         OPTIN_FORM_PASSWORD_FIELD_PLACEHOLDER: '输入您常用的 NEM 钱包密码',
         OPTIN_NEW_PASSWORD: '新密码',
         SYMBOL_PASSWORD_REQUIREMENT: '密码必须至少为 8 个字符',
+        SYMBOL_WALLET_CREATING_TYPE_INFO: 'Please choose the way to create your Symbol account',
+        SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO: 'Generate random account',
+        SYMBOL_WALLET_CREATING_BY_LEDGER_IMPORT_TYPE_INFO: 'Import Symbol account from Ledger',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_1: '现在，我们将生成您的主私钥。',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_2: '请单击 开始 并移动光标以添加更多熵。',
         OPTIN_WELCOME_TITLE: '欢迎来到Symbol选择加入',
@@ -910,7 +940,11 @@ function ChineseProvider($translateProvider) {
         OPTIN_FINISHED: '选择权已经结束 请更新您的钱包，以获得最新的详细信息。',
         GENERAL_BACK: '回去',
         CREATE_SYMBOL_ACCOUNT: '创建您的Symbol帐户',
-        OPTIN_SYMBOL_READY: '您的Symbol账户已经准备就绪'
+        OPTIN_SYMBOL_READY: '您的Symbol账户已经准备就绪',
+        OPTIN_COPY_SUCCESS: 'Copied!',
+        OPTIN_TYPE_SELECT: 'Select the way you opted in this wallet',
+        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories'
+
     });
 
 }

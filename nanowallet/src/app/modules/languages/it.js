@@ -540,6 +540,7 @@ function ItalianProvider($translateProvider) {
         ALERT_SUPERNODES_ERROR: 'Si è verificato un errore durante il recupero dei dati dal supernodo!',
         ALERT_INVALID_NTY_FILE: 'Il file fornito non è un file di autenticazione notarile!',
         ALERT_CREATE_WALLET_FAILED: 'Impossibile creare il portafoglio, per ragioni: ',
+        ALERT_REQUEST_FAILED: 'Request failed, reason: ',
         ALERT_DERIVATION_FROM_SEED_FAILED: 'Impossibile ottenere l"account seme, per il motivo: ',
         ALERT_BIP32_GENERATION_FAILED: 'Impossibile generare dati BIP32, per il motivo: ',
         ALERT_NO_WALLET_DATA: 'Errore, dati del portafoglio vuoti!',
@@ -776,10 +777,27 @@ function ItalianProvider($translateProvider) {
         TREZOR_TEXT: 'Il portafoglio hardware TREZOR ti consente di conservare le tue XEM, bollette a più conti con mosaico',
         TREZOR_BUTTON: 'Accedi con TREZOR',
 
-        // NANO LEDGER RELATED
-        NANO_LEDGER_TITLE: 'NANO LEDGER',
-        NANO_LEDGER_TEXT: 'Il portafoglio hardware NANO LEDGER ti consente di conservare le tue XEM, bollette a più conti con mosaico',
-        NANO_LEDGER_BUTTON: 'Accedi con NANO LEDGER',
+        // LEDGER NANO RELATED
+        LEDGER_NANO_TITLE: 'LEDGER NANO',
+        LEDGER_NANO_TEXT: 'Il portafoglio hardware LEDGER NANO ti consente di conservare le tue XEM, bollette a più conti con mosaico',
+        LEDGER_NANO_BUTTON: 'Accedi con LEDGER NANO',
+        LEDGER_NANO_NO_DEVICE: 'Ledger device not found',
+        LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+      LEDGER_NANO_CONNECTED_OTHER_APP: 'Your Ledger device is connecting to Ledger Live. Please close it then continue',
+        LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
+        LEDGER_NANO_USER_REJECT_LOGIN: 'Login cancelled by user',
+        LEDGER_NANO_USER_REJECT_REQUEST: 'Request cancelled by user',
+        LEDGER_NANO_FOLLOW_INSTRUCTION: 'Follow instructions on your Ledger device',
+        LEDGER_NANO_TRANSACTION_TOO_BIG: 'The transaction is too big to sign on your Ledger device',
+        LEDGER_NANO_TRANSACTION_USER_CANCEL: 'Signing cancelled by user',
+        LEDGER_NANO_TRANSACTION_FAILED: 'Failed to sign transaction, reason: ',
+        LEDGER_NANO_OPTIN_INFO_1: 'You can use Symbol Ledger app to get account for Symbol Opt-in.',
+        LEDGER_NANO_OPTIN_INFO_2: 'Please open Symbol Ledger app on your device and click on Import Symbol account.',
+        LEDGER_NANO_IMPORT_SYMBOL: 'Import Symbol account',
 
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Preparare una transazione offline',
@@ -877,6 +895,9 @@ function ItalianProvider($translateProvider) {
         OPTIN_FORM_PASSWORD_FIELD_PLACEHOLDER: 'Inserisci la tua password per NEM Wallet',
         OPTIN_NEW_PASSWORD: 'Nuova password',
         SYMBOL_PASSWORD_REQUIREMENT: "La password deve contenere almeno 8 caratteri",
+        SYMBOL_WALLET_CREATING_TYPE_INFO: 'Please choose the way to create your Symbol account',
+        SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO: 'Generate random account',
+        SYMBOL_WALLET_CREATING_BY_LEDGER_IMPORT_TYPE_INFO: 'Import Symbol account from Ledger',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_1: 'Ora generare la tua chiave privata primaria.',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_2: 'Premere "Start" e spostare il cursore continuamente per terminare entropia.',
         OPTIN_WELCOME_TITLE: 'Benvenuti in Symbol Opt In',
@@ -908,8 +929,10 @@ function ItalianProvider($translateProvider) {
         OPTIN_FINISHED: 'Opt-in è terminato, aggiorna il tuo portafoglio per ottenere i dettagli più recenti',
         GENERAL_BACK: 'Indietro',
         CREATE_SYMBOL_ACCOUNT: 'Crea il tuo account Symbol',
-        OPTIN_SYMBOL_READY: 'il tuo account Symbol è pronto'
-
+        OPTIN_SYMBOL_READY: 'il tuo account Symbol è pronto',
+        OPTIN_COPY_SUCCESS: 'Copied!',
+        OPTIN_TYPE_SELECT: 'Select the way you opted in this wallet',
+        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories'
 
 });
 

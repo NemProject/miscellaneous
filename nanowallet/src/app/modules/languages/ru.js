@@ -775,6 +775,33 @@ function RussianProvider($translateProvider) {
         FORM_SELECT_MULTISIG: 'Select a multisignature account',
         FORM_SELECT_CONTACT: 'Select a contact',
 
+        // TREZOR RELATED
+        TREZOR_TITLE: 'TREZOR',
+        TREZOR_TEXT: 'The TREZOR hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        TREZOR_BUTTON: 'Login with TREZOR',
+
+        // LEDGER NANO RELATED
+        LEDGER_NANO_TITLE: 'LEDGER NANO',
+        LEDGER_NANO_TEXT: 'The LEDGER NANO hardware wallet allows you to secure your XEM, mosaics and multisig accounts',
+        LEDGER_NANO_BUTTON: 'Login with LEDGER NANO',
+        LEDGER_NANO_NO_DEVICE: 'Ledger device not found',
+        LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
+      LEDGER_NANO_CONNECTED_OTHER_APP: 'Your Ledger device is connecting to Ledger Live. Please close it then continue',
+        LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM BOLOS app on your Ledger device',
+        LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol BOLOS app on your Ledger device',
+        LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',
+        LEDGER_NANO_USER_REJECT_LOGIN: 'Login cancelled by user',
+        LEDGER_NANO_USER_REJECT_REQUEST: 'Request cancelled by user',
+        LEDGER_NANO_FOLLOW_INSTRUCTION: 'Follow instructions on your Ledger device',
+        LEDGER_NANO_TRANSACTION_TOO_BIG: 'The transaction is too big to sign on your Ledger device',
+        LEDGER_NANO_TRANSACTION_USER_CANCEL: 'Signing cancelled by user',
+        LEDGER_NANO_TRANSACTION_FAILED: 'Failed to sign transaction, reason: ',
+        LEDGER_NANO_OPTIN_INFO_1: 'You can use Symbol Ledger app to get account for Symbol Opt-in.',
+        LEDGER_NANO_OPTIN_INFO_2: 'Please open Symbol Ledger app on your device and click on Import Symbol account.',
+        LEDGER_NANO_IMPORT_SYMBOL: 'Import Symbol account',
+
         // CREATE OFFLINE TRANSACTION MODULE
         OFFLINE_TX_TITLE: 'Prepare an offline transaction',
         OFFLINE_TX_NO_WALLET: 'Please import a wallet from login module to see the form.',
@@ -871,6 +898,9 @@ function RussianProvider($translateProvider) {
         OPTIN_FORM_PASSWORD_FIELD_PLACEHOLDER: 'Введите свой пароль, для NEM Wallet',
         OPTIN_NEW_PASSWORD: 'Новый Пароль',
         SYMBOL_PASSWORD_REQUIREMENT: " 'Пароль должен состоять не менее чем из 8 символов",
+        SYMBOL_WALLET_CREATING_TYPE_INFO: 'Please choose the way to create your Symbol account',
+        SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO: 'Generate random account',
+        SYMBOL_WALLET_CREATING_BY_LEDGER_IMPORT_TYPE_INFO: 'Import Symbol account from Ledger',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_1: 'Теперь мы собираемся сгенерировать ваш первичный приватный ключ.',
         SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_2: 'Нажмите "Пуск" и непрерывно перемещайте курсор, чтобы завершить энтропию. ',
         OPTIN_WELCOME_TITLE: 'Добро пожаловать в Symbol Опт Ин',
@@ -902,7 +932,10 @@ function RussianProvider($translateProvider) {
         OPTIN_FINISHED: 'Опт Ин процесс завершен, обновите свой кошелек, чтобы получить актуальную информацию',
         GENERAL_BACK: 'Назад',
         CREATE_SYMBOL_ACCOUNT: 'Создайте свой Symbol аккаунт',
-        OPTIN_SYMBOL_READY: 'Ваш Symbol аккаунт успешно создан'
+        OPTIN_SYMBOL_READY: 'Ваш Symbol аккаунт успешно создан',
+        OPTIN_COPY_SUCCESS: 'Copied!',
+        OPTIN_TYPE_SELECT: 'Select the way you opted in this wallet',
+        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories'
 
 });
 

@@ -54,6 +54,10 @@ If the circle next to `Node` is red, click on it and select another node from th
 
 <pre>gulp build-app</pre>
 
+6) Build NEM Wallet Electron apps (only Electron verision support Ledger wallets), default build for MacOS, Windows and Linux
+
+<pre>npm run release</pre>
+
 ### Known issues ###
 
 - Sometimes, depending the node used, unconfirmed data to sign is not incoming from websocket
