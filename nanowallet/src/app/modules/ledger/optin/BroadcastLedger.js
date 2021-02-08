@@ -135,17 +135,17 @@ const buildConvertDTO = (origin, destination, config, cache) => __awaiter(void 0
   const n = origin.account.multisigInfo.minCosignatories;
   const m = origin.account.multisigInfo.cosignatoriesCount;
   let minRemoval;
-  if (n == 1 && m == 1) {
+  if (m === 1) {
       minRemoval = 1;
   }
-  else if (n == m) {
-      minRemoval = m;
-  }
-  else if (n < m) {
+  else if (n === m || n === 0) {
       minRemoval = m - 1;
   }
+  else if (n < m) {
+      minRemoval = n;
+  }
   else {
-      throw new Error('Invalid n/m values');
+      throw new Error('Invalid minApproval/totalCosignatories values');
   }
   return convertOptinDTO_1.ConvertOptinDTO.create(destination, cosigners, n, minRemoval, config.CATNetwork);
 });
@@ -176,4 +176,3 @@ const buildCosignDTOLedger = (origin, cosigner, cosignerPath, destination, confi
   return cosigOptinDTO_1.CosigOptinDTOLedger.createLedger(cosigner, cosignerPath, cache.convertDTO, destination, config.CATNetwork);
 });
 exports.buildCosignDTOLedger = buildCosignDTOLedger;
-
