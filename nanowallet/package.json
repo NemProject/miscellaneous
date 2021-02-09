@@ -88,7 +88,7 @@
   },
   "main": "./build.js",
   "build": {
-    "appId": "io.nem.nano.desktop-wallet",
+    "appId": "com.nemgrouplimited.nemwallet",
     "extends": null,
     "copyright": "Copyright © 2019-2021 NEM",
     "productName": "Nem Wallet",
