@@ -797,7 +797,7 @@ function UkrainianProvider($translateProvider) {
         LEDGER_NANO_NOT_USING_NEM_APP: 'Ви не використовуєте додаток NEM на вашому пристрої Ledger',
         LEDGER_NANO_NOT_USING_XYM_APP: 'Ви не використовуєте додаток Symbol на вашому пристрої Ledger',
         LEDGER_NANO_NOT_SUPPORTED_APP: 'Будь ласка, перевірте чи відкрита остання версія додатку NEM на Вашому пристрої Ledger',
-        LEDGER_NANO_CONNECTED_OTHER_APP: `Ваш пристрій Ledger під'єднується до Ledger Live. Будь ласка, закрийте це та продовжуйте далі`,
+        LEDGER_NANO_CONNECTED_OTHER_APP: 'Another app is already connected to your Ledger device. Please close it then try again',
         LEDGER_NANO_NOT_OPENED_NEM_APP: 'Будь ласка, відкрийте додаток NEM на вашому пристрої Ledger',
         LEDGER_NANO_NOT_OPENED_XYM_APP: 'Будь ласка, відкрийте додаток Symbol на вашому пристрої Ledger',
         LEDGER_NANO_DEVICE_LOCKED: 'Будь ласка, розблокуйте ваш пристрій Ledger',

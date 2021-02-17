@@ -791,7 +791,7 @@ function GermanProvider($translateProvider) {
         LEDGER_NANO_NOT_USING_NEM_APP: 'You are not using NEM app on your Ledger device',
         LEDGER_NANO_NOT_USING_XYM_APP: 'You are not using Symbol app on your Ledger device',
         LEDGER_NANO_NOT_SUPPORTED_APP: 'Please check if you have an up-to-date NEM application open on your Ledger device',
-        LEDGER_NANO_CONNECTED_OTHER_APP: 'Your Ledger device is connecting to Ledger Live. Please close it then continue',
+        LEDGER_NANO_CONNECTED_OTHER_APP: 'Another app is already connected to your Ledger device. Please close it then try again',
         LEDGER_NANO_NOT_OPENED_NEM_APP: 'Please open NEM app on your Ledger device',
         LEDGER_NANO_NOT_OPENED_XYM_APP: 'Please open Symbol app on your Ledger device',
         LEDGER_NANO_DEVICE_LOCKED: 'Please unlock your Ledger device',

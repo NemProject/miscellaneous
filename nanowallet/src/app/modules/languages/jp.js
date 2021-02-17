@@ -805,7 +805,7 @@ function JapaneseProvider($translateProvider) {
       LEDGER_NANO_NOT_USING_NEM_APP: 'Ledgerデバイスで NEMアプリが使用されていません。',
       LEDGER_NANO_NOT_USING_XYM_APP: 'Ledgerデバイスで Symbolアプリが使用されていません。',
       LEDGER_NANO_NOT_SUPPORTED_APP: 'Ledgerデバイスで最新の NEMアプリケーションを開いているか確認してください。',
-      LEDGER_NANO_CONNECTED_OTHER_APP: 'Ledgerデバイスが Ledger Liveに接続しています。 閉じてから続行してください。',
+      LEDGER_NANO_CONNECTED_OTHER_APP: 'Another app is already connected to your Ledger device. Please close it then try again',
       LEDGER_NANO_NOT_OPENED_NEM_APP: 'Ledgerデバイスで NEMアプリを開いてください。',
       LEDGER_NANO_NOT_OPENED_XYM_APP: 'Ledgerデバイスで Symbolアプリを開いてください。',
       LEDGER_NANO_DEVICE_LOCKED: 'Ledgerデバイスのロックを解除してください。',

@@ -794,7 +794,7 @@ function ChineseProvider($translateProvider) {
         LEDGER_NANO_NOT_USING_NEM_APP: '您没有在Ledger设备上使用NEM程序',
         LEDGER_NANO_NOT_USING_XYM_APP: '您没有在Ledger设备上使用Symbol程序',
         LEDGER_NANO_NOT_SUPPORTED_APP: '请检查您的Ledger设备是否使用最新的NEM程序',
-        LEDGER_NANO_CONNECTED_OTHER_APP: 'Ledger设备正在连接Ledger Live， 请关闭并继续',
+        LEDGER_NANO_CONNECTED_OTHER_APP: 'Another app is already connected to your Ledger device. Please close it then try again',
         LEDGER_NANO_NOT_OPENED_NEM_APP: '请在Ledger设备上打开NEM程序',
         LEDGER_NANO_NOT_OPENED_XYM_APP: '请在Ledger设备上打开Symbol程序',
         LEDGER_NANO_DEVICE_LOCKED: '请解锁Ledger设备',
