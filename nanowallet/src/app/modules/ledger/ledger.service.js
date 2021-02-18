@@ -23,11 +23,12 @@ class Ledger {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(Alert, $timeout) {
+    constructor(Alert, $filter, $timeout) {
         'ngInject';
 
         // Service dependencies region //
         this._Alert = Alert;
+        this._$filter = $filter;
         this._$timeout = $timeout;
 
         // End dependencies region //
@@ -109,7 +110,7 @@ class Ledger {
         return new Promise((resolve, reject) => {
             this.getAppVersion().then(checkVersion => {
                 if (checkVersion === 1) {
-                    alert("Please check your Ledger device!");
+                    alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
                     });
@@ -143,7 +144,7 @@ class Ledger {
             this.getAppVersion(true).then(checkVersion => {
                 if (checkVersion === 1) {
                     if (display) {
-                        alert("Please check your Ledger device!");
+                        alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                         this._$timeout(() => {
                             this._Alert.ledgerFollowInstruction();
                         });
@@ -219,7 +220,7 @@ class Ledger {
     }
 
     showAccount(account) {
-        alert("Please check your Ledger device!");
+        alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
         this._Alert.ledgerFollowInstruction();
         return new Promise((resolve, reject) => {
             this.getAccount(account.hdKeypath, account.network, (result) => {
@@ -305,7 +306,7 @@ class Ledger {
         return new Promise((resolve, reject) => {
             this.getAppVersion().then(checkVersion => {
                 if (checkVersion == 1) {
-                    alert("Please check your Ledger device!");
+                    alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
                     });
@@ -345,7 +346,7 @@ class Ledger {
         return new Promise(async (resolve, reject) => {
             this.getAppVersion().then(async checkVersion => {
                 if (checkVersion === 1) {
-                    alert("Please check your Ledger device!");
+                    alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
                     });

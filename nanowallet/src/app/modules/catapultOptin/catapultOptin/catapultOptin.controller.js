@@ -17,11 +17,12 @@ const VRF_ACCOUNT_PATH = "m/44'/4343'/0'/1'/0'";
 
 class NormalOptInCtrl {
     // Set services as constructor parameter
-    constructor(Wallet, Alert, $scope, $timeout, DataStore, $location, Recipient, CatapultOptin, Ledger) {
+    constructor(Wallet, Alert, $filter, $scope, $timeout, DataStore, $location, Recipient, CatapultOptin, Ledger) {
         'ngInject';
 
         // Declaring services
         this._location = $location;
+        this._$filter = $filter;
         this._Alert = Alert;
         this._Wallet = Wallet;
         this._scope = $scope;
@@ -258,7 +259,7 @@ class NormalOptInCtrl {
      * Get Ledger account from hardware device
      */
     async getLedgerSymbolAccount() {
-        alert("Please open Symbol BOLOS app");
+        alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
         const defaultPublicKey = await this._Ledger.getSymbolAccount(this.defaultAccountPath, this.catapultNetwork, true);
         const defaultAccount = PublicAccount.createFromPublicKey(defaultPublicKey, this.catapultNetwork);
         this._$timeout(() => {
