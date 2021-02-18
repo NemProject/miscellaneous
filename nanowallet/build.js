@@ -309,6 +309,20 @@ function initialize() {
       })
     })
   }
+
+  app.on('web-contents-created', (e, webContents) => {
+    webContents.on('new-window', (event, url) => {
+      if (url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g)) {
+        if (!url.match(/connect.trezor.io/g)) {
+          event.preventDefault();
+          shell.openExternal(url);
+        }
+      } else {
+        event.preventDefault();
+      }
+    })
+  })
+
   app.on('window-all-closed', function () {
     app.quit()
   })
