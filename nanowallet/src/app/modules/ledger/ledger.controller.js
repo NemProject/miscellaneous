@@ -13,12 +13,13 @@ class LedgerCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(AppConstants, $timeout, Alert, Login, Ledger) {
+    constructor(AppConstants, $filter, $timeout, Alert, Login, Ledger) {
         'ngInject';
 
         //// Module dependencies region ////
 
         this._AppConstants = AppConstants;
+        this._$filter = $filter;
         this._$timeout = $timeout;
         this._Alert = Alert;
         this._Login = Login;
@@ -114,7 +115,7 @@ class LedgerCtrl {
         this.okPressed = true;
         this._Ledger.getAppVersion().then(checkVersion => {
             if (checkVersion === 1) {
-                alert("Please check your Ledger device!");
+                alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                 this._$timeout(() => {
                     this._Alert.ledgerFollowInstruction();
                 });

@@ -23,7 +23,7 @@ class CatapultOptin {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($localStorage, Wallet, Trezor, Ledger, DataStore, Alert, $timeout) {
+    constructor($localStorage, $filter, Wallet, Trezor, Ledger, DataStore, Alert, $timeout) {
         'ngInject';
 
         this.normalCaches = {};
@@ -31,6 +31,7 @@ class CatapultOptin {
         // Service dependencies region //
 
         this._storage = $localStorage;
+        this._$filter = $filter;
         this._Wallet = Wallet;
         this._DataStore = DataStore;
         this._Trezor = Trezor;
@@ -159,8 +160,8 @@ class CatapultOptin {
         return new Promise( (resolve, reject) => {
             const config = this.getOptinConfig();
             if (optinSymbolLedger && (namespaces.length > 0 || vrfAccount)) {
-                alert("Please open Symbol BOLOS app");
-                alert("Please check your Ledger device!");
+                alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
+                alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                 this._$timeout(() => {
                     this._Alert.ledgerFollowInstruction();
                 });
@@ -169,7 +170,7 @@ class CatapultOptin {
                 if (this._Wallet.algo == "trezor") {
                     this._sendTrezorDTOs(common, dtos).then(resolve).catch(reject);
                 } else if (this._Wallet.algo == "ledger") {
-                    alert("Please open NEM BOLOS app");
+                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
                     this._sendLedgerDTOs(common, dtos).then(resolve).catch(reject);
                 } else {
                     const sendPromises = dtos.map(dto => broadcastDTO(common.privateKey, dto, config));
@@ -324,8 +325,8 @@ class CatapultOptin {
         return new Promise((resolve, reject) => {
             nem.com.requests.account.data(this._Wallet.node, originAddress).then(origin => {
                 if (optinSymbolLedger) {
-                    alert("Please open Symbol BOLOS app");
-                    alert("Please check your Ledger device!");
+                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
+                    alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                     this._$timeout(() => {
                         this._Alert.ledgerFollowInstruction();
                     });
@@ -334,7 +335,7 @@ class CatapultOptin {
                     if (this._Wallet.algo == "trezor") {
                         this._sendTrezorDTOs(common, dtos).then(resolve).catch(reject);
                     } else if (this._Wallet.algo == "ledger") {
-                        alert("Please open NEM BOLOS app");
+                        alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
                         this._sendLedgerDTOs(common, dtos).then(resolve).catch(reject);
                     } else {
                         const sendPromises = dtos.map(dto => broadcastDTO(common.privateKey, dto, config));
@@ -376,16 +377,16 @@ class CatapultOptin {
         return new Promise((resolve, reject) => {
             nem.com.requests.account.data(this._Wallet.node, originAddress).then(origin => {
                 if (optinSymbolLedger) {
-                    alert("Please open Symbol BOLOS app");
+                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
                     this._$timeout(() => {
-                        alert("Please check your Ledger device!");
+                        alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
                         this._Alert.ledgerFollowInstruction();
                     });
                 }
                 buildCosignDTOLedger(origin, cosigner, cosignerPath, destination, config).then(cosignDTO => {
                     this.createTransactionFromDTO(cosignDTO, common).then( transaction => {
                         if (this._Wallet.algo == "ledger") {
-                            alert("Please open NEM BOLOS app");
+                            alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
                         }
                         this._Wallet.transact(common, transaction)
                             .then(resolve)
