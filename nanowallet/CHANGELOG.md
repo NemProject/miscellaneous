@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.5.1
+
+    - Fixed Ledger opt-in cosigning issue.
+
 ## Version 2.5.0
 
     - Added Electron builds
