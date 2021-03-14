@@ -932,7 +932,7 @@ function RussianProvider($translateProvider) {
         HERE:'здесь',
         OPTIN_ENTER_PASSWORD: 'Введите свой пароль NEM (NIS1), чтобы подтвердить процесс Опт Ин',
         OPTIN_LOADING: 'Извлечение Опт Ин данных',
-        OPTIN_FINISHED: 'Опт Ин процесс завершен, обновите свой кошелек, чтобы получить актуальную информацию',
+        OPTIN_FINISHED: 'Опт-Ин процесс откроется, после запуска блокчейна Symbol. Пожалуйста, ожидайте новую версию кошелька.',
         GENERAL_BACK: 'Назад',
         CREATE_SYMBOL_ACCOUNT: 'Создайте свой Symbol аккаунт',
         OPTIN_SYMBOL_READY: 'Ваш Symbol аккаунт успешно создан',

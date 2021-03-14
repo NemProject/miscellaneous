@@ -926,7 +926,7 @@ function SpanishProvider($translateProvider) {
         HERE:'aquí',
         OPTIN_ENTER_PASSWORD: 'Introduce tu contraseña de NEM NIS1 para firmar el Opt-in',
         OPTIN_LOADING: 'Comprovando los datos de Opt-in...',
-        OPTIN_FINISHED: 'El Opt-in ha terminado, por favor, atualiza este programa para obtener los últimos detalles',
+        OPTIN_FINISHED: 'El proceso de opt-in post lanzamiento se abirá pronto. Por favor comprueba nuevas versiones después del lanzamiento de Symbol',
         CREATE_SYMBOL_ACCOUNT: 'Crea tu cuenta Symbol',
         OPTIN_SYMBOL_READY: 'Tu cuenta Symbol está lista',
         GENERAL_BACK: 'atrás',

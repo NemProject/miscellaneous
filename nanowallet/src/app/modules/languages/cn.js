@@ -942,7 +942,7 @@ function ChineseProvider($translateProvider) {
         HERE:'请点击此处',
         OPTIN_ENTER_PASSWORD: '输入 NEM NIS1 密码以签署选择加入',
         OPTIN_LOADING: '取数',
-        OPTIN_FINISHED: '选择权已经结束 请更新您的钱包，以获得最新的详细信息。',
+        OPTIN_FINISHED: '发布后的Opt In即将开放。 Symbol启动后，请重新检查是否有新版本',
         GENERAL_BACK: '回去',
         CREATE_SYMBOL_ACCOUNT: '创建您的Symbol帐户',
         OPTIN_SYMBOL_READY: '您的Symbol账户已经准备就绪',
