@@ -994,7 +994,7 @@ function UkrainianProvider($translateProvider) {
         HERE:'here',
         OPTIN_ENTER_PASSWORD: 'Enter your NEM NIS1 password to sign the Opt-in',
         OPTIN_LOADING: 'Fetching Opt In data...',
-        OPTIN_FINISHED: 'Post launch Opt-in will open soon. Please check back for a new version after Symbol launch.',
+        OPTIN_FINISHED: 'Підписку Опт-ін буде відкрито після запуску основної мережі Symbol. Будь ласка, очікуйте нову версію гаманця.',
         CREATE_SYMBOL_ACCOUNT: 'Create your Symbol account',
         OPTIN_SYMBOL_READY: 'Your Symbol account is ready',
         OPTIN_COPY_SUCCESS: 'Copied!',
