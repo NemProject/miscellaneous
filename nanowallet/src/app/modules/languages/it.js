@@ -927,7 +927,7 @@ function ItalianProvider($translateProvider) {
         HERE:'maggiori dettagli qui',
         OPTIN_ENTER_PASSWORD: 'Inserisci la tua password NEM (NIS1) per confermare il processo Opt In',
         OPTIN_LOADING: 'Recupero dati di attivazione',
-        OPTIN_FINISHED: 'Opt-in è terminato, aggiorna il tuo portafoglio per ottenere i dettagli più recenti',
+        OPTIN_FINISHED: 'Il processo di attivazione (opt-in) si aprirà dopo il lancio della blockchain di Symbol.  Attendi la nuova versione del portafoglio.',
         GENERAL_BACK: 'Indietro',
         CREATE_SYMBOL_ACCOUNT: 'Crea il tuo account Symbol',
         OPTIN_SYMBOL_READY: 'il tuo account Symbol è pronto',

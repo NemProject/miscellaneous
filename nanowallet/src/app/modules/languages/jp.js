@@ -1002,7 +1002,7 @@ function JapaneseProvider($translateProvider) {
       HERE:'こちらをクリックしてください。',
       OPTIN_ENTER_PASSWORD: 'ENEM NIS1のパスワードを入力して、オプトインに署名してください',
       OPTIN_LOADING: 'オプトインのステータスをフェッチしています…',
-      OPTIN_FINISHED: 'オプトインが完了しました。ウォレットを更新して最新の詳細を取得してください',
+      OPTIN_FINISHED: 'ローンチ後のオプトインは、間もなく開始されます。Symbolローンチ後、新しいバージョンを確認してください。',
       GENERAL_BACK: '戻る',
       CREATE_SYMBOL_ACCOUNT: 'Symbol アカウントを作成して下さい',
       OPTIN_SYMBOL_READY: 'Symbol アカウントが準備出来ました。',
