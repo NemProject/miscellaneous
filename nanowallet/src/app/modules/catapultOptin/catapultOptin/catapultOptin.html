@@ -1,22 +1,16 @@
 <div class="optin-page" ng-show="!$ctrl.isOptedIn">
 
     <video ng-show="$ctrl.step == 0;" class="videoLogo" autoplay="autoplay" loop="loop" muted="muted" defaultmuted="" playsinline="" src="images/welcome-background.mp4"></video>
-    <video ng-show="$ctrl.step == 10 || $ctrl.step == 100;" class="videoLogo" autoplay="autoplay" loop="loop" muted="muted" defaultmuted="" playsinline="" data-src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4" src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4"></video>
-    <img src="images/background-purple-small.png" class="imageLogo" ng-show="$ctrl.step == 11 || $ctrl.step == 12 || $ctrl.step == 2 || $ctrl.step == 3">
-    <img src="images/background-purple-big.png" class="imageLogo" ng-show="$ctrl.step == 5">
-    <img src="images/background-white.png" class="imageLogo" ng-show="$ctrl.step == 4">
+    <video ng-show="$ctrl.step == 10;" class="videoLogo" autoplay="autoplay" loop="loop" muted="muted" defaultmuted="" playsinline="" data-src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4" src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4"></video>
+    <img src="images/background-purple-small.png" class="imageLogo" ng-show="$ctrl.step == 15 || $ctrl.step == 16 || $ctrl.step == 2 || $ctrl.step == 3">
+    <img src="images/background-white.png" class="imageLogo" ng-show="$ctrl.step == 17">
 
 
     <div class="container">
         <!-- LOADING SCREEN -->
-        <div class="row welcome-page" ng-show="$ctrl.statusLoading && !$ctrl.optinStopped">
+        <div class="row welcome-page" ng-show="$ctrl.step == 0 && $ctrl.statusLoading">
             <div class="col-md-12">
                 <h1 class="text-white">{{'OPTIN_LOADING' | translate }}</h1>
-            </div>
-        </div>
-        <div class="row welcome-page" ng-show="$ctrl.statusLoading && $ctrl.optinStopped">
-            <div class="col-md-12">
-                <h1 class="text-white">{{'OPTIN_FINISHED' | translate }}</h1>
             </div>
         </div>
         <!-- STEP 0: WELCOME -->
@@ -29,467 +23,191 @@
         <div class="col-md-10 welcome-page" style="top: 48%; margin-left: -15px;" ng-show="$ctrl.step == 0 && !$ctrl.statusLoading">
             <!-- Welcome text -->
             <div class="form-group" style="margin-bottom: 25px;">
-                <h4 class="text-white">{{ 'OPTIN_INFO_1' | translate }}</h4>
-                <h4 class="text-white">{{ 'OPTIN_INFO_2' | translate }} <br> {{ 'OPTIN_INFO_3' | translate }}</h4>
+                <h4 class="text-white">{{ 'POST_OPTIN_INFO_1' | translate }}</h4>
+                <h4 class="text-white">{{ 'POST_OPTIN_INFO_2' | translate }} <br> {{ 'POST_OPTIN_INFO_3' | translate }}</h4>
                 <h4 style="margin-top: 15px;"><a href="https://nemplatform.com/symbol-migration" target="_blank" class="symbol-link"><strong>{{ 'OPTIN_LINK_INFO' | translate }}<span style="text-decoration: underline">{{('HERE' | translate) }}</span></strong></a></h4>
             </div>
             <!-- Ready button -->
-            <button class="btn symbol-button" ng-disabled="$ctrl.statusLoading" ng-click="$ctrl.resetImport()">{{ 'SIGNUP_CREATE_READY_BTN' | translate }}</button>
+            <button class="btn symbol-button" ng-disabled="$ctrl.statusLoading" ng-click="$ctrl.step = 15;">{{ 'SIGNUP_CREATE_READY_BTN' | translate }}</button>
         </div>
 
-        <!-- STEP 1.0.0: SELECT TREZOR OPTIN OPTION -->
-        <div class="row container-div" ng-show="$ctrl.step == 100">
+        <!-- STEP 1: SELECT ACCOUNT -->
+        <div class="row container-div" ng-show="$ctrl.step == 15">
             <div class="col-md-12">
                 <img src="images/account.png">
-                <h1>{{'CREATE_SYMBOL_ACCOUNT' | translate}}</h1>
+                <h1>{{'SELECT_ACCOUNT_POST_OPTIN' | translate}}</h1>
             </div>
         </div>
-        <!-- Symbol account creating type buttons -->
-        <div class="col-md-12 text-center" ng-show="$ctrl.step == 100">
-            <div>
-                <p><b>{{'SYMBOL_WALLET_CREATING_TYPE_INFO' | translate}}</b></p>
-            </div>
-            <div class="mt-4 row">
-                <button class="btn symbol-button" ng-click="$ctrl.optinMethod(false)" >{{ 'SYMBOL_WALLET_CREATING_BY_ENTROPY_TYPE_INFO' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
-            </div>
-            <div class="mt-4 row">
-                <button class="btn symbol-button" ng-click="$ctrl.optinMethod(true)" >{{ 'SYMBOL_WALLET_CREATING_BY_LEDGER_IMPORT_TYPE_INFO' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
-            </div>
-        </div>
-
-        <!-- STEP 1.0: ENTROPY / IMPORT SYMBOL LEDGER ACCOUNT -->
-        <div class="row container-div" ng-show="$ctrl.step == 10">
-            <div class="col-md-12">
-                <img src="images/account.png">
-                <h1>{{'CREATE_SYMBOL_ACCOUNT' | translate}}</h1>
-            </div>
-        </div>
-        <div class="row text-center" ng-show="$ctrl.step == 10">
-            <div class="col-md-12 centered-col" style="margin-bottom: 50px;">
-                <img src="images/logo_white.png" style="width: 15%;">
-            </div>
-
-            <div class="col-md-12 text-center" ng-show="!$ctrl.optinSymbolLedger">
-                <!-- Entropy info -->
-                <div>
-                    <p>{{'SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_1' | translate}}</p>
-                    <p><b>{{'SYMBOL_SIGNUP_CREATE_WALLET_ADD_ENTROPY_INFO_2' | translate}}</b></p>
-                </div>
-                <div class="mt-4" ng-show="!$ctrl.progressBar">
-                    <div class="row">
-                        <button class="btn symbol-button" ng-click="$ctrl.progressBar = true;$ctrl.getEntropy();"> {{ 'GENERAL_START' | translate }}</button>
-                    </div>
-                </div>
-                <div ng-show="$ctrl.progressBar">
-                    <div class="progressBar">
-                        <div id="pBarOptIn"><span>a</span></div>
-                    </div>
-                </div>
-                <!-- Wallet type buttons -->
-                <div class="row mt-4" ng-show="$ctrl.entropyDone">
-                    <div class="col-md-6">
-                        <button class="btn symbol-button half-width" style="float:right;" ng-click="$ctrl.step = 0"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn symbol-button half-width"  style="float: left;" ng-click="$ctrl.step = 11 " >{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Import Symbol Ledger account -->
-            <div class="col-md-12 text-center" ng-show="$ctrl.optinSymbolLedger">
-                <!-- Import Ledger account info -->
-                <div>
-                    <p>{{ 'LEDGER_NANO_OPTIN_INFO_1' | translate }}</p>
-                    <p><b>{{ 'LEDGER_NANO_OPTIN_INFO_2' | translate }}</b></p>
-                </div>
-                <div class="row mt-4">
-                    <button class="btn symbol-button" ng-click="$ctrl.getLedgerSymbolAccount()"> {{ 'LEDGER_NANO_IMPORT_SYMBOL' | translate }}</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 1.1: YOUR SYMBOL ACCOUNT -->
-        <div class="row container-div" ng-show="$ctrl.step == 11">
-            <div class="col-md-12">
-                <img src="images/account.png">
-                <h1>{{'OPTIN_SYMBOL_READY' | translate}}</h1>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 11">
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 15">
             <!-- Wallet type titles -->
-            <div class="form-group">
-                <p>{{ 'YOUR_SYMBOL_ADDRESS' | translate }}</p>
-                <label class="text-center optin-label-form">{{ $ctrl.formData.optinAddress }}</label>
-                <img ng-click="$ctrl.copyToClipboard($ctrl.formData.optinAddress);" src="images/Clipboard.png" class="clipboard-icon">
+            <div class="form-group" ng-show="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length > 0">
+                <p>{{'GENERAL_SELECT_ACCOUNT' | translate}}</p>
+                <simple-and-multisig-select account="$ctrl.formData.selectedAccount" update-ctrl="$ctrl.onMultisigSelectorChange()" class="optin-Selector" </simple-and-multisig-select>
+            </div>
+            <div class="form-group" ng-show="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length == 0">
+                <p>{{'YOUR_NIS_ACCOUNT' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl._DataStore.account.metaData.account.address}}</label>
             </div>
 
-            <div class="form-group" style="margin-bottom: 4em;" ng-show="!$ctrl.optinSymbolLedger">
-                <p>{{ 'YOUR_SYMBOL_MNEMONIC' | translate }}</p>
-                <label class="text-center optin-label-form">{{ $ctrl.formData.optinMnemonic }}</label>
-                <img ng-click="$ctrl.copyToClipboard($ctrl.formData.optinMnemonic);" src="images/Clipboard.png" class="clipboard-icon">
+            <div class="form-group" ng-show="$ctrl.statusLoading">
+                <p>{{'LOADING' | translate}}...</p>
             </div>
 
-            <!-- Wallet type buttons -->
-            <div class="text-center">
-                <a class="btn symbol-button" id="downloadWallet" ng-click="$ctrl.step = $ctrl.skipNamespaces ? 3: 2" ng-show="!$ctrl.optinSymbolLedger"><span class="fa fa-download" aria-hidden="true"></span> {{ 'SIGNUP_COMMON_WALLET_WARNING_DOWNLOAD' | translate }}</a>
-                <a class="btn symbol-button" style="margin-top: 4em;" ng-click="$ctrl.step = $ctrl.skipNamespaces ? 4: 2" ng-show="$ctrl.optinSymbolLedger"> {{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></a>
+            <div class="form-group" ng-show="!$ctrl.statusLoading">
+                <p ng-show="$ctrl.optinAmount > 0">{{'POST_OPTIN_STATUS' | translate}}</p>
+                <label class="optin-label-form" ng-show="$ctrl.optinAmount > 0">
+                    <div ng-show="$ctrl.optinError && $ctrl.optinStatus !== 2 && $ctrl.optinStatus !== 4 && $ctrl.optinStatus !== 6" class="status-color-error" style="margin-bottom: 20px;">
+                        {{ ('OPTIN_ERROR_TITLE_' + $ctrl.optinError.code) | translate}}
+                    </div>
+                    <div class="status-color-{{$ctrl.optinStatus}}">
+                        {{ ('OPTIN_STATUS_TITLE_' + $ctrl.optinStatus) | translate}}
+                    </div>
+                </label>
+
+                <p>{{'POST_OPTIN_DETAILS' | translate}}</p>
+                <div class="optin-label-form" ng-show="$ctrl.optinAmount > 0">
+                    <label style="font-weight: lighter">{{ ('OPTIN_STATUS_TEXT_' + $ctrl.optinStatus) | translate}}</label>
+                    <div ng-show="$ctrl.isMultisig" style="margin: 14px 0; padding: 10px;">
+                        <table style="width:100%" class="optin-table">
+                            <tr>
+                                <th style="width: 50%;">{{ 'NIS1_ADDRESS' | translate }}</th>
+                                <th style="width: 50%;">{{ 'SYMBOL_ADDRESS' | translate }}</th>
+                            </tr>
+                            <tr ng-repeat="cosig in $ctrl.cosignatoriesMapping">
+                                <td style="width: 50%;">{{ cosig[0] }}</td>
+                                <td ng-show="!!cosig[1]" style="width: 50%;">
+                                    <i style="color: rgb(0, 179, 0);" class="fa fa-check"></i> {{ cosig[1] }}
+                                </td>
+                                <td ng-show="!cosig[1]" style="width: 50%;">
+                                    <i style="color: rgb(179, 0, 0);" class="fa fa-times"></i>
+                                    {{ 'OPTIN_NOT_DONE' | translate }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="optin-label-form" ng-show="$ctrl.optinAmount <= 0">
+                    <label style="font-weight: lighter">{{ 'OPTIN_NOT_AVAILABLE' | translate}}</label>
+                </div>
+            </div>
+            <div class="form-group" ng-show="!$ctrl.statusLoading && ($ctrl.optinStatus === 2 || $ctrl.optinStatus === 4 || $ctrl.optinStatus === 5 || $ctrl.optinStatus === 6)">
+                <p>{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                <label class="text-left optin-label-form">{{$ctrl.isMultisig ? $ctrl.multisigDestinationAddress : $ctrl.optinAddress}}</label>
+            </div>
+            <div class="form-group" ng-show="!$ctrl.statusLoading">
+                <p>{{($ctrl.optinStatus === 1 || $ctrl.optinStatus === 3 || $ctrl.optinStatus === 4 ? 'POST_OPTIN_AMOUNT' : 'POST_OPTIN_AMOUNT_CLAIMED') | translate}}</p>
+                <label class="text-left optin-label-form" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAmount}} XYM</label>
+            </div>
+            <div class="mt-4" ng-show="!$ctrl.statusLoading && $ctrl.optinStatus !== 2 && $ctrl.optinStatus !== 5 && $ctrl.optinStatus !== 6 && !($ctrl.optinStatus === 4 && $ctrl.hasCosignatorySigned)">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 0 16px;">
+                    </div>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 16;" ng-show="$ctrl.optinAmount > 0">{{'POST_OPTIN_START' | translate}}</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-
-        <!-- STEP 1.2: PASSWORD TO BACKUP -->
-        <div class="row container-div" ng-show="$ctrl.step == 12">
+        <!-- STEP 2: UNLOCK ACCOUNT -->
+        <div class="row container-div" ng-show="$ctrl.step == 16">
             <div class="col-md-12">
                 <img src="images/password.png">
-                <h1>Set a password to encrypt your wallet</h1>
+                <h1>{{'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate}}</h1>
             </div>
         </div>
-        <div class="row text-center" ng-show="$ctrl.step == 12">
-            <div class="col-md-8 col-md-offset-2">
-                <h4>The security of your account is very important. Please enter a password below to encrypt your Symbol wallet</h4>
-            </div>
-        </div>
-        <div class="col-md-12 mt-4" ng-show="$ctrl.step == 12">
-            <!-- Wallet type buttons -->
-            <div class="col-md-6 col-md-offset-3">
-                <!-- Password / passphrase field -->
-                <fieldset>
-                    <p>{{'SIGNUP_CREATE_ENTER_PASSPHRASE' | translate }}</p>
-                    <div class="input-group">
-                        <input class="form-control optin-input" type="{{!$ctrl.showPassword ? 'password' : 'text'}}" ng-model="$ctrl.formData.password"  />
-                        <span class="input-group-addon icon-eye" ng-click="$ctrl.showPassword ? $ctrl.showPassword = false : $ctrl.showPassword = true">
-                <span ng-show="!$ctrl.showPassword"><i class="fa fa-eye"></i></span>
-                <span ng-show="$ctrl.showPassword"><i class="fa fa-eye-slash"></i></span>
-                </span>
-                    </div>
-                </fieldset>
-                <!-- Password / passphrase confirmation field -->
-                <fieldset class="mt-4">
-                    <p>{{'SIGNUP_CREATE_CONFIRM_PASSWORD' | translate }}</p>
-                    <input class="form-control optin-input" type="password" ng-model="$ctrl.formData.confirmPassword" />
-                </fieldset>
-                <div class="row mt-4" ng-show="$ctrl.entropyDone">
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.step = 11"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_GO_BACK' | translate }}</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = $ctrl.skipNamespaces ? 3: 2" >{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 2: NAMESPACES -->
-        <div class="row container-div" ng-show="$ctrl.step == 2">
-            <div class="col-md-12">
-                <img src="images/namespace.png">
-                <h1>{{'OPTIN_NAMESPACES_TITLE' | translate }}</h1>
-            </div>
-        </div>
-        <div class="row text-center" ng-show="$ctrl.step == 2">
-            <div class="col-md-8 col-md-offset-2">
-                <h4>{{'OPTIN_NAMESPACES_INFO' | translate }}</h4>
-                <h4><b><a href="https://nemplatform.com/symbol-migration#acc-tb_mrzh282-10" target="_blank" class="symbol-link">{{'OPTIN_NAMESPACES_LINK' | translate }}<span style="text-decoration: underline">{{'HERE' | translate }}</span></a></b></h4>
-            </div>
-        </div>
-        <div class="col-md-12 mt-4" style="margin-top: 2rem !important;" ng-show="$ctrl.step == 2">
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 16">
             <!-- Wallet type titles -->
-            <div class="col-md-6 col-md-offset-3">
-                <form class="form">
-
-                    <h4 style="margin-bottom: 1em;">{{('OPTIN_NAMESPACES_SELECT' | translate) }}</h4>
-                    <div class="inputGroupSymbol" ng-repeat="namespace in $ctrl.namespaces">
-                        <input id="{{namespace}}" type="checkbox" ng-model="$ctrl.includedNamespaces[namespace]"/>
-                        <label for="{{namespace}}">{{namespace}}</label>
-                    </div>
-                </form>
+            <div class="form-group" ng-show="$ctrl.isMultisig">
+                <p>{{'POST_OPTIN_DEST_MSIG' | translate}}</p>
+                <input ng-show="$ctrl.optinStatus === 3" type="text"  placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" class="optin-label-form" ng-model="$ctrl.multisigDestinationPublicKey" ng-change="$ctrl.calculateMultisigDestinationAddress()"/>
             </div>
-            <!-- Wallet type buttons -->
-            <div class="col-md-6 col-md-offset-3 mt-4">
+            <div class="form-group" ng-show="$ctrl.isMultisig && $ctrl.multisigDestinationAddress">
+                <p>{{'POST_OPTIN_DEST_MSIG_ADDRESS' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl.multisigDestinationAddress ? $ctrl.multisigDestinationAddress : ''}}</label>
+            </div>
+
+            <div class="form-group">
+                <p>{{'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate}}</p>
+                <input type="text" class="optin-label-form" placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" ng-model="$ctrl.optinPublicKey" ng-change="$ctrl.onPrivateKeyChange()"/>
+            </div>
+            <div class="form-group" ng-show="$ctrl.optinAccount">
+                <p>{{'YOUR_SYMBOL_ADDRESS' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl.optinAccount ? $ctrl.optinAccount.address.pretty() : ''}}</label>
+            </div>
+            <div class="mt-4">
                 <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.step = 11;"><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 15; $ctrl.optinAccount = null; $ctrl.optinPublicKey = '';">{{'GENERAL_BACK' | translate}}</button>
                     </div>
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.optinSymbolLedger ? $ctrl.step = 4 : $ctrl.step = 3">{{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 3: VRF KEYS -->
-        <div class="row container-div" ng-show="$ctrl.step == 3">
-            <div class="col-md-12">
-                <img src="images/VRFKeys.png">
-                <h1>{{'OPTIN_VRF_TITLE' | translate }}</h1>
-            </div>
-        </div>
-        <div class="row text-center" ng-show="$ctrl.step == 3">
-            <div class="col-md-8 col-md-offset-2">
-                <h4>{{'OPTIN_VRF_INFO' | translate }}</h4>
-                <h4><b><a href="https://nemplatform.com/symbol-migration#acc-tb_mrzh282-11" target="_blank" class="symbol-link">{{'OPTIN_VRF_LINK' | translate }}<span style="text-decoration: underline">{{'HERE' | translate }}</span></a></b></h4>
-            </div>
-        </div>
-        <div class="col-md-12" ng-show="$ctrl.step == 3">
-            <!-- Wallet type titles -->
-            <div class="col-md-6 col-md-offset-3">
-                <div class="inputGroupSymbol">
-                    <input id="vrfCheckbox" name="checkbox1" type="checkbox" ng-model="$ctrl.includeVrf" ng-change="$ctrl.calculateFee();"/>
-                    <label for="vrfCheckbox">{{ 'OPTIN_VRF_KEYS' | translate }}</label>
-                </div>
-            </div>
-            <div class="col-md-8 col-md-offset-2">
-                <div class="mt-4" ng-show="$ctrl.includeVrf">
-                    <p>{{'OPTIN_VRF_PUBLIC' | translate }}</p>
-                    <label class="text-center optin-label-form">{{$ctrl.formData.optinVrfAddress}}</label>
-                    <img ng-click="$ctrl.copyToClipboard($ctrl.formData.optinVrfAddress);" src="images/Clipboard.png" class="clipboard-icon">
-                </div>
-                <div class="mt-4" ng-show="$ctrl.includeVrf">
-                    <p>{{'OPTIN_VRF_PRIVATE' | translate }}</p>
-                    <label class="text-center optin-label-form">{{$ctrl.formData.optinVrfPrivateKey}}</label>
-                    <img ng-click="$ctrl.copyToClipboard($ctrl.formData.optinVrfPrivateKey);" src="images/Clipboard.png" class="clipboard-icon">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 mt-4" ng-show="$ctrl.step == 3">
-            <!-- Wallet type buttons -->
-            <div class="col-md-6 col-md-offset-3">
-                <div class="row">
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.step = $ctrl.skipNamespaces ? 11: 2" ><span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 4"> {{ 'GENERAL_NEXT' | translate }} <span class="fa fa-chevron-right" aria-hidden="true"></span></button>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-show="!!$ctrl.optinAccount && $ctrl.isValidMultisigDestination()" ng-click="$ctrl.step = 17;">{{'GENERAL_NEXT' | translate}}</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- STEP 4: TERMS AND CONDITIONS -->
-
-        <div class="row container-div" ng-show="$ctrl.step == 4">
+        <!-- STEP 3: REVIEW INFO -->
+        <div class="row container-div" ng-show="$ctrl.step == 17">
             <div class="col-md-12">
                 <img src="images/terms.png">
-                <h1 style="color: #44004E">{{ 'OPTIN_TAC_TITLE' | translate }}</h1>
+                <h1 style="color: #44004E">{{'CATAPULTOPTIN_REVIEW_NORMAL_RESULT' | translate}}</h1>
             </div>
         </div>
-        <div class="row text-center" ng-show="$ctrl.step == 4">
-            <div class="col-md-12">
-                <h4>
-                    <p style="color: #44004E">{{ 'OPTIN_TAC_INFO_1' | translate }}</p>
-                    <p style="color: #44004E"><b>{{ 'OPTIN_TAC_INFO_2' | translate }}</b></p>
-                </h4>
-            </div>
-        </div>
-        <div class="col-md-12 mt-4" ng-show="$ctrl.step == 4">
-            <!-- Wallet type buttons -->
-            <div class="col-md-offset-1 col-md-10">
-
-                <div ng-show="!$ctrl.optinSymbolLedger">
-                    <input id="backup_confirm" type="checkbox" ng-model="$ctrl.formData.backupConfirm">
-                    <label for="backup_confirm" style="color: #44004E"><b>{{
-                        'CATAPULT_OPT_IN_CONFIRM_BACKUP' | translate }}</b></label>
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 17">
+            <!-- Wallet type titles -->
+            <div ng-show="!$ctrl.isMultisig">
+                <div class="form-group">
+                    <p class="purple-dark">{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                    <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
                 </div>
+            </div>
+            <div ng-show="$ctrl.isMultisig">
+                <div class="form-group">
+                    <p class="purple-dark">{{'POST_OPTIN_DEST_MULTISIG_ADDRESS' | translate}}</p>
+                    <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.multisigDestinationAddress}}</label>
+                </div>
+                <div class="form-group">
+                    <p class="purple-dark">{{'POST_OPTIN_COSIG_DEST_ADDRESS' | translate}}</p>
+                    <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="purple-dark">{{'GENERAL_AMOUNT' | translate}}</p>
+                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAmount}} XYM</label>
+            </div>
 
-                <input id="understand_confirm" type="checkbox" ng-model="$ctrl.formData.understandConfirm">
-                <label class="mt-2" for="understand_confirm" style="color: #44004E" ><b>{{
-                    'CATAPULT_OPT_IN_UNDERSTAND_FUNDS' | translate }}</b></label>
+            <!-- TERMS AND CONDITIONS-->
+            <input id="accept_and_read_terms" type="checkbox" ng-model="$ctrl.formData.acceptTerms">
+            <label class="mt-2" for="accept_and_read_terms" class="purple-dark"><b>{{ 'OPTIN_TAC_READ_ACCEPT' | translate }}<a href="https://symbolplatform.com/terms-conditions/" class="symbol-link" style="color: rgb(205,0,205);" target="_blank">{{ 'OPTIN_TAC_TEXT' | translate }}</a></b></label>
+            <!-- PRIVACY POLICY-->
+            <br>
+            <input id="accept_and_read_privacy" type="checkbox" ng-model="$ctrl.formData.acceptPrivacy">
+            <label class="mt-2" for="accept_and_read_privacy" class="purple-dark"><b>{{ 'OPTIN_TAC_READ_ACCEPT' | translate }}<a href="https://symbolplatform.com/terms-conditions/" class="symbol-link" style="color: rgb(205,0,205);" target="_blank">{{ 'OPTIN_PP_TEXT' | translate }}</a></b></label>
 
-                <input id="accept_and_read_terms" type="checkbox" ng-model="$ctrl.formData.acceptTerms">
-                <label class="mt-2" for="accept_and_read_terms" style="color: #44004E"><b>{{ 'OPTIN_TAC_READ_ACCEPT' | translate }}<a href="https://nemplatform.com/wp-content/uploads/2020/09/Symbol-Terms-and-Conditions-for-XYM-9-Sep-2020.pdf" class="symbol-link" style="color: rgb(205,0,205);" target="_blank">{{ 'OPTIN_TAC_TEXT' | translate }}</a></b></label>
-
-                <div class="mt-4">
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.optinSymbolLedger ? ($ctrl.step = $ctrl.skipNamespaces ? 11 : 2) : $ctrl.step = 3;  $ctrl.formData.backupConfirm = false; $ctrl.formData.understandConfirm = false; $ctrl.formData.acceptTerms = false;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
+            <div class="mt-4">
+                <p class="purple-dark">{{ 'GENERAL_FEE' | translate }}</p>
+                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{ $ctrl.isMultisig ? '0.45': '0.2' }} XEM</label>
+            </div>
+            <div class="mt-4">
+                <!-- Password sign -->
+                <fieldset ng-show="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger'">
+                    <p class="purple-dark">{{'OPTIN_ENTER_PASSWORD'| translate }}</p>
+                    <input class="form-control optin-input purple-dark" type="password" ng-model="$ctrl.common.password"/>
+                </fieldset>
+            </div>
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 16;">{{'GENERAL_BACK' | translate}}</button>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
 background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100%);"
-                                    ng-click="$ctrl.step = 5; $ctrl.calculateFee();"
-                                    ng-disabled="!$ctrl.optinSymbolLedger && !$ctrl.formData.backupConfirm || !$ctrl.formData.understandConfirm || !$ctrl.formData.acceptTerms"
-                            >{{ 'SIGNUP_COMMON_WALLET_WARNING_CONFIRM_3' | translate }}</button>
-                        </div>
+                                ng-click="$ctrl.send()"
+                                ng-disabled="!$ctrl.formData.acceptPrivacy || !$ctrl.formData.acceptTerms"
+                        >{{ 'GENERAL_TAB_SEND' | translate }}</button>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 5: CONFIRM -->
-        <div class="row container-div" ng-show="$ctrl.step == 5">
-            <div class="col-md-12">
-                <img src="images/logo_white.png">
-                <h1>{{ 'OPTIN_CONFIRM_TITLE' | translate }}</h1>
-            </div>
-        </div>
-        <div class="row text-center" ng-show="$ctrl.step == 5">
-            <div class="col-md-12">
-                <h4>{{ 'OPTIN_CONFIRM_INFO' | translate }}</h4>
-            </div>
-        </div>
-        <div class="col-md-12" ng-show="$ctrl.step == 5">
-            <!-- Wallet type buttons -->
-            <div class="col-md-8 col-md-offset-2">
-                <div class="mt-4">
-                    <p>{{ 'YOUR_SYMBOL_ADDRESS' | translate }}</p>
-                    <label class="text-center optin-label-form" style="width: 100%;">{{$ctrl.formData.optinAddress}}</label>
-                </div>
-                <div class="mt-4" ng-show="!$ctrl.optinSymbolLedger">
-                    <p>{{ 'YOUR_SYMBOL_MNEMONIC' | translate }}</p>
-                    <label class="text-center optin-label-form" style="width: 100%;">{{$ctrl.formData.optinMnemonic}}</label>
-                </div>
-                <div class="mt-4" ng-show="!$ctrl.skipNamespaces">
-                    <p>{{ 'EXPLORER_HOME_NS' | translate }}</p>
-                    <div class="inputGroupSymbol" ng-repeat="namespace in $ctrl.namespaces">
-                        <input id="final-{{namespace}}" type="checkbox" onclick="return false;" ng-checked="$ctrl.includedNamespaces[namespace]"/>
-                        <label for="final-{{namespace}}">{{namespace}}</label>
-                    </div>
-                </div>
-                <div class="mt-4" ng-show="!$ctrl.optinSymbolLedger">
-                    <p>{{ 'OPTIN_VRF_KEYS' | translate }}</p>
-                    <div class="inputGroupSymbol">
-                        <input id="final-includeVrf" type="checkbox" onclick="return false;" ng-checked="$ctrl.includeVrf"/>
-                        <label for="final-includeVrf">{{ 'OPTIN_VRF_KEYS' | translate }}</label>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <p>{{ 'GENERAL_FEE' | translate }}</p>
-                    <label class="text-left optin-label-form" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.fee}} XEM</label>
-                </div>
-                <div class="mt-4">
-                    <!-- Password sign -->
-                    <fieldset ng-show="$ctrl._Wallet.algo !== 'ledger' && $ctrl._Wallet.algo !== 'trezor'">
-                        <p>{{'OPTIN_ENTER_PASSWORD'| translate }}</p>
-                        <input class="form-control optin-input" type="password" ng-model="$ctrl.common.password"/>
-                    </fieldset>
-                </div>
-                <div class="mt-4">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <button class="btn symbol-button symbol-button__block" style="float:right;" ng-click="$ctrl.step = 4; $ctrl.common.password = ''; $ctrl.formData.backupConfirm = false; $ctrl.formData.understandConfirm = false; $ctrl.formData.acceptTerms = false;"> <span class="fa fa-chevron-left" aria-hidden="true"></span> {{ 'GENERAL_BACK' | translate }}</button>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.send()" ng-disabled="$ctrl._Wallet.algo !== 'ledger' && $ctrl._Wallet.algo !== 'trezor' && $ctrl.common.password.length == 0">{{ 'OPTIN_CONFIRM_OPTIN' | translate }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="catapultOptin-page" ng-show="$ctrl.isOptedIn">
-
-    <div class="container-fluid main">
-        <div class="row">
-            <div class="col-sm-8">
-                <h2>{{ 'TITLE_CATAPULTOPTIN' | translate }}</h2>
-            </div>
-            <div class="col-sm-4 helper">
-                <a href="https://nemplatform.com/symbol-migration" target="_blank"><h4>{{
-                    'CATAPULTOPTIN_CREATE_HELP' | translate }}</h4></a>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-6 col-md-12">
-                <div class="panel-heading">
-                    <div class="tabDescription">
-                        <!-- Title of panel -->
-                        <span>{{ 'CATAPULTOPTIN_TRANSACTION' | translate }}</span>
-                    </div>
-                    <!-- Tabbed modes -->
-                    <ul class="nav nav-tabs">
-                        <!-- Normal mode -->
-                        <li class="active"><a >{{ 'GENERAL_TAB_NORMAL' | translate }}</a></li>
-                        <!-- Multisig mode -->
-                        <li ng-if="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length">
-                            <a ui-sref="app.multisigOptin">{{ 'GENERAL_TAB_MULTISIG' | translate }}</a></li>
-                    </ul>
-                </div>
-                <div class="panel-body">
-                    <!-- Catapult Opt In Address -->
-                    <fieldset class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <label>{{ 'GENERAL_ADDRESS' | translate }}: </label>
-                            </span>
-                            <input type="text" class="form-control" ng-model="$ctrl._DataStore.account.metaData.account.address" readOnly>
-                        </div>
-                    </fieldset>
-                    <!-- Catapult Opt In Balance -->
-                    <fieldset class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <label>{{ 'FORM_SIDE_BTN_BALANCE' | translate }}: </label>
-                            </span>
-                            <div class="form-control formFloat" readOnly>
-                                <input type="text" value="{{ ($ctrl._DataStore.account.metaData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl._DataStore.account.metaData.account.balance | fmtNemValue)[1] }}" readOnly disabled/>
-                                <label class="floatRight"><small>XEM</small></label>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <!-- OPT IN DONE MESSAGE -->
-                <div style="margin-top: 70px;">
-                    <h4 class="alert alert-success margin-form">{{'CATAPULTOPTIN_OPT_IN_SUCCESS' | translate }}</h4>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-
-                <!-- REVIEW OPT IN -->
-                <div>
-                    <!-- Catapult Account Information -->
-                    <div class="panel-heading margin-form">
-                        <h3>{{ 'CATAPULTOPTIN_REVIEW_NORMAL_RESULT' | translate }}</h3>
-                    </div>
-
-                    <!-- Sign Opt In Address -->
-                    <div class="margin-form">
-                        <h5 class="title-list">{{ 'SYMBOL_ADDRESS' | translate }}</h5>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" ng-model="$ctrl.formData.finalSymbolAddress" readOnly>
-                        </div>
-                    </fieldset>
-
-                    <!-- Opt In Namespaces -->
-                    <div class="margin-form">
-                        <h5 class="title-list">{{ 'CATAPULTOPTIN_NAMESPACES_OPTIN' | translate }}</h5>
-                    </div>
-                    <fieldset class="form-group">
-                        <ul class="list-group" ng-repeat="namespace in $ctrl.formData.finalSymbolNamespaces">
-                            <li class="list-group-item">{{namespace}}</li>
-                        </ul>
-                        <p class="nothing" ng-show="!$ctrl.formData.finalSymbolNamespaces.length">{{ 'GENERAL_NO_RESULTS' | translate }}</p>
-                    </fieldset>
-
-                    <!-- Sign Opt In Address -->
-                    <div class="margin-form" ng-show="$ctrl.formData.finalSymbolVrfPublicKey">
-                        <h5 class="title-list">{{ 'CATAPULTOPTIN_VRF_PUBLIC_KEY' | translate }}</h5>
-                    </div>
-                    <fieldset class="form-group" ng-show="$ctrl.formData.finalSymbolVrfPublicKey">
-                        <div class="input-group" style="width: 100%">
-                            <input type="text" class="form-control" ng-model="$ctrl.formData.finalSymbolVrfPublicKey" readOnly>
-                        </div>
-                    </fieldset>
-
-                    <!-- Opt In Balance -->
-                    <div class="margin-form">
-                        <h5 class="title-list">{{ 'CATAPULT_OPT_IN_BALANCE_SNAPSHOT' | translate }}</h5>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="form-control formFloat" readOnly>
-                            <input type="text"
-                                   value="{{ ($ctrl._DataStore.account.metaData.account.balance | fmtNemValue)[0] }}.{{ ($ctrl._DataStore.account.metaData.account.balance | fmtNemValue)[1] }}"
-                                   readOnly disabled/>
-                            <label class="floatRight"><small>XYM</small></label>
-                        </div>
-                    </fieldset>
                 </div>
             </div>
         </div>

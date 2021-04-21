@@ -1,18 +1,13 @@
 import nem from 'nem-sdk';
 import {
+    buildMultisigDTO,
+    buildSimpleDTO,
     MultisigCache,
     NormalCache,
-    OptinConstants,
-    status,
-    hasOptInStopped
-} from "catapult-optin-module";
-import {
-    buildCosignDTOLedger,
-    buildNormalOptInDTOsLedger,
-    buildStartMultisigOptInDTOsLedger
-} from "../modules/ledger/optin/BroadcastLedger";
-import { NetworkType } from "symbol-sdk";
-import { broadcastDTO } from "catapult-optin-module/dist/src/Broadcast";
+    status
+} from "symbol-post-launch-optin";
+import {PublicAccount, NetworkType, Account} from "symbol-sdk";
+import {broadcastDTO} from "symbol-post-launch-optin";
 
 
 /** Service with relative functions on symbol opt in books. */
@@ -23,7 +18,7 @@ class CatapultOptin {
      *
      * @params {services} - Angular services to inject
      */
-    constructor($localStorage, $filter, Wallet, Trezor, Ledger, DataStore, Alert, $timeout) {
+    constructor($localStorage, Wallet, Trezor, DataStore) {
         'ngInject';
 
         this.normalCaches = {};
@@ -35,9 +30,7 @@ class CatapultOptin {
         this._Wallet = Wallet;
         this._DataStore = DataStore;
         this._Trezor = Trezor;
-        this._Ledger = Ledger;
-        this._Alert = Alert;
-        this._$timeout = $timeout;
+
         // End dependencies region //
 
         // Service properties region //
@@ -49,32 +42,62 @@ class CatapultOptin {
 
     /**
      * Returns optin config
-     *
-     * @return {{NISConfigAccount: string, NISStopAccount: string, NISNetwork: *, NISEndpoint: *, CATNetwork: *}}
      */
     getOptinConfig() {
         let CATNetwork, NISStopAccount;
-        if (this._Wallet.network === nem.model.network.data.testnet.id){
+        if (this._Wallet.network === nem.model.network.data.testnet.id) {
             CATNetwork = NetworkType.TEST_NET;
             NISStopAccount = 'TAXF5HUGBKGSC3MOJCRXN5LLKFBY43LXI3DE2YLS';
-        }
-        else if (this._Wallet.network === nem.model.network.data.mainnet.id) {
+        } else if (this._Wallet.network === nem.model.network.data.mainnet.id) {
             CATNetwork = NetworkType.MAIN_NET;
-            NISStopAccount = 'NAWIP6WBLEAHUHWJ757Q2UXTVE3DYVDNNDAVWLUZ';
-        }
-        else if (this._Wallet.network === nem.model.network.data.mijin.id) {
+            NISStopAccount = 'NAQ7RCYM4PRUAKA7AMBLN4NPBJEJMRCHHJYAVA72';
+        } else if (this._Wallet.network === nem.model.network.data.mijin.id) {
             CATNetwork = NetworkType.MIJIN;
-        }
-        else {
+        } else {
             CATNetwork = NetworkType.MIJIN_TEST;
         }
         return {
-            NISConfigAccount: OptinConstants[CATNetwork].CONFIG_ACCOUNT,
-            NISStopAccount: NISStopAccount,
-            NISEndpoint: this._Wallet.node,
-            NISNetwork: this._Wallet.network,
-            CATNetwork: CATNetwork,
+            NIS: {
+                endpoint: this._Wallet.node,
+                network: this._Wallet.network,
+                configAddress: NISStopAccount,
+            },
+            SYM: {
+                network: CATNetwork,
+                generationHash: '57F7DA205008026C776CB6AED843393F04CD458E0AA2D9F1D5F31A402072B2D6'
+            },
+            snapshotInfoApi: 'http://post-optin.symboldev.com/'
         };
+    }
+
+    getStatus(account) {
+        return new Promise( (resolve) => {
+            const config = this.getOptinConfig();
+            if (account.meta.cosignatories.length > 0) {
+                this.getMultisigCache(account, true).then(cache => {
+                    status(account, config, cache).then(resolve);
+                });
+            } else {
+                this.getNormalCache(account, true).then(cache => {
+                    status(account, config, cache).then(resolve);
+                });
+            }
+        });
+    }
+
+    getClaimAmount(address) {
+        return new Promise(resolve => {
+            fetch(this.getOptinConfig().snapshotInfoApi + 'balance?address=' + address).then(result => {
+                result.json().then(json => {
+                    resolve(json && json.amount ? json.amount : 0);
+                }).catch(() => {
+                    resolve(0);
+                })
+            }).catch(() => {
+                resolve(0);
+            });
+        });
+        // return Promise.resolve(Math.round(Math.random() * Math.pow(10, Math.round(Math.random() * 10)) * Math.pow(10, 6)) / Math.pow(10, 6));
     }
 
     getNormalCache(account, forceRefresh = false) {
@@ -90,7 +113,6 @@ class CatapultOptin {
                 resolve(this.normalCaches[account.account.address]);
             }
         })
-
     }
 
     getMultisigCache(account, forceRefresh = false) {
@@ -109,89 +131,59 @@ class CatapultOptin {
     }
 
     /**
-     * Pop-up alert handler
-     */
-    alertHandler(inputErrorCode, isSymbolOptin, isTxSigning, txStatusText) {
-        if (inputErrorCode.message && inputErrorCode.message.includes("cannot open device with path")) {
-            inputErrorCode = 3;
-        }
-        switch (inputErrorCode) {
-            case 'NoDevice':
-                this._Alert.ledgerDeviceNotFound();
-                break;
-            case 26628:
-                this._Alert.ledgerDeviceLocked();
-                break;
-            case 27904:
-                this._Alert.ledgerNotOpenApp(isSymbolOptin);
-                break;
-            case 27264:
-                this._Alert.ledgerNotUsingCorrectApp(isSymbolOptin);
-                break;
-            case 27013:
-                isTxSigning ? this._Alert.ledgerTransactionCancelByUser() : this._Alert.ledgerRequestCancelByUser();
-                break;
-            case 26368:
-                isTxSigning ? this._Alert.ledgerNotOpenApp(isSymbolOptin) : this._Alert.ledgerTransactionTooBig();
-                break;
-            case 2:
-                this._Alert.ledgerNotSupportApp();
-                break;
-            case 3:
-                this._Alert.ledgerConnectedOtherApp();
-                break;
-            default:
-                isTxSigning ? this._Alert.transactionError(txStatusText) : this._Alert.requestFailed(inputErrorCode);
-                break;
-        }
-    }
-
-    /**
      * Sends simple optin status
      *
      * @param common
-     * @param destination
-     * @param destinationPath
-     * @param namespaces
-     * @param vrfAccount
-     * @param optinSymbolLedger
+     * @param destinationPublicKey
      */
-    sendSimpleOptin(common, destination, destinationPath, namespaces, vrfAccount, optinSymbolLedger) {
+    sendSimpleOptin(common, destinationPublicKey) {
         return new Promise( (resolve, reject) => {
             const config = this.getOptinConfig();
-            if (optinSymbolLedger && (namespaces.length > 0 || vrfAccount)) {
-                alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
-                alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
-                this._$timeout(() => {
-                    this._Alert.ledgerFollowInstruction();
-                });
+            const simpleDTO = buildSimpleDTO(destinationPublicKey);
+            if (this._Wallet.algo == "trezor") {
+                this._sendTrezorDTOs(common, [simpleDTO]).then(resolve).catch(reject);
+            } else if (this._Wallet.algo == "ledger") {
+                alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
+                this._sendLedgerDTOs(common, [simpleDTO]).then(resolve).catch(reject);
             }
-            buildNormalOptInDTOsLedger(destination, destinationPath, namespaces, vrfAccount, config).then(dtos => {
-                if (this._Wallet.algo == "trezor") {
-                    this._sendTrezorDTOs(common, dtos).then(resolve).catch(reject);
-                } else if (this._Wallet.algo == "ledger") {
-                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
-                    this._sendLedgerDTOs(common, dtos).then(resolve).catch(reject);
-                } else {
-                    const sendPromises = dtos.map(dto => broadcastDTO(common.privateKey, dto, config));
-                    Promise.all(sendPromises).then(messages => {
-                        if (messages.filter(_ => _ !== 'SUCCESS').length > 0) {
-                            reject('Sending OptIn failed: ' + messages.toString());
-                        } else {
-                            resolve(true);
-                        }
-                    }).catch(reject);
-                }
-            }).catch((error) => {
-                if (error.ledgerError) {
-                    this._$timeout(() => {
-                        this.alertHandler(...error.ledgerError);
-                    });
-                    reject('handledLedgerErrorSignal');
-                } else {
-                    reject(error);
-                }
-            });
+            else {
+                broadcastDTO(common.privateKey, simpleDTO, config).then((message) => {
+                    if (message !== 'SUCCESS') {
+                        reject('Sending OptIn failed: ' + message.toString());
+                    } else {
+                        resolve(true);
+                    }
+                }).catch(reject);
+            }
+        });
+    }
+    /**
+     * Sends multisig optin status
+     *
+     * @param common
+     * @param NIS1multisigAddress
+     * @param SYMMultisigPublicKey
+     * @param SYMCosignerPublicKey
+     */
+    sendMultisigOptin(common, NIS1multisigAddress, SYMMultisigPublicKey, SYMCosignerPublicKey) {
+        return new Promise( (resolve, reject) => {
+            const config = this.getOptinConfig();
+            const dto = buildMultisigDTO(NIS1multisigAddress, SYMMultisigPublicKey, SYMCosignerPublicKey);
+            if (this._Wallet.algo == "trezor") {
+                this._sendTrezorDTOs(common, [dto]).then(resolve).catch(reject);
+            } else if (this._Wallet.algo == "ledger") {
+                alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
+                this._sendLedgerDTOs(common, [dto]).then(resolve).catch(reject);
+            }
+            else {
+                broadcastDTO(common.privateKey, dto, config).then((message) => {
+                    if (message !== 'SUCCESS') {
+                        reject('Sending OptIn failed: ' + message.toString());
+                    } else {
+                        resolve(true);
+                    }
+                }).catch(reject);
+            }
         });
     }
 
@@ -272,7 +264,7 @@ class CatapultOptin {
      * @param common
      */
     createTransactionFromDTO(dto, common){
-        let configTransaction = nem.model.objects.create("transferTransaction")(this.getOptinConfig().NISConfigAccount, 0, dto.toMessage());
+        let configTransaction = nem.model.objects.create("transferTransaction")(this.getOptinConfig().NIS.configAddress, 0, dto.toMessage());
         // Prepare with Signer and Network
         configTransaction = nem.model.transactions.prepare("transferTransaction")(
             common,
@@ -286,135 +278,6 @@ class CatapultOptin {
                 resolve(configTransaction);
             });
         });
-    }
-
-    /**
-     * Get simple optin status
-     */
-    getStatus(originAddress) {
-        return new Promise( (resolve) => {
-            nem.com.requests.account.data(this._Wallet.node, originAddress).then( origin => {
-                const config = this.getOptinConfig();
-                if (origin.meta.cosignatories.length > 0) {
-                    this.getMultisigCache(origin, true).then( cache => {
-                        status(origin, config, cache).then(resolve);
-                    });
-                } else {
-                    this.getNormalCache(origin, true).then( cache => {
-                        status(origin, config).then(resolve);
-                    });
-                }
-            });
-        });
-    }
-
-    /**
-     * Send multisig start opt in
-     *
-     * @param common
-     * @param originAddress
-     * @param cosigner
-     * @param cosignerPath
-     * @param destination
-     * @param namespaces
-     * @param optinSymbolLedger
-     * @return {Promise<unknown>}
-     */
-    sendMultisigStartOptIn(common, originAddress, cosigner, cosignerPath, destination, namespaces, optinSymbolLedger) {
-        const config = this.getOptinConfig();
-        return new Promise((resolve, reject) => {
-            nem.com.requests.account.data(this._Wallet.node, originAddress).then(origin => {
-                if (optinSymbolLedger) {
-                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
-                    alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
-                    this._$timeout(() => {
-                        this._Alert.ledgerFollowInstruction();
-                    });
-                }
-                buildStartMultisigOptInDTOsLedger(origin, cosigner, cosignerPath, destination, namespaces, config).then( dtos => {
-                    if (this._Wallet.algo == "trezor") {
-                        this._sendTrezorDTOs(common, dtos).then(resolve).catch(reject);
-                    } else if (this._Wallet.algo == "ledger") {
-                        alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
-                        this._sendLedgerDTOs(common, dtos).then(resolve).catch(reject);
-                    } else {
-                        const sendPromises = dtos.map(dto => broadcastDTO(common.privateKey, dto, config));
-                        Promise.all(sendPromises).then(messages => {
-                            if (messages.filter(_ => _ !== 'SUCCESS').length > 0) {
-                                reject('Sending OptIn failed: ' + messages.toString());
-                            } else {
-                                resolve(true);
-                            }
-                        }).catch(reject);
-                    }
-                }).catch((error) => {
-                    if (error.ledgerError) {
-                        this._$timeout(() => {
-                            this.alertHandler(...error.ledgerError);
-                        });
-                        reject('handledLedgerErrorSignal');
-                    } else {
-                        reject(error);
-                    }
-                });
-            }).catch(reject);
-        });
-    }
-
-    /**
-     * Send multisig optin cosig
-     *
-     * @return {Promise<any>}
-     * @param common
-     * @param originAddress
-     * @param cosigner
-     * @param cosignerPath
-     * @param destination
-     * @param optinSymbolLedger
-     */
-    sendMultisigSignOptIn(common, originAddress, cosigner, cosignerPath, destination, optinSymbolLedger) {
-        const config = this.getOptinConfig();
-        return new Promise((resolve, reject) => {
-            nem.com.requests.account.data(this._Wallet.node, originAddress).then(origin => {
-                if (optinSymbolLedger) {
-                    alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_XYM_APP'));
-                    this._$timeout(() => {
-                        alert(this._$filter('translate')('LEDGER_NANO_CHECK_DEVICE'));
-                        this._Alert.ledgerFollowInstruction();
-                    });
-                }
-                buildCosignDTOLedger(origin, cosigner, cosignerPath, destination, config).then(cosignDTO => {
-                    this.createTransactionFromDTO(cosignDTO, common).then( transaction => {
-                        if (this._Wallet.algo == "ledger") {
-                            alert(this._$filter('translate')('LEDGER_NANO_NOT_OPENED_NEM_APP'));
-                        }
-                        this._Wallet.transact(common, transaction)
-                            .then(resolve)
-                            .catch(err => {
-                                reject(this._Wallet.algo == "ledger" ? 'handledLedgerErrorSignal' : err);
-                            });
-                    }).catch(reject);
-                }).catch((error) => {
-                    if (error.ledgerError) {
-                        this._$timeout(() => {
-                            this.alertHandler(...error.ledgerError);
-                        });
-                        reject('handledLedgerErrorSignal');
-                    } else {
-                        reject(error);
-                    }
-                });
-            }).catch(reject);
-        });
-    }
-
-    /**
-     * Checks if opt in has stopped
-     * @return {boolean}
-     */
-    checkIfOptinHasStopped() {
-        const config = this.getOptinConfig();
-        return hasOptInStopped(config.NISStopAccount, config);
     }
 
     // End methods region //

@@ -2,7 +2,7 @@ const AppConstants = {
     //Application name
     appName: 'NEM Wallet',
 
-    version: '2.5.1',
+    version: '3.0.0-post-launch-optin',
 
     //Network
     defaultNetwork: 104,
