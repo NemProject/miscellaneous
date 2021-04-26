@@ -893,10 +893,10 @@ function EnglishProvider($translateProvider) {
 
         // CATAPULT OPT IN MODULE
         PORTAL_CATAPULTOPTIN_TITLE: 'Symbol Opt In',
-        PORTAL_CATAPULTOPTIN_TEXT: 'Use this module to receive XYM on the Symbol network. You may also opt in to have your namespaces registered and multisig accounts opted in. Your mosaic balances, Apostille data, delegating harvesting contracts, and all other DAP content will not carry forward. Please, read more ',
+        PORTAL_CATAPULTOPTIN_TEXT: 'Use this module to receive XYM on the Symbol network. Please, read more ',
         PORTAL_CATAPULTOPTIN_TEXT_LINK: 'here.',
         PORTAL_CATAPULTOPTIN_MULTISIG_TEXT: 'Your multi-signature opt-in request must be issued with cosigner accounts',
-        PORTAL_CATAPULTOPTIN_BTN_1: 'Claim XYM and Namespaces with a Symbol Opt In',
+        PORTAL_CATAPULTOPTIN_BTN_1: 'Claim XYM with Symbol Opt In',
         PORTAL_CATAPULTOPTIN_BTN_2: 'Sign a Multisig Opt In Message',
         PORTAL_CATAPULTOPTIN_TREZOR_TEXT: 'Opt in with trezor is not implemented yet. If you want to Opt in, please move your funds to a normal account.',
         TITLE_CATAPULTOPTIN: 'Symbol Opt In',
@@ -1016,12 +1016,12 @@ function EnglishProvider($translateProvider) {
         POST_OPTIN_AMOUNT: 'Amount to claim',
         POST_OPTIN_AMOUNT_CLAIMED: 'Amount claimed',
         POST_OPTIN_START: 'START OPT-IN',
-        POST_OPTIN_DEST_MSIG: 'Enter your destination multisig public key',
+        POST_OPTIN_DEST_MSIG: 'Enter your destination multisig public key. This account must be a multisig and must have the same number of cosigners than the current NIS1 multisig account.',
         POST_OPTIN_DEST_MSIG_ADDRESS: 'Symbol multisig address',
         POST_OPTIN_DEST_ADDRESS: 'Symbol destination address',
         POST_OPTIN_DEST_MULTISIG_ADDRESS: 'Symbol multisig destination address',
         POST_OPTIN_COSIG_DEST_ADDRESS: 'Symbol cosignatory destination address',
-        NIS1_ADDRESS: 'NIS1 Address',
+        NIS1_ADDRESS: 'Cosigner Address',
         YOUR_NIS_ACCOUNT: 'Your NIS1 Address',
         OPTIN_NOT_DONE: 'Opt-in not done',
         OPTIN_STATUS_TITLE_1: 'Opt in not done',
@@ -1039,8 +1039,9 @@ function EnglishProvider($translateProvider) {
         OPTIN_ERROR_TITLE_0: 'The opt-in you made previously failed because the signature was not valid.',
         OPTIN_ERROR_TITLE_1: 'The opt-in you made previously failed because the destination account was not valid',
         OPTIN_ERROR_TITLE_2: 'The opt-in you made previously failed because one or more cosignatories were not valid.',
-        OPTIN_NOT_AVAILABLE: 'You didn\'t have any XEM in the snapshot or you already claimed them in pre-launch Opt in',
-        OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long'
+        OPTIN_NOT_AVAILABLE: 'You didn\'t have enough XEM in the snapshot or you already claimed them in pre-launch Opt in',
+        OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long',
+        OPTIN_DONE: 'Done'
     });
 }
 

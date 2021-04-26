@@ -13,12 +13,7 @@ import {broadcastDTO} from "symbol-post-launch-optin";
 /** Service with relative functions on symbol opt in books. */
 class CatapultOptin {
 
-    /**
-     * Initialize dependencies and properties
-     *
-     * @params {services} - Angular services to inject
-     */
-    constructor($localStorage, Wallet, Trezor, DataStore) {
+    constructor($localStorage, $filter, Wallet, Trezor, Ledger, DataStore, Alert, $timeout) {
         'ngInject';
 
         this.normalCaches = {};
@@ -30,7 +25,9 @@ class CatapultOptin {
         this._Wallet = Wallet;
         this._DataStore = DataStore;
         this._Trezor = Trezor;
-
+        this._Ledger = Ledger;
+        this._Alert = Alert;
+        this._$timeout = $timeout;
         // End dependencies region //
 
         // Service properties region //
@@ -165,10 +162,10 @@ class CatapultOptin {
      * @param SYMMultisigPublicKey
      * @param SYMCosignerPublicKey
      */
-    sendMultisigOptin(common, NIS1multisigAddress, SYMMultisigPublicKey, SYMCosignerPublicKey) {
+    sendMultisigOptin(common, NIS1multisigAddress, SYMMultisigPublicKey) {
         return new Promise( (resolve, reject) => {
             const config = this.getOptinConfig();
-            const dto = buildMultisigDTO(NIS1multisigAddress, SYMMultisigPublicKey, SYMCosignerPublicKey);
+            const dto = buildMultisigDTO(NIS1multisigAddress, SYMMultisigPublicKey, "0000000000000000000000000000000000000000000000000000000000000000");
             if (this._Wallet.algo == "trezor") {
                 this._sendTrezorDTOs(common, [dto]).then(resolve).catch(reject);
             } else if (this._Wallet.algo == "ledger") {

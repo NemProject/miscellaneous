@@ -163,7 +163,11 @@ class NormalOptInCtrl {
 
     onPrivateKeyChange() {
         try {
-            this.optinAccount = PublicAccount.createFromPublicKey(this.optinPublicKey, this.catapultNetwork);
+            if (this.optinPublicKey.length !== 64) {
+                this.optinAccount = null;
+            } else {
+                this.optinAccount = PublicAccount.createFromPublicKey(this.optinPublicKey, this.catapultNetwork);
+            }
         } catch (e) {
             this.optinAccount = null;
         }
@@ -211,7 +215,7 @@ class NormalOptInCtrl {
                             // this
                         });
                     } else {
-                        this._CatapultOptin.sendMultisigOptin(this.common, this.formData.selectedAccount.publicKey, this.multisigDestinationPublicKey, this.optinPublicKey).then(result => {
+                        this._CatapultOptin.sendMultisigOptin(this.common, this.formData.selectedAccount.publicKey, this.multisigDestinationPublicKey).then(result => {
                             this.checkOptinStatus(this.formData.selectedAccount.address);
                             this.onMultisigSelectorChange();
                             this.optinAccount = null;
