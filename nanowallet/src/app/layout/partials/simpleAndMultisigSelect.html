@@ -4,7 +4,7 @@
     <span class="input-group-btn">
       <label class="control-label">{{ 'GENERAL_ACCOUNT' | translate }}:</label>
     </span>
-    <select class="form-control" ng-disabled="$ctrl.isDisabled" ng-options="(acc.address | fmtContact:Wallet.current) for acc in $ctrl.allAccounts track by acc.address" ng-model="$ctrl.account" ng-change="$ctrl.update();">
+    <select class="form-control" ng-disabled="$ctrl.isDisabled" ng-options="($ctrl.formatLabel(acc.address)) for acc in $ctrl.allAccounts track by acc.address" ng-model="$ctrl.account" ng-change="$ctrl.update();">
       <option value="" selected disabled>{{'FORM_SELECT_ACCOUNT' | translate}}</option>
     </select>
   </div>

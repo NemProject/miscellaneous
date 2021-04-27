@@ -28,6 +28,18 @@ class SimpleAndMultisigSelectCtrl {
 
     }
 
+    formatLabel(address) {
+        let suffix = ' - ';
+        for (let i=0; i < this.allAccounts.length; i++) {
+            if (this.allAccounts[i].address === address) {
+                if (i === 0) suffix += this._Wallet.currentAccount.label;
+                else suffix += 'Multisig';
+                break;
+            }
+        }
+        return address + suffix;
+    }
+
     //// Component methods region ////
 
     /**
