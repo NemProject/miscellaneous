@@ -165,7 +165,7 @@ class CatapultOptin {
     sendMultisigOptin(common, NIS1multisigAddress, SYMMultisigPublicKey) {
         return new Promise( (resolve, reject) => {
             const config = this.getOptinConfig();
-            const dto = buildMultisigDTO(NIS1multisigAddress, SYMMultisigPublicKey, "0000000000000000000000000000000000000000000000000000000000000000");
+            const dto = buildMultisigDTO(NIS1multisigAddress, SYMMultisigPublicKey);
             if (this._Wallet.algo == "trezor") {
                 this._sendTrezorDTOs(common, [dto]).then(resolve).catch(reject);
             } else if (this._Wallet.algo == "ledger") {

@@ -183,7 +183,7 @@ class NormalOptInCtrl {
                     for (let cosignatory of account.meta.cosignatories) {
                         this.cosignatoriesMapping.push([
                             cosignatory.address, cache.multisigDTOs[cosignatory.publicKey] ?
-                                PublicAccount.createFromPublicKey(cache.multisigDTOs[cosignatory.publicKey].cosigner, this.catapultNetwork).address.plain()
+                                PublicAccount.createFromPublicKey(cache.multisigDTOs[cosignatory.publicKey].destination, this.catapultNetwork).address.plain()
                                 : null
                         ]);
                     }

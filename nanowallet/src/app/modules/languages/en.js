@@ -1027,21 +1027,21 @@ function EnglishProvider($translateProvider) {
         OPTIN_STATUS_TITLE_1: 'Opt in not done',
         OPTIN_STATUS_TEXT_1: 'You can start claiming XYM',
         OPTIN_STATUS_TITLE_2: 'Simple Opt in Pending',
-        OPTIN_STATUS_TEXT_2: 'You have done the Opt In successfully. Your petition can take up to a week to be processed.',
+        OPTIN_STATUS_TEXT_2: 'Your Opt in request has been successfully created.',
         OPTIN_STATUS_TITLE_3: 'Multisig Opt in not started',
         OPTIN_STATUS_TEXT_3: 'You can claim XYM for the multisig account',
         OPTIN_STATUS_TITLE_4: 'Multisig Opt In Pending signatures',
         OPTIN_STATUS_TEXT_4: 'Pending cosigners to Opt In',
         OPTIN_STATUS_TITLE_5: 'Multisig Opt in Pending',
-        OPTIN_STATUS_TEXT_5: 'You have done the Opt In successfully. Your petition can take up to a week to be processed.',
+        OPTIN_STATUS_TEXT_5: 'Your Opt in request has been successfully created.',
         OPTIN_STATUS_TITLE_6: 'Opt in Done',
         OPTIN_STATUS_TEXT_6: 'You have claimed XYM successfully. You should now have received a Symbol transaction with the amount.',
-        OPTIN_ERROR_TITLE_0: 'The opt-in you made previously failed because the signature was not valid.',
-        OPTIN_ERROR_TITLE_1: 'The opt-in you made previously failed because the destination account was not valid',
-        OPTIN_ERROR_TITLE_2: 'The opt-in you made previously failed because one or more cosignatories were not valid.',
+        OPTIN_ERROR_TITLE_0: 'This opt-in request has failed because the signature was not valid.',
+        OPTIN_ERROR_TITLE_1: 'This opt-in request has failed because the destination account was not valid',
+        OPTIN_ERROR_TITLE_2: 'This opt-in request has failed because one or more cosignatories were not valid.',
         OPTIN_NOT_AVAILABLE: 'You didn\'t have enough XEM in the snapshot or you already claimed them in pre-launch Opt in',
         OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long',
-        OPTIN_DONE: 'Done'
+        OPTIN_SIGNED: 'Signed'
     });
 }
 
