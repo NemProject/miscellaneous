@@ -112,7 +112,25 @@ class NormalOptInCtrl {
                     this._$timeout(() => {
                         this.optinAmount = amount;
                         this.optinStatus = status;
-                        if (status === StatusCode.OPTIN_SM_DONE || status === StatusCode.OPTIN_PROCESSED) {
+                        if (status === StatusCode.OPTIN_PROCESSED) {
+                            if (isMultisig) {
+                                this._CatapultOptin.getMultisigCache(account, true).then(cache => {
+                                    this._$timeout(() => {
+                                        this.hasCosignatorySigned = !!cache.multisigDTOs[this._DataStore.account.metaData.account.publicKey];
+                                        this.multisigDestinationPublicKey = cache.multisigDestinationPublicKey;
+                                        this.multisigDestinationAddress = PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork).address.pretty();
+                                        this.statusLoading = false;
+                                    });
+                                });
+                            } else {
+                                this._CatapultOptin.getNormalCache(account).then(cache => {
+                                    this._$timeout(() => {
+                                        this.optinAddress = PublicAccount.createFromPublicKey(cache.simpleDTO.destination, this.catapultNetwork).address.pretty();
+                                        this.statusLoading = false;
+                                    });
+                                });
+                            }
+                        } else if (status === StatusCode.OPTIN_SM_DONE) {
                             this._CatapultOptin.getNormalCache(account).then(cache => {
                                 this._$timeout(() => {
                                     this.optinAddress = PublicAccount.createFromPublicKey(cache.simpleDTO.destination, this.catapultNetwork).address.pretty();
@@ -122,6 +140,8 @@ class NormalOptInCtrl {
                         } else if (status === StatusCode.OPTIN_MS_PENDING) {
                             this._CatapultOptin.getMultisigCache(account, true).then(cache => {
                                 this._$timeout(() => {
+                                    this.multisigDestinationPublicKey = "";
+                                    this.multisigDestinationAddress = "";
                                     this.statusLoading = false;
                                 });
                             });
@@ -154,6 +174,9 @@ class NormalOptInCtrl {
     isValidMultisigDestination() {
         if (!this.isMultisig) return true;
         try {
+            if (this.multisigDestinationPublicKey.length !== 64) {
+                return false;
+            }
             PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork);
             return true;
         } catch (e) {

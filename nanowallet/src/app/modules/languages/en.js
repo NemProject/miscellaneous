@@ -1039,7 +1039,7 @@ function EnglishProvider($translateProvider) {
         OPTIN_ERROR_TITLE_0: 'This Opt-in request has failed because the signature was not valid.',
         OPTIN_ERROR_TITLE_1: 'This Opt-in request has failed because the destination account was not valid',
         OPTIN_ERROR_TITLE_2: 'This Opt-in request has failed because one or more cosignatories were not valid.',
-        OPTIN_NOT_AVAILABLE: 'The Opt-in you previously made failed because the destination account was not valid',
+        OPTIN_NOT_AVAILABLE: 'You didn\'t have enough XEM in the snapshot or you already claimed them in a pre-launch Opt-in',
         OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long',
         OPTIN_SIGNED: 'Signed'
     });
