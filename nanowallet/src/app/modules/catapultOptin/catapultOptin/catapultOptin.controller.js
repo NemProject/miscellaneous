@@ -165,7 +165,11 @@ class NormalOptInCtrl {
 
     calculateMultisigDestinationAddress() {
         try {
-            this.multisigDestinationAddress = PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork).address.pretty();
+            if (this.multisigDestinationPublicKey.length !== 64) {
+                this.multisigDestinationAddress = null;
+            } else {
+                this.multisigDestinationAddress = PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork).address.pretty();
+            }
         } catch (e) {
             this.multisigDestinationAddress = null;
         }

@@ -992,6 +992,7 @@ function EnglishProvider($translateProvider) {
         OPTIN_TAC_INFO_1:'The Opt-in process is a feature launched by Symbol Chain Limited with the aim of helping NIS1 users migrate their balances to their new Symbol network. It is a process defined under certain parameters that all users who adhere to it have to comply with.',
         OPTIN_TAC_INFO_2:'Symbol Chain Limited will not be liable for any incidents outside of the terms and conditions specified below.',
         OPTIN_TAC_READ_ACCEPT: 'I have read and accept the ',
+        OPTIN_TAC_READ_ACCEPT_POST: '',
         OPTIN_CONFIRM_TITLE:'Confirm Symbol Opt-in',
         OPTIN_CONFIRM_INFO:'We are almost done! This will be the information that will be migrated to the new Symbol chain. Review it carefully and sign with your NEM key to finish your Opt-in.',
         OPTIN_CONFIRM_OPTIN:'Confirm Opt-in',
