@@ -5,9 +5,9 @@ import {
     MultisigCache,
     NormalCache,
     status
-} from "symbol-post-launch-optin";
+} from "symbol-post-launch-optin-module";
 import {PublicAccount, NetworkType, Account} from "symbol-sdk";
-import {broadcastDTO} from "symbol-post-launch-optin";
+import {broadcastDTO} from "symbol-post-launch-optin-module";
 
 
 /** Service with relative functions on symbol opt in books. */

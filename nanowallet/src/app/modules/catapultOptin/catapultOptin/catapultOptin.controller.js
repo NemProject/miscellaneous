@@ -4,7 +4,7 @@ import {
     NetworkType,
     Address
 } from "symbol-sdk";
-import {StatusCode} from "symbol-post-launch-optin";
+import {StatusCode} from "symbol-post-launch-optin-module";
 import {PublicAccount} from "symbol-sdk";
 
 class NormalOptInCtrl {
