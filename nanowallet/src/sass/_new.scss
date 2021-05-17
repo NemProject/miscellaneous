@@ -1735,12 +1735,40 @@ textarea {
     width: 50%;
   }
   .optin-label-form{
-    padding: 10px;
-    text-align: center;
+    padding: 10px 20px 10px 20px;
     background-color: white;
     border-radius: 5px;
     color: #5200c6;
-    width: 93%;
+    width: 100%;
+    border: none;
+    font-weight: inherit !important;
+  }
+  .status-color-2 {
+    color: darkorange;
+  }
+  .status-color-4 {
+    color: darkorange;
+  }
+  .status-color-5 {
+    color: darkorange;
+  }
+  .status-color-6 {
+    color: $green;
+  }
+  .status-color-error {
+    color: $red;
+  }
+  .purple-dark{
+    color: #44004E !important;
+  }
+  .optin-label-form-white{
+    padding: 10px 30px 10px 30px;
+    background-color: white;
+    border-radius: 5px;
+    color: #44004E;
+    border: 1px solid #44004E;
+    width: 100%;
+    font-weight: inherit !important;
   }
 
   .clipboard-icon{
@@ -1762,6 +1790,22 @@ textarea {
   }
 }
 
+.optin-table {
+    th {
+      color: #5200c6;
+      font-weight: bold;
+      padding: 10px 0 4px 6px;
+      font-size: 16px;
+      border-bottom: 1px solid #5200c6 !important;
+    }
+
+    td {
+      font-size: 12px;
+      color: rgb(85, 85, 85);
+      padding: 6px;
+    }
+}
+
 .mb-0 {
 
   margin-bottom: 0;
@@ -1778,6 +1822,22 @@ textarea {
 
   margin-top: 2rem;
 
+}
+.optin-Selector{
+  span{
+    display: none !important;
+  }
+  .input-group{
+    display: block !important;
+  }
+  select{
+    border-radius: 5px !important;
+    color: #5200c6;
+  }
+  .form-control{
+    padding: 10px !important;
+    height: auto !important;
+  }
 }
 
 

@@ -116,8 +116,7 @@ const requires = [
     'app.dnsSearch',
     'app.NEMonster',
     'app.importWalletQrCode',
-    'app.catapultOptin',
-    'app.multisigOptin'
+    'app.catapultOptin'
 ];
 
 window.$ = window.jQuery = $;
