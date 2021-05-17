@@ -31,6 +31,10 @@ componentsModule.component('attachMosaic', AttachMosaic);
 import MultisigSelect from './multisigSelect.component';
 componentsModule.component('multisigSelect', MultisigSelect);
 
+// Set simple-and-multisig-select component
+import SimpleAndMultisigSelect from './simpleAndmultisigSelect.component';
+componentsModule.component('simpleAndMultisigSelect', SimpleAndMultisigSelect);
+
 // Set news component
 import News from './news.component';
 componentsModule.component('news', News);

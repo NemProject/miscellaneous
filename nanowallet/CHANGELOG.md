@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.6.0
+
+    - Added post-launch opt-in process
+
 ## Version 2.5.1
 
     - Fixed Ledger opt-in cosigning issue.

@@ -7,7 +7,7 @@ function CatapultOptInConfig($stateProvider) {
             controller: 'CatapultOptInCtrl',
             controllerAs: '$ctrl',
             templateUrl: 'modules/catapultOptin/catapultOptin/catapultOptin.html',
-            title: 'Catapult Opt In'
+            title: 'Symbol Opt In'
         });
 
 };
