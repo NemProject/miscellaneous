@@ -85,6 +85,7 @@ class NormalOptInCtrl {
         this.formData.selectedAccount = this._DataStore.account.metaData.account;
         this.isMultisig = false;
         this.hasCosignatorySigned = true;
+        this.isConfirmAddressModalShown = false;
     }
 
     /**
@@ -220,9 +221,25 @@ class NormalOptInCtrl {
     }
 
     /**
+     * Shows Symbol Address confirmation modal
+     */
+    showConfirmAddressModal() {
+        this.isConfirmAddressModalShown = true;
+    }
+
+    /**
+     * Hides Symbol Address confirmation modal
+     */
+    hideConfirmAddressModal() {
+        this.isConfirmAddressModalShown = false;
+    }
+
+
+    /**
      * Sends optin simple or multisig account by a valid form
      */
     send() {
+        this.isConfirmAddressModalShown = false;
         if (this._Wallet.decrypt(this.common)) {
             if (this._DataStore.account.metaData.account.balance < this.fee) {
                 this._$timeout(() => {

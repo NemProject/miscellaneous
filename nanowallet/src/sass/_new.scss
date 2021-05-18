@@ -1823,6 +1823,30 @@ textarea {
   margin-top: 2rem;
 
 }
+
+.mb-4 {
+
+  margin-bottom: 2rem;
+
+}
+
+.mb-2 {
+
+  margin-bottom: 4rem;
+
+}
+
+.pt-2 {
+
+  padding-top: 2rem;
+
+}
+
+.pb-2 {
+
+  padding-bottom: 2rem;
+
+}
 .optin-Selector{
   span{
     display: none !important;
@@ -1840,7 +1864,18 @@ textarea {
   }
 }
 
+.optin-confirm-bg {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.optin-confirm-modal {
+  background-color: #f3f4f8;
+  border-radius: 6px;
+  box-shadow: 0 3px 200px #0005;
+}
 
 
 
