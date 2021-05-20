@@ -67,6 +67,15 @@ class CatapultOptin {
         };
     }
 
+    async checkIfNIS1PublicKeyOrPrivateKey(key) {
+        const publicKeyAddress = nem.utils.format.pubToAddress(key, this._Wallet.network);
+        const privateKeyAddress = nem.utils.format.pubToAddress(nem.crypto.keyPair.create(key).publicKey.toString(), this._Wallet.network);
+
+        const publicKeyData = await nem.com.requests.account.data(this._Wallet.node, publicKeyAddress);
+        const privateKeyData = await nem.com.requests.account.data(this._Wallet.node, privateKeyAddress);
+        return publicKeyData.account.balance === 0 && publicKeyData.account.publicKey == null && privateKeyData.account.balance === 0 && privateKeyData.account.publicKey == null;
+    }
+
     getStatus(account) {
         return new Promise( (resolve) => {
             const config = this.getOptinConfig();

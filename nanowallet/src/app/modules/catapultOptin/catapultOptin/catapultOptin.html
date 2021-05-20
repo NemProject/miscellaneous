@@ -120,6 +120,7 @@
             <div class="form-group" ng-show="$ctrl.isMultisig && $ctrl.optinStatus === 3">
                 <p>{{'POST_OPTIN_DEST_MSIG' | translate}}</p>
                 <input ng-show="$ctrl.optinStatus === 3" type="text"  placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" class="optin-label-form" ng-model="$ctrl.multisigDestinationPublicKey" ng-change="$ctrl.calculateMultisigDestinationAddress()"/>
+                <p style="color: red; font-size: 14px; margin-top: 10px;" ng-show="$ctrl.publicKeyError">{{'OPTIN_NIS1_PUBLIC_KEY' | translate}}</p>
             </div>
             <div class="form-group" ng-show="$ctrl.isMultisig && $ctrl.multisigDestinationAddress">
                 <p>{{'POST_OPTIN_DEST_MSIG_ADDRESS' | translate}}</p>
@@ -129,6 +130,7 @@
             <div class="form-group" ng-show="!$ctrl.isMultisig">
                 <p>{{'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate}}</p>
                 <input type="text" class="optin-label-form" placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" ng-model="$ctrl.optinPublicKey" ng-change="$ctrl.onPrivateKeyChange()"/>
+                <p style="color: red; font-size: 14px; margin-top: 10px;" ng-show="$ctrl.publicKeyError">{{'OPTIN_NIS1_PUBLIC_KEY' | translate}}</p>
             </div>
             <div class="form-group" ng-show="!$ctrl.isMultisig && $ctrl.optinAccount">
                 <p>{{'YOUR_SYMBOL_ADDRESS' | translate}}</p>
