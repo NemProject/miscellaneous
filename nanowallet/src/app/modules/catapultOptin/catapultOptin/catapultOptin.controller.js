@@ -80,6 +80,7 @@ class NormalOptInCtrl {
         this.formData.password = "";
         this.formData.confirmPassword = "";
         this.formData.acceptPrivacy = false;
+        this.formData.addressConfirmed = false;
         this.statusLoading = true;
         this.isOptedIn = false;
         this.formData.selectedAccount = this._DataStore.account.metaData.account;
@@ -224,7 +225,12 @@ class NormalOptInCtrl {
      * Shows Symbol Address confirmation modal
      */
     showConfirmAddressModal() {
-        this.isConfirmAddressModalShown = true;
+        this.formData.addressConfirmed = false;
+
+        if (!this.isMultisig && this._Wallet.decrypt(this.common))
+            this.isConfirmAddressModalShown = true;
+        else
+            this.send();
     }
 
     /**
