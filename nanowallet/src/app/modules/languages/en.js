@@ -1043,6 +1043,7 @@ function EnglishProvider($translateProvider) {
         OPTIN_NOT_AVAILABLE: 'You didn\'t have enough XEM in Snapshot or you already claimed them in a pre-launch opt-in.',
         OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long.',
         OPTIN_SIGNED: 'Signed',
+        OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.'
     });
 }
 

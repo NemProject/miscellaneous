@@ -85,6 +85,7 @@ class NormalOptInCtrl {
         this.formData.selectedAccount = this._DataStore.account.metaData.account;
         this.isMultisig = false;
         this.hasCosignatorySigned = true;
+        this.publicKeyError = false;
     }
 
     /**
@@ -168,7 +169,17 @@ class NormalOptInCtrl {
             if (this.multisigDestinationPublicKey.length !== 64) {
                 this.multisigDestinationAddress = null;
             } else {
-                this.multisigDestinationAddress = PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork).address.pretty();
+                this._CatapultOptin.checkIfNIS1PublicKeyOrPrivateKey(this.multisigDestinationPublicKey).then(result => {
+                    this._$timeout(() => {
+                        if (result) {
+                            this.multisigDestinationAddress = PublicAccount.createFromPublicKey(this.multisigDestinationPublicKey, this.catapultNetwork).address.pretty();
+                            this.publicKeyError = false;
+                        } else {
+                            this.multisigDestinationAddress = null;
+                            this.publicKeyError = true;
+                        }
+                    });
+                });
             }
         } catch (e) {
             this.multisigDestinationAddress = null;
@@ -193,7 +204,17 @@ class NormalOptInCtrl {
             if (this.optinPublicKey.length !== 64) {
                 this.optinAccount = null;
             } else {
-                this.optinAccount = PublicAccount.createFromPublicKey(this.optinPublicKey, this.catapultNetwork);
+                this._CatapultOptin.checkIfNIS1PublicKeyOrPrivateKey(this.optinPublicKey).then(result => {
+                    this._$timeout(() => {
+                        if (result) {
+                            this.optinAccount = PublicAccount.createFromPublicKey(this.optinPublicKey, this.catapultNetwork);
+                            this.publicKeyError = false;
+                        } else {
+                            this.optinAccount = null;
+                            this.publicKeyError = true;
+                        }
+                    });
+                });
             }
         } catch (e) {
             this.optinAccount = null;
