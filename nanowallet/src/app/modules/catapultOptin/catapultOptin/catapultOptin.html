@@ -155,7 +155,7 @@
                 <h1 style="color: #44004E">{{'CATAPULTOPTIN_REVIEW_NORMAL_RESULT' | translate}}</h1>
             </div>
         </div>
-        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 17">
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 17 && $ctrl.isConfirmAddressModalShown == false">
             <!-- Wallet type titles -->
             <div ng-show="!$ctrl.isMultisig">
                 <div class="form-group">
@@ -201,9 +201,55 @@
                     <div class="col-md-6" style="padding: 0 16px;">
                         <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
 background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100%);"
-                                ng-click="$ctrl.send()"
+                                ng-click="$ctrl.showConfirmAddressModal()"
                                 ng-disabled="!$ctrl.formData.acceptPrivacy || !$ctrl.formData.acceptTerms"
                         >{{ 'GENERAL_TAB_SEND' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFIRM ADDRESS MODAL -->
+        <div ng-show="$ctrl.isConfirmAddressModalShown == true" class="optin-confirm-bg container">
+            <div class="optin-confirm-modal col-sm-12 col-md-9">
+                
+                <div class="row optin-confirm-modal-inner">
+                    <div class="optin-confirm-modal-image-container col-xs-1 col-sm-4">
+                        <img src="images/address-verify.png" class="optin-confirm-modal-image">
+                    </div>
+                
+                    <div class="optin-confirm-modal-body pb-2 pt-2 col-xs-11 col-sm-8">
+                        <div>
+                            <h4 style="color: #44004E; font-weight: bold; font-size: 24px;">{{'POST_OPTIN_CONFIRM_MODAL_TITLE' | translate}}</h4>
+                        </div>
+                        <div class="mt-2">
+                            {{'POST_OPTIN_CONFIRM_MODAL_TEXT' | translate}}
+                        </div>
+                        <div class="mt-4">
+                            <div class="form-group">
+                                <p class="purple-dark">{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <input id="address_confirm" type="checkbox" ng-model="$ctrl.formData.addressConfirmed">
+                            <label class="mt-2" for="address_confirm" class="purple-dark"><b>{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX' | translate }}</b></label>
+                        </div>
+                        <div class="mt-2">
+                            <div class="row">
+                                <div class="col-md-6" style="padding: 0 16px;">
+                                    <button class="btn symbol-button symbol-button__block" style="float:left;"
+                                        ng-click="$ctrl.hideConfirmAddressModal()">{{'GENERAL_BACK' |
+                                        translate}}</button>
+                                </div>
+                                <div class="col-md-6" style="padding: 0 16px;">
+                                    <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
+        background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100%);" ng-click="$ctrl.send()"
+                                        ng-disabled="!$ctrl.formData.addressConfirmed">{{
+                                        'GENERAL_TAB_SEND' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
