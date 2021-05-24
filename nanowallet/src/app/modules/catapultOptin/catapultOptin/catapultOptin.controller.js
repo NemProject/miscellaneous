@@ -272,37 +272,30 @@ class NormalOptInCtrl {
     send() {
         this.isConfirmAddressModalShown = false;
         if (this._Wallet.decrypt(this.common)) {
-            if (this._DataStore.account.metaData.account.balance < this.fee) {
-                this._$timeout(() => {
-                    this._Alert.insufficientBalance();
-                });
-            }
-            else {
-                this.step = 0;
-                this.statusLoading = true;
-                this._$timeout(() => {
-                    if (!this.isMultisig) {
-                        this._CatapultOptin.sendSimpleOptin(this.common, this.optinPublicKey).then(result => {
-                            this.checkOptinStatus(this.formData.selectedAccount.address);
-                            this.optinAccount = null;
-                            this.optinPublicKey = '';
-                        }).catch(e => {
-                            // this
-                        });
-                    } else {
-                        this._CatapultOptin.sendMultisigOptin(this.common, this.formData.selectedAccount.publicKey, this.multisigDestinationPublicKey).then(result => {
-                            this.checkOptinStatus(this.formData.selectedAccount.address);
-                            this.onMultisigSelectorChange();
-                            this.optinAccount = null;
-                            this.optinPublicKey = '';
-                            this.multisigDestinationPublicKey = '';
-                            this.multisigDestinationAddress = '';
-                        }).catch(e => {
-                            // this
-                        });
-                    }
-                });
-            }
+            this.step = 0;
+            this.statusLoading = true;
+            this._$timeout(() => {
+                if (!this.isMultisig) {
+                    this._CatapultOptin.sendSimpleOptin(this.common, this.optinPublicKey).then(result => {
+                        this.checkOptinStatus(this.formData.selectedAccount.address);
+                        this.optinAccount = null;
+                        this.optinPublicKey = '';
+                    }).catch(e => {
+                        // this
+                    });
+                } else {
+                    this._CatapultOptin.sendMultisigOptin(this.common, this.formData.selectedAccount.publicKey, this.multisigDestinationPublicKey).then(result => {
+                        this.checkOptinStatus(this.formData.selectedAccount.address);
+                        this.onMultisigSelectorChange();
+                        this.optinAccount = null;
+                        this.optinPublicKey = '';
+                        this.multisigDestinationPublicKey = '';
+                        this.multisigDestinationAddress = '';
+                    }).catch(e => {
+                        // this
+                    });
+                }
+            });
         }
         this.common.password = '';
         this.formData.acceptTerms = false;

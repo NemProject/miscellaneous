@@ -142,7 +142,7 @@
                         <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 15; $ctrl.optinAccount = null; $ctrl.optinPublicKey = '';">{{'GENERAL_BACK' | translate}}</button>
                     </div>
                     <div class="col-md-6" style="padding: 0 16px;">
-                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-show="(!$ctrl.isMultisig && !!$ctrl.optinAccount) || ($ctrl.isMultisig && $ctrl.isValidMultisigDestination())" ng-click="$ctrl.step = 17;">{{'GENERAL_NEXT' | translate}}</button>
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-show="(!$ctrl.isMultisig && !!$ctrl.optinAccount) || ($ctrl.isMultisig && !!$ctrl.multisigDestinationAddress)" ng-click="$ctrl.step = 17;">{{'GENERAL_NEXT' | translate}}</button>
                     </div>
                 </div>
             </div>
@@ -212,12 +212,12 @@ background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100
         <!-- CONFIRM ADDRESS MODAL -->
         <div ng-show="$ctrl.isConfirmAddressModalShown == true" class="optin-confirm-bg container">
             <div class="optin-confirm-modal col-sm-12 col-md-9">
-                
+
                 <div class="row optin-confirm-modal-inner">
                     <div class="optin-confirm-modal-image-container col-xs-1 col-sm-4">
                         <img src="images/address-verify.png" class="optin-confirm-modal-image">
                     </div>
-                
+
                     <div class="optin-confirm-modal-body pb-2 pt-2 col-xs-11 col-sm-8">
                         <div>
                             <h4 style="color: #44004E; font-weight: bold; font-size: 24px;">{{'POST_OPTIN_CONFIRM_MODAL_TITLE' | translate}}</h4>
