@@ -1039,6 +1039,11 @@ function UkrainianProvider($translateProvider) {
         OPTIN_ERROR_TITLE_1:                    'Цей opt-in запит не вдався, оскільки цільовий рахунок для нарахування не був дійсним.',
         OPTIN_ERROR_TITLE_2:                    'Цей opt-in запит не вдався, оскільки один або декілька підписантів не були дійсними.',
         OPTIN_SIGNED:                           'Підписано',
+        POST_OPTIN_CONFIRM_MODAL_TITLE:         'Увага!',
+        POST_OPTIN_CONFIRM_MODAL_TEXT:          'Переконайтесь, що адреса призначення Symbol - це адреса вашого акаунту Symbol. Адресу свого акаунту  Symbol можна знайти на головному екрані гаманця Symbol. Якщо вони не збігаються, будь ласка, запустіть процес знову та надайте дійсний відкритий ключ акаунту Symbol, яким Ви володієте!',
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Я підтверджую, що адреса призначення співпадає з адресою мого акаунту Symbol',
+        OPTIN_NIS1_PUBLIC_KEY:                  'Ключ, що Ви ввели, є ключем NEM NIS1. Будь ласка, уведіть публічний ключ Symbol',
+        POST_OPTIN_ERROR_INVALID_KEY:           'Неправильний ключ'
     });
 
 }

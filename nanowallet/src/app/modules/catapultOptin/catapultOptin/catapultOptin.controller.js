@@ -170,6 +170,7 @@ class NormalOptInCtrl {
         try {
             if (this.multisigDestinationPublicKey.length !== 64) {
                 this.multisigDestinationAddress = null;
+                this.publicKeyError = false;
             } else {
                 this._CatapultOptin.checkIfNIS1PublicKeyOrPrivateKey(this.multisigDestinationPublicKey).then(result => {
                     this._$timeout(() => {
@@ -184,6 +185,7 @@ class NormalOptInCtrl {
                 });
             }
         } catch (e) {
+            this.publicKeyError = false;
             this.multisigDestinationAddress = null;
         }
     }
@@ -205,6 +207,7 @@ class NormalOptInCtrl {
         try {
             if (this.optinPublicKey.length !== 64) {
                 this.optinAccount = null;
+                this.publicKeyError = false;
             } else {
                 this._CatapultOptin.checkIfNIS1PublicKeyOrPrivateKey(this.optinPublicKey).then(result => {
                     this._$timeout(() => {
@@ -220,6 +223,7 @@ class NormalOptInCtrl {
             }
         } catch (e) {
             this.optinAccount = null;
+            this.publicKeyError = false;
         }
     }
 

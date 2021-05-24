@@ -972,6 +972,11 @@ function SpanishProvider($translateProvider) {
         OPTIN_ERROR_TITLE_1:                    'El opt-in hecho anteriormente ha fallado por que la cuenta destino no era valida.',
         OPTIN_ERROR_TITLE_2:                    'Esta opt-in request ha fallado por que uno o mas cofirmantes no eran validos.',
         OPTIN_SIGNED:                           'Firmado',
+        POST_OPTIN_CONFIRM_MODAL_TITLE:         'Atención!',
+        POST_OPTIN_CONFIRM_MODAL_TEXT:          'Por favor verifica que la dirección de Symbol destino es la misma dirección que tu cuenta de Symbol. Puedes encontrar la dirección de tu cuenta de Symbol  en la página de inicio de tu billetera de Symbol. Si no son la misma, por favor empieza el proceso de nuevo y entra una llave publica de Symbol valida para tu cuenta!',
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Confirmo que la dirección de Symbol destino es la misma que la dirección de mi cuenta de Symbol',
+        OPTIN_NIS1_PUBLIC_KEY:                  'La llave publica que has entrado es una llave de NIS1! Debes poner una llave publica de Symbol',
+        POST_OPTIN_ERROR_INVALID_KEY:           'Llave inválida'
     });
 
 }

@@ -938,7 +938,12 @@ function RussianProvider($translateProvider) {
         OPTIN_SYMBOL_READY: 'Ваш Symbol аккаунт успешно создан',
         OPTIN_COPY_SUCCESS: 'Copied!',
         OPTIN_TYPE_SELECT: 'Выберите способ, с помощью которого вы произвели опт-ин процесс, в этом кошельке',
-        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'У этого аккаунта более 8 подписантов. Протокол Opt In позволяет использовать мультисиг аккаунты не более чем с 9 подписантами.'
+        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'У этого аккаунта более 8 подписантов. Протокол Opt In позволяет использовать мультисиг аккаунты не более чем с 9 подписантами.',
+        POST_OPTIN_CONFIRM_MODAL_TITLE:         'Внимание!',
+        POST_OPTIN_CONFIRM_MODAL_TEXT:          'Убедитесь, что адрес назначения Symbol - это адрес вашего аккаунта Symbol. Адрес своего аккаунта Symbol можно найти на главном экране кошелька Symbol. Если они не совпадают, пожалуйста, запустите процесс снова и предоставьте действительный открытый ключ аккаунта Symbol, которым Вы владеете!',
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Я подтверждаю, что адрес назначения совпадает с адресом моего аккаунта Symbol',
+        OPTIN_NIS1_PUBLIC_KEY:                  'Ключ, который Вы ввели, является ключом NEM NIS1. Пожалуйста, введите публичный ключ Symbol',
+        POST_OPTIN_ERROR_INVALID_KEY:           'Неправильный ключ'
 
 });
 

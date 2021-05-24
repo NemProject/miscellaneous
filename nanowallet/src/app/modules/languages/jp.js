@@ -1049,6 +1049,11 @@ function JapaneseProvider($translateProvider) {
       OPTIN_ERROR_TITLE_2:                    '1名または複数の連署者が有効でないため、このオプトインリクエストは失敗しました。',
       OPTIN_SIGNED:                           '署名済み',
       OPTIN_TAC_READ_ACCEPT_POST:             'を読んだ上で承諾します。',
+      POST_OPTIN_CONFIRM_MODAL_TITLE:         '注意!',
+      POST_OPTIN_CONFIRM_MODAL_TEXT:          '"Symbolの送信先アドレスがあなたのSymbolアカウントのアドレスであることを確認してください。',
+      POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Symbolアカウントのアドレスは、Symbolウォレットのホーム画面で確認できます。',
+      OPTIN_NIS1_PUBLIC_KEY:                  '一致しない場合は、再度手続きを開始し、あなたが所有するアカウントの有効なSymbol公開鍵を入力してください。"',
+      POST_OPTIN_ERROR_INVALID_KEY:           'Symbolの送付先アドレスが、私のSymbolアカウントのアドレスと一致していることを確認します。'
     });
 
 }
