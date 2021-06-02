@@ -222,18 +222,28 @@ background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100
                         <div>
                             <h4 style="color: #44004E; font-weight: bold; font-size: 24px;">{{'POST_OPTIN_CONFIRM_MODAL_TITLE' | translate}}</h4>
                         </div>
-                        <div class="mt-2">
+                        <div ng-show="$ctrl.isMultisig == false" class="mt-2">
                             {{'POST_OPTIN_CONFIRM_MODAL_TEXT' | translate}}
                         </div>
+                        <div ng-show="$ctrl.isMultisig == true" class="mt-2">
+                            {{'POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG' | translate}}
+                        </div>
                         <div class="mt-4">
-                            <div class="form-group">
+                            <div ng-show="!$ctrl.isMultisig" class="form-group">
                                 <p class="purple-dark">{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
                                 <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
+                            </div>
+                            <div ng-show="$ctrl.isMultisig" class="form-group">
+                                <p class="purple-dark">{{'POST_OPTIN_DEST_MULTISIG_ADDRESS' | translate}}</p>
+                                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.multisigDestinationAddress}}</label>
                             </div>
                         </div>
                         <div class="mt-4">
                             <input id="address_confirm" type="checkbox" ng-model="$ctrl.formData.addressConfirmed">
-                            <label class="mt-2" for="address_confirm" class="purple-dark"><b>{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX' | translate }}</b></label>
+                            <label class="mt-2" for="address_confirm" class="purple-dark">
+                                <b ng-show="$ctrl.isMultisig == false">{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX' | translate }}</b>
+                                <b ng-show="$ctrl.isMultisig == true">{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG' | translate }}</b>
+                            </label>
                         </div>
                         <div class="mt-2">
                             <div class="row">

@@ -252,10 +252,8 @@ class NormalOptInCtrl {
     showConfirmAddressModal() {
         this.formData.addressConfirmed = false;
 
-        if (!this.isMultisig && this._Wallet.decrypt(this.common))
+        if (this._Wallet.decrypt(this.common))
             this.isConfirmAddressModalShown = true;
-        else
-            this.send();
     }
 
     /**
