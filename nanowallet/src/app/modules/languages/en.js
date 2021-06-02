@@ -1044,7 +1044,7 @@ function EnglishProvider($translateProvider) {
         OPTIN_PUBLICKEY_PLACEHOLDER: 'Public key must be 64 hexadecimal characters long.',
         OPTIN_SIGNED: 'Signed',
         POST_OPTIN_CONFIRM_MODAL_TITLE: "Warning!",
-        POST_OPTIN_CONFIRM_MODAL_TEXT: "Please verify that the Symbol destination address is your Symbol account address. You can find your Symbol account address in the Symbol Wallet home screen. If it doesn’t match, please start the process again and provide a valid Symbol public key of the accout you are own!",
+        POST_OPTIN_CONFIRM_MODAL_TEXT: "Please verify that the Symbol destination address is your Symbol account address. You can find your Symbol account address in the Symbol Wallet home screen. If it doesn’t match, please start the process again and provide a valid Symbol public key of the accout you own!",
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX: "I confirm that the Symbol destination address matches my Symbol account address",
         OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.'
     });
