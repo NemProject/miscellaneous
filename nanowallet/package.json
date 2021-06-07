@@ -82,9 +82,9 @@
     "release:lin": "npm run node-hid:prebuild-install:lin && electron-builder --linux deb snap tar.gz",
     "release:zip": "npm-build-zip --source=build --destination=release --name=universal",
     "node-hid:prebuild-install": "cd ./node_modules/node-hid && npm run install && cd ../..",
-    "node-hid:prebuild-install:mac": "set npm_config_platform=darwin && npm run node-hid:prebuild-install",
-    "node-hid:prebuild-install:win": "set npm_config_platform=win32 && npm run node-hid:prebuild-install",
-    "node-hid:prebuild-install:lin": "set npm_config_platform=linux && npm run node-hid:prebuild-install"
+    "node-hid:prebuild-install:mac": "export npm_config_platform=darwin && npm run node-hid:prebuild-install",
+    "node-hid:prebuild-install:win": "export npm_config_platform=win32 && npm run node-hid:prebuild-install",
+    "node-hid:prebuild-install:lin": "export npm_config_platform=linux && npm run node-hid:prebuild-install"
   },
   "resolutions": {
     "@babel/preset-env": "7.5.5"
