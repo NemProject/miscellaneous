@@ -938,7 +938,9 @@ function ItalianProvider($translateProvider) {
         POST_OPTIN_CONFIRM_MODAL_TEXT:          'Verifica che l\'indirizzo di destinazione di Symbol sia l\'indirizzo del tuo account Symbol.  Puoi trovare l\'indirizzo del tuo account Symbol nella schermata iniziale del tuo wallet Symbol. Se non corrisponde, riavvia la procedura e fornisci una chiave pubblica valida per l\'account di tua proprietà.',
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Confermo che l\'indirizzo di destinazione Symbol corrisponde all\'indirizzo del mio account Symbol.',
         OPTIN_NIS1_PUBLIC_KEY:                  'La chiave pubblica che hai inserito è una chiave NIS1!  Devi inserire una chiave pubblica Symbol.',
-        POST_OPTIN_ERROR_INVALID_KEY:           ' Chiave non valida'
+        POST_OPTIN_ERROR_INVALID_KEY:           ' Chiave non valida',
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
 });
 
 }

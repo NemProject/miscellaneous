@@ -1053,7 +1053,9 @@ function JapaneseProvider($translateProvider) {
       POST_OPTIN_CONFIRM_MODAL_TEXT:          '"Symbolの送信先アドレスがあなたのSymbolアカウントのアドレスであることを確認してください。',
       POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Symbolアカウントのアドレスは、Symbolウォレットのホーム画面で確認できます。',
       OPTIN_NIS1_PUBLIC_KEY:                  '一致しない場合は、再度手続きを開始し、あなたが所有するアカウントの有効なSymbol公開鍵を入力してください。"',
-      POST_OPTIN_ERROR_INVALID_KEY:           'Symbolの送付先アドレスが、私のSymbolアカウントのアドレスと一致していることを確認します。'
+      POST_OPTIN_ERROR_INVALID_KEY:           'Symbolの送付先アドレスが、私のSymbolアカウントのアドレスと一致していることを確認します。',
+      POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
+      POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
     });
 
 }

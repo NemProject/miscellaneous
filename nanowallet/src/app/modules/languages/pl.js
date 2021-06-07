@@ -1044,7 +1044,9 @@ function PolishProvider($translateProvider) {
         POST_OPTIN_CONFIRM_MODAL_TEXT:          'Zweryfikuj, że zaprezentowany docelowy adres Symbol jest Twoim adresem. Twój adres Symbol możesz znaleźć w Twoim portfelu Symbol na głównym ekranie. Jeśli adresy nie są takie same zacznij proces od początku i wprowadź poprawny klucz publiczny Twojego konta Symbol.',
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Potwierdzam, że prezentowany adres do wypłaty w sieci Symbol zgadza się z moim adresem Symbol.',
         OPTIN_NIS1_PUBLIC_KEY:                  'Klucz publiczny, który wprowadziłeś to klucz z sieci NIS1. Wprowadź klucz publiczny sieci Symbol.',
-        POST_OPTIN_ERROR_INVALID_KEY:           'Niepoprawny klucz'
+        POST_OPTIN_ERROR_INVALID_KEY:           'Niepoprawny klucz',
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Zweryfikuj, że zaprezentowany docelowy adres Symbol jest Twoim adresem z multipodpisem. Jeśli adresy nie są takie same zacznij proces od początku i wprowadź poprawny klucz publiczny Twojego konta Symbol z multipodpisem.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "Potwierdzam, że prezentowany adres do wypłaty w sieci Symbol zgadza się z moim adresem konta Symbol z multipodpisem.",
     });
 
 }

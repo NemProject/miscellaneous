@@ -943,8 +943,9 @@ function RussianProvider($translateProvider) {
         POST_OPTIN_CONFIRM_MODAL_TEXT:          'Убедитесь, что адрес назначения Symbol - это адрес вашего аккаунта Symbol. Адрес своего аккаунта Symbol можно найти на главном экране кошелька Symbol. Если они не совпадают, пожалуйста, запустите процесс снова и предоставьте действительный открытый ключ аккаунта Symbol, которым Вы владеете!',
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Я подтверждаю, что адрес назначения совпадает с адресом моего аккаунта Symbol',
         OPTIN_NIS1_PUBLIC_KEY:                  'Ключ, который Вы ввели, является ключом NEM NIS1. Пожалуйста, введите публичный ключ Symbol',
-        POST_OPTIN_ERROR_INVALID_KEY:           'Неправильный ключ'
-
+        POST_OPTIN_ERROR_INVALID_KEY:           'Неправильный ключ',
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Убедитесь, что в качестве адреса назначения Symbol указан адрес вашего мультисиг аккаунта Symbol. Если он не совпадает, начните процесс снова и предоставьте корректный публичный ключ от мультисиг аккаунта Symbol.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "Я подтверждаю, что адрес назначения совпадает с адресом мультисиг аккаунта Symbol",
 });
 
 }
