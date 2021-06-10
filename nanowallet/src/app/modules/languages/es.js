@@ -977,8 +977,8 @@ function SpanishProvider($translateProvider) {
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Confirmo que la dirección de Symbol destino es la misma que la dirección de mi cuenta de Symbol',
         OPTIN_NIS1_PUBLIC_KEY:                  'La llave publica que has entrado es una llave de NIS1! Debes poner una llave publica de Symbol',
         POST_OPTIN_ERROR_INVALID_KEY:           'Llave inválida',   
-        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
-        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Por favor verifica que la dirección destino de Symbol coincide con la de tu dirección multisig. Si no coinciden, por favor inicia el proceso de nuevo e introduce la llave pública válida  de la cuenta multisig.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "Confirmo que la dirección destino de Symbol coincide con la dirección de mi cuenta multisig.",
     });
 
 }

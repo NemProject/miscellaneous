@@ -987,12 +987,12 @@ function ChineseProvider($translateProvider) {
         OPTIN_NOT_AVAILABLE:                    '您的快照模块上没有足够的余额， 亦或者您已在发布前选择加入。',
         OPTIN_PUBLICKEY_PLACEHOLDER:            '公钥只能是64位的Hex字符串',
         OPTIN_DONE:                             '完成',
-        POST_OPTIN_CONFIRM_MODAL_TITLE: "Warning!",
-        POST_OPTIN_CONFIRM_MODAL_TEXT: "Please verify that the Symbol destination address is your Symbol account address. You can find your Symbol account address in your Symbol Wallet home screen. If it doesn’t match, please start the process again and provide a valid Symbol public key of the account that you own.",
-        POST_OPTIN_CONFIRM_MODAL_CHECKBOX: "I confirm that the Symbol destination address matches my Symbol account address",
-        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
-        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
-        OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.'
+        POST_OPTIN_CONFIRM_MODAL_TITLE: '注意!',
+        POST_OPTIN_CONFIRM_MODAL_TEXT: "请确认 Symbol 目标地址是您的 Symbol 帐户地址。您可以在 Symbol Wallet 主屏幕中找到您的 Symbol 帐户地址。如果不匹配，请重新开始该过程并提供您拥有的帐户的有效Symbol公钥。",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX: "我确认Symbol目标地址与我的Symbol帐户地址匹配",
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "请确认 Symbol 目标地址是您的 Symbol 多重签名帐户地址。如果不匹配，请重新开始该过程并提供多重签名帐户的有效Symbol公钥。",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "我确认 Symbol 目标地址与 Symbol 多重签名帐户地址匹配",
+        OPTIN_NIS1_PUBLIC_KEY: '您输入的公钥是 NIS1 密钥！您需要输入一个Symbol公钥。'
     });
 
 }
