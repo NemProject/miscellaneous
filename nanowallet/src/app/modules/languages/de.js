@@ -992,8 +992,13 @@ function GermanProvider($translateProvider) {
         OPTIN_SYMBOL_READY: 'Your Symbol account is ready',
         OPTIN_COPY_SUCCESS: 'Copied!',
         OPTIN_TYPE_SELECT: 'Select the way you opted in this wallet',
-        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories'
-
+        CATAPULT_OPT_IN_ERROR_TOO_MUCH_COSIGNATORIES: 'This account has more than 8 cosignatories. Opt In protocol only allows multisig accounts with less than 9 cosignatories',
+        POST_OPTIN_CONFIRM_MODAL_TITLE: "Warning!",
+        POST_OPTIN_CONFIRM_MODAL_TEXT: "Please verify that the Symbol destination address is your Symbol account address. You can find your Symbol account address in your Symbol Wallet home screen. If it doesn’t match, please start the process again and provide a valid Symbol public key of the account that you own.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX: "I confirm that the Symbol destination address matches my Symbol account address",
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
+        OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.'
     });
 
 }
