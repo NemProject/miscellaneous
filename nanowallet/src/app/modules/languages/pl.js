@@ -985,6 +985,7 @@ function PolishProvider($translateProvider) {
         OPTIN_TAC_INFO_1:'The Opt-in process is a feature launched by Symbol Chain Limited with the aim of helping NIS1 users migrate their balances to their new Symbol network. It is a process defined under certain parameters that all users who adhere to it have to comply with.',
         OPTIN_TAC_INFO_2:'Symbol Chain Limited will not be liable for any incidents outside of the terms and conditions specified below.',
         OPTIN_TAC_READ_ACCEPT: 'I have read and accept the ',
+        OPTIN_TAC_READ_ACCEPT_POST: ' ',
         OPTIN_CONFIRM_TITLE:'Confirm Symbol Opt-in',
         OPTIN_CONFIRM_INFO:'We are almost done! This will be the information that will be migrated to the new Symbol chain. Review it carefully and sign with your NEM key to finish your Opt-in.',
         OPTIN_CONFIRM_OPTIN:'Confirm Opt-in',
@@ -1040,6 +1041,13 @@ function PolishProvider($translateProvider) {
         OPTIN_ERROR_TITLE_1:                    'Ta prośba opt-in nie powiodła się ponieważ konto docelowe nie jest poprawne',
         OPTIN_ERROR_TITLE_2:                    'Ta prośba opt-in nie powiodła się ponieważ jeden lub więcej sygnatariuszy nie było poprawnych.',
         OPTIN_SIGNED:                           'Podpisano',
+        POST_OPTIN_CONFIRM_MODAL_TITLE:         'Uwaga!',
+        POST_OPTIN_CONFIRM_MODAL_TEXT:          'Zweryfikuj, że zaprezentowany docelowy adres Symbol jest Twoim adresem. Twój adres Symbol możesz znaleźć w Twoim portfelu Symbol na głównym ekranie. Jeśli adresy nie są takie same zacznij proces od początku i wprowadź poprawny klucz publiczny Twojego konta Symbol.',
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX:      'Potwierdzam, że prezentowany adres do wypłaty w sieci Symbol zgadza się z moim adresem Symbol.',
+        OPTIN_NIS1_PUBLIC_KEY:                  'Klucz publiczny, który wprowadziłeś to klucz z sieci NIS1. Wprowadź klucz publiczny sieci Symbol.',
+        POST_OPTIN_ERROR_INVALID_KEY:           'Niepoprawny klucz',
+        POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Zweryfikuj, że zaprezentowany docelowy adres Symbol jest Twoim adresem z multipodpisem. Jeśli adresy nie są takie same zacznij proces od początku i wprowadź poprawny klucz publiczny Twojego konta Symbol z multipodpisem.",
+        POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "Potwierdzam, że prezentowany adres do wypłaty w sieci Symbol zgadza się z moim adresem konta Symbol z multipodpisem.",
     });
 
 }

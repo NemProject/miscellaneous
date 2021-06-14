@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.6.1
+
+    - Added post-launch opt-in check NIS keys
+
 ## Version 2.6.0
 
     - Added post-launch opt-in process
