@@ -1,1 +1,11 @@
-{}
+# Generic types
+AllNodesDTO:
+    '$ref': './AllNodesDTO.yml'
+NetworkId:
+    '$ref': './NetworkId.yml'
+NodeDTO:
+    '$ref': './NodeDTO.yml'
+NodeListDTO:
+    '$ref': './NodeListDTO.yml'
+PublicKey:
+    '$ref': './PublicKey.yml'

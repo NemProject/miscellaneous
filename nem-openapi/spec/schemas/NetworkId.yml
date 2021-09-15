@@ -1,0 +1,9 @@
+type: integer
+enum:
+    - 104
+    - -104
+description: >
+    The network id. The following network ids are supported:
+    * `104 (hex 0x68)` - The main network id.
+    * `-104 (hex 0x98)` - The test network id.
+example: 104

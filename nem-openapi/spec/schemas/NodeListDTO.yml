@@ -1,0 +1,10 @@
+type: object
+description: >
+    Simple list with Node items.
+required:
+    - data
+properties:
+    data:
+        type: array
+        items:
+            $ref: './NodeDTO.yml'
