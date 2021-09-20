@@ -1,3 +1,4 @@
+# Node routes
 '/node/info':
     get:
         tags:
@@ -55,3 +56,33 @@
                     application/json:
                         schema:
                             $ref: './schemas/AllNodesDTO.yml'
+
+# Chain routes
+'/chain/height':
+    get:
+        tags:
+            - Chain
+        summary: Chain Height
+        description: Gets the current height of the block chain.
+        operationId: chainHeight
+        responses:
+            '200':
+                description: success
+                content:
+                    application/json:
+                        schema:
+                            $ref: './schemas/BlockHeightDTO.yml'
+'/chain/score':
+    get:
+        tags:
+            - Chain
+        summary: Chain Score
+        description: Gets the current score of the block chain.
+        operationId: chainScore
+        responses:
+            '200':
+                description: success
+                content:
+                    application/json:
+                        schema:
+                            $ref: './schemas/ChainScoreDTO.yml'
