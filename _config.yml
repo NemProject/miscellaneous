@@ -28,6 +28,7 @@ github_username:  jekyll
 logo: "/assets/images/logo.svg"
 
 # Build settings
+remote_theme: pmarsceill/just-the-docs
 theme: just-the-docs
 
 
