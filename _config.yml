@@ -26,11 +26,10 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
 logo: "/assets/images/logo.svg"
+color_scheme: light
 
 # Build settings
 remote_theme: pmarsceill/just-the-docs
-theme: just-the-docs
-
 
 # Exclude from processing.
 # The following items will not be processed, by default.
