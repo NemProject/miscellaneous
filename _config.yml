@@ -20,8 +20,8 @@
 
 title: NEM Documentation
 description: Technical Documentation for Developers and Average Users.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/nemio" # the subpath of your site, e.g. /blog
+url: "https://segfaultxavi.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 logo: "/assets/images/logo.svg"
 color_scheme: light
 
