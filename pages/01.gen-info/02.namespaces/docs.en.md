@@ -7,7 +7,7 @@ taxonomy:
 nav_order: 2
 ---
 
-####Mosaics and Namespaces
+#### Mosaics and Namespaces
 Mosaics are a very important backbone of the NEM platform. Mosaics add depth and breath into NEM. Given these mosaics, we are now able to do a lot more, and which actually opens up a plethora of things that otherwise cannot be done in most blockchain platforms. Coupled with NEM’s multisig, mosaics allow new levels of blockchain utility and versatility.
 
 The basic things you need to know about NEM’s recent fork are Namespaces and Mosaics features. The easiest way to appreciate it is the domain and file analogy on the internet. Imagine that a domain address has to be unique in a root (lowest level) directory. Namespace addresses this unique feature. If one creates a namespace, that namespace will appear unique in the NEM ecosystem. For example, if one were to create a namespace called “foo” that namespace cannot be created by a second person.  Just like on the internet, a domain can have a sub-domain, namespaces can have sub-namespaces.   And it is possible to create multiple sub-namespaces with the same name (example: “foo.bar” and “foo2.bar”, “bar” is the sub-namespace/sub-domain). A namespace and a domain name is the same in this document and shall be used interchangeably. Namespaces can have up to 3 levels, a namespace and its two levels of sub-namespace domains.

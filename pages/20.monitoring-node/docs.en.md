@@ -14,7 +14,7 @@ the required information to configure any other monitoring solution.
 
 It is possible to get information from a running nis by sending HTTP requests. Several URLS are handled.
 
-Status URLs will give JSON-formatted answers, and their meaning is detaild in the [NIS API documentation](http://bob.nem.ninja/docs/#nemRequestResult).
+Status URLs will give JSON-formatted answers, and their meaning is detailed in the [NIS API documentation](http://bob.nem.ninja/docs/#nemRequestResult).
 
 Node URLs will give information on the node, such as the version that it is running.
 
@@ -23,7 +23,7 @@ Node URLs will give information on the node, such as the version that it is runn
 You configure your monitoring solution to send requests to the url `http://YOUR_IP:7890/heartbeat`. A NIS instance 
 receiving this request will answer if the node is up and able to answer to requests. 
 
-In UptimRobot, the form configuring a new monitor hence looks like this:
+In UptimeRobot, the form configuring a new monitor hence looks like this:
 {{< figure src="/images/running_node_uptimerobot.png" title="UptimeRobot Monitor definition" >}}
 
 ### Status URL /status
