@@ -1,0 +1,22 @@
+/* Custom fonts */
+@font-face {
+    font-family: "Industry Inc";
+    src: url("/nem-docs/assets/fonts/IndustryInc-Base.ttf");
+}
+
+/* Navigation menu selected link */
+.nav-list .nav-list-item .nav-list-link.active {
+    background-image: linear-gradient(-90deg, #9773FF40 0%, #9773FF00 100%);
+    border-right: 4px solid #9773FF;
+}
+.nav-list .nav-list-item .nav-list-link:hover {
+    background-image: linear-gradient(-90deg, #9773FF40 0%, #9773FF00 100%);
+}
+
+.main-content h1, .main-content h2, .main-content h3, .main-content h4 {
+    font-family: Industry Inc;
+    background: linear-gradient(270deg, #B32AF9 43.23%, #9773FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
