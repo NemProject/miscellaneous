@@ -20,14 +20,14 @@
 
 title: NEM Documentation
 description: Technical Documentation for Developers and Average Users.
-baseurl: "/nemio" # the subpath of your site, e.g. /blog
-url: "https://segfaultxavi.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/nem-docs" # the subpath of your site, e.g. /blog
+url: "https://NemProject.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 logo: "/assets/images/logo.svg"
 color_scheme: light
 
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub."
-gh_edit_repository: "https://github.com/segfaultxavi/nemio" # the github URL for your repo
+gh_edit_repository: "https://github.com/NemProject/nem-docs" # the github URL for your repo
 gh_edit_branch: "gh-pages" # the branch that your docs is served from
 # gh_edit_source: docs # the source that your files originate from
 gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into the editor immediately
