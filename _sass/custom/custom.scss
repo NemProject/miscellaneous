@@ -1,22 +1,46 @@
 /* Custom fonts */
 @font-face {
-    font-family: "Industry Inc";
-    src: url("/nem-docs/assets/fonts/IndustryInc-Base.ttf");
+    font-family: "ProximaNovaBold";
+    src: url("/nem-docs/assets/fonts/Proxima Nova Bold.otf");
 }
 
-/* Navigation menu selected link */
+/* Navigation menu */
 .nav-list .nav-list-item .nav-list-link.active {
-    background-image: linear-gradient(-90deg, #9773FF40 0%, #9773FF00 100%);
-    border-right: 4px solid #9773FF;
+    background-color: white;
+    background-image: none;
+    border-color: #66B7E7;
+    border-style: solid;
+    border-radius: 8px 0px 0px 8px;
+    border-width: 2px 0px 2px 2px;
 }
 .nav-list .nav-list-item .nav-list-link:hover {
-    background-image: linear-gradient(-90deg, #9773FF40 0%, #9773FF00 100%);
+    background-image: none;
+    background-color: #66B7E780;
+    border-radius: 8px 0px 0px 8px;
+}
+.nav-list .nav-list-item .nav-list-link {
+    color: black;
+    border-right: 2px solid #66B7E7;
 }
 
+/* Headers */
 .main-content h1, .main-content h2, .main-content h3, .main-content h4 {
-    font-family: Industry Inc;
-    background: linear-gradient(270deg, #B32AF9 43.23%, #9773FF 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: ProximaNovaBold;
+}
+.main-content h1 {
+    text-align: center;
+}
+
+/* Side bar */
+.side-bar {
+    background-color: #EEF5F9;
+    background-image: url("/nem-docs/assets/images/background-branches.png");
+}
+
+/* Links */
+a {
+  color: #66B7E7;
+}
+a:not([class]):hover {
+  background-image: linear-gradient(#66B7E7 0%, #66B7E7 100%); 
 }
