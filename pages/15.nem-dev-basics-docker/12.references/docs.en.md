@@ -10,7 +10,7 @@ taxonomy:
 Here are links that you most certainly will be interested in as a developer.
 
 ### Papers
-* [NEM technical paper](http://blog.nem.io/nem-technical-report/)
+* [NEM technical paper](http://nem.ghost.io/nem-technical-report/)
 * [Apostille white paper](https://www.nem.io/ApostilleWhitePaper.pdf)
 * [Catapult white paper](https://www.nem.io/catapultwhitepaper.pdf)
 

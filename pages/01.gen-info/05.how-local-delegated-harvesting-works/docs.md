@@ -24,7 +24,7 @@ If you are connected to a remotely located NIS ("remote NIS") and want to start 
 
 The solution is easy: Activate *delegated harvesting* before you start harvesting on a remote NIS. This step will initiate a block chain transaction and therefore costs a fee of 6 XEM. The activation has to be done only once for an account. After 360 confirmations (approx. 6 hours) the activation is complete and you can start harvesting. Once a remote NIS started harvesting, you can even shut down the NEM software on your local computer - the remote NIS will continue to harvest for your account as long as it is being operated.
 
-For a detailed description how to start delegated harvesting, please see [here](http://blog.nem.io/how-to-use-delegated-harvesting/).
+For a detailed description how to start delegated harvesting, please see [here](http://nem.ghost.io/how-to-use-delegated-harvesting/).
 
 **Note:** If you activated *delegated harvesting* for an account, this doesn't mean you can only harvest on a remote NIS. It is still possible to harvest on your local NIS if you wish to do that.
 **Note 2:** You don't have to trust the remote NIS you are using. If it is acting fraudulent or it got hacked, your funds are not at risk. The worst thing a remote NIS can do is to pretend to harvest for you, but in reality it is not. If you want to know how that is possible, please read on.
@@ -35,7 +35,7 @@ If you activate *delegated harvesting*, NCC (NEM Community Client) initiates an 
 
 #### Conclusion
 Practically, what this means is that users can put their main account into an offline storage and use a proxy account to harvest on behalf of the offline storage account.
-For more information about how to connect to remote servers when using *delegated harvesting* please visit the tutorial on [connecting to a remote NIS](http://blog.nem.io/connecting-to-a-remote-server/).
+For more information about how to connect to remote servers when using *delegated harvesting* please visit the tutorial on [connecting to a remote NIS](http://nem.ghost.io/connecting-to-a-remote-server/).
 
 **Local harvesting**  
 <font color="green">**+** No setup required - just click "Start local harvesting"</font>  

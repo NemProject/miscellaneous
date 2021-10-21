@@ -14,7 +14,7 @@ This chapter will cover transfer transactions, arguably one of the most common t
 We start with unisig transactions. These transactions are initiated from the account sending the funds, and can immediately be accepted in 
 a block.
 As a reminder, the type of these transactions is `0x101`, or `257`.
-Let's take a closer look at a transaction we have already seen in the [blockchain requests](/04-blockchain-requests#getting-a-transaction-by-its-hash-transaction-get) section, when we validated an [Apostile](https://blog.nem.io/apostille/) signature.
+Let's take a closer look at a transaction we have already seen in the [blockchain requests](/04-blockchain-requests#getting-a-transaction-by-its-hash-transaction-get) section, when we validated an [Apostile](https://nem.ghost.io/apostille/) signature.
 
 Here is the data returned when we request a transaction by its hash, with each field explained:
 

@@ -7,7 +7,7 @@ taxonomy:
 
 ## About Supernodes
 
-The NEM Supernode's program is funded with XEM set aside during the Nemesis block. These awards are then given to high performance nodes for helping to secure the network. These nodes form a backbone of support for [light wallets](http://blog.nem.io/lightwallet/), mobile wallets, and 3rd party apps so that users of these services might have access to the network that is easy, fast, and reliable without having to sync a blockchain by themselves or use untrustworthy centralized services.
+The NEM Supernode's program is funded with XEM set aside during the Nemesis block. These awards are then given to high performance nodes for helping to secure the network. These nodes form a backbone of support for [light wallets](http://nem.ghost.io/lightwallet/), mobile wallets, and 3rd party apps so that users of these services might have access to the network that is easy, fast, and reliable without having to sync a blockchain by themselves or use untrustworthy centralized services.
 
 The NEM network has been designed from the very beginning with the goal in mind that any light client can securely connect to and use any server safely to make any transaction. Supernodes are expected to be high performance and reliable nodes. They are regularly tested on their bandwidth, chain height, chain parts, computing power, version, ping, and responsiveness to make sure that they are performing to high standards. If they meet all these requirements, they are randomly given rewards.
 
@@ -15,9 +15,9 @@ The Supernodes program is currently undergoing alpha testing and is looking for 
 
 ## Steps to Enroll and Participate in Supernodes
 
-- **Step 1**: Download and run the standalone version of NEM from [nem.io](http://nem.io/install.html).
+- **Step 1**: Download and run the standalone version of NEM from [the GitHub releases page](https://github.com/NemProject/NanoWallet/releases).
 
-  The standalone tutorials for Mac, Ubuntu, and Windows can be found at the [NEM Tutorials Index](http://blog.nem.io/nem-tutorial-list/).
+  The standalone tutorials for Mac, Ubuntu, and Windows can be found at the [NEM Tutorials Index](http://nem.ghost.io/nem-tutorial-list/).
 
 - **Step 2**: Make an account and have at least 3,000,030 XEM in an account.
 
@@ -25,7 +25,7 @@ The Supernodes program is currently undergoing alpha testing and is looking for 
 
 - **Step 3**: Activate delegated harvesting on your main account.
 
-  A tutorial can be found [here](http://blog.nem.io/how-to-use-delegated-harvesting/).
+  A tutorial can be found [here](http://nem.ghost.io/how-to-use-delegated-harvesting/).
   
   Remember, 6 hours must pass before you can start harvesting, but for the sake of supernodes, once you have the delegated private key (which is available instantly), you may proceed. (Please make sure to get the private key from the **delegated** harvesting account, not your main account and not either of the public keys.)
 
@@ -45,7 +45,7 @@ The Supernodes program is currently undergoing alpha testing and is looking for 
 
   Save your edits and close the text editor.
 
-  Please review this [tutorial](http://blog.nem.io/nis-auto-start-and-auto-harvest/) if you need more help.
+  Please review this [tutorial](http://nem.ghost.io/nis-auto-start-and-auto-harvest/) if you need more help.
 
   To test if you have done this correctly restart your standalone NIS and NCC. If you have followed all steps correctly, you will see that your NIS is booting and synchronizing automatically, even if you didn't log into your wallet yet.
 
@@ -61,7 +61,7 @@ The Supernodes program is currently undergoing alpha testing and is looking for 
 
 - **Step 8**: Open inbound/outbound TCP ports 7890 (NIS), 7880 (servant), and 7778 (websocket for lightwallet).
 
-  Opening 7890 allows your node to be a full node and contribute to the network. Please review the [configuration tutorial](http://blog.nem.io/easy-configuration-guide-opening-port-7890/). If you were successful you will see your node's name appear on [Nembex](http://chain.nem.ninja/#/nodes/). This might take an hour or so to appear.
+  Opening 7890 allows your node to be a full node and contribute to the network. Please review the [configuration tutorial](http://nem.ghost.io/easy-configuration-guide-opening-port-7890/). If you were successful you will see your node's name appear on [Nembex](http://chain.nem.ninja/#/nodes/). This might take an hour or so to appear.
 
   Opening port 7880 is required to allow the servant to work correctly.
 

@@ -24,7 +24,7 @@ If you receive an error, it is most likely because the node you selected is alre
 
 One way of finding another node is to open [supernodes.nem.io](http://supernodes.nem.io) and try different nodes from the provided list. 
 
-Another way to find nodes with free harvesting slots is the @NemNotificationsBot on Telegram. With the command /harvestingSpace it will provide you nodes with free slots. Read more about it [here](https://blog.nem.io/nem-chain-supernode-notifications-telegram-bot/).
+Another way to find nodes with free harvesting slots is the @NemNotificationsBot on Telegram. With the command /harvestingSpace it will provide you nodes with free slots. Read more about it [here](https://nem.ghost.io/nem-chain-supernode-notifications-telegram-bot/).
 
 
 ## Review Blocks Created

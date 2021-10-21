@@ -11,7 +11,7 @@ taxonomy:
 
 [Deutsch](https://forum.nem.io/t/android-wallet-release/2984/8)
 
-Today the NEM team announces the release of the Android wallet.  Below is a tutorial and introduction.  The iOS app has additionally been launched and can be found at the [App Store](https://www.nem.io/install.html).  
+Today the NEM team announces the release of the Android wallet.  Below is a tutorial and introduction.  The iOS app has additionally been launched and can be found at the [App Store](https://nemplatform.com/wallets/).  
 
 [![NEM Wallet Video](https://s25.postimg.org/bws92b2vj/play2.png)](https://youtu.be/EZR-wfehd5U)
 

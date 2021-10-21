@@ -70,11 +70,11 @@ Once you have enough vested coins, you can mine either through local harvesting 
  
 Local harvesting is much easier to setup, but has more disadvantages than delegated harvesting.
  
-![](https://blog.nem.io/content/images/2015/03/Screenshot-2015-03-28-13-19-38.png)
+![](https://nem.ghost.io/content/images/2015/03/Screenshot-2015-03-28-13-19-38.png)
  
 To start local harvesting, select harvested blocks from the left-hand menu, then click “Start local harvesting.”
  
-If you are interested in setting up delegated harvesting, please go [here](http://blog.nem.io/how-local-and-delegated-harvesting-works/).
+If you are interested in setting up delegated harvesting, please go [here](http://nem.ghost.io/how-local-and-delegated-harvesting-works/).
  
 For more discussion on this blog, please visit the [NEM Forum](https://forum.nem.io/). 
  

@@ -13,7 +13,7 @@ Above we showed how to harvest on a remote node, and it is a normal case for man
 
 **NIS needs Java 8 64 bit to run. Download it from [java.com](https://www.java.com/en/download/manual.jsp) and install it with default values.**
 
-To run a local node, download and extract the standalone client from [nem.io](https://www.nem.io/install.html) or [the developer's repository](http://bob.nem.ninja/). 
+To run a local node, [download the standalone client](http://bob.nem.ninja/nis-0.6.97.tgz) and extract it.
 
 In the extracted folder (nis-ncc) you will find a file called "runNis" (Windows: runNis.bat, OSX/Linux: nix.runNis.sh).
 ![](bWxx446.png)

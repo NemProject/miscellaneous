@@ -15,5 +15,5 @@ taxonomy:
 * [Account Stats Viewer](http://nember.ru/#/)
 * [NEM Nodejs Bot (Javascript)](https://github.com/evias/nem-nodejs-bot)
 * [NEMid (Javascript)](https://github.com/nikhiljha/nemid/releases)
-* [XEMsign (C#)](https://blog.nem.io/xemsign/)
+* [XEMsign (C#)](https://nem.ghost.io/xemsign/)
 * [PayContent.js (Javascript)](https://forum.nem.io/t/paycontent-js-looking-for-beta-testers/5591)

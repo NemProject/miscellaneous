@@ -28,4 +28,4 @@ Once you have downloaded the package, you can proceed to install it. First, clic
 Proceed with the installation by clicking "Install".
 ![](http://i.imgur.com/HUnDRPq.png?1)
 
-Congratulations! Java&nbsp;8 (64&nbsp;bit) is now installed on your computer. To install the NEM software, please follow our guide [here](http://blog.nem.io/windows-mac-installation-guide/).
+Congratulations! Java&nbsp;8 (64&nbsp;bit) is now installed on your computer. To install the NEM software, please follow our guide [here](http://nem.ghost.io/windows-mac-installation-guide/).

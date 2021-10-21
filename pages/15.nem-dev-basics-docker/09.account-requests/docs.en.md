@@ -57,12 +57,12 @@ Vary: Accept-Encoding, User-Agent
 This returns the account's info:
 * address
 * balance in microXEMs
-* the number of [harvested blocks](https://blog.nem.io/the-beginners-guide-to-nem/#whatisharvesting)
-* the account's [importance](https://blog.nem.io/the-beginners-guide-to-nem/#whatisproofofimportance). Accounts need at least 10k vested NEM to be included in the importance calculation
+* the number of [harvested blocks](https://nem.ghost.io/the-beginners-guide-to-nem/#whatisharvesting)
+* the account's [importance](https://nem.ghost.io/the-beginners-guide-to-nem/#whatisproofofimportance). Accounts need at least 10k vested NEM to be included in the importance calculation
 * a label which is always null as it is currently not used
 * information about multisig in multisigInfo. This account is not a multisig account.
 * the publicKey. As this account's public key is on the blockchain, it means it has already generated a transaction
-* the [vestedBalance](https://blog.nem.io/the-beginners-guide-to-nem/#whatisavestedbalance)
+* the [vestedBalance](https://nem.ghost.io/the-beginners-guide-to-nem/#whatisavestedbalance)
 
 The meta information gives us info about
 

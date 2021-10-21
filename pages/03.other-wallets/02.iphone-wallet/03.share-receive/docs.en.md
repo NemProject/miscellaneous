@@ -13,4 +13,4 @@ There are multiple ways of sharing your wallet address. The most standard option
 
 
 You can save other’s addresses in the Address Book. It is a list of the contact names and their matching addresses, so when you need to send some XEM to one of your contacts, you can simply use the address from the Address Book.
-![Share NEM Address](https://blog.nem.io/content/images/2016/11/photo_2016-11-05_10-57-58--Copy-.jpg)
+![Share NEM Address](https://nem.ghost.io/content/images/2016/11/photo_2016-11-05_10-57-58--Copy-.jpg)

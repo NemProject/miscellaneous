@@ -8,11 +8,11 @@ nav_order: 6
 
 Do you want to mine XEM? Fortunately NEM uses a new and improved consensus method called POI that is ultra-light and energy efficient.  For more about havesting on NEM (NEM's version of mining) please visit the following blogs. 
 
-* [What is Proof-of-Importance (POI) and Why Is It Better, and What Is Vesting?](http://blog.nem.io/what-are-poi-and-vesting/)
-* [How do I get importance and make more blocks on NEM?](https://blog.nem.io/how-do-i-get-importance-on-the-nem-blockchain/)
-* [How to Enroll and Participate in Supernodes](http://blog.nem.io/supernodes/)
+* [What is Proof-of-Importance (POI) and Why Is It Better, and What Is Vesting?](http://nem.ghost.io/what-are-poi-and-vesting/)
+* [How do I get importance and make more blocks on NEM?](https://nem.ghost.io/how-do-i-get-importance-on-the-nem-blockchain/)
+* [How to Enroll and Participate in Supernodes](http://nem.ghost.io/supernodes/)
 
-But some people like the original POW style of mining. As mentioned above, NEM uses [harvesting](http://blog.nem.io/how-local-and-delegated-harvesting-works/) which works from an accounts importance, but if you are still interested in POW style mining with video cards or ASICs what you can do, however, is mine other altcoins and move them to XEM at their exchange rates automatically.
+But some people like the original POW style of mining. As mentioned above, NEM uses [harvesting](http://nem.ghost.io/how-local-and-delegated-harvesting-works/) which works from an accounts importance, but if you are still interested in POW style mining with video cards or ASICs what you can do, however, is mine other altcoins and move them to XEM at their exchange rates automatically.
 
 This has two main advantages for both you and the NEM ecosystem.
 
