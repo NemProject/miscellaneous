@@ -5,7 +5,6 @@ has_children: true
 has_toc: false
 taxonomy:
     category: docs
-has_children: true
 ---
 
 * NCC Guides
