@@ -76,7 +76,7 @@ To start local harvesting, select harvested blocks from the left-hand menu, then
  
 If you are interested in setting up delegated harvesting, please go [here](http://nem.ghost.io/how-local-and-delegated-harvesting-works/).
  
-For more discussion on this blog, please visit the [NEM Forum](https://forum.nem.io/). 
+For more discussion on this blog, please visit the [NEM Forum](https://web.archive.org/web/20210814074405/https://forum.nem.io/). 
  
 The NEM team would like to thank *part12* for contributing this blog.  
 *Icons by DinosoftLabs, Pixel Buddha, Madebyoliver, Roundicons & Freepik from www.flaticon.com, Creative Commons BY 3.0*

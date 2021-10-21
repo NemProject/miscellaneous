@@ -15,4 +15,4 @@ taxonomy:
 	* [Factom vs NEM](https://nem.ghost.io/factom_vs_apostille/)
 	* [Ethereum vs NEM](https://nem.ghost.io/ethereum-versus-nem-the-obvious-choice/)
 
-[plugin:embed](https://forum.nem.io/t/stories-from-the-dev-front-diary/2641)
+[plugin:embed](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/stories-from-the-dev-front-diary/2641)

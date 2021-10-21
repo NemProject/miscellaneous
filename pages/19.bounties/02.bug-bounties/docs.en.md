@@ -8,11 +8,11 @@ taxonomy:
         - docs
 twig_feeds:
     -
-        source: 'https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core/1656.rss'
+        source: 'https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core/1656.rss'
         end: 2
 ---
 
-[plugin:embed](https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core)
+[plugin:embed](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core)
 Lorem markdownum vides aram est sui istis excipis Danai elusaque manu fores.
 Illa hunc primo pinum pertulit conplevit portusque pace *tacuit* sincera. Iam
 tamen licentia exsulta patruelibus quam, deorum capit; vultu. Est *Philomela

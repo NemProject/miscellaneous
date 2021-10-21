@@ -8,7 +8,7 @@ taxonomy:
 has_children: true
 ---
 
-[Deutsch](https://forum.nem.io/t/how-to-make-your-first-namespace-and-mosaic/3898/2)
+[Deutsch](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/how-to-make-your-first-namespace-and-mosaic/3898/2)
 
 This guide will cover the basic setup of namespaces and mosaics in the NanoWallet.
 

@@ -81,7 +81,7 @@ The Supernodes program is currently undergoing alpha testing and is looking for 
 
 - **Step 11**: Review your results at [supernodes.nem.io](http://supernodes.nem.io/) to make sure that your node is passing all the tests. Please be patient, since your results will not be visible immediately.
 
-  For more discussion about this blog, please visit the [NEM Forum](https://forum.nem.io/t/nem-supernode-rewards-program/1735).
+  For more discussion about this blog, please visit the [NEM Forum](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-supernode-rewards-program/1735).
 
 ## Editing Your Supernode IP and Alias
 

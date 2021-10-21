@@ -30,6 +30,6 @@ Development Center.](https://nemtech.github.io/concepts/account.html)
 
 ##### Do you share the vision for a powerful open data network that helps everyone?
 NEM welcomes all who want to contribute. You can join the community on [Telegram](https://t.me/nemred)
-and the NEM.io [forum](https://forum.nem.io/). Learn about the technology, build a new project, participate through the nemtech project management committee ([PMC](https://github.com/nemtech/community)), or help with an [existing project](https://t.me/nemprojects).
+and the NEM.io [forum](https://web.archive.org/web/20210814074405/https://forum.nem.io/). Learn about the technology, build a new project, participate through the nemtech project management committee ([PMC](https://github.com/nemtech/community)), or help with an [existing project](https://t.me/nemprojects).
 
 _Note: This is a living document and is subject to change_

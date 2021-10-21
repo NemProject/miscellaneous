@@ -10,8 +10,8 @@ jscomments:
     active: true
     provider: discourse
     title: 'NEM’s Prototype Project Bounty Program'
-    url: 'https://forum.nem.io/t/nem-s-prototype-project-bounty-program/2822'
-    id: 'https://forum.nem.io/t/nem-s-prototype-project-bounty-program/2822'
+    url: 'https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-s-prototype-project-bounty-program/2822'
+    id: 'https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-s-prototype-project-bounty-program/2822'
     enabled: true
 ---
 

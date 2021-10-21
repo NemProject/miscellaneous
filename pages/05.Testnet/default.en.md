@@ -12,7 +12,7 @@ Note: The network might be offline, reset, or taken down without previous notice
 ##### Learn how to interact with NEM's Catapult Testnet blockchain
 
 #### Web Wallet
-* [Tutorial]( https://forum.nem.io/t/guide-to-using-nf-catapult-testnet-beta-wallet/22045)
+* [Tutorial]( https://web.archive.org/web/20210814074405/https://forum.nem.io/t/guide-to-using-nf-catapult-testnet-beta-wallet/22045)
 * [Wallet](http://nfwallet.z31.web.core.windows.net/)
 
 #### Faucet
