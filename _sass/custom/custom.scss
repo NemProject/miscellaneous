@@ -44,3 +44,18 @@ a {
 a:not([class]):hover {
   background-image: linear-gradient(#66B7E7 0%, #66B7E7 100%); 
 }
+
+/* Table of Contents */
+#markdown-toc { 
+background-color: #EEF5F9;
+width: fit-content;
+margin-left: auto;
+}
+#markdown-toc::before { content: "Page Contents"; font-weight: bold; }
+.main-content #markdown-toc {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+#markdown-toc a {
+  white-space:normal;
+}
