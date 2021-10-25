@@ -1,0 +1,106 @@
+<table style="width: 100%;"><tr><td>
+    <div class="side-info"><table>
+    <tr><td class="side-info-icon">&varr;</td><td>Size: 137+ bytes = 0x89+ <i>(variable)</i></td></tr>
+    <tr><td class="side-info-icon"><i class="fab fa-github"></i></td><td><a href="https://github.com/symbol/catbuffer-schemas/blob/main/nem/multisig/multisig_account_modification.cats#L22">schema</a></td></tr>
+    </table></div>
+<p>binary layout for a multisig account modification transaction (V1) </p>
+</td></tr></table>
+
+<div class="big-table6">
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">TRANSACTION_VERSION</code></div>
+   <div>byte[1]</div>
+   <div class="description"><b>const</b> <code class="docutils literal">1</code><br/></div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">TRANSACTION_TYPE</code></div>
+   <div><a href="#transactiontype" title="enumeration of transaction types">TransactionType</a></div>
+   <div class="description"><b>const</b> <code class="docutils literal">MULTISIG_ACCOUNT_MODIFICATION</code> (<code class="docutils literal">0x1001</code>)<br/></div>
+   <div style="grid-column: 1 / span 6;" class="big-table-section"><a href="#transaction" title="binary layout for a transaction">Transaction</a><span style="float:right">128 bytes = 0x80</span></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">type</code></div>
+   <div><a href="#transactiontype" title="enumeration of transaction types">TransactionType</a></div>
+   <div class="description"><p>transaction type </p></div>
+   <div class="indentation-cell-h"></div><div style="grid-column: 2 / span 5;" class="big-table-section"><a href="#entitybody" title="binary layout for a blockchain entity (block or transaction)">EntityBody</a><span style="float:right">112 bytes = 0x70</span></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">version</code></div>
+   <div>byte[1]</div>
+   <div class="description"><p>entity version </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">entity_body_reserved_1</code></div>
+   <div>byte[2]</div>
+   <div class="description"><b>reserved</b> <code class="docutils literal">0</code><br/><p>reserved padding between version and network type </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">network</code></div>
+   <div><a href="#networktype" title="enumeration of network types">NetworkType</a></div>
+   <div class="description"><p>entity network </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">timestamp</code></div>
+   <div><a href="#timestamp" title="">Timestamp</a></div>
+   <div class="description"><p>entity timestamp </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">signer_public_key_size</code></div>
+   <div>byte[4]</div>
+   <div class="description"><b>reserved</b> <code class="docutils literal">32</code><br/><p>entity signer public key size </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">signer_public_key</code></div>
+   <div><a href="#publickey" title="">PublicKey</a></div>
+   <div class="description"><p>entity signer public key </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">signature_size</code></div>
+   <div>byte[4]</div>
+   <div class="description"><b>reserved</b> <code class="docutils literal">64</code><br/><p>entity signature size </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">signature</code></div>
+   <div><a href="#signature" title="">Signature</a></div>
+   <div class="description"><p>entity signature </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">fee</code></div>
+   <div><a href="#amount" title="">Amount</a></div>
+   <div class="description"><p>transaction fee </p></div>
+   <div class="indentation-cell">&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">deadline</code></div>
+   <div><a href="#timestamp" title="">Timestamp</a></div>
+   <div class="description"><p>transaction deadline </p></div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">modifications_count</code></div>
+   <div>byte[4]</div>
+   <div class="description"><p>number of modifications </p></div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div>&nbsp;</div>
+   <div><code class="docutils literal">modifications</code></div>
+   <div><a href="#multisigaccountmodification" title="binary layout for a multisig account modification">MultisigAccountModification</a>&ZeroWidthSpace;[modifications_count]</div>
+   <div class="description"><p>multisig account modifications </p></div>
+</div>
+<details><summary>Included in:</summary><div class="tabulated-list"><div>
+<a href="#multisigaccountmodificationtransaction2" title="binary layout for a multisig account modification transaction (V2)">MultisigAccountModificationTransaction2</a>
+</div></div></details>
+
