@@ -1,6 +1,6 @@
 ---
 title: 'Supernode Program'
-parent: Guides
+parent: User guides
 nav_order: 22
 taxonomy:
     category: docs

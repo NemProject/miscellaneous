@@ -1,6 +1,6 @@
 ---
 title: 'Monitoring a Node'
-parent: Guides
+parent: User guides
 nav_order: 2
 taxonomy:
     category:
