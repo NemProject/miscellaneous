@@ -22,6 +22,11 @@
     color: black;
     border-right: 2px solid #66B7E7;
 }
+.nav-list .nav-list-item .nav-list-expander:hover {
+  background-image: none;
+  background-color:#66B7E780;
+  border-radius: 16px;
+}
 
 /* Headers */
 .main-content h1, .main-content h2, .main-content h3, .main-content h4 {
@@ -40,9 +45,6 @@
 /* Links */
 a {
   color: #66B7E7;
-}
-a:not([class]):hover {
-  background-image: linear-gradient(#66B7E7 0%, #66B7E7 100%); 
 }
 
 /* Table of Contents */
