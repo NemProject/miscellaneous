@@ -4,7 +4,6 @@ nav_order: 7
 taxonomy:
     category:
         - docs
-has_children: true
 ---
 
 External pages:
