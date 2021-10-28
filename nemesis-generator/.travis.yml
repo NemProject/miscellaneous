@@ -18,3 +18,4 @@ jobs:
     - stage: run
       script:
         - python -m generator -i ./resources/sample_config.yaml -o nemesis.bin
+        - python -m configuration_generator --count 20 --seed 100000000000 --network-name testnet --output nemesis.yml --accounts-output user.yml
