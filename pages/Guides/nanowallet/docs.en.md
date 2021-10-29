@@ -9,7 +9,7 @@ taxonomy:
         - docs
 ---
 
-The NEM NanoWallet is the officially supported client for Windows, Mac, and Linux. 
+The NEM NanoWallet is the officially supported client for Windows, Mac, and Linux.
 
 These tutorials will guide you through installation, setup, and how to use all these features.
 

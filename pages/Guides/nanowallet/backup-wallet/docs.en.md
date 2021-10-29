@@ -37,7 +37,7 @@ You can make copies and store your .wlt file on USB thumb drives, USB hard drive
 
 **Reminder: Without your password your wallet file is useless!**
 
-### Backup to  paper
+### Backup to paper
 
 If you don't want to save a .wlt file, you can also use your private key as a backup of your account.
 
