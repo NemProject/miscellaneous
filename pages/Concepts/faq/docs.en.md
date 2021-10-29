@@ -129,7 +129,7 @@ These issues will be answered by the faucet owner in [this thread](https://web.a
 
 Harvesting is a process whereby a node will calculate blocks and add them to the blockchain.
 A block contains all transactions that were sent in the last minute. In other words, a block is calculated every minute. With the help of the proof-of-importance algorithm it is decided which node is allowed to calculate a block and can keep all included transaction fees.
-More info can be found [here](http://docs.nem.io/en/gen-info/how-local-delegated-harvesting-works).
+More info can be found [here](../how-local-delegated-harvesting-works/docs.md).
 
 ## How can I Harvest?
 
