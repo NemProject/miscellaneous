@@ -10,9 +10,9 @@ taxonomy:
 
 Updating your NEM node to the latest version of the protocol is actually extremely easy:
 
-- Stop the server (ctr+c or sigint)
+- Stop the server by pressing ``Ctrl+C`` or killing the process.
 
-- Remove the old package. This means all files you [installed previously](../deploying-node/docs.en.md) **except** the ``*.config`` files and the ``nis/data`` folder.
+- Remove the old package. This means all files you [installed previously](../deploying-node/docs.en.md#installation) **except** the ``*.config`` files and the ``nis/data`` folder.
 
 - [Download latest binary](https://bob.nem.ninja) and extract it in the same folder.
 
