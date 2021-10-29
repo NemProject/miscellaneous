@@ -21,15 +21,19 @@ This guide explains how to deploy a NIS1 node.
 
 ## Configuration
 
-Edit the ``config.properties`` file:
+Edit the ``nis/config.properties`` file:
 
 - Set the ``nem.folder`` property to point to where you installed nis1 (On Windows, backslashes ``\`` need to be doubled). For example ``D:\\NEM\\nis1-home`` or ``~/nem``.
 - Set ``nis.bootName`` to the name you want for your server. This is merely informational.
-- Set ``nis.bootKey`` to the **private key** of the account managing this node. This is the account that will receive the harvesting rewards.
+- Set ``nis.bootKey`` to the **private key** of the account managing this node. If you don't have such account, use the [NanoWallet](../../nanowallet/docs.en.md) to create one.
 
-  If you don't have such account, use the [NanoWallet](../../nanowallet/docs.en.md) to create one. Once you have it, retrieve its private key from the Account tab ([As explained here](../../nanowallet/backup-wallet/docs.en.md#backup-to-paper)).
+  - When performing [delegated harvesting](../../nanowallet/delegated-harvesting/docs.en.md) this is the private key of the proxy remote account. Harvesting rewards go to the linked account (this is the **recommended** setup).
 
-  {% include warning.html content="**Needless to say that this key must be kept secret at all times**." %}
+  - When performing local harvesting this is directly the private key of your account (This setup is **not recommended**).
+
+    Retrieve this private key from the NanoWallet's Account tab ([as explained here](../../nanowallet/backup-wallet/docs.en.md#backup-to-paper)).
+
+    {% include warning.html content="**Needless to say that this key must be kept secret at all times**." %}
 
 **Optionally**, you can download a snapshot of the database at a certain height to speed up the first run of the node:
 
@@ -40,7 +44,7 @@ Edit the ``config.properties`` file:
 
 ## Launch
 
-Open a terminal and run the appropriate command for your operating system, either:
+Open a terminal and locate the appropriate command for your operating system, either:
 
 ```bash
 runNis.bat
@@ -52,7 +56,12 @@ or
 nix.runNis.sh
 ```
 
-You will see a lot of output on the console while your new node reads the database and then synchronizes with the rest of the network. This process might take up to 12 hours.
+Before running them, though, edit the files:
+
+- Increase the amount of RAM used by the client by replacing the ``-Xmx1G`` parameter with ``-Xmx4G``. If more than 4GB of RAM are available you can increase this parameter further.
+- Enable the G1 Garbage collector by appending the ``-XX:+UseG1GC`` parameter for increased performance.
+
+You can now launch the script. You will see a lot of output on the console while your new node reads the database and then synchronizes with the rest of the network. This process might take up to 12 hours.
 
 ## Next
 
