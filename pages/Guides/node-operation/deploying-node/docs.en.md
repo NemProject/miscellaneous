@@ -8,18 +8,20 @@ taxonomy:
         - docs
 ---
 
-This guide explains how to deploy a NIS1 node.
+This guide explains how to deploy a NIS1 node, either [manually](#manually) or [using Docker](#using-docker).
 
-## Prerequisites
+## Manually
+
+### Prerequisites
 
 - [Install Java JRE 8](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html).
 
-## Installation
+### Installation
 
 - [Download latest binary](https://bob.nem.ninja/nis-0.6.97.tgz).
 - Decompress the file anywhere you want. It should be a drive with a few Gigabytes of spare space (Current database size is over 6GB).
 
-## Configuration
+### Configuration
 
 Edit the ``nis/config.properties`` file:
 
@@ -42,7 +44,7 @@ Edit the ``nis/config.properties`` file:
 
   You should get a file named ``{nem.folder}/nis/data/nis5_mainnet.h2.db``.
 
-## Launch
+### Launch
 
 Open a terminal and locate the appropriate command for your operating system, either:
 
@@ -62,6 +64,42 @@ Before running them, though, edit the files:
 - Enable the G1 Garbage collector by appending the ``-XX:+UseG1GC`` parameter for increased performance.
 
 You can now launch the script. You will see a lot of output on the console while your new node reads the database and then synchronizes with the rest of the network. This process might take up to 12 hours.
+
+Jump to the [last section](#next) to see the following steps.
+
+## Using Docker
+
+These instructions only work for Linux systems (or the Linux Subsystem for Windows).
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/).
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+
+### Installation
+
+Clone the [nem-docker](https://github.com/rb2nem/nem-docker) repository:
+
+```bash
+git clone git@github.com:rb2nem/nem-docker.git
+cd nem-docker
+```
+
+### Node control
+
+To start the node:
+
+```bash
+./boot.sh
+```
+
+To stop the node:
+
+```bash
+./stop.sh
+```
+
+For additional commands read [the nem-docker GitHub project](https://github.com/rb2nem/nem-docker).
 
 ## Next
 
