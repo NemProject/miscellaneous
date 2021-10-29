@@ -184,3 +184,23 @@ tbody tr td .side-info-icon {
   border-radius: 8px;
   padding: 0px 16px 0px;
 }
+
+/* Endpoint info boxes */
+.endpoint::before {
+  content: "Endpoints";
+  font-weight: bold;
+}
+.endpoint {
+  background-color: #C8E4D5;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding: 8px 1em 1px 1em;
+  border-radius: 8px;
+}
+
+/* Images and Captions */
+.caption {
+  text-align: center;
+  line-height: 1em;
+  font-size: 90%;
+}
