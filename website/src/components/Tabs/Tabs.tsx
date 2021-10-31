@@ -37,17 +37,14 @@ export const Tabs: React.FunctionComponent<Props> = (props): JSX.Element => {
 
     return (
         <div className="tabs">
-            <div className="tabs-items">
-                {!!items && items.map((item: TabItem) => (
-                    <div 
-                        className={`tabs-item ${item.value === value ? 'tabs-item-active' : ''}`} 
-                        onClick={() => onChange && onChange(item.value)}
-                    >
-                        <div className="tabs-item-text">{item.text}</div>
-                    </div>
-                ))}
-                <div className="tabs-border" />
-            </div>
+            {!!items && items.map((item: TabItem) => (
+                <div 
+                    className={`tabs-item ${item.value === value ? 'tabs-item-active' : ''}`} 
+                    onClick={() => onChange && onChange(item.value)}
+                >
+                    <div className="tabs-item-text">{item.text}</div>
+                </div>
+            ))}
         </div>
     );
 }

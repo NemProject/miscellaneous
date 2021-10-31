@@ -35,6 +35,11 @@ import HeroLamaImageUrl from 'src/assets/images/hero-lama.png';
 import HeroMountainImageUrl from 'src/assets/images/hero-mountain.png';
 import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix.png';
 
+import WatercolorBlueImageUrl from 'src/assets/images/watercolor-blue.png';
+import WatercolorGoldImageUrl from 'src/assets/images/watercolor-gold.png';
+import WatercolorGreenImageUrl from 'src/assets/images/watercolor-green.png';
+import WatercolorPurpleImageUrl from 'src/assets/images/watercolor-purple.png';
+
 import { Row } from 'antd';
 import { RouteChildrenProps } from 'react-router-dom';
 import './HomePage.less'
@@ -43,23 +48,34 @@ interface Props extends RouteChildrenProps {
 }
 
 function HomePage(props: Props): JSX.Element {
-    const [activeTab, setActiveTab] = useState<string | number>(1);
+    const [activeTab, setActiveTab] = useState<number>(1);
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const tabItems = [
         {
-            text: 'Tokenomics',
+            text: 'Harvesting',
             value: 1
         },
         {
-            text: 'Harvesting',
+            text: 'Exchanges',
             value: 2
         },
         {
-            text: 'Exchanges',
+            text: 'Tokenomics',
             value: 3
         },
+        {
+            text: 'Supernode Program',
+            value: 4
+        },
     ];
+
+    const watercolorImageUrl = ([
+        WatercolorGreenImageUrl,
+        WatercolorBlueImageUrl,
+        WatercolorPurpleImageUrl,
+        WatercolorGoldImageUrl,
+    ])[activeTab - 1]
 
     const openModal = (index: number) => {
         setShowModal(true);
@@ -71,9 +87,9 @@ function HomePage(props: Props): JSX.Element {
                 <div className="section section-1">
                     <ContentContainer>
                         <div className="content">
-                            <h1>
+                            <h2>
                                 We’ve built a new economy: decentralized, distributed, and digital. Now, it belongs to you.
-                            </h1>
+                            </h2>
                             <div>
                                 <p>
                                     On June 16th, 2014, “UtopianFuture” painted a vision for a new blockchain protocol based on three key principles: decentralization, financial freedom, and equality of opportunity.
@@ -106,9 +122,9 @@ function HomePage(props: Props): JSX.Element {
                             src={HeroLamaImageUrl} 
                         />
                         <div className="content">
-                            <h1>
+                            <h3>
                                 Noteworthy Features
-                            </h1>
+                            </h3>
                             <div>
                                 <p>
                                     Many banks around the world have come to accept the importance of blockchain technology. In fact, a good number of banks in the U.S, India and Japan have already started using the technology. 
@@ -129,12 +145,142 @@ function HomePage(props: Props): JSX.Element {
                         </div>
                     </ContentContainer>
                 </div>
-                <div className="section section-3">
+                <div className="section section-3" active-title={activeTab}>
+                    <img src={watercolorImageUrl} className="image-watercolor" />
                     <ContentContainer>
-                        <Tabs items={tabItems} value={activeTab} onChange={setActiveTab} />
-                        {activeTab === 1 && (
-                            <div></div>
-                        )}
+                        <div className="tabs-wrapper">
+                            <Tabs items={tabItems} value={activeTab} onChange={(value) => setActiveTab(value as number)} />
+                            {activeTab === 1 && (
+                                <div className="section-3-tab section-3-tab-1">
+                                    
+                                    <div className="content">
+                                        <h3>
+                                            Harvesting the NEM Token
+                                        </h3>
+                                        <div>
+                                            <p>
+                                                The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                                            </p>
+                                            <p>
+                                                Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                                            </p>
+                                            <p>
+                                                Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Art 
+                                        className="hero-image-container" 
+                                        imageClassName="hero-image"
+                                        src={HeroBuffaloImageUrl} 
+                                    />
+                                </div>
+                            )}
+                            {activeTab === 2 && (
+                                <div className="section-3-tab section-3-tab-2">
+                                    <div className="content">
+                                        <h3>
+                                            Exchanges That Support The XEM Token
+                                        </h3>
+                                        <div>
+                                            <p>
+                                                The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                                            </p>
+                                            <p>
+                                                Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                                            </p>
+                                            <p>
+                                                Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Art 
+                                        className="hero-image-container" 
+                                        imageClassName="hero-image"
+                                        src={HeroCowImageUrl} 
+                                    />
+                                </div>
+                            )}
+                            {activeTab === 3 && (
+                                <div className="section-3-tab section-3-tab-3">
+                                    <div className="content">
+                                        <h3>
+                                            The XEM Tokenomics
+                                        </h3>
+                                        <div>
+                                            <p>
+                                                The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                                            </p>
+                                            <p>
+                                                Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                                            </p>
+                                            <p>
+                                                Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Art 
+                                        className="hero-image-container" 
+                                        imageClassName="hero-image"
+                                        src={HeroDragonImageUrl} 
+                                    />
+                                </div>
+                            )}
+                            {activeTab === 4 && (
+                                <div className="section-3-tab section-3-tab-4">
+                                    <div className="content">
+                                        <h3>
+                                            Join the NEM Supernode Program
+                                        </h3>
+                                        <div>
+                                            <p>
+                                                The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                                            </p>
+                                            <p>
+                                                Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                                            </p>
+                                            <p>
+                                                Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Art 
+                                        className="hero-image-container" 
+                                        imageClassName="hero-image"
+                                        src={HeroElephantImageUrl} 
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </ContentContainer>
+                </div>
+                <div className="section section-4">
+                    <ContentContainer>
+                        <Art 
+                            className="hero-image-container" 
+                            imageClassName="hero-image"
+                            linkText="The Phoenix  |  By Maho"
+                            src={HeroPhoenixImageUrl} 
+                        />
+                        <div className="content">
+                            <h3>
+                                What’s on the horizon
+                            </h3>
+                            <div>
+                                <p>
+                                    Many banks around the world have come to accept the importance of blockchain technology. In fact, a good number of banks in the U.S, India and Japan have already started using the technology. 
+                                </p>
+                                <p>
+                                    Because banks generally employ the smart contract concept, NEM’s platform which is asset-friendly can be used to settle any asset. In settling assets, speed, security, and reliability are very important to a mainstream institution which is what this crypto offers. NEM addresses these issues by repackaging its blockchain into a rivate chain and presenting it as Mijin.
+                                </p>
+                                <p>
+                                    NEM crypto is also applicable in the technology world. Unlike Bitcoin and Dogecoin which use mining to increase the number of coins, XEM uses something called ‘harvesting’. In this process, blocks are generated and a person is rewarded for work contributed using transaction fees. Every block has a certain number of transactions which attract an unknown amount of fees. 
+                                </p>
+                            </div>
+                            <Row>
+                                <Button>Learn More</Button>
+                            </Row>
+                        </div>
                     </ContentContainer>
                 </div> 
                 

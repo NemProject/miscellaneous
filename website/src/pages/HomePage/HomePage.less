@@ -17,6 +17,7 @@
 
     .button {
         margin-right: 28px;
+        margin-bottom: 28px;
     }
 }
 
@@ -45,6 +46,19 @@
     background-size: cover;
     background-blend-mode: color-burn;
     box-shadow: inset 0px 4.22676px 46.4943px rgba(23, 21, 109, 0.25);
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/bg-mask-tree.png');
+        background-size: contain;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
     
     .content {
         max-width: 535px;
@@ -62,23 +76,112 @@
 }
 
 .section-3 {
-    background-image: url('../../assets/images/bg-3.png');
-    background-size: cover;
-    background-position: right;
+    background: #fff;
+    min-height: 788px;
+    padding: 58px 0 46px;
+
+    .tabs-wrapper {
+        width: 100%;
+    }
+
+    .tabs {
+        max-width: 1010px;
+    }
+
+    .image-watercolor {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: auto;
+        height: 100%;
+    }
     
-    .content {
-        max-width: 590px;
-        margin: 81px 0 420px;
+    .section-3-tab {
+        display: flex;
+
+        .content {
+            position: relative;
+            max-width: 472px;
+            margin-top: 81px;
+        }
+    }
+
+    .section-3-tab-1 {
+        .hero-image-container {
+            margin: 76px 0 0 47px;
+        }
+
+        .hero-image {
+            max-width: 697px;
+            width: 100%;
+        }
+    }
+
+    .section-3-tab-2 {
+        .hero-image-container {
+            margin: 32px 0 0 97px;
+        }
+
+        .hero-image {
+            max-width: 456px;
+            width: 100%;
+        }
+    }
+
+    .section-3-tab-3 {
+        .hero-image-container {
+            margin: 0 -90px 0 134px;
+        }
+
+        .hero-image {
+            max-width: 738px;
+            width: 100%;
+        }
+    }
+
+    .section-3-tab-4 {
+        .hero-image-container {
+            margin: 41px 0 0 214px;
+        }
+
+        .hero-image {
+            max-width: 697px;
+            width: 100%;
+        }
     }
 }
 
 .section-4 {
+    background-color: #EEF5F9;
     background-image: url('../../assets/images/bg-4.png');
     background-size: cover;
-    background-position: right;
+    background-blend-mode: color-burn;
+    box-shadow: inset 0px 4.22676px 46.4943px rgba(23, 21, 109, 0.25);
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../../assets/images/bg-mask-tree-2.png');
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+    }
     
     .content {
-        max-width: 590px;
-        margin: 81px 0 420px;
+        max-width: 535px;
+        margin: 116px 0 300px;
+    }
+
+    .hero-image-container {
+        margin: 114px 83px 0 0;
+    }
+
+    .hero-image {
+        max-width: 626.39px;
+        width: 100%;
     }
 }

@@ -27,38 +27,40 @@ export const TheFooter = (): JSX.Element => {
     return (
         <div className="footer">
             <Row justify="center">
-                <ContentContainer className="footer-content-container">
-                    <NemLogo className="footer-symbol-logo" />
-                    <div className="footer-section">
-                        <h3 className="footer-section-title">NAVIGATION</h3>
-                        <div className="footer-section-item">Home</div>
-                        <div className="footer-section-item">Enterprise</div>
-                        <div className="footer-section-item">Developers</div>
-                        <div className="footer-section-item">XYM</div>
-                        <div className="footer-section-item">Latest</div>
-                        <div className="footer-section-item">Contact</div>
+                <div className="footer-content-container">
+                    <div className="footer-content-container">
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">DISCOVER</h3>
+                            <div className="footer-section-item">About</div>
+                            <div className="footer-section-item">Press and Media</div>
+                            <div className="footer-section-item">SI Partner Program</div>
+                        </div>
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">RESOURCES</h3>
+                            <div className="footer-section-item">Hackathon</div>
+                            <div className="footer-section-item">Webinar</div>
+                            <div className="footer-section-item">Video Tutorials</div>
+                        </div>
                     </div>
-                    <div className="footer-section">
-                        <h3 className="footer-section-title">DISCOVER</h3>
-                        <div className="footer-section-item">About</div>
-                        <div className="footer-section-item">Press and Media</div>
-                        <div className="footer-section-item">SI Partner Program</div>
-                        <div className="footer-section-item">Symbol FAQs</div>
-                        <div className="footer-section-item">NEM Blog</div>
-                        <div className="footer-section-item">NEM Forum</div>
-                        <div className="footer-section-item">NEM Ecosystem</div>
-                        <div className="footer-section-item">NEM NIS1</div>
+
+                    <NemLogo className="footer-nem-logo" />
+
+                    <div className="footer-content-container">
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">NAVIGATION</h3>
+                            <div className="footer-section-item">XEM</div>
+                            <div className="footer-section-item">Latest</div>
+                            <div className="footer-section-item">Contact</div>
+                        </div>
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">DISCOVER</h3>
+                            <div className="footer-section-item">About</div>
+                            <div className="footer-section-item">Press and Media</div>
+                            <div className="footer-section-item">SI Partner Program</div>
+                        </div>
                     </div>
-                    <div className="footer-section">
-                        <h3 className="footer-section-title">RESOURCES</h3>
-                        <div className="footer-section-item">Hackathon</div>
-                        <div className="footer-section-item">Webinar</div>
-                        <div className="footer-section-item">Video Tutorials</div>
-                        <div className="footer-section-item">XYM</div>
-                        <div className="footer-section-item">Latest</div>
-                        <div className="footer-section-item">Contact</div>
-                    </div>
-                </ContentContainer>
+
+                </div>
             </Row>
         </div>
     );
