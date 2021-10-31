@@ -22,9 +22,24 @@
 
 .footer-content-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 80px;
+}
+
+.footer-section-container {
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 20px;
+}
+
+.footer-section {
+    margin: 20px;
 }
 
 .footer-section-title {
@@ -34,9 +49,23 @@
     font-weight: bold;
     font-size: 18px;
     line-height: 140%;
+    margin-bottom: 15px;
 }
 
 .footer-nem-logo {
+    order: 1;
     height: 90px;
-    margin: auto 15px;
+    margin: auto 100px;
+}
+
+@media (max-width: 1200px) {
+    .footer-content-container { 
+        flex-direction: column;
+    }
+
+    .footer-nem-logo {
+        order: 0;
+        height: 90px;
+        margin: auto 40px;
+    }
 }

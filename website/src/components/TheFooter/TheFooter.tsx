@@ -28,7 +28,7 @@ export const TheFooter = (): JSX.Element => {
         <div className="footer">
             <Row justify="center">
                 <div className="footer-content-container">
-                    <div className="footer-content-container">
+                    <div className="footer-section-container">
                         <div className="footer-section">
                             <h3 className="footer-section-title">DISCOVER</h3>
                             <div className="footer-section-item">About</div>
@@ -45,7 +45,7 @@ export const TheFooter = (): JSX.Element => {
 
                     <NemLogo className="footer-nem-logo" />
 
-                    <div className="footer-content-container">
+                    <div className="footer-section-container">
                         <div className="footer-section">
                             <h3 className="footer-section-title">NAVIGATION</h3>
                             <div className="footer-section-item">XEM</div>

@@ -98,6 +98,7 @@
     
     .section-3-tab {
         display: flex;
+        justify-content: space-between;
 
         .content {
             position: relative;
@@ -113,13 +114,22 @@
 
         .hero-image {
             max-width: 697px;
+            min-width: 597px;
             width: 100%;
         }
     }
 
     .section-3-tab-2 {
+        .content {
+            max-width: 695px;
+        }
+
+        .image-exchange {
+            margin: 10px;
+        }
+
         .hero-image-container {
-            margin: 32px 0 0 97px;
+            margin: 32px 0 0 20px;
         }
 
         .hero-image {
@@ -130,23 +140,33 @@
 
     .section-3-tab-3 {
         .hero-image-container {
-            margin: 0 -90px 0 134px;
+            margin: 0 -130px 0 20px;
         }
 
         .hero-image {
             max-width: 738px;
+            min-width: 638px;
             width: 100%;
         }
     }
 
     .section-3-tab-4 {
         .hero-image-container {
-            margin: 41px 0 0 214px;
+            margin: 41px 0 0 20px;
         }
 
         .hero-image {
             max-width: 697px;
+            min-width: 497px;
             width: 100%;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .section-3 {
+        .hero-image {
+            display: none;
         }
     }
 }

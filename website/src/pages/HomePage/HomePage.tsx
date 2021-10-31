@@ -20,20 +20,17 @@ import BasePage from '../BasePage/BasePage';
 import {
     Art,
     Button,
-    Card,
     ContentContainer,
-    HorizontalLine,
-    Link,
     ModalBox,
     Tabs
 } from 'src/components';
-import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo.png';
-import HeroCowImageUrl from 'src/assets/images/hero-cow.png';
-import HeroDragonImageUrl from 'src/assets/images/hero-dragon.png';
-import HeroElephantImageUrl from 'src/assets/images/hero-elephant.png';
-import HeroLamaImageUrl from 'src/assets/images/hero-lama.png';
+import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo-2.png';
+import HeroCowImageUrl from 'src/assets/images/hero-cow-2.png';
+import HeroDragonImageUrl from 'src/assets/images/hero-dragon-2.png';
+import HeroElephantImageUrl from 'src/assets/images/hero-elephant-2.png';
+import HeroLamaImageUrl from 'src/assets/images/hero-lama-2.png';
 import HeroMountainImageUrl from 'src/assets/images/hero-mountain.png';
-import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix.png';
+import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix-2.png';
 
 import WatercolorBlueImageUrl from 'src/assets/images/watercolor-blue.png';
 import WatercolorGoldImageUrl from 'src/assets/images/watercolor-gold.png';
@@ -50,6 +47,64 @@ interface Props extends RouteChildrenProps {
 function HomePage(props: Props): JSX.Element {
     const [activeTab, setActiveTab] = useState<number>(1);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [exchanges, setExchanges] = useState<Array<string>>([]);
+    
+    useEffect(() => {
+        setExchanges([
+            require('src/assets/images/exchanges/Group 2535.png').default,
+            require('src/assets/images/exchanges/Group 2536.png').default,
+            require('src/assets/images/exchanges/Group 2537.png').default,
+            require('src/assets/images/exchanges/Group 2538.png').default,
+            require('src/assets/images/exchanges/Group 2539.png').default,
+            require('src/assets/images/exchanges/Group 2540.png').default,
+            require('src/assets/images/exchanges/Group 2541.png').default,
+            require('src/assets/images/exchanges/Group 2542.png').default,
+            require('src/assets/images/exchanges/Group 2543.png').default,
+            require('src/assets/images/exchanges/Group 2545.png').default,
+            require('src/assets/images/exchanges/Group 2546.png').default,
+            require('src/assets/images/exchanges/Group 2547.png').default,
+            require('src/assets/images/exchanges/Group 2548.png').default,
+            require('src/assets/images/exchanges/Group 2550.png').default,
+            require('src/assets/images/exchanges/Group 2551.png').default,
+            require('src/assets/images/exchanges/Group 2552.png').default,
+            require('src/assets/images/exchanges/Group 2553.png').default,
+            require('src/assets/images/exchanges/Group 2554.png').default,
+            require('src/assets/images/exchanges/Group 2556.png').default,
+            require('src/assets/images/exchanges/Group 2557.png').default,
+            require('src/assets/images/exchanges/Group 2558.png').default,
+            require('src/assets/images/exchanges/Group 2559.png').default,
+            require('src/assets/images/exchanges/Group 2560.png').default,
+            require('src/assets/images/exchanges/Group 2561.png').default,
+            require('src/assets/images/exchanges/Group 2562.png').default,
+            require('src/assets/images/exchanges/Group 2563.png').default,
+            require('src/assets/images/exchanges/Group 2564.png').default,
+            require('src/assets/images/exchanges/Group 2565.png').default,
+            require('src/assets/images/exchanges/Group 2566.png').default,
+            require('src/assets/images/exchanges/Group 2572.png').default,
+            require('src/assets/images/exchanges/Group 2573.png').default,
+            require('src/assets/images/exchanges/Group 2574.png').default,
+            require('src/assets/images/exchanges/Group 2575.png').default,
+            require('src/assets/images/exchanges/Group 2576.png').default,
+            require('src/assets/images/exchanges/Group 2591.png').default,
+            require('src/assets/images/exchanges/Group 2593.png').default,
+            require('src/assets/images/exchanges/Group 2594.png').default,
+            require('src/assets/images/exchanges/Group 2595.png').default,
+            require('src/assets/images/exchanges/Group 2596.png').default,
+            require('src/assets/images/exchanges/Group 2597.png').default,
+            require('src/assets/images/exchanges/Group 2598.png').default,
+            require('src/assets/images/exchanges/Group 2599.png').default,
+            require('src/assets/images/exchanges/Group 2600.png').default,
+            require('src/assets/images/exchanges/Group 2601.png').default,
+            require('src/assets/images/exchanges/Group 2602.png').default,
+            require('src/assets/images/exchanges/Group 2603.png').default,
+            require('src/assets/images/exchanges/Group 2604.png').default,
+            require('src/assets/images/exchanges/Group 2605.png').default,
+            require('src/assets/images/exchanges/Group 2614.png').default,
+            require('src/assets/images/exchanges/Group 2615.png').default,
+            require('src/assets/images/exchanges/Group 2616.png').default,
+            require('src/assets/images/exchanges/Group 2618.png').default,
+        ]);
+    }, [])
 
     const tabItems = [
         {
@@ -183,15 +238,9 @@ function HomePage(props: Props): JSX.Element {
                                             Exchanges That Support The XEM Token
                                         </h3>
                                         <div>
-                                            <p>
-                                                The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
-                                            </p>
-                                            <p>
-                                                Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
-                                            </p>
-                                            <p>
-                                                Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
-                                            </p>
+                                           {exchanges.map((exchangeImageUrl, index) => (
+                                               <img className="image-exchange" src={exchangeImageUrl} key={'exch' + index} />
+                                           ))}
                                         </div>
                                     </div>
                                     <Art 
