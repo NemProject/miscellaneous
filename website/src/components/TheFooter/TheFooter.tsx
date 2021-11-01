@@ -28,7 +28,7 @@ export const TheFooter = (): JSX.Element => {
         <div className="footer">
             <Row justify="center">
                 <div className="footer-content-container">
-                    <div className="footer-section-container">
+                    {/* <div className="footer-section-container"> */}
                         <div className="footer-section">
                             <h3 className="footer-section-title">DISCOVER</h3>
                             <div className="footer-section-item">About</div>
@@ -41,11 +41,19 @@ export const TheFooter = (): JSX.Element => {
                             <div className="footer-section-item">Webinar</div>
                             <div className="footer-section-item">Video Tutorials</div>
                         </div>
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">RESOURCES</h3>
+                            <div className="footer-section-item">Hackathon</div>
+                            <div className="footer-section-item">Webinar</div>
+                            <div className="footer-section-item">Video Tutorials</div>
+                        </div>
+                    {/* </div> */}
+
+                    <div className="footer-logo-container">
+                        <NemLogo className="footer-nem-logo" />
                     </div>
 
-                    <NemLogo className="footer-nem-logo" />
-
-                    <div className="footer-section-container">
+                    {/* <div className="footer-section-container"> */}
                         <div className="footer-section">
                             <h3 className="footer-section-title">NAVIGATION</h3>
                             <div className="footer-section-item">XEM</div>
@@ -58,7 +66,13 @@ export const TheFooter = (): JSX.Element => {
                             <div className="footer-section-item">Press and Media</div>
                             <div className="footer-section-item">SI Partner Program</div>
                         </div>
-                    </div>
+                        <div className="footer-section">
+                            <h3 className="footer-section-title">RESOURCES</h3>
+                            <div className="footer-section-item">Hackathon</div>
+                            <div className="footer-section-item">Webinar</div>
+                            <div className="footer-section-item">Video Tutorials</div>
+                        </div>
+                    {/* </div> */}
 
                 </div>
             </Row>
