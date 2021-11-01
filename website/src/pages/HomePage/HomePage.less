@@ -99,6 +99,9 @@
     .section-3-tab {
         display: flex;
         justify-content: space-between;
+        animation-name: fadeIn;
+        animation-duration: 250ms;
+        animation-timing-function: linear;
 
         .content {
             position: relative;
@@ -134,6 +137,7 @@
 
         .hero-image {
             max-width: 456px;
+            min-width: 456px;
             width: 100%;
         }
     }
@@ -159,14 +163,6 @@
             max-width: 697px;
             min-width: 497px;
             width: 100%;
-        }
-    }
-}
-
-@media (max-width: 1200px) {
-    .section-3 {
-        .hero-image {
-            display: none;
         }
     }
 }
@@ -203,5 +199,108 @@
     .hero-image {
         max-width: 626.39px;
         width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .section {
+        .content-container {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .button {
+            margin-right: 28px;
+            margin-bottom: 28px;
+        }
+    }
+
+    .section-1 {
+        .content-container {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .content {
+            position: relative;
+            margin: 58px 0 32px -54px;
+            max-width: 387px;
+        }
+
+        .buttons {
+            flex-wrap: nowrap;
+        }
+    }
+
+    .section-2 {
+        .content {
+            margin: 0 0 32px;
+            max-width: 100%;
+        }
+
+        .hero-image-container {
+            margin: 64px 0;
+            max-width: 347px;
+        }
+    }
+
+    .section-3 {
+        .image-watercolor {
+            transform: translateX(100%);
+            right: 100px;
+        }
+
+        .tabs {
+            max-width: 100%;
+            left: 0;
+            padding: 0 28px;
+            position: absolute;
+        }
+
+        .section-3-tab {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;
+    
+            .content {
+                position: relative;
+                max-width: 100%;
+                margin: 0;
+                order: 1;
+            }
+
+            .hero-image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 76px 0 47px;
+                order: 0;
+            }
+
+            .hero-image {
+                max-height: 400px;
+                min-width: 0;
+                width: auto;
+            }
+        }
+
+        .section-3-tab-1 {
+            .hero-image-container {
+
+            }
+        }
+    }
+
+    .section-4 {
+        .content {
+            margin: 0 0 50px;
+            max-width: 100%;
+        }
+
+        .hero-image-container {
+            margin: 110px 0 94px;
+            max-width: 347px;
+        }
     }
 }

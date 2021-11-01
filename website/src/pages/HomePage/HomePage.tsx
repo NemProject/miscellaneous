@@ -156,7 +156,7 @@ function HomePage(props: Props): JSX.Element {
                                     NEM launched with key features that helped it become a pioneer in the blockchain landscape: native multisignature accounts; namespaces; and mosaics. 
                                 </p>
                             </div>
-                            <Row>
+                            <Row className="buttons">
                                 <Button>Start building</Button>
                                 <Button>Join discord</Button>
                             </Row>

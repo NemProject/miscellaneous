@@ -17,6 +17,7 @@
 import * as React from 'react';
 import './Tabs.less';
 
+type SimpleSpread<L, R> = R & Pick<L, Exclude<keyof L, keyof R>>;
 interface TabItem {
     text: string;
     value: number | string;
@@ -28,15 +29,18 @@ interface Props {
     onChange?: (value: number | string) => void;
 }
 
-export const Tabs: React.FunctionComponent<Props> = (props): JSX.Element => {
+export const Tabs: React.FunctionComponent<SimpleSpread<React.HTMLAttributes<HTMLDivElement>, Props>> = (props): JSX.Element => {
     const { 
         items,
         value,
+        className,
         onChange
     } = props;
 
+    const extendedClassName = 'tabs' + (className ? ' ' + className : '');
+
     return (
-        <div className="tabs">
+        <div className={extendedClassName}>
             {!!items && items.map((item: TabItem) => (
                 <div 
                     className={`tabs-item ${item.value === value ? 'tabs-item-active' : ''}`} 
