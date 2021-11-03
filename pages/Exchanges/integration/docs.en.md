@@ -147,15 +147,15 @@ The mechanism proposed below addresses all these issues by **monitoring incoming
 
 2. **Ignore transactions that**:
 
-   1. Have no message or the message does not correspond to an existing UUID.
+   1. Have no message or the message does not correspond to an existing UUID. You can find the message (if any) in the ``transaction.message`` field.
 
-      Check the ``transaction.message`` field.
+      Keep in mind that when the ``message.type`` is **1** (unencrypted message) the ``message.payload`` field contains an **UTF8** string encoded into **hexadecimal**. E.g., the payload ``313030393138383233`` corresponds to the message ``100918823``.
 
-   2. Do not contain tokens, or the token is not ``nem:xem``.
+   2. Do not contain ``XEM`` tokens (namespaceId: ``nem``, name: ``xem``).
 
-      [Version 1 transfer transactions](https://nemproject.github.io/#version-1-transfer-transactions) always transfer ``XEM`` tokens. Check the ``amount`` field.
+      [Version 1 transfer transactions](https://nemproject.github.io/#version-1-transfer-transactions) always transfer the **absolute** amount of ``XEM`` tokens indicated in the ``amount`` field. These transactions do not have a ``mosaics`` array, or it is empty.
 
-      [Version 2 transfer transactions](https://nemproject.github.io/#version-2-transfer-transactions) can transfer any kind of mosaic besides ``XEM`` tokens. Check the ``amount`` field but also the ``mosaicId`` and ``quantity``.
+      [Version 2 transfer transactions](https://nemproject.github.io/#version-2-transfer-transactions) can transfer any kind of mosaic besides ``XEM`` tokens. In this case the ``amount`` field **multiplies** the ``quantity`` of each token indicated in the ``mosaics`` array. Both ``amount`` and ``quantity`` are in **absolute** units so both need to be divided by 1'000'000 to get a relative amount (because ``XEM``'s [divisibility](#the-xem-token) is 6).
 
    3. Have already been processed (as a security measure).
 
@@ -170,6 +170,15 @@ The mechanism proposed below addresses all these issues by **monitoring incoming
 4. **Store the last processed block height** and wait for the next polling period.
 
    Blocks in the NEM blockchain are generated roughly every 30 seconds so this is a good candidate for the polling period.
+
+> **Note on received multi-signature transactions**
+>
+> When the transfer transaction is received through a [multisig transaction](https://nemproject.github.io/#initiating-a-multisig-transaction) its ``type`` will be **4100** (multisig transaction) instead of **257** (transfer transaction).
+>
+> In this case, all the above mentioned fields like ``transaction.amount`` or ``transaction.mesage`` are actually inside an object called ``otherTrans``. I.e., they should be accessed as ``transaction.otherTrans.amount`` or ``transaction.otherTrans.message``.
+>
+> You can see [in this example](https://nemproject.github.io/#initiating-a-multisig-transaction) that ``transaction.type`` is 4100 but ``transaction.otherTrans.type`` is 257.
+{:.alert-info}
 
 ## Performing withdrawals
 
