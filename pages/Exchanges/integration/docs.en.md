@@ -4,6 +4,7 @@ parent: 'Exchanges'
 taxonomy:
     category:
         - docs
+has_children: true
 ---
 
 - TOC
@@ -58,7 +59,21 @@ Although not absolutely necessary, it is **recommended** that Exchanges deploy *
 
 Also, by running your own, secure node, you can use the simplified REST API which takes care of signing transactions for you [as explained below](#announcing-the-transaction).
 
-See the [tutorials](../../Community/tutorials/docs.en.md) section to learn how to deploy a node.
+See the [Node operation guides](../../Guides/node-operation/docs.en.md) to learn how to deploy a node.
+
+> **Note**:
+>
+> Nodes normally keep old transactions in memory so they can be queried by their hash, but only for **36h**. If you need to retrieve older transactions you can configure your node with a longer retention time by adding these properties to the ``nis/config.properties`` file:
+>
+> ```ini
+> nis.optionalFeatures = TRANSACTION_HASH_LOOKUP
+> nis.transactionHashRetentionTime = 36 # Number of hours
+> ```
+>
+> Use **-1** to indicate that transactions should be kept in memory forever.
+>
+> Note that this restriction only applies to retrieving transactions **by their hash**. **All** transactions are retrievable, for example, if you know the block where they were included (See the [/block/at/public](https://nemproject.github.io/#requesting-parts-of-the-block-chain) endpoint).
+{:.alert-info}
 
 ### Accounts setup
 
@@ -151,7 +166,7 @@ The mechanism proposed below addresses all these issues by **monitoring incoming
 
       Keep in mind that when the ``message.type`` is **1** (unencrypted message) the ``message.payload`` field contains an **UTF8** string encoded into **hexadecimal**. E.g., the payload ``313030393138383233`` corresponds to the message ``100918823``.
 
-   2. Do not contain ``XEM`` tokens (namespaceId: ``nem``, name: ``xem``).
+   2. Do not contain ``XEM`` tokens (namespaceId: ``nem``, name: ``xem``. **Both fields must be checked!**).
 
       [Version 1 transfer transactions](https://nemproject.github.io/#version-1-transfer-transactions) always transfer the **absolute** amount of ``XEM`` tokens indicated in the ``amount`` field. These transactions do not have a ``mosaics`` array, or it is empty.
 
@@ -179,6 +194,10 @@ The mechanism proposed below addresses all these issues by **monitoring incoming
 >
 > You can see [in this example](https://nemproject.github.io/#initiating-a-multisig-transaction) that ``transaction.type`` is 4100 but ``transaction.otherTrans.type`` is 257.
 {:.alert-info}
+
+### Examples
+
+Take a look at the [transfer transaction examples](examples/docs.en.md) page.
 
 ## Performing withdrawals
 
