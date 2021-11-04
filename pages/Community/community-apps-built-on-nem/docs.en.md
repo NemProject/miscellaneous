@@ -34,6 +34,7 @@ taxonomy:
 * [PayContent.js (Javascript)](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/paycontent-js-looking-for-beta-testers/5591)
 * [PundiX](https://pundix.com)
 * [Qchain](https://qchain.co)
+* [Sakura weaving](https://311-support.nemtus.com/en/sakura-weaving/)
 * [Snap Interactive](http://www.snap-interactive.com)
 * [Xarcade](https://www.xarcade.io)
 * [XEMsign (C#)](https://nem.ghost.io/xemsign/)
