@@ -24,6 +24,7 @@ taxonomy:
 * [LoyalCoin](https://loyalcoin.io)
 * [LuxTag](http://luxtag.io)
 * [NEM Authenticator](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-authenticator-be-a-beta-tester/5161/15)
+* [NEM Cafe](https://nemcafe.jp/)
 * [NEM Nodejs Bot (Javascript)](https://github.com/evias/nem-nodejs-bot)
 * [NEM Tools (Javascript)](http://nem-tools.com/#/transactions)
 * [NEMid (Javascript)](https://github.com/nikhiljha/nemid/releases)
