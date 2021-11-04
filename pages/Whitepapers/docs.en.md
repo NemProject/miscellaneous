@@ -9,6 +9,8 @@ taxonomy:
 External pages:
 
 * [Technical Reference](NEM_techRef.pdf) - Learn how NEM's algorithms and features work.
+* [EigenTrust](eigentrust.pdf) - The original EigenTrust algorithm.
+* [EigenTrust++](2012XinxinFanEigenTrustAttackResilientTrustManagement.pdf) - The modified EigenTrust++ algorithm upon which NEM is based.
 * [Radicalizing the Equity Markets](https://nem.io/RadicalizingEquityMarket.pdf) - NEM's future role in equities.
 * [Apostille Whitepaper](ApostilleWhitePaper.pdf) - Learn about NEM's integrated notarization tool.
 * [Starting a NEM Project](https://medium.com/@aleixmorgadas/how-to-start-a-nem-project-a622fa67e7be) - What to know before you start.
