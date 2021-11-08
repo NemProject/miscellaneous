@@ -9,6 +9,7 @@
     align-items: center;
 
     .content-container {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,4 +27,17 @@
     margin: auto 0;
 
     max-width: 703px;
+}
+
+.header-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.8;
+    }
 }

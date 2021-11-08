@@ -16,3 +16,4 @@
 /**/*.srl
 /**/*.pfx
 **/generated/
+public/announcements.json

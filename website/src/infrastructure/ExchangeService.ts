@@ -17,7 +17,6 @@
 import { Exchange } from 'src/models/Exchange';
 
 
-
 export class ExchangeService {
 
     // Hardcoded exchange list

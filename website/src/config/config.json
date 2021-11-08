@@ -2,7 +2,7 @@
     "URL_GITHUB":       "https://github.com/symbol",
     "URL_TWITTER":      "https://twitter.com/NEMofficial",
     "URL_DISCORD":      "https://discord.gg/xymcity",
-    "URL_ANNOUNCEMETS": "http://localhost:3000/symbol-website/announcements.json",
+    "URL_ANNOUNCEMETS": "http://localhost:3000/nem-website-2/announcements.json",
     "URL_CLIENTS":      "https://github.com/symbol/catapult-client",
     "URL_CLI":          "https://github.com/symbol/symbol-cli",
     "URL_EXPLORER":     "https://symbol.fyi/",

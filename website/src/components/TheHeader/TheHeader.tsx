@@ -14,25 +14,46 @@
  *
  */
 
-import React from 'react';
-import { Row } from 'antd';
-import { 
-    ContentContainer,
-} from 'src/components';
-import { Config } from 'src/config';
+import React, { useEffect } from 'react';
+import store, { connect, RootStoreState } from 'src/store';
+import { ContentContainer } from 'src/components';
+import ButtonCloseImageUrl from 'src/assets/images/button-close.png';
 import './TheHeader.less';
 
-export const TheHeader = (): JSX.Element => {
-    const announcement = '🎉  Announcement... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Enim, ipsum in mi gravida tristique diam justo, ultricies ac.';
+interface Props {
+    announcement: RootStoreState['announcement']['latest'];
+}
+
+const TheHeaderComponent = (props: Props): JSX.Element => {
+    const { announcement } = props; 
+    useEffect(() => { 
+        store.dispatchAction({type: 'announcement/load'})
+    }, []);
+
+    const hide = () => {
+        if (announcement) {
+            store.dispatchAction({type: 'announcement/hide', payload: announcement.id})
+            store.dispatchAction({type: 'announcement/load'})
+        }
+    }
 
     return (announcement 
         ? <div className="header">
             <ContentContainer>
                 <div className="header-text">
-                    {announcement}
+                    {announcement.text}
                 </div>
+                <img 
+                    className="header-close" 
+                    src={ButtonCloseImageUrl} 
+                    onClick={() => hide()} 
+                />
             </ContentContainer>
         </div>
         : <></> 
     );
 }
+
+export const TheHeader = connect((state: RootStoreState) => ({
+    announcement: state.announcement.latest
+}))(TheHeaderComponent);
