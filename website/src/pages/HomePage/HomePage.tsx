@@ -42,69 +42,13 @@ import { RouteChildrenProps } from 'react-router-dom';
 import './HomePage.less'
 
 interface Props extends RouteChildrenProps {
+    exchangeList: RootStoreState['exchange']['list'];
 }
 
 function HomePage(props: Props): JSX.Element {
+    const { exchangeList } = props;
     const [activeTab, setActiveTab] = useState<number>(1);
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [exchanges, setExchanges] = useState<Array<string>>([]);
-    
-    useEffect(() => {
-        setExchanges([
-            require('src/assets/images/exchanges/Group 2535.png').default,
-            require('src/assets/images/exchanges/Group 2536.png').default,
-            require('src/assets/images/exchanges/Group 2537.png').default,
-            require('src/assets/images/exchanges/Group 2538.png').default,
-            require('src/assets/images/exchanges/Group 2539.png').default,
-            require('src/assets/images/exchanges/Group 2540.png').default,
-            require('src/assets/images/exchanges/Group 2541.png').default,
-            require('src/assets/images/exchanges/Group 2542.png').default,
-            require('src/assets/images/exchanges/Group 2543.png').default,
-            require('src/assets/images/exchanges/Group 2545.png').default,
-            require('src/assets/images/exchanges/Group 2546.png').default,
-            require('src/assets/images/exchanges/Group 2547.png').default,
-            require('src/assets/images/exchanges/Group 2548.png').default,
-            require('src/assets/images/exchanges/Group 2550.png').default,
-            require('src/assets/images/exchanges/Group 2551.png').default,
-            require('src/assets/images/exchanges/Group 2552.png').default,
-            require('src/assets/images/exchanges/Group 2553.png').default,
-            require('src/assets/images/exchanges/Group 2554.png').default,
-            require('src/assets/images/exchanges/Group 2556.png').default,
-            require('src/assets/images/exchanges/Group 2557.png').default,
-            require('src/assets/images/exchanges/Group 2558.png').default,
-            require('src/assets/images/exchanges/Group 2559.png').default,
-            require('src/assets/images/exchanges/Group 2560.png').default,
-            require('src/assets/images/exchanges/Group 2561.png').default,
-            require('src/assets/images/exchanges/Group 2562.png').default,
-            require('src/assets/images/exchanges/Group 2563.png').default,
-            require('src/assets/images/exchanges/Group 2564.png').default,
-            require('src/assets/images/exchanges/Group 2565.png').default,
-            require('src/assets/images/exchanges/Group 2566.png').default,
-            require('src/assets/images/exchanges/Group 2572.png').default,
-            require('src/assets/images/exchanges/Group 2573.png').default,
-            require('src/assets/images/exchanges/Group 2574.png').default,
-            require('src/assets/images/exchanges/Group 2575.png').default,
-            require('src/assets/images/exchanges/Group 2576.png').default,
-            require('src/assets/images/exchanges/Group 2591.png').default,
-            require('src/assets/images/exchanges/Group 2593.png').default,
-            require('src/assets/images/exchanges/Group 2594.png').default,
-            require('src/assets/images/exchanges/Group 2595.png').default,
-            require('src/assets/images/exchanges/Group 2596.png').default,
-            require('src/assets/images/exchanges/Group 2597.png').default,
-            require('src/assets/images/exchanges/Group 2598.png').default,
-            require('src/assets/images/exchanges/Group 2599.png').default,
-            require('src/assets/images/exchanges/Group 2600.png').default,
-            require('src/assets/images/exchanges/Group 2601.png').default,
-            require('src/assets/images/exchanges/Group 2602.png').default,
-            require('src/assets/images/exchanges/Group 2603.png').default,
-            require('src/assets/images/exchanges/Group 2604.png').default,
-            require('src/assets/images/exchanges/Group 2605.png').default,
-            require('src/assets/images/exchanges/Group 2614.png').default,
-            require('src/assets/images/exchanges/Group 2615.png').default,
-            require('src/assets/images/exchanges/Group 2616.png').default,
-            require('src/assets/images/exchanges/Group 2618.png').default,
-        ]);
-    }, [])
 
     const tabItems = [
         {
@@ -237,10 +181,20 @@ function HomePage(props: Props): JSX.Element {
                                         <h3>
                                             Exchanges That Support The XEM Token
                                         </h3>
-                                        <div>
-                                           {exchanges.map((exchangeImageUrl, index) => (
-                                               <img className="image-exchange" src={exchangeImageUrl} key={'exch' + index} />
-                                           ))}
+                                        <div className="image-container">
+                                            {exchangeList.map((exchange, index) => (
+                                                <a 
+                                                    href={exchange.url}
+                                                    key={'exchange' + index} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    <img 
+                                                        src={exchange.imageSrc}
+                                                        className="image-exchange" 
+                                                    />
+                                                </a>
+                                            ))}
                                         </div>
                                     </div>
                                     <Art 
@@ -344,4 +298,5 @@ function HomePage(props: Props): JSX.Element {
 }
 
 export default connect((state: RootStoreState) => ({
+    exchangeList: state.exchange.list
 }))(HomePage);

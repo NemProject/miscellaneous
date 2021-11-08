@@ -14,17 +14,18 @@
  *
  */
 
+const STORAGE_KEY = 'storage_';
 export class Storage {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static set = (key: string, value: string): string | null => {
-        localStorage.setItem(key, value);
+        localStorage.setItem(STORAGE_KEY + key, value);
         return value;
     };
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static get = (key: string): string | null => {
         try {
-            const value = localStorage.getItem(key);
+            const value = localStorage.getItem(STORAGE_KEY + key);
             return value;
         } catch (e) {
             return null;
@@ -33,7 +34,7 @@ export class Storage {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     static remove = (key: string): string | null => {
-        localStorage.removeItem(key);
+        localStorage.removeItem(STORAGE_KEY + key);
         return key;
     };
 }

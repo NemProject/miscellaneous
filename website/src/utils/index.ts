@@ -1,2 +1,4 @@
 import * as Hooks from './Hooks';
-export { Hooks };
+import * as Utils from './Utils';
+
+export { Hooks, Utils };

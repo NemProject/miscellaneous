@@ -14,22 +14,7 @@
  *
  */
 
-import { RootStoreState } from './RootStore';
-import { StoreActionParam } from './index';
-
-export type BookStoreState = {
-
-};
-
-export default {
-    namespace: 'book',
-    state: {
-    },
-    mutations: {
-    
-    },
-    actions: {
-        INIT: async ({ commit }: StoreActionParam): Promise<void> => {
-        },
-    },
-};
+export interface Exchange {
+    imageSrc: string;
+    url: string;
+}

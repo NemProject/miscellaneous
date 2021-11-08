@@ -14,22 +14,11 @@
  *
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import store from 'src/store';
-import Router from './Router';
-import 'antd/dist/antd.less';
-import './styles/fonts.less';
-import './styles/global.less';
+export interface Announcement {
+    text: string;
+    id: number;
+}
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <Router />
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById('root'),
-);
-
-store.dispatchAction({ type: 'exchange/load' });
+export interface AnnouncementsFile {
+    [key: string]: Announcement[];
+}
