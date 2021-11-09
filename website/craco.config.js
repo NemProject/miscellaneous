@@ -26,7 +26,7 @@ module.exports = {
             options: {
                 customizeThemeLessPath: path.join(
                     __dirname,
-                    'src/styles/global.less',
+                    'src/styles/variables.less',
                 ),
             },
         },
