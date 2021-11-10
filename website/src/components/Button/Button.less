@@ -1,6 +1,6 @@
 .button {
     min-width: 236px;
-    padding: 19px 0 15px;
+    padding: 19px 15px 15px;
     background: @color-green;
     border-style: none;
     border-radius: 10px;
@@ -15,15 +15,11 @@
     font-family: Proxima Nova;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
-    line-height: 100%;
-    /* or 20px */
-
+    font-size: 22px;
+    line-height: 22px;
     text-align: center;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-
-    /* lightmode/button/text */
 
     color: #FFFFFF;
 
@@ -32,5 +28,15 @@
     &:hover {
         opacity: 0.9;
         color: white;
+    }
+}
+
+@media @screen-mobile {
+    .button {
+        width: 100%;
+        max-width: 100%;
+        padding: 17px 15px;
+        line-height: 27px;
+        text-transform: unset;
     }
 }

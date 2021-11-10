@@ -315,8 +315,7 @@
         }
     
         .button {
-            margin-right: 28px;
-            margin-bottom: 28px;
+            margin: 0 22px 28px;
         }
     }
 
@@ -328,14 +327,14 @@
 
         .content {
             position: relative;
-            margin: 58px 0 32px 0;
+            margin: 0 0 18px 0;
             width: 100%;
             max-width: 387px;
             order: 1;
         }
 
         .hero-image-container {
-            margin: 68px 0 0;
+            margin: 29px 0 58px;
             order: 0;
         }
     
@@ -350,29 +349,28 @@
     }
 
     .section-2 {
+        &:before {
+            display: none;
+        }
+
         .content {
-            margin: 0 0 32px;
+            margin: 0 0 18px;
             max-width: 100%;
         }
 
         .hero-image-container {
-            margin: 64px 0;
+            margin: 64px 0 45px;
             max-width: 347px;
         }
     }
 
     .section-3 {
         .image-watercolor {
-            transform: translateX(100%);
-            right: 100px;
+            display: none;
         }
 
-        .tabs {
-            max-width: 100%;
-            left: 0;
-            padding: 0 28px;
-            position: absolute;
-            justify-content: space-around;
+        .tabs-wrapper {
+            display: none;
         }
 
         .section-3-tab {
@@ -411,13 +409,17 @@
     }
 
     .section-4 {
+        &:before {
+            display: none;
+        }
+
         .content {
             margin: 0 0 50px;
             max-width: 100%;
         }
 
         .hero-image-container {
-            margin: 110px 0 94px;
+            margin: 64px 0 45px;
             max-width: 347px;
         }
     }

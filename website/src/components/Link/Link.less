@@ -1,6 +1,4 @@
 .link {
-    /* Depreciated/button_unbounded */
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +7,6 @@
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
-    /* identical to box height */
     text-align: center;
     color: #0D155C;
 
@@ -24,4 +21,12 @@
 .link-arrow {
     fill: #0D155C;
     margin-left: 10px;
+}
+
+@media @screen-mobile {
+    .link {
+        font-size: 13.25px;
+        line-height: 16px;
+        text-align: center;
+    }
 }

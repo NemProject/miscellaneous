@@ -24,13 +24,13 @@ import {
     ModalBox,
     Tabs
 } from 'src/components';
-import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo-2.png';
-import HeroCowImageUrl from 'src/assets/images/hero-cow-2.png';
-import HeroDragonImageUrl from 'src/assets/images/hero-dragon-2.png';
-import HeroElephantImageUrl from 'src/assets/images/hero-elephant-2.png';
-import HeroLamaImageUrl from 'src/assets/images/hero-lama-2.png';
+import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo.png';
+import HeroCowImageUrl from 'src/assets/images/hero-cow.png';
+import HeroDragonImageUrl from 'src/assets/images/hero-dragon.png';
+import HeroElephantImageUrl from 'src/assets/images/hero-elephant.png';
+import HeroLamaImageUrl from 'src/assets/images/hero-lama.png';
 import HeroMountainImageUrl from 'src/assets/images/hero-mountain.png';
-import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix-2.png';
+import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix.png';
 
 import WatercolorBlueImageUrl from 'src/assets/images/watercolor-blue.png';
 import WatercolorGoldImageUrl from 'src/assets/images/watercolor-gold.png';
