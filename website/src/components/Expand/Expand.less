@@ -1,0 +1,65 @@
+.expand {
+    margin-bottom: 28px;
+}
+
+.expand-link-triangle-group {
+    width: auto;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+
+    color: @color-black;
+}
+
+.expand-link {
+    display: flex;
+    align-items: center;
+}
+
+
+.expand-container {
+    margin: 0 0 30px;
+    max-height: 1920px;
+    overflow-y: auto;
+    animation-duration: 1s;
+    animation-name: expand-shrink;
+    width: 100%;
+}
+
+.expand-arrow {
+    margin-left: 11px;
+    fill: @color-blue;
+    transition: all 0.2s;
+}
+
+.expand-arrow-active {
+    fill: @color-yellow;
+    transform: rotate(90deg);
+}
+
+@keyframes expand-shrink {
+    from {
+        max-height: 1px;
+    }
+
+    to {
+        max-height: 1920px
+    }
+}
+
+@keyframes expand-arrow-rotate {
+    from {
+        color: 1px;
+    }
+
+    to {
+        max-height: 1920px
+    }
+}

@@ -14,14 +14,15 @@
  *
  */
 
-export { Art } from './Art/Art';
-export { Button } from './Button/Button';
-export { Card } from './Card/Card';
-export { ContentContainer } from './ContentContainer/ContentContainer';
-export { HorizontalLine } from './HorizontalLine/HorizontalLine';
-export { Link } from './Link/Link';
-export { ModalBox } from './ModalBox/ModalBox';
-export { NemLogo } from './NemLogo/NemLogo';
-export { TheHeader } from './TheHeader/TheHeader';
-export { TheFooter } from './TheFooter/TheFooter';
-export { Tabs } from './Tabs/Tabs';
+export * from './Art/Art';
+export * from './Button/Button';
+export * from './Card/Card';
+export * from './ContentContainer/ContentContainer';
+export * from './Expand/Expand';
+export * from './HorizontalLine/HorizontalLine';
+export * from './Link/Link';
+export * from './ModalBox/ModalBox';
+export * from './NemLogo/NemLogo';
+export * from './TheHeader/TheHeader';
+export * from './TheFooter/TheFooter';
+export * from './Tabs/Tabs';

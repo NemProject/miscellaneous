@@ -365,6 +365,12 @@
     }
 
     .section-3 {
+        min-height: unset;
+
+        .content-container {
+            align-items: flex-start;
+        }
+
         .image-watercolor {
             display: none;
         }
@@ -374,11 +380,8 @@
         }
 
         .section-3-tab {
-            display: flex;
             flex-direction: column;
-            justify-content: center;
-            justify-items: center;
-    
+
             .content {
                 position: relative;
                 max-width: 100%;
@@ -390,20 +393,22 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin: 76px 0 47px;
+                margin: 41px 0 33px;
                 order: 0;
             }
 
             .hero-image {
-                max-height: 400px;
+                max-height: 200px;
                 min-width: 0;
                 width: auto;
             }
         }
 
-        .section-3-tab-1 {
-            .hero-image-container {
-
+        .section-3-tab-2 {
+            .image-container {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
             }
         }
     }
