@@ -34,6 +34,10 @@ export const ModalBox: React.FunctionComponent<SimpleSpread<
     const extendedClassName =
         'modal-wrapper' + (className ? ' ' + className : '');
 
+    React.useEffect(() => {
+        document.body.style.overflow = visible ? 'hidden' : 'unset';
+    }, [visible]);
+
     return (
         <>
             {visible && (
