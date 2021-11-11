@@ -44,12 +44,12 @@ const TheHeaderComponent = (props: Props): JSX.Element => {
         <div className="header">
             <ContentContainer>
                 <div className="header-text">{announcement.text}</div>
-                <img
-                    className="header-close"
-                    src={ButtonCloseImageUrl}
-                    onClick={() => hide()}
-                />
             </ContentContainer>
+            <img
+                className="header-close"
+                src={ButtonCloseImageUrl}
+                onClick={() => hide()}
+            />
         </div>
     ) : (
         <></>
