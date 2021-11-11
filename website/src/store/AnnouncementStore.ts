@@ -23,7 +23,10 @@ export type AnnouncementStoreState = {
     latest: Announcement | null;
 };
 
-export default ReactVuexStore.createModule<AnnouncementStoreState, RootStoreState>({
+export default ReactVuexStore.createModule<
+    AnnouncementStoreState,
+    RootStoreState
+>({
     namespace: 'announcement',
     state: {
         latest: null,
@@ -31,16 +34,22 @@ export default ReactVuexStore.createModule<AnnouncementStoreState, RootStoreStat
     mutations: {
         latest(store, payload: AnnouncementStoreState['latest']) {
             store.announcement.latest = payload;
-        }
+        },
     },
     actions: {
-        load: async ({ commit }, lang: string): Promise<void> => {
-            const latest = await AnnouncementService.getAnnouncement(lang);
-    
-            commit<AnnouncementStoreState['latest']>({type: 'announcement/latest', payload: latest});
+        load: async ({ commit }): Promise<void> => {
+            const latest = await AnnouncementService.getAnnouncement();
+
+            commit<AnnouncementStoreState['latest']>({
+                type: 'announcement/latest',
+                payload: latest,
+            });
         },
         hide: async ({ commit }, announcementId: number): Promise<void> => {
-            commit<AnnouncementStoreState['latest']>({type: 'announcement/latest', payload: null});
+            commit<AnnouncementStoreState['latest']>({
+                type: 'announcement/latest',
+                payload: null,
+            });
             AnnouncementService.hideNotification(announcementId);
         },
     },

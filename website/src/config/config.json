@@ -1,14 +1,14 @@
 {
-    "URL_GITHUB":       "https://github.com/symbol",
-    "URL_TWITTER":      "https://twitter.com/NEMofficial",
-    "URL_DISCORD":      "https://discord.gg/xymcity",
+    "URL_GITHUB": "https://github.com/symbol",
+    "URL_TWITTER": "https://twitter.com/NEMofficial",
+    "URL_DISCORD": "https://discord.gg/xymcity",
     "URL_ANNOUNCEMETS": "http://localhost:3000/nem-website-2/announcements.json",
-    "URL_CLIENTS":      "https://github.com/symbol/catapult-client",
-    "URL_CLI":          "https://github.com/symbol/symbol-cli",
-    "URL_EXPLORER":     "https://symbol.fyi/",
-    "URL_TESTNET":      "https://testnet.symbol.fyi/",
-    "URL_WALLET":       "https://github.com/symbol/desktop-wallet/releases",
-    "URL_BOOTSTRAP":    "https://github.com/symbol/symbol-bootstrap",
-    "URL_DOCS":         "https://docs.symbolplatform.com/",
-    "URL_WHITEPAPER":   "./"
+    "URL_CLIENTS": "https://github.com/symbol/catapult-client",
+    "URL_CLI": "https://github.com/symbol/symbol-cli",
+    "URL_EXPLORER": "https://symbol.fyi/",
+    "URL_TESTNET": "https://testnet.symbol.fyi/",
+    "URL_WALLET": "https://github.com/symbol/desktop-wallet/releases",
+    "URL_BOOTSTRAP": "https://github.com/symbol/symbol-bootstrap",
+    "URL_DOCS": "https://docs.symbolplatform.com/",
+    "URL_WHITEPAPER": "./"
 }

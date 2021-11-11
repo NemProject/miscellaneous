@@ -21,14 +21,18 @@ import { Announcement, AnnouncementsFile } from 'src/models/Announcement';
 import { Utils } from 'src/utils';
 import { Config } from 'src/config';
 
-
 export class AnnouncementService {
     // Returns latest not viewed announcement
-    public static async getAnnouncement(lang: string): Promise<Announcement | null> {
-        const latestAnnouncements = await AnnouncementService.fetchAnnouncemets(lang);
+    public static async getAnnouncement(): Promise<Announcement | null> {
+        const currentLanguage = CopyService.getCurrentLanguage();
+        const latestAnnouncements = await AnnouncementService.fetchAnnouncemets(
+            currentLanguage,
+        );
         const viewedAnnouncementIds = AnnouncementService.getViewedAnnouncementIds();
-        const notViewedAnnouncements = latestAnnouncements.filter(announcement => !viewedAnnouncementIds.includes(announcement.id));
-        
+        const notViewedAnnouncements = latestAnnouncements.filter(
+            announcement => !viewedAnnouncementIds.includes(announcement.id),
+        );
+
         return notViewedAnnouncements.shift() || null;
     }
 
@@ -41,10 +45,13 @@ export class AnnouncementService {
     }
 
     // Fetch announcement from server
-    private static async fetchAnnouncemets(lang: string): Promise<Announcement[]> {
-        const rawAnnouncements: AnnouncementsFile = (await Axios.get(Config.URL_ANNOUNCEMETS)).data;
-        const currentLanguage = CopyService.getCurrentLanguage();
-        const announcements = rawAnnouncements[currentLanguage] || [];
+    private static async fetchAnnouncemets(
+        lang: string,
+    ): Promise<Announcement[]> {
+        const rawAnnouncements: AnnouncementsFile = (
+            await Axios.get(Config.URL_ANNOUNCEMETS)
+        ).data;
+        const announcements = rawAnnouncements[lang] || [];
 
         return announcements;
     }
@@ -53,10 +60,10 @@ export class AnnouncementService {
     private static getViewedAnnouncementIds(): number[] {
         let viewedAnnouncements = [];
         try {
-            const viewedAnnouncementsJSON = Storage.get('viewedAnnouncements') || '[]';
-            viewedAnnouncements = JSON.parse(viewedAnnouncementsJSON)
-        }
-        catch {}
+            const viewedAnnouncementsJSON =
+                Storage.get('viewedAnnouncements') || '[]';
+            viewedAnnouncements = JSON.parse(viewedAnnouncementsJSON);
+        } catch {}
 
         return viewedAnnouncements;
     }

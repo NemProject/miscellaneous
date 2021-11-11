@@ -23,11 +23,8 @@ type Locale = typeof english;
 const MISSING_TRANSLATION_MESSAGE = 'missing_translation_';
 
 export class CopyService {
-
     // Available languages
-    private static languages: string[] = [
-        'eng'
-    ];
+    private static languages: string[] = ['eng'];
 
     private static defaultLanguage = 'eng';
 
@@ -36,7 +33,8 @@ export class CopyService {
 
         switch (currentLanguage) {
             default:
-            case 'eng': return english;
+            case 'eng':
+                return english;
         }
     }
 
@@ -52,13 +50,13 @@ export class CopyService {
 
     // Returns current language
     static getCurrentLanguage(): string {
-        const currentLanguage = Storage.get('currentLanguage') || CopyService.defaultLanguage;
+        const currentLanguage =
+            Storage.get('currentLanguage') || CopyService.defaultLanguage;
         const supportedLanguages = CopyService.getLanguages();
 
         if (!supportedLanguages.includes(currentLanguage)) {
             return CopyService.defaultLanguage;
-        }
-        else {
+        } else {
             return currentLanguage;
         }
     }
@@ -70,8 +68,7 @@ export class CopyService {
 
         if (keyExists) {
             return locale[key];
-        }
-        else {
+        } else {
             return MISSING_TRANSLATION_MESSAGE + key;
         }
     }

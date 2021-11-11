@@ -14,7 +14,6 @@
  *
  */
 
-
 export interface LocaleObject {
     [key: string]: string;
 }

@@ -15,12 +15,7 @@
  */
 import React, { useState } from 'react';
 import { connect, RootStoreState } from 'src/store';
-import {
-    Art,
-    ContentContainer,
-    Expand,
-    Tabs
-} from 'src/components';
+import { Art, ContentContainer, Expand, Tabs } from 'src/components';
 import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo.png';
 import HeroCowImageUrl from 'src/assets/images/hero-cow.png';
 import HeroDragonImageUrl from 'src/assets/images/hero-dragon.png';
@@ -29,7 +24,7 @@ import WatercolorBlueImageUrl from 'src/assets/images/watercolor-blue.png';
 import WatercolorGoldImageUrl from 'src/assets/images/watercolor-gold.png';
 import WatercolorGreenImageUrl from 'src/assets/images/watercolor-green.png';
 import WatercolorPurpleImageUrl from 'src/assets/images/watercolor-purple.png';
-import './SectionTabs.less'
+import './SectionTabs.less';
 
 interface Props {
     exchangeList: RootStoreState['exchange']['list'];
@@ -39,129 +34,145 @@ function SectionTabs(props: Props): JSX.Element {
     const { exchangeList } = props;
     const [activeTab, setActiveTab] = useState<number>(0);
 
-    const watercolorImageUrl = ([
+    const watercolorImageUrl = [
         WatercolorGreenImageUrl,
         WatercolorBlueImageUrl,
         WatercolorPurpleImageUrl,
         WatercolorGoldImageUrl,
-    ])[activeTab - 1];
+    ][activeTab - 1];
 
     const tabItems = [
         {
             text: 'Harvesting',
-            value: 0
+            value: 0,
         },
         {
             text: 'Exchanges',
-            value: 1
+            value: 1,
         },
         {
             text: 'Tokenomics',
-            value: 2
+            value: 2,
         },
         {
             text: 'Supernode Program',
-            value: 3
+            value: 3,
         },
     ];
 
     const tabItemsContent: Array<JSX.Element> = [
         <div className="section-3-tab section-3-tab-1">
             <div className="content">
-                <h3>
-                    Harvesting the NEM Token
-                </h3>
+                <h3>Harvesting the NEM Token</h3>
                 <div>
                     <p>
-                        The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                        The process of creating new blocks and adding them to
+                        the blockchain is called Harvesting in Symbol.
                     </p>
                     <p>
-                        Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                        Harvesting nodes commit hardware resources to
+                        maintaining the Symbol network and their owning accounts
+                        are rewarded XYM tokens for each harvested block. In
+                        order to harvest, accounts must hold a minimum of 10’000
+                        XYM.
                     </p>
                     <p>
-                        Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                        Node owners with insufficient balance can benefit from
+                        delegated harvesting and split the harvesting rewards
+                        with an account providing the required minimum balance.
+                        A profitable arrangement for both accounts!
                     </p>
                 </div>
             </div>
-            <Art 
-                className="hero-image-container" 
+            <Art
+                className="hero-image-container"
                 imageClassName="hero-image"
-                src={HeroBuffaloImageUrl} 
+                src={HeroBuffaloImageUrl}
             />
         </div>,
         <div className="section-3-tab section-3-tab-2">
             <div className="content">
-                <h3>
-                    Exchanges That Support The XEM Token
-                </h3>
+                <h3>Exchanges That Support The XEM Token</h3>
                 <div className="image-container">
                     {exchangeList.map((exchange, index) => (
-                        <a 
+                        <a
                             href={exchange.url}
-                            key={'exchange' + index} 
-                            target="_blank" 
+                            key={'exchange' + index}
+                            target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <img 
+                            <img
                                 src={exchange.imageSrc}
-                                className="image-exchange" 
+                                className="image-exchange"
                             />
                         </a>
                     ))}
                 </div>
             </div>
-            <Art 
-                className="hero-image-container" 
+            <Art
+                className="hero-image-container"
                 imageClassName="hero-image"
-                src={HeroCowImageUrl} 
+                src={HeroCowImageUrl}
             />
         </div>,
         <div className="section-3-tab section-3-tab-3">
             <div className="content">
-                <h3>
-                    The XEM Tokenomics
-                </h3>
+                <h3>The XEM Tokenomics</h3>
                 <div>
                     <p>
-                        The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                        The process of creating new blocks and adding them to
+                        the blockchain is called Harvesting in Symbol.
                     </p>
                     <p>
-                        Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                        Harvesting nodes commit hardware resources to
+                        maintaining the Symbol network and their owning accounts
+                        are rewarded XYM tokens for each harvested block. In
+                        order to harvest, accounts must hold a minimum of 10’000
+                        XYM.
                     </p>
                     <p>
-                        Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                        Node owners with insufficient balance can benefit from
+                        delegated harvesting and split the harvesting rewards
+                        with an account providing the required minimum balance.
+                        A profitable arrangement for both accounts!
                     </p>
                 </div>
             </div>
-            <Art 
-                className="hero-image-container" 
+            <Art
+                className="hero-image-container"
                 imageClassName="hero-image"
-                src={HeroDragonImageUrl} 
+                src={HeroDragonImageUrl}
             />
         </div>,
         <div className="section-3-tab section-3-tab-4">
             <div className="content">
-                <h3>
-                    Join the NEM Supernode Program
-                </h3>
+                <h3>Join the NEM Supernode Program</h3>
                 <div>
                     <p>
-                        The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.
+                        The process of creating new blocks and adding them to
+                        the blockchain is called Harvesting in Symbol.
                     </p>
                     <p>
-                        Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.
+                        Harvesting nodes commit hardware resources to
+                        maintaining the Symbol network and their owning accounts
+                        are rewarded XYM tokens for each harvested block. In
+                        order to harvest, accounts must hold a minimum of 10’000
+                        XYM.
                     </p>
                     <p>
-                        Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!
+                        Node owners with insufficient balance can benefit from
+                        delegated harvesting and split the harvesting rewards
+                        with an account providing the required minimum balance.
+                        A profitable arrangement for both accounts!
                     </p>
                 </div>
             </div>
-            <Art 
-                className="hero-image-container" 
+            <Art
+                className="hero-image-container"
                 imageClassName="hero-image"
-                src={HeroElephantImageUrl} 
+                src={HeroElephantImageUrl}
             />
-        </div>
+        </div>,
     ];
 
     return (
@@ -169,18 +180,18 @@ function SectionTabs(props: Props): JSX.Element {
             <img src={watercolorImageUrl} className="image-watercolor" />
             <ContentContainer>
                 <div className="tabs-wrapper">
-                    <Tabs 
-                        items={tabItems} 
-                        value={activeTab} 
-                        onChange={(value) => setActiveTab(value as number)} 
+                    <Tabs
+                        items={tabItems}
+                        value={activeTab}
+                        onChange={value => setActiveTab(value as number)}
                     />
                     {tabItemsContent[activeTab]}
                 </div>
-                {tabItems.map((item) => (
-                    <Expand 
-                        className="tab-mobile" 
+                {tabItems.map(item => (
+                    <Expand
+                        className="tab-mobile"
                         expanded={activeTab === item.value}
-                        onClick={(v) => setActiveTab(v ? item.value : -1)}
+                        onClick={v => setActiveTab(v ? item.value : -1)}
                         linkText={item.text}
                         key={'tabitem' + item.value}
                     >
@@ -193,5 +204,5 @@ function SectionTabs(props: Props): JSX.Element {
 }
 
 export default connect((state: RootStoreState) => ({
-    exchangeList: state.exchange.list
+    exchangeList: state.exchange.list,
 }))(SectionTabs);

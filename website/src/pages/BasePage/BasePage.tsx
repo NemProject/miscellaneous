@@ -16,7 +16,7 @@
 
 import React, { Component } from 'react';
 import { TheHeader, TheFooter } from 'src/components';
-import './BasePage.less'
+import './BasePage.less';
 
 class BasePage extends Component {
     render(): JSX.Element {

@@ -25,35 +25,37 @@ interface Props {
 }
 
 const TheHeaderComponent = (props: Props): JSX.Element => {
-    const { announcement } = props; 
-    useEffect(() => { 
-        store.dispatchAction({type: 'announcement/load'})
+    const { announcement } = props;
+    useEffect(() => {
+        store.dispatchAction({ type: 'announcement/load' });
     }, []);
 
     const hide = () => {
         if (announcement) {
-            store.dispatchAction({type: 'announcement/hide', payload: announcement.id})
-            store.dispatchAction({type: 'announcement/load'})
+            store.dispatchAction({
+                type: 'announcement/hide',
+                payload: announcement.id,
+            });
+            store.dispatchAction({ type: 'announcement/load' });
         }
-    }
+    };
 
-    return (announcement 
-        ? <div className="header">
+    return announcement ? (
+        <div className="header">
             <ContentContainer>
-                <div className="header-text">
-                    {announcement.text}
-                </div>
-                <img 
-                    className="header-close" 
-                    src={ButtonCloseImageUrl} 
-                    onClick={() => hide()} 
+                <div className="header-text">{announcement.text}</div>
+                <img
+                    className="header-close"
+                    src={ButtonCloseImageUrl}
+                    onClick={() => hide()}
                 />
             </ContentContainer>
         </div>
-        : <></> 
+    ) : (
+        <></>
     );
-}
+};
 
 export const TheHeader = connect((state: RootStoreState) => ({
-    announcement: state.announcement.latest
+    announcement: state.announcement.latest,
 }))(TheHeaderComponent);

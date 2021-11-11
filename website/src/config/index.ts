@@ -15,15 +15,15 @@ export class Config {
     static menuItems = [
         {
             text: 'Token',
-            path: '/#token'
+            path: '/#token',
         },
         {
             text: 'Tools',
-            path: '/#tools'
+            path: '/#tools',
         },
         {
             text: 'About',
-            path: '/#about'
+            path: '/#about',
         },
     ];
 }

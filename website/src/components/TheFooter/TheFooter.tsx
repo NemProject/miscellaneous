@@ -16,37 +16,41 @@
 
 import React from 'react';
 import { Row } from 'antd';
-import { 
-    ContentContainer,
-    NemLogo
-} from 'src/components';
+import { NemLogo } from 'src/components';
 import './TheFooter.less';
 
 export const TheFooter = (): JSX.Element => {
-
     return (
         <div className="footer">
             <Row justify="center">
                 <div className="footer-content-container">
                     {/* <div className="footer-section-container"> */}
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">DISCOVER</h3>
-                            <div className="footer-section-item">About</div>
-                            <div className="footer-section-item">Press and Media</div>
-                            <div className="footer-section-item">SI Partner Program</div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">DISCOVER</h3>
+                        <div className="footer-section-item">About</div>
+                        <div className="footer-section-item">
+                            Press and Media
                         </div>
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">RESOURCES</h3>
-                            <div className="footer-section-item">Hackathon</div>
-                            <div className="footer-section-item">Webinar</div>
-                            <div className="footer-section-item">Video Tutorials</div>
+                        <div className="footer-section-item">
+                            SI Partner Program
                         </div>
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">RESOURCES</h3>
-                            <div className="footer-section-item">Hackathon</div>
-                            <div className="footer-section-item">Webinar</div>
-                            <div className="footer-section-item">Video Tutorials</div>
+                    </div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">RESOURCES</h3>
+                        <div className="footer-section-item">Hackathon</div>
+                        <div className="footer-section-item">Webinar</div>
+                        <div className="footer-section-item">
+                            Video Tutorials
                         </div>
+                    </div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">RESOURCES</h3>
+                        <div className="footer-section-item">Hackathon</div>
+                        <div className="footer-section-item">Webinar</div>
+                        <div className="footer-section-item">
+                            Video Tutorials
+                        </div>
+                    </div>
                     {/* </div> */}
 
                     <div className="footer-logo-container">
@@ -54,28 +58,33 @@ export const TheFooter = (): JSX.Element => {
                     </div>
 
                     {/* <div className="footer-section-container"> */}
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">NAVIGATION</h3>
-                            <div className="footer-section-item">XEM</div>
-                            <div className="footer-section-item">Latest</div>
-                            <div className="footer-section-item">Contact</div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">NAVIGATION</h3>
+                        <div className="footer-section-item">XEM</div>
+                        <div className="footer-section-item">Latest</div>
+                        <div className="footer-section-item">Contact</div>
+                    </div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">DISCOVER</h3>
+                        <div className="footer-section-item">About</div>
+                        <div className="footer-section-item">
+                            Press and Media
                         </div>
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">DISCOVER</h3>
-                            <div className="footer-section-item">About</div>
-                            <div className="footer-section-item">Press and Media</div>
-                            <div className="footer-section-item">SI Partner Program</div>
+                        <div className="footer-section-item">
+                            SI Partner Program
                         </div>
-                        <div className="footer-section">
-                            <h3 className="footer-section-title">RESOURCES</h3>
-                            <div className="footer-section-item">Hackathon</div>
-                            <div className="footer-section-item">Webinar</div>
-                            <div className="footer-section-item">Video Tutorials</div>
+                    </div>
+                    <div className="footer-section">
+                        <h3 className="footer-section-title">RESOURCES</h3>
+                        <div className="footer-section-item">Hackathon</div>
+                        <div className="footer-section-item">Webinar</div>
+                        <div className="footer-section-item">
+                            Video Tutorials
                         </div>
+                    </div>
                     {/* </div> */}
-
                 </div>
             </Row>
         </div>
     );
-}
+};

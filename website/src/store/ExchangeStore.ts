@@ -31,13 +31,16 @@ export default ReactVuexStore.createModule<ExchangeStoreState, RootStoreState>({
     mutations: {
         list(store, payload: ExchangeStoreState['list']) {
             store.exchange.list = payload;
-        }
+        },
     },
     actions: {
         load: async ({ commit }): Promise<void> => {
             const list = ExchangeService.getExchangeList();
-    
-            commit<ExchangeStoreState['list']>({type: 'exchange/list', payload: list});
+
+            commit<ExchangeStoreState['list']>({
+                type: 'exchange/list',
+                payload: list,
+            });
         },
     },
 });

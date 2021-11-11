@@ -18,14 +18,8 @@ import * as React from 'react';
 import './NemLogo.less';
 import NemLogoImageUrl from 'src/assets/images/nem-logo.png';
 
-interface Props extends React.HTMLAttributes<HTMLImageElement> {};
+type Props = React.HTMLAttributes<HTMLImageElement>;
 
 export const NemLogo: React.FunctionComponent<Props> = (props): JSX.Element => {
-    return (
-        <img 
-            className="nem-logo" 
-            src={NemLogoImageUrl}
-            {...props} 
-        />
-    );
-}
+    return <img className="nem-logo" src={NemLogoImageUrl} {...props} />;
+};

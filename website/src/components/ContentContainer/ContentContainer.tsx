@@ -17,16 +17,13 @@
 import * as React from 'react';
 import './ContentContainer.less';
 
+export const ContentContainer: React.FunctionComponent<React.HTMLAttributes<
+    HTMLButtonElement
+>> = (props): JSX.Element => {
+    const { children, className } = props;
 
-export const ContentContainer: React.FunctionComponent<React.HTMLAttributes<HTMLButtonElement>> = (props): JSX.Element => {
-    const { 
-        children,
-        className
-    } = props;
+    const extendedClassName =
+        'content-container' + (className ? ' ' + className : '');
 
-    const extendedClassName = 'content-container' + (className ? ' ' + className : '');
-
-    return (
-        <div className={extendedClassName}>{children}</div>
-    );
-}
+    return <div className={extendedClassName}>{children}</div>;
+};

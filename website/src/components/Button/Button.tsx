@@ -17,20 +17,15 @@
 import * as React from 'react';
 import './Button.less';
 
-export const Button: React.FunctionComponent<React.HTMLAttributes<HTMLButtonElement>> = (props): JSX.Element => {
-    const { 
-        children,
-        className,
-        ...rest
-    } = props;
+export const Button: React.FunctionComponent<React.HTMLAttributes<
+    HTMLButtonElement
+>> = (props): JSX.Element => {
+    const { children, className, ...rest } = props;
     const extendedClassName = 'button' + (className ? ' ' + className : '');
 
     return (
-        <button 
-            className={extendedClassName}
-            {...rest}
-        >
+        <button className={extendedClassName} {...rest}>
             {children}
         </button>
     );
-}
+};

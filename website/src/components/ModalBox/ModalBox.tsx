@@ -25,38 +25,37 @@ interface Props {
     onClose?: () => void;
 }
 
-export const ModalBox: 
-    React.FunctionComponent<SimpleSpread<React.HTMLAttributes<HTMLDivElement>, Props>> 
-    = (props): JSX.Element => {
-    const { 
-        children,
-        className,
-        visible,
-        onChange,
-        onClose,
-        ...rest
-    } = props;
+export const ModalBox: React.FunctionComponent<SimpleSpread<
+    React.HTMLAttributes<HTMLDivElement>,
+    Props
+>> = (props): JSX.Element => {
+    const { children, className, visible, onClose, ...rest } = props;
 
-    const extendedClassName = 'modal-wrapper' + (className ? ' ' + className : '');
+    const extendedClassName =
+        'modal-wrapper' + (className ? ' ' + className : '');
 
-    return (<>{visible && 
-        <div 
-            onClick={() => onClose && onClose()}
-            className="modal-shaddow"
-        >
-            <div 
-                className={extendedClassName}
-                {...rest}
-            >
-                <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-                    {children}
-                    <img 
-                        className="modal-box-close" 
-                        src={ArtistMahoImageUrl}
-                        onClick={() => onClose && onClose()}
-                    />
+    return (
+        <>
+            {visible && (
+                <div
+                    onClick={() => onClose && onClose()}
+                    className="modal-shaddow"
+                >
+                    <div className={extendedClassName} {...rest}>
+                        <div
+                            className="modal-box"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            {children}
+                            <img
+                                className="modal-box-close"
+                                src={ArtistMahoImageUrl}
+                                onClick={() => onClose && onClose()}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    }</>);
-}
+            )}
+        </>
+    );
+};

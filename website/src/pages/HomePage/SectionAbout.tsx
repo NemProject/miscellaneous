@@ -15,14 +15,10 @@
  */
 
 import React from 'react';
-import {
-    Art,
-    Button,
-    ContentContainer,
-} from 'src/components';
+import { Art, Button, ContentContainer } from 'src/components';
 import HeroMountainImageUrl from 'src/assets/images/hero-mountain.png';
 import { Row } from 'antd';
-import './SectionAbout.less'
+import './SectionAbout.less';
 
 export default function HomePage(): JSX.Element {
     return (
@@ -30,17 +26,25 @@ export default function HomePage(): JSX.Element {
             <ContentContainer>
                 <div className="content">
                     <h2>
-                        We’ve built a new economy: decentralized, distributed, and digital. Now, it belongs to you.
+                        We’ve built a new economy: decentralized, distributed,
+                        and digital. Now, it belongs to you.
                     </h2>
                     <div>
                         <p>
-                            On June 16th, 2014, “UtopianFuture” painted a vision for a new blockchain protocol based on three key principles: decentralization, financial freedom, and equality of opportunity.
+                            On June 16th, 2014, “UtopianFuture” painted a vision
+                            for a new blockchain protocol based on three key
+                            principles: decentralization, financial freedom, and
+                            equality of opportunity.
                         </p>
                         <p>
-                            On March 31st, 2015, a team of psuedonymous developers banded together to launch NEM - the New Economy Movement. 
+                            On March 31st, 2015, a team of psuedonymous
+                            developers banded together to launch NEM - the New
+                            Economy Movement.
                         </p>
                         <p>
-                            NEM launched with key features that helped it become a pioneer in the blockchain landscape: native multisignature accounts; namespaces; and mosaics. 
+                            NEM launched with key features that helped it become
+                            a pioneer in the blockchain landscape: native
+                            multisignature accounts; namespaces; and mosaics.
                         </p>
                     </div>
                     <Row className="buttons">
@@ -48,10 +52,10 @@ export default function HomePage(): JSX.Element {
                         <Button>Join discord</Button>
                     </Row>
                 </div>
-                <Art 
-                    className="hero-image-container" 
+                <Art
+                    className="hero-image-container"
                     imageClassName="hero-image"
-                    src={HeroMountainImageUrl} 
+                    src={HeroMountainImageUrl}
                 />
             </ContentContainer>
         </div>

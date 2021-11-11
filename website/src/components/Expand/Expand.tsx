@@ -26,68 +26,71 @@ interface ExpandProps {
     onClick?: (expanded: boolean) => void;
 }
 
-export const Expand:
-    React.FunctionComponent<SimpleSpread<React.HTMLAttributes<HTMLDivElement>, ExpandProps>> 
-    = (props): JSX.Element => {
-        const {
-            children,
-            linkText,
-            linkClassName,
-            containerClassName,
-            className,
-            expanded,
-            onClick,
-            ...rest
-        } = props;
+export const Expand: React.FunctionComponent<SimpleSpread<
+    React.HTMLAttributes<HTMLDivElement>,
+    ExpandProps
+>> = (props): JSX.Element => {
+    const {
+        children,
+        linkText,
+        linkClassName,
+        containerClassName,
+        className,
+        expanded,
+        onClick,
+        ...rest
+    } = props;
 
-        const [_expanded, setExpanded] = React.useState(false);
-        React.useEffect(() => {
-            if (!!expanded !== _expanded) {
-                setExpanded(!!expanded);
-            }
-        }, [expanded]);
-        const ref = React.useRef<HTMLDivElement>(null);
-        const toggle = (value: boolean) => {
-            setExpanded(value);
-            onClick && onClick(value);
-            
-            if (value) {
-                setTimeout(() => {
-                    ref.current && ref.current.scrollIntoView();
-                }, 200);
-            }
-        };
+    const [_expanded, setExpanded] = React.useState(false);
+    React.useEffect(() => {
+        if (!!expanded !== _expanded) {
+            setExpanded(!!expanded);
+        }
+    }, [expanded]);
+    const ref = React.useRef<HTMLDivElement>(null);
+    const toggle = (value: boolean) => {
+        setExpanded(value);
+        onClick && onClick(value);
 
-        const extendedClassName = 'expand' + (className ? ' ' + className : '');
-        const extendedLinkClassName = 'expand-link' + (linkClassName ? ' ' + linkClassName : '');
-        const extendedContainerClassName = 'expand-container' + (containerClassName ? ' ' + containerClassName : '');
-        const arrowClassName = 'expand-arrow' + (_expanded ? ' expand-arrow-active' : '');
+        if (value) {
+            setTimeout(() => {
+                ref.current && ref.current.scrollIntoView();
+            }, 200);
+        }
+    };
 
-        return (
-            <div className={extendedClassName} {...rest}>
-                <div className="expand-link-triangle-group" ref={ref}>
-                    <div 
-                        className={extendedLinkClassName}
-                        onClick={() => toggle(!_expanded)}
+    const extendedClassName = 'expand' + (className ? ' ' + className : '');
+    const extendedLinkClassName =
+        'expand-link' + (linkClassName ? ' ' + linkClassName : '');
+    const extendedContainerClassName =
+        'expand-container' +
+        (containerClassName ? ' ' + containerClassName : '');
+    const arrowClassName =
+        'expand-arrow' + (_expanded ? ' expand-arrow-active' : '');
+
+    return (
+        <div className={extendedClassName} {...rest}>
+            <div className="expand-link-triangle-group" ref={ref}>
+                <div
+                    className={extendedLinkClassName}
+                    onClick={() => toggle(!_expanded)}
+                >
+                    {linkText}
+                    <svg
+                        className={arrowClassName}
+                        width="21"
+                        height="26"
+                        viewBox="0 0 21 26"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                     >
-                        {linkText}
-                        <svg 
-                            className={arrowClassName}
-                            width="21" 
-                            height="26" 
-                            viewBox="0 0 21 26" 
-                            fill="none" 
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                        <path 
-                            d="M21 13L-1.14193e-06 25.1244L-8.1987e-08 0.875644L21 13Z" 
-                        />
-                        </svg>
-                    </div>
+                        <path d="M21 13L-1.14193e-06 25.1244L-8.1987e-08 0.875644L21 13Z" />
+                    </svg>
                 </div>
-                {_expanded && <div className={extendedContainerClassName}>
-                    {children}
-                </div>}
             </div>
-        );
-    }
+            {_expanded && (
+                <div className={extendedContainerClassName}>{children}</div>
+            )}
+        </div>
+    );
+};

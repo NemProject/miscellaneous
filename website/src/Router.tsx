@@ -17,7 +17,7 @@ import * as React from 'react';
 import HomePage from './pages/HomePage/HomePage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-export enum MainRouterPage {   
+export enum MainRouterPage {
     HOME = '/',
 }
 

@@ -29,26 +29,27 @@ interface Props {
     onChange?: (value: number | string) => void;
 }
 
-export const Tabs: React.FunctionComponent<SimpleSpread<React.HTMLAttributes<HTMLDivElement>, Props>> = (props): JSX.Element => {
-    const { 
-        items,
-        value,
-        className,
-        onChange
-    } = props;
+export const Tabs: React.FunctionComponent<SimpleSpread<
+    React.HTMLAttributes<HTMLDivElement>,
+    Props
+>> = (props): JSX.Element => {
+    const { items, value, className, onChange } = props;
 
     const extendedClassName = 'tabs' + (className ? ' ' + className : '');
 
     return (
         <div className={extendedClassName}>
-            {!!items && items.map((item: TabItem) => (
-                <div 
-                    className={`tabs-item ${item.value === value ? 'tabs-item-active' : ''}`} 
-                    onClick={() => onChange && onChange(item.value)}
-                >
-                    <div className="tabs-item-text">{item.text}</div>
-                </div>
-            ))}
+            {!!items &&
+                items.map((item: TabItem) => (
+                    <div
+                        className={`tabs-item ${
+                            item.value === value ? 'tabs-item-active' : ''
+                        }`}
+                        onClick={() => onChange && onChange(item.value)}
+                    >
+                        <div className="tabs-item-text">{item.text}</div>
+                    </div>
+                ))}
         </div>
     );
-}
+};
