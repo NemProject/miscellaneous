@@ -16,10 +16,8 @@
 
 export * from './Art/Art';
 export * from './Button/Button';
-export * from './Card/Card';
 export * from './ContentContainer/ContentContainer';
 export * from './Expand/Expand';
-export * from './HorizontalLine/HorizontalLine';
 export * from './Link/Link';
 export * from './ModalBox/ModalBox';
 export * from './NemLogo/NemLogo';
