@@ -3,3 +3,100 @@
         margin: 0 auto;
     }
 }
+
+.art-modal {
+    width: 100%;
+    height: 100%;
+    padding-right: 35px;
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+
+    .art-modal-artist {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .art-modal-artist-avatar {
+        width: 262px;
+        height: 262px;
+        padding: 10px;
+        
+        border-radius: 50%;
+        border: 6.71795px solid #ABC2FC;
+        box-sizing: border-box;
+    }
+
+    .artist-website-link {
+        margin: 24px 0;
+    }
+
+    .art-modal-artist-social {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        svg {
+            margin: 9px;
+        }
+    }
+
+    .art-modal-divider {
+        width: 4px;
+        height: 100%;
+        background-color: @color-yellow;
+        margin: 0 60px;
+    }
+}
+
+@media @screen-tablet {
+    .art-modal {
+        flex-direction: column;
+    
+        .art-modal-artist {
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 57px;
+        }
+    
+        .art-modal-artist-avatar {
+            width: 222px;
+            height: 222px;
+            padding: 5.69231px;
+            
+            border-radius: 50%;
+            border-width: 5.69231px;
+        }
+    
+        .art-modal-divider {
+            display: none;
+        }
+    }
+}
+
+@media @screen-mobile {
+    .art-modal {
+        flex-direction: column;
+        padding-right: 29px;
+
+        .art-modal-artist {
+            margin-bottom: 55px;
+        }
+    
+        .art-modal-artist-avatar {
+            width: 109px;
+            height: 109px;
+            border-width: 2.79487px;
+            padding: 2.79487px;
+        }
+
+        .artist-website-link {
+            margin: 16px 0;
+        }
+    
+        .art-modal-divider {
+            display: none;
+        }
+    }
+}
