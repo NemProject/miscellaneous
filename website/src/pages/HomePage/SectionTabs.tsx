@@ -169,13 +169,16 @@ function SectionTabs(props: Props): JSX.Element {
             <img src={watercolorImageUrl} className="image-watercolor" />
             <ContentContainer>
                 <div className="tabs-wrapper">
-                    <Tabs items={tabItems} value={activeTab} onChange={(value) => setActiveTab(value as number)} />
+                    <Tabs 
+                        items={tabItems} 
+                        value={activeTab} 
+                        onChange={(value) => setActiveTab(value as number)} 
+                    />
                     {tabItemsContent[activeTab]}
                 </div>
                 {tabItems.map((item) => (
                     <Expand 
-                        className="tab-action-mobile" 
-                        containerClassName="tab-action-mobile-container"
+                        className="tab-mobile" 
                         expanded={activeTab === item.value}
                         onClick={(v) => setActiveTab(v ? item.value : -1)}
                         linkText={item.text}
