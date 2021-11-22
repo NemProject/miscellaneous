@@ -41,7 +41,7 @@ def attach_signature(payload, signature, prepend_size=False):
 
 class Generator:
     def __init__(self, input_file):
-        with open(input_file, 'rt') as infile:
+        with open(input_file, 'rt', encoding='utf8') as infile:
             nemesis_config = yaml.load(infile, yaml.SafeLoader)
 
             self.signer_key_pair = KeyPair(PrivateKey(nemesis_config['signer_private_key']))
@@ -54,11 +54,14 @@ class Generator:
         self.signed_block_header = None
 
     def print_header(self):
+        signer_address = self.network.public_key_to_address(self.signer_key_pair.public_key)
+        total_xem = sum([account['amount'] for account in self.accounts]) / MICROXEM_PER_XEM
+
         log.info('Preparing Nemesis Block')
-        log.info(' *  SIGNER ADDRESS: {}'.format(self.network.public_key_to_address(self.signer_key_pair.public_key)))
-        log.info(' * GENERATION HASH: {}'.format(self.generation_hash))
-        log.info(' *  TOTAL ACCOUNTS: {}'.format(len(self.accounts)))
-        log.info(' *       TOTAL XEM: {:.6f}'.format(sum([account['amount'] for account in self.accounts]) / MICROXEM_PER_XEM))
+        log.info(f' *  SIGNER ADDRESS: {signer_address}')
+        log.info(f' * GENERATION HASH: {self.generation_hash}')
+        log.info(f' *  TOTAL ACCOUNTS: {len(self.accounts)}')
+        log.info(f' *       TOTAL XEM: {total_xem:.6f}')
 
     def prepare_transactions(self):
         for transaction_descriptor in self.accounts:
@@ -115,8 +118,12 @@ class Generator:
 
 
 def main():
+    program_name = None
+    if globals().get('__spec__'):
+        program_name = __spec__.name.partition('.')[0]
+
     parser = argparse.ArgumentParser(
-        prog=None if globals().get('__spec__') is None else 'python -m {}'.format(__spec__.name.partition('.')[0]),
+        prog=None if not program_name else f'python -m {program_name}',
         description='NEM nemesis block generator'
     )
     parser.add_argument('-i', '--input', help='nemesis configuration', required=True)
