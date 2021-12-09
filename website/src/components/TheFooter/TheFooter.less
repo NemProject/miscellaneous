@@ -1,17 +1,17 @@
 .footer {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     min-height: 277px;
     padding: 0 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: #fff;
     background-color: #000;
-    background-image: url('../../assets/images/bg-footer.png');
-    background-size: cover;
-    background-position: center;
+    background-image: url("../../assets/images/bg-footer.png");
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .footer-symbol-logo {
@@ -22,34 +22,9 @@
 
 .footer-content-container {
     display: flex;
-    justify-content: center;
+    flex-flow: row wrap;
     align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.footer-section-container {
-    order: 1;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 0 20px;
-}
-
-.footer-section {
-    margin: 20px;
-}
-
-.footer-section-title {
-    color: @color-blue;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 140%;
-    margin-bottom: 15px;
 }
 
 .footer-logo-container {
@@ -58,17 +33,11 @@
 }
 
 @media (max-width: 1500px) {
-    .footer-content-container { 
+    .footer-content-container {
         justify-content: space-around;
         width: 100%;
         max-width: 800px;
         padding-bottom: 70px;
-    }
-
-    .footer-section {
-        order: 1;
-        width: 100%;
-        max-width: 25%;
     }
 
     .footer-logo-container {

@@ -1,0 +1,68 @@
+.section-1 {
+    background-image: url("../../../assets/images/bg-1.png");
+    background-size: cover;
+
+    .content {
+        max-width: 614px;
+        margin: 88px 0 196px;
+    }
+
+    .hero-image-container {
+        margin: 68px -127px 0 63px;
+    }
+
+    .hero-image {
+        width: 100%;
+        max-width: 710px;
+    }
+}
+
+@media @screen-tablet {
+    .section-1 {
+        .content-container {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        .content {
+            position: relative;
+            max-width: 387px;
+            margin: 58px 0 32px -54px;
+        }
+
+        .buttons {
+            flex-wrap: nowrap;
+        }
+    }
+}
+
+@media @screen-mobile {
+    .section-1 {
+        .content-container {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .content {
+            position: relative;
+            order: 1;
+            width: 100%;
+            max-width: 387px;
+            margin: 0 0 18px;
+        }
+
+        .hero-image-container {
+            order: 0;
+            margin: 29px 0 58px;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 710px;
+        }
+
+        .buttons {
+            flex-wrap: wrap;
+        }
+    }
+}

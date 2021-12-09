@@ -1,130 +1,84 @@
+// Global styles
+// Desktop Large
+
 body {
     margin: 0;
     padding: 0;
-    background: #fff
+    color: @color-black-lighter;
+    font: var(--font-nem-body);
 }
 
 #root {
-    height: 100%;
     width: 100%;
-    font-family: Protipo;
-    color: @color-black-lighter;
-    background: #fff;
-}
-
-p {
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 140%;
-
-    color: @color-black-lighter;
-}
-
-p:last-child {
-    margin-bottom: 40px;
-}
-
-h2 {
-    font-family: Quando;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    line-height: 140%;
-
-    letter-spacing: -0.02em;
-
-    color: @color-black-lighter;
-    
-    margin: 0;
-    margin-bottom: 40px;
-}
-
-h3 {
-    font-family: Quando;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 140%;
-
-    color: @color-black-lighter;
-
-
-    margin: 0;
-    margin-bottom: 40px;
-}
-
-h4 {
-    font-family: Protipo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: @color-black;
-
-    margin: 0;
-    margin-bottom: 10px;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 a {
-    display: inline-block;
-    font-family: Protipo;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
+    color: unset;
 
-    text-decoration-line: underline;
-
-    color: #66B7E7;
+    &:hover {
+        color: unset;
+    }
 }
 
-@keyframes fadeIn {
+p {
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: @margin-base;
+    }
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: @margin-base-sm;
+    font: var(--font-nem-title);
+    letter-spacing: var(--typography-nem-title-letter-spacing);
+}
+
+.text-crop {
+    position: relative;
+    margin-bottom: @margin-base;
+    overflow: visible;
+}
+
+.text-crop-sm {
+    position: relative;
+    margin-bottom: @margin-base-sm;
+    overflow: visible;
+}
+
+// Mobile
+
+@media @screen-mobile {
+    body {
+        font: var(--font-mobile-body);
+    }
+
+    p {
+        margin-bottom: 7px;
+
+        &:last-child {
+            margin-bottom: @margin-base;
+        }
+    }
+
+    h2 {
+        margin-bottom: @margin-base-sm;
+        font: var(--font-mobil-title);
+        letter-spacing: var(--typography-mobil-title-letter-spacing);
+    }
+}
+
+// Animations & Transitions
+
+@keyframes fade-in {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
-    } 
-}
-
-@media @screen-mobile {
-    p {
-        font-family: Protipo;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 150%;
-    
-    }
-    
-    p:last-child {
-        margin-bottom: 28px;
-    }
-    
-    h2 {
-        font-family: Proxima Nova;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 26px;
-    
-        margin-bottom: 11px;
-    }
-    
-    h3 {
-        font-family: Proxima Nova;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 20px;
-        line-height: 26px;
-    
-        color: @color-black-lighter;
-    
-    
-        margin: 0;
-        margin-bottom: 11px;
     }
 }

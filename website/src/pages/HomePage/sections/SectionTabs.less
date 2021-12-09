@@ -1,0 +1,231 @@
+.section-3 {
+    min-height: 788px;
+    padding: 58px 0 46px;
+    background: #fff;
+
+    .tabs-wrapper {
+        width: 100%;
+    }
+
+    .tab-mobile {
+        display: none;
+    }
+
+    .tabs {
+        max-width: 1010px;
+    }
+
+    .image-watercolor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: 100%;
+    }
+
+    .section-3-tab {
+        display: flex;
+        justify-content: space-between;
+        animation-name: fade-in;
+        animation-duration: 250ms;
+        animation-timing-function: linear;
+
+        .content {
+            position: relative;
+            max-width: 472px;
+            margin-top: 81px;
+        }
+    }
+
+    .section-3-tab-1 {
+        .hero-image-container {
+            margin: 76px 0 0 47px;
+        }
+
+        .hero-image {
+            width: 100%;
+            min-width: 597px;
+            max-width: 697px;
+        }
+    }
+
+    .section-3-tab-2 {
+        .content {
+            max-width: 695px;
+        }
+
+        .exchange-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto;
+            gap: 30px;
+        }
+
+        .image-exchange {
+            width: 100%;
+        }
+
+        .hero-image-container {
+            margin: 32px 0 0 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            min-width: 456px;
+            max-width: 456px;
+        }
+    }
+
+    .section-3-tab-3 {
+        .hero-image-container {
+            margin: 0 -130px 0 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            min-width: 638px;
+            max-width: 738px;
+        }
+    }
+
+    .section-3-tab-4 {
+        .hero-image-container {
+            margin: 41px 0 0 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            min-width: 497px;
+            max-width: 697px;
+        }
+    }
+}
+
+@media @screen-tablet {
+    .section-3 {
+        .image-watercolor {
+            right: 100px;
+            transform: translateX(100%);
+        }
+
+        .tabs {
+            position: absolute;
+            left: 0;
+            justify-content: space-around;
+            max-width: 100%;
+            padding: 0 28px;
+        }
+
+        .section-3-tab {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-items: center;
+
+            .content {
+                position: relative;
+                order: 1;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .hero-image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                order: 0;
+                margin: 76px 0 47px;
+            }
+
+            .hero-image {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                height: auto;
+                min-height: 0;
+                max-height: 100%;
+            }
+        }
+
+        .section-3-tab-2 {
+            h2 {
+                display: none;
+            }
+
+            .exchange-container {
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+                gap: 30px;
+            }
+
+            .image-exchange {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media @screen-mobile {
+    .section-3 {
+        min-height: unset;
+
+        h2 {
+            display: none;
+        }
+
+        .content-container {
+            align-items: flex-start;
+        }
+
+        .image-watercolor {
+            display: none;
+        }
+
+        .tabs-wrapper {
+            display: none;
+        }
+
+        .tab-mobile {
+            display: unset;
+        }
+
+        .section-3-tab {
+            flex-direction: column;
+
+            .content {
+                position: relative;
+                order: 1;
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .hero-image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                order: 0;
+                margin: 41px 0 33px;
+            }
+
+            .hero-image {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                height: auto;
+                min-height: 0;
+                max-height: 100%;
+            }
+        }
+
+        .section-3-tab-2 {
+            .exchange-container {
+                display: grid;
+                grid-template-columns: auto auto auto;
+                gap: 30px;
+            }
+
+            .image-exchange {
+                width: 100%;
+            }
+        }
+    }
+}

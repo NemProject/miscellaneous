@@ -16,10 +16,10 @@
 import React from 'react';
 import BasePage from '../BasePage/BasePage';
 import './HomePage.less';
-import SectionAbout from './SectionAbout';
-import SectionDocumentation from './SectionDocumentation';
-import SectionHorizon from './SectionHorizon';
-import SectionTabs from './SectionTabs';
+import SectionAbout from './sections/SectionAbout';
+import SectionDocumentation from './sections/SectionDocumentation';
+import SectionHorizon from './sections/SectionHorizon';
+import SectionTabs from './sections/SectionTabs';
 
 export default function HomePage(): JSX.Element {
     return (

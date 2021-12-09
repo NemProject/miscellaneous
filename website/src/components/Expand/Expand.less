@@ -1,47 +1,39 @@
 .expand {
-    margin-bottom: 28px;
+    margin-bottom: 10px;
 }
 
 .expand-link-triangle-group {
-    width: auto;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-
-    font-family: Proxima Nova;
-    font-style: normal;
+    width: auto;
+    color: @color-black-lighter;
     font-weight: bold;
     font-size: 25px;
-    line-height: 30px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    line-height: 34px;
     text-align: center;
-
-    color: @color-black;
 }
 
 .expand-link {
     display: flex;
     align-items: center;
+    padding: 10px 0 4px;
+    border-bottom: 4px solid transparent;
 }
 
+.expand-link-active {
+    border-bottom: 4px solid @color-yellow;
+}
 
 .expand-container {
-    margin: 0 0 30px;
-    max-height: 1920px;
-    overflow-y: auto;
-    animation-duration: 1s;
-    animation-name: expand-shrink;
     width: 100%;
-}
-
-.expand-arrow {
-    margin-left: 11px;
-    fill: @color-blue;
-    transition: all 0.2s;
-}
-
-.expand-arrow-active {
-    fill: @color-yellow;
-    transform: rotate(90deg);
+    max-height: 1920px;
+    margin: 0 0 30px;
+    overflow-y: auto;
+    animation-name: expand-shrink;
+    animation-duration: 1s;
 }
 
 @keyframes expand-shrink {
@@ -50,16 +42,6 @@
     }
 
     to {
-        max-height: 1920px
-    }
-}
-
-@keyframes expand-arrow-rotate {
-    from {
-        color: 1px;
-    }
-
-    to {
-        max-height: 1920px
+        max-height: 1920px;
     }
 }

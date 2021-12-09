@@ -20,264 +20,245 @@ export class ExchangeService {
     // Hardcoded exchange list
     private static staticExchangeList: Exchange[] = [
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2535.png')
-                .default,
-            url: 'https://binance.com/',
+            imageSrc: require('src/assets/images/exchanges/aex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2536.png')
-                .default,
-            url: 'https://huobi.com/',
+            imageSrc: require('src/assets/images/exchanges/aofex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2537.png')
+            imageSrc: require('src/assets/images/exchanges/ascendex.png')
                 .default,
-            url: 'https://okex.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2538.png')
-                .default,
-            url: 'https://kucoin.com/',
+            imageSrc: require('src/assets/images/exchanges/bibox.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2539.png')
+            imageSrc: require('src/assets/images/exchanges/binance.png')
                 .default,
-            url: 'https://ascendex.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2540.png')
-                .default,
-            url: 'https://bithumb.com/',
+            imageSrc: require('src/assets/images/exchanges/bione.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2541.png')
+            imageSrc: require('src/assets/images/exchanges/bit-bns.png')
                 .default,
-            url: 'https://liquid.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2542.png')
+            imageSrc: require('src/assets/images/exchanges/bithumb.png')
                 .default,
-            url: 'https://upbit.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2543.png')
+            imageSrc: require('src/assets/images/exchanges/bitmart.png')
                 .default,
-            url: 'https://bittrex.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2545.png')
-                .default,
-            url: 'https://bibox.com/',
+            imageSrc: require('src/assets/images/exchanges/bitrue.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2546.png')
+            imageSrc: require('src/assets/images/exchanges/bittrex.png')
                 .default,
-            url: 'https://latoken.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2547.png')
+            imageSrc: require('src/assets/images/exchanges/bitvavo.png')
                 .default,
-            url: 'https://hotbit.io/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2548.png')
-                .default,
-            url: 'https://wazirx.com/',
+            imageSrc: require('src/assets/images/exchanges/bkex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2550.png')
+            imageSrc: require('src/assets/images/exchanges/btc-trade-ua.png')
                 .default,
-            url: 'https://probit.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2551.png')
+            imageSrc: require('src/assets/images/exchanges/coindcx.png')
                 .default,
-            url: 'https://hitbtc.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2552.png')
-                .default,
-            url: 'https://digifinex.com/',
+            imageSrc: require('src/assets/images/exchanges/coinex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2553.png')
+            imageSrc: require('src/assets/images/exchanges/coinsbit.png')
                 .default,
-            url: 'https://gokumarket.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2554.png')
+            imageSrc: require('src/assets/images/exchanges/cointiger.png')
                 .default,
-            url: 'https://__/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2556.png')
-                .default,
-            url: 'https://cointiger.com/',
+            imageSrc: require('src/assets/images/exchanges/crex24.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2557.png')
+            imageSrc: require('src/assets/images/exchanges/dex-trade.png')
                 .default,
-            url: 'https://poloniex.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2558.png')
+            imageSrc: require('src/assets/images/exchanges/digifinex.png')
                 .default,
-            url: 'https://bione.info/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2559.png')
+            imageSrc: require('src/assets/images/exchanges/dragonex.png')
                 .default,
-            url: 'https://coindcx.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2560.png')
-                .default,
-            url: 'https://pionex.com/',
+            imageSrc: require('src/assets/images/exchanges/exmo.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2561.png')
+            imageSrc: require('src/assets/images/exchanges/exrates.png')
                 .default,
-            url: 'https://valr.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2562.png')
+            imageSrc: require('src/assets/images/exchanges/gete-io.png')
                 .default,
-            url: 'https://bitvavo.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2563.png')
+            imageSrc: require('src/assets/images/exchanges/goku-market.png')
                 .default,
-            url: 'https://aex.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2564.png')
-                .default,
-            url: 'https://coinex.com/',
+            imageSrc: require('src/assets/images/exchanges/hitbtc.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2565.png')
-                .default,
-            url: 'https://bitrue.com/',
+            imageSrc: require('src/assets/images/exchanges/hotbit.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2566.png')
-                .default,
-            url: 'https://bitmart.com/',
+            imageSrc: require('src/assets/images/exchanges/huobi.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2572.png')
+            imageSrc: require('src/assets/images/exchanges/indodax.png')
                 .default,
-            url: 'https://mexo.io/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2573.png')
-                .default,
-            url: 'https://__/',
+            imageSrc: require('src/assets/images/exchanges/kucoin.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2574.png')
-                .default,
-            url: 'https://kuna.io/',
+            imageSrc: require('src/assets/images/exchanges/kuna.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2575.png')
+            imageSrc: require('src/assets/images/exchanges/latoken.png')
                 .default,
-            url: 'https://zb.com/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2576.png')
-                .default,
-            url: 'https://zaif.jp/',
+            imageSrc: require('src/assets/images/exchanges/liquid.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2591.png')
+            imageSrc: require('src/assets/images/exchanges/mandala.png')
                 .default,
-            url: 'https://__/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2593.png')
+            imageSrc: require('src/assets/images/exchanges/mexo-io.png')
                 .default,
-            url: 'https://ztb.im/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2594.png')
-                .default,
-            url: 'https://p2pb2b.io/',
+            imageSrc: require('src/assets/images/exchanges/okex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2595.png')
+            imageSrc: require('src/assets/images/exchanges/p2p-b2b.png')
                 .default,
-            url: 'https://coinsbit.io/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2596.png')
-                .default,
-            url: 'https://vindax.com/',
+            imageSrc: require('src/assets/images/exchanges/pionex.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2597.png')
+            imageSrc: require('src/assets/images/exchanges/poloniex.png')
                 .default,
-            url: 'https://yobit.net/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2598.png')
-                .default,
-            url: 'https://mandala.exchange/',
+            imageSrc: require('src/assets/images/exchanges/probit.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2599.png')
+            imageSrc: require('src/assets/images/exchanges/tokocrypto.png')
                 .default,
-            url: 'https://dragonex.io/',
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2600.png')
-                .default,
-            url: 'https://exrates.me/',
+            imageSrc: require('src/assets/images/exchanges/upbit.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2601.png')
-                .default,
-            url: 'https://xt.com/',
+            imageSrc: require('src/assets/images/exchanges/valr.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2602.png')
-                .default,
-            url: 'https://dex-trade.com/',
+            imageSrc: require('src/assets/images/exchanges/vindax.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2603.png')
-                .default,
-            url: 'https://exmo.com/',
+            imageSrc: require('src/assets/images/exchanges/warizx.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2604.png')
-                .default,
-            url: 'https://gate.io/',
+            imageSrc: require('src/assets/images/exchanges/wbf.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2605.png')
-                .default,
-            url: 'https://tokocrypto.com/',
+            imageSrc: require('src/assets/images/exchanges/xt-com.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2614.png')
-                .default,
-            url: 'https://crex24.com/',
+            imageSrc: require('src/assets/images/exchanges/yobit.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2615.png')
-                .default,
-            url: 'https://__/',
+            imageSrc: require('src/assets/images/exchanges/zaif.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2616.png')
-                .default,
-            url: 'https://indodax.com/',
+            imageSrc: require('src/assets/images/exchanges/zb-com.png').default,
+            url: 'https://___/',
         },
         {
-            imageSrc: require('src/assets/images/exchanges/Group 2618.png')
+            imageSrc: require('src/assets/images/exchanges/zbg.png').default,
+            url: 'https://___/',
+        },
+        {
+            imageSrc: require('src/assets/images/exchanges/zipmex.png').default,
+            url: 'https://___/',
+        },
+        {
+            imageSrc: require('src/assets/images/exchanges/zt-global.png')
                 .default,
-            url: 'https://bitbns.com/',
+            url: 'https://___/',
         },
     ];
 

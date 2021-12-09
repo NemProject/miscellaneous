@@ -61,12 +61,12 @@ export const Expand: React.FunctionComponent<SimpleSpread<
 
     const extendedClassName = 'expand' + (className ? ' ' + className : '');
     const extendedLinkClassName =
-        'expand-link' + (linkClassName ? ' ' + linkClassName : '');
+        'expand-link' +
+        (linkClassName ? ' ' + linkClassName : '') +
+        (_expanded ? ' expand-link-active' : '');
     const extendedContainerClassName =
         'expand-container' +
         (containerClassName ? ' ' + containerClassName : '');
-    const arrowClassName =
-        'expand-arrow' + (_expanded ? ' expand-arrow-active' : '');
 
     return (
         <div className={extendedClassName} {...rest}>
@@ -76,16 +76,6 @@ export const Expand: React.FunctionComponent<SimpleSpread<
                     onClick={() => toggle(!_expanded)}
                 >
                     {linkText}
-                    <svg
-                        className={arrowClassName}
-                        width="21"
-                        height="26"
-                        viewBox="0 0 21 26"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path d="M21 13L-1.14193e-06 25.1244L-8.1987e-08 0.875644L21 13Z" />
-                    </svg>
                 </div>
             </div>
             {_expanded && (

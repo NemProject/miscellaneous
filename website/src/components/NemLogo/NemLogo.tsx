@@ -15,7 +15,6 @@
  */
 
 import * as React from 'react';
-import './NemLogo.less';
 import NemLogoImageUrl from 'src/assets/images/nem-logo.png';
 
 type Props = React.HTMLAttributes<HTMLImageElement>;

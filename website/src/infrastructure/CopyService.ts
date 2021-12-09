@@ -15,53 +15,79 @@
  */
 
 import { Storage } from 'src/infrastructure/Storage';
-import { LocaleObject } from 'src/models/LocaleObject';
-import english from 'src/locales/english.json';
+import { LocaleObject } from 'src/models/Locale';
+import en from 'src/locales/en.json';
 
-type Locale = typeof english;
-
-const MISSING_TRANSLATION_MESSAGE = 'missing_translation_';
+type Locale = typeof en;
 
 export class CopyService {
-    // Available languages
-    private static languages: string[] = ['eng'];
+    // Supported languages
+    private static languages: string[] = ['en'];
+    private static defaultLanguage = 'en';
 
-    private static defaultLanguage = 'eng';
-
+    /**
+     * Returns locale object depeding on the current language
+     * @returns {string} locale object
+     */
     private static getCurrentLocale(): Locale {
         const currentLanguage = CopyService.getCurrentLanguage();
 
         switch (currentLanguage) {
             default:
-            case 'eng':
-                return english;
+            case 'en':
+                return en;
         }
     }
 
-    // Returns default language
-    static getdefaultLanguage(): string {
-        return CopyService.defaultLanguage;
-    }
-
-    // Returns available languages
+    /**
+     * Returnsns all supported languages
+     * @returns {string[]} list of languages
+     */
     static getLanguages(): string[] {
         return CopyService.languages;
     }
 
-    // Returns current language
+    /**
+     * Returns user selected or default language
+     * @returns {string} current language
+     */
     static getCurrentLanguage(): string {
         const currentLanguage =
             Storage.get('currentLanguage') || CopyService.defaultLanguage;
         const supportedLanguages = CopyService.getLanguages();
 
         if (!supportedLanguages.includes(currentLanguage)) {
+            console.error(
+                `Current language "${currentLanguage}" is not supported. Switching to default.`,
+            );
+
             return CopyService.defaultLanguage;
         } else {
             return currentLanguage;
         }
     }
 
-    // Returns copy by key depeding on the current language
+    /**
+     * Sets user language
+     * @param {string} lang - language
+     */
+    static setCurrentLanguage(lang: string): void {
+        const supportedLanguages = CopyService.getLanguages();
+
+        if (supportedLanguages.includes(lang)) {
+            Storage.set('currentLanguage', lang);
+        } else {
+            console.error(
+                `Failed to set current language. Language "${lang}"" is not supported`,
+            );
+        }
+    }
+
+    /**
+     * Returns copy by key depeding on the current language
+     * @param {string} key - translation key
+     * @returns {string} translated copy text
+     */
     static getCopy(key: string): string {
         const locale = CopyService.getCurrentLocale() as LocaleObject;
         const keyExists = locale.hasOwnProperty(key);
@@ -69,7 +95,11 @@ export class CopyService {
         if (keyExists) {
             return locale[key];
         } else {
-            return MISSING_TRANSLATION_MESSAGE + key;
+            const currentLanguage = CopyService.getCurrentLanguage();
+
+            return `[missing_translation](${currentLanguage})${key}`;
         }
     }
 }
+
+export const $t = CopyService.getCopy;

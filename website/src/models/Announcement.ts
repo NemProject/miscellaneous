@@ -19,6 +19,6 @@ export interface Announcement {
     id: number;
 }
 
-export interface AnnouncementsFile {
-    [key: string]: Announcement[];
+export interface AnnouncementObject {
+    [lang: string]: Announcement[];
 }

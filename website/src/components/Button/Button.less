@@ -1,42 +1,28 @@
 .button {
-    min-width: 236px;
-    padding: 19px 15px 15px;
-    background: @color-green;
-    border-style: none;
-    border-radius: 10px;
-
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-width: 182px;
+    padding: 11px 28px 10px;
+    color: @color-green;
+    font: var(--font-nem-button-text);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: var(--typography-nem-button-text-text-case);
+    background: transparent;
+    border: 1px solid @color-green;
+    cursor: pointer;
     user-select: none;
 
-    
-    font-family: Proxima Nova;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 22px;
-    line-height: 22px;
-    text-align: center;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-
-    color: #FFFFFF;
-
-    cursor: pointer;
-
     &:hover {
+        color: #fff;
+        background-color: @color-green;
         opacity: 0.9;
-        color: white;
     }
-}
 
-@media @screen-mobile {
-    .button {
-        width: 100%;
-        max-width: 100%;
-        padding: 17px 15px;
-        line-height: 27px;
-        text-transform: unset;
+    &:active {
+        border: 1px solid #fff;
     }
 }

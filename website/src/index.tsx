@@ -21,6 +21,7 @@ import store from 'src/store';
 import Router from './Router';
 import 'antd/dist/antd.less';
 import './styles/fonts.less';
+import './styles/nem-design-system.css';
 import './styles/global.less';
 
 ReactDOM.render(

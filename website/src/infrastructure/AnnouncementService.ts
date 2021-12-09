@@ -17,7 +17,7 @@
 import Axios from 'axios';
 import { CopyService } from 'src/infrastructure/CopyService';
 import { Storage } from 'src/infrastructure/Storage';
-import { Announcement, AnnouncementsFile } from 'src/models/Announcement';
+import { Announcement, AnnouncementObject } from 'src/models/Announcement';
 import { Utils } from 'src/utils';
 import { Config } from 'src/config';
 
@@ -48,7 +48,7 @@ export class AnnouncementService {
     private static async fetchAnnouncemets(
         lang: string,
     ): Promise<Announcement[]> {
-        const rawAnnouncements: AnnouncementsFile = (
+        const rawAnnouncements: AnnouncementObject = (
             await Axios.get(Config.URL_ANNOUNCEMETS)
         ).data;
         const announcements = rawAnnouncements[lang] || [];
