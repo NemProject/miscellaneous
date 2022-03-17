@@ -14,7 +14,7 @@ describe("Ledger service", function() {
 
   it ("Has right bip44 path for testnet NetWork", function() {
     // GIVEN
-    let expectedResult = "44'/43'/152'/0'/0'";
+    let expectedResult = "m/44'/1'/0'/0'/0'";
 
     // WHEN
     let result = LedgerService.bip44(-104, 0);
@@ -25,7 +25,7 @@ describe("Ledger service", function() {
 
   it ("Has right bip44 path for main NetWork", function() {
     // GIVEN
-    let expectedResult = "44'/43'/104'/0'/0'";
+    let expectedResult = "m/44'/43'/0'/0'/0'";
 
     // WHEN
     let result = LedgerService.bip44(104, 0);
@@ -46,7 +46,7 @@ describe("Ledger service", function() {
     let result = await LedgerService.createAccount(network, index, label)
 
     // THEN
-    expect(LedgerService.getAccount).toHaveBeenCalledWith("44'/43'/152'/0'/0'", network, label);
+    expect(LedgerService.getAccount).toHaveBeenCalledWith("m/44'/1'/0'/0'/0'", network, label);
     expect(result).toEqual(expetedResult);
     done();
   });
@@ -99,17 +99,19 @@ describe("Ledger service", function() {
       publicKey:"3e6e6cbac488b8a44bdf5abf27b9e1cc2a6f20d09d550a66b9b36f525ca222ee",
       $$hashKey:"object:141"
     };
-    spyOn(LedgerService, 'signTransaction').and.returnValue(Promise.resolve('payload'));
-    let expetedResult = 'payload';
+    spyOn(window, 'alert');
+    spyOn(LedgerService, 'signTransaction').and.returnValue(Promise.resolve({ signature: 'signature' }));
+    spyOn(LedgerService, 'getAppVersion').and.returnValue(Promise.resolve(1));
+    let expectedResult = { signature: 'signature' };
 
     // WHEN
     let result = await LedgerService.serialize(transaction, account).catch(err => {
-      fail('Error while serializig transaction: ' + err);
+      fail('Error while serializing transaction: ' + err);
     });
 
     // THEN
     expect(LedgerService.signTransaction).toHaveBeenCalled();
-    expect(result).toEqual(expetedResult);
+    expect(result).toEqual(expectedResult);
     done();
   });
 });

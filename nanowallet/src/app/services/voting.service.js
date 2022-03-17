@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {TrezorAccount} from 'nem-trezor';
+import {TrezorAccount} from '../modules/trezor/trezorAccount';
 import nemsdk from 'nem-sdk';
 const nem = require('nem-library');
 const voting = require('nem-voting');
@@ -127,7 +127,7 @@ class Voting {
         let account = {};
         if (common.isHW) {
             if (this._Wallet.algo == "trezor") {
-                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath, nem.NEMLibrary.getNetworkType(), this._Trezor);
             }
         } else {
             account = nem.Account.createWithPrivateKey(common.privateKey);
@@ -138,6 +138,7 @@ class Voting {
         const broadcastData = poll.broadcast(account.publicKey, index);
         broadcastData.transactions = broadcastData.transactions.map((t) => {
             t.timeWindow = nem.TimeWindow.createFromDTOInfo(timeStamp, deadline);
+            t.fee = Math.floor(t.fee);
             return t;
         });
         const nodeSplit = this._Wallet.node.host.split("://");
@@ -156,7 +157,6 @@ class Voting {
                 if (this._Wallet.algo == "trezor") {
                     if (window['isElectronEnvironment']) {
                         const transaction = broadcastData.transactions[i];
-                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
                         transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
                         const dto = transaction.toDTO();
                         p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
@@ -165,7 +165,6 @@ class Voting {
                     }
                 } else if (this._Wallet.algo == "ledger") {
                     const transaction = broadcastData.transactions[i];
-                    transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
                     transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
                     const dto = transaction.toDTO();
                     p = this._Ledger.serialize(dto, this._Wallet.currentAccount);
@@ -349,7 +348,7 @@ class Voting {
         let account;
         if (common.isHW) {
             if (this._Wallet.algo == "trezor") {
-                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath);
+                account = new TrezorAccount(this._Wallet.currentAccount.address, this._Wallet.currentAccount.hdKeypath, nem.NEMLibrary.getNetworkType(), this._Trezor);
             }
         } else {
             account = nem.Account.createWithPrivateKey(common.privateKey);
@@ -361,7 +360,6 @@ class Voting {
                 if (window['isElectronEnvironment']) {
                     const signTransaction = (i) => {
                         const transaction = votes[i];
-                        transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
                         transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
                         const dto = transaction.toDTO();
                         const p = this._Trezor.serialize(dto, this._Wallet.currentAccount);
@@ -378,12 +376,11 @@ class Voting {
                     }
                     signedTransactionsPromise = signTransaction(0);
                 } else {
-                    signedTransactionsPromise = account.signSerialTransactions(votes).first().toPromise();
+                    signedTransactionsPromise = account.signTransactions(votes).first().toPromise();
                 }
             } else if (this._Wallet.algo == "ledger") {
                 const signTransaction = (i) => {
                     const transaction = votes[i];
-                    transaction.signer = nem.PublicAccount.createWithPublicKey("462ee976890916e54fa825d26bdd0235f5eb5b6a143c199ab0ae5ee9328e08ce");
                     transaction.setNetworkType(nem.NEMLibrary.getNetworkType());
                     const dto = transaction.toDTO();
                     const p = this._Ledger.serialize(dto, this._Wallet.currentAccount);

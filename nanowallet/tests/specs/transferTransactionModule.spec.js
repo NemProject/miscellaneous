@@ -430,11 +430,10 @@ describe('Transfer transaction module tests', function() {
         scope.$digest();
 
         // Act
-        ctrl.resetData();
+        ctrl.init();
         scope.$digest();
 
         // Assert
-        expect(ctrl.formData).toEqual(nem.model.objects.get("transferTransaction"));
         expect(ctrl.common).toEqual(nem.model.objects.get("common")); 
     });
 
