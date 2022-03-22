@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.6.2
+
+    - Upgraded trezor-connect to v8
+    - Refactored voting module
+    - Added unit tests for Trezor
+    - Removed dependency to nem-trezor lib 
+    - Fixed failing unit tests
+    - Fixed voting transactions fee flooring issue
+
 ## Version 2.6.1
 
     - Added post-launch opt-in check NIS keys
