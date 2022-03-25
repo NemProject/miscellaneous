@@ -1,6 +1,6 @@
 {
   "name": "NEM-Wallet",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "Cross-platform lite wallet for NEM",
   "author": "https://github.com/QuantumMechanics <qmnwdev@gmail.com>",
   "license": "MIT",
@@ -93,7 +93,7 @@
   "build": {
     "appId": "com.nemgrouplimited.nemwallet",
     "extends": null,
-    "copyright": "Copyright © 2019-2021 NEM",
+    "copyright": "Copyright © 2019-2022 NEM",
     "productName": "Nem Wallet",
     "artifactName": "${name}-${os}-${arch}-${version}.${ext}",
     "icon": "./build/images/NanoWallet.icns",
@@ -107,7 +107,8 @@
       "buildResources": "assets",
       "output": "release"
     },
-    "npmRebuild": false
+    "npmRebuild": false,
+    "afterSign": "scripts/notarize.js"
   },
   "mac": {
     "category": "public.app-category.finance",

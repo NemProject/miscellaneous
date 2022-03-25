@@ -54,9 +54,45 @@ If the circle next to `Node` is red, click on it and select another node from th
 
 <pre>gulp build-app</pre>
 
-6) Build NEM Wallet Electron apps (only Electron verision support Ledger wallets), default build for MacOS, Windows and Linux
+6) For local use, build NEM Wallet Electron apps (only Electron verision support Ledger wallets), default build for MacOS, Windows and Linux
 
-<pre>npm run release</pre>
+<pre>
+# create the release folder where the artifacts will be created
+mkdir -p release
+
+# to skip code signing
+export CSC_IDENTITY_AUTO_DISCOVERY=false
+
+npm run release
+</pre>
+
+7) Release for distribution: (Code signing for Apple builds - requires `Developer ID Certificate`)
+
+    7.1 On a MacOS machine, download the zip file containing the app signing certificates (ask team)
+
+    7.2 Extract the certificates and double click each one of them to add to the keychain (ask the team for private key password)
+    
+    7.3 Starting with MacOS 10.14.5, all signed applications by new `Developer ID Certificate` will need to be notarized. This is an automated step in the process. You'll need to enable notarization by setting the following env vars.
+
+    <pre>
+    export DESKTOP_APP_NOTARIZE=true
+    export DESKTOP_APP_APPLE_ID=VALID_APPLE_DEV_ID
+    export DESKTOP_APP_APPLE_PASSWORD=VALID_APPLE_DEV_PASSWORD
+    </pre>
+    
+    7.4 Enable auto discovery for code signing process to pick up the certificates from the keychain
+
+    <pre>export CSC_IDENTITY_AUTO_DISCOVERY=true</pre>
+
+    7.5 Run release
+    <pre>npm run release</pre>
+
+    7.6 Validate if the app is signed with a `Developer ID Certificate` and notarized
+    
+    <pre>spctl -a -t exec -v ./release/mac/Nem\ Wallet.app
+    # Output(Success): ./release/mac/Nem Wallet.app: accepted source=Notarized Developer ID
+    # Output(Failure): ./release/mac/Nem Wallet.app: rejected source=Unnotarized Developer ID
+    </pre>
 
 ### Known issues ###
 
