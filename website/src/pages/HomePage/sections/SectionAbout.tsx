@@ -15,9 +15,11 @@
  */
 
 import React from 'react';
-import { Art, Button, ContentContainer } from 'src/components';
+import { Button, ContentContainer } from 'src/components';
 import HeroMountainImageUrl from 'src/assets/images/hero-mountain.png';
 import { Row } from 'antd';
+import { $t } from 'src/infrastructure/CopyService';
+import { JSXUtils } from 'src/utils';
 import './SectionAbout.less';
 
 export default function HomePage(): JSX.Element {
@@ -26,37 +28,22 @@ export default function HomePage(): JSX.Element {
             <ContentContainer>
                 <div className="content">
                     <h2>
-                        We’ve built a new economy: decentralized, distributed,
-                        and digital. Now, it belongs to you.
+                        {$t('home_about_title')}
                     </h2>
                     <div>
-                        <p>
-                            On June 16th, 2014, “UtopianFuture” painted a vision
-                            for a new blockchain protocol based on three key
-                            principles: decentralization, financial freedom, and
-                            equality of opportunity.
-                        </p>
-                        <p>
-                            On March 31st, 2015, a team of psuedonymous
-                            developers banded together to launch NEM - the New
-                            Economy Movement.
-                        </p>
-                        <p>
-                            NEM launched with key features that helped it become
-                            a pioneer in the blockchain landscape: native
-                            multisignature accounts; namespaces; and mosaics.
-                        </p>
+                        {JSXUtils.createParagraph($t('home_about_content'), 'hero')}
                     </div>
                     <Row className="buttons">
-                        <Button>Start building</Button>
-                        <Button>Join discord</Button>
+                        <Button>{$t('home_about_button_github')}</Button>
+                        <Button>{$t('home_about_button_discord')}</Button>
                     </Row>
                 </div>
-                <Art
-                    className="hero-image-container"
-                    imageClassName="hero-image"
-                    src={HeroMountainImageUrl}
-                />
+                <div className="hero-image-container">
+                    <img
+                        className="hero-image"
+                        src={HeroMountainImageUrl}
+                    />
+                </div>
             </ContentContainer>
         </div>
     );

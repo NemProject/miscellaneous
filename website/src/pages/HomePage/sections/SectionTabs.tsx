@@ -24,6 +24,8 @@ import WatercolorBlueImageUrl from 'src/assets/images/watercolor-blue.png';
 import WatercolorGoldImageUrl from 'src/assets/images/watercolor-gold.png';
 import WatercolorGreenImageUrl from 'src/assets/images/watercolor-green.png';
 import WatercolorPurpleImageUrl from 'src/assets/images/watercolor-purple.png';
+import { $t } from 'src/infrastructure/CopyService';
+import { JSXUtils } from 'src/utils';
 import './SectionTabs.less';
 
 interface Props {
@@ -39,49 +41,21 @@ function SectionTabs(props: Props): JSX.Element {
         WatercolorBlueImageUrl,
         WatercolorPurpleImageUrl,
         WatercolorGoldImageUrl,
-    ][activeTab - 1];
+    ][activeTab];
 
     const tabItems = [
-        {
-            text: 'Harvesting',
-            value: 0,
-        },
-        {
-            text: 'Exchanges',
-            value: 1,
-        },
-        {
-            text: 'Tokenomics',
-            value: 2,
-        },
-        {
-            text: 'Supernode Program',
-            value: 3,
-        },
+        { text: $t('home_tabs_tab1_t'), value: 0 },
+        { text: $t('home_tabs_tab2_t'), value: 1 },
+        { text: $t('home_tabs_tab3_t'), value: 2 },
+        { text: $t('home_tabs_tab4_t'), value: 3 },
     ];
 
     const tabItemsContent: Array<JSX.Element> = [
         <div className="section-3-tab section-3-tab-1" key="tab-1">
             <div className="content">
-                <h2>Harvesting the NEM Token</h2>
+                <h2>{$t('home_tabs_tab1_title')}</h2>
                 <div>
-                    <p>
-                        The process of creating new blocks and adding them to
-                        the blockchain is called Harvesting in Symbol.
-                    </p>
-                    <p>
-                        Harvesting nodes commit hardware resources to
-                        maintaining the Symbol network and their owning accounts
-                        are rewarded XYM tokens for each harvested block. In
-                        order to harvest, accounts must hold a minimum of 10’000
-                        XYM.
-                    </p>
-                    <p>
-                        Node owners with insufficient balance can benefit from
-                        delegated harvesting and split the harvesting rewards
-                        with an account providing the required minimum balance.
-                        A profitable arrangement for both accounts!
-                    </p>
+                    {JSXUtils.createParagraph($t('home_tabs_tab1_content'))}
                 </div>
             </div>
             <Art
@@ -92,7 +66,7 @@ function SectionTabs(props: Props): JSX.Element {
         </div>,
         <div className="section-3-tab section-3-tab-2" key="tab-2">
             <div className="content">
-                <h2>Exchanges That Support The XEM Token</h2>
+                <h2>{$t('home_tabs_tab2_title')}</h2>
                 <div className="exchange-container">
                     {exchangeList.map((exchange, index) => (
                         <a
@@ -103,6 +77,7 @@ function SectionTabs(props: Props): JSX.Element {
                         >
                             <img
                                 src={exchange.imageSrc}
+                                alt={exchange.exchangeName}
                                 className="image-exchange"
                             />
                         </a>
@@ -117,25 +92,9 @@ function SectionTabs(props: Props): JSX.Element {
         </div>,
         <div className="section-3-tab section-3-tab-3" key="tab-3">
             <div className="content">
-                <h2>The XEM Tokenomics</h2>
+                <h2>{$t('home_tabs_tab3_title')}</h2>
                 <div>
-                    <p>
-                        The process of creating new blocks and adding them to
-                        the blockchain is called Harvesting in Symbol.
-                    </p>
-                    <p>
-                        Harvesting nodes commit hardware resources to
-                        maintaining the Symbol network and their owning accounts
-                        are rewarded XYM tokens for each harvested block. In
-                        order to harvest, accounts must hold a minimum of 10’000
-                        XYM.
-                    </p>
-                    <p>
-                        Node owners with insufficient balance can benefit from
-                        delegated harvesting and split the harvesting rewards
-                        with an account providing the required minimum balance.
-                        A profitable arrangement for both accounts!
-                    </p>
+                    {JSXUtils.createParagraph($t('home_tabs_tab3_content'))}
                 </div>
             </div>
             <Art
@@ -146,25 +105,9 @@ function SectionTabs(props: Props): JSX.Element {
         </div>,
         <div className="section-3-tab section-3-tab-4" key="tab-4">
             <div className="content">
-                <h2>Join the NEM Supernode Program</h2>
+                <h2>{$t('home_tabs_tab4_title')}</h2>
                 <div>
-                    <p>
-                        The process of creating new blocks and adding them to
-                        the blockchain is called Harvesting in Symbol.
-                    </p>
-                    <p>
-                        Harvesting nodes commit hardware resources to
-                        maintaining the Symbol network and their owning accounts
-                        are rewarded XYM tokens for each harvested block. In
-                        order to harvest, accounts must hold a minimum of 10’000
-                        XYM.
-                    </p>
-                    <p>
-                        Node owners with insufficient balance can benefit from
-                        delegated harvesting and split the harvesting rewards
-                        with an account providing the required minimum balance.
-                        A profitable arrangement for both accounts!
-                    </p>
+                    {JSXUtils.createParagraph($t('home_tabs_tab4_content'))}
                 </div>
             </div>
             <Art
@@ -178,7 +121,7 @@ function SectionTabs(props: Props): JSX.Element {
     return (
         <div className="section section-3" active-title={activeTab}>
             <img src={watercolorImageUrl} className="image-watercolor" />
-            <ContentContainer>
+            <ContentContainer className="static">
                 <div className="tabs-wrapper">
                     <Tabs
                         items={tabItems}

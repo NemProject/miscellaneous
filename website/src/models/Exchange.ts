@@ -14,7 +14,21 @@
  *
  */
 
-export interface Exchange {
+export interface ExchangeConfig {
     imageSrc: string;
+    exchangeId: string;
     url: string;
+}
+
+export interface ExchangeInfo extends ExchangeConfig {
+    isUSD: boolean;
+    target: string;
+    exchangeName: string;
+    price: number;
+    volume: number;
+}
+
+export interface ExchangeDetails {
+    marketData: number[];
+    exchangeDescription: string; 
 }

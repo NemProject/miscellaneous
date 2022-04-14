@@ -14,256 +14,106 @@
  *
  */
 
-import { Exchange } from 'src/models/Exchange';
+import axios from 'axios';
+import { ExchangeDetails, ExchangeInfo, ExchangeConfig } from 'src/models/Exchange';
+import { Config, exchanges } from 'src/config'
+
+interface Ticker {
+    base: string;
+    bid_ask_spread_percentage: number;
+    coin_id: string;
+    converted_last: {
+        btc: number;
+        eth: number;
+        usd: number;
+    }
+    converted_volume: {
+        btc: number;
+        eth: number;
+        usd: number;
+    }
+    is_anomaly: boolean
+    is_stale: boolean
+    last: number;
+    last_fetch_at: string;
+    last_traded_at: string;
+    market: {
+        name: string;
+        identifier: string;
+        has_trading_incentive: boolean
+    }
+    has_trading_incentive: boolean
+    identifier: string;
+    name: string;
+    target: string;
+    target_coin_id: string;
+    timestamp: string;
+    token_info_url: null
+    trade_url: string;
+    trust_score: string;
+    volume: number;
+}
 
 export class ExchangeService {
-    // Hardcoded exchange list
-    private static staticExchangeList: Exchange[] = [
-        {
-            imageSrc: require('src/assets/images/exchanges/aex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/aofex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/ascendex.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bibox.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/binance.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bione.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bit-bns.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bithumb.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bitmart.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bitrue.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bittrex.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bitvavo.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/bkex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/btc-trade-ua.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/coindcx.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/coinex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/coinsbit.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/cointiger.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/crex24.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/dex-trade.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/digifinex.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/dragonex.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/exmo.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/exrates.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/gete-io.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/goku-market.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/hitbtc.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/hotbit.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/huobi.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/indodax.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/kucoin.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/kuna.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/latoken.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/liquid.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/mandala.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/mexo-io.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/okex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/p2p-b2b.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/pionex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/poloniex.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/probit.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/tokocrypto.png')
-                .default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/upbit.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/valr.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/vindax.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/warizx.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/wbf.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/xt-com.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/yobit.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/zaif.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/zb-com.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/zbg.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/zipmex.png').default,
-            url: 'https://___/',
-        },
-        {
-            imageSrc: require('src/assets/images/exchanges/zt-global.png')
-                .default,
-            url: 'https://___/',
-        },
-    ];
-
     // Returns exchange list
-    static getExchangeList(): Exchange[] {
-        return ExchangeService.staticExchangeList;
+    static async getExchangeList(): Promise<ExchangeInfo[]> {
+        const exchangeList: ExchangeConfig[] = exchanges;
+        const response = await axios.get(Config.URL_MARKET_DATA);
+        const usdTickers = ['USD', 'USDT', 'USDC', 'BUSD']
+        const targetPriority = [...usdTickers, 'BTC', 'ETH'];
+        const targetOrderIndexes: Record<string, number> = {};
+
+        for (let index = 0; index < targetPriority.length; index++) {
+            targetOrderIndexes[targetPriority[index]] = index;
+        }
+
+        const tickerList: ExchangeInfo[] = response.data.tickers
+            .map((ticker: Ticker) => ({
+                isUSD: usdTickers.includes(ticker.target),
+                target: ticker.target,
+                exchangeId: ticker.market.identifier,
+                exchangeName: ticker.market.name,
+                price: ticker.last,
+                volume: ticker.converted_volume.usd,
+                url: ticker.trade_url,
+                imageSrc: ''
+            }))
+            .sort((a: ExchangeInfo, b: ExchangeInfo) => {
+                if (a.exchangeId < b.exchangeId) {
+                    return -1;
+                }
+                if (a.exchangeId > b.exchangeId) {
+                    return 1;
+                }
+                if (targetOrderIndexes[a.target] === undefined) {
+                    return 1;
+                }
+                if (targetOrderIndexes[b.target] === undefined) {
+                    return -1;
+                }
+                return (targetOrderIndexes[a.target] - targetOrderIndexes[b.target]) || 0;
+            });
+        
+        let currentExchangeId;
+        const marketData: ExchangeInfo[] = [];
+
+        for (const ticker of tickerList) {
+            if (currentExchangeId !== ticker.exchangeId) {
+                marketData.push(ticker);
+                currentExchangeId = ticker.exchangeId;
+            }
+        }
+
+        const list = exchangeList.map(ex => ({  
+            ...marketData.find(m => m.exchangeId === ex.exchangeId) || {},
+            ...ex,
+        }));
+
+        //@ts-ignore
+        return list;
     }
+
+    // static async getExchangeMarketData(exchangeId: number): Promise<ExchangeDetails> {
+    
+    // }
 }

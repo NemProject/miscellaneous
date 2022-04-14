@@ -17,7 +17,9 @@
         background-size: contain;
         content: "";
     }
+}
 
+@media @screen-4k {
     .content {
         max-width: 535px;
         margin: 102px 0 194px;
@@ -33,16 +35,38 @@
     }
 }
 
+@media @screen-desktop {
+    .hero-image-container {
+        margin: 124px 48px 78px 0;
+    }
+
+    .hero-image {
+        width: 626px;
+    }
+
+    .content {
+        max-width: 535px;
+        margin: 102px 0 48px;
+    }
+}
+
 @media @screen-tablet {
     .section-2 {
+        &::before {
+            background-size: cover;
+        }
+
         .content {
             max-width: 100%;
             margin: 0 0 32px;
         }
 
         .hero-image-container {
-            max-width: 347px;
-            margin: 64px 0;
+            margin: 74px 0 49px;
+        }
+
+        .hero-image {
+            width: 100%;
         }
     }
 }
@@ -61,6 +85,10 @@
         .hero-image-container {
             max-width: 347px;
             margin: 64px 0 45px;
+        }
+
+        .hero-image {
+            width: 100%;
         }
     }
 }

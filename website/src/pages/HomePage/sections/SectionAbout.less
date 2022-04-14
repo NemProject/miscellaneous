@@ -1,37 +1,60 @@
 .section-1 {
     background-image: url("../../../assets/images/bg-1.png");
     background-size: cover;
+}
 
-    .content {
-        max-width: 614px;
-        margin: 88px 0 196px;
+@media @screen-4k {
+    .section-1 {
+        .content {
+            width: 614px;
+            margin: auto 0;
+        }
+    
+        .hero-image-container {
+            margin: 50px -894px 101px 218px;
+        }
+    
+        .hero-image {
+            width: 1667px;
+        }
     }
+}
 
-    .hero-image-container {
-        margin: 68px -127px 0 63px;
-    }
-
-    .hero-image {
-        width: 100%;
-        max-width: 710px;
+@media @screen-desktop {
+    .section-1 {
+        .content {
+            max-width: 614px;
+            margin: 88px 0 48px;
+        }
+    
+        .hero-image-container {
+            margin: 53px -127px 48px 48px;
+        }
+    
+        .hero-image {
+            width: 560px;
+        }
     }
 }
 
 @media @screen-tablet {
     .section-1 {
         .content-container {
-            flex-direction: row;
-            align-items: flex-start;
+            flex-direction: column-reverse;
+        }
+
+        .hero-image-container {
+            margin: 42px 0 22px;
         }
 
         .content {
             position: relative;
-            max-width: 387px;
-            margin: 58px 0 32px -54px;
+            width: 100%;
+            margin: 0 0 70px;
         }
 
-        .buttons {
-            flex-wrap: nowrap;
+        .hero-image {
+            width: 510px;
         }
     }
 }
@@ -39,30 +62,21 @@
 @media @screen-mobile {
     .section-1 {
         .content-container {
-            flex-direction: column;
-            align-items: flex-start;
+            flex-direction: column-reverse;
+        }
+
+        .hero-image-container {
+            margin: 29px 0 20px;
         }
 
         .content {
             position: relative;
-            order: 1;
             width: 100%;
-            max-width: 387px;
-            margin: 0 0 18px;
-        }
-
-        .hero-image-container {
-            order: 0;
-            margin: 29px 0 58px;
+            margin: 0 0 28px;
         }
 
         .hero-image {
             width: 100%;
-            max-width: 710px;
-        }
-
-        .buttons {
-            flex-wrap: wrap;
         }
     }
 }

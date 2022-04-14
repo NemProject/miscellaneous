@@ -1,5 +1,5 @@
 .section-3 {
-    min-height: 788px;
+    height: 800px;
     padding: 58px 0 46px;
     background: #fff;
 
@@ -23,11 +23,17 @@
         height: 100%;
     }
 
+    .hero-image {
+        animation-name: fade-in;
+        animation-duration: 250ms;
+        animation-timing-function: linear;
+    }
+
     .section-3-tab {
         display: flex;
         justify-content: space-between;
         animation-name: fade-in;
-        animation-duration: 250ms;
+        animation-duration: 500ms;
         animation-timing-function: linear;
 
         .content {
@@ -62,6 +68,9 @@
 
         .image-exchange {
             width: 100%;
+            animation-name: fade-in;
+            animation-duration: 500ms;
+            animation-timing-function: linear;
         }
 
         .hero-image-container {
@@ -102,9 +111,15 @@
 
 @media @screen-tablet {
     .section-3 {
+        height: unset;
+
+        // .image-watercolor {
+        //     right: 100px;
+        //     transform: translateX(100%);
+        // }
+
         .image-watercolor {
-            right: 100px;
-            transform: translateX(100%);
+            display: none;
         }
 
         .tabs {
@@ -166,7 +181,7 @@
 
 @media @screen-mobile {
     .section-3 {
-        min-height: unset;
+        height: unset;
 
         h2 {
             display: none;

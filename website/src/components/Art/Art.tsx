@@ -16,23 +16,26 @@
 
 import * as React from 'react';
 import { Link, ModalBox } from 'src/components';
+import { $t } from 'src/infrastructure/CopyService';
 import ArtistMahoImageUrl from 'src/assets/images/artist-maho.png';
 import './Art.less';
 interface Props {
     className?: string;
     src?: string;
     imageClassName?: string;
-    linkText?: string;
     artName?: string;
     artDescription?: string;
 }
 
 export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
-    const { className, src, imageClassName, linkText } = props;
+    const { className, src, imageClassName, artName, artDescription } = props;
 
     const [showModal, setShowModal] = React.useState(false);
 
     const extendedClassName = 'art' + (className ? ' ' + className : '');
+    const artistName = $t('artist_name_maho');
+    const artistNameBy = $t('artist_by_maho');
+    const artistAbout = $t('artist_about_maho');
     const artistWebsiteText = 'www.maho.tokyo/home';
     const artistWebsiteUrl = 'https://www.maho.tokyo/home';
     const artistTwitterUrl = 'https://twitter.com';
@@ -41,9 +44,16 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
     return (
         <>
             <div className={extendedClassName}>
-                <img src={src} className={imageClassName} />
-                {linkText && (
-                    <Link onClick={() => setShowModal(true)}>{linkText}</Link>
+                <img 
+                    src={src} 
+                    className={imageClassName} 
+                    alt={artName}
+                    title={artName}
+                />
+                {artName && (
+                    <Link onClick={() => setShowModal(true)}>
+                        {artName + ' | ' + artistNameBy}
+                    </Link>
                 )}
             </div>
             <ModalBox visible={showModal} onClose={() => setShowModal(false)}>
@@ -52,16 +62,20 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
                         <img
                             className="art-modal-artist-avatar"
                             src={ArtistMahoImageUrl}
+                            alt={artistName}
+                            title={artistName}
                         />
                         <div>
-                            <a
-                                className="artist-website-link"
-                                href={artistWebsiteUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {artistWebsiteText}
-                            </a>
+                            <div className="artist-website-link">
+                                <a
+                                    
+                                    href={artistWebsiteUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {artistWebsiteText}
+                                </a>
+                            </div>
                             <div className="art-modal-artist-social">
                                 <a
                                     href={artistTwitterUrl}
@@ -115,24 +129,12 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
                     <div className="art-modal-divider" />
                     <div className="art-modal-content">
                         <div>
-                            <h4>The Alpaca</h4>
-                            <p>
-                                Gumbo beet greens corn soko endive gumbo gourd.
-                                Parsley shallot courgette tatsoi pea sprouts
-                                fava bean collard greens dandelion okra wakame
-                                tomato. Dandelion cucumber earthnut pea peanut
-                                soko zucchini.
-                            </p>
+                            <p><strong>{artName}</strong></p>
+                            <p>{artDescription}</p>
                         </div>
                         <div>
-                            <h4>About the Arist</h4>
-                            <p>
-                                Gumbo beet greens corn soko endive gumbo gourd.
-                                Parsley shallot courgette tatsoi pea sprouts
-                                fava bean collard greens dandelion okra wakame
-                                tomato. Dandelion cucumber earthnut pea peanut
-                                soko zucchini.
-                            </p>
+                            <p><strong>{$t('artist_about_title')}</strong></p>
+                            <p>{artistAbout}</p>
                         </div>
                     </div>
                 </div>

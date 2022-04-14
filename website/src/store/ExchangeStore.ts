@@ -16,31 +16,72 @@
 
 import { ReactVuexStore } from 'react-vuex-store';
 import { ExchangeService } from 'src/infrastructure/ExchangeService';
-import { Exchange } from 'src/models/Exchange';
+import { ExchangeInfo } from 'src/models/Exchange';
 import { RootStoreState } from '.';
 
 export type ExchangeStoreState = {
-    list: Exchange[];
+    list: ExchangeInfo[];
+    isError: boolean;
+    isLoading: boolean;
 };
 
 export default ReactVuexStore.createModule<ExchangeStoreState, RootStoreState>({
     namespace: 'exchange',
     state: {
         list: [],
+        isError: false,
+        isLoading: true,
+
     },
     mutations: {
         list(store, payload: ExchangeStoreState['list']) {
             store.exchange.list = payload;
         },
+        isError(store, payload: ExchangeStoreState['isError']) {
+            store.exchange.isError = payload;
+        },
+        isLoading(store, payload: ExchangeStoreState['isLoading']) {
+            store.exchange.isLoading = payload;
+        },
     },
     actions: {
         load: async ({ commit }): Promise<void> => {
-            const list = ExchangeService.getExchangeList();
-
-            commit<ExchangeStoreState['list']>({
-                type: 'exchange/list',
-                payload: list,
+            commit<ExchangeStoreState['isError']>({
+                type: 'exchange/isError',
+                payload: false,
             });
+            commit<ExchangeStoreState['isLoading']>({
+                type: 'exchange/isLoading',
+                payload: true,
+            });
+
+            try {
+                const list = await ExchangeService.getExchangeList();
+
+                commit<ExchangeStoreState['list']>({
+                    type: 'exchange/list',
+                    payload: list,
+                });
+                commit<ExchangeStoreState['isError']>({
+                    type: 'exchange/isError',
+                    payload: false,
+                });
+                commit<ExchangeStoreState['isLoading']>({
+                    type: 'exchange/isLoading',
+                    payload: false,
+                });
+            }
+            catch(e) {
+                console.error(e);
+                commit<ExchangeStoreState['isError']>({
+                    type: 'exchange/isError',
+                    payload: false,
+                });
+                commit<ExchangeStoreState['isLoading']>({
+                    type: 'exchange/isLoading',
+                    payload: true,
+                });
+            }
         },
     },
 });

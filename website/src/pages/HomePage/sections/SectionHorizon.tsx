@@ -17,6 +17,8 @@ import React from 'react';
 import { Art, Button, ContentContainer } from 'src/components';
 import HeroPhoenixImageUrl from 'src/assets/images/hero-phoenix.png';
 import { Row } from 'antd';
+import { $t } from 'src/infrastructure/CopyService';
+import { JSXUtils } from 'src/utils';
 import './SectionHorizon.less';
 
 export default function SectionHorizon(): JSX.Element {
@@ -26,41 +28,17 @@ export default function SectionHorizon(): JSX.Element {
                 <Art
                     className="hero-image-container"
                     imageClassName="hero-image"
-                    linkText="The Phoenix  |  By Maho"
+                    artName={$t('art_phoenix_name')}
+                    artDescription={$t('art_phoenix_desc')}
                     src={HeroPhoenixImageUrl}
                 />
                 <div className="content">
-                    <h2>What’s on the horizon</h2>
+                    <h2>{$t('home_horizon_title')}</h2>
                     <div>
-                        <p>
-                            Many banks around the world have come to accept the
-                            importance of blockchain technology. In fact, a good
-                            number of banks in the U.S, India and Japan have
-                            already started using the technology.
-                        </p>
-                        <p>
-                            Because banks generally employ the smart contract
-                            concept, NEM’s platform which is asset-friendly can
-                            be used to settle any asset. In settling assets,
-                            speed, security, and reliability are very important
-                            to a mainstream institution which is what this
-                            crypto offers. NEM addresses these issues by
-                            repackaging its blockchain into a rivate chain and
-                            presenting it as Mijin.
-                        </p>
-                        <p>
-                            NEM crypto is also applicable in the technology
-                            world. Unlike Bitcoin and Dogecoin which use mining
-                            to increase the number of coins, XEM uses something
-                            called ‘harvesting’. In this process, blocks are
-                            generated and a person is rewarded for work
-                            contributed using transaction fees. Every block has
-                            a certain number of transactions which attract an
-                            unknown amount of fees.
-                        </p>
+                        {JSXUtils.createParagraph($t('home_horizon_content'))}
                     </div>
                     <Row>
-                        <Button>Learn More</Button>
+                        <Button>{$t('home_horizon_button')}</Button>
                     </Row>
                 </div>
             </ContentContainer>

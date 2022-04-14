@@ -1,48 +1,49 @@
 {
     "lang": "English",
-    "home_about_title": "Rebuilding the financial fabric of the modern world",
-    "home_about_content": "Symbol allows simple and yet flexible exchange of digital tokens, laying the grounds for a more egalitarian and efficient market. \n Elaborate transactions involving multiple accounts are available out-of-the-box. No need to write custom contracts in complex programming languages or trust a third party to write them for you.",
+    "home_about_title": "We’ve built a new economy: decentralized, distributed, and digital. Now, it belongs to you.",
+    "home_about_content": "On June 16th, 2014, “UtopianFuture” painted a vision for a new blockchain protocol based on three key principles: decentralization, financial freedom, and equality of opportunity. \n On March 31st, 2015, a team of psuedonymous developers banded together to launch NEM - the New Economy Movement. \n NEM launched with key features that helped it become a pioneer in the blockchain landscape: native multisignature accounts; namespaces; and mosaics.",
     "home_about_button_github": "Start Building",
     "home_about_button_discord": "Join Discord",
 
-    "home_valueprops_title": "What can you do with Symbol?",
-    "home_valueprops_content": "Symbol offers the ability to do all the things that can be done with the things that do things and that’s what you need to know.",
-    "home_valueprops_prop1_title": "Mosaics",
-    "home_valueprops_prop1_content": "You see Lord Vader, she can be reasonable. Continue with the operation. You worry. We will deal with your Rebel friends soon enough. No! Commence primary ignition.",
-    "home_valueprops_prop2_title": "Namespaces",
-    "home_valueprops_prop2_content": "You see Lord Vader, she can be reasonable. Continue with the operation. You worry. We will deal with your Rebel friends soon enough. No! Commence primary ignition.",
-    "home_valueprops_prop3_title": "Plugins",
-    "home_valueprops_prop3_content": "You see Lord Vader, she can be reasonable. Continue with the operation. You worry. We will deal with your Rebel friends soon enough. No! Commence primary ignition.",
-    "home_valueprops_link_learnmore": "Learn More",
-
-    "home_tabs_title": "XYM Token",
-    "home_tabs_content": "XYM is used to pay for transaction fees which revert to node owners, incentivizing network growth. Since Symbol’s Consensus algorithm is based on Proof-of-Stake, XYM plays an essential role in securing the platform.",
-    "home_tabs_tab1_title": "Tokenomics",
-    "home_tabs_tab1_content": "Maximum Supply: 8,999,999,999 XYM.\nInitial Supply: 7,842,928,625 XYM allocated to accounts based on their XEM holdings.\nInflation: 1,157,071,374 XYM reserved for inflationary rewards, halved every 4 years (like Bitcoin but with a more gradual decline, dropping every quarter).\n Team reserves: The core team holds 22% of ??? to fund the further development of the network.",
-    "home_tabs_tab2_title": "Harvesting",
-    "home_tabs_tab2_content": "The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol.\nHarvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM.\nNode owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!",
-    "home_tabs_tab3_title": "Exchanges",
-    "home_tabs_tab3_content": "You can buy XYM tokens at the following trusted exchanges.",
-
-    "home_tools_title": "Tools",
-    "home_tools_button_clients": "Clients",
-    "home_tools_button_cli": "Symbol cli",
-    "home_tools_button_explorer": "Explorer",
-    "home_tools_button_testnet": "Testnet",
-    "home_tools_button_wallet": "Wallet",
-    "home_tools_button_bootstrap": "Bootstrap",
-
-    "home_documentation_title": "Documentation",
-    "home_documentation_content": "You must learn the ways of the Force if you're to come with me to Alderaan. Alderaan? I'm not going to Alderaan. I've got to go home. It's late, I'm in for it as it is. I need your help, Luke. She needs your help.",
+    "home_documentation_title": "Noteworthy Features",
+    "home_documentation_content": "Many banks around the world have come to accept the importance of blockchain technology. In fact, a good number of banks in the U.S, India and Japan have already started using the technology. \n  Because banks generally employ the smart contract concept, NEM’s platform which is asset-friendly can be used to settle any asset. In settling assets, speed, security, and reliability are very important to a mainstream institution which is what this crypto offers. \n NEM addresses these issues by repackaging its blockchain into a rivate chain and presenting it as Mijin. \n NEM crypto is also applicable in the technology world. Unlike Bitcoin and Dogecoin which use mining to increase the number of coins, XEM uses something called ‘harvesting’. In this process, blocks are generated and a person is rewarded for work contributed using transaction fees. Every block has a certain number of transactions which attract an unknown amount of fees.",
     "home_documentation_button": "Documentation",
 
-    "home_vision_title": "Join Our Voyage",
-    "home_vision_content": "We want you to join us on our mission to redefine the financial fabric of our modern world. We are always looking for inspired, talented people to collaborate with or bring onto our crew.\nWe are a world-wide, multicultural team of rockstars operating as a fully remote unit on planet Earth. We believe in moving quickly, failing fast, and learning faster. Everything we build is open source, and we share transparently with our amazing community.",
-    "home_vision_button_unknown1": "Our Vision",
-    "home_vision_button_unknown2": "Our Culture",
+    "home_tabs_tab1_t": "Harvesting",
+    "home_tabs_tab1_title": "Harvesting the NEM Token",
+    "home_tabs_tab1_content": "The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol. \n Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM. \n Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!",
 
-    "home_community_title": "Join Our Community",
-    "home_community_content": "You may fire when ready. What? You’re far too trusting. Dantooine is too remote to make an effective demonstration. But don’t worry. We will deal with your Rebel friends soon enough.",
+    "home_tabs_tab2_t": "Exchanges",
+    "home_tabs_tab2_title": "Exchanges That Support The XEM Token",
+
+    "home_tabs_tab3_t": "Tokenomics",
+    "home_tabs_tab3_title": "The XEM Tokenomics",
+    "home_tabs_tab3_content": "The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol. \n Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM. \n Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!",
+
+    "home_tabs_tab4_t": "Supernode Program",
+    "home_tabs_tab4_title": "Join the NEM Supernode Program",
+    "home_tabs_tab4_content": "The process of creating new blocks and adding them to the blockchain is called Harvesting in Symbol. \n Harvesting nodes commit hardware resources to maintaining the Symbol network and their owning accounts are rewarded XYM tokens for each harvested block. In order to harvest, accounts must hold a minimum of 10’000 XYM. \n Node owners with insufficient balance can benefit from delegated harvesting and split the harvesting rewards with an account providing the required minimum balance. A profitable arrangement for both accounts!",
+
+    "home_horizon_title": "What’s on the horizon",
+    "home_horizon_content": "Many banks around the world have come to accept the importance of blockchain technology. In fact, a good number of banks in the U.S, India and Japan have already started using the technology. \n Because banks generally employ the smart contract concept, NEM’s platform which is asset-friendly can be used to settle any asset. In settling assets, speed, security, and reliability are very important to a mainstream institution which is what this crypto offers. NEM addresses these issues by repackaging its blockchain into a rivate chain and presenting it as Mijin. \n NEM crypto is also applicable in the technology world. Unlike Bitcoin and Dogecoin which use mining to increase the number of coins, XEM uses something called ‘harvesting’. In this process, blocks are generated and a person is rewarded for work contributed using transaction fees. Every block has a certain number of transactions which attract an unknown amount of fees.",
+    "home_horizon_button": "Learn More",
+
+    "artist_about_title": "About the Artist",
+    "artist_name_maho": "Maho",
+    "artist_by_maho": "By Maho",
+    "artist_about_maho": "Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.",
+
+    "art_alpaca_name": "The Alpaca",
+    "art_alpaca_desc": "Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.",
+
+    "art_buffalo_name": "The Buffalo",
+    "art_buffalo_desc": "Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.",
+
+    "art_cow_name": "The Cow",
+    "art_cow_desc": "Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.",
+
+    "art_phoenix_name": "The Phoenix",
+    "art_phoenix_desc": "Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.",
 
     "copyright": "© The Symbol Syndicate"
 }
