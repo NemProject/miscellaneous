@@ -15,7 +15,7 @@
  */
 import React, { useState } from 'react';
 import { connect, RootStoreState } from 'src/store';
-import { Art, ContentContainer, Expand, Tabs } from 'src/components';
+import { Art, ContentContainer, ExchangeList, Expand, Tabs } from 'src/components';
 import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo.png';
 import HeroCowImageUrl from 'src/assets/images/hero-cow.png';
 import HeroDragonImageUrl from 'src/assets/images/hero-dragon.png';
@@ -67,22 +67,7 @@ function SectionTabs(props: Props): JSX.Element {
         <div className="section-3-tab section-3-tab-2" key="tab-2">
             <div className="content">
                 <h2>{$t('home_tabs_tab2_title')}</h2>
-                <div className="exchange-container">
-                    {exchangeList.map((exchange, index) => (
-                        <a
-                            href={exchange.url}
-                            key={'exchange' + index}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <img
-                                src={exchange.imageSrc}
-                                alt={exchange.exchangeName}
-                                className="image-exchange"
-                            />
-                        </a>
-                    ))}
-                </div>
+                <ExchangeList exchangeInfoList={exchangeList} />
             </div>
             <Art
                 className="hero-image-container"

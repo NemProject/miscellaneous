@@ -17,6 +17,7 @@
 export * from './Art/Art';
 export * from './Button/Button';
 export * from './ContentContainer/ContentContainer';
+export * from './ExchangeList/ExchangeList';
 export * from './Expand/Expand';
 export * from './Link/Link';
 export * from './ModalBox/ModalBox';

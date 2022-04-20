@@ -1,4 +1,8 @@
 :root {
+    --font-4k-nem-body: 400 30px/150% Nunito Sans;
+    --font-4k-nem-title: 700 56px/140% Abhaya Libre;
+    --font-4k-nem-button-text: 700 21.41px/21.41px Nunito Sans;
+    --font-4k-nem-menu: 700 30px/30px Nunito Sans;
     --font-nem-body: 400 16px/24px Nunito Sans;
     --font-nem-title: 700 38px/53.2px Abhaya Libre;
     --font-nem-button-text: 700 14px/14px Nunito Sans;
@@ -6,6 +10,8 @@
     --font-nem-menu-tablet: 700 18px/18px Nunito Sans;
     --font-mobil-title: 700 24px/33.6px Abhaya Libre;
     --font-mobile-body: 400 12px/18px Nunito Sans;
+    --typography-4k-nem-title-letter-spacing: -2%;
+    --typography-4k-nem-menu-letter-spacing: 5%;
     --typography-nem-body-font-size: 16px;
     --typography-nem-body-text-decoration: none;
     --typography-nem-body-font-family: Nunito Sans;

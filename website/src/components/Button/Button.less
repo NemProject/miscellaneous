@@ -3,10 +3,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    min-width: 182px;
-    padding: 11px 28px 10px;
+    min-width: 408px;
+    padding: 16.82px 28px 14.18px;
     color: @color-green;
-    font: var(--font-nem-button-text);
+    font: var(--font-4k-nem-button-text);
     letter-spacing: 0.05em;
     white-space: nowrap;
     text-align: center;
@@ -15,6 +15,7 @@
     border: 1px solid @color-green;
     cursor: pointer;
     user-select: none;
+    transition: all .2s ease-in;
 
     &:hover {
         color: #fff;
@@ -24,5 +25,13 @@
 
     &:active {
         border: 1px solid #fff;
+    }
+}
+
+@media @screen-desktop, @screen-tablet, @screen-mobile {
+    .button {
+        min-width: 182px;
+        padding: 11px 28px 10px;
+        font: var(--font-nem-button-text);
     }
 }

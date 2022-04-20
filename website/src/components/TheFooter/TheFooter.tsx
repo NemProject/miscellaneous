@@ -15,20 +15,13 @@
  */
 
 import React from 'react';
-import { Row } from 'antd';
 import { NemLogo } from 'src/components';
 import './TheFooter.less';
 
 export const TheFooter = (): JSX.Element => {
     return (
         <div className="footer">
-            <Row justify="center">
-                <div className="footer-content-container">
-                    <div className="footer-logo-container">
-                        <NemLogo className="footer-nem-logo" />
-                    </div>
-                </div>
-            </Row>
+            <NemLogo className="footer-nem-logo" />
         </div>
     );
 };

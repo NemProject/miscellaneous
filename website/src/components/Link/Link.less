@@ -7,6 +7,7 @@
     background-color: transparent;
     border-style: none;
     cursor: pointer;
+    transition: all .2s ease-in;
 }
 
 .link-arrow {
@@ -14,10 +15,66 @@
     fill: @color-dark-blue;
 }
 
+.link-external {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 182px;
+    padding: 11px 28px 10px;
+    color: @color-green;
+    font: var(--font-4k-nem-button-text);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: var(--typography-nem-button-text-text-case);
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: all .2s ease-in;
+
+    &:hover {
+        color: @color-green;
+        opacity: 0.7;
+    }
+
+    svg {
+        margin-left: 9px;
+        margin-bottom: 1px;
+        height: 30px;
+        width: 30px;
+    }
+}
+@media @screen-desktop, @screen-tablet {
+    .link {
+        font-size: 13.25px;
+        line-height: 16px;
+        text-align: center;
+    }
+
+    .link-external {
+        font: var(--font-nem-button-text);
+
+        svg {
+            height: unset;
+            width: unset; 
+        }
+    }
+}
+
 @media @screen-mobile {
     .link {
         font-size: 13.25px;
         line-height: 16px;
         text-align: center;
+    }
+
+    .link-external {
+        font: var(--font-nem-button-text);
+
+        svg {
+            height: unset;
+            width: unset; 
+        }
     }
 }

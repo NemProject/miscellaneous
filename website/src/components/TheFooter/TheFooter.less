@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 277px;
+    height: 277px;
     padding: 0 70px;
     color: #fff;
     background-color: #000;
@@ -14,42 +14,29 @@
     background-size: cover;
 }
 
-.footer-symbol-logo {
-    width: 40.81px;
-    height: 40.95px;
-    margin: 20px 0;
-}
-
-.footer-content-container {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.footer-logo-container {
+.footer-nem-logo {
+    width: 90px;
     height: 90px;
-    margin: 54px 140px;
 }
 
-@media (max-width: 1500px) {
-    .footer-content-container {
-        justify-content: space-around;
-        width: 100%;
-        max-width: 800px;
-        padding-bottom: 70px;
+@media @screen-4k {
+    .footer {
+        height: 773px;
     }
 
-    .footer-logo-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        margin: 54px 140px 40px;
+    .footer-nem-logo {
+        width: 251px;
+        height: 251px;
     }
 }
 
 @media @screen-mobile {
     .footer {
-        display: none;
+        height: 238px;
+    }
+
+    .footer-nem-logo {
+        width: 64px;
+        height: 64px;
     }
 }

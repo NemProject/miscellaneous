@@ -1,0 +1,120 @@
+.exchange-list {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+    gap: 30px;
+}
+
+.exchange-item {
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+}
+
+.selected {
+    border-color: #50B9AD;
+}
+
+.image-exchange {
+    width: 100%;
+    animation-name: fade-in;
+    animation-duration: 500ms;
+    animation-timing-function: linear;
+}
+
+.exchange-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: span 7;
+    border-bottom: 1px solid #CCCCCC;
+    animation-name: fade-in;
+    animation-duration: 250ms;
+    animation-timing-function: linear;
+}
+
+.exchange-details-table {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.exchange-details-th {
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.exchange-details-amount {
+    margin-bottom: 35px;
+}
+
+.exchange-details-desc > .description-text {
+    font-size: 16px;
+    line-height: normal;
+}
+
+.visit-link {
+    margin: 14px 0;
+    color: #060606;
+}
+
+@media @screen-desktop {
+    .exchange-details-desc > .description-text {
+        font-size: 10px;
+    }
+}
+
+@media @screen-tablet {
+    .exchange-list {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 30px;
+    }
+
+    .image-exchange {
+        width: 100%;
+    }
+
+    .exchange-details {
+        grid-column: span 4;
+    }
+
+    .exchange-details-desc > .description-text {
+        font-size: 10px;
+    }
+}
+
+@media @screen-mobile {
+    .exchange-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 30px;
+    }
+
+    .image-exchange {
+        width: 100%;
+    }
+
+    .exchange-details {
+        grid-column: span 3;
+        border-bottom: unset;
+    }
+
+    .exchange-details-table {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .exchange-details-desc {
+        grid-column: span 2;
+
+        & > .description-text {
+            font-size: 10px;
+        }
+    }
+}
