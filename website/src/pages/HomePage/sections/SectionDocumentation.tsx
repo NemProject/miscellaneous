@@ -35,7 +35,9 @@ export default function SectionDocumentation(): JSX.Element {
                 <div className="content">
                     <h2>{$t('home_documentation_title')}</h2>
                     <div>
-                        {JSXUtils.createParagraph($t('home_documentation_content'))}
+                        {JSXUtils.createParagraph(
+                            $t('home_documentation_content'),
+                        )}
                     </div>
                     <Row>
                         <Button>{$t('home_documentation_button')}</Button>

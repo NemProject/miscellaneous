@@ -15,7 +15,13 @@
  */
 import React, { useState } from 'react';
 import { connect, RootStoreState } from 'src/store';
-import { Art, ContentContainer, ExchangeList, Expand, Tabs } from 'src/components';
+import {
+    Art,
+    ContentContainer,
+    ExchangeList,
+    Expand,
+    Tabs,
+} from 'src/components';
 import HeroBuffaloImageUrl from 'src/assets/images/hero-buffalo.png';
 import HeroCowImageUrl from 'src/assets/images/hero-cow.png';
 import HeroDragonImageUrl from 'src/assets/images/hero-dragon.png';

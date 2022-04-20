@@ -27,11 +27,12 @@ export default function HomePage(): JSX.Element {
         <div className="section section-1">
             <ContentContainer>
                 <div className="content">
-                    <h2>
-                        {$t('home_about_title')}
-                    </h2>
+                    <h2>{$t('home_about_title')}</h2>
                     <div>
-                        {JSXUtils.createParagraph($t('home_about_content'), 'hero')}
+                        {JSXUtils.createParagraph(
+                            $t('home_about_content'),
+                            'hero',
+                        )}
                     </div>
                     <Row className="buttons">
                         <Button>{$t('home_about_button_github')}</Button>
@@ -39,10 +40,7 @@ export default function HomePage(): JSX.Element {
                     </Row>
                 </div>
                 <div className="hero-image-container">
-                    <img
-                        className="hero-image"
-                        src={HeroMountainImageUrl}
-                    />
+                    <img className="hero-image" src={HeroMountainImageUrl} />
                 </div>
             </ContentContainer>
         </div>

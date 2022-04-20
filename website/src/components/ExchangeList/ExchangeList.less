@@ -1,7 +1,7 @@
 .exchange-list {
     display: grid;
-    grid-template-columns: repeat(7, minmax(0, 1fr));
     grid-auto-flow: row dense;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 30px;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .selected {
-    border-color: #50B9AD;
+    border-color: #50b9ad;
 }
 
 .image-exchange {
@@ -22,30 +22,30 @@
 }
 
 .exchange-details {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     grid-column: span 7;
-    border-bottom: 1px solid #CCCCCC;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
     animation-name: fade-in;
     animation-duration: 250ms;
     animation-timing-function: linear;
 }
 
 .exchange-details-table {
-    width: 100%;
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr);
+    width: 100%;
 }
 
 .exchange-details-th {
     width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    padding-bottom: 4px;
     margin-bottom: 4px;
-    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
 }
 
 .exchange-details-amount {
@@ -105,9 +105,9 @@
     }
 
     .exchange-details-table {
-        width: 100%;
         display: grid;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        width: 100%;
     }
 
     .exchange-details-desc {

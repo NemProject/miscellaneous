@@ -7,7 +7,7 @@
     background-color: transparent;
     border-style: none;
     cursor: pointer;
-    transition: all .2s ease-in;
+    transition: all 0.2s ease-in;
 }
 
 .link-arrow {
@@ -30,8 +30,8 @@
     text-transform: var(--typography-nem-button-text-text-case);
     background: transparent;
     cursor: pointer;
+    transition: all 0.2s ease-in;
     user-select: none;
-    transition: all .2s ease-in;
 
     &:hover {
         color: @color-green;
@@ -39,12 +39,13 @@
     }
 
     svg {
-        margin-left: 9px;
-        margin-bottom: 1px;
-        height: 30px;
         width: 30px;
+        height: 30px;
+        margin-bottom: 1px;
+        margin-left: 9px;
     }
 }
+
 @media @screen-desktop, @screen-tablet {
     .link {
         font-size: 13.25px;
@@ -56,8 +57,8 @@
         font: var(--font-nem-button-text);
 
         svg {
+            width: unset;
             height: unset;
-            width: unset; 
         }
     }
 }
@@ -73,8 +74,8 @@
         font: var(--font-nem-button-text);
 
         svg {
+            width: unset;
             height: unset;
-            width: unset; 
         }
     }
 }

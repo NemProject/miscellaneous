@@ -44,9 +44,9 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
     return (
         <>
             <div className={extendedClassName}>
-                <img 
-                    src={src} 
-                    className={imageClassName} 
+                <img
+                    src={src}
+                    className={imageClassName}
                     alt={artName}
                     title={artName}
                 />
@@ -68,7 +68,6 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
                         <div>
                             <div className="artist-website-link">
                                 <a
-                                    
                                     href={artistWebsiteUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -129,11 +128,15 @@ export const Art: React.FunctionComponent<Props> = (props): JSX.Element => {
                     <div className="art-modal-divider" />
                     <div className="art-modal-content">
                         <div>
-                            <p><strong>{artName}</strong></p>
+                            <p>
+                                <strong>{artName}</strong>
+                            </p>
                             <p>{artDescription}</p>
                         </div>
                         <div>
-                            <p><strong>{$t('artist_about_title')}</strong></p>
+                            <p>
+                                <strong>{$t('artist_about_title')}</strong>
+                            </p>
                             <p>{artistAbout}</p>
                         </div>
                     </div>

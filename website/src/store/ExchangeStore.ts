@@ -31,7 +31,6 @@ export default ReactVuexStore.createModule<ExchangeStoreState, RootStoreState>({
         list: [],
         isError: false,
         isLoading: true,
-
     },
     mutations: {
         list(store, payload: ExchangeStoreState['list']) {
@@ -70,8 +69,7 @@ export default ReactVuexStore.createModule<ExchangeStoreState, RootStoreState>({
                     type: 'exchange/isLoading',
                     payload: false,
                 });
-            }
-            catch(e) {
+            } catch (e) {
                 console.error(e);
                 commit<ExchangeStoreState['isError']>({
                     type: 'exchange/isError',

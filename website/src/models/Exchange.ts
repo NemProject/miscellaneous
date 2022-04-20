@@ -30,5 +30,5 @@ export interface ExchangeInfo extends ExchangeConfig {
 
 export interface ExchangeDetails {
     marketData: number[];
-    exchangeDescription: string; 
+    exchangeDescription: string;
 }

@@ -15,8 +15,8 @@
  */
 
 import axios from 'axios';
-import { ExchangeDetails, ExchangeInfo, ExchangeConfig } from 'src/models/Exchange';
-import { Config, exchanges } from 'src/config'
+import { ExchangeInfo, ExchangeConfig } from 'src/models/Exchange';
+import { Config, exchanges } from 'src/config';
 
 interface Ticker {
     base: string;
@@ -26,29 +26,29 @@ interface Ticker {
         btc: number;
         eth: number;
         usd: number;
-    }
+    };
     converted_volume: {
         btc: number;
         eth: number;
         usd: number;
-    }
-    is_anomaly: boolean
-    is_stale: boolean
+    };
+    is_anomaly: boolean;
+    is_stale: boolean;
     last: number;
     last_fetch_at: string;
     last_traded_at: string;
     market: {
         name: string;
         identifier: string;
-        has_trading_incentive: boolean
-    }
-    has_trading_incentive: boolean
+        has_trading_incentive: boolean;
+    };
+    has_trading_incentive: boolean;
     identifier: string;
     name: string;
     target: string;
     target_coin_id: string;
     timestamp: string;
-    token_info_url: null
+    token_info_url: null;
     trade_url: string;
     trust_score: string;
     volume: number;
@@ -59,7 +59,7 @@ export class ExchangeService {
     static async getExchangeList(): Promise<ExchangeInfo[]> {
         const exchangeList: ExchangeConfig[] = exchanges;
         const response = await axios.get(Config.URL_MARKET_DATA);
-        const usdTickers = ['USD', 'USDT', 'USDC', 'BUSD']
+        const usdTickers = ['USD', 'USDT', 'USDC', 'BUSD'];
         const targetPriority = [...usdTickers, 'BTC', 'ETH'];
         const targetOrderIndexes: Record<string, number> = {};
 
@@ -76,7 +76,7 @@ export class ExchangeService {
                 price: ticker.last,
                 volume: ticker.converted_volume.usd,
                 url: ticker.trade_url,
-                imageSrc: ''
+                imageSrc: '',
             }))
             .sort((a: ExchangeInfo, b: ExchangeInfo) => {
                 if (a.exchangeId < b.exchangeId) {
@@ -91,9 +91,12 @@ export class ExchangeService {
                 if (targetOrderIndexes[b.target] === undefined) {
                     return -1;
                 }
-                return (targetOrderIndexes[a.target] - targetOrderIndexes[b.target]) || 0;
+                return (
+                    targetOrderIndexes[a.target] -
+                        targetOrderIndexes[b.target] || 0
+                );
             });
-        
+
         let currentExchangeId;
         const marketData: ExchangeInfo[] = [];
 
@@ -104,16 +107,12 @@ export class ExchangeService {
             }
         }
 
-        const list = exchangeList.map(ex => ({  
-            ...marketData.find(m => m.exchangeId === ex.exchangeId) || {},
+        const list = exchangeList.map(ex => ({
+            ...(marketData.find(m => m.exchangeId === ex.exchangeId) || {}),
             ...ex,
         }));
 
         //@ts-ignore
         return list;
     }
-
-    // static async getExchangeMarketData(exchangeId: number): Promise<ExchangeDetails> {
-    
-    // }
 }
