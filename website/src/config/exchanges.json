@@ -11,7 +11,7 @@
     },
     {
         "imageSrc": "./exchanges/ascendex.png",
-        "exchangeId": "",
+        "exchangeId": "bitmax",
         "url": "https://www.ascendex.com/en/basic/cashtrade-spottrading/usdt/xem"
     },
     {
@@ -201,7 +201,7 @@
     },
     {
         "imageSrc": "./exchanges/probit.png",
-        "exchangeId": "probit_kr",
+        "exchangeId": "probit",
         "url": "https://www.probit.kr/app/exchange/XEM-USDT"
     },
     {

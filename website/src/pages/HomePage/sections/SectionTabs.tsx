@@ -67,6 +67,8 @@ function SectionTabs(props: Props): JSX.Element {
             <Art
                 className="hero-image-container"
                 imageClassName="hero-image"
+                artName={$t('art_buffalo_name')}
+                artDescription={$t('art_buffalo_desc')}
                 src={HeroBuffaloImageUrl}
             />
         </div>,
@@ -78,6 +80,8 @@ function SectionTabs(props: Props): JSX.Element {
             <Art
                 className="hero-image-container"
                 imageClassName="hero-image"
+                artName={$t('art_cow_name')}
+                artDescription={$t('art_cow_desc')}
                 src={HeroCowImageUrl}
             />
         </div>,
@@ -91,6 +95,8 @@ function SectionTabs(props: Props): JSX.Element {
             <Art
                 className="hero-image-container"
                 imageClassName="hero-image"
+                artName={$t('art_dragon_name')}
+                artDescription={$t('art_dragon_desc')}
                 src={HeroDragonImageUrl}
             />
         </div>,
@@ -104,6 +110,8 @@ function SectionTabs(props: Props): JSX.Element {
             <Art
                 className="hero-image-container"
                 imageClassName="hero-image"
+                artName={$t('art_elephant_name')}
+                artDescription={$t('art_elephant_desc')}
                 src={HeroElephantImageUrl}
             />
         </div>,
