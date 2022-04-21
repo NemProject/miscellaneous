@@ -71,7 +71,7 @@
     },
     {
         "imageSrc": "./exchanges/coindcx.png",
-        "exchangeId": "",
+        "exchangeId": "coindcx",
         "url": "https://coindcx.com/trade/XEMUSDT"
     },
     {
@@ -166,7 +166,7 @@
     },
     {
         "imageSrc": "./exchanges/liquid.png",
-        "exchangeId": "",
+        "exchangeId": "liquid",
         "url": "https://app.liquid.com/exchange/XEMBTC"
     },
     {
@@ -186,8 +186,8 @@
     },
     {
         "imageSrc": "./exchanges/p2p-b2b.png",
-        "exchangeId": "",
-        "url": ""
+        "exchangeId": "p2pb2b",
+        "url": "https://p2pb2b.com/ru/trade/XEM_BTC/"
     },
     {
         "imageSrc": "./exchanges/pionex.png",
@@ -216,7 +216,7 @@
     },
     {
         "imageSrc": "./exchanges/valr.png",
-        "exchangeId": "",
+        "exchangeId": "valr",
         "url": "https://www.valr.com/buy/XEM/ETH"
     },
     {
@@ -266,7 +266,7 @@
     },
     {
         "imageSrc": "./exchanges/zt-global.png",
-        "exchangeId": "",
-        "url": ""
+        "exchangeId": "zt",
+        "url": "https://www.ztb.im/"
     }
 ]

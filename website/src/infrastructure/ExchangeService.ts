@@ -15,10 +15,11 @@
  */
 
 import axios from 'axios';
-import { ExchangeInfo, ExchangeConfig } from 'src/models/Exchange';
+import { ExchangeInfo, MarketData, ExchangeConfig } from 'src/models/Exchange';
 import { Config, exchanges } from 'src/config';
+import { Utils } from 'src/utils';
 
-interface Ticker {
+interface CoingeckoMarketData {
     base: string;
     bid_ask_spread_percentage: number;
     coin_id: string;
@@ -54,22 +55,47 @@ interface Ticker {
     volume: number;
 }
 
+interface CoincdxMarketData {
+    market: string;
+    last_price: string;
+    volume: string;
+}
+
+interface LiquidMarketData {
+    last_traded_price: string;
+    volume_24h: string;
+}
+
+interface ProbitMarketData {
+    last: string;
+    quote_volume: string;
+}
+
+interface ValrMarketData {
+    lastTradedPrice: string;
+}
+
+interface ZtMarketData {
+    symbol: string;
+    last: string;
+    vol: string;
+}
+
 export class ExchangeService {
     // Returns exchange list
     static async getExchangeList(): Promise<ExchangeInfo[]> {
         const exchangeList: ExchangeConfig[] = exchanges;
         const response = await axios.get(Config.URL_MARKET_DATA);
-        const usdTickers = ['USD', 'USDT', 'USDC', 'BUSD'];
-        const targetPriority = [...usdTickers, 'BTC', 'ETH'];
+        const targetPriority = [...Utils.getUSDTickers(), 'BTC', 'ETH'];
         const targetOrderIndexes: Record<string, number> = {};
 
         for (let index = 0; index < targetPriority.length; index++) {
             targetOrderIndexes[targetPriority[index]] = index;
         }
 
-        const tickerList: ExchangeInfo[] = response.data.tickers
-            .map((ticker: Ticker) => ({
-                isUSD: usdTickers.includes(ticker.target),
+        const exchangeInfoListFromCoingecko: ExchangeInfo[] = response.data.tickers
+            .map((ticker: CoingeckoMarketData) => ({
+                isUSD: Utils.isUSDTicker(ticker.target),
                 target: ticker.target,
                 exchangeId: ticker.market.identifier,
                 exchangeName: ticker.market.name,
@@ -85,34 +111,202 @@ export class ExchangeService {
                 if (a.exchangeId > b.exchangeId) {
                     return 1;
                 }
-                if (targetOrderIndexes[a.target] === undefined) {
+                if (targetOrderIndexes[a.target as string] === undefined) {
                     return 1;
                 }
-                if (targetOrderIndexes[b.target] === undefined) {
+                if (targetOrderIndexes[b.target as string] === undefined) {
                     return -1;
                 }
                 return (
-                    targetOrderIndexes[a.target] -
-                        targetOrderIndexes[b.target] || 0
+                    targetOrderIndexes[a.target as string] -
+                        targetOrderIndexes[b.target as string] || 0
                 );
             });
 
         let currentExchangeId;
-        const marketData: ExchangeInfo[] = [];
+        const exchangeInfoListFromCoingeckoFiltered: ExchangeInfo[] = [];
+        const exchangeListWithMarketData: ExchangeInfo[] = [];
 
-        for (const ticker of tickerList) {
+        for (const ticker of exchangeInfoListFromCoingecko) {
             if (currentExchangeId !== ticker.exchangeId) {
-                marketData.push(ticker);
+                exchangeInfoListFromCoingeckoFiltered.push(ticker);
                 currentExchangeId = ticker.exchangeId;
             }
         }
 
-        const list = exchangeList.map(ex => ({
-            ...(marketData.find(m => m.exchangeId === ex.exchangeId) || {}),
-            ...ex,
-        }));
+        for (const exchange of exchangeList) {
+            let marketData;
 
-        //@ts-ignore
-        return list;
+            switch (exchange.exchangeId) {
+                case 'coindcx':
+                    marketData = await this.getCoindcxInfo();
+                    break;
+
+                case 'liquid':
+                    marketData = await this.getLiquidInfo();
+                    break;
+
+                case 'probit':
+                    marketData = await this.getProbitInfo();
+                    break;
+
+                case 'valr':
+                    marketData = await this.getValrInfo();
+                    break;
+
+                case 'zt':
+                    marketData = await this.getZtInfo();
+                    break;
+
+                default:
+                    marketData = exchangeInfoListFromCoingeckoFiltered.find(
+                        ex => ex.exchangeId === exchange.exchangeId,
+                    );
+            }
+
+            exchangeListWithMarketData.push({
+                ...(marketData || {}),
+                ...exchange,
+            });
+        }
+
+        return exchangeListWithMarketData;
+    }
+
+    static async getCoindcxInfo(): Promise<MarketData | null> {
+        const url = 'https://api.coindcx.com/exchange/ticker';
+        const exchangeName = 'CoinCDX';
+        const target = 'USDT';
+
+        try {
+            const response = await axios.get(url);
+            const markets: CoincdxMarketData[] = response.data;
+            const xem = markets.find(market => market.market === 'XEMUSDT');
+
+            if (!xem) {
+                console.log(
+                    `Failed to get market data from exchange ${exchangeName}. Cannot find market`,
+                );
+                return null;
+            }
+
+            return {
+                target,
+                isUSD: Utils.isUSDTicker(target),
+                price: Number(xem.last_price),
+                volume: Number(xem.volume),
+            };
+        } catch (e) {
+            console.error(
+                `Failed to get market data from exchange ${exchangeName}`,
+                (e as Error).message,
+            );
+            return null;
+        }
+    }
+
+    static async getLiquidInfo(): Promise<MarketData | null> {
+        const url = 'https://api.liquid.com/products/113';
+        const exchangeName = 'Liquid';
+        const target = 'BTC';
+
+        try {
+            const response = await axios.get(url);
+            const xem: LiquidMarketData = response.data;
+
+            return {
+                target,
+                isUSD: Utils.isUSDTicker(target),
+                price: Number(xem.last_traded_price),
+                volume: Number(xem.volume_24h),
+            };
+        } catch (e) {
+            console.error(
+                `Failed to get market data from exchange ${exchangeName}`,
+                (e as Error).message,
+            );
+            return null;
+        }
+    }
+
+    static async getProbitInfo(): Promise<MarketData | null> {
+        const url =
+            'https://api.probit.com/api/exchange/v1/ticker?market_ids=XEM-USDT';
+        const exchangeName = 'Probit';
+        const target = 'USDT';
+
+        try {
+            const response = await axios.get(url);
+            const xem: ProbitMarketData = response.data.data;
+
+            return {
+                target,
+                isUSD: Utils.isUSDTicker(target),
+                price: Number(xem.last),
+                volume: Number(xem.quote_volume),
+            };
+        } catch (e) {
+            console.error(
+                `Failed to get market data from exchange ${exchangeName}`,
+                (e as Error).message,
+            );
+            return null;
+        }
+    }
+
+    static async getValrInfo(): Promise<MarketData | null> {
+        const url = 'https://api.valr.com/v1/public/XEMETH/marketsummary';
+        const exchangeName = 'Valr';
+        const target = 'ETH';
+
+        try {
+            const response = await axios.get(url);
+            const xem: ValrMarketData = response.data;
+
+            return {
+                target,
+                isUSD: Utils.isUSDTicker(target),
+                price: Number(xem.lastTradedPrice),
+                volume: 0,
+            };
+        } catch (e) {
+            console.error(
+                `Failed to get market data from exchange ${exchangeName}`,
+                (e as Error).message,
+            );
+            return null;
+        }
+    }
+
+    static async getZtInfo(): Promise<MarketData | null> {
+        const url = 'https://www.ztb.im/api/v1/tickers';
+        const exchangeName = 'ZtGlobal';
+        const target = 'USDT';
+
+        try {
+            const response = await axios.get(url);
+            const markets: ZtMarketData[] = response.data.ticker;
+            const xem = markets.find(market => market.symbol === 'XEM_USDT');
+
+            if (!xem) {
+                console.log(
+                    `Failed to get market data from exchange ${exchangeName}. Cannot find market`,
+                );
+                return null;
+            }
+
+            return {
+                target,
+                isUSD: Utils.isUSDTicker(target),
+                price: Number(xem.last),
+                volume: Number(xem.vol),
+            };
+        } catch (e) {
+            console.error(
+                `Failed to get market data from exchange ${exchangeName}`,
+                (e as Error).message,
+            );
+            return null;
+        }
     }
 }

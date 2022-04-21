@@ -12,3 +12,11 @@ export function pushUnique<ItemType = unknown>(
 
     return array;
 }
+
+export function getUSDTickers(): string[] {
+    return ['USD', 'USDT', 'USDC', 'BUSD'];
+}
+
+export function isUSDTicker(ticker: string): boolean {
+    return getUSDTickers().includes(ticker);
+}

@@ -20,15 +20,13 @@ export interface ExchangeConfig {
     url: string;
 }
 
-export interface ExchangeInfo extends ExchangeConfig {
+export interface MarketData {
     isUSD: boolean;
     target: string;
-    exchangeName: string;
     price: number;
     volume: number;
 }
 
-export interface ExchangeDetails {
-    marketData: number[];
-    exchangeDescription: string;
+export interface ExchangeInfo extends ExchangeConfig, Partial<MarketData> {
+    exchangeName?: string;
 }

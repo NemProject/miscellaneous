@@ -46,6 +46,7 @@ export const Tabs: React.FunctionComponent<SimpleSpread<
                             item.value === value ? 'tabs-item-active' : ''
                         }`}
                         onClick={() => onChange && onChange(item.value)}
+                        key={item.text}
                     >
                         <div className="tabs-item-text">{item.text}</div>
                     </div>
