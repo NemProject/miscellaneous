@@ -1,0 +1,36 @@
+// Brand colors definition
+
+$color-brand-blue: #66b7e7;
+$color-brand-green: #50b9ad;
+$color-brand-yellow: #fab700;
+
+$color-brand-white: #fff;
+$color-brand-gray: #a8a6a6;
+$color-brand-black: #000;
+$color-brand-dark: #0b0118;
+$color-brand-dark-blue: #0d155c;
+
+$color-brand-success: #4cc773;
+$color-brand-danger: #ed514e;
+
+// Bootstrap colors override
+
+$primary: $color-brand-green;
+$secondary: $color-brand-green;
+$success: $color-brand-success;
+$info: $color-brand-blue;
+$warning: $color-brand-yellow;
+$danger: $color-brand-danger;
+$light:$color-brand-white;
+$dark: $color-brand-dark;
+
+$theme-colors: (
+    primary:    $primary,
+    secondary:  $secondary,
+    success:    $success,
+    info:       $info,
+    warning:    $warning,
+    danger:     $danger,
+    light:      $light,
+    dark:       $dark
+);

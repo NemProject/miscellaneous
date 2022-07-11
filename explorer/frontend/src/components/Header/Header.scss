@@ -1,0 +1,21 @@
+@use "~/src/styles/main.scss" as *;
+
+.header {
+    .header__brand {
+        display: flex;
+        align-items: center;
+    }
+
+    .header__logo {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .header__navigation-link {
+        border-bottom: 0.1rem solid transparent;
+    }
+
+    .header__navigation-link--active {
+        border-bottom: 0.1rem solid $color-brand-yellow;
+    }
+}

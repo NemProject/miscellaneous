@@ -1,0 +1,31 @@
+.btn {
+    padding: 0.5rem 2rem;
+    color: $color-brand-green;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid $color-brand-green;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    user-select: none;
+
+    &:hover {
+        color: #fff;
+        background: $color-brand-green;
+        opacity: 0.9;
+    }
+
+    &:active {
+        color: #fff;
+        background: $color-brand-green;
+        border: 1px solid #fff;
+    }
+
+    &:focus {
+        color: $color-brand-green;
+        background: transparent;
+    }
+}
