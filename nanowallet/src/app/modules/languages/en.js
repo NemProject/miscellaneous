@@ -403,6 +403,10 @@ function EnglishProvider($translateProvider) {
         PORTAL_ADDRESS_BOOK_BTN: 'Manage address book',
         PORTAL_INVOICE_TEXT: 'Create an invoice to share via QR code',
         PORTAL_SIGNED_MSG_TEXT: 'Create and verify signed messages to authenticate account ownership without transacting.',
+        PORTAL_SUPER_NODE_PROGRAM_TITLE: 'SuperNode Program',
+        PORTAL_SUPER_NODE_PROGRAM_TEXT: 'Enroll in the SuperNode Program to earn $XEM for securing the network. Minimum 10,000 XEM required.',
+        PORTAL_SUPER_NODE_PROGRAM_TEXT_LINK: 'Read more here.',
+        PORTAL_SUPER_NODE_PROGRAM_BTN_1: 'Check & Enroll in Program',
 
         // ADDRESS BOOK MODULE
         ADDRESS_BOOK_TITLE: 'Address book',
@@ -729,7 +733,7 @@ function EnglishProvider($translateProvider) {
         FAQ_ANSWER_6_WEBSITE: 'Official website',
         FAQ_ANSWER_6_BTT: 'Official BitcoinTalk thread',
         FAQ_QUESTION_7: 'Nothing is shown on the dashboard',
-        FAQ_ANSWER_7: 'Please be sure to check the node circle in the top navigation bar. <br> Red circle means that connection to the node failed. <br> Click on "Node" and select another one from the dropdown list or use a custom node. <br> <a href="https://supernodes.nem.io" target="_blank">Supernodes.nem.io</a> has a lot of nodes that you can use.</a>',
+        FAQ_ANSWER_7: 'Please be sure to check the node circle in the top navigation bar. <br> Red circle means that connection to the node failed. <br> Click on "Node" and select another one from the dropdown list or use a custom node. <br> <a href="https://www.nem.io/supernode" target="_blank">Supernode</a> has a lot of nodes that you can use.</a>',
         FAQ_QUESTION_8: 'Cosignatories cannot see the transaction to sign',
         FAQ_ANSWER_8: 'In this case go to "Services", look for "Multisignature and Multi-User Accounts" and click on "Sign multisig transactions".',
         FAQ_QUESTION_9: 'What are the best security practices ?',
@@ -1048,7 +1052,40 @@ function EnglishProvider($translateProvider) {
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX: "I confirm that the Symbol destination address matches my Symbol account address",
         POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG: "Please verify that the Symbol destination address is your Symbol multisig account address. If it doesn’t match, please start the process again and provide a valid Symbol public key of the multisig account.",
         POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG: "I confirm that the Symbol destination address matches the Symbol multisig account address",
-        OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.'
+        OPTIN_NIS1_PUBLIC_KEY: 'The public key you entered is a NIS1 key! You need to enter a Symbol public key.',
+
+        // SUPERNODE PROGRAM MODULE
+        SUPER_NODE_PROGRAM_TITLE: 'NEM SUPERNODE PROGRAM',
+        ACCOUNT_NAME: 'Account',
+        BALANCE_NAME: 'Balance',
+        TAB_STATUS_NAME: 'Status',
+        TAB_ENROLL_IN_PROGRAM_NAME: 'Enroll in Program',
+        TAB_PAYOUT_HISTORY_NAME: 'Payout History',
+
+        STATUS_NODE_NAME: 'Node Name',
+        STATUS_NAME: 'Status',
+        STATUS_ACTIVE_NAME: 'Active',
+        STATUS_INACTIVE_NAME: 'Inactive',
+        STATUS_PUBLIC_KEY_NAME: 'Public Key',
+        STATUS_REMOTE_PUBLIC_KEY_NAME: 'Remote Public Key',
+        STATUS_LAST_PAYOUT_ROUND_NAME: 'Last Payout Round',
+        STATUS_TOTAL_REWARDS_NAME: 'Total Rewards',
+
+        ENROLL_IN_PROGRAM_ADDRESS_NAME: 'Enroll Address',
+        ENROLL_IN_PROGRAM_NODE_HOST: 'Node Host',
+        ENROLL_IN_PROGRAM_BUTTON_NAME: 'Enroll in Program',
+
+        PAYOUT_HISTORY_FROM_NAME: 'From Round',
+        PAYOUT_HISTORY_TO_NAME: 'To Round',
+        PAYOUT_HISTORY_AMOUNT_NAME: 'Amount',
+        PAYOUT_HISTORY_TRANSACTION_HASH_NAME: 'Transaction Hash',
+        PAYOUT_HISTORY_DATE_NAME: 'Date',
+
+        INVALID_ENROLLMENT_ADDRESS: 'Invalid enrollment address.',
+        ADDRESS_ENROLLED: 'Current address already enrolled to this period.',
+        INVALID_CODEWORD_HASH: 'Invalid codeword hash.',
+        ACCOUNT_MISSING_PUBLICKEY: 'You need to make a transaction to get a public key.',
+        INVALID_FORMAT_NODE_HOST: 'Protocol (http://) and port (:7890) are not allowed.',
     });
 }
 

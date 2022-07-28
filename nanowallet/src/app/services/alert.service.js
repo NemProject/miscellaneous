@@ -651,6 +651,41 @@ export default class Alert {
         });
     }
 
+    invalidEnrollmentAddress() {
+        this._ngToast.create({
+            content: this._$filter('translate')('INVALID_ENROLLMENT_ADDRESS'),
+            className: 'danger'
+        });
+    }
+
+    addressEnrolled() {
+        this._ngToast.create({
+            content: this._$filter('translate')('ADDRESS_ENROLLED'),
+            className: 'warning',
+        });
+    }
+
+    invalidCodewordHash() {
+        this._ngToast.create({
+            content: this._$filter('translate')('INVALID_CODEWORD_HASH'),
+            className: 'danger',
+        });
+    }
+
+    accountHasNoPublicKey() {
+        this._ngToast.create({
+            content: this._$filter("translate")("ACCOUNT_MISSING_PUBLICKEY"),
+            className: 'danger'
+        });
+    }
+
+    invalidFormatNodeHost() {
+        this._ngToast.create({
+            content: this._$filter('translate')('INVALID_FORMAT_NODE_HOST'),
+            className: 'danger',
+        });
+    }
+
     /***
      * Success alerts
      */
