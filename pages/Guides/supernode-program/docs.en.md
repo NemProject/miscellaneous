@@ -6,92 +6,122 @@ taxonomy:
     category: docs
 ---
 
-## About Supernodes
+## About the NEM Supernode Program
 
-The NEM Supernode's program is funded with XEM set aside during the Nemesis block. These awards are then given to high performance nodes for helping to secure the network. These nodes form a backbone of support for [light wallets](http://nem.ghost.io/lightwallet/), mobile wallets, and 3rd party apps so that users of these services might have access to the network that is easy, fast, and reliable without having to sync a blockchain by themselves or use untrustworthy centralized services.
+The NEM Supernode Program rewards high performance validators that participate in the consensus and security of the network, and provide high-speed data availability for applications on the NEM blockchain. NEM's native token XEM was 100% issued in the Genesis block; in lieu of block rewards, 10,000,000 XEM have been set aside for the Supernode Program.
 
-The NEM network has been designed from the very beginning with the goal in mind that any light client can securely connect to and use any server safely to make any transaction. Supernodes are expected to be high performance and reliable nodes. They are regularly tested on their bandwidth, chain height, chain parts, computing power, version, ping, and responsiveness to make sure that they are performing to high standards. If they meet all these requirements, they are randomly given rewards.
+Reward eligibility is determined on a daily basis via four rounds of testing (one round every 6 hours). A participating node must pass all tests in a given day in order to be eligible for a share of that day's rewards. Node testing is facilitated by the controller (a centrally managed Supernode monitoring service). A reference node is also used for comparative purposes in some tests. Each round of testing includes the following tests:
 
-The Supernodes program is currently undergoing alpha testing and is looking for volunteer nodes to participate. During this phase of testing, rewards will **not** be distributed. Once the Supernode network is working and all parameters configured properly a date for the official start will be announced.
+- **Chain Height:**
+The chain height test checks that a node reports the correct height via the ``/chain/height API``. It retrieves a node’s height and compares it to the reference node’s height. This test passes if the node reports a height that is no more than four blocks behind the reference node’s height.
+- **Chain Part:**
+The chain part test checks that a node can serve a random subset of blocks close to the end of the chain via the ``/chain/blocks-after`` API. First, it retrieves a node’s self reported height. Next, it requests a random number of blocks (between 60 and 100) from the node. Finally, it calculates the hash of each block and then a single composite hash over those hashes. The same composite hash is calculated over blocks retrieved from the reference node. This test passes if all returned blocks are verifiable with proper signatures and the calculated composite hashes from the node and reference node match.
+- **Balance:**
+The balance test checks that a node has a balance of at least 10000 XEM. It requests a node’s main account’s balance via the ``/account/get/forwarded`` API. Unlike the other tests, this request is routed to the reference node. This test passes if the reported balance is at least 10000 XEM.
+- **Computing Power:**
+The computing power test checks that a node is running on sufficiently strong hardware. The controller calls a node’s ``nr/computing-power`` API with a random hash. The node interprets that hash as a private key and derives a public key from it. It then interprets that new public key as a private key and derives another public key from it. This is repeated 10000 times and the final public key is returned to the controller. This test passes if the public key matches the value calculated by the controller and the entire operation, including roundtrip, completes in 5s or less.
+- **Version:**
+The version test checks that a node is running a recent version of the NIS client software. It requests a node’s version via the ``/node/info`` API. This test passes if the node’s version is greater than or equal to the reference node’s version.
+- **Ping:**
+The ping test checks that a node has a sufficiently responsive network connection. The controller selects 5 nodes at random and passes them to the node under test via the ``nr/task/ping`` API. Upon receiving the partner nodes, the node calls the ``nr/ping`` API on each partner 5 times each and measures the roundtrip time. When all pings are complete, the node reports the roundtrip times to the controller. This test passes when no more than one ping fails and the average ping time of all successful samples is less than 200ms.
+- **Bandwidth:**
+The bandwidth test checks a node is running on hardware with a sufficiently capable network connection. The controller selects the partner node with the lowest ping time as measured by the ping test and passes it to the node under test via the ``nr/task/bandwidth`` API. The controller also sends a random hash seed. The node then sends the random hash seed to the partner, which hashes it 30000 times and returns a list of all resulting hashes concatenated to the seed. The sending node measures the time needed to complete this operation. Finally, the sending node independently performs the same hash calculation and returns the results to the controller. This test passes when the hashes calculated by the node and the partner node are equal and the measured operation time indicates a transfer speed of at least 5 Mbit/s.
+- **Responsiveness:**
+The responsiveness test checks how quickly a node can respond to a chain height request. The controller initiates 10 chain height requests via the ``/chain/height`` API. It then calculates the total amount of time to fulfill all of the requests. This test passes when at least 9 requests are fulfilled and the total time to fulfill all requests was no greater than one second. If only the time threshold is exceeded, the controller will retry this test up to 4 times.
 
-## Steps to Enroll and Participate in Supernodes
+## Steps to Enroll and Participate in the Supernode Program
 
-- **Step 1**: Download and run the standalone version of NEM from [the GitHub releases page](https://github.com/NemProject/NanoWallet/releases).
+- **Step 1**: Download and Launch Latest NEM NanoWallet From [the GitHub Releases Page](https://github.com/NemProject/NanoWallet/releases).
 
-  The standalone tutorials for Mac, Ubuntu, and Windows can be found at the [NEM Tutorials Index](http://nem.ghost.io/nem-tutorial-list/).
+- **Step 2**: Make an Account and Have at Least 10,010 XEM.
 
-- **Step 2**: Make an account and have at least 3,000,030 XEM in an account.
+  10,000 XEM to be able to participate in the Supernode Program, and ~10 XEM to pay the fees for activating delegated harvesting and sending the enrollment message. (You will need to re-enroll in the Supernode Program every month - 10 XEM should be enough to cover transaction fees for at least a year.)
 
-  3 million XEM to be able to participate in the program, and 30 XEM to be able to pay the fees for activating delegated harvesting and sending the enrollment message. The message fee depends on the size of the message text, so 30 XEM might be a little bit more than you really need.
+- **Step 3**: Activate Delegated Harvesting on Your Main Account.
 
-- **Step 3**: Activate delegated harvesting on your main account.
+  The tutorial for NEM NanoWallet delegated harvesting can be found [here](https://nemproject.github.io/nem-docs/pages/Guides/nanowallet/delegated-harvesting/docs.en.html#activation).
 
-  A tutorial can be found [here](http://nem.ghost.io/how-to-use-delegated-harvesting/).
+  Six (6) hours must pass before you can start harvesting, but enrollment in the Supernode Program can be initiated once you have the delegated private key (available immediately).
   
-  Remember, 6 hours must pass before you can start harvesting, but for the sake of supernodes, once you have the delegated private key (which is available instantly), you may proceed. (Please make sure to get the private key from the **delegated** harvesting account, not your main account and not either of the public keys.)
+  It's important to understand the difference between Main and Delegated Key Pairs which are used in NEM:
+  - Main - Is used to control funds for your account. If the main private key will be stolen all funds could be transferred to another account. Never expose or share your Main Private Key!
+  - Delegated - Is used to control delegated harvesting. If the delegated private key will be stolen your funds are safe. You'll be also able to change the compromised delegated account linked to your Main account.
+  
+  {% include warning.html content="For NEM node and Servant configuration you should use **Delegated** keys." %}
+  
+  To find your delegated private key go to Services -> Delegated Harvesting -> Manage delegated account. Choose "Show delegated account keys", and put the password to reveal the delegated private key.
 
-- **Step 4**: Shut down NIS, if running.
+- **Step 4**: Setup NEM Node.
 
-- **Step 5**: Configure your NIS to autoboot with the **delegated** private key.
+  If you don't have a NEM node, you need to set up it first. The tutorial can be found [here](https://nemproject.github.io/nem-docs/pages/Guides/node-operation/docs.en.html).
 
-  To find your delegated private key please use NCC and go to *View Account Details* and then *Show Remote Account's PRIVATE Key*.
+- **Step 5**: Shutdown the NIS Client, if Running.
 
-  You will need to edit the config file in your NIS folder to do this. Here is some help:
+- **Step 6**: Configure Your NEM Node to Autoboot With the **Delegated** Private Key.
 
-  When you unzipped the standalone you made a folder called ``package``. Open that folder and double click on the folder ``nis`` and then open the file ``config.properties`` with a text editor. You will then need to find line 43 which says ``#nis.bootKey =``. Now delete the "#" so it only says  ``nis.bootKey =``. Next delete ``#0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef`` and replace it with your delegate private key you just made, and again don't keep the "#".
+  You will need to edit the config file in your NIS folder to include the **Delegated** Private Key collected in Step 3. Here is some help:
 
-  Next in line 44, ``#nis.bootName``, remove the "#" and then erase "foobar" and instead write the name of your node. Any name is fine. Lastly, set ``nis.shouldAutoHarvestOnBoot`` to true.
+  When you unzipped the standalone you made a folder called ``package``. Open that folder and double-click on the folder ``nis`` and then open the file ``config.properties`` with a text editor. You need to find line which says ``#nis.bootKey =``. Now delete the "#" so it only says ``nis.bootKey =``. Next delete ``#0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef`` and replace it with your delegate private key from Step 3.
 
-  ![nis config.proprties](Screenshot-2016-02-07-05-25-08.png)
+  In the next line (``#nis.bootName``), remove the "#" and then erase "foobar" and instead write the name of your node. Any name is fine. Lastly, make sure that ``nis.shouldAutoHarvestOnBoot`` is set to ``true``.
+
+  Optionally (node will try to autodetect IP automatically if not defined), you can define your domain or IP using ``nem.host`` property.
+
+  ![nis config.properties](guide-config-properties-node.png)
 
   Save your edits and close the text editor.
 
-  Please review this [tutorial](http://nem.ghost.io/nis-auto-start-and-auto-harvest/) if you need more help.
+  To test if you have done this correctly restart your node. If you have followed all steps correctly, you will see that your NIS is booting and synchronizing automatically.
 
-  To test if you have done this correctly restart your standalone NIS and NCC. If you have followed all steps correctly, you will see that your NIS is booting and synchronizing automatically, even if you didn't log into your wallet yet.
-
-- **Step 6**: Download the [node servant program](https://drive.google.com/open?id=0B_0Z9jDGHPxPVmdCVDFTT25CXzg).
+- **Step 7**: Download the [Node Servant](https://bob.nem.ninja/servant_0_0_4.zip).
   
-  This is a very light application that will run 24/7 on the same machine as your NIS to perform tests and monitor the network.
+  This is a very light application that will run 24/7 on the same machine as your NIS client to perform tests and monitor the network.
 
-- **Step 7**: Configure the servant.
+- **Step 8**: Configure the Servant.
 
-  Unzip and open the folder ``supernodes``. Open the ``servant`` folder. Open the file ``config.properties`` with a text editor. In your text editor enter your static IP or host name for the ``nem.host`` field. (It is important that your host name or static IP associated with your node is fixed for the stability of the network.) Then in the field ``servant.key`` enter your delegated private key from your account with 3 million XEM (again make sure to use your delegated private key and not your main account private key. This will be the same key you used earlier). Save your edits and close the text editor.
+  Unzip and open the folder ``servant``. Open the file ``config.properties`` with a text editor. In your text editor enter your static IP or domain name for the ``nem.host`` field. (It is important that your domain name or static IP associated with your node is fixed for the stability of the network.) Then in the field ``servant.key`` enter your delegated private key from Step 3. (Again make sure to use your delegated private key and not your main account private key.) Save your edits and close the text editor.
 
-  ![servant config.properties](Screenshot-2016-01-06-14-07-35-copy-1.png)
+  ![servant config.properties](guide-config-properties-servant.png)
 
-- **Step 8**: Open inbound/outbound TCP ports 7890 (NIS), 7880 (servant), and 7778 (websocket for lightwallet).
+- **Step 9**: Open Inbound/Outbound TCP ports 7890 (NIS), 7880 (Servant), and 7778 (Websocket).
 
-  Opening 7890 allows your node to be a full node and contribute to the network. Please review the [configuration tutorial](http://nem.ghost.io/easy-configuration-guide-opening-port-7890/). If you were successful you will see your node's name appear on [Nembex](http://chain.nem.ninja/#/nodes/). This might take an hour or so to appear.
+  Opening 7890 allows your node to be a full node and contribute to the network. If you were successful you will see your node's name appear on [Explorer](https://explorer.nemtool.com/#/nodelist). This might take a while to appear.
 
   Opening port 7880 is required to allow the servant to work correctly.
 
-  Port 7778 allows light wallets to connect to the server.
+  Port 7778 allows NEM NanoWallet to connect using websockets to the server.
 
-- **Step 9**: Start NIS, let it synchronize and then start the servant.
+- **Step 10**: Start NIS Client, Let it Synchronize, and Then Start the Servant.
 
-  To start the servant double click on ``runservant.bat`` in the ``servant`` folder (In Mac or Linux navigate to the file in terminal and use the command ``sh startservant.sh``). If it works you will see your terminal/command prompt window become active.
+  To start the servant double-click on ``runservant.bat`` in the ``servant`` folder. (In Mac or Linux navigate to the file in terminal and use the command ``sh startservant.sh``. It's recommended to run in background using ``screen`` or ``nohup`` command.)
 
-- **Step 10**: Send an unencrypted enrollment message to the official node rewards account.
+- **Step 11**: Enroll in the Program.
 
-  Send a NEM message to ``NAFUNDBUKIOSTMD4BNXL7ZFE735QHN7A3FBS6CMY`` stating "enroll (your IP or hostname) (your nodes name) (your delegated harvesting public key)" from the primary account that has the 3 million XEM deposit to officially announce you would like to participate in the program. To find the delegated public key, open your 3 million XEM account in NCC. Go to *View Account Details* and then you can see the delegated account's public key. Please note that this is **not** the delegated harvesting **private** key you used earlier.
+  Go to Services -> SuperNode Program -> Check & Enroll in Program -> Enroll in Program, put the enrollment address for current month (announced via [Twitter](https://twitter.com/nemofficial) and [Discord](https://www.discord.gg/xymcity)) and host for your NEM node. Send enrollment transaction.
 
-  ![find delegated public key](delegated-key.png)
+  ![NEM NanoWallet Enrollment](guide-wallet-enroll.png)
 
-  ![Example for an enrollment message](enroll-1.png)
+  Make sure host matches your node host from ``/node/info`` endpoint response.
 
-- **Step 11**: Review your results at [supernodes.nem.io](http://supernodes.nem.io/) to make sure that your node is passing all the tests. Please be patient, since your results will not be visible immediately.
+  ![Endpoint response](guide-node-info.png)
 
-  For more discussion about this blog, please visit the [NEM Forum](https://web.archive.org/web/20210814074405/https://forum.nem.io/t/nem-supernode-rewards-program/1735).
+  As an alternative to enrollment via NEM NanoWallet, you can send enroll transaction manually. It should be transfer transaction with message: ``enroll <NODE_HOST> <CODEWORD_HASH>`` send to current enrollment address. 
+  
+  As a ``<NODE_HOST>`` you should use host from ``/node/info`` endpoint. Current ``<CODEWORD_HASH>`` can be fetched for specific account by main **public key** (Make sure you are using public - not private key) using Supernode API: ``https://nem.io/supernode/api/codeword/<main_public_Key>``.
 
-## Editing Your Supernode IP and Alias
+- **Step 12**: Review Your Results at [nem.io/supernode](https://nem.io/supernode).
 
-Some node admins will need to change there IP from time to time as they move hosting services. Or at some point a node admin might want to change their node name.
+  To make sure your NEM node is passing all the tests review results at [nem.io/supernode](https://nem.io/supernode) web page. Please be patient, since your results will not be visible immediately.
 
-In this case you will need to prove that you are still the owner of the account by sending a message from the original account used the first time to enroll. Send the message to ``NAFUNDBUKIOSTMD4BNXL7ZFE735QHN7A3FBS6CMY``.
+## Editing Your Supernode Host
 
-The message for IP's should be formatted like this, `change ip <old-ip> to <new-ip>`, so basically, "change ip 123.456.789.012 to 098.765.432.109".
+Some node admins will need to change the IP address or domain from time to time as they move hosting services.
 
-The message for alias's should be formatted like this, `change alias <old-alias> to <new-alias>`, so basically, "change alias oldname to newname".
+In such a case, you have to modify node configuration and re-send enrollment (Step 11) with a changed Host.
 
-Also please leave a message at the bottom of this NEM Node Rewards thread so that Bloody Rookie knows he must check the above account for new messages.
+## Monthly Re-enrollment
+The Supernode Program requires monthly re-enrollments. We believe the set-and-forget philosophy of node operation rewards unhealthy behaviours, especially in a decentralised network where validators need to make informed decisions pertaining to the state of the network.
+Prior to the month-end, a new enrollment address will be announced by [Twitter](https://twitter.com/nemofficial) and [Discord](https://www.discord.gg/xymcity).
+The node operator has to re-enroll each month using a new enrollment address. Enrollment for the next month is available 4 days before the end of the preceding month.
+
+Refer to Step 11 in [Steps to Enroll and Participate in the Supernode Program](#steps-to-enroll-and-participate-in-the-supernode-program)

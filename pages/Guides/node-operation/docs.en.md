@@ -12,7 +12,7 @@ taxonomy:
 
 ## Deploying a node
 
-This guide explains how to deploy a NIS1 node, either [manually](#manually) or [using Docker](#using-docker).
+This guide explains how to deploy a NEM node, either [manually](#manually) or [using Docker](#using-docker).
 
 ### Manually
 
@@ -24,32 +24,32 @@ This guide explains how to deploy a NIS1 node, either [manually](#manually) or [
 #### Installation
 {:.no_toc}
 
-- [Download latest binary](https://bob.nem.ninja/nis-0.6.97.tgz).
-- Decompress the file anywhere you want. It should be a drive with a few Gigabytes of spare space (Current database size is over 6GB).
+- [Download latest binary](https://bob.nem.ninja/nis-0.6.100.tgz).
+- Decompress the file anywhere you want. It should be a drive with a few dozen Gigabytes of spare space (Current database size is over 20GB).
 
 #### Configuration
 {:.no_toc}
 
 Edit the ``nis/config.properties`` file:
 
-- Set the ``nem.folder`` property to point to where you installed nis1 (On Windows, backslashes ``\`` need to be doubled). For example ``D:\\NEM\\nis1-home`` or ``~/nem``.
+- Set the ``nem.folder`` property to point to where you installed NIS1 Client (On Windows, backslashes ``\`` need to be doubled). For example ``D:\\NEM\\nis1-home`` or ``~/nem``.
 - Set ``nis.bootName`` to the name you want for your server. This is merely informational.
-- Set ``nis.bootKey`` to the **private key** of the account managing this node. If you don't have such account, use the [NanoWallet](../../nanowallet/docs.en.md) to create one.
+- Set ``nis.bootKey`` to the **private key** of the account managing this node. If you don't have such account, use the [NanoWallet](/nem-docs/pages/Guides/nanowallet/docs.en.html) to create one.
 
-  - When performing [delegated harvesting](../../nanowallet/delegated-harvesting/docs.en.md) this is the private key of the proxy remote account. Harvesting rewards go to the linked account (this is the **recommended** setup).
+  - When performing [delegated harvesting](/nem-docs/pages/Guides/nanowallet/docs.en.html) this is the private key of the proxy remote account. Harvesting rewards go to the linked account (this is the **recommended** setup).
 
   - When performing local harvesting this is directly the private key of your account (This setup is **not recommended**).
 
-    Retrieve this private key from the NanoWallet's Account tab ([as explained here](../../nanowallet/backup-wallet/docs.en.md#backup-to-paper)).
+    Retrieve this private key from the NanoWallet's Account tab ([as explained here](/nem-docs/pages/Guides/nanowallet/backup-wallet/docs.en.html)).
 
     {% include warning.html content="**Needless to say that this key must be kept secret at all times**." %}
 
 **Optionally**, you can download a snapshot of the database at a certain height to speed up the first run of the node:
 
-- Go to  [https://bob.nem.ninja/](https://bob.nem.ninja/) and download any of the ``nis5_mainnet.h2-*`` files. [This is the latest one](https://bob.nem.ninja/nis5_mainnet.h2-snapshot.db.gz).
-- Decompress this file inside a folder named ``nis/data`` inside the folder where you installed nis1 (this is the folder you wrote in the ``nem.folder`` property).
+- Go to  [https://bob.nem.ninja/](https://bob.nem.ninja/) and download any of the ``nis5_mainnet-*.mv.db`` files. [This is the latest one](https://bob.nem.ninja/nis5_mainnet-3_500_060.mv.db.gz).
+- Decompress this file inside a folder named ``nis/data`` inside the folder where you installed NIS1 Client (this is the folder you wrote in the ``nem.folder`` property).
 
-  You should get a file named ``{nem.folder}/nis/data/nis5_mainnet.h2.db``.
+  You should get a file named ``{nem.folder}/nis/data/nis5_mainnet.mv.db``.
 
 #### Launch
 {:.no_toc}
@@ -157,12 +157,12 @@ The extended-info URL gives a bit more information. Check for yourself if this i
 
 ## Updating a node
 
-Updating your NEM node to the latest version of the protocol is actually extremely easy:
+Updating your NIS1 Client to the latest version of the protocol is actually extremely easy:
 
 - Stop the server by pressing ``Ctrl+C`` or killing the process.
 
-- Remove the old package. This means all files you [installed previously](../deploying-node/docs.en.md#installation) **except** the ``*.config`` files and the ``nis/data`` folder.
+- Remove the old package. This means all files you [installed previously](#installation) **except** the ``*.config`` files and the ``nis/data`` folder.
 
 - [Download latest binary](https://bob.nem.ninja) and extract it in the same folder.
 
-- Start the server again with [the same command you used in the deployment guide](../deploying-node/docs.en.md#launch).
+- Start the server again with [the same command you used in the deployment guide](#launch).
