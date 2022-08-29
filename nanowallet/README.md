@@ -26,6 +26,12 @@ It is probably that the node you are connected to is down.
 Look at the navigation bar, at the top of the page.
 If the circle next to `Node` is red, click on it and select another node from the list.
 
+### How to participate in the Supernodes program ? ###
+
+To enroll Supernodes program, the minimum amount to participate at least **10,000 XEM** in the account.
+
+The step is easy, login to the wallet, selected "Service" from the top menu, and search for `SuperNode Program`, then you will find a table at the bottom, and click on the "Enroll in Program" tab and fill up the form. Lastly, click on the enroll button. [More info](https://www.nem.io/supernode/).
+
 # Developers #
 
 ### Build from source ###
@@ -71,7 +77,7 @@ npm run release
     7.1 On a MacOS machine, download the zip file containing the app signing certificates (ask team)
 
     7.2 Extract the certificates and double click each one of them to add to the keychain (ask the team for private key password)
-    
+
     7.3 Starting with MacOS 10.14.5, all signed applications by new `Developer ID Certificate` will need to be notarized. This is an automated step in the process. You'll need to enable notarization by setting the following env vars.
 
     <pre>
@@ -79,7 +85,7 @@ npm run release
     export DESKTOP_APP_APPLE_ID=VALID_APPLE_DEV_ID
     export DESKTOP_APP_APPLE_PASSWORD=VALID_APPLE_DEV_PASSWORD
     </pre>
-    
+
     7.4 Enable auto discovery for code signing process to pick up the certificates from the keychain
 
     <pre>export CSC_IDENTITY_AUTO_DISCOVERY=true</pre>
@@ -88,7 +94,7 @@ npm run release
     <pre>npm run release</pre>
 
     7.6 Validate if the app is signed with a `Developer ID Certificate` and notarized
-    
+
     <pre>spctl -a -t exec -v ./release/mac/Nem\ Wallet.app
     # Output(Success): ./release/mac/Nem Wallet.app: accepted source=Notarized Developer ID
     # Output(Failure): ./release/mac/Nem Wallet.app: rejected source=Unnotarized Developer ID

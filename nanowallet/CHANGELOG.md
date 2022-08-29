@@ -1,11 +1,20 @@
 # Changelog
 
+## Version 2.7.0
+
+    - Added SuperNode program module
+        - It allows user to enroll the SuperNode program from the wallet
+        - It allows the user to track reward payout history
+        - It shows node harvesting status and total collected rewards
+    - Fixed app code signing and notarization issues and updated the Readme
+    - Symbol opt in module is no longer available
+
 ## Version 2.6.2
 
     - Upgraded trezor-connect to v8
     - Refactored voting module
     - Added unit tests for Trezor
-    - Removed dependency to nem-trezor lib 
+    - Removed dependency to nem-trezor lib
     - Fixed failing unit tests
     - Fixed voting transactions fee flooring issue
 
