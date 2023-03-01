@@ -19,12 +19,12 @@ This guide explains how to deploy a NEM node, either [manually](#manually) or [u
 #### Prerequisites
 {:.no_toc}
 
-- [Install Java JRE 8](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html).
+- [Install Java JRE 11](https://docs.oracle.com/en/java/javase/11/). You can also use [OpenJDK](https://openjdk.org/projects/jdk/11/).
 
 #### Installation
 {:.no_toc}
 
-- [Download latest binary](https://bob.nem.ninja/nis-0.6.100.tgz).
+- [Download latest binary](https://bob.nem.ninja/nis-0.6.101.tgz).
 - Decompress the file anywhere you want. It should be a drive with a few dozen Gigabytes of spare space (Current database size is over 20GB).
 
 #### Configuration
