@@ -97,7 +97,7 @@ The responsiveness test checks how quickly a node can respond to a chain height 
 
 - **Step 11**: Enroll in the Program.
 
-  Go to Services -> SuperNode Program -> Check & Enroll in Program -> Enroll in Program, put the enrollment address for current month (announced via [Twitter](https://twitter.com/nemofficial) and [Discord](https://www.discord.gg/xymcity)) and host for your NEM node. Send enrollment transaction.
+  Go to Services -> SuperNode Program -> Check & Enroll in Program -> Enroll in Program, put the enrollment address for current month (announced via [Twitter](https://twitter.com/hashtag/NEMSupernodeProgram) and [Discord](https://www.discord.gg/xymcity)) and host for your NEM node. Send enrollment transaction.
 
   ![NEM NanoWallet Enrollment](guide-wallet-enroll.png)
 
@@ -121,7 +121,7 @@ In such a case, you have to modify node configuration and re-send enrollment (St
 
 ## Monthly Re-enrollment
 The Supernode Program requires monthly re-enrollments. We believe the set-and-forget philosophy of node operation rewards unhealthy behaviours, especially in a decentralised network where validators need to make informed decisions pertaining to the state of the network.
-Prior to the month-end, a new enrollment address will be announced by [Twitter](https://twitter.com/nemofficial) and [Discord](https://www.discord.gg/xymcity).
+Prior to the month-end, a new enrollment address will be announced by [Twitter](https://twitter.com/hashtag/NEMSupernodeProgram) and [Discord](https://www.discord.gg/xymcity).
 The node operator has to re-enroll each month using a new enrollment address. Enrollment for the next month is available 4 days before the end of the preceding month.
 
 Refer to Step 11 in [Steps to Enroll and Participate in the Supernode Program](#steps-to-enroll-and-participate-in-the-supernode-program)
