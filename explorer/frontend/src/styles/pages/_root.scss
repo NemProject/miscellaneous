@@ -1,0 +1,36 @@
+html,
+body {
+    @include responsive-font($body-fonts);
+
+    letter-spacing: 0;
+}
+
+h1 {
+    @include responsive-font($h1-fonts);
+
+    letter-spacing: -2%;
+}
+
+h2 {
+    @include responsive-font($h2-fonts);
+
+    letter-spacing: -2%;
+}
+
+h3 {
+    @include responsive-font($h3-fonts);
+
+    letter-spacing: -2%;
+}
+
+h4 {
+    @include responsive-font($h4-fonts);
+
+    letter-spacing: -2%;
+}
+
+button {
+    @include responsive-font($button-fonts);
+
+    letter-spacing: 0;
+}

@@ -1,0 +1,28 @@
+@use "~/src/styles/main.scss" as *;
+
+.footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+    color: #fff;
+    background-color: #000;
+    background-image: url("../../assets/images/bg-footer.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    .footer__container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer__logo {
+        width: 4rem;
+        height: 4rem;
+    }
+}

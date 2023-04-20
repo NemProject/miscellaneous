@@ -1,0 +1,14 @@
+// Container maps definition
+
+$container-paddings: (
+    xs: 0 19px,
+    sm: 0 88px,
+    md: 0 88px,
+    lg: 0 160px
+);
+
+// Apply styles
+
+.container {
+    @include responsive-padding($container-paddings);
+}

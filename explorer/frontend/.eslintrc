@@ -1,0 +1,16 @@
+---
+extends:
+- react-app
+- react-app/jest
+- plugin:import/react
+- ../_symbol/linters/javascript/default.eslintrc
+rules:
+  sort-imports: 
+    - error
+    - ignoreDeclarationSort: true
+settings:
+  import/resolver:
+    node:
+      extensions:
+      - .js
+      - .jsx

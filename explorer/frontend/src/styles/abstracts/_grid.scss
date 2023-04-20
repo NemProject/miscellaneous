@@ -1,0 +1,15 @@
+// Breakpoint definition
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 768px,
+    md: 1200px,
+    lg: 4000px
+);
+
+$container-max-widths: (
+    xs: 418px,
+    sm: 614px,
+    md: 1413px,
+    lg: 2987px
+);

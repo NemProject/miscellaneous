@@ -1,0 +1,56 @@
+@mixin responsive-font($fs-map, $fs-breakpoints: $grid-breakpoints) {
+    @each $fs-breakpoint,
+        $fs-font in $fs-map {
+        @if $fs-breakpoint == null {
+            font: $fs-font !important;
+        }
+
+        @else {
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) {
+                font: $fs-font !important;
+            }
+        }
+    }
+}
+
+@mixin responsive-border-radius($fs-map, $fs-breakpoints: $grid-breakpoints) {
+    @each $fs-breakpoint,
+        $fs-border-radius in $fs-map {
+        @if $fs-breakpoint == null {
+            border-radius: $fs-border-radius !important;
+        }
+
+        @else {
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) {
+                border-radius: $fs-border-radius !important;
+            }
+        }
+    }
+}
+
+@mixin responsive-padding($fs-map, $fs-breakpoints: $grid-breakpoints) {
+    @each $fs-breakpoint,
+        $fs-padding in $fs-map {
+        @if $fs-breakpoint == null {
+            padding: $fs-padding !important;
+        }
+
+        @else {
+            @if map-has-key($fs-breakpoints, $fs-breakpoint) {
+                $fs-breakpoint: map-get($fs-breakpoints, $fs-breakpoint);
+            }
+
+            @media screen and (min-width: $fs-breakpoint) {
+                padding: $fs-padding !important;
+            }
+        }
+    }
+}
