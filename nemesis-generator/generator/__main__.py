@@ -4,6 +4,8 @@ import yaml
 from symbolchain.BufferWriter import BufferWriter
 from symbolchain.CryptoTypes import Hash256, PrivateKey, PublicKey, Signature
 from symbolchain.facade.NemFacade import NemFacade
+from symbolchain.nem.Network import Network
+from symbolchain.nem.TransactionFactory import TransactionFactory
 from zenlog import log
 
 MICROXEM_PER_XEM = 1000000
@@ -29,12 +31,19 @@ def attach_signature(payload, signature):
     return writer.buffer
 
 
+def patch_network_identifier(payload, identifier):
+    payload[4 + 1 + 2] = identifier
+
+
 class Generator:
     def __init__(self, input_file):
         with open(input_file, 'rt', encoding='utf8') as infile:
             nemesis_config = yaml.load(infile, yaml.SafeLoader)
 
-            self.facade = NemFacade(nemesis_config['network'])
+            network = nemesis_config['network']
+            network_name = network if network in ['mainnet', 'testnet'] else network['name']
+            self.facade = NemFacade(network_name)
+            self.network_id = self.facade.network.identifier if network in ['mainnet', 'testnet'] else network['identifier']
 
             self.signer_key_pair = self.facade.KeyPair(PrivateKey(nemesis_config['signer_private_key']))
             self.generation_hash = Hash256(nemesis_config['generation_hash'])
@@ -45,7 +54,8 @@ class Generator:
         self.signed_block_header = None
 
     def print_header(self):
-        signer_address = self.facade.network.public_key_to_address(self.signer_key_pair.public_key)
+        network = Network('', self.network_id, self.facade.network.datetime_converter)
+        signer_address = network.public_key_to_address(self.signer_key_pair.public_key)
         total_xem = sum([account['amount'] for account in self.accounts]) / MICROXEM_PER_XEM
 
         log.info('Preparing Nemesis Block')
@@ -69,10 +79,17 @@ class Generator:
         unsigned_payload = self.facade.transaction_factory.to_non_verifiable_transaction(transaction).serialize()
         self.unsigned_transaction_payloads.append(unsigned_payload)
 
-        signature = self.facade.sign_transaction(self.signer_key_pair, transaction)
+        # manually serialize and sign, in order to patch network byte
+        non_verifiable_transaction = TransactionFactory.to_non_verifiable_transaction(transaction)
+        unsigned_transaction_payload = bytearray(non_verifiable_transaction.serialize())
+        patch_network_identifier(unsigned_transaction_payload, self.network_id)
+        signature = self.signer_key_pair.sign(bytes(unsigned_transaction_payload))
         self.facade.transaction_factory.attach_signature(transaction, signature)
 
-        signed_payload = prepend_size(transaction.serialize())
+        # patch network byte in final tx
+        transaction_payload = bytearray(transaction.serialize())
+        patch_network_identifier(transaction_payload, self.network_id)
+        signed_payload = prepend_size(transaction_payload)
         self.signed_transaction_payloads.append(signed_payload)
 
     def prepare_block(self):
@@ -100,7 +117,7 @@ class Generator:
     def _write_entity_header(self, writer):
         writer.write_int(1, 1)  # version
         writer.write_int(0, 2)  # padding
-        writer.write_int(self.facade.network.identifier, 1)  # network
+        writer.write_int(self.network_id, 1)  # network
         writer.write_int(0, 4)  # timestamp
 
         writer.write_int(PublicKey.SIZE, 4)
