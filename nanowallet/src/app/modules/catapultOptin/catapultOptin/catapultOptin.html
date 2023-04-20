@@ -1,0 +1,268 @@
+<div class="optin-page" ng-show="!$ctrl.isOptedIn">
+
+    <video ng-show="$ctrl.step == 0;" class="videoLogo" autoplay="autoplay" loop="loop" muted="muted" defaultmuted="" playsinline="" src="images/welcome-background.mp4"></video>
+    <video ng-show="$ctrl.step == 10;" class="videoLogo" autoplay="autoplay" loop="loop" muted="muted" defaultmuted="" playsinline="" data-src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4" src="https://s3.amazonaws.com/symbol/wp-content/uploads/2020/05/22103325/ENTERPRISE-HEADER.mp4"></video>
+    <img src="images/background-purple-small.png" class="imageLogo" ng-show="$ctrl.step == 15 || $ctrl.step == 16 || $ctrl.step == 2 || $ctrl.step == 3">
+    <img src="images/background-white.png" class="imageLogo" ng-show="$ctrl.step == 17">
+
+
+    <div class="container">
+        <!-- LOADING SCREEN -->
+        <div class="row welcome-page" ng-show="$ctrl.step == 0 && $ctrl.statusLoading">
+            <div class="col-md-12">
+                <h1 class="text-white">{{'OPTIN_LOADING' | translate }}</h1>
+            </div>
+        </div>
+        <!-- STEP 0: WELCOME -->
+        <!-- Welcome title -->
+        <div class="row welcome-page" ng-show="$ctrl.step == 0 && !$ctrl.statusLoading">
+            <div class="col-md-12">
+                <h1 class="text-white">{{ 'OPTIN_WELCOME_TITLE' | translate }}</h1>
+            </div>
+        </div>
+        <div class="col-md-10 welcome-page" style="top: 48%; margin-left: -15px;" ng-show="$ctrl.step == 0 && !$ctrl.statusLoading">
+            <!-- Welcome text -->
+            <div class="form-group" style="margin-bottom: 25px;">
+                <h4 class="text-white">{{ 'POST_OPTIN_INFO_1' | translate }}</h4>
+                <h4 class="text-white">{{ 'POST_OPTIN_INFO_2' | translate }} <br> {{ 'POST_OPTIN_INFO_3' | translate }}</h4>
+                <h4 style="margin-top: 15px;"><a href="https://nemplatform.com/symbol-migration" target="_blank" class="symbol-link"><strong>{{ 'OPTIN_LINK_INFO' | translate }}<span style="text-decoration: underline">{{('HERE' | translate) }}</span></strong></a></h4>
+            </div>
+            <!-- Ready button -->
+            <button class="btn symbol-button" ng-disabled="$ctrl.statusLoading" ng-click="$ctrl.step = 15;">{{ 'SIGNUP_CREATE_READY_BTN' | translate }}</button>
+        </div>
+
+        <!-- STEP 1: SELECT ACCOUNT -->
+        <div class="row container-div" ng-show="$ctrl.step == 15">
+            <div class="col-md-12">
+                <img src="images/account.png">
+                <h1>{{'SELECT_ACCOUNT_POST_OPTIN' | translate}}</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 15">
+            <!-- Wallet type titles -->
+            <div class="form-group" ng-show="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length > 0">
+                <p>{{'GENERAL_SELECT_ACCOUNT' | translate}}</p>
+                <simple-and-multisig-select account="$ctrl.formData.selectedAccount" update-ctrl="$ctrl.onMultisigSelectorChange()" class="optin-Selector" </simple-and-multisig-select>
+            </div>
+            <div class="form-group" ng-show="$ctrl._DataStore.account.metaData.meta.cosignatoryOf.length == 0">
+                <p>{{'YOUR_NIS_ACCOUNT' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl._DataStore.account.metaData.account.address}}</label>
+            </div>
+
+            <div class="form-group" ng-show="$ctrl.statusLoading">
+                <p>{{'LOADING' | translate}}...</p>
+            </div>
+
+            <div class="form-group" ng-show="!$ctrl.statusLoading">
+                <p ng-show="$ctrl.optinAmount >= 2">{{'POST_OPTIN_STATUS' | translate}}</p>
+                <label class="optin-label-form" ng-show="$ctrl.optinAmount >= 2">
+                    <div ng-show="$ctrl.optinError && $ctrl.optinStatus !== 2 && $ctrl.optinStatus !== 4 && $ctrl.optinStatus !== 5 && $ctrl.optinStatus !== 6" class="status-color-error" style="margin-bottom: 20px;">
+                        {{ ('OPTIN_ERROR_TITLE_' + $ctrl.optinError.code) | translate}}
+                    </div>
+                    <div class="status-color-{{$ctrl.optinStatus}}">
+                        {{ ('OPTIN_STATUS_TITLE_' + $ctrl.optinStatus) | translate}}
+                    </div>
+                </label>
+
+                <p>{{'POST_OPTIN_DETAILS' | translate}}</p>
+                <div class="optin-label-form" ng-show="$ctrl.optinAmount >= 2">
+                    <label style="font-weight: lighter">{{ ('OPTIN_STATUS_TEXT_' + $ctrl.optinStatus) | translate}}</label>
+                    <div ng-show="$ctrl.isMultisig" style="margin: 14px 0; padding: 10px;">
+                        <table style="width:100%" class="optin-table">
+                            <tr>
+                                <th style="width: 80%;">{{ 'NIS1_ADDRESS' | translate }}</th>
+                                <th style="width: 20%;">{{ 'OPTIN_SIGNED' | translate }}</th>
+                            </tr>
+                            <tr ng-repeat="cosig in $ctrl.cosignatoriesMapping">
+                                <td style="width: 80%;">{{ cosig[0] }}</td>
+                                <td ng-show="!!cosig[1]" style="width: 80%;">
+                                    <i style="color: rgb(0, 179, 0);" class="fa fa-check"></i>
+                                </td>
+                                <td ng-show="!cosig[1]" style="width: 20%;">
+                                    <i style="color: rgb(179, 0, 0);" class="fa fa-times"></i>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="optin-label-form" ng-show="$ctrl.optinAmount < 2">
+                    <label style="font-weight: lighter">{{ 'OPTIN_NOT_AVAILABLE' | translate}}</label>
+                </div>
+            </div>
+            <div class="form-group" ng-show="!$ctrl.statusLoading && ($ctrl.optinStatus === 2 || $ctrl.optinStatus === 4 || $ctrl.optinStatus === 5 || $ctrl.optinStatus === 6) && $ctrl.optinAmount >= 2">
+                <p>{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                <label class="text-left optin-label-form">{{$ctrl.isMultisig ? $ctrl.multisigDestinationAddress : $ctrl.optinAddress}}</label>
+            </div>
+            <div class="form-group" ng-show="!$ctrl.statusLoading && $ctrl.optinAmount >= 2">
+                <p>{{($ctrl.optinStatus === 1 || $ctrl.optinStatus === 3 || $ctrl.optinStatus === 4 || $ctrl.optinStatus === 5 ? 'POST_OPTIN_AMOUNT' : 'POST_OPTIN_AMOUNT_CLAIMED') | translate}}</p>
+                <label class="text-left optin-label-form" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAmount}} XYM</label>
+            </div>
+            <div class="mt-4" ng-show="!$ctrl.statusLoading && $ctrl.optinStatus !== 2 && $ctrl.optinStatus !== 5 && $ctrl.optinStatus !== 6 && !($ctrl.optinStatus === 4 && $ctrl.hasCosignatorySigned) ">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 0 16px;">
+                    </div>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 16;" ng-show="$ctrl.optinAmount >= 2">{{'POST_OPTIN_START' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: UNLOCK ACCOUNT -->
+        <div class="row container-div" ng-show="$ctrl.step == 16">
+            <div class="col-md-12">
+                <img src="images/password.png">
+                <h1>{{'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate}}</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 16">
+            <!-- Wallet type titles -->
+            <div class="form-group" ng-show="$ctrl.isMultisig && $ctrl.optinStatus === 3">
+                <p>{{'POST_OPTIN_DEST_MSIG' | translate}}</p>
+                <input ng-show="$ctrl.optinStatus === 3" type="text"  placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" class="optin-label-form" ng-model="$ctrl.multisigDestinationPublicKey" ng-change="$ctrl.calculateMultisigDestinationAddress()"/>
+                <p style="color: red; font-size: 14px; margin-top: 10px;" ng-show="$ctrl.publicKeyError">{{'OPTIN_NIS1_PUBLIC_KEY' | translate}}</p>
+            </div>
+            <div class="form-group" ng-show="$ctrl.isMultisig && $ctrl.multisigDestinationAddress">
+                <p>{{'POST_OPTIN_DEST_MSIG_ADDRESS' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl.multisigDestinationAddress ? $ctrl.multisigDestinationAddress : ''}}</label>
+            </div>
+
+            <div class="form-group" ng-show="!$ctrl.isMultisig">
+                <p>{{'CATAPULTOPTIN_ACCOUNT_UNLOCK' | translate}}</p>
+                <input type="text" class="optin-label-form" placeholder="{{ 'OPTIN_PUBLICKEY_PLACEHOLDER' | translate }}" ng-model="$ctrl.optinPublicKey" ng-change="$ctrl.onPrivateKeyChange()"/>
+                <p style="color: red; font-size: 14px; margin-top: 10px;" ng-show="$ctrl.publicKeyError">{{'OPTIN_NIS1_PUBLIC_KEY' | translate}}</p>
+            </div>
+            <div class="form-group" ng-show="!$ctrl.isMultisig && $ctrl.optinAccount">
+                <p>{{'YOUR_SYMBOL_ADDRESS' | translate}}</p>
+                <label class="optin-label-form">{{$ctrl.optinAccount ? $ctrl.optinAccount.address.pretty() : ''}}</label>
+            </div>
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 15; $ctrl.optinAccount = null; $ctrl.optinPublicKey = ''; $ctrl.publicKeyError = false; $ctrl.multisigDestinationPublicKey = '';">{{'GENERAL_BACK' | translate}}</button>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-show="(!$ctrl.isMultisig && !!$ctrl.optinAccount) || ($ctrl.isMultisig && !!$ctrl.multisigDestinationAddress)" ng-click="$ctrl.step = 17;">{{'GENERAL_NEXT' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: REVIEW INFO -->
+        <div class="row container-div" ng-show="$ctrl.step == 17">
+            <div class="col-md-12">
+                <img src="images/terms.png">
+                <h1 style="color: #44004E">{{'CATAPULTOPTIN_REVIEW_NORMAL_RESULT' | translate}}</h1>
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2" ng-show="$ctrl.step == 17 && $ctrl.isConfirmAddressModalShown == false">
+            <!-- Wallet type titles -->
+            <div ng-show="!$ctrl.isMultisig">
+                <div class="form-group">
+                    <p class="purple-dark">{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                    <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
+                </div>
+            </div>
+            <div ng-show="$ctrl.isMultisig">
+                <div class="form-group">
+                    <p class="purple-dark">{{'POST_OPTIN_DEST_MULTISIG_ADDRESS' | translate}}</p>
+                    <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.multisigDestinationAddress}}</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="purple-dark">{{'GENERAL_AMOUNT' | translate}}</p>
+                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAmount}} XYM</label>
+            </div>
+
+            <!-- TERMS AND CONDITIONS-->
+            <input id="accept_and_read_terms" type="checkbox" ng-model="$ctrl.formData.acceptTerms">
+            <label class="mt-2" for="accept_and_read_terms" class="purple-dark"><b>{{ 'OPTIN_TAC_READ_ACCEPT' | translate }}<a href="https://symbolplatform.com/terms-conditions/" class="symbol-link" style="color: rgb(205,0,205);" target="_blank">{{ 'OPTIN_TAC_TEXT' | translate }}</a></b>{{ 'OPTIN_TAC_READ_ACCEPT_POST' | translate }}</label>
+            <!-- PRIVACY POLICY-->
+            <br>
+            <input id="accept_and_read_privacy" type="checkbox" ng-model="$ctrl.formData.acceptPrivacy">
+            <label class="mt-2" for="accept_and_read_privacy" class="purple-dark"><b>{{ 'OPTIN_TAC_READ_ACCEPT' | translate }}<a href="https://symbolplatform.com/terms-conditions/" class="symbol-link" style="color: rgb(205,0,205);" target="_blank">{{ 'OPTIN_PP_TEXT' | translate }}</a></b>{{ 'OPTIN_TAC_READ_ACCEPT_POST' | translate }}</label>
+
+            <div class="mt-4">
+                <p class="purple-dark">{{ 'GENERAL_FEE' | translate }}</p>
+                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{ $ctrl.isMultisig ? '0.35': '0.2' }} XEM</label>
+            </div>
+            <div class="mt-4">
+                <!-- Password sign -->
+                <fieldset ng-show="$ctrl._Wallet.algo !== 'trezor' && $ctrl._Wallet.algo !== 'ledger'">
+                    <p class="purple-dark">{{'OPTIN_ENTER_PASSWORD'| translate }}</p>
+                    <input class="form-control optin-input purple-dark" type="password" ng-model="$ctrl.common.password"/>
+                </fieldset>
+            </div>
+            <div class="mt-4">
+                <div class="row">
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left;" ng-click="$ctrl.step = 16;">{{'GENERAL_BACK' | translate}}</button>
+                    </div>
+                    <div class="col-md-6" style="padding: 0 16px;">
+                        <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
+background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100%);"
+                                ng-click="$ctrl.showConfirmAddressModal()"
+                                ng-disabled="!$ctrl.formData.acceptPrivacy || !$ctrl.formData.acceptTerms"
+                        >{{ 'GENERAL_TAB_SEND' | translate }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONFIRM ADDRESS MODAL -->
+        <div ng-show="$ctrl.isConfirmAddressModalShown == true" class="optin-confirm-bg container">
+            <div class="optin-confirm-modal col-sm-12 col-md-9">
+
+                <div class="row optin-confirm-modal-inner">
+                    <div class="optin-confirm-modal-image-container col-xs-1 col-sm-4">
+                        <img src="images/address-verify.png" class="optin-confirm-modal-image">
+                    </div>
+
+                    <div class="optin-confirm-modal-body pb-2 pt-2 col-xs-11 col-sm-8">
+                        <div>
+                            <h4 style="color: #44004E; font-weight: bold; font-size: 24px;">{{'POST_OPTIN_CONFIRM_MODAL_TITLE' | translate}}</h4>
+                        </div>
+                        <div ng-show="$ctrl.isMultisig == false" class="mt-2">
+                            {{'POST_OPTIN_CONFIRM_MODAL_TEXT' | translate}}
+                        </div>
+                        <div ng-show="$ctrl.isMultisig == true" class="mt-2">
+                            {{'POST_OPTIN_CONFIRM_MODAL_TEXT_MULTISIG' | translate}}
+                        </div>
+                        <div class="mt-4">
+                            <div ng-show="!$ctrl.isMultisig" class="form-group">
+                                <p class="purple-dark">{{'POST_OPTIN_DEST_ADDRESS' | translate}}</p>
+                                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.optinAccount.address.pretty()}}</label>
+                            </div>
+                            <div ng-show="$ctrl.isMultisig" class="form-group">
+                                <p class="purple-dark">{{'POST_OPTIN_DEST_MULTISIG_ADDRESS' | translate}}</p>
+                                <label class="text-left optin-label-form-white" style="width: 100%; text-align: left; padding-left: 30px;">{{$ctrl.multisigDestinationAddress}}</label>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <input id="address_confirm" type="checkbox" ng-model="$ctrl.formData.addressConfirmed">
+                            <label class="mt-2" for="address_confirm" class="purple-dark">
+                                <b ng-show="$ctrl.isMultisig == false">{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX' | translate }}</b>
+                                <b ng-show="$ctrl.isMultisig == true">{{ 'POST_OPTIN_CONFIRM_MODAL_CHECKBOX_MULTISIG' | translate }}</b>
+                            </label>
+                        </div>
+                        <div class="mt-2">
+                            <div class="row">
+                                <div class="col-md-6" style="padding: 0 16px;">
+                                    <button class="btn symbol-button symbol-button__block" style="float:left;"
+                                        ng-click="$ctrl.hideConfirmAddressModal()">{{'GENERAL_BACK' |
+                                        translate}}</button>
+                                </div>
+                                <div class="col-md-6" style="padding: 0 16px;">
+                                    <button class="btn symbol-button symbol-button__block" style="float:left; background: rgb(255,0,255);
+        background: linear-gradient(42deg, rgba(255,0,255,1) 0%, rgba(255,255,255,1) 100%);" ng-click="$ctrl.send()"
+                                        ng-disabled="!$ctrl.formData.addressConfirmed">{{
+                                        'GENERAL_TAB_SEND' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
