@@ -1,0 +1,7 @@
+nodes:
+  - host: test1.symbol.com
+    name: test1
+  - host: test2.symbol.com
+    name: test2
+  - host: test3.symbol.com
+    name: test3
