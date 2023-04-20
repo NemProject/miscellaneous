@@ -2,8 +2,8 @@ import argparse
 import secrets
 
 import yaml
-from symbolchain.core.CryptoTypes import Hash256, PrivateKey
-from symbolchain.core.facade.NemFacade import NemFacade
+from symbolchain.CryptoTypes import Hash256, PrivateKey
+from symbolchain.facade.NemFacade import NemFacade
 from zenlog import log
 
 MICROXEM_PER_XEM = 1000000
