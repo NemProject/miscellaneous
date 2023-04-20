@@ -1,0 +1,7 @@
+type: object
+description: The block chain score is a measure how good the block chain is. The higher the score, the better the block chain is.
+required:
+    - score
+properties:
+    score:
+        $ref: './ChainScore.yml'

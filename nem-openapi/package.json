@@ -1,0 +1,27 @@
+{
+  "name": "nem-openapi",
+  "version": "0.0.1",
+  "description": "OpenAPI Specification of NEM Rest interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "swagger-cli validate _build/openapi3.yml",
+    "build": "swagger-cli bundle ./spec/openapi.yml --outfile _build/openapi3.yml --type yaml",
+    "version": "echo $npm_package_version",
+    "version:prepare": "mkdir _build/v$npm_package_version && cp -r _build/template/. _build/v$npm_package_version",
+    "version:pack": "cp _build/openapi3.yml _build/v$npm_package_version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NemProject/nem-openapi.git"
+  },
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/NemProject/nem-openapi/issues"
+  },
+  "homepage": "https://github.com/NemProject/nem-openapi#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "swagger-cli": "^4.0.4",
+    "yaml-cli": "^1.1.8"
+  }
+}

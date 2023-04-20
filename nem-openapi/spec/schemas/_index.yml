@@ -1,0 +1,19 @@
+# Generic types
+AllNodesDTO:
+    '$ref': './AllNodesDTO.yml'
+BlockHeightDTO:
+    '$ref': './BlockHeightDTO.yml'
+ChainScore:
+    '$ref': './ChainScore.yml'
+ChainScoreDTO:
+    '$ref': './ChainScoreDTO.yml'
+Height:
+    '$ref': './Height.yml'
+NetworkId:
+    '$ref': './NetworkId.yml'
+NodeDTO:
+    '$ref': './NodeDTO.yml'
+NodeListDTO:
+    '$ref': './NodeListDTO.yml'
+PublicKey:
+    '$ref': './PublicKey.yml'

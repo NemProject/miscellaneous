@@ -1,0 +1,67 @@
+type: object
+description: >
+    Nodes are the entities that perform communication in the network like sending and receiving data.
+    A node has an identity which is tied to an account through which the node can identify itself to the network.
+    The communication is done through the endpoint of the node. Additionally a node provides meta data information
+required:
+    - metaData
+    - endpoint
+    - identity
+properties:
+    metaData:
+        type: object
+        required:
+            - features
+            - networkId
+            - version
+            - platform
+        properties:
+            features:
+                type: integer
+                description: The number of features the nodes has.
+                example: 3
+            application:
+                type: string
+                description: The application name.
+                example: NIS
+            networkId:
+                $ref: './NetworkId.yml'
+            version:
+                type: string
+                description: The version of the node.
+                example: 0.6.97-BETA
+            platform:
+                type: string
+                description: The platform where the node is running.
+                example: Oracle Corporation (1.8.0_221) on Linux
+    endpoint:
+        type: object
+        required:
+            - protocol
+            - port
+            - host
+        properties:
+            protocol:
+                type: string
+                description: The protocol to use (only HTTP supported as for now).
+                example: http
+            port:
+                type: integer
+                description: The port to use.
+                example: 7890
+            host:
+                type: string
+                description: The IP address or hostname to use.
+                example: 54.170.97.221
+    identity:
+        type: object
+        required:
+            - name
+            - public-key
+        properties:
+            name:
+                type: string
+                description: The name of the node.
+                example: SuperAlice
+            'public-key':
+                $ref: './PublicKey.yml'

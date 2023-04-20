@@ -1,0 +1,4 @@
+type: string
+description: The score is an integer greater or equal to zero. It is submitted in hexadecimal format.
+example: 12ba672a4969562b74
+pattern: '^([0-9A-Fa-f])+$'
