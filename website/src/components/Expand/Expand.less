@@ -1,0 +1,48 @@
+.expand {
+    margin-bottom: 10px;
+}
+
+.expand-link-triangle-group {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    color: @color-black-lighter;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    line-height: 34px;
+    text-align: center;
+}
+
+.expand-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 4px;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+}
+
+.expand-link-active {
+    border-bottom: 4px solid @color-yellow;
+}
+
+.expand-container {
+    width: 100%;
+    max-height: 4000px;
+    margin: 0 0 30px;
+    overflow: hidden;
+    animation-name: expand-shrink;
+    animation-duration: 1s;
+}
+
+@keyframes expand-shrink {
+    from {
+        max-height: 1px;
+    }
+
+    to {
+        max-height: 1920px;
+    }
+}

@@ -1,0 +1,124 @@
+// Global styles
+// Desktop Large
+
+body {
+    margin: 0;
+    padding: 0;
+    color: @color-black-lighter;
+    font: var(--font-4k-nem-body);
+}
+
+#root {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+a {
+    color: unset;
+
+    &:hover {
+        color: unset;
+    }
+}
+
+p {
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: @margin-base;
+    }
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: @margin-base-sm;
+    font: var(--font-4k-nem-title);
+    letter-spacing: var(--typography-4k-nem-title-letter-spacing);
+}
+
+.text-crop {
+    position: relative;
+    margin-bottom: @margin-base;
+    overflow: visible;
+}
+
+.text-crop-sm {
+    position: relative;
+    margin-bottom: @margin-base-sm;
+    overflow: visible;
+}
+
+.static {
+    position: static !important;
+}
+
+@media @screen-desktop, @screen-tablet {
+    body {
+        margin: 0;
+        padding: 0;
+        color: @color-black-lighter;
+        font: var(--font-nem-body);
+    }
+
+    p {
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: @margin-base;
+        }
+    }
+
+    h2 {
+        margin: 0;
+        margin-bottom: @margin-base-sm;
+        font: var(--font-nem-title);
+        letter-spacing: var(--typography-nem-title-letter-spacing);
+    }
+
+    .text-crop {
+        position: relative;
+        margin-bottom: @margin-base;
+        overflow: visible;
+    }
+
+    .text-crop-sm {
+        position: relative;
+        margin-bottom: @margin-base-sm;
+        overflow: visible;
+    }
+}
+
+// Mobile
+
+@media @screen-mobile {
+    body {
+        font: var(--font-mobile-body);
+    }
+
+    p {
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: @margin-base;
+        }
+    }
+
+    h2 {
+        margin-bottom: @margin-base-sm;
+        font: var(--font-mobil-title);
+        letter-spacing: var(--typography-mobil-title-letter-spacing);
+    }
+}
+
+// Animations & Transitions
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

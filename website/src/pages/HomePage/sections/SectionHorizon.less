@@ -1,0 +1,108 @@
+.section-4 {
+    background-color: #eef5f9;
+    background-image: url("../../../assets/images/bg-4.png");
+    background-size: cover;
+    background-blend-mode: color-burn;
+    box-shadow: inset 0 4.22px 46.49px rgba(23, 21, 109, 25%);
+
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../../assets/images/bg-mask-tree-2.png");
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+        content: "";
+    }
+}
+
+@media @screen-4k {
+    .section-4 {
+        .content-container {
+            padding-bottom: 94px;
+        }
+
+        .content {
+            max-width: 896px;
+            margin: auto 0 auto 502px;
+        }
+
+        .hero-image-container {
+            margin: 383px 0 293px;
+        }
+
+        .hero-image {
+            width: 1269px;
+        }
+    }
+}
+
+@media @screen-desktop {
+    .section-4 {
+        .content-container {
+            padding-bottom: 94px;
+        }
+
+        .content {
+            max-width: 535px;
+            margin: 116px 0 0;
+        }
+
+        .hero-image-container {
+            margin: 114px 83px 0 0;
+        }
+
+        .hero-image {
+            width: 626.39px;
+        }
+    }
+}
+
+@media @screen-tablet {
+    .section-4 {
+        .content-container {
+            padding-bottom: 54px;
+        }
+
+        .content {
+            max-width: 100%;
+            margin: 0 0 50px;
+        }
+
+        .hero-image-container {
+            margin: 110px 0 94px;
+        }
+
+        .hero-image {
+            width: 490px;
+        }
+    }
+}
+
+@media @screen-mobile {
+    .section-4 {
+        &::before {
+            display: none;
+        }
+
+        .content-container {
+            padding-bottom: 23px;
+        }
+
+        .content {
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .hero-image-container {
+            margin: 64px 0 45px;
+        }
+
+        .hero-image {
+            width: 100%;
+        }
+    }
+}

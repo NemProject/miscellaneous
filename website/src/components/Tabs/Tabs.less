@@ -1,0 +1,36 @@
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.tabs-item {
+    padding: 10px 0 6px;
+    color: @color-gray;
+    font: var(--font-4k-nem-menu);
+    letter-spacing: var(--typography-4k-nem-menu-letter-spacing);
+    text-align: center;
+    text-transform: var(--typography-nem-menu-text-case);
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+.tabs-item-active {
+    color: @color-black-lighter;
+    border-bottom: 4px solid @color-yellow;
+}
+
+@media @screen-desktop, @screen-tablet {
+    .tabs-item {
+        font: var(--font-nem-menu);
+        letter-spacing: var(--typography-nem-menu-letter-spacing);
+    }
+}

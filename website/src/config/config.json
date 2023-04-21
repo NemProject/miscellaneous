@@ -1,0 +1,8 @@
+{
+    "URL_ANNOUNCEMETS": "http://localhost:3000/announcements.json",
+    "URL_MARKET_DATA": "https://api.coingecko.com/api/v3/coins/nem/tickers",
+    "URL_GITHUB": "https://github.com/symbol",
+    "URL_DISCORD": "https://discord.gg/xymcity",
+    "URL_DOCS": "https://docs.symbolplatform.com/",
+    "URL_UNKNOWN1": ""
+}

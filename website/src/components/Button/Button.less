@@ -1,0 +1,37 @@
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 408px;
+    padding: 16.82px 28px 14.18px;
+    color: @color-green;
+    font: var(--font-4k-nem-button-text);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: var(--typography-nem-button-text-text-case);
+    background: transparent;
+    border: 1px solid @color-green;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    user-select: none;
+
+    &:hover {
+        color: #fff;
+        background-color: @color-green;
+        opacity: 0.9;
+    }
+
+    &:active {
+        border: 1px solid #fff;
+    }
+}
+
+@media @screen-desktop, @screen-tablet, @screen-mobile {
+    .button {
+        min-width: 182px;
+        padding: 11px 28px 10px;
+        font: var(--font-nem-button-text);
+    }
+}
