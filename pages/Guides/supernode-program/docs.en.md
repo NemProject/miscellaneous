@@ -39,7 +39,7 @@ The responsiveness test checks how quickly a node can respond to a chain height 
 
 - **Step 3**: Activate Delegated Harvesting on Your Main Account.
 
-  The tutorial for NEM NanoWallet delegated harvesting can be found [here](https://nemproject.github.io/nem-docs/pages/Guides/nanowallet/delegated-harvesting/docs.en.html#activation).
+  The tutorial for NEM NanoWallet delegated harvesting can be found [here](https://docs.nem.io/pages/Guides/nanowallet/delegated-harvesting/docs.en.html#activation).
 
   Six (6) hours must pass before you can start harvesting, but enrollment in the Supernode Program can be initiated once you have the delegated private key (available immediately).
   
@@ -53,7 +53,7 @@ The responsiveness test checks how quickly a node can respond to a chain height 
 
 - **Step 4**: Setup NEM Node.
 
-  If you don't have a NEM node, you need to set up it first. The tutorial can be found [here](https://nemproject.github.io/nem-docs/pages/Guides/node-operation/docs.en.html).
+  If you don't have a NEM node, you need to set up it first. The tutorial can be found [here](https://docs.nem.io/pages/Guides/node-operation/docs.en.html).
 
 - **Step 5**: Shutdown the NIS Client, if Running.
 

@@ -71,7 +71,7 @@ You can later log in to the Dashboard of your NEM NanoWallet and get a summary o
 
 Above we showed how to harvest on a remote node, and it is a normal case for many that they run delegated harvesting on a remote node, but it is also possible to run delegated harvesting on a local NEM node. The advantage of this is that you will always know that your account is being harvested on and you won't have to rely on others.
 
-To set up NEM node check guide: https://nemproject.github.io/nem-docs/pages/Guides/node-operation/docs.en.html
+To set up NEM node check guide: https://docs.nem.io/pages/Guides/node-operation/docs.en.html
 
 When NEM node is synced click on the "Node" option in the top bar of your NEM NanoWallet and enter "localhost" in the "Custom node" field:
 

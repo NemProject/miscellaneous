@@ -1,6 +1,6 @@
 # Documentation for the NEM Project
 
-Published at [nemproject.github.io/nem-docs](https://nemproject.github.io/nem-docs) via GitHub Pages.
+Published at [nemproject.github.io/miscellaneous](https://nemproject.github.io/miscellaneous) via GitHub Pages.
 
 This is a refresh of the old [docs.nem.io](http://docs.nem.io) site.
 

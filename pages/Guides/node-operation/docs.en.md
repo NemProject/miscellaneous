@@ -34,13 +34,13 @@ Edit the ``nis/config.properties`` file:
 
 - Set the ``nem.folder`` property to point to where you installed NIS1 Client (On Windows, backslashes ``\`` need to be doubled). For example ``D:\\NEM\\nis1-home`` or ``~/nem``.
 - Set ``nis.bootName`` to the name you want for your server. This is merely informational.
-- Set ``nis.bootKey`` to the **private key** of the account managing this node. If you don't have such account, use the [NanoWallet](/nem-docs/pages/Guides/nanowallet/docs.en.html) to create one.
+- Set ``nis.bootKey`` to the **private key** of the account managing this node. If you don't have such account, use the [NanoWallet](/pages/Guides/nanowallet/docs.en.html) to create one.
 
-  - When performing [delegated harvesting](/nem-docs/pages/Guides/nanowallet/docs.en.html) this is the private key of the proxy remote account. Harvesting rewards go to the linked account (this is the **recommended** setup).
+  - When performing [delegated harvesting](/pages/Guides/nanowallet/docs.en.html) this is the private key of the proxy remote account. Harvesting rewards go to the linked account (this is the **recommended** setup).
 
   - When performing local harvesting this is directly the private key of your account (This setup is **not recommended**).
 
-    Retrieve this private key from the NanoWallet's Account tab ([as explained here](/nem-docs/pages/Guides/nanowallet/backup-wallet/docs.en.html)).
+    Retrieve this private key from the NanoWallet's Account tab ([as explained here](/pages/Guides/nanowallet/backup-wallet/docs.en.html)).
 
     {% include warning.html content="**Needless to say that this key must be kept secret at all times**." %}
 
