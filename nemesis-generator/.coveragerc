@@ -1,0 +1,2 @@
+[run]
+source = generator,configuration_generator,node_configuration_generator

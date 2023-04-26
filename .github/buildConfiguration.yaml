@@ -1,0 +1,12 @@
+builds:
+  - name: NEM Explorer Frontend
+    path: explorer/frontend
+
+  - name: NEM Nano Wallet
+    path: nanowallet
+
+  - name: NEM Open API
+    path: nem-openapi
+
+  - name: NEM Nemesis Generator
+    path: nemesis-generator

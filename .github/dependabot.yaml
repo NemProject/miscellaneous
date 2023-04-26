@@ -1,0 +1,66 @@
+version: 2
+updates:
+
+  - package-ecosystem: npm
+    directory: /explorer/frontend
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [explorer]
+    versioning-strategy: increase
+    commit-message:
+      prefix: '[dependency]'
+
+  - package-ecosystem: npm
+    directory: /nanowallet
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [nanowallet]
+    versioning-strategy: increase
+    commit-message:
+      prefix: '[dependency]'
+
+  - package-ecosystem: docker
+    directory: /nem-docker
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [nem-docker]
+    commit-message:
+      prefix: '[dependency]'
+
+  - package-ecosystem: npm
+    directory: /nem-openapi
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [nem-openapi]
+    versioning-strategy: increase
+    commit-message:
+      prefix: '[dependency]'
+
+  - package-ecosystem: pip
+    directory: /nemesis-generator
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [nemesis-generator]
+    commit-message:
+      prefix: '[dependency]'
+
+  - package-ecosystem: npm
+    directory: /website
+    schedule:
+      interval: weekly
+      day: saturday
+    target-branch: dev
+    labels: [website]
+    versioning-strategy: increase
+    commit-message:
+      prefix: '[dependency]'

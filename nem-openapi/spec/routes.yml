@@ -12,7 +12,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/NodeDTO.yml'
+                            $ref: ./schemas/NodeDTO.yml
 
 '/node/peer-list/reachable':
     get:
@@ -27,7 +27,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/NodeListDTO.yml'
+                            $ref: ./schemas/NodeListDTO.yml
 '/node/peer-list/active':
     get:
         tags:
@@ -41,7 +41,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/NodeListDTO.yml'
+                            $ref: ./schemas/NodeListDTO.yml
 '/node/peer-list/all':
     get:
         tags:
@@ -55,7 +55,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/AllNodesDTO.yml'
+                            $ref: ./schemas/AllNodesDTO.yml
 
 # Chain routes
 '/chain/height':
@@ -71,7 +71,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/BlockHeightDTO.yml'
+                            $ref: ./schemas/BlockHeightDTO.yml
 '/chain/score':
     get:
         tags:
@@ -85,4 +85,4 @@
                 content:
                     application/json:
                         schema:
-                            $ref: './schemas/ChainScoreDTO.yml'
+                            $ref: ./schemas/ChainScoreDTO.yml

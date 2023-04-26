@@ -72,6 +72,7 @@
   },
   "scripts": {
     "test": "gulp tests browserifyTests",
+    "test:jenkins": "gulp tests browserifyTests",
     "devApp": "nw build/",
     "compile": "gulp",
     "start": "npm run node-hid:prebuild-install && electron .",

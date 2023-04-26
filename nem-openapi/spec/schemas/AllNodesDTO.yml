@@ -10,19 +10,19 @@ properties:
         type: array
         description: Denotes the beginning of the array of active nodes.
         items:
-            $ref: './NodeDTO.yml'
+            $ref: ./NodeDTO.yml
     inactive:
         type: array
         description: Denotes the beginning of the array of inactive nodes.
         items:
-            $ref: './NodeDTO.yml'
+            $ref: ./NodeDTO.yml
     failure:
         type: array
         description: Denotes the beginning of the array of failure nodes.
         items:
-            $ref: './NodeDTO.yml'
+            $ref: ./NodeDTO.yml
     busy:
         type: array
         description: Denotes the beginning of the array of busy nodes.
         items:
-            $ref: './NodeDTO.yml'
+            $ref: ./NodeDTO.yml

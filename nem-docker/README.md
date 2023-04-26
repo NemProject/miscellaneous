@@ -1,7 +1,7 @@
 
 # NEM Docker
 
-This Docker file and the helper scripts are the fastest and easiest way deploy a [NEM](https://nemproject.github.io/nem-docs/pages/) node.
+This Docker file and the helper scripts are the fastest and easiest way deploy a [NEM](https://docs.nem.io) node.
 
 ## Prerequisites
 
@@ -98,12 +98,15 @@ Services running in the container are controlled with ``supervisord``. You can e
 
 ## Enabling the Servant process
 
-[NEM Supernodes](https://nemproject.github.io/nem-docs/pages/Guides/supernode-program/docs.en.html) require a servant process to be running to monitor and report the node's health.
+[NEM Supernodes](https://docs.nem.io/pages/Guides/supernode-program/docs.en.html) require a servant process to be running to monitor and 
+report 
+the node's health.
 
 To enable the servant in the container:
 
 - Stop the container if you had it running.
-- **Copy** `custom-configs/servant.config.properties.sample` to `custom-configs/servant.config.properties` and [edit it to your liking](https://nemproject.github.io/nem-docs/pages/Guides/supernode-program/docs.en.html).
+- **Copy** `custom-configs/servant.config.properties.sample` to `custom-configs/servant.config.properties` and [edit it to your liking]
+  (https://docs.nem.io/pages/Guides/supernode-program/docs.en.html).
 - Start the container and wait for NIS to synchronize:
 
   ```bash

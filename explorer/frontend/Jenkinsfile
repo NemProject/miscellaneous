@@ -1,0 +1,6 @@
+defaultCiPipeline {
+	platform = ['ubuntu']
+	ciBuildDockerfile = 'javascript.Dockerfile'
+
+	packageId = 'nem-explorer-frontend'
+}
