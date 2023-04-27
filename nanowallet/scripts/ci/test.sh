@@ -4,7 +4,7 @@ set -ex
 
 if [ "$1" = "code-coverage" ];
 then
-    npm run test:jenkins
+	npm run test:jenkins
 else
-    npm run test
+	npm run test
 fi

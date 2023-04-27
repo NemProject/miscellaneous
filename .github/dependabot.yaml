@@ -64,3 +64,12 @@ updates:
     versioning-strategy: increase
     commit-message:
       prefix: '[dependency]'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+    target-branch: dev
+    commit-message:
+      prefix: '[dependency]'
