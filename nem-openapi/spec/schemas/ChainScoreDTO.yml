@@ -4,4 +4,4 @@ required:
     - score
 properties:
     score:
-        $ref: './ChainScore.yml'
+        $ref: ./ChainScore.yml

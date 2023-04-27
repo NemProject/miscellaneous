@@ -1,0 +1,6 @@
+defaultCiPipeline {
+	platform = ['ubuntu']
+	ciBuildDockerfile = 'node10.Dockerfile'
+
+	packageId = 'nem-nanowallet'
+}

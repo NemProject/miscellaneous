@@ -1,24 +1,24 @@
 openapi: 3.0.2
 info:
-    $ref: './info.yml'
+    $ref: ./info.yml
 tags:
-    $ref: './tags.yml'
+    $ref: ./tags.yml
 paths:
-    $ref: './routes.yml'
+    $ref: ./routes.yml
 externalDocs:
-    description: 'NEM Developers'
-    url: 'https://nemproject.github.io/'
+    description: NEM Developers
+    url: https://nemproject.github.io/
 servers:
-    - url: 'http://localhost:7890'
-      description: 'Local development'
-    - url: 'http://54.170.97.221:7890'
-      description: 'Mainnet NGL Node - SuperAlice'
+    - url: http://localhost:7890
+      description: Local development
+    - url: http://54.170.97.221:7890
+      description: Mainnet NGL Node - SuperAlice
 components:
     parameters:
-        $ref: './parameters/_index.yml'
+        $ref: ./parameters/_index.yml
     requestBodies:
-        $ref: './request_bodies/_index.yml'
+        $ref: ./request_bodies/_index.yml
     schemas:
-        $ref: './schemas/_index.yml'
+        $ref: ./schemas/_index.yml
     responses:
-        $ref: './responses/_index.yml'
+        $ref: ./responses/_index.yml
