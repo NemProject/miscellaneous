@@ -57,7 +57,7 @@
     "ng-toast": "2.0.0",
     "ngstorage": "0.3.10",
     "npm-build-zip": "^1.0.2",
-    "nw": "^0.26.6",
+    "nw": "^0.75.0",
     "nw-builder": "^3.4.1",
     "rxjs": "5.5.12",
     "symbol-hd-wallets": "0.12.0",
