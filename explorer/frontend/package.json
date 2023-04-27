@@ -28,7 +28,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-tabs": "^4.3.0",
-    "react-toastify": "^9.0.5",
+    "react-toastify": "^9.1.2",
     "react-transition-group": "^4.4.2",
     "sass": "^1.49.0",
     "symbol-sdk": "^3.0.0",
