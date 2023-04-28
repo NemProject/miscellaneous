@@ -5,7 +5,6 @@ if [[ "$#" -lt 1 ]]; then
   exit 1
 fi
 
-
 ./supervisorctl.sh "$@"
 
 while ./supervisorctl.sh status "$2" | grep -E "STARTING > /dev/null"  ; do
@@ -17,7 +16,6 @@ if ./supervisorctl.sh status "$2" | grep -E "FATAL|BACKOFF"  ; then
   echo "Starting service failed, you might have some info in the logs below:"
   ./supervisorctl.sh tail "$2" | tail -n 10
 fi
-
 
 if [[ "$*" =~ ncc && "$1" == "start" ]]; then
   echo "You can access the NEM Community Client at http://localhost:8989/"

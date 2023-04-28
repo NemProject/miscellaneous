@@ -34,9 +34,7 @@ config_file="${PWD}/custom-configs/supervisord.conf"
 nem_folder="${PWD}/nem"
 if [[ ! -d "${nem_folder}" ]]; then
   echo "Creating nem folder"
-  mkdir "${nem_folder}"
-  mkdir "${nem_folder}/ncc"
-  mkdir "${nem_folder}/nis"
+  mkdir -p "${nem_folder}"/{ncc,nis}
   chown -R 1000 nem
 fi
 
