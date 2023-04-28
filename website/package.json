@@ -6,7 +6,7 @@
         "dev": "craco start",
         "build": "craco build",
         "test": "craco test",
-	"test:jenkins": "craco test",
+        "test:jenkins": "craco test",
         "eject": "craco eject",
         "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 && stylelint \"**/*.less\"",
         "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx,.json --fix && stylelint \"**/*.less\" --fix",
