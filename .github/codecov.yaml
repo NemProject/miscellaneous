@@ -1,0 +1,36 @@
+# Setting coverage targets per flag
+# Each project represent a package which has one flag
+coverage:
+  status:
+    project:
+      default:
+        target: 95%  # overall project / repo coverage
+
+      explorer-frontend:
+        target: auto
+        threshold: 1%
+        flags:
+          - explorer-frontend
+
+      nemesis-generator:
+        target: auto
+        threshold: 1%
+        flags:
+          - nemesis-generator
+
+# New root YAML section = `flags:`
+# This is where you would define every flag from your
+# uploader, and update when new Flags added
+# Each flag is used to represent each package in the
+# monorepo.  This allows code coverage per package.
+
+flags:
+  explorer-frontend:
+    paths:
+      - explorer/frontend
+    carryforward: true
+
+  nemesis-generator:
+    paths:
+      - nemesis-generator
+    carryforward: true
