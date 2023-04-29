@@ -11,7 +11,6 @@ fi
 docker build --rm=false -t mynem_image  .
 docker ps -a | grep mynem_container > /dev/null && docker rm mynem_container
 
-
 # determine which custom configs to mount
 config_mounts=""
 # nis.config-user.properties.sample  servant.config.properties.sample  supervisord.conf.sample
