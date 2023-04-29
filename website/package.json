@@ -46,7 +46,7 @@
         "react-scrollable-anchor": "^0.6.1",
         "react-spring": "^9.2.4",
         "react-vuex-store": "^1.0.0",
-        "redux": "^4.1.0",
+        "redux": "^4.2.1",
         "redux-thunk": "^2.3.0",
         "stylelint-config-rational-order": "^0.1.2",
         "three": "^0.129.0",
