@@ -12,6 +12,7 @@ docker build --rm=false -t mynem_image  .
 docker ps -a | grep mynem_container > /dev/null && docker rm mynem_container
 
 # determine which custom configs to mount
+set -x
 config_mounts=""
 # nis.config-user.properties.sample  servant.config.properties.sample  supervisord.conf.sample
 # - nis
@@ -39,6 +40,7 @@ fi
 
 command="docker run --restart always --name mynem_container -v ${PWD}/nem:/home/nem/nem ${config_mounts} -t -d  -p 7777:7777 -p 7778:7778 -p 7880:7880 -p 7890:7890 -p 8989:8989 mynem_image"
 ${command}
+set +x
 
 if [[ "$*" =~ nis || "$#" == 0 ]]; then
   echo "Starting NIS"
