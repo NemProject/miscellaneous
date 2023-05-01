@@ -36,14 +36,14 @@ def patch_network_identifier(payload, identifier):
 
 
 class Generator:
+	# pylint: disable=too-many-instance-attributes
 	def __init__(self, input_file):
 		with open(input_file, 'rt', encoding='utf8') as infile:
 			nemesis_config = yaml.load(infile, yaml.SafeLoader)
 
-			network = nemesis_config['network']
-			network_name = network if network in ['mainnet', 'testnet'] else network['name']
-			self.facade = NemFacade(network_name)
-			self.network_id = self.facade.network.identifier if network in ['mainnet', 'testnet'] else network['identifier']
+			self.facade = NemFacade(nemesis_config['network'])
+			self.network_identifier = nemesis_config['identifier']
+			self.epoch_time = nemesis_config['epoch_time']
 
 			self.signer_key_pair = self.facade.KeyPair(PrivateKey(nemesis_config['signer_private_key']))
 			self.generation_hash = Hash256(nemesis_config['generation_hash'])
@@ -54,7 +54,7 @@ class Generator:
 		self.signed_block_header = None
 
 	def print_header(self):
-		network = Network('', self.network_id)
+		network = Network('', self.network_identifier, self.epoch_time)
 		signer_address = network.public_key_to_address(self.signer_key_pair.public_key)
 		total_xem = sum(account['amount'] for account in self.accounts) / MICROXEM_PER_XEM
 
@@ -82,13 +82,13 @@ class Generator:
 		# manually serialize and sign, in order to patch network byte
 		non_verifiable_transaction = TransactionFactory.to_non_verifiable_transaction(transaction)
 		unsigned_transaction_payload = bytearray(non_verifiable_transaction.serialize())
-		patch_network_identifier(unsigned_transaction_payload, self.network_id)
+		patch_network_identifier(unsigned_transaction_payload, self.network_identifier)
 		signature = self.signer_key_pair.sign(bytes(unsigned_transaction_payload))
 		self.facade.transaction_factory.attach_signature(transaction, signature)
 
 		# patch network byte in final tx
 		transaction_payload = bytearray(transaction.serialize())
-		patch_network_identifier(transaction_payload, self.network_id)
+		patch_network_identifier(transaction_payload, self.network_identifier)
 		signed_payload = prepend_size(transaction_payload)
 		self.signed_transaction_payloads.append(signed_payload)
 
@@ -117,7 +117,7 @@ class Generator:
 	def _write_entity_header(self, writer):
 		writer.write_int(1, 1)  # version
 		writer.write_int(0, 2)  # padding
-		writer.write_int(self.network_id, 1)  # network
+		writer.write_int(self.network_identifier, 1)  # network
 		writer.write_int(0, 4)  # timestamp
 
 		writer.write_int(PublicKey.SIZE, 4)
