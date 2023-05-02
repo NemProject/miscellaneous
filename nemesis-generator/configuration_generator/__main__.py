@@ -1,6 +1,5 @@
 import argparse
 import secrets
-import time
 
 import yaml
 from symbolchain.CryptoTypes import Hash256, PrivateKey
@@ -13,10 +12,9 @@ MICROXEM_PER_XEM = 1000000
 
 class NemesisConfigurationGenerator:
 	def __init__(self, network_name, network_identifier):
-		self.epoch_time = int(time.time_ns() / 1000000000)
 		self.facade = NemFacade(network_name)
 		self.network_identifier = int(network_identifier) if network_identifier else self.facade.network.identifier
-		self.network = Network(network_name, self.network_identifier, self.epoch_time)
+		self.network = Network(network_name, self.network_identifier, self.facade.network.datetime_converter.epoch)
 		self.signer_private_key_pair = self.facade.KeyPair(PrivateKey.random())
 		self.generation_hash = Hash256(self._random_bytes(Hash256.SIZE))
 		self.account_key_pairs = []
@@ -44,7 +42,7 @@ class NemesisConfigurationGenerator:
 			'signer_private_key': str(self.signer_private_key_pair.private_key),
 			'generation_hash': str(self.generation_hash),
 			'network': network_name,
-			'epoch_time': self.epoch_time,
+			'epoch_time': int(self.facade.network.datetime_converter.epoch.timestamp()),
 			'accounts': accounts,
 			'identifier': self.network_identifier
 		}
