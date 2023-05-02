@@ -16,7 +16,8 @@ class NemesisConfigurationGenerator:
 			int(custom_network_identifier) if custom_network_identifier else Network.MAINNET.identifier if 'mainnet' == network_name else
 			Network.TESTNET.identifier
 		)
-		self.facade = NemFacade(Network(network_name, network_identifier, Network.MAINNET.datetime_converter.epoch))
+		epoch = Network.MAINNET.datetime_converter.epoch if 'mainnet' == network_name else Network.TESTNET.datetime_converter.epoch
+		self.facade = NemFacade(Network(network_name, network_identifier, epoch))
 		self.signer_private_key_pair = self.facade.KeyPair(PrivateKey.random())
 		self.generation_hash = Hash256(self._random_bytes(Hash256.SIZE))
 		self.account_key_pairs = []
