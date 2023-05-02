@@ -10,3 +10,9 @@ builds:
 
   - name: NEM Nemesis Generator
     path: nemesis-generator
+
+  - name: NEM Docker
+    path: nem-docker
+
+  - name: NEM Website
+    path: website

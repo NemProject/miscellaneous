@@ -3,9 +3,9 @@ set -eu
 if [[ ! -f custom-configs/nis.config-user.properties ]] ; then
   echo -e "\e[31mNo config file was found. We need to generate one, even if you run only NCC\e[39m"
   echo -e "\e[32mEnter the name you want to assign to your node:\e[39m"
-  read name
+  read -r name
   echo -e "\e[34mEnter the boot key of your node. If you do not know what this is, press enter and one will be generated for you\e[39m"
-  read key
+  read -r key
   if [[ $key == "" ]] ; then
     key=$(< /dev/urandom tr -dc a-f0-9 | head -c64)
   fi

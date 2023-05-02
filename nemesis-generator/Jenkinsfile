@@ -3,4 +3,7 @@ defaultCiPipeline {
 	ciBuildDockerfile = 'python.Dockerfile'
 
 	packageId = 'nemesis-generator'
+
+	codeCoverageTool = 'coverage'
+	minimumCodeCoverage = 95
 }

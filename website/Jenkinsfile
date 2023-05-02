@@ -2,8 +2,5 @@ defaultCiPipeline {
 	platform = ['ubuntu']
 	ciBuildDockerfile = 'javascript.Dockerfile'
 
-	packageId = 'nem-explorer-frontend'
-
-	codeCoverageTool = 'nyc'
-	minimumCodeCoverage = 95
+	packageId = 'nem-website'
 }
