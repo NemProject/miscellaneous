@@ -11,16 +11,18 @@ MICROXEM_PER_XEM = 1000000
 
 
 class NemesisConfigurationGenerator:
-	def __init__(self, network_name, network_identifier):
-		self.facade = NemFacade(network_name)
-		self.network_identifier = int(network_identifier) if network_identifier else self.facade.network.identifier
-		self.network = Network(network_name, self.network_identifier, self.facade.network.datetime_converter.epoch)
+	def __init__(self, network_name, custom_network_identifier):
+		network_identifier = (
+			int(custom_network_identifier) if custom_network_identifier else Network.MAINNET.identifier if 'mainnet' == network_name else
+			Network.TESTNET.identifier
+		)
+		self.facade = NemFacade(Network(network_name, network_identifier, Network.MAINNET.datetime_converter.epoch))
 		self.signer_private_key_pair = self.facade.KeyPair(PrivateKey.random())
 		self.generation_hash = Hash256(self._random_bytes(Hash256.SIZE))
 		self.account_key_pairs = []
 
 	def print_header(self, amount):
-		signer_address = self.network.public_key_to_address(self.signer_private_key_pair.public_key)
+		signer_address = self.facade.network.public_key_to_address(self.signer_private_key_pair.public_key)
 		total_xem = (len(self.account_key_pairs) * amount) / MICROXEM_PER_XEM
 
 		log.info('Generated Nemesis Configuration')
@@ -34,7 +36,7 @@ class NemesisConfigurationGenerator:
 
 	def save_nemesis_configuration(self, amount, network_name, output_filepath):
 		accounts = [{
-			'address': str(self.network.public_key_to_address(key_pair.public_key)),
+			'address': str(self.facade.network.public_key_to_address(key_pair.public_key)),
 			'amount': amount
 		} for key_pair in self.account_key_pairs]
 
@@ -44,7 +46,7 @@ class NemesisConfigurationGenerator:
 			'network': network_name,
 			'epoch_time': int(self.facade.network.datetime_converter.epoch.timestamp()),
 			'accounts': accounts,
-			'identifier': self.network_identifier
+			'identifier': self.facade.network.identifier
 		}
 
 		self._save_configuration_file(output_filepath, configuration)
@@ -53,7 +55,7 @@ class NemesisConfigurationGenerator:
 		account_descriptors = [{
 			'privatekey': str(key_pair.private_key),
 			'publickey': str(key_pair.public_key),
-			'address': str(self.network.public_key_to_address(key_pair.public_key))
+			'address': str(self.facade.network.public_key_to_address(key_pair.public_key))
 		} for key_pair in self.account_key_pairs]
 
 		configuration = {
@@ -62,7 +64,7 @@ class NemesisConfigurationGenerator:
 			'nemesis': {
 				'privatekey': str(self.signer_private_key_pair.private_key),
 				'publickey': str(self.signer_private_key_pair.public_key),
-				'address': str(self.network.public_key_to_address(self.signer_private_key_pair.public_key))
+				'address': str(self.facade.network.public_key_to_address(self.signer_private_key_pair.public_key))
 			}
 		}
 
