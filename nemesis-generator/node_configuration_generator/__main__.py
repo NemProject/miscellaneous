@@ -10,8 +10,6 @@ MICROXEM_PER_XEM = 1000000
 
 
 def _save_user_configuration(output_filepath, prepare_replacements):
-	(version, address_start_char) = (104, 'N') if prepare_replacements['network'] == 'mainnet' else (-104, 'T')
-
 	configuration = f'''
 nis.bootKey = {prepare_replacements['boot_key']}
 nis.bootName = {prepare_replacements['boot_name']}
@@ -20,12 +18,22 @@ nem.host = {prepare_replacements['host']}
 nis.ipDetectionMode = Disabled
 
 nem.network = {prepare_replacements['network_friendly_name']}
-nem.network.version = {version}
-nem.network.addressStartChar = {address_start_char}
+nem.network.version = {prepare_replacements['network_version']}
+nem.network.addressStartChar = {prepare_replacements['address_start_char']}
 nem.network.generationHash = {prepare_replacements['generation_hash']}
 nem.network.nemesisSignerAddress = {prepare_replacements['nemesis_address']}
 nem.network.totalAmount = {prepare_replacements['total_amount']}
 nem.network.nemesisFilePath = nemesis.bin
+
+nis.treasuryReissuanceForkHeight = 1
+nis.treasuryReissuanceForkTransactionHashes =
+nis.treasuryReissuanceForkFallbackTransactionHashes =
+nis.multisigMOfNForkHeight = 1
+nis.mosaicsForkHeight = 1
+nis.firstFeeForkHeight = 1
+nis.secondFeeForkHeight = 1
+nis.remoteAccountForkHeight = 1
+nis.mosaicRedefinitionForkHeight = 1
 	'''
 
 	_save_user_configuration_file(output_filepath / 'config-user.properties', configuration)
@@ -73,7 +81,9 @@ def save_network_configuration(args):
 			'nemesis_address': user_configuration['nemesis']['address'],
 			'total_amount': total_xem,
 			'network': nemesis['network'],
-			'network_friendly_name': network_friendly_name
+			'network_friendly_name': network_friendly_name,
+			'network_version': nemesis['identifier'],
+			'address_start_char': user_configuration['nemesis']['address'][0]
 		})
 
 		_save_json_configuration_file(path / f'peers-config_{network_friendly_name}.json', known_peers)

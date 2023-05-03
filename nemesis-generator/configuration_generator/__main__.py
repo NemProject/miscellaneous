@@ -4,14 +4,20 @@ import secrets
 import yaml
 from symbolchain.CryptoTypes import Hash256, PrivateKey
 from symbolchain.facade.NemFacade import NemFacade
+from symbolchain.nem.Network import Network
 from zenlog import log
 
 MICROXEM_PER_XEM = 1000000
 
 
 class NemesisConfigurationGenerator:
-	def __init__(self, network):
-		self.facade = NemFacade(network)
+	def __init__(self, network_name, custom_network_identifier):
+		network_identifier = (
+			int(custom_network_identifier) if custom_network_identifier else Network.MAINNET.identifier if 'mainnet' == network_name else
+			Network.TESTNET.identifier
+		)
+		epoch = Network.MAINNET.datetime_converter.epoch if 'mainnet' == network_name else Network.TESTNET.datetime_converter.epoch
+		self.facade = NemFacade(Network(network_name, network_identifier, epoch))
 		self.signer_private_key_pair = self.facade.KeyPair(PrivateKey.random())
 		self.generation_hash = Hash256(self._random_bytes(Hash256.SIZE))
 		self.account_key_pairs = []
@@ -39,7 +45,9 @@ class NemesisConfigurationGenerator:
 			'signer_private_key': str(self.signer_private_key_pair.private_key),
 			'generation_hash': str(self.generation_hash),
 			'network': network_name,
-			'accounts': accounts
+			'epoch_time': int(self.facade.network.datetime_converter.epoch.timestamp()),
+			'accounts': accounts,
+			'identifier': self.facade.network.identifier
 		}
 
 		self._save_configuration_file(output_filepath, configuration)
@@ -88,9 +96,10 @@ def main():
 	parser.add_argument('-o', '--output', help='Nemesis configuration file', required=True)
 	parser.add_argument('-a', '--accounts-output', help='Account configuration file', required=True)
 	parser.add_argument('-n', '--network-name', help='Network name', choices=('mainnet', 'testnet'), required=True)
+	parser.add_argument('-i', '--network-identifier', help='Network identifier', required=False)
 	args = parser.parse_args()
 
-	generator = NemesisConfigurationGenerator(args.network_name)
+	generator = NemesisConfigurationGenerator(args.network_name, args.network_identifier)
 	generator.generate_keys(args.count)
 	generator.save_nemesis_configuration(args.seed, args.network_name, args.output)
 	generator.save_account_configuration(args.accounts_output)
