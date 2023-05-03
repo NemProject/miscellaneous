@@ -27,7 +27,7 @@ $ ./boot.sh
 The first time you will be asked for a node name:
 
 ```text
-No config file was found. We need to generate one, even if you run only NCC
+No config file was found. We need to generate one
 Enter the name you want to assign to your node:
 ```
 
@@ -46,7 +46,6 @@ Starting NIS
 nis: started
 All done, here are the services running:
 
-ncc                              STOPPED   Not started
 nis                              RUNNING   pid 19, uptime 0:00:01
 perms                            RUNNING   pid 16, uptime 0:00:01
 servant                          STOPPED   Not started
@@ -68,7 +67,6 @@ Services running in the container are controlled with ``supervisord``. You can e
 
   ```bash
   $ ./service.sh status
-  ncc                              STOPPED   Not started
   nis                              RUNNING   pid 18, uptime 0:01:19
   perms                            RUNNING   pid 15, uptime 0:01:19
   servant                          STOPPED   Not started
@@ -130,7 +128,7 @@ Once the config file is generated the script builds and runs the image with thes
 
 ```bash
 sudo docker build -t mynem_image  .
-sudo docker run --name mynem_container -v ${PWD}/nem:/root/nem $config_mounts -t -d  -p 7777:7777 -p 7880:7880 -p 7890:7890 -p 8989:8989 mynem_image "$@"
+sudo docker run --name mynem_container -v ${PWD}/nem:/root/nem $config_mounts -t -d  -p 7777:7777 -p 7880:7880 -p 7890:7890 mynem_image "$@"
 ```
 
 This runs the container and makes the necessary ports available on your host.
