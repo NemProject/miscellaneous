@@ -4,7 +4,7 @@ MAINTAINER NEM Contributors
 # install dependencies (install tzdata first to prevent 'geographic area' prompt)
 RUN apt-get update > /dev/null \
 	&& apt-get install -y tzdata \
-	&& apt-get install -y tmux supervisor procps jq unzip curl gnupg openjdk-8-jdk-headless git libssl-dev maven ca-certificates \
+	&& apt-get install -y tmux supervisor procps jq unzip curl gnupg openjdk-11-jre-headless git libssl-dev maven ca-certificates \
 	&& update-ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
