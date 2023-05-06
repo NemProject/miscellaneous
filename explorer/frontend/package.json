@@ -30,7 +30,7 @@
     "react-tabs": "^4.3.0",
     "react-toastify": "^9.1.2",
     "react-transition-group": "^4.4.2",
-    "sass": "^1.49.0",
+    "sass": "^1.62.1",
     "symbol-sdk": "^3.0.7",
     "web-vitals": "^2.1.4"
   },
