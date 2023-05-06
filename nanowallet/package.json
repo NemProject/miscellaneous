@@ -5,7 +5,7 @@
   "author": "https://github.com/QuantumMechanics <qmnwdev@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@ledgerhq/hw-transport-node-hid-noevents": "^5.43.0",
+    "@ledgerhq/hw-transport-node-hid-noevents": "^6.27.13",
     "trezor-connect": "^8.2.7"
   },
   "devDependencies": {
