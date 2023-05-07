@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ "$#" -lt 1 ]]; then
-  echo "Usage: $0 [start|stop|restart|status] [ncc|nis]"
+  echo "Usage: $0 [start|stop|restart|status] [nis]"
   exit 1
 fi
 
@@ -15,8 +15,4 @@ done
 if ./supervisorctl.sh status "$2" | grep -E "FATAL|BACKOFF"  ; then
   echo "Starting service failed, you might have some info in the logs below:"
   ./supervisorctl.sh tail "$2" | tail -n 10
-fi
-
-if [[ "$*" =~ ncc && "$1" == "start" ]]; then
-  echo "You can access the NEM Community Client at http://localhost:8989/"
 fi
