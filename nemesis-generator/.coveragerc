@@ -1,2 +1,5 @@
 [run]
-source = generator,configuration_generator,node_configuration_generator
+include = 
+	generator/*.py
+	configuration_generator/*.py
+	node_configuration_generator/*.py
