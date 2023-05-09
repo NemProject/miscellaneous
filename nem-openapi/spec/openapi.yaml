@@ -1,10 +1,10 @@
 openapi: 3.0.2
 info:
-    $ref: ./info.yml
+    $ref: ./info.yaml
 tags:
-    $ref: ./tags.yml
+    $ref: ./tags.yaml
 paths:
-    $ref: ./routes.yml
+    $ref: ./routes.yaml
 externalDocs:
     description: NEM Developers
     url: https://nemproject.github.io/
@@ -15,10 +15,10 @@ servers:
       description: Mainnet NGL Node - SuperAlice
 components:
     parameters:
-        $ref: ./parameters/_index.yml
+        $ref: ./parameters/_index.yaml
     requestBodies:
-        $ref: ./request_bodies/_index.yml
+        $ref: ./request_bodies/_index.yaml
     schemas:
-        $ref: ./schemas/_index.yml
+        $ref: ./schemas/_index.yaml
     responses:
-        $ref: ./responses/_index.yml
+        $ref: ./responses/_index.yaml

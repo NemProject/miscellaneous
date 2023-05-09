@@ -25,7 +25,7 @@ properties:
                 description: The application name.
                 example: NIS
             networkId:
-                $ref: ./NetworkId.yml
+                $ref: ./NetworkId.yaml
             version:
                 type: string
                 description: The version of the node.
@@ -64,4 +64,4 @@ properties:
                 description: The name of the node.
                 example: SuperAlice
             'public-key':
-                $ref: ./PublicKey.yml
+                $ref: ./PublicKey.yaml
