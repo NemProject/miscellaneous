@@ -4,11 +4,11 @@
   "description": "OpenAPI Specification of NEM Rest interface",
   "main": "index.js",
   "scripts": {
-    "test": "swagger-cli validate _build/openapi3.yml",
-    "build": "swagger-cli bundle ./spec/openapi.yml --outfile _build/openapi3.yml --type yaml",
+    "test": "swagger-cli validate _build/openapi3.yaml",
+    "build": "swagger-cli bundle ./spec/openapi.yaml --outfile _build/openapi3.yaml --type yaml",
     "version": "echo $npm_package_version",
     "version:prepare": "mkdir _build/v$npm_package_version && cp -r _build/template/. _build/v$npm_package_version",
-    "version:pack": "cp _build/openapi3.yml _build/v$npm_package_version"
+    "version:pack": "cp _build/openapi3.yaml _build/v$npm_package_version"
   },
   "repository": {
     "type": "git",
