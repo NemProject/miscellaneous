@@ -26,10 +26,9 @@ interface ExpandProps {
     onClick?: (expanded: boolean) => void;
 }
 
-export const Expand: React.FunctionComponent<SimpleSpread<
-    React.HTMLAttributes<HTMLDivElement>,
-    ExpandProps
->> = (props): JSX.Element => {
+export const Expand: React.FunctionComponent<
+    SimpleSpread<React.HTMLAttributes<HTMLDivElement>, ExpandProps>
+> = (props): JSX.Element => {
     const {
         children,
         linkText,

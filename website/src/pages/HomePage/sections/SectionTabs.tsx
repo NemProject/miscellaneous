@@ -125,15 +125,15 @@ function SectionTabs(props: Props): JSX.Element {
                     <Tabs
                         items={tabItems}
                         value={activeTab}
-                        onChange={value => setActiveTab(value as number)}
+                        onChange={(value) => setActiveTab(value as number)}
                     />
                     {tabItemsContent[activeTab]}
                 </div>
-                {tabItems.map(item => (
+                {tabItems.map((item) => (
                     <Expand
                         className="tab-mobile"
                         expanded={activeTab === item.value}
-                        onClick={v => setActiveTab(v ? item.value : -1)}
+                        onClick={(v) => setActiveTab(v ? item.value : -1)}
                         linkText={item.text}
                         key={'tabitem' + item.value}
                     >

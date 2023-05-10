@@ -25,10 +25,9 @@ interface Props {
     onClose?: () => void;
 }
 
-export const ModalBox: React.FunctionComponent<SimpleSpread<
-    React.HTMLAttributes<HTMLDivElement>,
-    Props
->> = (props): JSX.Element => {
+export const ModalBox: React.FunctionComponent<
+    SimpleSpread<React.HTMLAttributes<HTMLDivElement>, Props>
+> = (props): JSX.Element => {
     const { children, className, visible, onClose, ...rest } = props;
 
     const extendedClassName =
@@ -48,7 +47,7 @@ export const ModalBox: React.FunctionComponent<SimpleSpread<
                     <div className={extendedClassName} {...rest}>
                         <div
                             className="modal-box"
-                            onClick={e => e.stopPropagation()}
+                            onClick={(e) => e.stopPropagation()}
                         >
                             {children}
                             <img
