@@ -93,35 +93,36 @@ export class ExchangeService {
             targetOrderIndexes[targetPriority[index]] = index;
         }
 
-        const exchangeInfoListFromCoingecko: ExchangeInfo[] = response.data.tickers
-            .map((ticker: CoingeckoMarketData) => ({
-                isUSD: Utils.isUSDTicker(ticker.target),
-                target: ticker.target,
-                exchangeId: ticker.market.identifier,
-                exchangeName: ticker.market.name,
-                price: ticker.last,
-                volume: ticker.converted_volume.usd,
-                url: ticker.trade_url,
-                imageSrc: '',
-            }))
-            .sort((a: ExchangeInfo, b: ExchangeInfo) => {
-                if (a.exchangeId < b.exchangeId) {
-                    return -1;
-                }
-                if (a.exchangeId > b.exchangeId) {
-                    return 1;
-                }
-                if (targetOrderIndexes[a.target as string] === undefined) {
-                    return 1;
-                }
-                if (targetOrderIndexes[b.target as string] === undefined) {
-                    return -1;
-                }
-                return (
-                    targetOrderIndexes[a.target as string] -
-                        targetOrderIndexes[b.target as string] || 0
-                );
-            });
+        const exchangeInfoListFromCoingecko: ExchangeInfo[] =
+            response.data.tickers
+                .map((ticker: CoingeckoMarketData) => ({
+                    isUSD: Utils.isUSDTicker(ticker.target),
+                    target: ticker.target,
+                    exchangeId: ticker.market.identifier,
+                    exchangeName: ticker.market.name,
+                    price: ticker.last,
+                    volume: ticker.converted_volume.usd,
+                    url: ticker.trade_url,
+                    imageSrc: '',
+                }))
+                .sort((a: ExchangeInfo, b: ExchangeInfo) => {
+                    if (a.exchangeId < b.exchangeId) {
+                        return -1;
+                    }
+                    if (a.exchangeId > b.exchangeId) {
+                        return 1;
+                    }
+                    if (targetOrderIndexes[a.target as string] === undefined) {
+                        return 1;
+                    }
+                    if (targetOrderIndexes[b.target as string] === undefined) {
+                        return -1;
+                    }
+                    return (
+                        targetOrderIndexes[a.target as string] -
+                            targetOrderIndexes[b.target as string] || 0
+                    );
+                });
 
         let currentExchangeId;
         const exchangeInfoListFromCoingeckoFiltered: ExchangeInfo[] = [];
@@ -160,7 +161,7 @@ export class ExchangeService {
 
                 default:
                     marketData = exchangeInfoListFromCoingeckoFiltered.find(
-                        ex => ex.exchangeId === exchange.exchangeId,
+                        (ex) => ex.exchangeId === exchange.exchangeId,
                     );
             }
 
@@ -181,7 +182,7 @@ export class ExchangeService {
         try {
             const response = await axios.get(url);
             const markets: CoincdxMarketData[] = response.data;
-            const xem = markets.find(market => market.market === 'XEMUSDT');
+            const xem = markets.find((market) => market.market === 'XEMUSDT');
 
             if (!xem) {
                 console.log(
@@ -286,7 +287,7 @@ export class ExchangeService {
         try {
             const response = await axios.get(url);
             const markets: ZtMarketData[] = response.data.ticker;
-            const xem = markets.find(market => market.symbol === 'XEM_USDT');
+            const xem = markets.find((market) => market.symbol === 'XEM_USDT');
 
             if (!xem) {
                 console.log(

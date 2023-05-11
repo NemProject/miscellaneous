@@ -28,9 +28,10 @@ export class AnnouncementService {
         const latestAnnouncements = await AnnouncementService.fetchAnnouncemets(
             currentLanguage,
         );
-        const viewedAnnouncementIds = AnnouncementService.getViewedAnnouncementIds();
+        const viewedAnnouncementIds =
+            AnnouncementService.getViewedAnnouncementIds();
         const notViewedAnnouncements = latestAnnouncements.filter(
-            announcement => !viewedAnnouncementIds.includes(announcement.id),
+            (announcement) => !viewedAnnouncementIds.includes(announcement.id),
         );
 
         return notViewedAnnouncements.shift() || null;
@@ -38,7 +39,8 @@ export class AnnouncementService {
 
     // Adds announcement id to the viewed list and stores it in the storage
     public static hideNotification(notificationId: number): void {
-        const viewedAnnouncements = AnnouncementService.getViewedAnnouncementIds();
+        const viewedAnnouncements =
+            AnnouncementService.getViewedAnnouncementIds();
 
         Utils.pushUnique(viewedAnnouncements, notificationId);
         Storage.set('viewedAnnouncements', JSON.stringify(viewedAnnouncements));

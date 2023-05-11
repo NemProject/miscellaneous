@@ -29,10 +29,9 @@ interface Props {
     onChange?: (value: number | string) => void;
 }
 
-export const Tabs: React.FunctionComponent<SimpleSpread<
-    React.HTMLAttributes<HTMLDivElement>,
-    Props
->> = (props): JSX.Element => {
+export const Tabs: React.FunctionComponent<
+    SimpleSpread<React.HTMLAttributes<HTMLDivElement>, Props>
+> = (props): JSX.Element => {
     const { items, value, className, onChange } = props;
 
     const extendedClassName = 'tabs' + (className ? ' ' + className : '');

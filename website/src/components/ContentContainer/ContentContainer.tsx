@@ -17,9 +17,9 @@
 import * as React from 'react';
 import './ContentContainer.less';
 
-export const ContentContainer: React.FunctionComponent<React.HTMLAttributes<
-    HTMLButtonElement
->> = (props): JSX.Element => {
+export const ContentContainer: React.FunctionComponent<
+    React.HTMLAttributes<HTMLButtonElement>
+> = (props): JSX.Element => {
     const { children, className } = props;
 
     const extendedClassName =
