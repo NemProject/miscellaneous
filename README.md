@@ -56,4 +56,3 @@ Detailed version can be seen on [codecov.io][miscellaneous-cov-link].
 [website-test]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Fwebsite%2Fdev%2F&config=nem-website-test
 [website-cov]: https://codecov.io/gh/NemProject/miscellaneous/branch/dev/graph/badge.svg?token=gYl6U8kJfi&flag=nem-website
 [website-cov-link]: https://app.codecov.io/gh/NEMProject/miscellaneous/tree/dev/website
-git 
