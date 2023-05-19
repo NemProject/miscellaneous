@@ -22,10 +22,10 @@ Detailed version can be seen on [codecov.io][miscellaneous-cov-link].
 [miscellaneous-cov]: https://codecov.io/gh/NemProject/miscellaneous/branch/dev/graphs/tree.svg
 [miscellaneous-cov-link]: https://codecov.io/gh/NEMProject/miscellaneous/tree/dev
 
-[nem-explorer-frontend-job]: https://jenkins.symboldev.com/blue/organizations/jenkins/Nem%2Fgenerated%2Fmiscellaneous%2Ffrontend/activity/?branch=dev
-[nem-explorer-frontend-lint]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Ffrontend%2Fdev%2F&config=nem-explorer-frontend-lint
-[nem-explorer-frontend-build]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Ffrontend%2Fdev%2F&config=nem-explorer-frontend-build
-[nem-explorer-frontend-test]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Ffrontend%2Fdev%2F&config=nem-explorer-frontend-test
+[nem-explorer-frontend-job]: https://jenkins.symboldev.com/blue/organizations/jenkins/Nem%2Fgenerated%2Fmiscellaneous%2Fexplorer-frontend/activity/?branch=dev
+[nem-explorer-frontend-lint]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Fexplorer-frontend%2Fdev%2F&config=nem-explorer-frontend-lint
+[nem-explorer-frontend-build]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Fexplorer-frontend%2Fdev%2F&config=nem-explorer-frontend-build
+[nem-explorer-frontend-test]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Fexplorer-frontend%2Fdev%2F&config=nem-explorer-frontend-test
 [nem-explorer-frontend-cov]: https://codecov.io/gh/NemProject/miscellaneous/branch/dev/graph/badge.svg?token=gYl6U8kJfi&flag=nem-explorer-frontend
 [nem-explorer-frontend-cov-link]: https://app.codecov.io/gh/NEMProject/miscellaneous/tree/dev/explorer/frontend
 
@@ -56,3 +56,4 @@ Detailed version can be seen on [codecov.io][miscellaneous-cov-link].
 [website-test]: https://jenkins.symboldev.com/buildStatus/icon?job=Nem%2Fgenerated%2Fmiscellaneous%2Fwebsite%2Fdev%2F&config=nem-website-test
 [website-cov]: https://codecov.io/gh/NemProject/miscellaneous/branch/dev/graph/badge.svg?token=gYl6U8kJfi&flag=nem-website
 [website-cov-link]: https://app.codecov.io/gh/NEMProject/miscellaneous/tree/dev/website
+git 
