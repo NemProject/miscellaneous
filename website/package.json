@@ -41,7 +41,7 @@
         "react-mount-animation": "0.0.11",
         "react-navigation": "^4.4.4",
         "react-pageflip": "^2.0.3",
-        "react-redux": "^7.2.4",
+        "react-redux": "^8.0.5",
         "react-router-dom": "^5.2.0",
         "react-scripts": "5.0.1",
         "react-scrollable-anchor": "^0.6.1",
