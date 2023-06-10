@@ -48,7 +48,7 @@
         "react-spring": "^9.7.1",
         "react-vuex-store": "^1.0.0",
         "redux": "^4.2.1",
-        "redux-thunk": "^2.3.0",
+        "redux-thunk": "^2.4.2",
         "stylelint-config-rational-order": "^0.1.2",
         "three": "^0.152.2",
         "three.meshline": "^1.4.0",
