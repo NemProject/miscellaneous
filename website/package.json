@@ -24,7 +24,7 @@
         "@react-three/drei": "^8.20.2",
         "@react-three/fiber": "^6.2.2",
         "@types/react-scrollable-anchor": "^0.6.1",
-        "@types/three": "^0.152.0",
+        "@types/three": "^0.152.1",
         "ant-design": "^1.0.0",
         "antd": "^4.15.5",
         "axios": "^1.4.0",
