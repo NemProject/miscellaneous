@@ -55,7 +55,7 @@
     "nem-sdk": "^1.6.8",
     "nem-voting": "^2.2.9",
     "ng-toast": "2.0.0",
-    "ngstorage": "0.3.10",
+    "ngstorage": "0.3.11",
     "npm-build-zip": "^1.0.2",
     "nw": "^0.75.0",
     "nw-builder": "^3.4.1",
