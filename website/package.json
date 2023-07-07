@@ -79,7 +79,7 @@
         "postcss-less": "^6.0.0",
         "prettier": "^2.8.8",
         "prettier-stylelint": "^0.4.2",
-        "stylelint": "^14.16.1",
+        "stylelint": "^15.10.1",
         "stylelint-config-standard": "^24.0.0",
         "stylelint-order": "^6.0.3"
     },
