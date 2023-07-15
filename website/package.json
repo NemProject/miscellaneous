@@ -75,7 +75,7 @@
         "eslint-plugin-react": "^7.23.2",
         "husky": "^8.0.3",
         "lint": "^0.8.19",
-        "lint-staged": "^11.0.0",
+        "lint-staged": "^13.2.3",
         "postcss-less": "^6.0.0",
         "prettier": "^2.8.8",
         "prettier-stylelint": "^0.4.2",
