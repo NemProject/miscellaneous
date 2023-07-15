@@ -61,7 +61,7 @@
     "nw-builder": "^3.4.1",
     "rxjs": "7.8.1",
     "symbol-hd-wallets": "0.12.0",
-    "symbol-paper-wallets": "1.0.2-optin",
+    "symbol-paper-wallets": "1.0.2",
     "symbol-post-launch-optin-module": "1.0.1",
     "symbol-qr-library": "^0.14.2",
     "symbol-sdk": "1.0.0",
