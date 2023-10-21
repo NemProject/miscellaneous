@@ -42,7 +42,7 @@
         "react-navigation": "^4.4.4",
         "react-pageflip": "^2.0.3",
         "react-redux": "^8.0.5",
-        "react-router-dom": "^5.2.0",
+        "react-router-dom": "^6.17.0",
         "react-scripts": "5.0.1",
         "react-scrollable-anchor": "^0.6.1",
         "react-spring": "^9.7.1",
