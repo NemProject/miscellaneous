@@ -11,7 +11,7 @@
     "eject": "react-app-rewired eject"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
     "@trendmicro/react-paginations": "^0.6.1",
