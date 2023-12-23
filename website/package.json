@@ -27,7 +27,7 @@
         "@types/three": "^0.152.1",
         "ant-design": "^1.0.0",
         "antd": "^5.11.5",
-        "axios": "^1.4.0",
+        "axios": "^1.6.2",
         "craco-antd": "^2.0.0",
         "craco-plugin-scoped-css": "^1.1.1",
         "i": "^0.3.7",
