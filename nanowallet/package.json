@@ -58,7 +58,7 @@
     "ngstorage": "0.3.10",
     "npm-build-zip": "^1.0.2",
     "nw": "^0.75.0",
-    "nw-builder": "^3.4.1",
+    "nw-builder": "^4.5.3",
     "rxjs": "7.8.1",
     "symbol-hd-wallets": "0.12.0",
     "symbol-paper-wallets": "1.0.2-optin",
