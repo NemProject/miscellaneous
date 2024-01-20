@@ -81,7 +81,7 @@
         "prettier-stylelint": "^0.4.2",
         "stylelint": "^14.16.1",
         "stylelint-config-standard": "^24.0.0",
-        "stylelint-order": "^6.0.3"
+        "stylelint-order": "^6.0.4"
     },
     "browserslist": {
         "production": [
