@@ -45,7 +45,7 @@
         "react-router-dom": "^6.20.0",
         "react-scripts": "5.0.1",
         "react-scrollable-anchor": "^0.6.1",
-        "react-spring": "^9.7.1",
+        "react-spring": "^9.7.3",
         "react-vuex-store": "^1.0.0",
         "redux": "^5.0.1",
         "redux-thunk": "^3.1.0",
