@@ -23,7 +23,7 @@
         "@react-spring/three": "^9.2.3",
         "@react-three/drei": "^8.20.2",
         "@react-three/fiber": "^6.2.2",
-        "@types/react-scrollable-anchor": "^0.6.1",
+        "@types/react-scrollable-anchor": "^0.6.4",
         "@types/three": "^0.152.1",
         "ant-design": "^1.0.0",
         "antd": "^5.15.1",
