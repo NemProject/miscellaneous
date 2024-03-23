@@ -53,7 +53,7 @@
         "three": "^0.153.0",
         "three.meshline": "^1.4.0",
         "threejs-meshline": "^2.0.12",
-        "typescript": "^5.3.2",
+        "typescript": "^5.4.3",
         "web-vitals": "^3.5.2"
     },
     "devDependencies": {
