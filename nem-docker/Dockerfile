@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 MAINTAINER NEM Contributors
 
 # install dependencies (install tzdata first to prevent 'geographic area' prompt)
