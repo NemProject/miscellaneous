@@ -48,6 +48,8 @@ class Generator:
 			self.generation_hash = Hash256(nemesis_config['generation_hash'])
 			self.accounts = nemesis_config['accounts']
 
+			self.previous_block_hash = Hash256.zero()
+
 		self.unsigned_transaction_payloads = []
 		self.signed_transaction_payloads = []
 		self.signed_block_header = None
@@ -98,8 +100,7 @@ class Generator:
 
 		writer.write_int(Hash256.SIZE + 4, 4)  # needed to deserialize the previous block hash object
 		writer.write_int(Hash256.SIZE, 4)
-		previous_block_hash = Hash256.zero()
-		writer.write_bytes(previous_block_hash.bytes)
+		writer.write_bytes(self.previous_block_hash.bytes)
 
 		writer.write_int(1, 8)  # height
 
