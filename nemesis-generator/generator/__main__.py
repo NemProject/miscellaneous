@@ -26,7 +26,6 @@ def attach_signature(payload, signature):
 	writer.write_bytes(payload[:ENTITY_HEADER_SIZE])
 	writer.write_int(Signature.SIZE, 4)
 	writer.write_bytes(signature.bytes)
-
 	writer.write_bytes(payload[ENTITY_HEADER_SIZE:])
 	return writer.buffer
 
@@ -97,18 +96,19 @@ class Generator:
 		writer.write_int(0xFFFFFFFF, 4)  # type
 		self._write_entity_header(writer)
 
-		writer.write_int(Hash256.SIZE + 4, 4)
+		writer.write_int(Hash256.SIZE + 4, 4)  # needed to deserialize the previous block hash object
 		writer.write_int(Hash256.SIZE, 4)
-		writer.write_bytes(self.generation_hash.bytes)
+		previous_block_hash = Hash256.zero()
+		writer.write_bytes(previous_block_hash.bytes)
 
 		writer.write_int(1, 8)  # height
 
-		writer.write_int(len(self.unsigned_transaction_payloads), 4)  # transactions count
+		writer.write_int(len(self.signed_transaction_payloads), 4)  # transactions count
 
 		unsigned_block_header = writer.buffer[:]
 
-		for unsigned_transaction_payload in self.unsigned_transaction_payloads:
-			writer.write_bytes(unsigned_transaction_payload)
+		for signed_transaction_payload in self.signed_transaction_payloads:
+			writer.write_bytes(signed_transaction_payload)
 
 		unsigned_block = writer.buffer
 		signature = self.signer_key_pair.sign(unsigned_block)
