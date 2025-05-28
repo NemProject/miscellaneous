@@ -20,6 +20,7 @@ var jsFiles   = "src/app/**/*.js";
 var viewFiles = "src/app/**/*.html";
 var specFiles = "tests/specs/*.spec.js"
 var specsArray = glob.sync(specFiles);
+var setupFile = "tests/setup.js";
 
 
 var interceptErrors = function(error) {
@@ -73,8 +74,7 @@ gulp.task('browserify', ['views'], function() {
 
 // Task for test files
 gulp.task('browserifyTests', function() {
-  return browserify(specsArray)
-      // .transform(babelify, {presets: ["es2015"]})
+  return browserify([setupFile].concat(specsArray))
       .transform(babelify.configure({
         presets: [['es2015', {
           targets: {
