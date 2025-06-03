@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 2.7.1
+
+   - Upgraded trezor-connect to v9
+
 ## Version 2.7.0
 
     - Added SuperNode program module
