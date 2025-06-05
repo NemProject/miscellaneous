@@ -23,7 +23,7 @@ export const assertTestnetNodes = ($controller, $rootScope, controlName, Wallet,
 
     // Act:
     ctrl.setNodes();
-
+    
     // Assert:
     expect(ctrl.nodes).toEqual([
         {
@@ -101,7 +101,7 @@ export const assertMainnetNodes = async ($controller, $rootScope, controlName, W
             "port": 7890
         },
         {
-            "host": "http://62.75.171.41",
+            "host": "http://bigalice3.nem.ninja",
             "port": 7890
         },
         {
@@ -125,18 +125,6 @@ export const assertMainnetNodes = async ($controller, $rootScope, controlName, W
             "port": 7890
         },
         {
-            "host": "http://alice2.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice3.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice4.nem.ninja",
-            "port": 7890
-        },
-        {
             "host": "http://alice5.nem.ninja",
             "port": 7890
         },
@@ -146,6 +134,10 @@ export const assertMainnetNodes = async ($controller, $rootScope, controlName, W
         },
         {
             "host": "http://alice7.nem.ninja",
+            "port": 7890
+        },
+        {
+            "host": "http://alice8.nem.ninja",
             "port": 7890
         },
         {

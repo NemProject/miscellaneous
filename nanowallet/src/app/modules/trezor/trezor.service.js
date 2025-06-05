@@ -1,6 +1,5 @@
 import { TransactionTypes } from 'nem-library';
 import nem from 'nem-sdk';
-import TrezorConnect from 'trezor-connect';
 
 /** Service storing Trezor utility functions. */
 class Trezor {
@@ -20,7 +19,14 @@ class Trezor {
         // Service properties region //
 
         // End properties region //
-        TrezorConnect.manifest({ email: 'maintainers@nem.io', appUrl: 'https://www.nem.io' });
+        
+        window.TrezorConnect.init({
+            manifest: {
+                email: 'maintainers@nem.io',
+                appUrl: 'https://www.nem.io',
+            },
+            coreMode: 'popup',
+        });
     }
 
     // Service methods region //
@@ -47,7 +53,7 @@ class Trezor {
     createAccount(network, index, label) {
         return new Promise((resolve, reject) => {
             const hdKeypath = this.bip44(network, index);
-            TrezorConnect.nemGetAddress({
+            window.TrezorConnect.nemGetAddress({
                 path: hdKeypath,
                 network: this.adjustNetwork(network),
                 showOnTrezor: true
@@ -76,7 +82,7 @@ class Trezor {
         const value = "0000000000000000000000000000000000000000000000000000000000000000";
 
         return new Promise((resolve, reject) => {
-            TrezorConnect.cipherKeyValue({
+            window.TrezorConnect.cipherKeyValue({
                 path: account.hdKeypath,
                 key: key,
                 value: value,
@@ -124,7 +130,7 @@ class Trezor {
         const tx = this.adjustImportanceTransferTransaction(transaction);
 
         return new Promise((resolve, reject) => {
-          TrezorConnect.nemSignTransaction({
+          window.TrezorConnect.nemSignTransaction({
             path: account.hdKeypath,
             transaction: tx,
           }).then(function (result) {
@@ -144,7 +150,7 @@ class Trezor {
 
     showAccount(account) {
         return new Promise((resolve, reject) => {
-            TrezorConnect.nemGetAddress({
+            window.TrezorConnect.nemGetAddress({
                 path: account.hdKeypath,
                 network: this.adjustNetwork(account.network),
                 showOnTrezor: true
