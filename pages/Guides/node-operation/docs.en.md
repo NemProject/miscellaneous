@@ -24,7 +24,7 @@ This guide explains how to deploy a NEM node, either [manually](#manually) or [u
 #### Installation
 {:.no_toc}
 
-- [Download latest binary](https://bob.nem.ninja/nis-0.6.101.tgz).
+- [Download latest binary](https://github.com/NemProject/nem/releases/download/v0.6.102/nis-0.6.102.tgz).
 - Decompress the file anywhere you want. It should be a drive with a few dozen Gigabytes of spare space (Current database size is over 20GB).
 
 #### Configuration
