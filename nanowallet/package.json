@@ -27,7 +27,7 @@
     "bip32-path": "^0.4.2",
     "bitcoinjs-lib": "^3.3.2",
     "bootstrap": "3.4.1",
-    "browser-sync": "^2.29.1",
+    "browser-sync": "^3.0.4",
     "browserify": "^13.0.0",
     "browserify-ngannotate": "^2.0.0",
     "bufferutil": "^4.0.7",
