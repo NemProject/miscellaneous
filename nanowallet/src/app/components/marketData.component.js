@@ -1,5 +1,6 @@
 import nem from "nem-sdk";
 import Helpers from '../utils/helpers';
+import MarketDataUtil from '../utils/marketData';
 
 class MarketDataCtrl {
 
@@ -41,14 +42,14 @@ class MarketDataCtrl {
 	 */
 	refreshMarketInfo() {
 	    // Gets btc-xem market
-	    nem.com.requests.market.xem().then((data) => {
+	    MarketDataUtil.getXemBtcMarketData().then((data) => {
 	        this._$timeout(() => {
-	            this._DataStore.market.xem = data["BTC_XEM"];
+	            this._DataStore.market.xem = data;
 	        });
 	    },
 	    (err) => {
 	        this._$timeout(() => {
-	            this._Alert.errorGetMarketInfo(); 
+	            this._Alert.errorGetMarketInfo();
 	        });
 	    });
 	    // Gets btc-usd market

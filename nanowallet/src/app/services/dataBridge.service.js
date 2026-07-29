@@ -1,4 +1,5 @@
 import nem from 'nem-sdk';
+import MarketData from '../utils/marketData';
 
 /** Service to open connection, store and process data received from websocket. */
 class DataBridge {
@@ -126,9 +127,9 @@ class DataBridge {
             });
 
             // Gets market info
-            nem.com.requests.market.xem().then((data) => {
+            MarketData.getXemBtcMarketData().then((data) => {
                 this._$timeout(() => {
-                    this._DataStore.market.xem = data["BTC_XEM"];
+                    this._DataStore.market.xem = data;
                 });
             },
             (err) => {
