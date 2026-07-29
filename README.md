@@ -1,7 +1,7 @@
 # NEM Miscellaneous Monorepo
 
 In Q2 2023, we consolidated a number of projects into this repository.
-It includes the NanoWallet, NEM Documentation and NEM docker.
+It includes the NEM Wallet, NEM Documentation and NEM docker.
 
 | component                               | lint                                                             | build                                                              | test                                                             | coverage                                                         | package |
 |-----------------------------------------|------------------------------------------------------------------|--------------------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|---------|
