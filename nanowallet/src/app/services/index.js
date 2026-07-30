@@ -59,4 +59,8 @@ servicesModule.service('CatapultOptin', CatapultOptinService);
 import SuperNodeProgramService from './superNodeProgram.service'
 servicesModule.service('SuperNodeProgram', SuperNodeProgramService);
 
+// Set MarketData service
+import MarketDataService from './marketData.service';
+servicesModule.service('MarketData', MarketDataService);
+
 export default servicesModule;

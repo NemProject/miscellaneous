@@ -1,6 +1,5 @@
 import nem from "nem-sdk";
 import Helpers from '../utils/helpers';
-import MarketDataUtil from '../utils/marketData';
 
 class MarketDataCtrl {
 
@@ -9,15 +8,16 @@ class MarketDataCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(DataStore, Alert, $timeout, $scope) {
+    constructor(DataStore, Alert, $timeout, $scope, MarketData) {
         'ngInject';
 
         //// Component dependencies region ////
-        
+
         this._DataStore = DataStore;
         this._Alert = Alert;
         this._$timeout = $timeout;
         this._Helpers = Helpers;
+        this._MarketData = MarketData;
 
         //// End dependencies region ////
 
@@ -42,7 +42,7 @@ class MarketDataCtrl {
 	 */
 	refreshMarketInfo() {
 	    // Gets btc-xem market
-	    MarketDataUtil.getXemBtcMarketData().then((data) => {
+	    this._MarketData.getXemBtcMarketData().then((data) => {
 	        this._$timeout(() => {
 	            this._DataStore.market.xem = data;
 	        });
