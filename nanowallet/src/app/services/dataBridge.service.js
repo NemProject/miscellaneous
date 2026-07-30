@@ -387,6 +387,9 @@ class DataBridge {
         // Set needed nodes into the Wallet service
         this._Nodes.setDefault();
         this._Nodes.setUtil();
+        // Try to refresh Wallet.nodes with a live list from NodeWatch;
+        // fails safe and keeps the bundled static list on any error
+        this._Nodes.loadNetworkNodes();
         // Change endpoint port to websocket port
         let endpoint = nem.model.objects.create("endpoint")(this._Wallet.node.host, nem.model.nodes.websocketPort);
         // Create a connector

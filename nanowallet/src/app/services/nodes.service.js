@@ -1,6 +1,99 @@
 import nem from 'nem-sdk';
 import UrlParser from 'url-parse';
 
+var NODEWATCH_URLS = {
+    mainnet: 'https://nodewatch.symbol.tools/api/nem/nodes',
+    testnet: 'https://nodewatch.symbol.tools/testnet/api/nem/nodes'
+};
+var DYNAMIC_NODES_DEFAULT_PORT = 7890;
+var DYNAMIC_NODES_HEIGHT_TOLERANCE = 20;
+var DYNAMIC_NODES_MIN_NODES = 3;
+var DYNAMIC_NODES_FETCH_TIMEOUT_MS = 8000;
+var DYNAMIC_NODES_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+var DYNAMIC_NODES_PRIVATE_HOST_RE = /^(127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|169\.254\.|0\.0\.0\.0$)|^localhost$|^\[?::1\]?$/i;
+
+/**
+ * Parse a "scheme://host:port" endpoint string as returned by NodeWatch
+ *
+ * @param {string} raw - The raw endpoint string
+ *
+ * @return {object|null} - {scheme, hostname, port} or null if unparsable
+ */
+function parseDynamicNodeEndpoint(raw) {
+    var m = /^(https?):\/\/([^:\/\s]+):(\d+)\/?$/i.exec(String(raw || '').trim());
+    if (!m) return null;
+    return { scheme: m[1].toLowerCase(), hostname: m[2], port: parseInt(m[3], 10) };
+}
+
+/**
+ * Filter and normalize a NodeWatch API response into a list of usable nodes
+ *
+ * Keeps only default-port, non-private-host nodes within the configured
+ * height tolerance of the highest reported height.
+ *
+ * @param {*} json - The parsed NodeWatch response body
+ *
+ * @return {array|null} - An array of {uri} objects, or null if nothing usable
+ */
+function processNodewatchResponse(json) {
+    if (!Array.isArray(json)) return null;
+
+    var candidates = [];
+    for (var i = 0; i < json.length; i++) {
+        var entry = json[i];
+        var ep = entry && parseDynamicNodeEndpoint(entry.endpoint);
+        if (!ep) continue;
+        if (ep.port !== DYNAMIC_NODES_DEFAULT_PORT) continue;
+        if (DYNAMIC_NODES_PRIVATE_HOST_RE.test(ep.hostname)) continue;
+        if (typeof entry.height !== 'number' || entry.height <= 0) continue;
+        candidates.push({ uri: ep.scheme + '://' + ep.hostname, height: entry.height });
+    }
+    if (!candidates.length) return null;
+
+    var maxHeight = 0;
+    for (var j = 0; j < candidates.length; j++) {
+        if (candidates[j].height > maxHeight) maxHeight = candidates[j].height;
+    }
+
+    var seen = Object.create(null);
+    var result = [];
+    for (var k = 0; k < candidates.length; k++) {
+        var c = candidates[k];
+        if ((maxHeight - c.height) > DYNAMIC_NODES_HEIGHT_TOLERANCE) continue;
+        var key = c.uri.toLowerCase();
+        if (seen[key]) continue;
+        seen[key] = true;
+        result.push({ uri: c.uri });
+    }
+    return result;
+}
+
+/**
+ * Fetch JSON from a URL, rejecting if it doesn't resolve within the timeout
+ *
+ * @param {string} url - The URL to fetch
+ * @param {number} ms - Timeout in milliseconds
+ *
+ * @return {Promise} - Resolves with the parsed JSON body
+ */
+function fetchJsonWithTimeout(url, ms) {
+    return new Promise(function (resolve, reject) {
+        var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        var timer = setTimeout(function () {
+            if (ctrl) ctrl.abort();
+            reject(new Error('timeout'));
+        }, ms);
+        fetch(url, { signal: ctrl ? ctrl.signal : undefined, cache: 'no-store' }).then(function (res) {
+            clearTimeout(timer);
+            if (!res.ok) { reject(new Error('http ' + res.status)); return; }
+            resolve(res.json());
+        }, function (err) {
+            clearTimeout(timer);
+            reject(err);
+        });
+    });
+}
+
 /** Service with functions regarding the nodes */
 class Nodes {
 
@@ -201,6 +294,50 @@ class Nodes {
         } else {
             this._storage.harvestingMijinNode = endpoint;
         }
+    }
+
+    /**
+     * Refresh Wallet.nodes with a live, active node list fetched from NodeWatch.
+     *
+     * Fails safe at every step: any error, timeout, or lack of data leaves
+     * the currently set (bundled static, or last cached) node list untouched.
+     *
+     * @param {number} network - A network id (optional, defaults to current network)
+     *
+     * @return {Promise} - Resolves with the applied node array, or null if unchanged
+     */
+    loadNetworkNodes(network) {
+        let _network = network || this._Wallet.network;
+        let key = _network === nem.model.network.data.mainnet.id ? 'mainnet'
+            : _network === nem.model.network.data.testnet.id ? 'testnet'
+            : null;
+        if (!key) return Promise.resolve(null);
+
+        let cacheKey = 'dynamicNodes_' + key;
+        let cached = this._storage[cacheKey];
+        let hasValidCache = cached && Array.isArray(cached.nodes) && cached.nodes.length >= DYNAMIC_NODES_MIN_NODES;
+        let hasFreshCache = hasValidCache && (Date.now() - cached.fetchedAt) < DYNAMIC_NODES_CACHE_TTL_MS;
+
+        let apply = (nodes) => {
+            if (!Array.isArray(nodes) || nodes.length < DYNAMIC_NODES_MIN_NODES) return null;
+            this._Wallet.nodes = nodes;
+            return nodes;
+        };
+
+        if (hasFreshCache) {
+            return Promise.resolve(apply(cached.nodes));
+        }
+
+        return fetchJsonWithTimeout(NODEWATCH_URLS[key], DYNAMIC_NODES_FETCH_TIMEOUT_MS).then((json) => {
+            let processed = processNodewatchResponse(json);
+            if (!processed || processed.length < DYNAMIC_NODES_MIN_NODES) {
+                return hasValidCache ? apply(cached.nodes) : null;
+            }
+            this._storage[cacheKey] = { fetchedAt: Date.now(), nodes: processed };
+            return apply(processed);
+        }).catch(() => {
+            return hasValidCache ? apply(cached.nodes) : null;
+        });
     }
 
     /**
