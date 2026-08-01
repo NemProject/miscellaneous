@@ -1,11 +1,17 @@
 import { runPromiseErrorTest } from '../helper';
 
 function mockFetch(returnValue, ok = true, status = ok ? 200 : 500) {
-    return spyOn(window, 'fetch').and.returnValue(Promise.resolve({
+    let response = Promise.resolve({
         ok,
         status,
         json: () => Promise.resolve(returnValue),
-    }));
+    });
+    if (jasmine.isSpy(window.fetch)) {
+        window.fetch.and.returnValue(response);
+        window.fetch.calls.reset();
+        return window.fetch;
+    }
+    return spyOn(window, 'fetch').and.returnValue(response);
 }
 
 describe('MarketData service tests', () => {
@@ -56,6 +62,38 @@ describe('MarketData service tests', () => {
         it('should throw when the response shape is unexpected', async (done) => {
             // Arrange:
             mockFetch({ nem: {} });
+            const promiseToTest = MarketData.getXemBtcMarketData();
+
+            // Act + Assert:
+            await runPromiseErrorTest(promiseToTest, new Error('Unexpected CoinGecko response shape'));
+            done();
+        });
+
+        it('should throw when btc_24h_vol is not a number', async (done) => {
+            // Arrange:
+            mockFetch({
+                nem: {
+                    btc: 0.00000123,
+                    btc_24h_vol: null,
+                    btc_24h_change: 12.34
+                }
+            });
+            const promiseToTest = MarketData.getXemBtcMarketData();
+
+            // Act + Assert:
+            await runPromiseErrorTest(promiseToTest, new Error('Unexpected CoinGecko response shape'));
+            done();
+        });
+
+        it('should throw when btc_24h_change is not a number', async (done) => {
+            // Arrange:
+            mockFetch({
+                nem: {
+                    btc: 0.00000123,
+                    btc_24h_vol: 456.789,
+                    btc_24h_change: null
+                }
+            });
             const promiseToTest = MarketData.getXemBtcMarketData();
 
             // Act + Assert:

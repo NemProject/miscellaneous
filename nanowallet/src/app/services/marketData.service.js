@@ -28,7 +28,11 @@ class MarketData {
      * On fetch failure, falls back to the last successfully fetched value
      * (even if stale), rather than erroring out, if one is available.
      *
-     * @return {Promise} - Resolves with a {highestBid, baseVolume, percentChange} object
+     * @returns {Promise<{
+     *   highestBid: number,
+     *   baseVolume: number,
+     *   percentChange: number
+     * }>} Market data shaped like the former Poloniex response.
      */
     getXemBtcMarketData() {
         return fetch(COINGECKO_XEM_BTC_URL).then((response) => {
@@ -38,7 +42,10 @@ class MarketData {
             return response.json();
         }).then((json) => {
             let nemData = json && json.nem;
-            if (!nemData || typeof nemData.btc !== 'number') {
+            if (!nemData
+                || typeof nemData.btc !== 'number'
+                || typeof nemData.btc_24h_vol !== 'number'
+                || typeof nemData.btc_24h_change !== 'number') {
                 throw new Error('Unexpected CoinGecko response shape');
             }
             let data = {
