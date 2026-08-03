@@ -50,7 +50,6 @@ describe('Trezor Service', () => {
                     email: 'maintainers@nem.io',
                     appUrl: 'https://www.nem.io',
                 },
-                debug: true,
                 coreMode: 'popup',
             });
         });
