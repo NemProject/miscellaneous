@@ -20,7 +20,7 @@
     <div class="col-md-6 col-sm-3 ticker header">
       {{ 'DASHBOARD_MARKET_INFO_PRICE' | translate }} (Bitcoin):
       <br>
-      <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataStore.market.xem.highestBid}}</span>
+      <span><i class="fa fa-bitcoin"></i> {{$ctrl._DataStore.market.xem.highestBid | number:12}}</span>
     </div>
     <div class="col-md-6 col-sm-3 ticker header">
       {{ 'DASHBOARD_MARKET_INFO_CHANGES' | translate }}:
