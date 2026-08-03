@@ -5,10 +5,12 @@ const NODEWATCH_BASE_URL = 'https://nodewatch.symbol.tools';
 
 const NETWORK_NODE_CONFIG = {
     [nem.model.network.data.mainnet.id]: {
-        url: `${NODEWATCH_BASE_URL}/api/nem/nodes`
+        url: `${NODEWATCH_BASE_URL}/api/nem/nodes`,
+        cacheKey: 'nodewatchNodes_mainnet'
     },
     [nem.model.network.data.testnet.id]: {
-        url: `${NODEWATCH_BASE_URL}/testnet/api/nem/nodes`
+        url: `${NODEWATCH_BASE_URL}/testnet/api/nem/nodes`,
+        cacheKey: 'nodewatchNodes_testnet'
     }
 };
 var NODEWATCH_NODES_DEFAULT_PORT = nem.model.nodes.defaultPort;
@@ -85,6 +87,18 @@ function processNodewatchResponse(json) {
         result.push({ uri: candidate.uri });
     }
     return result;
+}
+
+/**
+ * Check whether a node list is usable, i.e. an array with at least the
+ * configured minimum number of nodes.
+ *
+ * @param {*} nodes - The candidate node list
+ *
+ * @return {boolean} - True if the list is usable
+ */
+function isUsableNodeList(nodes) {
+    return Array.isArray(nodes) && nodes.length >= NODEWATCH_NODES_MIN_NODES;
 }
 
 /**
@@ -327,18 +341,15 @@ class Nodes {
      */
     loadNetworkNodes(network) {
         let _network = network || this._Wallet.network;
-        let key = _network === nem.model.network.data.mainnet.id ? 'mainnet'
-            : _network === nem.model.network.data.testnet.id ? 'testnet'
-            : null;
-        if (!key) return Promise.resolve(null);
+        let config = NETWORK_NODE_CONFIG[_network];
+        if (!config) return Promise.resolve(null);
 
-        let cacheKey = 'dynamicNodes_' + key;
-        let cached = this._storage[cacheKey];
-        let hasValidCache = cached && Array.isArray(cached.nodes) && cached.nodes.length >= NODEWATCH_NODES_MIN_NODES;
+        let cached = this._storage[config.cacheKey];
+        let hasValidCache = cached && isUsableNodeList(cached.nodes);
         let hasFreshCache = hasValidCache && (Date.now() - cached.fetchedAt) < NODEWATCH_NODES_CACHE_TTL_MS;
 
         let apply = (nodes) => {
-            if (!Array.isArray(nodes) || nodes.length < NODEWATCH_NODES_MIN_NODES) return null;
+            if (!isUsableNodeList(nodes)) return null;
             this._Wallet.nodes = nodes;
             return nodes;
         };
@@ -347,12 +358,12 @@ class Nodes {
             return Promise.resolve(apply(cached.nodes));
         }
 
-        return fetchJsonWithTimeout(NETWORK_NODE_CONFIG[_network].url, NODEWATCH_NODES_FETCH_TIMEOUT_MS).then((json) => {
+        return fetchJsonWithTimeout(config.url, NODEWATCH_NODES_FETCH_TIMEOUT_MS).then((json) => {
             let processed = processNodewatchResponse(json);
-            if (!processed || processed.length < NODEWATCH_NODES_MIN_NODES) {
+            if (!isUsableNodeList(processed)) {
                 return hasValidCache ? apply(cached.nodes) : null;
             }
-            this._storage[cacheKey] = { fetchedAt: Date.now(), nodes: processed };
+            this._storage[config.cacheKey] = { fetchedAt: Date.now(), nodes: processed };
             return apply(processed);
         }).catch(() => {
             return hasValidCache ? apply(cached.nodes) : null;

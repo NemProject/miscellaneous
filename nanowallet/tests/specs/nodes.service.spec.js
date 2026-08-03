@@ -168,7 +168,6 @@ describe('Nodes Service', () => {
 
     describe('loadNetworkNodes', () => {
         const NODEWATCH_TESTNET_URL = 'https://nodewatch.symbol.tools/testnet/api/nem/nodes';
-        const MIN_NODES = 3;
 
         const nodewatchResponse = (overrides = []) => [
             { endpoint: 'http://node1.example.com:7890', height: 1000 },
@@ -210,7 +209,7 @@ describe('Nodes Service', () => {
         it('applies a fresh cached node list without calling fetch', (done) => {
             // Arrange:
             const cachedNodes = [{ uri: 'http://a' }, { uri: 'http://b' }, { uri: 'http://c' }];
-            mockStorage.dynamicNodes_testnet = { fetchedAt: Date.now(), nodes: cachedNodes };
+            mockStorage.nodewatchNodes_testnet = { fetchedAt: Date.now(), nodes: cachedNodes };
             const fetchSpy = spyOn(window, 'fetch');
 
             // Act:
@@ -237,14 +236,14 @@ describe('Nodes Service', () => {
                     { uri: 'http://node3.example.com' }
                 ]);
                 expect(mockWallet.nodes).toEqual(result);
-                expect(mockStorage.dynamicNodes_testnet.nodes).toEqual(result);
+                expect(mockStorage.nodewatchNodes_testnet.nodes).toEqual(result);
                 done();
             });
         });
 
         it('refetches when the cached node list has expired', (done) => {
             // Arrange:
-            mockStorage.dynamicNodes_testnet = {
+            mockStorage.nodewatchNodes_testnet = {
                 fetchedAt: Date.now() - (7 * 60 * 60 * 1000),
                 nodes: [{ uri: 'http://stale' }, { uri: 'http://stale2' }, { uri: 'http://stale3' }]
             };
@@ -261,7 +260,7 @@ describe('Nodes Service', () => {
         it('falls back to the cached node list when the fetch fails', (done) => {
             // Arrange:
             const cachedNodes = [{ uri: 'http://a' }, { uri: 'http://b' }, { uri: 'http://c' }];
-            mockStorage.dynamicNodes_testnet = {
+            mockStorage.nodewatchNodes_testnet = {
                 fetchedAt: Date.now() - (7 * 60 * 60 * 1000),
                 nodes: cachedNodes
             };
@@ -292,7 +291,7 @@ describe('Nodes Service', () => {
         it('falls back to the cache when fewer than the minimum nodes survive filtering', (done) => {
             // Arrange:
             const cachedNodes = [{ uri: 'http://a' }, { uri: 'http://b' }, { uri: 'http://c' }];
-            mockStorage.dynamicNodes_testnet = {
+            mockStorage.nodewatchNodes_testnet = {
                 fetchedAt: Date.now() - (7 * 60 * 60 * 1000),
                 nodes: cachedNodes
             };
@@ -328,6 +327,21 @@ describe('Nodes Service', () => {
 
             // Assert:
             expect(result).toBe(false);
+        });
+
+        it('resolves true when the node has free harvesting slots', (done) => {
+            // Arrange:
+            const endpoint = { host: 'http://alice.nem.ninja', port: 7890 };
+            spyOn(nem.com.requests.account, 'unlockInfo').and.returnValue(
+                Promise.resolve({ 'max-unlocked': 5, 'num-unlocked': 3 })
+            );
+
+            // Act:
+            nodesService.hasFreeSlots(endpoint).then(result => {
+                // Assert:
+                expect(result).toBe(true);
+                done();
+            });
         });
     });
 });
