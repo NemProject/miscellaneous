@@ -27,7 +27,7 @@ var NODEWATCH_NODES_PRIVATE_HOST_RE = /^(127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|19
  *
  * @return {object|null} - {scheme, hostname, port} or null if unparsable
  */
-function parseDynamicNodeEndpoint(raw) {
+function parseNodewatchNodeEndpoint(raw) {
     var m = /^(https?):\/\/([^:\/\s]+):(\d+)\/?$/i.exec(String(raw || '').trim());
     if (!m) return null;
     return { scheme: m[1].toLowerCase(), hostname: m[2], port: parseInt(m[3], 10) };
@@ -43,12 +43,12 @@ function parseDynamicNodeEndpoint(raw) {
  * @return {object|null} - {uri, height}, or null if the entry is unusable
  */
 function parseNodewatchEntry(entry) {
-    var ep = entry && parseDynamicNodeEndpoint(entry.endpoint);
-    if (!ep) return null;
-    if (ep.port !== NODEWATCH_NODES_DEFAULT_PORT) return null;
-    if (NODEWATCH_NODES_PRIVATE_HOST_RE.test(ep.hostname)) return null;
+    var endpoint = entry && parseNodewatchNodeEndpoint(entry.endpoint);
+    if (!endpoint) return null;
+    if (endpoint.port !== NODEWATCH_NODES_DEFAULT_PORT) return null;
+    if (NODEWATCH_NODES_PRIVATE_HOST_RE.test(endpoint.hostname)) return null;
     if (typeof entry.height !== 'number' || entry.height <= 0) return null;
-    return { uri: ep.scheme + '://' + ep.hostname, height: entry.height };
+    return { uri: endpoint.scheme + '://' + endpoint.hostname, height: entry.height };
 }
 
 /**
