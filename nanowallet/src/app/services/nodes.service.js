@@ -350,7 +350,10 @@ class Nodes {
 
         let apply = (nodes) => {
             if (!isUsableNodeList(nodes)) return null;
-            this._Wallet.nodes = nodes;
+            // Assign inside a digest, the fetch above resolves outside of one
+            this._$timeout(() => {
+                this._Wallet.nodes = nodes;
+            });
             return nodes;
         };
 
