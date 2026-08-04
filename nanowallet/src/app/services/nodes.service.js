@@ -147,11 +147,29 @@ class Nodes {
         this._$timeout = $timeout;
 
         nem.model.nodes.testnet = [{
-            uri: 'http://hugetestalice.nem.ninja'
+            uri: 'http://libertalia.nemtest.net'
         }, {
-            uri: 'http://hugetestalice2.nem.ninja'
+            uri: 'http://ocracoke.nemtest.net'
         }, {
-            uri: 'http://medalice2.nem.ninja'
+            uri: 'http://tortuga.nemtest.net'
+        }, {
+            uri: 'http://ntn1.dusanjp.com'
+        }, {
+            uri: 'http://localhost'
+        }];
+
+        nem.model.nodes.mainnet = [{
+            uri: 'http://portobelo.nemmain.net'
+        }, {
+            uri: 'http://hugealice.nem.ninja'
+        }, {
+            uri: 'http://hugealice2.nem.ninja'
+        }, {
+            uri: 'http://hugealice3.nem.ninja'
+        }, {
+            uri: 'http://1n.dusanjp.com'
+        }, {
+            uri: 'http://2n.dusanjp.com'
         }, {
             uri: 'http://localhost'
         }];
@@ -194,7 +212,7 @@ class Nodes {
             if (this._storage.selectedTestnetNode) {
                 this._Wallet.node = this._storage.selectedTestnetNode;
             } else {
-                let endpoint = nem.model.objects.create("endpoint")("http://hugetestalice.nem.ninja", nem.model.nodes.defaultPort);
+                let endpoint = nem.model.objects.create("endpoint")(nem.model.nodes.testnet[0].uri, nem.model.nodes.defaultPort);
                 this._Wallet.node = endpoint;
             }
             this._Wallet.nodes = nem.model.nodes.testnet;
