@@ -8,15 +8,16 @@ class MarketDataCtrl {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(DataStore, Alert, $timeout, $scope) {
+    constructor(DataStore, Alert, $timeout, $scope, MarketData) {
         'ngInject';
 
         //// Component dependencies region ////
-        
+
         this._DataStore = DataStore;
         this._Alert = Alert;
         this._$timeout = $timeout;
         this._Helpers = Helpers;
+        this._MarketData = MarketData;
 
         //// End dependencies region ////
 
@@ -41,14 +42,14 @@ class MarketDataCtrl {
 	 */
 	refreshMarketInfo() {
 	    // Gets btc-xem market
-	    nem.com.requests.market.xem().then((data) => {
+	    this._MarketData.getXemBtcMarketData().then((data) => {
 	        this._$timeout(() => {
-	            this._DataStore.market.xem = data["BTC_XEM"];
+	            this._DataStore.market.xem = data;
 	        });
 	    },
 	    (err) => {
 	        this._$timeout(() => {
-	            this._Alert.errorGetMarketInfo(); 
+	            this._Alert.errorGetMarketInfo();
 	        });
 	    });
 	    // Gets btc-usd market

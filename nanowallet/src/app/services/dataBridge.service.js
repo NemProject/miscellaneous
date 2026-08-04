@@ -8,7 +8,7 @@ class DataBridge {
      *
      * @params {services} - Angular services to inject
      */
-    constructor(Alert, Wallet, $timeout, $filter, Nodes, DataStore) {
+    constructor(Alert, Wallet, $timeout, $filter, Nodes, DataStore, MarketData) {
         'ngInject';
 
         //// Service dependencies region ////
@@ -17,6 +17,7 @@ class DataBridge {
         this._$timeout = $timeout;
         this._Wallet = Wallet;
         this._$filter = $filter;
+        this._MarketData = MarketData;
         this._Nodes = Nodes;
         this._DataStore = DataStore;
 
@@ -126,9 +127,9 @@ class DataBridge {
             });
 
             // Gets market info
-            nem.com.requests.market.xem().then((data) => {
+            this._MarketData.getXemBtcMarketData().then((data) => {
                 this._$timeout(() => {
-                    this._DataStore.market.xem = data["BTC_XEM"];
+                    this._DataStore.market.xem = data;
                 });
             },
             (err) => {
