@@ -1,5 +1,18 @@
+import nem from 'nem-sdk';
 import WalletFixture from '../data/wallet';
 import AccountDataFixture from '../data/accountData';
+
+/**
+ * Map the node list of the Wallet service to the endpoint objects exposed by the controllers
+ *
+ * @param {object} Wallet - The Wallet service
+ *
+ * @return {array} - An array of endpoint objects
+ */
+const expectedEndpoints = (Wallet) => Wallet.nodes.map((node) => ({
+    "host": node.uri,
+    "port": nem.model.nodes.defaultPort
+}));
 
 export const setupMainnetWallet = (Wallet, Nodes, DataBridge) => {
     Wallet.use(WalletFixture.mainnetWallet);
@@ -25,24 +38,7 @@ export const assertTestnetNodes = ($controller, $rootScope, controlName, Wallet,
     ctrl.setNodes();
     
     // Assert:
-    expect(ctrl.nodes).toEqual([
-        {
-            "host": "http://hugetestalice.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://hugetestalice2.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://medalice2.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://localhost",
-            "port": 7890
-        }
-    ]);
+    expect(ctrl.nodes).toEqual(expectedEndpoints(Wallet));
 }
 
 export const assertSuperNodes = async ($controller, $rootScope, controlName, Wallet, Nodes, DataBridge, SuperNodeProgram, $timeout) => {
@@ -83,66 +79,5 @@ export const assertMainnetNodes = async ($controller, $rootScope, controlName, W
     $timeout.flush();
 
     // Assert:
-    expect(ctrl.nodes).toEqual([
-        {
-            "host": "http://hugealice.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://hugealice2.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://hugealice3.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://hugealice4.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://bigalice3.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://san.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://go.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://hachi.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://jusan.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://nijuichi.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice5.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice6.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice7.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://alice8.nem.ninja",
-            "port": 7890
-        },
-        {
-            "host": "http://localhost",
-            "port": 7890
-        }
-    ]);
+    expect(ctrl.nodes).toEqual(expectedEndpoints(Wallet));
 }

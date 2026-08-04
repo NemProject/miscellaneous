@@ -27,11 +27,74 @@ describe('Nodes Service', () => {
         it('sets a fixed testnet node list on nem.model.nodes', () => {
             // Assert:
             expect(nem.model.nodes.testnet).toEqual([
-                { uri: 'http://hugetestalice.nem.ninja' },
-                { uri: 'http://hugetestalice2.nem.ninja' },
-                { uri: 'http://medalice2.nem.ninja' },
+                { uri: 'http://libertalia.nemtest.net' },
+                { uri: 'http://ocracoke.nemtest.net' },
+                { uri: 'http://tortuga.nemtest.net' },
+                { uri: 'http://ntn1.dusanjp.com' },
                 { uri: 'http://localhost' }
             ]);
+        });
+
+        it('sets a fixed mainnet node list on nem.model.nodes', () => {
+            // Assert:
+            expect(nem.model.nodes.mainnet).toEqual([
+                { uri: 'http://portobelo.nemmain.net' },
+                { uri: 'http://hugealice.nem.ninja' },
+                { uri: 'http://hugealice2.nem.ninja' },
+                { uri: 'http://hugealice3.nem.ninja' },
+                { uri: 'http://1n.dusanjp.com' },
+                { uri: 'http://2n.dusanjp.com' },
+                { uri: 'http://localhost' }
+            ]);
+        });
+    });
+
+    describe('getRandomNodeUri', () => {
+        it('returns a node of the given list', () => {
+            // Arrange:
+            const nodes = [{ uri: 'http://node1' }, { uri: 'http://node2' }, { uri: 'http://node3' }];
+
+            // Act:
+            const result = nodesService.getRandomNodeUri(nodes);
+
+            // Assert:
+            expect(nodes).toContain({ uri: result });
+        });
+
+        it('can pick any node of the given list', () => {
+            // Arrange:
+            const nodes = [{ uri: 'http://node1' }, { uri: 'http://node2' }, { uri: 'http://node3' }];
+            const randoms = [0, 0.4, 0.9];
+            let index = 0;
+            spyOn(Math, 'random').and.callFake(() => randoms[index++]);
+
+            // Act:
+            const result = randoms.map(() => nodesService.getRandomNodeUri(nodes));
+
+            // Assert:
+            expect(result).toEqual(['http://node1', 'http://node2', 'http://node3']);
+        });
+
+        it('never picks the local node when other nodes are available', () => {
+            // Arrange:
+            const nodes = [{ uri: 'http://node1' }, { uri: 'http://localhost' }];
+            const randoms = [0, 0.5, 0.99];
+            let index = 0;
+            spyOn(Math, 'random').and.callFake(() => randoms[index++]);
+
+            // Act:
+            const result = randoms.map(() => nodesService.getRandomNodeUri(nodes));
+
+            // Assert:
+            expect(result).toEqual(['http://node1', 'http://node1', 'http://node1']);
+        });
+
+        it('picks the local node when it is the only one available', () => {
+            // Act:
+            const result = nodesService.getRandomNodeUri([{ uri: 'http://localhost' }]);
+
+            // Assert:
+            expect(result).toEqual('http://localhost');
         });
     });
 
@@ -105,7 +168,7 @@ describe('Nodes Service', () => {
             expect(mockWallet.nodes).toBe(nem.model.nodes.mainnet);
         });
 
-        it('falls back to the first bundled testnet node when nothing is stored', () => {
+        it('falls back to a random bundled testnet node when nothing is stored', () => {
             // Arrange:
             mockWallet.network = TESTNET_NETWORK;
 
@@ -113,10 +176,24 @@ describe('Nodes Service', () => {
             nodesService.setDefault();
 
             // Assert:
-            expect(mockWallet.node).toEqual(
-                nem.model.objects.create('endpoint')('http://hugetestalice.nem.ninja', nem.model.nodes.defaultPort)
-            );
+            expect(nem.model.nodes.testnet).toContain({ uri: mockWallet.node.host });
+            expect(mockWallet.node.host).not.toEqual('http://localhost');
+            expect(mockWallet.node.port).toEqual(nem.model.nodes.defaultPort);
             expect(mockWallet.nodes).toBe(nem.model.nodes.testnet);
+        });
+
+        it('falls back to a random bundled mainnet node when nothing is stored', () => {
+            // Arrange:
+            mockWallet.network = MAINNET_NETWORK;
+
+            // Act:
+            nodesService.setDefault();
+
+            // Assert:
+            expect(nem.model.nodes.mainnet).toContain({ uri: mockWallet.node.host });
+            expect(mockWallet.node.host).not.toEqual('http://localhost');
+            expect(mockWallet.node.port).toEqual(nem.model.nodes.defaultPort);
+            expect(mockWallet.nodes).toBe(nem.model.nodes.mainnet);
         });
     });
 
@@ -143,6 +220,7 @@ describe('Nodes Service', () => {
 
             // Assert:
             expect(nem.model.nodes.mainnet).toContain({ uri: mockWallet.node.host });
+            expect(mockWallet.node.host).not.toEqual('http://localhost');
             expect(mockStorage.selectedMainnetNode).toBe(mockWallet.node);
         });
     });
