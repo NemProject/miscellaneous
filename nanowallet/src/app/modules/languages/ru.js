@@ -54,9 +54,9 @@ function RussianProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CHANGES_24H: '24ч.',
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7д.',
         DASHBOARD_MARKET_INFO_NOTE: '<a href="http://coinmarketcap.com/" target="_blank">CoinMarketCap</a> данные обновляются каждые 5 минут',
-        DASHBOARD_NOTICE_1: 'Добро пожаловать в NanoWallet Beta!',
-        DASHBOARD_NOTICE_2: 'Пожалуйста, <a href="https://github.com/NemProject/NanoWallet" target="_blank">сообщите об ошибке.</a>',
-        DASHBOARD_NOTICE_3: 'Команда NEM не несёт ответственности за любые потери средств, в связи с использованием NanoWallet в главной сети (mainnet). Мы рекомендуем, в первую очередь, ознакомиться с NanoWallet в тестовой сети (testnet). Пользователи несут ответственность за сохранность своих средств, резервных копий и закрытых ключей.',
+        DASHBOARD_NOTICE_1: 'Добро пожаловать в NEM Wallet!',
+        DASHBOARD_NOTICE_2: 'Пожалуйста, <a href="https://github.com/NemProject/miscellaneous" target="_blank">сообщите об ошибке.</a>',
+        DASHBOARD_NOTICE_3: 'Команда NEM не несёт ответственности за любые потери средств, в связи с использованием NEM Wallet в главной сети (mainnet). Мы рекомендуем, в первую очередь, ознакомиться с NEM Wallet в тестовой сети (testnet). Пользователи несут ответственность за сохранность своих средств, резервных копий и закрытых ключей.',
         DASHBOARD_NOTICE_4: 'Не используйте главную сеть (mainnet), если не уверены, что Ваши средства надежно защищены. Мы рекомендуем записать закрытые ключи на бумаге и хранить её в безопасном месте. Кроме того, Вы можете импортировать свои аккаунты в LightWallet/NCC.',
         DASHBOARD_NOTICE_5: 'Благодарим за Ваше участие!',
 
@@ -165,7 +165,7 @@ function RussianProvider($translateProvider) {
         GENERAL_INVOICE: 'Invoice',
 
         // HOME MODULE
-        HOME_UNSUPPORTED_BROWSER: 'Простите, но Вы не можете безопасно использовать NanoWallet в этом браузере...',
+        HOME_UNSUPPORTED_BROWSER: 'Простите, но Вы не можете безопасно использовать NEM Wallet в этом браузере...',
         HOME_RECOMMENDED_BROWSERS: 'Рекомендуемые браузеры:',
         HOME_FEATURE_STAND_BY: 'Place the cursor on a feature to show information.',
         HOME_FEATURE_1: 'Send and receive XEM easily and almost instantly, only 1 minute block time !',
@@ -343,7 +343,7 @@ function RussianProvider($translateProvider) {
         ACCOUNT_DELEGATED_PUBLIC: 'Публичный ключ',
         ACCOUNT_HARVESTED_BLOCKS: 'Собранные блоки',
         ACCOUNT_START_STOP_HARVESTING: 'Старт / Стоп делегированного сбора блоков',
-        ACCOUNT_HARVESTING_NOTE: 'Если Вы уже запускали сбор блоков <b>используя NanoWallet</b> и Ваше локальное хранилище было очищено, выберите узел, который использовался, для восстановления прежнего состояния. (Ваш сбор блоков не останавливался).',
+        ACCOUNT_HARVESTING_NOTE: 'Если Вы уже запускали сбор блоков <b>используя NEM Wallet</b> и Ваше локальное хранилище было очищено, выберите узел, который использовался, для восстановления прежнего состояния. (Ваш сбор блоков не останавливался).',
         ACCOUNT_HARVESTING_NODE_SELECT: 'Выберите узел для сбора блоков',
         ACCOUNT_HARVESTING_START: 'Запустить делегированный сбор блоков',
         ACCOUNT_HARVESTING_STOP: 'Остановить делегированный сбор блоков',
@@ -707,8 +707,8 @@ function RussianProvider($translateProvider) {
 
         // FAQ MODULE
         FAQ_TITLE: 'Frequently Asked Questions',
-        FAQ_QUESTION_1: 'How Nano Wallet works ?',
-        FAQ_ANSWER_1: 'Nano Wallet is built using the latest crypto libraries with ES6 and AngularJS. It is a full client-side application that never sends any sensitive data through the wire; everything happens in your browser from creating private keys to the signing of transactions.',
+        FAQ_QUESTION_1: 'How NEM Wallet works ?',
+        FAQ_ANSWER_1: 'NEM Wallet is built using the latest crypto libraries with ES6 and AngularJS. It is a full client-side application that never sends any sensitive data through the wire; everything happens in your browser from creating private keys to the signing of transactions.',
         FAQ_QUESTION_2: 'Is it free to use ?',
         FAQ_ANSWER_2: 'Absolutely all operations are client-side, only you have control of your coins, no third parties, and no extra fees.',
         FAQ_QUESTION_3: 'Why do I already have one mosaic ?',
@@ -730,13 +730,13 @@ function RussianProvider($translateProvider) {
         FAQ_QUESTION_10: 'Where to find information about my account (address, etc) ?',
         FAQ_ANSWER_10: 'If you look at the top navigation bar, you will see an <b><i>"Account"</b></i> button between <b><i>"Node"</b></i> and <b><i>"Language"</b></i>. There you can find your address, public key, vested balance and other important data.',
         FAQ_QUESTION_11: 'I have deposited XEM to an exchange but nothing has been credited ?',
-        FAQ_ANSWER_11_1: 'First you must check that the hash of your transaction is pointing to an existing transaction on the <a target="_blank" href="http://chain.nem.ninja">explorer</a> (please, note that the explorer is a few blocks behind).',
+        FAQ_ANSWER_11_1: 'First you must check that the hash of your transaction is pointing to an existing transaction on the <a target="_blank" href="https://nem.fyi/">explorer</a> (please, note that the explorer is a few blocks behind).',
         FAQ_ANSWER_11_2: 'Most exchanges are asking for an identification message to credit your deposit. Make sure that you have followed carefully the exchange instructions and added a message that is NOT encrypted. ',
         FAQ_ANSWER_11_3: 'Even if you have added a message, it can happen that exchanges may not process your deposit, because of issues on their side.',
         FAQ_ANSWER_11_4: 'You must contact the exchange support, explain the situation and provide them the hash of the transaction.',
         FAQ_QUESTION_12: 'How to check if I am on a fork ?',
         FAQ_ANSWER_12_1: 'Click on <b><i>"Node"</b></i>, in the top navigation bar, to open the node panel.',
-        FAQ_ANSWER_12_2: 'Look at the chain height and compare it to the height shown <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">here</a>.',
+        FAQ_ANSWER_12_2: 'Look at the chain height and compare it to the height shown <a target="_blank" href="https://nem.fyi/nodes/">here</a>.',
         FAQ_ANSWER_12_3: 'If different of more than 5 blocks then you are probably on a fork.',
         FAQ_ANSWER_12_4: 'To fix, just choose another node from the dropdown in the node panel, it will restore your account at it\'s latest state on the real network.',
 

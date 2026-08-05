@@ -54,9 +54,9 @@ function ChineseProvider($translateProvider) {
         DASHBOARD_MARKET_INFO_CHANGES_24H: '24小时',
         DASHBOARD_MARKET_INFO_CHANGES_7D: '7天',
         DASHBOARD_MARKET_INFO_NOTE: '<a href="http://coinmarketcap.com/" target="_blank">CoinMarketCap</a> 数据每5分钟更新一次',
-        DASHBOARD_NOTICE_1:  '欢迎来到 Nano Wallet Beta!',
-        DASHBOARD_NOTICE_2: '请 <a href="https://github.com/NemProject/NanoWallet" target="_blank">在这里报告问题</a>',
-        DASHBOARD_NOTICE_3: 'NEM team 不对由于在主网上使用此应用程序而导致的任何资金损失负责，以及我们建议您首先在测试网上进行测试，以便先熟悉NanoWallet. 用户自己负责其资金并具有其私钥。.',
+        DASHBOARD_NOTICE_1:  '欢迎来到 NEM Wallet!',
+        DASHBOARD_NOTICE_2: '请 <a href="https://github.com/NemProject/miscellaneous" target="_blank">在这里报告问题</a>',
+        DASHBOARD_NOTICE_3: 'NEM team 不对由于在主网上使用此应用程序而导致的任何资金损失负责，以及我们建议您首先在测试网上进行测试，以便先熟悉NEM Wallet. 用户自己负责其资金并具有其私钥。.',
         DASHBOARD_NOTICE_4: '如果您不确定您的所有资金是否安全，请勿使用该网络。我们建议在纸上写下私钥并将其存放在安全的地方。 此外，您可以将您的账户导入Lightwallet/NCC.',
         DASHBOARD_NOTICE_5: '感谢您的参与!',
 
@@ -165,7 +165,7 @@ function ChineseProvider($translateProvider) {
         GENERAL_INVOICE: '账单',
 
         // HOME MODULE
-        HOME_UNSUPPORTED_BROWSER: '对不起，但你不能在这里安全地使用NanoWallet...',
+        HOME_UNSUPPORTED_BROWSER: '对不起，但你不能在这里安全地使用NEM Wallet...',
         HOME_RECOMMENDED_BROWSERS: '推荐的浏览器:',
         HOME_FEATURE_STAND_BY: '将光标置于特征上以显示信息.',
         HOME_FEATURE_1: '只需1分钟的时间，几乎立即发送和接收XEM !',
@@ -735,13 +735,13 @@ function ChineseProvider($translateProvider) {
         FAQ_QUESTION_10: '在哪里可以找到关于我的账户信息（地址等） ?',
         FAQ_ANSWER_10: '如果您查看顶部导航栏，您会看到<b> <i>“帐号”</ b> </ i>之间<b> </ i>Node</ b> </ i>和 <B> <I>“语言”</ b> </ I>. 在那里你可以找到你的地址，公钥，余额和其他重要数据.',
         FAQ_QUESTION_11: '我已将XEM存入交易所，但没有任何记入 ?',
-        FAQ_ANSWER_11_1: '首先，您必须检查您的交易的哈希是否指向现有的交易，在 <a target="_blank" href="http://chain.nem.ninja">explorer</a> (请注意，浏览器落后几个块).',
+        FAQ_ANSWER_11_1: '首先，您必须检查您的交易的哈希是否指向现有的交易，在 <a target="_blank" href="https://nem.fyi/">explorer</a> (请注意，浏览器落后几个块).',
         FAQ_ANSWER_11_2: '大多数交易所都要求提供身份证明信息以记入您的存款. 确保您已仔细遵守交换指示并添加了未加密的消息. ',
         FAQ_ANSWER_11_3: '即使您添加了一条消息，也可能发生交换可能无法处理您的存款，因为对面存在问题.',
         FAQ_ANSWER_11_4: '您必须联系交易所支持人员，说明情况并向他们提供交易的哈希.',
         FAQ_QUESTION_12: '如何检查我是否在分叉上 ?',
         FAQ_ANSWER_12_1: '点击 <b><i>"Node"</b></i>, 顶部导航栏中的，打开节点面板.',
-        FAQ_ANSWER_12_2: '查看链条高度并将其与所示高度进行比较 <a target="_blank" href="http://hugealice.nem.ninja:7890/chain/height">here</a>.',
+        FAQ_ANSWER_12_2: '查看链条高度并将其与所示高度进行比较 <a target="_blank" href="https://nem.fyi/nodes/">here</a>.',
         FAQ_ANSWER_12_3: '如果超过5个区块不同，那么你很可能在分叉.',
         FAQ_ANSWER_12_4: '要解决这个问题，只需从节点面板的下拉菜单中选择另一个节点，它就会将您的帐户恢复到真实网络上的最新状态.',
 
