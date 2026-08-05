@@ -147,11 +147,29 @@ class Nodes {
         this._$timeout = $timeout;
 
         nem.model.nodes.testnet = [{
-            uri: 'http://hugetestalice.nem.ninja'
+            uri: 'http://libertalia.nemtest.net'
         }, {
-            uri: 'http://hugetestalice2.nem.ninja'
+            uri: 'http://ocracoke.nemtest.net'
         }, {
-            uri: 'http://medalice2.nem.ninja'
+            uri: 'http://tortuga.nemtest.net'
+        }, {
+            uri: 'http://ntn1.dusanjp.com'
+        }, {
+            uri: 'http://localhost'
+        }];
+
+        nem.model.nodes.mainnet = [{
+            uri: 'http://portobelo.nemmain.net'
+        }, {
+            uri: 'http://hugealice.nem.ninja'
+        }, {
+            uri: 'http://hugealice2.nem.ninja'
+        }, {
+            uri: 'http://hugealice3.nem.ninja'
+        }, {
+            uri: 'http://1n.dusanjp.com'
+        }, {
+            uri: 'http://2n.dusanjp.com'
         }, {
             uri: 'http://localhost'
         }];
@@ -179,14 +197,29 @@ class Nodes {
     }
 
     /**
+     * Pick a random node uri in a list of nodes
+     * Local nodes are skipped, they must be selected explicitly by the user
+     *
+     * @param {array} nodes - An array of node objects
+     *
+     * @return {string} - A node uri
+     */
+    getRandomNodeUri(nodes) {
+        let pool = nodes.filter((node) => node.uri !== 'http://localhost');
+        if (!pool.length) pool = nodes;
+        return pool[Math.floor(Math.random() * pool.length)].uri;
+    }
+
+    /**
      * Check if nodes present in local storage or set default according to network
+     * If no node in local storage a random node is used, to balance the load between nodes
      */
     setDefault() {
         if (this._Wallet.network == nem.model.network.data.mainnet.id) {
             if (this._storage.selectedMainnetNode) {
                 this._Wallet.node = this._storage.selectedMainnetNode;
             } else {
-                let endpoint = nem.model.objects.create("endpoint")(nem.model.nodes.mainnet[0].uri, nem.model.nodes.defaultPort);
+                let endpoint = nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.mainnet), nem.model.nodes.defaultPort);
                 this._Wallet.node = endpoint;
             }
             this._Wallet.nodes = nem.model.nodes.mainnet;
@@ -194,7 +227,7 @@ class Nodes {
             if (this._storage.selectedTestnetNode) {
                 this._Wallet.node = this._storage.selectedTestnetNode;
             } else {
-                let endpoint = nem.model.objects.create("endpoint")("http://hugetestalice.nem.ninja", nem.model.nodes.defaultPort);
+                let endpoint = nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.testnet), nem.model.nodes.defaultPort);
                 this._Wallet.node = endpoint;
             }
             this._Wallet.nodes = nem.model.nodes.testnet;
@@ -202,7 +235,7 @@ class Nodes {
             if (this._storage.selectedMijinNode) {
                 this._Wallet.node = this._storage.selectedMijinNode;
             } else {
-                let endpoint = nem.model.objects.create("endpoint")(nem.model.nodes.mijin[0].uri, nem.model.nodes.mijinPort);
+                let endpoint = nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.mijin), nem.model.nodes.mijinPort);
                 this._Wallet.node = endpoint;
             }
             this._Wallet.nodes = nem.model.nodes.mijin;
@@ -220,13 +253,13 @@ class Nodes {
         let _endpoint;
         // Set node in local storage according to network
         if (this._Wallet.network == nem.model.network.data.mainnet.id) {
-            _endpoint = endpoint || nem.model.objects.create("endpoint")(nem.model.nodes.mainnet[Math.floor(Math.random()*nem.model.nodes.mainnet.length)].uri, nem.model.nodes.defaultPort);
+            _endpoint = endpoint || nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.mainnet), nem.model.nodes.defaultPort);
             this._storage.selectedMainnetNode = _endpoint;
         } else if (this._Wallet.network == nem.model.network.data.testnet.id) {
-            _endpoint = endpoint || nem.model.objects.create("endpoint")(nem.model.nodes.testnet[Math.floor(Math.random()*nem.model.nodes.testnet.length)].uri, nem.model.nodes.defaultPort);
+            _endpoint = endpoint || nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.testnet), nem.model.nodes.defaultPort);
             this._storage.selectedTestnetNode = _endpoint;
         } else {
-            _endpoint = endpoint || nem.model.objects.create("endpoint")(nem.model.nodes.mijin[Math.floor(Math.random()*nem.model.nodes.mijin.length)].uri, nem.model.nodes.mijinPort);
+            _endpoint = endpoint || nem.model.objects.create("endpoint")(this.getRandomNodeUri(nem.model.nodes.mijin), nem.model.nodes.mijinPort);
             this._storage.selectedMijinNode = _endpoint;
         }
         // Set endpoint in Wallet service

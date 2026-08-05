@@ -49,7 +49,7 @@ describe('Importance transfer module tests', function() {
         expect(ctrl.customHarvestingNode).toEqual("");
         expect(ctrl.harvestingNode).toEqual(Wallet.node);
         expect(ctrl.hasFreeSlots).toBe(false);
-        expect(ctrl.nodes[0]).toEqual(nem.model.objects.create("endpoint")("http://hugetestalice.nem.ninja", 7890));
+        expect(ctrl.nodes[0]).toEqual(nem.model.objects.create("endpoint")(Wallet.nodes[0].uri, 7890));
         expect(ctrl.showSupernodes).toBe(false);
     });
 
