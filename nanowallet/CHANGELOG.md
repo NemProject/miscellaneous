@@ -1,5 +1,14 @@
 # Changelog
 
+## Version 2.7.2
+
+   - Replaced Poloniex market data with CoinGecko
+   - Integrated NodeWatch for up-to-date NEM node discovery
+   - Refreshed mainnet and testnet node lists
+   - Improved default node selection and fallback reliability
+   - Updated NEM Wallet branding and outdated links
+   - Fixed a Trezor test expectation
+
 ## Version 2.7.1
 
    - Upgraded Trezor Connect to v9
