@@ -24,4 +24,4 @@ NanoWallet features include:
 * Changelly Instant Exchange.
 * Voting Center module allows customizable voting.
 
-The newest version is always available here: [Github Releases](https://github.com/NemProject/NanoWallet/releases).
+The newest version is always available here: [Github Releases](https://github.com/NemProject/miscellaneous/releases).
