@@ -31,7 +31,7 @@
         "craco-antd": "^2.0.0",
         "craco-plugin-scoped-css": "^1.1.1",
         "i": "^0.3.7",
-        "i18n-js": "^4.2.3",
+        "i18n-js": "^4.5.3",
         "meshline": "^3.1.6",
         "npm": "^10.5.2",
         "postcss": "^8.3.11",
@@ -58,7 +58,7 @@
     },
     "devDependencies": {
         "@emotion/babel-plugin": "^11.3.0",
-        "@types/i18n-js": "^3.8.4",
+        "@types/i18n-js": "^4.0.1",
         "@types/jest": "^29.5.1",
         "@types/node": "^20.2.5",
         "@types/react": "^17.0.0",
